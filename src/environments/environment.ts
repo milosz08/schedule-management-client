@@ -1,16 +1,23 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+/*
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: environment.ts
+ * Last modified | Ostatnia modyfikacja: 05/04/2022, 22:50
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP. NET Core application to manage the schedule management application for sample university.
+ * Written with the Framework Angular 2.0 for generating dynamic web applications. Project for the teaching course
+ * "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular 2.0 do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
 
 export const environment = {
   production: false
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
