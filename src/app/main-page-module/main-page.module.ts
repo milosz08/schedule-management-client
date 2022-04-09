@@ -41,6 +41,6 @@ import { MainPageRoutingModule } from './main-page-routing.module';
         CommonModule,
         RouterModule,
         MainPageRoutingModule,
-    ]
+    ],
 })
 export class MainPageModule {}
