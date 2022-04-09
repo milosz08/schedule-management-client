@@ -18,18 +18,45 @@
  */
 
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
+import { combinedReducers } from './store/combine-reducers';
+
+import { AppRoutingModule } from './app-routing.module';
+import { MainPageModule } from './main-page-module/main-page.module';
+import { AdminPageModule } from './admin-panel-module/admin-page.module';
+import { SharedModule } from './shared-module/shared.module';
+import { AdminRedirectGuard } from './guards/admin-redirect.guard';
 
 @NgModule({
     declarations: [
         AppComponent,
     ],
     imports: [
+        // Podstawowe importy
+        RouterModule,
         BrowserModule,
+        AppRoutingModule,
+        // Importy stworzonych modułów w całej aplikacji
+        MainPageModule,
+        AdminPageModule,
+        SharedModule,
+        // Dodanie globalnego ngrx flux store + ngrx middleware effects
+        StoreModule.forRoot(combinedReducers),
+        EffectsModule.forRoot([]),
+        // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)
+        StoreDevtoolsModule.instrument({ logOnly: environment.production })
     ],
-    providers: [],
+    providers: [
+        AdminRedirectGuard
+    ],
     bootstrap: [
         AppComponent,
     ],

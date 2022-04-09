@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: app.component.ts
- * Last modified | Ostatnia modyfikacja: 05/04/2022, 23:55
+ * File name | Nazwa pliku: combine-reducers.ts
+ * Last modified | Ostatnia modyfikacja: 09/04/2022, 20:08
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,10 +17,15 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { ActionReducerMap } from '@ngrx/store';
 
-@Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-})
-export class AppComponent {}
+import { sessionReducer } from './reducers/session.reducer';
+import { InitialSessionStateTypes } from './initial-state/session.initial';
+
+interface AppGlobalState {
+    sessionState: InitialSessionStateTypes;
+}
+
+export const combinedReducers: ActionReducerMap<AppGlobalState> = {
+    sessionState: sessionReducer,
+};
