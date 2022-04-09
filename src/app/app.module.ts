@@ -33,7 +33,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainPageModule } from './main-page-module/main-page.module';
 import { AdminPageModule } from './admin-panel-module/admin-page.module';
 import { SharedModule } from './shared-module/shared.module';
-import { AdminRedirectGuard } from './guards/admin-redirect.guard';
 
 @NgModule({
     declarations: [
@@ -54,9 +53,7 @@ import { AdminRedirectGuard } from './guards/admin-redirect.guard';
         // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)
         StoreDevtoolsModule.instrument({ logOnly: environment.production })
     ],
-    providers: [
-        AdminRedirectGuard
-    ],
+    providers: [],
     bootstrap: [
         AppComponent,
     ],
