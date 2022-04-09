@@ -1,0 +1,8 @@
+Routing w aplikacji dla elementów bez autentykacji:
+/schedule                    <- wyświetla podstawowy plan
+/schedule/booking            <- wyświetla możliwość rezerwacji
+/schedule/login              <- wyświetla możliwość zalogowania
+/schedule/search             <- wyświetla możliwość wyszukania sali/nauczyciela/grupy
+
+Routing w aplikacji dla elementów z autentykacją:
+/secure/admin-panel/dashboard       <- wyświetla podstawowy panel konfiguracji
