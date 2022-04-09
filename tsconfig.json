@@ -20,7 +20,9 @@
         "lib": [
             "es2020",
             "dom"
-        ]
+        ],
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
