@@ -9,15 +9,15 @@
         },
         "login": {
             "title": "Logowanie",
-            "description": "Na tej stronie masz możliwość zalogowania do systemu jako administrator, edytor lub nauczyciel"
+            "description": "Na tej stronie masz możliwość zalogowania do systemu jako administrator, edytor lub nauczyciel."
         },
         "booking": {
             "title": "Rezerwacje",
-            "description": "Na tej stronie masz możliwość rezerwacji sali, grupy lub nauczyciela"
+            "description": "Na tej stronie masz możliwość rezerwacji sali, grupy lub nauczyciela."
         },
         "search": {
             "title": "Szukaj",
-            "description": "Na tej stronie masz możliwość wyszukania sali, grupy lub nauczyciela"
+            "description": "Na tej stronie masz możliwość wyszukania sali, grupy lub nauczyciela."
         }
     },
     "adminPanelSubpages": {
