@@ -18,10 +18,32 @@
  */
 
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+
+import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
+
 
 @Component({
     selector: 'app-booking-page',
     templateUrl: './booking-page.component.html',
     styleUrls: [ './booking-page.component.scss' ]
 })
-export class BookingPageComponent {}
+export class BookingPageComponent {
+
+    private webtitle: WebTitle = new WebTitle();
+
+    constructor(
+        private titleService: Title,
+        private meta: Meta
+    ) {
+        this.updateMetaTags();
+    };
+
+    private updateMetaTags(): void {
+        this.titleService.setTitle(this.webtitle.combinePageTitleElements(AllMainWebpages.BOOKING));
+        this.meta.updateTag({
+            name: 'description',
+            content: this.webtitle.combinePageDescriptionElements(AllMainWebpages.BOOKING)
+        });
+    };
+}

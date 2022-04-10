@@ -18,12 +18,18 @@
  */
 
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { UserLogin } from '../../../store/actions/session.actions';
-import { SessionStateKeysTypes } from '../../../store/types/session.types';
-import { InitialSessionStateTypes, sessionSelectSelector } from '../../../store/initial-state/session.initial';
+import { AllAdminWebpages, WebTitle } from '../../../../utils/WebTitle';
+
+import { UserLogin } from '../../../../store/actions/session.actions';
+import { SessionStateKeysTypes } from '../../../../store/types/session.types';
+import { InitialSessionStateTypes, sessionSelectSelector } from '../../../../store/initial-state/session.initial';
+
 
 @Component({
     selector: 'app-root-admin-page',
@@ -33,12 +39,28 @@ import { InitialSessionStateTypes, sessionSelectSelector } from '../../../store/
 export class RootAdminPageComponent {
 
     public ifLogged$?: Observable<boolean>;
+    private webtitle: WebTitle = new WebTitle();
 
-    constructor(private store: Store<InitialSessionStateTypes>) {
+    constructor(
+        private titleService: Title,
+        private meta: Meta,
+        private store: Store<InitialSessionStateTypes>,
+        private router: Router
+    ) {
+        this.updateMetaTags();
         this.ifLogged$ = this.store.pipe(select(sessionSelectSelector(SessionStateKeysTypes.IF_LOGGED)));
+    };
+
+    private updateMetaTags(): void {
+        this.titleService.setTitle(this.webtitle.combinePageTitleElements(AllAdminWebpages.DASHBOARD));
+        this.meta.updateTag({
+            name: 'description',
+            content: this.webtitle.combinePageDescriptionElements(AllAdminWebpages.DASHBOARD)
+        });
     };
 
     public logout(): void {
         this.store.dispatch(new UserLogin({ ifLogged: false }));
+        this.router.navigate([ '/schedule/login' ]).then(r => r);
     };
 }

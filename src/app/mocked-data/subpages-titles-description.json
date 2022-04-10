@@ -1,0 +1,29 @@
+{
+    "defaultSeparator": "|",
+    "defaultPrefix": "System Zarządzania Planem",
+    "adminPanelPrefix": "Panel Administratora",
+    "mainSubpages": {
+        "root": {
+            "title": "Strona główna",
+            "description": "Na tej stronie możesz przeglądać plan zajęć uczelni."
+        },
+        "login": {
+            "title": "Logowanie",
+            "description": "Na tej stronie masz możliwość zalogowania do systemu jako administrator, edytor lub nauczyciel"
+        },
+        "booking": {
+            "title": "Rezerwacje",
+            "description": "Na tej stronie masz możliwość rezerwacji sali, grupy lub nauczyciela"
+        },
+        "search": {
+            "title": "Szukaj",
+            "description": "Na tej stronie masz możliwość wyszukania sali, grupy lub nauczyciela"
+        }
+    },
+    "adminPanelSubpages": {
+        "dashboard": {
+            "title": "Pulpit",
+            "description": "Pulpit główny panelu administratora systemu zarządzania planem zajęć uczelni."
+        }
+    }
+}

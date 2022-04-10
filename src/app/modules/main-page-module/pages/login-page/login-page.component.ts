@@ -18,12 +18,18 @@
  */
 
 import { Component } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
-import { UserLogout } from '../../../store/actions/session.actions';
-import { SessionStateKeysTypes } from '../../../store/types/session.types';
-import { InitialSessionStateTypes, sessionSelectSelector } from '../../../store/initial-state/session.initial';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+
+import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
+
+import { UserLogout } from '../../../../store/actions/session.actions';
+import { SessionStateKeysTypes } from '../../../../store/types/session.types';
+import { InitialSessionStateTypes, sessionSelectSelector } from '../../../../store/initial-state/session.initial';
+
 
 @Component({
     selector: 'app-login-page',
@@ -33,12 +39,28 @@ import { InitialSessionStateTypes, sessionSelectSelector } from '../../../store/
 export class LoginPageComponent {
 
     public ifLogged$?: Observable<boolean>;
+    private webtitle: WebTitle = new WebTitle();
 
-    constructor(private store: Store<InitialSessionStateTypes>) {
+    constructor(
+        private titleService: Title,
+        private meta: Meta,
+        private store: Store<InitialSessionStateTypes>,
+        private router: Router
+    ) {
+        this.updateMetaTags();
         this.ifLogged$ = this.store.pipe(select(sessionSelectSelector(SessionStateKeysTypes.IF_LOGGED)));
+    };
+
+    private updateMetaTags(): void {
+        this.titleService.setTitle(this.webtitle.combinePageTitleElements(AllMainWebpages.LOGIN));
+        this.meta.updateTag({
+            name: 'description',
+            content: this.webtitle.combinePageDescriptionElements(AllMainWebpages.LOGIN)
+        });
     };
 
     public login(): void {
         this.store.dispatch(new UserLogout({ ifLogged: true }));
+        this.router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);
     };
 }

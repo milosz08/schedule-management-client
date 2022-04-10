@@ -23,6 +23,8 @@
         ],
         "strictNullChecks": true,
         "suppressImplicitAnyIndexErrors": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
