@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: admin-page.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:46
+ * File name | Nazwa pliku: shared.module.ts
+ * Last modified | Ostatnia modyfikacja: 10/04/2022, 00:52
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,10 +17,17 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-@Component({
-    selector: 'app-admin-panel',
-    templateUrl: './admin-page.component.html',
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
+@NgModule({
+    declarations: [
+        NotFoundComponent
+    ],
+    imports: [
+        CommonModule
+    ],
 })
-export class AdminPageComponent {}
+export class SharedModule {}

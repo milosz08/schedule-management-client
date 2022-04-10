@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: admin-page-routing.module.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 05:12
+ * File name | Nazwa pliku: admin-page.module.ts
+ * Last modified | Ostatnia modyfikacja: 10/04/2022, 00:50
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,29 +18,22 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { AdminPageComponent } from './admin-page.component';
 import { RootAdminPageComponent } from './pages/root-admin-page/root-admin-page.component';
-import { NotFoundComponent } from '../shared-module/components/not-found/not-found.component';
 
-const routes: Routes = [
-    {
-        path: 'admin-panel', component: AdminPageComponent, children: [
-            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: RootAdminPageComponent },
-            { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-        ],
-    },
-    { path: '', redirectTo: 'admin-panel', pathMatch: 'full' },
-];
+import { AdminPageRoutingModule } from './admin-page-routing.module';
+
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes)
+    declarations: [
+        AdminPageComponent,
+        RootAdminPageComponent,
     ],
-    exports: [
-        RouterModule,
+    imports: [
+        CommonModule,
+        AdminPageRoutingModule,
     ],
 })
-export class AdminPageRoutingModule {}
+export class AdminPageModule {}

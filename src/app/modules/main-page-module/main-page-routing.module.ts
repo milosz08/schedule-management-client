@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: main-page-routing.module.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 16:38
+ * Last modified | Ostatnia modyfikacja: 10/04/2022, 01:09
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -21,13 +21,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainPageComponent } from './main-page.component';
-import { LoginRedirectGuard } from '../guards/login-redirect.guard';
+import { LoginRedirectGuard } from '../../guards/login-redirect.guard';
 
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { NotFoundComponent } from '../shared-module/components/not-found/not-found.component';
+
 
 const routes: Routes = [
     {
@@ -41,6 +42,7 @@ const routes: Routes = [
     },
     { path: '', redirectTo: 'schedule', pathMatch: 'full' },
 ];
+
 
 @NgModule({
     imports: [

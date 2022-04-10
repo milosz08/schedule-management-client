@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: admin-panel-module.module.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 04:47
+ * File name | Nazwa pliku: main-page.module.ts
+ * Last modified | Ostatnia modyfikacja: 10/04/2022, 01:09
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,20 +19,29 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-import { AdminPageComponent } from './admin-page.component';
-import { RootAdminPageComponent } from './pages/root-admin-page/root-admin-page.component';
+import { MainPageComponent } from './main-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 
-import { AdminPageRoutingModule } from './admin-page-routing.module';
+import { MainPageRoutingModule } from './main-page-routing.module';
+
 
 @NgModule({
     declarations: [
-        AdminPageComponent,
-        RootAdminPageComponent,
+        MainPageComponent,
+        LoginPageComponent,
+        BookingPageComponent,
+        SearchPageComponent,
+        RootMainPageComponent,
     ],
     imports: [
         CommonModule,
-        AdminPageRoutingModule,
+        RouterModule,
+        MainPageRoutingModule,
     ],
 })
-export class AdminPageModule {}
+export class MainPageModule {}

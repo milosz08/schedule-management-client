@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: not-found.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 14:46
+ * File name | Nazwa pliku: admin-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:52
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,9 +19,9 @@
 
 import { Component } from '@angular/core';
 
+
 @Component({
-    selector: 'app-not-found',
-    templateUrl: './not-found.component.html',
-    styleUrls: [ './not-found.component.scss' ]
+    selector: 'app-admin-panel',
+    templateUrl: './admin-page.component.html',
 })
-export class NotFoundComponent {}
+export class AdminPageComponent {}

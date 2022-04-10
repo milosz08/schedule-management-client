@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: shared-module.module.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 04:49
+ * File name | Nazwa pliku: main-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:37
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,17 +17,11 @@
  * Obiektowe".
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
-import { NotFoundComponent } from './components/not-found/not-found.component';
 
-@NgModule({
-    declarations: [
-        NotFoundComponent
-    ],
-    imports: [
-        CommonModule
-    ],
+@Component({
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
 })
-export class SharedModule {}
+export class MainPageComponent {}

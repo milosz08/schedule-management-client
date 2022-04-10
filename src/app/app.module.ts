@@ -26,13 +26,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { combinedReducers } from './store/combine-reducers';
 
-import { AppRoutingModule } from './app-routing.module';
-import { MainPageModule } from './main-page-module/main-page.module';
-import { AdminPageModule } from './admin-panel-module/admin-page.module';
-import { SharedModule } from './shared-module/shared.module';
+import { MainPageModule } from './modules/main-page-module/main-page.module';
+import { AdminPageModule } from './modules/admin-panel-module/admin-page.module';
+import { SharedModule } from './modules/shared-module/shared.module';
+
 
 @NgModule({
     declarations: [

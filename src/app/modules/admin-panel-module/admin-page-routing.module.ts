@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: main-page.module.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:35
+ * File name | Nazwa pliku: admin-page-routing.module.ts
+ * Last modified | Ostatnia modyfikacja: 10/04/2022, 00:50
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,29 +18,31 @@
  */
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { MainPageComponent } from './main-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { BookingPageComponent } from './pages/booking-page/booking-page.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
+import { AdminPageComponent } from './admin-page.component';
+import { RootAdminPageComponent } from './pages/root-admin-page/root-admin-page.component';
+import { NotFoundComponent } from '../shared-module/components/not-found/not-found.component';
 
-import { MainPageRoutingModule } from './main-page-routing.module';
+
+const routes: Routes = [
+    {
+        path: 'admin-panel', component: AdminPageComponent, children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', component: RootAdminPageComponent },
+            { path: '**', component: NotFoundComponent, pathMatch: 'full' },
+        ],
+    },
+    { path: '', redirectTo: 'admin-panel', pathMatch: 'full' },
+];
+
 
 @NgModule({
-    declarations: [
-        MainPageComponent,
-        LoginPageComponent,
-        BookingPageComponent,
-        SearchPageComponent,
-        RootMainPageComponent,
-    ],
     imports: [
-        CommonModule,
+        RouterModule.forChild(routes)
+    ],
+    exports: [
         RouterModule,
-        MainPageRoutingModule,
     ],
 })
-export class MainPageModule {}
+export class AdminPageRoutingModule {}
