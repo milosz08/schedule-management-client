@@ -24,9 +24,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 
-import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
+import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
 
-import { UserLogout } from '../../../../store/actions/session.actions';
+import { UserLogin } from '../../../../store/actions/session.actions';
 import { SessionStateKeysTypes } from '../../../../store/types/session.types';
 import { InitialSessionStateTypes, sessionSelectSelector } from '../../../../store/initial-state/session.initial';
 
@@ -36,31 +36,26 @@ import { InitialSessionStateTypes, sessionSelectSelector } from '../../../../sto
     templateUrl: './login-page.component.html',
     styleUrls: [ './login-page.component.scss' ],
 })
-export class LoginPageComponent {
+export class LoginPageComponent extends MetaWebContent {
 
     public ifLogged$?: Observable<boolean>;
-    private webtitle: WebTitle = new WebTitle();
 
     constructor(
-        private titleService: Title,
-        private meta: Meta,
+        titleService: Title,
+        metaService: Meta,
         private store: Store<InitialSessionStateTypes>,
         private router: Router
     ) {
-        this.updateMetaTags();
+        super(titleService, metaService, AllMainWebpages.LOGIN);
         this.ifLogged$ = this.store.pipe(select(sessionSelectSelector(SessionStateKeysTypes.IF_LOGGED)));
     };
 
-    private updateMetaTags(): void {
-        this.titleService.setTitle(this.webtitle.combinePageTitleElements(AllMainWebpages.LOGIN));
-        this.meta.updateTag({
-            name: 'description',
-            content: this.webtitle.combinePageDescriptionElements(AllMainWebpages.LOGIN)
-        });
+    public login(): void {
+        this.store.dispatch(new UserLogin({ ifLogged: true }));
+        // this.router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);
     };
 
-    public login(): void {
-        this.store.dispatch(new UserLogout({ ifLogged: true }));
-        this.router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);
+    public handleSubmitForm(): void {
+        console.log('loggin into the system...')
     };
 }

@@ -21,32 +21,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainPageComponent } from './main-page.component';
-import { LoginRedirectGuard } from '../../guards/login-redirect.guard';
 
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { NotFoundComponent } from '../shared-module/components/not-found/not-found.component';
 
 
 const routes: Routes = [
     {
-        path: 'schedule', component: MainPageComponent, children: [
+        path: '', component: MainPageComponent, children: [
             { path: '', component: RootMainPageComponent },
-            { path: 'login', component: LoginPageComponent, canActivate: [ LoginRedirectGuard ] },
+            { path: 'schedule', component: SchedulePageComponent },
             { path: 'booking', component: BookingPageComponent },
             { path: 'search', component: SearchPageComponent },
-            { path: '**', component: NotFoundComponent, pathMatch: 'full' },
         ],
     },
-    { path: '', redirectTo: 'schedule', pathMatch: 'full' },
 ];
 
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
     ],
     exports: [
         RouterModule,

@@ -2,8 +2,8 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: main-page.component.html
-  ~ Last modified | Ostatnia modyfikacja: 09/04/2022, 15:37
+  ~ File name | Nazwa pliku: login-page.component.html
+  ~ Last modified | Ostatnia modyfikacja: 09/04/2022, 15:56
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
   ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,6 +17,24 @@
   ~ Obiektowe".
   -->
 
-<app-main-header></app-main-header>
-<router-outlet></router-outlet>
-<app-main-footer></app-main-footer>
+<main class = 'flex__center login__container'>
+	<div class = 'login__wrapper'>
+		<div class = 'login__remember__accounts'>
+			<h3 class = 'login__form__header'>
+				Ostatnie logowania
+			</h3>
+		</div>
+		<form class = 'flex__center login__form__container'>
+			<img src = 'assets/images/main-logo-light.svg' alt = 'logo'>
+			<h3 class = 'login__form__header header--light'>
+				Logowanie
+			</h3>
+
+			<p>komponent podstrony logowania</p>
+			<button (click)="login()">zaloguj</button>
+			<p>Stan zalogowania: {{ ifLogged$ | async }}</p>
+		</form>
+	</div>
+
+
+</main>

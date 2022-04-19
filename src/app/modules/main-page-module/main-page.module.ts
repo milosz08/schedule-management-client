@@ -22,21 +22,27 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MainPageComponent } from './main-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 
 import { MainPageRoutingModule } from './main-page-routing.module';
+import { MainHeaderComponent } from './components/main-header/main-header.component';
+import { MainFooterComponent } from './components/main-footer/main-footer.component';
 
 
 @NgModule({
     declarations: [
+        // widoki stron
         MainPageComponent,
-        LoginPageComponent,
         BookingPageComponent,
         SearchPageComponent,
+        SchedulePageComponent,
         RootMainPageComponent,
+        // komponenty
+        MainHeaderComponent,
+        MainFooterComponent,
     ],
     imports: [
         CommonModule,

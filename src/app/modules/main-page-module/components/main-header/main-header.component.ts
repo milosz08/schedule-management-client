@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: root-admin-page.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 17:15
+ * File name | Nazwa pliku: main-header.component.ts
+ * Last modified | Ostatnia modyfikacja: 17/04/2022, 13:17
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,19 +18,34 @@
  */
 
 import { Component } from '@angular/core';
-import { Title, Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
-import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
+import { MainNavigationModel } from '../../models/main-navigation.model';
+
+import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navigation-content.json';
 
 
 @Component({
-    selector: 'app-root-main-page',
-    templateUrl: './root-main-page.component.html',
-    styleUrls: [ './root-main-page.component.scss' ]
+    selector: 'app-main-header',
+    templateUrl: './main-header.component.html',
+    styleUrls: [ './main-header.component.scss' ],
 })
-export class RootMainPageComponent extends MetaWebContent {
+export class MainHeaderComponent {
 
-    constructor(titleService: Title, metaService: Meta) {
-        super(titleService, metaService, AllMainWebpages.ROOT);
+    private readonly _navigationData: MainNavigationModel[];
+
+    constructor(
+        private router: Router,
+    ) {
+        this._navigationData = MainPageNavigationMockedData;
+    };
+
+    public handleClickLoggedButton(): void {
+        console.log('login button was clicked');
+        this.router.navigate([ 'auth/login' ]).then(r => r);
+    };
+
+    get navigationData(): Array<MainNavigationModel> {
+        return this._navigationData;
     };
 }

@@ -21,6 +21,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminRedirectGuard } from './guards/admin-redirect.guard';
+import { LoginRedirectGuard } from './guards/login-redirect.guard';
+
+import { NotFoundComponent } from './modules/shared-module/components/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -29,11 +32,16 @@ const routes: Routes = [
         loadChildren: () => import('./modules/main-page-module/main-page.module').then(m => m.MainPageModule),
     },
     {
+        path: 'auth',
+        loadChildren: () => import('./modules/auth-module/auth.module').then(m => m.AuthModule),
+        canActivate: [ LoginRedirectGuard ],
+    },
+    {
         path: 'secure',
         loadChildren: () => import('./modules/admin-panel-module/admin-page.module').then(m => m.AdminPageModule),
-        canActivate: [ AdminRedirectGuard ]
+        canActivate: [ AdminRedirectGuard ],
     },
-    { path: '**', redirectTo: 'schedule' },
+    { path: '**', component: NotFoundComponent },
 ];
 
 

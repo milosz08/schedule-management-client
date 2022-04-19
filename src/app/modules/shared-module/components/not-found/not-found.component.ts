@@ -18,6 +18,8 @@
  */
 
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
 
 
 @Component({
@@ -25,4 +27,9 @@ import { Component } from '@angular/core';
     templateUrl: './not-found.component.html',
     styleUrls: [ './not-found.component.scss' ]
 })
-export class NotFoundComponent {}
+export class NotFoundComponent extends MetaWebContent {
+
+    constructor(titleService: Title, metaService: Meta) {
+        super(titleService, metaService, AllMainWebpages.NOT_FOUND);
+    };
+}

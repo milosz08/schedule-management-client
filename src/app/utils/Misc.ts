@@ -17,6 +17,9 @@
  * Obiektowe".
  */
 
+/**
+ * Dodatkowe metody pomocnicze używane w aplikacji.
+ */
 export class Misc {
 
     public static compareEnum = <T>(e: T) => (key: any): key is T[keyof T] => {

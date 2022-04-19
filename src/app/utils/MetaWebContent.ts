@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: WebTitle.ts
- * Last modified | Ostatnia modyfikacja: 10/04/2022, 13:13
+ * File name | Nazwa pliku: MetaWebContent.ts
+ * Last modified | Ostatnia modyfikacja: 19/04/2022, 14:44
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,11 +17,18 @@
  * Obiektowe".
  */
 
-import JsonMockedTitles from '../mocked-data/subpages-titles-description.json';
+import { Meta, Title } from '@angular/platform-browser';
+
 import { Misc } from './Misc';
+import JsonMockedTitles from '../mocked-data/subpages-titles-description.json';
 
 
-export class WebTitle {
+/**
+ * Klasa dodająca dodatkowe informacje dla SEO (tytuł strony oraz opis) na podstawie przekazywanej
+ * wartości enuma (jako klucza mapującego dany obiekt w zamockowanej tablicy). Żeby użyć klasy w komponencie
+ * angulara należy rozszerzyć ją i wywołać konstruktor klasy bazowej przy użyciu słowa super.
+ */
+export abstract class MetaWebContent {
 
     private readonly _defPrefix: string;
     private readonly _adminPrefix: string;
@@ -30,36 +37,59 @@ export class WebTitle {
     private readonly _mainSubpages: object;
     private readonly _adminSubpages: object;
 
-    constructor() {
+    protected constructor(
+        private titleService: Title,
+        private meta: Meta,
+        private metaPageExtendor: AllMainWebpages | AllAdminWebpages,
+    ) {
         this._defPrefix = JsonMockedTitles.defaultPrefix;
         this._adminPrefix = JsonMockedTitles.adminPanelPrefix;
         this._defSeparator = JsonMockedTitles.defaultSeparator;
         this._mainSubpages = JsonMockedTitles.mainSubpages;
         this._adminSubpages = JsonMockedTitles.adminPanelSubpages;
+        this.updateMetaTags();
     };
 
-    public combinePageTitleElements(webpage: AllMainWebpages | AllAdminWebpages): string {
+    private updateMetaTags(): void {
+        this.titleService.setTitle(this.combinePageTitleElements(this.metaPageExtendor));
+        this.meta.updateTag({
+            name: 'description',
+            content: this.combinePageDescriptionElements(this.metaPageExtendor),
+        });
+    };
+
+    private combinePageTitleElements(webpage: AllMainWebpages | AllAdminWebpages): string {
         if (Misc.compareEnum(AllMainWebpages)(webpage)) {
             return `${this._mainSubpages[webpage].title} ${this._defSeparator} ${this._defPrefix}`;
         }
         return `${this._adminSubpages[webpage].title} ${this._defSeparator} ${this._adminPrefix}`;
     };
 
-    public combinePageDescriptionElements(webpage: AllMainWebpages | AllAdminWebpages): string {
+    private combinePageDescriptionElements(webpage: AllMainWebpages | AllAdminWebpages): string {
         if (Misc.compareEnum(AllMainWebpages)(webpage)) {
             return this._mainSubpages[webpage].description;
         }
         return this._adminSubpages[webpage].description;
     };
+
 }
 
+/**
+ * Klucze obiektów meta właściwości dla stron niechronionych.
+ */
 export enum AllMainWebpages {
     ROOT = 'root',
+    SCHEDULE = 'schedule',
     LOGIN = 'login',
+    FORGOT_PASSWORD = 'forgotPassword',
     BOOKING = 'booking',
     SEARCH = 'search',
+    NOT_FOUND = 'notFound',
 }
 
+/**
+ * Klucze obiektów meta właściwości dla stron chronionych (panel administratora).
+ */
 export enum AllAdminWebpages {
     DASHBOARD = 'dashboard',
 }

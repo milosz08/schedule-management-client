@@ -21,6 +21,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    letter-spacing: -.02rem;
     :focus { // Dostępność
         outline: 2px dashed var(--redHighlighIndicator);
     }
@@ -29,11 +30,11 @@
 body {
     font-size: 16px;
     color: var(--mainBlackColor);
-    background-color: var(--mainWhiteColor);
+    background: var(--basicGradient);
 }
 
 body, input, textarea, button {
-    font-family: 'Source Code Pro', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -49,4 +50,9 @@ button {
 
 button, a {
     cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }

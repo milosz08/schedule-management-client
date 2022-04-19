@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: _variables.scss
- * Last modified | Ostatnia modyfikacja: 07/04/2022, 18:59
+ * File name | Nazwa pliku: root-admin-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 09/04/2022, 17:15
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,25 +17,20 @@
  * Obiektowe".
  */
 
-:root {
+import { Component } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 
-    // Podstawowe kolory
-    --gradientFirstColor: #f0fcff;
-    --gradientSecondColor: #fceff1;
+import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
 
-    --darkBlueColor: #011d3d;
-    --darkPurpleColor: #1d1e3b;
-    --mainYellowColor: #fff255;
-    --mainBlackColor: #212529;
-    --lightGrayColor: #818181;
-    --mainWhiteColor: #f0fcff;
 
-    // Dostępność
-    --redHighlighIndicator: #de0505;
+@Component({
+    selector: 'app-root-schedule-page',
+    templateUrl: './schedule-page.component.html',
+    styleUrls: [ './schedule-page.component.scss' ]
+})
+export class SchedulePageComponent extends MetaWebContent {
 
-    // Inne
-    --transitionDuration: .2s;
-    --borderRadius: 5px;
-    --basicGradient: linear-gradient(135deg, var(--gradientFirstColor), var(--gradientSecondColor));
-
+    constructor(titleService: Title, private metaService: Meta) {
+        super(titleService, metaService, AllMainWebpages.SCHEDULE);
+    };
 }

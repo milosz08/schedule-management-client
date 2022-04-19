@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Informacje",
+        "location": "/",
+        "ariaLabel": "Przejdź do strony z informacjami"
+    },
+    {
+        "name": "Plan zajęć",
+        "location": "schedule",
+        "ariaLabel": "Przejdź do planu zajęć"
+    },
+    {
+        "name": "Rezerwacje",
+        "location": "booking",
+        "ariaLabel": "Przejdź do stworzenia nowej rezerwacji"
+    },
+    {
+        "name": "Wyszukaj",
+        "location": "search",
+        "ariaLabel": "Przejdź do wyszukiwarki"
+    }
+]

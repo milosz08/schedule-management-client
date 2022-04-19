@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: _variables.scss
- * Last modified | Ostatnia modyfikacja: 07/04/2022, 18:59
+ * File name | Nazwa pliku: auth.module.ts
+ * Last modified | Ostatnia modyfikacja: 17/04/2022, 21:30
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,25 +17,25 @@
  * Obiektowe".
  */
 
-:root {
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-    // Podstawowe kolory
-    --gradientFirstColor: #f0fcff;
-    --gradientSecondColor: #fceff1;
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 
-    --darkBlueColor: #011d3d;
-    --darkPurpleColor: #1d1e3b;
-    --mainYellowColor: #fff255;
-    --mainBlackColor: #212529;
-    --lightGrayColor: #818181;
-    --mainWhiteColor: #f0fcff;
+import { AuthRoutingModule } from './auth-routing.module';
 
-    // Dostępność
-    --redHighlighIndicator: #de0505;
 
-    // Inne
-    --transitionDuration: .2s;
-    --borderRadius: 5px;
-    --basicGradient: linear-gradient(135deg, var(--gradientFirstColor), var(--gradientSecondColor));
-
-}
+@NgModule({
+    declarations: [
+        LoginPageComponent,
+        ForgotPasswordPageComponent
+    ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        RouterModule,
+    ],
+})
+export class AuthModule {}
