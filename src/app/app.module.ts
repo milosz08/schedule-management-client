@@ -32,6 +32,7 @@ import { combinedReducers } from './store/combine-reducers';
 
 import { MainPageModule } from './modules/main-page-module/main-page.module';
 import { AdminPageModule } from './modules/admin-panel-module/admin-page.module';
+import { AuthModule } from './modules/auth-module/auth.module';
 import { SharedModule } from './modules/shared-module/shared.module';
 
 
@@ -47,12 +48,13 @@ import { SharedModule } from './modules/shared-module/shared.module';
         // Importy stworzonych modułów w całej aplikacji
         MainPageModule,
         AdminPageModule,
+        AuthModule,
         SharedModule,
         // Dodanie globalnego ngrx flux store + ngrx middleware effects
         StoreModule.forRoot(combinedReducers),
         EffectsModule.forRoot([]),
         // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)
-        StoreDevtoolsModule.instrument({ logOnly: environment.production })
+        StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     ],
     providers: [],
     bootstrap: [
