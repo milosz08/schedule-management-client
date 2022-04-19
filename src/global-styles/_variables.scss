@@ -20,14 +20,22 @@
 :root {
 
     // Podstawowe kolory
-    --darkBlueColor: #0c0958;
-    --mainBlueColor: #2434b3;
-    --blueLightTintColor: #edeff9;
+    --gradientFirstColor: #f0fcff;
+    --gradientSecondColor: #fceff1;
+
+    --darkBlueColor: #011d3d;
+    --darkPurpleColor: #1d1e3b;
     --mainYellowColor: #fff255;
     --mainBlackColor: #212529;
-    --mainWhiteColor: #ffffff;
+    --lightGrayColor: #818181;
+    --mainWhiteColor: #f0fcff;
 
     // Dostępność
     --redHighlighIndicator: #de0505;
+
+    // Inne
+    --transitionDuration: .2s;
+    --borderRadius: 5px;
+    --basicGradient: linear-gradient(135deg, var(--gradientFirstColor), var(--gradientSecondColor));
 
 }
