@@ -4,12 +4,20 @@
     "adminPanelPrefix": "Panel Administratora",
     "mainSubpages": {
         "root": {
-            "title": "Strona główna",
+            "title": "Strona Główna",
+            "description": "Na tej stronie możesz dowiedzieć się podstawowych informacji."
+        },
+        "schedule": {
+            "title": "Plan Zajęć",
             "description": "Na tej stronie możesz przeglądać plan zajęć uczelni."
         },
         "login": {
             "title": "Logowanie",
             "description": "Na tej stronie masz możliwość zalogowania do systemu jako administrator, edytor lub nauczyciel."
+        },
+        "forgotPassword": {
+            "title": "Zapomniałem Hasła",
+            "description": "Na tej stronie masz możliwość stworzenia nowego hasła po weryfikacji tożsamości."
         },
         "booking": {
             "title": "Rezerwacje",
@@ -18,6 +26,10 @@
         "search": {
             "title": "Szukaj",
             "description": "Na tej stronie masz możliwość wyszukania sali, grupy lub nauczyciela."
+        },
+        "notFound": {
+            "title": "404",
+            "description": "Nie odnaleziono zawartości. Strona którą szukasz nie istnieje."
         }
     },
     "adminPanelSubpages": {
