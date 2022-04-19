@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 
-import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
+import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
 
 
 @Component({
@@ -28,19 +28,9 @@ import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
     templateUrl: './root-main-page.component.html',
     styleUrls: [ './root-main-page.component.scss' ]
 })
-export class RootMainPageComponent {
+export class RootMainPageComponent extends MetaWebContent {
 
-    private webtitle: WebTitle = new WebTitle();
-
-    constructor(private titleService: Title, private meta: Meta) {
-        this.updateMetaTags();
-    };
-
-    private updateMetaTags(): void {
-        this.titleService.setTitle(this.webtitle.combinePageTitleElements(AllMainWebpages.ROOT));
-        this.meta.updateTag({
-            name: 'description',
-            content: this.webtitle.combinePageDescriptionElements(AllMainWebpages.ROOT)
-        });
+    constructor(titleService: Title, metaService: Meta) {
+        super(titleService, metaService, AllMainWebpages.ROOT);
     };
 }

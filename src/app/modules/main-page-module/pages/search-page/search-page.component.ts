@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
+import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
 
 
 @Component({
@@ -28,19 +28,9 @@ import { AllMainWebpages, WebTitle } from '../../../../utils/WebTitle';
     templateUrl: './search-page.component.html',
     styleUrls: [ './search-page.component.scss' ]
 })
-export class SearchPageComponent {
+export class SearchPageComponent extends MetaWebContent {
 
-    private webtitle: WebTitle = new WebTitle();
-
-    constructor(private titleService: Title, private meta: Meta) {
-        this.updateMetaTags();
-    };
-
-    private updateMetaTags(): void {
-        this.titleService.setTitle(this.webtitle.combinePageTitleElements(AllMainWebpages.SEARCH));
-        this.meta.updateTag({
-            name: 'description',
-            content: this.webtitle.combinePageDescriptionElements(AllMainWebpages.SEARCH)
-        });
+    constructor(titleService: Title, metaService: Meta) {
+        super(titleService, metaService, AllMainWebpages.SEARCH);
     };
 }
