@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth.module.ts
+ * File name | Nazwa pliku: auth-page.module.ts
  * Last modified | Ostatnia modyfikacja: 17/04/2022, 21:30
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -21,21 +21,43 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AuthPageComponent } from './auth-page.component';
+import { AuthRoutingModule } from './auth-routing.module';
+
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 
-import { AuthRoutingModule } from './auth-routing.module';
+import { LastLoginsComponent } from './components/last-logins/last-logins.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { AuthFooterComponent } from './components/auth-footer/auth-footer.component';
+
+import { AuthService } from '../../services/auth.service';
+import { BrowserStorageService } from '../../services/browser-storage.service';
 
 
 @NgModule({
     declarations: [
+        AuthPageComponent,
         LoginPageComponent,
-        ForgotPasswordPageComponent
+        ForgotPasswordPageComponent,
+        LastLoginsComponent,
+        LoginFormComponent,
+        AuthFooterComponent
     ],
     imports: [
         CommonModule,
         AuthRoutingModule,
         RouterModule,
+        ReactiveFormsModule,
+        MatIconModule,
     ],
+    providers: [
+        AuthService,
+        BrowserStorageService,
+    ],
+    exports: []
 })
-export class AuthModule {}
+export class AuthPageModule {}

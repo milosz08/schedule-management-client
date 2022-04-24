@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: session.types.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 19:51
+ * File name | Nazwa pliku: auth-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 22/04/2022, 01:16
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,18 +17,11 @@
  * Obiektowe".
  */
 
-export enum SessionActionTypes {
-    USER_LOGIN = '[USER] LOGIN',
-    USER_LOGOUT = '[USER] LOGOUT',
-}
+import { Component } from '@angular/core';
 
-export enum AuthenticationLevels {
-    UNDEFINED = 'UNDEFINED',
-    TEACHER = 'TEACHER',
-    EDITOR = 'EDITOR',
-    ADMINISTRATOR = 'ADMINISTRATOR',
-}
 
-export enum SessionStateKeysTypes {
-    IF_LOGGED = 'ifLogged',
-}
+@Component({
+    selector: 'app-auth-page',
+    templateUrl: './auth-page.component.html',
+})
+export class AuthPageComponent {}
