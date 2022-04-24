@@ -18,8 +18,12 @@
  */
 
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,12 +32,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
-import { combinedReducers } from './store/combine-reducers';
-
-import { MainPageModule } from './modules/main-page-module/main-page.module';
-import { AdminPageModule } from './modules/admin-panel-module/admin-page.module';
-import { AuthModule } from './modules/auth-module/auth.module';
 import { SharedModule } from './modules/shared-module/shared.module';
+import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
+
+import { combinedReducers } from './ngrx-store/combine-reducers';
+
+import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
+import { SharedEffects } from './ngrx-store/shared-ngrx-store/shared.effects';
 
 
 @NgModule({
@@ -45,18 +50,24 @@ import { SharedModule } from './modules/shared-module/shared.module';
         RouterModule,
         BrowserModule,
         AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
         // Importy stworzonych modułów w całej aplikacji
-        MainPageModule,
-        AdminPageModule,
-        AuthModule,
         SharedModule,
         // Dodanie globalnego ngrx flux store + ngrx middleware effects
         StoreModule.forRoot(combinedReducers),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([
+            LoginSessionEffects,
+            SharedEffects,
+        ]),
         // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)
         StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     ],
-    providers: [],
+    providers: [
+        DatePipe,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true },
+    ],
     bootstrap: [
         AppComponent,
     ],
