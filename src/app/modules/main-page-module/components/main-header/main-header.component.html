@@ -17,40 +17,29 @@
   ~ Obiektowe".
   -->
 
-<header class = 'header__container'>
+<header class = 'main-header__container'>
 	<a
 		[routerLink] = '[ "/" ]'
 		title = 'Przejdź do strony głównej'
-		class = 'header__logo'
+		class = 'main-header__logo'
 	>
 		<img src = 'assets/images/main-logo-dark.svg' alt = 'logo'>
 	</a>
-	<nav class = 'header__navigation'>
-		<ng-container *ngFor = 'let nav of navigationData; index as i;'>
+	<nav class = 'main-header__navigation'>
+		<ng-container *ngFor = 'let nav of navigationDataGet; index as i;'>
 			<a
 				[routerLink] = 'nav.location'
 				[routerLinkActive] = '[ "link--active" ]'
 				[routerLinkActiveOptions] = '{ exact: true }'
-				class = 'header__navigation__link'
+				class = 'main-header__navigation-link'
 				title = '{{ nav.ariaLabel }}'
 			>
 				{{ nav.name }}
 			</a>
-			<span *ngIf = 'i !== navigationData.length - 1'
-				  class = 'header__navigation__separator'
+			<span *ngIf = 'i !== navigationDataGet.length - 1'
+				  class = 'app__dot-separator'
 			></span>
 		</ng-container>
 	</nav>
-	<button
-		(click) = 'handleClickLoggedButton()'
-		class = 'header__auth'
-		title = 'login'
-	>
-		<div class = 'header__auth__text'>
-			Zaloguj
-		</div>
-		<div class = 'header__auth__icon'>
-			<img src = 'assets/images/not-logged.svg' alt = 'not-logged'>
-		</div>
-	</button>
+	<app-user-header-data-with-popup></app-user-header-data-with-popup>
 </header>
