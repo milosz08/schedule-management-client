@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: environment.prod.ts
- * Last modified | Ostatnia modyfikacja: 05/04/2022, 23:55
+ * File name | Nazwa pliku: api-configurer.helper.ts
+ * Last modified | Ostatnia modyfikacja: 25/04/2022, 00:18
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,7 +17,21 @@
  * Obiektowe".
  */
 
-export const environment = {
-    production: true,
-    backendApi: 'http://localhost:7575',
-};
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+
+/**
+ * Klasa przechowujący dane statyczne dla łączenia się z backendem.
+ */
+
+@Injectable({
+    providedIn: 'root',
+})
+export class ApiConfigurerHelper {
+
+    private static readonly API_PREFIX = environment.backendApi + '/api/v1/dotnet/';
+
+    public readonly LOGIN_USER = ApiConfigurerHelper.API_PREFIX + 'auth/login';
+    public readonly GET_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/get-avatar';
+
+}
