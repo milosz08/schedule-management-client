@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: MetaWebContent.ts
+ * File name | Nazwa pliku: meta-web-content.helper.ts
  * Last modified | Ostatnia modyfikacja: 19/04/2022, 14:44
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -19,7 +19,7 @@
 
 import { Meta, Title } from '@angular/platform-browser';
 
-import { Misc } from './Misc';
+import { MiscHelper } from './misc.helper';
 import JsonMockedTitles from '../mocked-data/subpages-titles-description.json';
 
 
@@ -28,7 +28,7 @@ import JsonMockedTitles from '../mocked-data/subpages-titles-description.json';
  * wartości enuma (jako klucza mapującego dany obiekt w zamockowanej tablicy). Żeby użyć klasy w komponencie
  * angulara należy rozszerzyć ją i wywołać konstruktor klasy bazowej przy użyciu słowa super.
  */
-export abstract class MetaWebContent {
+export abstract class MetaWebContentHelper {
 
     private readonly _defPrefix: string;
     private readonly _adminPrefix: string;
@@ -59,14 +59,14 @@ export abstract class MetaWebContent {
     };
 
     private combinePageTitleElements(webpage: AllMainWebpages | AllAdminWebpages): string {
-        if (Misc.compareEnum(AllMainWebpages)(webpage)) {
+        if (MiscHelper.compareEnum(AllMainWebpages)(webpage)) {
             return `${this._mainSubpages[webpage].title} ${this._defSeparator} ${this._defPrefix}`;
         }
         return `${this._adminSubpages[webpage].title} ${this._defSeparator} ${this._adminPrefix}`;
     };
 
     private combinePageDescriptionElements(webpage: AllMainWebpages | AllAdminWebpages): string {
-        if (Misc.compareEnum(AllMainWebpages)(webpage)) {
+        if (MiscHelper.compareEnum(AllMainWebpages)(webpage)) {
             return this._mainSubpages[webpage].description;
         }
         return this._adminSubpages[webpage].description;

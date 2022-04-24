@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: Misc.ts
+ * File name | Nazwa pliku: MiscHelper.ts
  * Last modified | Ostatnia modyfikacja: 10/04/2022, 13:36
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -20,7 +20,7 @@
 /**
  * Dodatkowe metody pomocnicze używane w aplikacji.
  */
-export class Misc {
+export class MiscHelper {
 
     public static compareEnum = <T>(e: T) => (key: any): key is T[keyof T] => {
         return (Object as any).values(e).includes(key as T[keyof T])
