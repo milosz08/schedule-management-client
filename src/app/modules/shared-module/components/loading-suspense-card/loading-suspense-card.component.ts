@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { fadeOutAnimation } from '../../../../animations/fade-animations';
 
@@ -41,7 +41,7 @@ import { InitialSharedStateTypes } from '../../../../ngrx-store/shared-ngrx-stor
 })
 export class LoadingSuspenseCardComponent {
 
-    public _suspenseLoading$: Observable<boolean> = this._store.pipe(select(getSuspenseLoading));
+    public _suspenseLoading$: Observable<boolean> = this._store.select(getSuspenseLoading);
 
     constructor(
         private _store: Store<InitialSharedStateTypes>,
