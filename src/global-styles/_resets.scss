@@ -23,14 +23,18 @@
     box-sizing: border-box;
     letter-spacing: -.02rem;
     :focus { // Dostępność
-        outline: 2px dashed var(--redHighlighIndicator);
+        outline: 2px dashed var(--accesibilityColor);
     }
 }
 
 body {
     font-size: 16px;
     color: var(--mainBlackColor);
-    background: var(--basicGradient);
+    background: var(--mainWhiteColor);
+    min-height: 100vh;
+    &.app--disable-scroll {
+        overflow: hidden;
+    }
 }
 
 body, input, textarea, button {
@@ -55,4 +59,20 @@ button, a {
 a {
     color: inherit;
     text-decoration: none;
+    &.app-link--underline:hover {
+        text-decoration: underline;
+    }
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+address {
+   font-style: normal;
+}
+
+strong {
+    font-weight: 500;
 }
