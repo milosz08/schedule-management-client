@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
+import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 
 @Component({
@@ -28,9 +28,12 @@ import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebConten
     templateUrl: './search-page.component.html',
     styleUrls: [ './search-page.component.scss' ]
 })
-export class SearchPageComponent extends MetaWebContent {
+export class SearchPageComponent extends MetaWebContentHelper {
 
-    constructor(titleService: Title, metaService: Meta) {
+    constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
         super(titleService, metaService, AllMainWebpages.SEARCH);
     };
 }

@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
+import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 
 @Component({
@@ -28,9 +28,12 @@ import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebConten
     templateUrl: './forgot-password-page.component.html',
     styleUrls: [ './forgot-password-page.component.scss' ]
 })
-export class ForgotPasswordPageComponent extends MetaWebContent {
+export class ForgotPasswordPageComponent extends MetaWebContentHelper {
 
-    constructor(titleService: Title, metaService: Meta) {
+    constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
         super(titleService, metaService, AllMainWebpages.FORGOT_PASSWORD);
     };
 }

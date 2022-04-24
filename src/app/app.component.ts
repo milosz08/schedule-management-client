@@ -17,10 +17,25 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppGlobalState } from './ngrx-store/combine-reducers';
+import { userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
+
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+
+    constructor(
+        private _store: Store<AppGlobalState>,
+    ) {
+    };
+
+    ngOnInit(): void {
+        this._store.dispatch(userAutoLogin());
+    };
+}

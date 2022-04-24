@@ -31,6 +31,8 @@ import { MainPageRoutingModule } from './main-page-routing.module';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 
+import { SharedModule } from '../shared-module/shared.module';
+
 
 @NgModule({
     declarations: [
@@ -48,6 +50,7 @@ import { MainFooterComponent } from './components/main-footer/main-footer.compon
         CommonModule,
         RouterModule,
         MainPageRoutingModule,
+        SharedModule,
     ],
 })
 export class MainPageModule {}

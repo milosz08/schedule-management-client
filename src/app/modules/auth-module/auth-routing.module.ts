@@ -20,13 +20,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthPageComponent } from './auth-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 
 
 const routes: Routes = [
-    { path: 'login', component: LoginPageComponent },
-    { path: 'forgot-password', component: ForgotPasswordPageComponent },
+    {
+        path: '', component: AuthPageComponent, children: [
+            { path: 'login', component: LoginPageComponent },
+            { path: 'forgot-password', component: ForgotPasswordPageComponent },
+        ]
+    },
 ];
 
 

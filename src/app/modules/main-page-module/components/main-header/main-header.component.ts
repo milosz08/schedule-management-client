@@ -18,12 +18,18 @@
  */
 
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
+import { Store } from '@ngrx/store';
+import { AppGlobalState } from '../../../../ngrx-store/combine-reducers';
 import { MainNavigationModel } from '../../models/main-navigation.model';
 
 import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navigation-content.json';
 
+/**
+ * Komponent odpowiadający za renderowanie widoku głównego headera na stronach niechronionych
+ * (dostępnych z poziomu wszystkich, przede wszystkim użytkowników niezalogowanych).
+ */
 
 @Component({
     selector: 'app-main-header',
@@ -35,17 +41,14 @@ export class MainHeaderComponent {
     private readonly _navigationData: MainNavigationModel[];
 
     constructor(
-        private router: Router,
+        private _store: Store<AppGlobalState>,
+        private _sanitazer: DomSanitizer,
     ) {
         this._navigationData = MainPageNavigationMockedData;
     };
 
-    public handleClickLoggedButton(): void {
-        console.log('login button was clicked');
-        this.router.navigate([ 'auth/login' ]).then(r => r);
-    };
-
-    get navigationData(): Array<MainNavigationModel> {
+    get navigationDataGet(): Array<MainNavigationModel> {
         return this._navigationData;
     };
+
 }

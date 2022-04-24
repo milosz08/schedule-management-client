@@ -1,0 +1,47 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: user-image.component.scss
+ * Last modified | Ostatnia modyfikacja: 24/04/2022, 18:47
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.header-auth__icon {
+    border: 1px solid var(--lightGrayColor);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.header-auth__icon--logged {
+        border: none;
+        overflow: hidden;
+        img {
+            width: 2.5em;
+            height: 2.5em;
+        }
+    }
+    &.header-auth__icon--without-image {
+        border: none;
+        background-color: var(--darkBlueColor);
+        color: var(--mainWhiteColor);
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}

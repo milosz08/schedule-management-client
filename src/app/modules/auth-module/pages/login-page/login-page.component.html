@@ -17,24 +17,38 @@
   ~ Obiektowe".
   -->
 
-<main class = 'flex__center login__container'>
-	<div class = 'login__wrapper'>
-		<div class = 'login__remember__accounts'>
-			<h3 class = 'login__form__header'>
-				Ostatnie logowania
-			</h3>
+<div class = 'login__wrapper'>
+
+	<section class = 'login__last-logins__container'>
+		<h3 class = 'app__header'>
+			Ostatnie logowania
+		</h3>
+		<app-last-logins></app-last-logins>
+	</section>
+
+	<section class = 'app__flex-center login__login-form__container'>
+		<img src = 'assets/images/main-logo-light.svg' alt = 'logo'>
+		<h3 class = 'app__header app__header--light'>
+			Logowanie do systemu
+		</h3>
+		<app-login-form></app-login-form>
+		<div class = 'login__login-form__bottom-links-container'>
+			<a
+				[routerLink] = '[ "/auth/forgot-password" ]'
+				class = 'login__login-form__bottom-links-container__link'
+				title = 'Przejdź do resetowania hasła'
+			>
+				Resetuj hasło
+			</a>
+			<span class = 'app__dot-separator app__dot-separator--gray'></span>
+			<a
+				[routerLink] = '[ "/" ]'
+				class = 'login__login-form__bottom-links-container__link'
+				title = 'Przejdź do strony głównej'
+			>
+				Strona główna
+			</a>
 		</div>
-		<form class = 'flex__center login__form__container'>
-			<img src = 'assets/images/main-logo-light.svg' alt = 'logo'>
-			<h3 class = 'login__form__header header--light'>
-				Logowanie
-			</h3>
+	</section>
 
-			<p>komponent podstrony logowania</p>
-			<button (click)="login()">zaloguj</button>
-			<p>Stan zalogowania: {{ ifLogged$ | async }}</p>
-		</form>
-	</div>
-
-
-</main>
+</div>

@@ -22,7 +22,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminPageComponent } from './admin-page.component';
 import { RootAdminPageComponent } from './pages/root-admin-page/root-admin-page.component';
-import { NotFoundComponent } from '../shared-module/components/not-found/not-found.component';
+import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 
 
 const routes: Routes = [
@@ -30,7 +30,7 @@ const routes: Routes = [
         path: 'admin-panel', component: AdminPageComponent, children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: RootAdminPageComponent },
-            { path: '**', component: NotFoundComponent, pathMatch: 'full' },
+            { path: '**', component: NotFoundPageComponent, pathMatch: 'full' },
         ],
     },
     { path: '', redirectTo: 'admin-panel', pathMatch: 'full' },

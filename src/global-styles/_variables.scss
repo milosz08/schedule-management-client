@@ -19,23 +19,23 @@
 
 :root {
 
-    // Podstawowe kolory
-    --gradientFirstColor: #f0fcff;
-    --gradientSecondColor: #fceff1;
-
+    // Podstatowe kolory
     --darkBlueColor: #011d3d;
     --darkPurpleColor: #1d1e3b;
     --mainYellowColor: #fff255;
     --mainBlackColor: #212529;
     --lightGrayColor: #818181;
-    --mainWhiteColor: #f0fcff;
+    --mainWhiteColor: #fbfdff;
+    --darkRedColor: #7a0f0f;
 
     // Dostępność
-    --redHighlighIndicator: #de0505;
+    --accesibilityColor: var(--lightGrayColor);
+    --safetyAreaWidth: 1250px;
+    --mobileMargin: 0 30px;
+    --mobileExactMargins: calc(100% - var(--mobileMargin) * 2);
 
     // Inne
     --transitionDuration: .2s;
     --borderRadius: 5px;
-    --basicGradient: linear-gradient(135deg, var(--gradientFirstColor), var(--gradientSecondColor));
-
+    --modalsBoxShadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }

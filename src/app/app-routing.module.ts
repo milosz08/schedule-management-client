@@ -23,7 +23,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminRedirectGuard } from './guards/admin-redirect.guard';
 import { LoginRedirectGuard } from './guards/login-redirect.guard';
 
-import { NotFoundComponent } from './modules/shared-module/components/not-found/not-found.component';
+import { NotFoundPageComponent } from './modules/shared-module/pages/not-found-page/not-found.component';
 
 
 const routes: Routes = [
@@ -33,7 +33,7 @@ const routes: Routes = [
     },
     {
         path: 'auth',
-        loadChildren: () => import('./modules/auth-module/auth.module').then(m => m.AuthModule),
+        loadChildren: () => import('./modules/auth-module/auth-page.module').then(m => m.AuthPageModule),
         canActivate: [ LoginRedirectGuard ],
     },
     {
@@ -41,7 +41,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/admin-panel-module/admin-page.module').then(m => m.AdminPageModule),
         canActivate: [ AdminRedirectGuard ],
     },
-    { path: '**', component: NotFoundComponent },
+    { path: '**', component: NotFoundPageComponent },
 ];
 
 
