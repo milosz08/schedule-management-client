@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: session.initial.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 20:01
+ * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:49
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,16 +17,17 @@
  * Obiektowe".
  */
 
-import { createSelector } from '@ngrx/store';
-import { SessionStateKeysTypes } from '../types/session.types';
+import { AuthResponseDataModel } from './ngrx-models/auth-response-data.model';
+
 
 export interface InitialSessionStateTypes {
-    ifLogged: boolean;
+    userData: AuthResponseDataModel | null;
+    errorMessage: string;
+    userImage: string;
 }
 
 export const initialSessionState: InitialSessionStateTypes = {
-    ifLogged: false,
+    userData: null,
+    errorMessage: '',
+    userImage: '',
 };
-
-export const sessionState = (state: any) => state.sessionState;
-export const sessionSelectSelector = (key: SessionStateKeysTypes) => createSelector(sessionState, state => state[key]);
