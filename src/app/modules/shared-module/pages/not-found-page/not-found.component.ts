@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: not-found.component.ts
+ * File name | Nazwa pliku: not-found-page.component.ts
  * Last modified | Ostatnia modyfikacja: 09/04/2022, 14:46
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -19,17 +19,25 @@
 
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
 
+import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+/**
+ * Komponent renderujący stronę błędu (404) w przypadku błędnego routingu lub
+ * nieznalezienia zawartości.
+ */
 
 @Component({
-    selector: 'app-not-found',
+    selector: 'app-not-found-page',
     templateUrl: './not-found.component.html',
     styleUrls: [ './not-found.component.scss' ]
 })
-export class NotFoundComponent extends MetaWebContent {
+export class NotFoundPageComponent extends MetaWebContentHelper {
 
-    constructor(titleService: Title, metaService: Meta) {
+    constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
         super(titleService, metaService, AllMainWebpages.NOT_FOUND);
     };
 }
