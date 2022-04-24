@@ -19,15 +19,40 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found.component';
+
+import { UserImageComponent } from './components/user-image/user-image.component';
+import { UserDetailsPopupComponent } from './components/user-details-popup/user-details-popup.component';
+import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
+import { UserHeaderDataWithPopupComponent } from './components/user-header-data-with-popup/user-header-data-with-popup.component';
+
+import { SuspenseService } from './services/suspense.service';
+
 
 @NgModule({
     declarations: [
-        NotFoundComponent
+        // strony
+        NotFoundPageComponent,
+        // komponenty
+        UserImageComponent,
+        UserDetailsPopupComponent,
+        LoadingSuspenseCardComponent,
+        UserHeaderDataWithPopupComponent,
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule,
+        MatIconModule,
+    ],
+    providers: [
+        SuspenseService,
+    ],
+    exports: [
+        LoadingSuspenseCardComponent,
+        UserHeaderDataWithPopupComponent,
     ],
 })
 export class SharedModule {}
