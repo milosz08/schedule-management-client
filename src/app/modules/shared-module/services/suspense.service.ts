@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: app.component.ts
- * Last modified | Ostatnia modyfikacja: 05/04/2022, 23:55
+ * File name | Nazwa pliku: suspense.service.ts
+ * Last modified | Ostatnia modyfikacja: 25/04/2022, 00:35
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,25 +17,34 @@
  * Obiektowe".
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+
 import { Store } from '@ngrx/store';
 
-import { AppGlobalState } from './ngrx-store/combine-reducers';
-import { userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
+import { AppGlobalState } from '../../../ngrx-store/combine-reducers';
+import { setSuspenseLoader } from '../../../ngrx-store/shared-ngrx-store/shared.actions';
 
+/**
+ * Serwis odpowiedzialny za planszę odpalaną przy leniwym ładowaniu kontenntu.
+ */
 
-@Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-})
-export class AppComponent implements OnInit {
+@Injectable()
+export class SuspenseService {
 
     constructor(
+        private _router: Router,
         private _store: Store<AppGlobalState>,
     ) {
     };
 
-    ngOnInit(): void {
-        this._store.dispatch(userAutoLogin());
+    public toggleSuspenseComponent(): void {
+        this._router.events.subscribe(event => {
+            if (event instanceof RouteConfigLoadStart) {
+                this._store.dispatch(setSuspenseLoader({ status: true }));
+            } else if (event instanceof RouteConfigLoadEnd) {
+                setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
+            }
+        });
     };
 }
