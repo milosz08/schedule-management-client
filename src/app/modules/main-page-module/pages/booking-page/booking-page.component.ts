@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
+import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 
 @Component({
@@ -28,9 +28,12 @@ import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebConten
     templateUrl: './booking-page.component.html',
     styleUrls: [ './booking-page.component.scss' ]
 })
-export class BookingPageComponent extends MetaWebContent {
+export class BookingPageComponent extends MetaWebContentHelper {
 
-    constructor(titleService: Title, metaService: Meta) {
+    constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
         super(titleService, metaService, AllMainWebpages.BOOKING);
     };
 }

@@ -23,8 +23,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 
-import { SessionStateKeysTypes } from '../store/types/session.types';
-import { InitialSessionStateTypes, sessionSelectSelector } from '../store/initial-state/session.initial';
+import { AppGlobalState } from '../ngrx-store/combine-reducers';
 
 
 @Injectable({
@@ -36,15 +35,15 @@ export class AdminRedirectGuard implements CanActivate {
 
     constructor(
         private router: Router,
-        private store: Store<InitialSessionStateTypes>
+        private store: Store<AppGlobalState>
     ) {
-        this.ifLogged$ = this.store.select(sessionSelectSelector(SessionStateKeysTypes.IF_LOGGED));
+        this.ifLogged$ = this.store.select(reducer => Boolean(reducer.sessionReducer.userData));
     };
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
         return this.ifLogged$.pipe(map(authenticate => {
             if (!authenticate) {
-                this.router.navigate([ '/schedule/login' ]).then(r => r);
+                this.router.navigate([ '/auth/login' ]).then(r => r);
             }
             return true;
         }));

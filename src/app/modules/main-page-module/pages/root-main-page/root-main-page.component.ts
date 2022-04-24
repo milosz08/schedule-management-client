@@ -20,7 +20,7 @@
 import { Component } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 
-import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
+import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 
 @Component({
@@ -28,9 +28,12 @@ import { AllMainWebpages, MetaWebContent } from '../../../../utils/MetaWebConten
     templateUrl: './root-main-page.component.html',
     styleUrls: [ './root-main-page.component.scss' ]
 })
-export class RootMainPageComponent extends MetaWebContent {
+export class RootMainPageComponent extends MetaWebContentHelper {
 
-    constructor(titleService: Title, metaService: Meta) {
+    constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
         super(titleService, metaService, AllMainWebpages.ROOT);
     };
 }

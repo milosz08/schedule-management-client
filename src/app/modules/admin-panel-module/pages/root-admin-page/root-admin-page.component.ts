@@ -19,16 +19,8 @@
 
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
-import { AllAdminWebpages, MetaWebContent } from '../../../../utils/MetaWebContent';
-
-import { UserLogin } from '../../../../store/actions/session.actions';
-import { SessionStateKeysTypes } from '../../../../store/types/session.types';
-import { InitialSessionStateTypes, sessionSelectSelector } from '../../../../store/initial-state/session.initial';
+import { AllAdminWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 
 @Component({
@@ -36,22 +28,12 @@ import { InitialSessionStateTypes, sessionSelectSelector } from '../../../../sto
     templateUrl: './root-admin-page.component.html',
     styleUrls: [ './root-admin-page.component.scss' ]
 })
-export class RootAdminPageComponent extends MetaWebContent {
-
-    public ifLogged$?: Observable<boolean>;
+export class RootAdminPageComponent extends MetaWebContentHelper {
 
     constructor(
         titleService: Title,
         metaService: Meta,
-        private store: Store<InitialSessionStateTypes>,
-        private router: Router
     ) {
         super(titleService, metaService, AllAdminWebpages.DASHBOARD);
-        this.ifLogged$ = this.store.pipe(select(sessionSelectSelector(SessionStateKeysTypes.IF_LOGGED)));
-    };
-
-    public logout(): void {
-        this.store.dispatch(new UserLogin({ ifLogged: false }));
-        this.router.navigate([ 'login' ]).then(r => r);
     };
 }
