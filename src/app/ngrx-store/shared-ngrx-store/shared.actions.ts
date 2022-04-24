@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: combine-reducers.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 20:08
+ * File name | Nazwa pliku: shared.actions.ts
+ * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:13
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,15 +17,8 @@
  * Obiektowe".
  */
 
-import { ActionReducerMap } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-import { sessionReducer } from './reducers/session.reducer';
-import { InitialSessionStateTypes } from './initial-state/session.initial';
+export const SET_SUSPENSE_LOADER = '[SHARED] SET_SUSPENSE_LOADER';
 
-interface AppGlobalState {
-    sessionState: InitialSessionStateTypes;
-}
-
-export const combinedReducers: ActionReducerMap<AppGlobalState> = {
-    sessionState: sessionReducer,
-};
+export const setSuspenseLoader = createAction(SET_SUSPENSE_LOADER, props<{ status: boolean }>());
