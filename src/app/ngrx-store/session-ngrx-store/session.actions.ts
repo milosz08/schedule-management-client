@@ -30,6 +30,9 @@ export const SESSION_GET_IMAGE = '[SESSION] GET USER IMAGE';
 export const SESSION_SUCCES_GET_IMAGE = '[SESSION] SUCCESS GET IMAGE';
 export const SESSION_FAILURE_GET_IMAGE = '[SESSION] FAILURE GET IMAGE';
 
+export const SESSION_UNEXPECTED_SERVER_ERROR = '[SESSION] UNEXPECTED SERVER ERROR';
+
+
 export const userLogin = createAction(SESSION_LOGIN, props<{ login: string, password: string }>());
 export const userAutoLogin = createAction(SESSION_AUTO_LOGIN);
 export const userSuccessLogin = createAction(SESSION_SUCCESS_LOGIN, props<{ data: AuthResponseDataModel | null }>());
@@ -39,3 +42,5 @@ export const userLogout = createAction(USER_LOGOUT);
 export const userGetImage = createAction(SESSION_GET_IMAGE, props<{ userId: string, jwt: string }>());
 export const userSuccesedGetImage = createAction(SESSION_SUCCES_GET_IMAGE, props<{ imageUri: string }>());
 export const userFailuredGetImage = createAction(SESSION_FAILURE_GET_IMAGE);
+
+export const serverConnectionFailure = createAction(SESSION_UNEXPECTED_SERVER_ERROR);

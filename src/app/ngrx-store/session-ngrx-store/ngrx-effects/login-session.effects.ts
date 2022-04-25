@@ -30,8 +30,8 @@ import { setSuspenseLoader } from '../../shared-ngrx-store/shared.actions';
 import { BrowserStorageService } from '../../../services/browser-storage.service';
 
 import {
-    userAutoLogin, userFailuredGetImage, userFailureLogin, userGetImage, userLogin, userLogout, userSuccesedGetImage,
-    userSuccessLogin
+    serverConnectionFailure, userAutoLogin, userFailuredGetImage, userFailureLogin, userGetImage, userLogin,
+    userLogout, userSuccesedGetImage, userSuccessLogin
 } from '../session.actions';
 
 /**
@@ -74,6 +74,10 @@ export class LoginSessionEffects {
                         }),
                         catchError(error => {
                             setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
+                            // nieoczekiwany błąd serwera (brak połączenia z backendem)
+                            if (error.statusText === 'Unknown Error' || error.status === 0) {
+                                return of(serverConnectionFailure());
+                            }
                             return of(userFailureLogin({ errorMessage: error.error.message }));
                         }),
                     );

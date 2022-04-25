@@ -33,8 +33,11 @@ export const getUserDetailsPopupButtonTitle = createSelector(getSessionState, st
 ));
 
 export const getUserInitials = createSelector(getSessionState, state => {
-    const [ name, surname ] = state.userData!.nameWithSurname.split(' ');
-    return name.charAt(0) + surname.charAt(0);
+    if (state.userData) {
+        const [ name, surname ] = state.userData.nameWithSurname.split(' ');
+        return name.charAt(0) + surname.charAt(0);
+    }
+    return '';
 });
 
 export const getUserAuthLevel = createSelector(getSessionState, state => {

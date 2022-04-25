@@ -20,6 +20,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
+    serverConnectionFailure,
     userFailuredGetImage, userFailureLogin, userLogout, userSuccesedGetImage, userSuccessLogin
 } from './session.actions';
 
@@ -34,6 +35,7 @@ const _sessionReducer = createReducer(
         };
     }),
     on(userFailureLogin, (state, action) => {
+        console.log(state.errorMessage);
         return { ...state,
             errorMessage: action.errorMessage
         };
@@ -53,6 +55,11 @@ const _sessionReducer = createReducer(
             userImage: '',
         };
     }),
+    on(serverConnectionFailure, state => {
+        return { ...state,
+            errorMessage: 'Brak połączenia z serwerem. Spróbuj ponownie później.'
+        };
+    })
 );
 
 export function sessionReducer(state: any, action: any) {
