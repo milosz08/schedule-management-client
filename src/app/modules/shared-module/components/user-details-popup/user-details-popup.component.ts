@@ -25,7 +25,7 @@ import { Store } from '@ngrx/store';
 import { userLogout } from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 import {
-    getUserAuthLevel, getUserEmail, getUserEmailLink, getUserHeaderName
+    getUserAuthLevel, getUserHeaderName, getUserLogin
 } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
@@ -43,8 +43,7 @@ import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-st
 export class UserDetailsPopupComponent {
 
     public _userNameAndSurname$: Observable<string> = this._store.select(getUserHeaderName);
-    public _userEmailLink$: Observable<string> = this._store.select(getUserEmailLink);
-    public _userEmail$: Observable<string> = this._store.select(getUserEmail);
+    public _userLogin$: Observable<string> = this._store.select(getUserLogin);
     public _userAuthLevel$: Observable<string> = this._store.select(getUserAuthLevel);
 
     constructor(

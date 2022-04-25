@@ -26,7 +26,7 @@ import { Observable, Subscription } from 'rxjs';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
 import {
-    getUserData, getUserDetailsPopupButtonTitle, getUserEmail, getUserHeaderName
+    getUserData, getUserDetailsPopupButtonTitle, getUserHeaderName, getUserLogin
 } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
@@ -47,7 +47,7 @@ export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
 
     public _userDetailsButtonTitle$: Observable<string> = this._store.select(getUserDetailsPopupButtonTitle);
     public _userHeaderName$: Observable<string> = this._store.select(getUserHeaderName);
-    public _userEmail$: Observable<string> = this._store.select(getUserEmail);
+    public _userLogin$: Observable<string> = this._store.select(getUserLogin);
 
     private _storeSubscription: Subscription | undefined;
     private _userData: AuthResponseDataModel | null = null;

@@ -25,12 +25,11 @@
 		<span class = 'user-details-popup__user-name-and-surname'>
 			{{ _userNameAndSurname$ | async }}
 		</span>
-		<a
-			[href] = '_userEmailLink$ | async'
-			class = 'user-details-popup__user-email app-link--underline'
+		<span
+			class = 'user-details-popup__user-login'
 		>
-			{{ _userEmail$ | async }}
-		</a>
+			{{ _userLogin$ | async }}
+		</span>
 		<span class = 'user-details-popup__user-role'>
 			Rola w systemie: <strong>{{ _userAuthLevel$ | async }}</strong>
 		</span>

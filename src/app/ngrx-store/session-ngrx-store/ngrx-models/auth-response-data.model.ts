@@ -22,6 +22,7 @@ export interface AuthResponseDataModel {
     role: string;
     bearerToken: string;
     nameWithSurname: string;
+    login: string;
     email: string;
     tokenExpirationDate: Date;
     firstAccess: boolean;

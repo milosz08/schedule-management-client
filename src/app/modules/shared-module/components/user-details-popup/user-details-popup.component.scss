@@ -40,7 +40,7 @@
 .user-details-popup__user-basic-data {
     text-align: center;
     .user-details-popup__user-name-and-surname,
-    .user-details-popup__user-email,
+    .user-details-popup__user-login,
     .user-details-popup__user-role {
         display: block;
     }
@@ -48,7 +48,7 @@
         font-size: 1.5rem;
         margin-top: 5px;
     }
-    .user-details-popup__user-email {
+    .user-details-popup__user-login {
         color: var(--lightGrayColor);
     }
     .user-details-popup__user-role {
