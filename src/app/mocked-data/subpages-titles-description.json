@@ -16,7 +16,7 @@
             "description": "Na tej stronie masz możliwość zalogowania do systemu jako administrator, edytor lub nauczyciel."
         },
         "forgotPassword": {
-            "title": "Zapomniałem Hasła",
+            "title": "Resetuj Hasło",
             "description": "Na tej stronie masz możliwość stworzenia nowego hasła po weryfikacji tożsamości."
         },
         "booking": {
