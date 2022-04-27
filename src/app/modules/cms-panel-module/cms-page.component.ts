@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: root-admin-page.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 17:23
+ * File name | Nazwa pliku: cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:52
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,22 +18,10 @@
  */
 
 import { Component } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-
-import { AllAdminWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 
 @Component({
-    selector: 'app-root-admin-page',
-    templateUrl: './root-admin-page.component.html',
-    styleUrls: [ './root-admin-page.component.scss' ]
+    selector: 'app-admin-panel',
+    templateUrl: './cms-page.component.html',
 })
-export class RootAdminPageComponent extends MetaWebContentHelper {
-
-    constructor(
-        titleService: Title,
-        metaService: Meta,
-    ) {
-        super(titleService, metaService, AllAdminWebpages.DASHBOARD);
-    };
-}
+export class CmsPageComponent {}

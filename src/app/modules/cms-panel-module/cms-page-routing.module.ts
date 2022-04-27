@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: admin-page-routing.module.ts
- * Last modified | Ostatnia modyfikacja: 10/04/2022, 00:50
+ * File name | Nazwa pliku: cms-page-routing.module.ts
+ * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:06
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -20,16 +20,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminPageComponent } from './admin-page.component';
-import { RootAdminPageComponent } from './pages/root-admin-page/root-admin-page.component';
+import { EditorRedirectGuard } from '../../guards/cms-roles-redirectors/editor-redirect.guard';
+
+import { CmsPageComponent } from './cms-page.component';
+import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 
 
 const routes: Routes = [
     {
-        path: 'admin-panel', component: AdminPageComponent, children: [
+        path: 'panel', component: CmsPageComponent, children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: RootAdminPageComponent },
+            { path: 'dashboard', component: DashboardCmsPageComponent },
+            { path: 'users', component: UsersCmsPageComponent, canActivate: [ EditorRedirectGuard ] },
             { path: '**', component: NotFoundPageComponent, pathMatch: 'full' },
         ],
     },
@@ -45,4 +49,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class AdminPageRoutingModule {}
+export class CmsPageRoutingModule {}

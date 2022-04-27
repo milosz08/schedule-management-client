@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: admin-page.module.ts
- * Last modified | Ostatnia modyfikacja: 10/04/2022, 00:50
+ * File name | Nazwa pliku: dashboard-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 09/04/2022, 17:23
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,23 +17,26 @@
  * Obiektowe".
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
-import { AdminPageComponent } from './admin-page.component';
-import { RootAdminPageComponent } from './pages/root-admin-page/root-admin-page.component';
+import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
-import { AdminPageRoutingModule } from './admin-page-routing.module';
+/**
+ *
+ */
 
-
-@NgModule({
-    declarations: [
-        AdminPageComponent,
-        RootAdminPageComponent,
-    ],
-    imports: [
-        CommonModule,
-        AdminPageRoutingModule,
-    ],
+@Component({
+    selector: 'app-dashboard-cms-page',
+    templateUrl: './dashboard-cms-page.component.html',
+    styleUrls: [ './dashboard-cms-page.component.scss' ]
 })
-export class AdminPageModule {}
+export class DashboardCmsPageComponent extends MetaWebContentHelper {
+
+    constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
+        super(titleService, metaService, AllCmsWebpages.DASHBOARD);
+    };
+}

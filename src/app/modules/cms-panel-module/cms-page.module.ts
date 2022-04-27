@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: admin-page.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:52
+ * File name | Nazwa pliku: cms-page.module.ts
+ * Last modified | Ostatnia modyfikacja: 10/04/2022, 14:43
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,11 +17,25 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { CmsPageComponent } from './cms-page.component';
+import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+
+import { CmsPageRoutingModule } from './cms-page-routing.module';
+import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 
 
-@Component({
-    selector: 'app-admin-panel',
-    templateUrl: './admin-page.component.html',
+@NgModule({
+    declarations: [
+        CmsPageComponent,
+        DashboardCmsPageComponent,
+        UsersCmsPageComponent,
+    ],
+    imports: [
+        CommonModule,
+        CmsPageRoutingModule,
+    ],
 })
-export class AdminPageComponent {}
+export class CmsPageModule {}
