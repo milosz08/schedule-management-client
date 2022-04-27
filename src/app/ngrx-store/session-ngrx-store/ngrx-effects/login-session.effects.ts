@@ -22,17 +22,21 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 
-import { AppGlobalState } from '../../combine-reducers';
-import { AuthService } from '../../../services/auth.service';
+import { InitialSessionStateTypes } from '../session.initial';
 import { setSuspenseLoader } from '../../shared-ngrx-store/shared.actions';
+
+import { AuthService } from '../../../services/auth.service';
 import { BrowserStorageService } from '../../../services/browser-storage.service';
 
 import {
-    serverConnectionFailure, userAutoLogin, userFailuredGetImage, userFailureLogin, userGetImage, userLogin,
-    userLogout, userSuccesedGetImage, userSuccessLogin
+    SESSION_LOGOUT, SESSION_SUCCESS_LOGIN,
+    serverConnectionFailure, userAutoLogin, userFailuredGetImage, userFailureLogin, userFailureSetNewToken, userGetImage,
+    userLogin, userLogout, userSetNewToken, userSuccesedGetImage, userSuccesedSetNewToken, userSuccessLogin
 } from '../session.actions';
+import { RefreshTokenResposneModel } from '../ngrx-models/refresh-token.model';
+
 
 /**
  * Klasa efektów (middleware) dla ngrx stora obsługującego stan sesji i autentykację użytkowników.
@@ -45,7 +49,8 @@ export class LoginSessionEffects {
         private _actions$: Actions,
         private _authService: AuthService,
         private _storageService: BrowserStorageService,
-        private _store: Store<AppGlobalState>,
+        private _store: Store<InitialSessionStateTypes>,
+        private _storage: BrowserStorageService,
         private _router: Router,
     ) {
     };
@@ -57,7 +62,7 @@ export class LoginSessionEffects {
     public userLogin$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(userLogin),
-            exhaustMap(action => {
+            mergeMap(action => {
                 return this._authService
                     .userLogin(action.login, action.password)
                     .pipe(
@@ -69,13 +74,13 @@ export class LoginSessionEffects {
                                 setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
                             }
                             this._storageService.setUserInStorage(data);
-                            this._authService.sessionStartInterval();
-                            return userSuccessLogin({ data });
+                            this._authService.sessionStartInterval(data.tokenExpirationDate);
+                            return userSuccessLogin({ data, ifRedirectToRoot: true });
                         }),
                         catchError(error => {
                             setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
                             // nieoczekiwany błąd serwera (brak połączenia z backendem)
-                            if (error.statusText === 'Unknown Error' || error.status === 0) {
+                            if (error.statusText.toLowerCase().includes('error') || error.status === 0) {
                                 return of(serverConnectionFailure());
                             }
                             return of(userFailureLogin({ errorMessage: error.error.message }));
@@ -91,7 +96,7 @@ export class LoginSessionEffects {
     public userGetImage$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(userGetImage),
-            exhaustMap(action => {
+            mergeMap(action => {
                 return this._authService
                     .userGetImage(action.userId, action.jwt)
                     .pipe(
@@ -115,12 +120,38 @@ export class LoginSessionEffects {
     public userAutoLogin$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(userAutoLogin),
-            mergeMap(() => {
+            map(() => {
                 const data = this._storageService.getUserFromStorage();
-                const imageUri = this._storageService.getUserImageFromStorage();
-                this._store.dispatch(userSuccesedGetImage({ imageUri }));
-                this._authService.sessionStartInterval();
-                return of(userSuccessLogin({ data }));
+                if (data) {
+                    const imageUri = this._storageService.getUserImageFromStorage();
+                    this._store.dispatch(userSuccesedGetImage({ imageUri }));
+                    this._store.dispatch(userSetNewToken({ data }));
+                    return userSuccessLogin({ data, ifRedirectToRoot: false });
+                }
+                return userLogout();
+            }),
+        );
+    });
+
+    /**
+     * Efekt uruchamiający procedurę ustawiania nowego tokenu JWT na podstawie tokenu odświeżającego.
+     */
+    public setNewJwt$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(userSetNewToken),
+            mergeMap(action => {
+                if (action.data) {
+                    return this._authService
+                        .getNewJwtToken(action.data.bearerToken, action.data.refreshBearerToken)
+                        .pipe(
+                            map((newTokens: RefreshTokenResposneModel) => {
+                                this._storage.setRefreshedJwtTokenInLocalStorage(newTokens);
+                                this._authService.sessionStartInterval(newTokens.tokenExpirationDate);
+                                return userSuccesedSetNewToken({ newTokens });
+                            }),
+                        );
+                }
+                return of(userFailureSetNewToken());
             }),
         );
     });
@@ -146,8 +177,11 @@ export class LoginSessionEffects {
     public loginLogoutRedirect$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(userSuccessLogin, userLogout),
-            tap(() => {
-                this._router.navigate([ '/' ]).then(r => r);
+            tap(action => {
+                const ifRedirect = action.type === SESSION_SUCCESS_LOGIN && action.ifRedirectToRoot;
+                if (ifRedirect || action.type === SESSION_LOGOUT) {
+                    this._router.navigate([ '/' ]).then(r => r);
+                }
             }),
         );
     }, { dispatch: false });

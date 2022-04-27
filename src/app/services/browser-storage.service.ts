@@ -18,9 +18,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
+import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
 
 /**
  * Serwis odpowiadający za komunikację aplikacji z mechanizmem session/local storage.
@@ -33,11 +33,6 @@ export class BrowserStorageService {
 
     public static readonly USER_DATA_KEY: string = "user__autologin" as const;
     public static readonly USER_IMAGE_KEY: string = "user__image" as const;
-
-    public constructor(
-        private _sanitazer: DomSanitizer,
-    ) {
-    };
 
     /**
      * Pozyskanie obiektu użytkownika z local storage (jeśli obiekt nie istnieje, zwraca null).
@@ -96,4 +91,19 @@ export class BrowserStorageService {
         return window.URL.createObjectURL(image);
     };
 
+    /**
+     * Odświeżenia stanu użytkownika (JWT, token odświeżający oraz czas życia nowego JWT).
+     */
+    public setRefreshedJwtTokenInLocalStorage(refreshTokenRes: RefreshTokenResposneModel): void {
+        const userDataBeforeParse = localStorage.getItem(BrowserStorageService.USER_DATA_KEY);
+        const { bearerToken, refreshBearerToken, tokenExpirationDate } = refreshTokenRes;
+        if (userDataBeforeParse) {
+            const parseUser: AuthResponseDataModel = JSON.parse(userDataBeforeParse);
+            parseUser.bearerToken = bearerToken;
+            parseUser.refreshBearerToken = refreshBearerToken;
+            parseUser.tokenExpirationDate = tokenExpirationDate;
+            localStorage.removeItem(BrowserStorageService.USER_DATA_KEY);
+            localStorage.setItem(BrowserStorageService.USER_DATA_KEY, JSON.stringify(parseUser));
+        }
+    };
 }

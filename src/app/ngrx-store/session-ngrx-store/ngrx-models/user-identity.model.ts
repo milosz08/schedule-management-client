@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 16:22
+ * File name | Nazwa pliku: user-identity.model.ts
+ * Last modified | Ostatnia modyfikacja: 27/04/2022, 09:55
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,17 +17,10 @@
  * Obiektowe".
  */
 
-import { UserIdentityModel } from './user-identity.model';
-
-export interface AuthResponseDataModel {
-    dictionaryHash: string;
-    role: UserIdentityModel;
-    bearerToken: string;
-    refreshBearerToken: string;
-    nameWithSurname: string;
-    login: string;
-    email: string;
-    tokenExpirationDate: Date;
-    firstAccess: boolean;
-    hasPicture: boolean;
+export enum UserIdentityModel {
+    ADMINISTRATOR = 'ADMINISTRATOR',
+    EDITOR = 'EDITOR',
+    TEACHER = 'TEACHER',
+    STUDENT = 'STUDENT',
+    UNDEFINED = 'UNDEFINED',
 }

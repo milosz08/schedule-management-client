@@ -25,8 +25,10 @@ import { Observable } from 'rxjs';
 
 import { AppGlobalState } from '../ngrx-store/combine-reducers';
 import { BrowserStorageService } from './browser-storage.service';
-import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
 import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
+import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
+
+import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
 
 /**
  * Serwis odpowiadający za łączenie się z api w celu autoryzacji użytkownika oraz odliczanie czasu
@@ -59,6 +61,16 @@ export class AuthService {
     };
 
     /**
+     * Żądanie HTTP POST do API w celu uzyskania nowego token JWT na podstawie tokenu odświeżającego.
+     */
+    public getNewJwtToken(befToken: string, refreshToken: string): Observable<RefreshTokenResposneModel> {
+        return this._http.post<RefreshTokenResposneModel>(
+            this._endpoints.GET_REFRESH_TOKEN,
+            { bearerToken: befToken, refreshBearerToken: refreshToken }
+        );
+    };
+
+    /**
      * Żądanie HTTP GET do API w celu pozyskania avataru (żądanie chronione przez JWT).
      */
     public userGetImage(userId: string, jwt: string): Observable<Blob> {
@@ -72,8 +84,22 @@ export class AuthService {
      * Rejestrowanie czasu sesji użytkownika, po jej przekroczeniu wyświetlenie modala z informacją o
      * automatycznym wylogowaniu za X sekund.
      */
-    public sessionStartInterval(): void {
-        // tutaj czas mierzenia sesji do zaimplementowania
+    public sessionStartInterval(tokenExpired: Date): void {
+        const expiredTime = new Date(tokenExpired).getTime();
+        let counting: number = expiredTime - new Date(new Date().toISOString()).getTime();
+
+        this._timeoutInterval = setInterval(() => {
+            const currentTime = new Date(new Date().toISOString()).getTime();
+
+            if (counting < 0) {
+                console.log('wylogowywanie...');
+                this.sessionEndInterval();
+            }
+
+            console.log(counting);
+
+            counting = expiredTime - currentTime;
+        }, 1000);
     };
 
     /**

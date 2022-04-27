@@ -20,8 +20,8 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-    serverConnectionFailure,
-    userFailuredGetImage, userFailureLogin, userLogout, userSuccesedGetImage, userSuccessLogin
+    serverConnectionFailure, userFailuredGetImage, userFailureLogin, userFailureSetNewToken, userLogout,
+    userSuccesedGetImage, userSuccesedSetNewToken, userSuccessLogin
 } from './session.actions';
 
 import { initialSessionState } from './session.initial';
@@ -57,9 +57,27 @@ const _sessionReducer = createReducer(
     }),
     on(serverConnectionFailure, state => {
         return { ...state,
-            errorMessage: 'Brak połączenia z serwerem. Spróbuj ponownie później.'
+            errorMessage: 'Brak połączenia z serwerem. Spróbuj ponownie później.',
         };
-    })
+    }),
+    on(userSuccesedSetNewToken, (state, action) => {
+        if (state.userData) {
+            const { bearerToken, refreshBearerToken, tokenExpirationDate } = action.newTokens;
+            return { ...state,
+                userData: { ...state.userData!,
+                    bearerToken,
+                    refreshBearerToken,
+                    tokenExpirationDate,
+                },
+            };
+        }
+        return state;
+    }),
+    on(userFailureSetNewToken, state => {
+        return { ...state,
+            errorMessage: 'Nieudane pozyskanie tokenu odświeżającego. Spróbuj ponownie później.',
+        }
+    }),
 );
 
 export function sessionReducer(state: any, action: any) {

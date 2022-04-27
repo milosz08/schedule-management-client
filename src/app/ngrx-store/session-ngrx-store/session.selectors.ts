@@ -19,6 +19,7 @@
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { InitialSessionStateTypes } from './session.initial';
+import { UserIdentityModel } from './ngrx-models/user-identity.model';
 
 /**
  * Plik przechowujący wszystkie selektory dla ngrx stora przechowującego informacje o stanie sesji użytkownika.
@@ -53,11 +54,39 @@ export const getUserAuthLevel = createSelector(getSessionState, state => {
     }
 });
 
-export const getUserData = createSelector(getSessionState, state => state.userData);
-export const getUserHeaderName = createSelector(getSessionState, state => state.userData?.nameWithSurname || 'Zaloguj');
-export const getUserLogin = createSelector(getSessionState, state => state.userData?.login || '');
-export const getIfUserNotLogged = createSelector(getSessionState, state => !Boolean(state.userData));
-export const getIfUserHasImage = createSelector(getSessionState, state => Boolean(state.userData?.hasPicture));
-export const getUserImageURL = createSelector(getSessionState, state => state.userImage);
+export const getUserData = createSelector(
+    getSessionState,
+    state => state.userData
+);
 
-export const getLoginError = createSelector(getSessionState, state => state.errorMessage);
+export const getUserHeaderName = createSelector(
+    getSessionState,
+    state => state.userData?.nameWithSurname || 'Zaloguj');
+
+export const getUserLogin = createSelector(
+    getSessionState,
+    state => state.userData?.login || '');
+
+export const getIfUserNotLogged = createSelector(
+    getSessionState,
+    state => !Boolean(state.userData)
+);
+
+export const getIfUserHasImage = createSelector(
+    getSessionState,
+    state => Boolean(state.userData?.hasPicture)
+);
+
+export const getUserImageURL = createSelector(
+    getSessionState,
+    state => state.userImage);
+
+export const getLoginError = createSelector(
+    getSessionState,
+    state => state.errorMessage
+);
+
+export const getUserIdentity = createSelector(
+    getSessionState,
+    state => state.userData ? state.userData.role : UserIdentityModel.UNDEFINED,
+)
