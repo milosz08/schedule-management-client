@@ -1,7 +1,7 @@
 {
     "defaultSeparator": "|",
     "defaultPrefix": "System Zarządzania Planem",
-    "adminPanelPrefix": "Panel Administratora",
+    "adminPanelPrefix": "Panel Zarządzania",
     "mainSubpages": {
         "root": {
             "title": "Strona Główna",
@@ -32,10 +32,14 @@
             "description": "Nie odnaleziono zawartości. Strona którą szukasz nie istnieje."
         }
     },
-    "adminPanelSubpages": {
+    "cmsPanelSubpages": {
         "dashboard": {
             "title": "Pulpit",
-            "description": "Pulpit główny panelu administratora systemu zarządzania planem zajęć uczelni."
+            "description": "Pulpit główny panelu systemu zarządzania planem zajęć uczelni."
+        },
+        "users": {
+            "title": "Użytkownicy",
+            "description": "W tej sekcji możesz przeglądać wszystkich użytkowników aktywnych w systemie."
         }
     }
 }

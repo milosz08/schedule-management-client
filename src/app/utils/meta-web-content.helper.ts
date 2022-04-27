@@ -40,13 +40,13 @@ export abstract class MetaWebContentHelper {
     protected constructor(
         private titleService: Title,
         private meta: Meta,
-        private metaPageExtendor: AllMainWebpages | AllAdminWebpages,
+        private metaPageExtendor: AllMainWebpages | AllCmsWebpages,
     ) {
         this._defPrefix = JsonMockedTitles.defaultPrefix;
         this._adminPrefix = JsonMockedTitles.adminPanelPrefix;
         this._defSeparator = JsonMockedTitles.defaultSeparator;
         this._mainSubpages = JsonMockedTitles.mainSubpages;
-        this._adminSubpages = JsonMockedTitles.adminPanelSubpages;
+        this._adminSubpages = JsonMockedTitles.cmsPanelSubpages;
         this.updateMetaTags();
     };
 
@@ -58,14 +58,14 @@ export abstract class MetaWebContentHelper {
         });
     };
 
-    private combinePageTitleElements(webpage: AllMainWebpages | AllAdminWebpages): string {
+    private combinePageTitleElements(webpage: AllMainWebpages | AllCmsWebpages): string {
         if (MiscHelper.compareEnum(AllMainWebpages)(webpage)) {
             return `${this._mainSubpages[webpage].title} ${this._defSeparator} ${this._defPrefix}`;
         }
         return `${this._adminSubpages[webpage].title} ${this._defSeparator} ${this._adminPrefix}`;
     };
 
-    private combinePageDescriptionElements(webpage: AllMainWebpages | AllAdminWebpages): string {
+    private combinePageDescriptionElements(webpage: AllMainWebpages | AllCmsWebpages): string {
         if (MiscHelper.compareEnum(AllMainWebpages)(webpage)) {
             return this._mainSubpages[webpage].description;
         }
@@ -90,6 +90,7 @@ export enum AllMainWebpages {
 /**
  * Klucze obiektów meta właściwości dla stron chronionych (panel administratora).
  */
-export enum AllAdminWebpages {
+export enum AllCmsWebpages {
     DASHBOARD = 'dashboard',
+    USERS = 'users',
 }
