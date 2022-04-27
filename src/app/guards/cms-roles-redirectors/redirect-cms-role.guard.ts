@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: login-redirect.guard.ts
- * Last modified | Ostatnia modyfikacja: 10/04/2022, 00:22
+ * File name | Nazwa pliku: redirect-cms-role.guard.ts
+ * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:51
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,33 +17,38 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 
-import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 
-import { AppGlobalState } from '../ngrx-store/combine-reducers';
+import { Store } from '@ngrx/store';
 
+import { getUserIdentity } from '../../ngrx-store/session-ngrx-store/session.selectors';
+import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
+import { UserIdentityModel } from '../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class LoginRedirectGuard implements CanActivate {
+/**
+ * Uniwersalny redirektor zasobów związanych z rolami użytkowników. Aby użyć należy rozszerzyć klasę o tą
+ * z dodaniem wywołania konstruktora klasy bazowej z użyciem super.
+ */
 
-    private readonly ifLogged$: Observable<boolean>;
+export class RedirectCmsRoleGuard implements CanActivate {
+
+    private readonly _userIdentity$: Observable<UserIdentityModel> = this._store.select(getUserIdentity);
+    private readonly _userCurrentRole: UserIdentityModel;
 
     constructor(
-        private router: Router,
-        private store: Store<AppGlobalState>
+        private _router: Router,
+        private _store: Store<InitialSessionStateTypes>,
+        userCurrentRole: UserIdentityModel,
     ) {
-        this.ifLogged$ = this.store.select(reducer => Boolean(reducer.sessionReducer.userData));
+        this._userCurrentRole = userCurrentRole;
     };
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-        return this.ifLogged$.pipe(map(authenticate => {
-            if (authenticate) {
-                this.router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);
+        return this._userIdentity$.pipe(map(userRole => {
+            if (userRole !== this._userCurrentRole) {
+                this._router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);
             }
             return true;
         }));

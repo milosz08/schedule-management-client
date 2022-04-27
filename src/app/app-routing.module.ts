@@ -20,8 +20,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminRedirectGuard } from './guards/admin-redirect.guard';
-import { LoginRedirectGuard } from './guards/login-redirect.guard';
+import { AdminRedirectGuard } from './guards/login-redirectors/admin-redirect.guard';
+import { LoginRedirectGuard } from './guards/login-redirectors/login-redirect.guard';
 
 import { NotFoundPageComponent } from './modules/shared-module/pages/not-found-page/not-found.component';
 
@@ -38,7 +38,7 @@ const routes: Routes = [
     },
     {
         path: 'secure',
-        loadChildren: () => import('./modules/admin-panel-module/admin-page.module').then(m => m.AdminPageModule),
+        loadChildren: () => import('./modules/cms-panel-module/cms-page.module').then(m => m.CmsPageModule),
         canActivate: [ AdminRedirectGuard ],
     },
     { path: '**', component: NotFoundPageComponent },
