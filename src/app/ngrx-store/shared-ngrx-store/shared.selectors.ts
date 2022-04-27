@@ -27,4 +27,5 @@ import { InitialSharedStateTypes } from './shared.initial';
 export const SHARED_REDUCER = 'sharedReducer' as const;
 const getSharedState = createFeatureSelector<InitialSharedStateTypes>(SHARED_REDUCER);
 
+
 export const getSuspenseLoading = createSelector(getSharedState, state => state.suspenseLoading);
