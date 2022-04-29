@@ -18,18 +18,13 @@
  */
 
 import { Injectable } from '@angular/core';
-import { HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
+import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
-import { catchError, Observable, of, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AppGlobalState } from '../ngrx-store/combine-reducers';
-import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
 import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
-
-import {
-    serverConnectionFailure, userLogout, userSuccesedSetNewToken
-} from '../ngrx-store/session-ngrx-store/session.actions';
 
 import { AuthService } from '../services/auth.service';
 import { BrowserStorageService } from '../services/browser-storage.service';
@@ -67,36 +62,6 @@ export class JwtTokenInterceptor implements HttpInterceptor {
         if (person) {
             req = JwtTokenInterceptor.addTokenHeader(req, person.bearerToken);
         }
-        return next.handle(req).pipe(
-            catchError(err => {
-                if (err.status === HttpStatusCode.Unauthorized) {
-                    return this.refreshTokenInvoker(req, next);
-                }
-                return of(serverConnectionFailure());
-            }),
-        );
-    };
-
-    /**
-     * Metoda uruchamiająca potok odpowiedzialny za wygenerowanie nowego tokenu (na podstawie
-     * metody HTTP z serwisu auth). Jeśli pojawi się jakiś błąd metoda natychniastowo wylogowywuje użytkownika.
-     */
-    private refreshTokenInvoker(req: HttpRequest<any>, next: HttpHandler) {
-        const person: AuthResponseDataModel | null = this._storage.getUserFromStorage();
-        if (person) {
-            return this._authService
-                .getNewJwtToken(person!.bearerToken, person!.refreshBearerToken)
-                .pipe(
-                    switchMap((newTokens: RefreshTokenResposneModel) => {
-                        this._storage.setRefreshedJwtTokenInLocalStorage(newTokens);
-                        this._store.dispatch(userSuccesedSetNewToken({ newTokens }));
-                        return next.handle(JwtTokenInterceptor.addTokenHeader(req, newTokens.bearerToken));
-                    }),
-                    catchError(() => {
-                        return of(userLogout());
-                    }),
-                );
-        }
-        return of(userLogout());
+        return next.handle(req);
     };
 }

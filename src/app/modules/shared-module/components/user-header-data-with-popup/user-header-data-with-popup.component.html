@@ -24,11 +24,15 @@
 		title = '{{ _userDetailsButtonTitle$ | async }}'
 	>
 		<div class = 'header-auth__text-area'>
-			<div>
-				{{ _userHeaderName$ | async }}
-			</div>
-			<div class = 'header-auth__email'>
-				{{ _userLogin$ | async }}
+			<div>{{ _userHeaderName$ | async }}</div>
+			<div
+				*ngIf = '_userData'
+				class = 'header-auth__session-info'
+			>
+				Pozostały czas sesji:
+				<span [ngClass] = '(_ifSessionSoonLogout$ | async) ? "header-auth__session-info--red-color" : ""'>
+					{{ _sessionLeftTime$ | async | date: 'mm:ss' }}
+				</span>
 			</div>
 		</div>
 		<div class = 'header-auth__image-container'>

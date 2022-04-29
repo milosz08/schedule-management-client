@@ -39,6 +39,12 @@ export const SESSION_FAILURE_SET_NEW_TOKEN = '[SESSION] FAILURE SET NEW TOKEN';
 
 export const SESSION_UNEXPECTED_SERVER_ERROR = '[SESSION] UNEXPECTED SERVER ERROR';
 
+export const SESSION_SET_TIME = '[SESSION] SET TIME';
+export const SESSION_RENEW = '[SESSION] RENEW SESSION';
+
+export const SESSION_SET_MODAL_VISIBILITY = '[SESSION] SET END SESSION MODAL VISIBILITY';
+export const SESSION_SET_LOGOUT_MODAL_VISIBILITY = '[SESSION] SET LOGOUT MODAL VISIBILITY';
+
 
 export const userLogin = createAction(
     SESSION_LOGIN,
@@ -94,3 +100,22 @@ export const userFailureSetNewToken = createAction(
 export const serverConnectionFailure = createAction(
     SESSION_UNEXPECTED_SERVER_ERROR,
 );
+
+export const userSessionSetTime = createAction(
+    SESSION_SET_TIME,
+    props<{ time: number }>(),
+);
+
+export const userSessionSetModalVisibility = createAction(
+    SESSION_SET_MODAL_VISIBILITY,
+    props<{ modalVisibility: boolean }>(),
+);
+
+export const userRenewSession = createAction(
+    SESSION_RENEW,
+);
+
+export const userLogoutModalSetVisibility = createAction(
+    SESSION_SET_LOGOUT_MODAL_VISIBILITY,
+    props<{ modalVisibility: boolean }>(),
+)

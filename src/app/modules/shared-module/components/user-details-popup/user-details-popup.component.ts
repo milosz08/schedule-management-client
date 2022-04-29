@@ -22,10 +22,11 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { userLogout } from '../../../../ngrx-store/session-ngrx-store/session.actions';
+import { userLogout, userLogoutModalSetVisibility } from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 import {
-    getUserAuthLevel, getUserHeaderName, getUserLogin
+    getSessionSoonLogout,
+    getUserAuthLevel, getUserHeaderName, getUserLogin, getUserSessionCurrentTime
 } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
@@ -42,16 +43,19 @@ import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-st
 })
 export class UserDetailsPopupComponent {
 
+    public _sessionLeftTime$: Observable<number> = this._store.select(getUserSessionCurrentTime);
+    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(getSessionSoonLogout);
     public _userNameAndSurname$: Observable<string> = this._store.select(getUserHeaderName);
-    public _userLogin$: Observable<string> = this._store.select(getUserLogin);
     public _userAuthLevel$: Observable<string> = this._store.select(getUserAuthLevel);
+    public _userLogin$: Observable<string> = this._store.select(getUserLogin);
 
-    constructor(
+    public constructor(
         private _store: Store<InitialSessionStateTypes>,
     ) {
     };
 
     public handleUserLogout(): void {
         this._store.dispatch(userLogout());
+        this._store.dispatch(userLogoutModalSetVisibility({ modalVisibility: true }));
     };
 }

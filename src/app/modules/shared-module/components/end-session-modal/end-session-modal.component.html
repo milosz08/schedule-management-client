@@ -1,0 +1,59 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: end-session-modal.component.html
+  ~ Last modified | Ostatnia modyfikacja: 28/04/2022, 19:16
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div
+	*ngIf = '_modalVisibility$ | async'
+	[@fadeInOutAnimation] = ''
+	class = 'app__modal-container'
+>
+	<div class = 'app__modal-wrapper'>
+		<img
+			src = 'assets/images/info-important-icon.svg'
+			class = 'modal-wrapper__image-element'
+			alt = ''
+		/>
+		<h2 class = 'app__modal-wrapper__h2-header'>
+			Automatyczne wylogowanie nastąpi za {{ _sequencerCurrValue$ | async }} sekund.
+		</h2>
+		<p class = 'app__modal-wrapper__description'>
+			W wyniku braku aktywności zostaniesz automatycznie wylogowany/na w przeciągu {{ _sequencerMaxInactivity }}
+			sekund. Jeśli chcesz odnowić czas sesji, kliknij w przycisk <strong>zamknij okno i odśwież sesję</strong>.
+			Jeśli natomiast chcesz wylogować się w trybie natychmiastowym, kliknij w przycisk <strong>Wyloguj z
+			systemu</strong>.
+		</p>
+		<div class = 'app__modal-buttons-container'>
+			<button
+				(click) = 'handleCloseModalAndLogoutUser()'
+				class = 'app__button app__button--light user-details-popup__button app__button--hollow-light'
+				title = 'Kliknij aby natychmiastowo wylogować się z systemu'
+			>
+				Wyloguj z systemu
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</button>
+			<button
+				(click) = 'handleCloseModalAndRenewSession()'
+				class = 'app__button app__button--light user-details-popup__button buttons-container__button--left-modal'
+				title = 'Kliknij aby zamknąć okno'
+			>
+				Zamknij okno i odśwież sesję
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</button>
+		</div>
+	</div>
+</div>

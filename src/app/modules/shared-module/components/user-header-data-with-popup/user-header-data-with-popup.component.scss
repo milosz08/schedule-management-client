@@ -34,8 +34,19 @@
     flex-direction: column;
     align-items: flex-end;
     margin-right: 15px;
-    .header-auth__email {
+    .header-auth__session-info {
+        display: flex;
         font-size: .8em;
+        span {
+            font-weight: 500;
+            color: var(--darkBlueColor);
+            display: block;
+            min-width: 40px;
+            text-align: right;
+        }
+        .header-auth__session-info--red-color {
+            color: var(--darkRedColor);
+        }
     }
 }
 

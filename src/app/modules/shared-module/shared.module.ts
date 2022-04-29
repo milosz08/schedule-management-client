@@ -30,6 +30,8 @@ import { LoadingSuspenseCardComponent } from './components/loading-suspense-card
 import { UserHeaderDataWithPopupComponent } from './components/user-header-data-with-popup/user-header-data-with-popup.component';
 
 import { SuspenseService } from './services/suspense.service';
+import { EndSessionModalComponent } from './components/end-session-modal/end-session-modal.component';
+import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { SuspenseService } from './services/suspense.service';
         UserDetailsPopupComponent,
         LoadingSuspenseCardComponent,
         UserHeaderDataWithPopupComponent,
+        EndSessionModalComponent,
+        LogoutModalComponent,
     ],
     imports: [
         CommonModule,
@@ -53,6 +57,8 @@ import { SuspenseService } from './services/suspense.service';
     exports: [
         LoadingSuspenseCardComponent,
         UserHeaderDataWithPopupComponent,
+        EndSessionModalComponent,
+        LogoutModalComponent,
     ],
 })
 export class SharedModule {}

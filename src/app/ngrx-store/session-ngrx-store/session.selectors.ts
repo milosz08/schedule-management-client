@@ -18,6 +18,7 @@
  */
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { InitialSessionStateTypes } from './session.initial';
 import { UserIdentityModel } from './ngrx-models/user-identity.model';
 
@@ -28,12 +29,14 @@ import { UserIdentityModel } from './ngrx-models/user-identity.model';
 export const SESSION_REDUCER = 'sessionReducer' as const;
 const getSessionState = createFeatureSelector<InitialSessionStateTypes>(SESSION_REDUCER);
 
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
+    createSelector(getSessionState, payload);
 
 export const getUserDetailsPopupButtonTitle = createSelector(getSessionState, state => (
     Boolean(state.userData) ? 'Otwórz panel użytkownika' : 'Przejdź do logowania'
 ));
 
-export const getUserInitials = createSelector(getSessionState, state => {
+export const getUserInitials = selectorWithInjectedStore(state => {
     if (state.userData) {
         const [ name, surname ] = state.userData.nameWithSurname.split(' ');
         return name.charAt(0) + surname.charAt(0);
@@ -41,52 +44,62 @@ export const getUserInitials = createSelector(getSessionState, state => {
     return '';
 });
 
-export const getUserAuthLevel = createSelector(getSessionState, state => {
+export const getUserAuthLevel = selectorWithInjectedStore(state => {
     switch(state.userData?.role) {
-        case 'ADMINISTRATOR':
-            return 'administrator';
-        case 'EDITOR':
-            return 'edytor';
-        case 'TEACHER':
-            return 'nauczyciel';
-        default:
-            return 'student';
+        case 'ADMINISTRATOR':   return 'administrator';
+        case 'EDITOR':          return 'edytor';
+        case 'TEACHER':         return 'nauczyciel';
+        default:                return 'student';
     }
 });
 
-export const getUserData = createSelector(
-    getSessionState,
+export const getUserData = selectorWithInjectedStore(
     state => state.userData
 );
 
-export const getUserHeaderName = createSelector(
-    getSessionState,
-    state => state.userData?.nameWithSurname || 'Zaloguj');
+export const getUserHeaderName = selectorWithInjectedStore(
+    state => state.userData?.nameWithSurname || 'Zaloguj'
+);
 
-export const getUserLogin = createSelector(
-    getSessionState,
-    state => state.userData?.login || '');
+export const getUserLogin = selectorWithInjectedStore(
+    state => state.userData?.login || ''
+);
 
-export const getIfUserNotLogged = createSelector(
-    getSessionState,
+export const getIfUserNotLogged = selectorWithInjectedStore(
     state => !Boolean(state.userData)
 );
 
-export const getIfUserHasImage = createSelector(
-    getSessionState,
+export const getIfUserHasImage = selectorWithInjectedStore(
     state => Boolean(state.userData?.hasPicture)
 );
 
-export const getUserImageURL = createSelector(
-    getSessionState,
+export const getUserImageURL = selectorWithInjectedStore(
     state => state.userImage);
 
-export const getLoginError = createSelector(
-    getSessionState,
+export const getLoginError = selectorWithInjectedStore(
     state => state.errorMessage
 );
 
-export const getUserIdentity = createSelector(
-    getSessionState,
+export const getUserIdentity = selectorWithInjectedStore(
     state => state.userData ? state.userData.role : UserIdentityModel.UNDEFINED,
-)
+);
+
+export const getSessionEndModalVisibility = selectorWithInjectedStore(
+    state => state.sessionEndModalVisibility && Boolean(state.userData),
+);
+
+export const getTokenRefreshInSeconds = selectorWithInjectedStore(
+    state => state.userData ? !state.sessionEndModalVisibility ? state.userData.tokenRefreshInSeconds : 0 : false,
+);
+
+export const getLogoutModalVisibility = selectorWithInjectedStore(
+    state => state.logoutModalVisibility,
+);
+
+export const getUserSessionCurrentTime = selectorWithInjectedStore(
+    state => state.sessionLeftTime * 1000,
+);
+
+export const getSessionSoonLogout = selectorWithInjectedStore(
+    state => state.sessionLeftTime < 15,
+);
