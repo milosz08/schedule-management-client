@@ -25,13 +25,20 @@
 		<span class = 'user-details-popup__user-name-and-surname'>
 			{{ _userNameAndSurname$ | async }}
 		</span>
-		<span
-			class = 'user-details-popup__user-login'
-		>
+		<span class = 'user-details-popup__user-login'>
 			{{ _userLogin$ | async }}
 		</span>
 		<span class = 'user-details-popup__user-role'>
 			Rola w systemie: <strong>{{ _userAuthLevel$ | async }}</strong>
+		</span>
+		<span class = 'user-details-popup__user-session'>
+			Pozostały czas sesji:
+			<span
+				[ngClass] = '(_ifSessionSoonLogout$ | async) ? "user-details-popup__user-session--red-color" : ""'
+				class = 'user-session__session-time-container'
+			>
+				{{ _sessionLeftTime$ | async | date: 'mm:ss' }}
+			</span>
 		</span>
 	</div>
 	<div class = 'user-details-popup__buttons-container'>

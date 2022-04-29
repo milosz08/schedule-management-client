@@ -17,12 +17,18 @@
  * Obiektowe".
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppGlobalState } from './ngrx-store/combine-reducers';
 import { userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
 
+import { AuthService } from './services/auth.service';
+import { SessionService } from './services/session.service';
+
+/**
+ * Komponent główny (automatyczne logowanie, uruchamia sekwencerów mierzenia czasu sesji użytkownika).
+ */
 
 @Component({
     selector: 'app-root',
@@ -30,12 +36,20 @@ import { userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
 })
 export class AppComponent implements OnInit {
 
-    constructor(
+    public constructor(
         private _store: Store<AppGlobalState>,
-    ) {
+        private _authService: AuthService,
+        private _sequencerService: SessionService,
+        ) {
     };
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this._store.dispatch(userAutoLogin());
+        this._sequencerService.refreshSession();
+    };
+
+    @HostListener('document:click', ['$event'])
+    public handlerFunction(e: MouseEvent) {
+        this._sequencerService.invokeRefreshSession(e);
     };
 }

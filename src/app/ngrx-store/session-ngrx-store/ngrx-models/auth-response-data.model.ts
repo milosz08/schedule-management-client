@@ -28,6 +28,7 @@ export interface AuthResponseDataModel {
     login: string;
     email: string;
     tokenExpirationDate: Date;
+    tokenRefreshInSeconds: number;
     firstAccess: boolean;
     hasPicture: boolean;
 }

@@ -41,7 +41,8 @@
     text-align: center;
     .user-details-popup__user-name-and-surname,
     .user-details-popup__user-login,
-    .user-details-popup__user-role {
+    .user-details-popup__user-role,
+    .user-details-popup__user-session {
         display: block;
     }
     .user-details-popup__user-name-and-surname {
@@ -58,6 +59,17 @@
             text-transform: capitalize;
             color: var(--darkBlueColor);
             margin-left: 5px;
+        }
+    }
+    .user-details-popup__user-session {
+        font-size: .9em;
+        color: var(--lightGrayColor);
+        .user-session__session-time-container {
+            display: block;
+            color: var(--darkBlueColor);
+        }
+        .user-details-popup__user-session--red-color {
+            color: var(--darkRedColor);
         }
     }
 }

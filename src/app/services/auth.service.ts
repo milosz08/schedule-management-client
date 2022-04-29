@@ -25,22 +25,19 @@ import { Observable } from 'rxjs';
 
 import { AppGlobalState } from '../ngrx-store/combine-reducers';
 import { BrowserStorageService } from './browser-storage.service';
-import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
 import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
+import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
 
 import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
 
 /**
- * Serwis odpowiadający za łączenie się z api w celu autoryzacji użytkownika oraz odliczanie czasu
- * pozostałej jego sesji po zalogowaniu.
+ * Serwis odpowiadający za łączenie się z api w celu autoryzacji użytkownika.
  */
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-
-    private _timeoutInterval?: number;
 
     constructor(
         private _http: HttpClient,
@@ -78,34 +75,5 @@ export class AuthService {
             this._endpoints.GET_USER_IMAGE,
             { responseType: 'blob', headers: { Authorization: `Bearer ${jwt}` }, params: { userId } }
         );
-    };
-
-    /**
-     * Rejestrowanie czasu sesji użytkownika, po jej przekroczeniu wyświetlenie modala z informacją o
-     * automatycznym wylogowaniu za X sekund.
-     */
-    public sessionStartInterval(tokenExpired: Date): void {
-        const expiredTime = new Date(tokenExpired).getTime();
-        let counting: number = expiredTime - new Date(new Date().toISOString()).getTime();
-
-        this._timeoutInterval = setInterval(() => {
-            const currentTime = new Date(new Date().toISOString()).getTime();
-
-            if (counting < 0) {
-                console.log('wylogowywanie...');
-                this.sessionEndInterval();
-            }
-
-            console.log(counting);
-
-            counting = expiredTime - currentTime;
-        }, 1000);
-    };
-
-    /**
-     * Zakończenie rejestrowania czasu sesji użytkownika.
-     */
-    public sessionEndInterval(): void {
-        clearInterval(this._timeoutInterval);
     };
 }

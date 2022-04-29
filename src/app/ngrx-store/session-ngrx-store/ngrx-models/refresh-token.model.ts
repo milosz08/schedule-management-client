@@ -24,4 +24,5 @@ export interface RefreshTokenRequestModel {
 
 export interface RefreshTokenResposneModel extends RefreshTokenRequestModel {
     tokenExpirationDate: Date;
+    tokenRefreshInSeconds: number;
 }

@@ -26,10 +26,10 @@ import { Observable, Subscription } from 'rxjs';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
 import {
-    getUserData, getUserDetailsPopupButtonTitle, getUserHeaderName, getUserLogin
+    getSessionSoonLogout, getUserDetailsPopupButtonTitle, getUserHeaderName, getUserSessionCurrentTime
 } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
+import { AppGlobalState } from '../../../../ngrx-store/combine-reducers';
 import { AuthResponseDataModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
 
 /**
@@ -46,23 +46,24 @@ import { AuthResponseDataModel } from '../../../../ngrx-store/session-ngrx-store
 export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
 
     public _userDetailsButtonTitle$: Observable<string> = this._store.select(getUserDetailsPopupButtonTitle);
+    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(getSessionSoonLogout);
+    public _sessionLeftTime$: Observable<number> = this._store.select(getUserSessionCurrentTime);
     public _userHeaderName$: Observable<string> = this._store.select(getUserHeaderName);
-    public _userLogin$: Observable<string> = this._store.select(getUserLogin);
 
     private _storeSubscription: Subscription | undefined;
-    private _userData: AuthResponseDataModel | null = null;
+    public _userData: AuthResponseDataModel | null = null;
     private _ifModalOpen: boolean = false;
 
-    constructor(
+    public constructor(
         private _router: Router,
-        private _store: Store<InitialSessionStateTypes>,
+        private _store: Store<AppGlobalState>,
     ) {
     };
 
     public ngOnInit(): void {
         this._storeSubscription = this._store
-            .select(getUserData)
-            .subscribe(userData => this._userData = userData);
+            .select(reducer => reducer.sessionReducer)
+            .subscribe(({ userData, sessionLeftTime }) => this._userData = userData );
     };
 
     public ngOnDestroy(): void {

@@ -21,7 +21,8 @@ import { createReducer, on } from '@ngrx/store';
 
 import {
     serverConnectionFailure, userFailuredGetImage, userFailureLogin, userFailureSetNewToken, userLogout,
-    userSuccesedGetImage, userSuccesedSetNewToken, userSuccessLogin
+    userLogoutModalSetVisibility, userSessionSetModalVisibility, userSessionSetTime, userSuccesedGetImage,
+    userSuccesedSetNewToken, userSuccessLogin
 } from './session.actions';
 
 import { initialSessionState } from './session.initial';
@@ -35,7 +36,6 @@ const _sessionReducer = createReducer(
         };
     }),
     on(userFailureLogin, (state, action) => {
-        console.log(state.errorMessage);
         return { ...state,
             errorMessage: action.errorMessage
         };
@@ -43,6 +43,8 @@ const _sessionReducer = createReducer(
     on(userLogout, state => {
         return { ...state,
             userData: null,
+            userImage: '',
+            sessionLeftTime: 0,
         };
     }),
     on(userSuccesedGetImage, (state, action) => {
@@ -77,6 +79,21 @@ const _sessionReducer = createReducer(
         return { ...state,
             errorMessage: 'Nieudane pozyskanie tokenu odświeżającego. Spróbuj ponownie później.',
         }
+    }),
+    on(userSessionSetTime, (state, action) => {
+        return { ...state,
+            sessionLeftTime: action.time,
+        };
+    }),
+    on(userSessionSetModalVisibility, (state, action) => {
+        return { ...state,
+            sessionEndModalVisibility: action.modalVisibility,
+        };
+    }),
+    on(userLogoutModalSetVisibility, (state, action) => {
+        return { ...state,
+            logoutModalVisibility: action.modalVisibility,
+        };
     }),
 );
 

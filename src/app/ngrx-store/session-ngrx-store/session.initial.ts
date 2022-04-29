@@ -24,10 +24,16 @@ export interface InitialSessionStateTypes {
     userData: AuthResponseDataModel | null;
     errorMessage: string;
     userImage: string;
+    sessionLeftTime: number;
+    sessionEndModalVisibility: boolean;
+    logoutModalVisibility: boolean;
 }
 
 export const initialSessionState: InitialSessionStateTypes = {
     userData: null,
     errorMessage: '',
     userImage: '',
+    sessionLeftTime: 0,
+    sessionEndModalVisibility: false,
+    logoutModalVisibility: false,
 };
