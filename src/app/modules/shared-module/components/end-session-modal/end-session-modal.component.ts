@@ -17,10 +17,11 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
+import { EndSessionModalSequencerService } from '../../services/end-session-modal-sequencer.service';
 
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
 import { getSessionEndModalVisibility } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
@@ -30,30 +31,44 @@ import {
 } from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 /**
- *
+ * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy końcu sesji.
  */
 
 @Component({
     selector: 'app-end-session-modal',
     templateUrl: './end-session-modal.component.html',
-    styleUrls: [ './end-session-modal.component.scss' ],
+    styleUrls: [ ],
     animations: [ fadeInOutAnimation ]
 })
-export class EndSessionModalComponent {
+export class EndSessionModalComponent implements OnDestroy {
 
     public _modalVisibility$ = this._store.select(getSessionEndModalVisibility);
+    public _sequencerMaxInactivity = this._endSessionModalSequencerService.__sequencerMaxInactivityInSeconds;
+    public _sequencerCurrValue$ = this._endSessionModalSequencerService._sequencerCurrentValue$;
 
     public constructor(
         private _store: Store<InitialSessionStateTypes>,
+        private _endSessionModalSequencerService: EndSessionModalSequencerService,
     ) {
+        this._modalVisibility$.subscribe(visibility => {
+            if (visibility) {
+                this._endSessionModalSequencerService.onInitSequencerStart();
+            }
+        });
+    };
+
+    public ngOnDestroy(): void {
+        this._endSessionModalSequencerService.sequencerForceStop();
     };
 
     public handleCloseModalAndRenewSession(): void {
         this._store.dispatch(userRenewSession());
+        this._endSessionModalSequencerService.sequencerForceStop();
     };
 
     public handleCloseModalAndLogoutUser(): void {
-        this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
         this._store.dispatch(userLogout());
+        this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
+        this._endSessionModalSequencerService.sequencerForceStop();
     };
 }
