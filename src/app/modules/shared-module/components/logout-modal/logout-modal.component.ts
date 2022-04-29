@@ -27,11 +27,15 @@ import { userLogoutModalSetVisibility } from '../../../../ngrx-store/session-ngr
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 import { Router } from '@angular/router';
 
+/**
+ * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy wciścięciu
+ * przez użytkownika przycisku "wyloguj".
+ */
 
 @Component({
     selector: 'app-logout-modal',
     templateUrl: './logout-modal.component.html',
-    styleUrls: [ './logout-modal.component.scss' ],
+    styleUrls: [ ],
     animations: [ fadeInOutAnimation ]
 })
 export class LogoutModalComponent {

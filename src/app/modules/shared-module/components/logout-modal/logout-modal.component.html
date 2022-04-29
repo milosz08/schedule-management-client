@@ -23,10 +23,35 @@
 	class = 'app__modal-container'
 >
 	<div class = 'app__modal-wrapper'>
-
-		poprawne wylogowanie z systemu
-
-		<button (click) = 'handleCloseModal()'>zamknij modal</button>
-		<button (click) = 'handleCloseModalAndLoginAgain()'>zaloguj ponownie</button>
+		<img
+			src = 'assets/images/info-icon.svg'
+			class = 'modal-wrapper__image-element'
+			alt = 'logo informacji'
+		/>
+		<h2 class = 'app__modal-wrapper__h2-header'>
+			Nastąpiło poprawne wylogowanie z systemu.
+		</h2>
+		<p class = 'app__modal-wrapper__description'>
+			Jeśli chcesz ponownie zalogować się do systemu (przy pomocy innego konta) kliknij w przycisk <strong>
+			Zaloguj ponownie</strong>. Przeniesie Cię on bezpośrednio do strony logowania.
+		</p>
+		<div class = 'app__modal-buttons-container'>
+			<button
+				(click) = 'handleCloseModalAndLoginAgain()'
+				class = 'app__button app__button--light user-details-popup__button app__button--hollow-light'
+				title = 'Kliknij aby się zalogować ponownie do systemu'
+			>
+				Zaloguj ponownie
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</button>
+			<button
+				(click) = 'handleCloseModal()'
+				class = 'app__button app__button--light user-details-popup__button buttons-container__button--left-modal'
+				title = 'Kliknij aby zamknąć okno'
+			>
+				Zamknij okno
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</button>
+		</div>
 	</div>
 </div>
