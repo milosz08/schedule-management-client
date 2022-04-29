@@ -37,88 +37,6 @@
     position: relative;
 }
 
-.app__toggle-visibility-button {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    .app__toggle-visibility-button__icon {
-        color: var(--lightGrayColor);
-    }
-}
-
-.app__input {
-    width: 100%;
-    padding: 8px 20px;
-    margin-bottom: 8px;
-    font-size: 1rem;
-    background-color: inherit;
-    border: 1px solid var(--lightGrayColor);
-    color: var(--mainWhiteColor);
-    border-radius: var(--borderRadius);
-    &::placeholder {
-        color: var(--mainWhiteColor);
-    }
-    &.app__input--light {
-
-    }
-}
-
-.app__input-error {
-    margin: 0 50px 0 20px;
-    color: var(--mainYellowColor);
-    .app__input-error--light {
-        color: var(--darkRedColor);
-    }
-}
-
-.app__button {
-    background-color: var(--mainWhiteColor);
-    color: var(--darkBlueColor);
-    padding: 6px 15px;
-    font-size: 1.1rem;
-    border-radius: var(--borderRadius);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    &.app__button--light {
-        background-color: var(--darkBlueColor);
-        color: var(--mainWhiteColor);
-        font-weight: 400;
-        .app__button__arrow {
-            color: var(--mainWhiteColor);
-        }
-    }
-    &.app__button--hollow-light {
-        background-color: transparent;
-        border: 1px solid var(--darkBlueColor);
-        color: var(--darkBlueColor);
-        font-weight: 500;
-        .app__button__arrow {
-            color: var(--darkBlueColor);
-        }
-    }
-    .app__button__arrow {
-        margin-left: 10px;
-        font-size: 1.7rem;
-        line-height: .8;
-        color: var(--darkBlueColor);
-        transition: var(--transitionDuration) transform ease-in-out;
-    }
-    &:hover:not(:disabled) .app__button__arrow {
-        transform: translateX(3px);
-    }
-    &:disabled {
-        opacity: .5;
-        cursor: not-allowed;
-    }
-}
-
 .app__dot-separator {
     display: block;
     width: 4px;
@@ -141,23 +59,4 @@
 
 .app__root-container {
     padding-top: 100px;
-}
-
-.app__modal-container {
-    position: absolute;
-    z-index: 20;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .5);
-}
-
-.app__modal-wrapper {
-    border-radius: var(--borderRadius);
-    background-color: var(--mainWhiteColor);
-    padding: 30px;
-    margin-top: 100px;
-    height: fit-content;
-    min-width: 1000px;
 }
