@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: user-details-popup.component.ts
- * Last modified | Ostatnia modyfikacja: 21/04/2022, 22:13
+ * File name | Nazwa pliku: end-session-modal.component.ts
+ * Last modified | Ostatnia modyfikacja: 28/04/2022, 19:18
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,41 +18,42 @@
  */
 
 import { Component } from '@angular/core';
-
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { userLogout, userLogoutModalSetVisibility } from '../../../../ngrx-store/session-ngrx-store/session.actions';
-
-import {
-    getUserAuthLevel, getUserHeaderName, getUserLogin
-} from '../../../../ngrx-store/session-ngrx-store/session.selectors';
+import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
+import { getSessionEndModalVisibility } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
+
+import {
+    userLogout, userRenewSession, userSessionSetModalVisibility
+} from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 /**
- * Komponent odpowiadający za renderowanie widoku okna z informacją o użytkowniku (w
- * headerze, po kliknięciu przycisku).
+ *
  */
 
 @Component({
-    selector: 'app-user-details-popup',
-    templateUrl: './user-details-popup.component.html',
-    styleUrls: [ './user-details-popup.component.scss' ]
+    selector: 'app-end-session-modal',
+    templateUrl: './end-session-modal.component.html',
+    styleUrls: [ './end-session-modal.component.scss' ],
+    animations: [ fadeInOutAnimation ]
 })
-export class UserDetailsPopupComponent {
+export class EndSessionModalComponent {
 
-    public _userNameAndSurname$: Observable<string> = this._store.select(getUserHeaderName);
-    public _userLogin$: Observable<string> = this._store.select(getUserLogin);
-    public _userAuthLevel$: Observable<string> = this._store.select(getUserAuthLevel);
+    public _modalVisibility$ = this._store.select(getSessionEndModalVisibility);
 
-    constructor(
+    public constructor(
         private _store: Store<InitialSessionStateTypes>,
     ) {
     };
 
-    public handleUserLogout(): void {
+    public handleCloseModalAndRenewSession(): void {
+        this._store.dispatch(userRenewSession());
+    };
+
+    public handleCloseModalAndLogoutUser(): void {
+        this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
         this._store.dispatch(userLogout());
-        this._store.dispatch(userLogoutModalSetVisibility({ modalVisibility: true }));
     };
 }
