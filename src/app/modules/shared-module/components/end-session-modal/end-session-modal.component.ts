@@ -29,6 +29,7 @@ import { getSessionEndModalVisibility } from '../../../../ngrx-store/session-ngr
 import {
     userLogout, userRenewSession, userSessionSetModalVisibility
 } from '../../../../ngrx-store/session-ngrx-store/session.actions';
+import { Subscription } from 'rxjs';
 
 /**
  * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy końcu sesji.
@@ -46,11 +47,13 @@ export class EndSessionModalComponent implements OnDestroy {
     public _sequencerMaxInactivity = this._endSessionModalSequencerService.__sequencerMaxInactivityInSeconds;
     public _sequencerCurrValue$ = this._endSessionModalSequencerService._sequencerCurrentValue$;
 
+    private _subscription$: Subscription;
+
     public constructor(
         private _store: Store<InitialSessionStateTypes>,
         private _endSessionModalSequencerService: EndSessionModalSequencerService,
     ) {
-        this._modalVisibility$.subscribe(visibility => {
+        this._subscription$ = this._modalVisibility$.subscribe(visibility => {
             if (visibility) {
                 this._endSessionModalSequencerService.onInitSequencerStart();
             }
@@ -59,6 +62,7 @@ export class EndSessionModalComponent implements OnDestroy {
 
     public ngOnDestroy(): void {
         this._endSessionModalSequencerService.sequencerForceStop();
+        this._subscription$.unsubscribe();
     };
 
     public handleCloseModalAndRenewSession(): void {
