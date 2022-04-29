@@ -22,21 +22,23 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 
-import { InitialSessionStateTypes } from '../session.initial';
+import { SESSION_REDUCER } from '../session.selectors';
+import { AppGlobalState } from '../../combine-reducers';
 import { setSuspenseLoader } from '../../shared-ngrx-store/shared.actions';
-
-import { AuthService } from '../../../services/auth.service';
-import { BrowserStorageService } from '../../../services/browser-storage.service';
+import { RefreshTokenResposneModel } from '../ngrx-models/refresh-token.model';
 
 import {
     SESSION_LOGOUT, SESSION_SUCCESS_LOGIN,
-    serverConnectionFailure, userAutoLogin, userFailuredGetImage, userFailureLogin, userFailureSetNewToken, userGetImage,
-    userLogin, userLogout, userSetNewToken, userSuccesedGetImage, userSuccesedSetNewToken, userSuccessLogin
+    serverConnectionFailure, userAutoLogin, userFailuredGetImage, userFailureLogin, userFailureSetNewToken,
+    userGetImage, userLogin, userLogout, userSetNewToken, userSuccesedGetImage, userSuccesedSetNewToken,
+    userSuccessLogin, userRenewSession, userSessionSetModalVisibility, userLogoutModalSetVisibility,
 } from '../session.actions';
-import { RefreshTokenResposneModel } from '../ngrx-models/refresh-token.model';
 
+import { AuthService } from '../../../services/auth.service';
+import { SessionService } from '../../../services/session.service';
+import { BrowserStorageService } from '../../../services/browser-storage.service';
 
 /**
  * Klasa efektów (middleware) dla ngrx stora obsługującego stan sesji i autentykację użytkowników.
@@ -48,8 +50,9 @@ export class LoginSessionEffects {
     constructor(
         private _actions$: Actions,
         private _authService: AuthService,
+        private _sessionService: SessionService,
         private _storageService: BrowserStorageService,
-        private _store: Store<InitialSessionStateTypes>,
+        private _store: Store<AppGlobalState>,
         private _storage: BrowserStorageService,
         private _router: Router,
     ) {
@@ -68,17 +71,17 @@ export class LoginSessionEffects {
                     .pipe(
                         map(data => {
                             if (data.hasPicture) {
-                                this._store
-                                    .dispatch(userGetImage({ userId: data.dictionaryHash, jwt: data.bearerToken }));
+                                this._store.dispatch(userGetImage({ userId: data.dictionaryHash, jwt: data.bearerToken }));
                             } else {
                                 setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
                             }
                             this._storageService.setUserInStorage(data);
-                            this._authService.sessionStartInterval(data.tokenExpirationDate);
+                            this._sessionService.allSessionCountersRerun(data);
                             return userSuccessLogin({ data, ifRedirectToRoot: true });
                         }),
                         catchError(error => {
                             setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
+                            this._sessionService.sessionEndInterval();
                             // nieoczekiwany błąd serwera (brak połączenia z backendem)
                             if (error.statusText.toLowerCase().includes('error') || error.status === 0) {
                                 return of(serverConnectionFailure());
@@ -126,6 +129,7 @@ export class LoginSessionEffects {
                     const imageUri = this._storageService.getUserImageFromStorage();
                     this._store.dispatch(userSuccesedGetImage({ imageUri }));
                     this._store.dispatch(userSetNewToken({ data }));
+                    this._sessionService.allSessionCountersRerun(data);
                     return userSuccessLogin({ data, ifRedirectToRoot: false });
                 }
                 return userLogout();
@@ -146,7 +150,6 @@ export class LoginSessionEffects {
                         .pipe(
                             map((newTokens: RefreshTokenResposneModel) => {
                                 this._storage.setRefreshedJwtTokenInLocalStorage(newTokens);
-                                this._authService.sessionStartInterval(newTokens.tokenExpirationDate);
                                 return userSuccesedSetNewToken({ newTokens });
                             }),
                         );
@@ -158,13 +161,14 @@ export class LoginSessionEffects {
 
     /**
      * Efekt uruchamiający procedurę wylogowywania (dodatkowo resetuje timer sesji i usuwa zapisanego
-     * użytkownika z local storage). Dodatkowo po wylogowywaniu przenosi na stronę startową.
+     * użytkownika z local storage). Dodatkowo po wylogowywaniu przenosi na stronę startową i pokazuje
+     * modal z informacją o wylogowywaniu użytkownika.
      */
     public userLogout$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(userLogout),
             map(() => {
-                this._authService.sessionEndInterval();
+                this._sessionService.sessionEndInterval();
                 this._storageService.removeUserWithImageFromStorage();
             }),
         );
@@ -186,4 +190,18 @@ export class LoginSessionEffects {
         );
     }, { dispatch: false });
 
+    /**
+     *
+     */
+    public sessionRenew$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(userRenewSession),
+            withLatestFrom(this._store.select(SESSION_REDUCER)),
+            map(([ action, state ]) => {
+                this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
+                this._store.dispatch(userSetNewToken({ data: state.userData }));
+                this._sessionService.allSessionCountersRerun(state.userData!);
+            }),
+        );
+    }, { dispatch: false });
 }
