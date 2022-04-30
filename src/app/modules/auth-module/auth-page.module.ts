@@ -36,6 +36,7 @@ import { AuthFooterComponent } from './components/auth-footer/auth-footer.compon
 
 import { AuthService } from '../../services/auth.service';
 import { BrowserStorageService } from '../../services/browser-storage.service';
+import { TemplatesModule } from '../templates-module/templates.module';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { BrowserStorageService } from '../../services/browser-storage.service';
         RouterModule,
         ReactiveFormsModule,
         MatIconModule,
+        TemplatesModule,
     ],
     providers: [
         AuthService,

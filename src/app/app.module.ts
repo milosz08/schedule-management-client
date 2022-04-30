@@ -33,12 +33,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { SharedModule } from './modules/shared-module/shared.module';
+import { TemplatesModule } from './modules/templates-module/templates.module';
 import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 
 import { combinedReducers } from './ngrx-store/combine-reducers';
 
+import { SharedEffects } from './ngrx-store/shared-ngrx-store/ngrx-effects/shared.effects';
+import { SavedUsersEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/saved-users.effects';
+import { JwtSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/jwt-session.effects';
 import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
-import { SharedEffects } from './ngrx-store/shared-ngrx-store/shared.effects';
 
 
 @NgModule({
@@ -55,10 +58,13 @@ import { SharedEffects } from './ngrx-store/shared-ngrx-store/shared.effects';
         BrowserAnimationsModule,
         // Importy stworzonych modułów w całej aplikacji
         SharedModule,
+        TemplatesModule,
         // Dodanie globalnego ngrx flux store + ngrx middleware effects
         StoreModule.forRoot(combinedReducers),
         EffectsModule.forRoot([
             LoginSessionEffects,
+            JwtSessionEffects,
+            SavedUsersEffects,
             SharedEffects,
         ]),
         // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)
