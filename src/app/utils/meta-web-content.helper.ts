@@ -28,6 +28,7 @@ import JsonMockedTitles from '../mocked-data/subpages-titles-description.json';
  * wartości enuma (jako klucza mapującego dany obiekt w zamockowanej tablicy). Żeby użyć klasy w komponencie
  * angulara należy rozszerzyć ją i wywołać konstruktor klasy bazowej przy użyciu słowa super.
  */
+
 export abstract class MetaWebContentHelper {
 
     private readonly _defPrefix: string;
@@ -36,6 +37,8 @@ export abstract class MetaWebContentHelper {
 
     private readonly _mainSubpages: object;
     private readonly _adminSubpages: object;
+
+    //------------------------------------------------------------------------------------------------------------------
 
     protected constructor(
         private titleService: Title,
@@ -50,6 +53,8 @@ export abstract class MetaWebContentHelper {
         this.updateMetaTags();
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     private updateMetaTags(): void {
         this.titleService.setTitle(this.combinePageTitleElements(this.metaPageExtendor));
         this.meta.updateTag({
@@ -58,12 +63,16 @@ export abstract class MetaWebContentHelper {
         });
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     private combinePageTitleElements(webpage: AllMainWebpages | AllCmsWebpages): string {
         if (MiscHelper.compareEnum(AllMainWebpages)(webpage)) {
             return `${this._mainSubpages[webpage].title} ${this._defSeparator} ${this._defPrefix}`;
         }
         return `${this._adminSubpages[webpage].title} ${this._defSeparator} ${this._adminPrefix}`;
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     private combinePageDescriptionElements(webpage: AllMainWebpages | AllCmsWebpages): string {
         if (MiscHelper.compareEnum(AllMainWebpages)(webpage)) {
@@ -73,6 +82,8 @@ export abstract class MetaWebContentHelper {
     };
 
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Klucze obiektów meta właściwości dla stron niechronionych.
@@ -87,8 +98,10 @@ export enum AllMainWebpages {
     NOT_FOUND = 'notFound',
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
- * Klucze obiektów meta właściwości dla stron chronionych (panel administratora).
+ * Klucze obiektów meta właściwości dla stron chronionych (panel cms).
  */
 export enum AllCmsWebpages {
     DASHBOARD = 'dashboard',

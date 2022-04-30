@@ -21,4 +21,9 @@ import { createAction, props } from '@ngrx/store';
 
 export const SET_SUSPENSE_LOADER = '[SHARED] SET_SUSPENSE_LOADER';
 
-export const setSuspenseLoader = createAction(SET_SUSPENSE_LOADER, props<{ status: boolean }>());
+//----------------------------------------------------------------------------------------------------------------------
+
+export const setSuspenseLoader = createAction(
+    SET_SUSPENSE_LOADER,
+    props<{ status: boolean }>()
+);

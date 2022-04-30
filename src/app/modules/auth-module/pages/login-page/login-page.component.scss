@@ -26,9 +26,16 @@
 }
 
 .login__last-logins__container {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
-    height: 100%;
     padding: 20px 30px;
+}
+
+.login__last-logins__component-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .login__login-form__container {
@@ -36,7 +43,6 @@
     background-color: var(--darkBlueColor);
     color: var(--mainWhiteColor);
     width: 450px;
-    height: 100%;
     padding: 30px 40px;
     img {
         width: 60px;

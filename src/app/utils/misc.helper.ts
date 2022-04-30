@@ -17,13 +17,48 @@
  * Obiektowe".
  */
 
+import { UserIdentityModel } from '../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
+
 /**
  * Dodatkowe metody pomocnicze używane w aplikacji.
  */
+
 export class MiscHelper {
 
+    private static _randomCharacters: string = 'abcdefghijklmnoprstquvwxyzABCDEFGHIJKLMNOPRSTQUWXYZ0123456789';
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda umożliwiająca porówanie typu enum.
+     */
     public static compareEnum = <T>(e: T) => (key: any): key is T[keyof T] => {
         return (Object as any).values(e).includes(key as T[keyof T])
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda umożliwiająca generowanie pseudolosowego ciągu znaków (na podstawie parametru).
+     */
+    public static randomCharactersGenerator(length: number = 5): string {
+        return Array.from({ length }).map(() => {
+            const radomizerIndex = Math.floor(Math.random() * (this._randomCharacters.length - 1));
+            return this._randomCharacters[radomizerIndex];
+        }).join('');
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda konwertująca typ enum nazwy roli użytkownika na nazwę spolszczoną.
+     */
+    public static convertEngToPlUserRole(role: UserIdentityModel): string {
+        switch(role) {
+            case 'ADMINISTRATOR':   return 'administrator';
+            case 'EDITOR':          return 'edytor';
+            case 'TEACHER':         return 'nauczyciel';
+            default:                return 'student';
+        }
+    };
 }

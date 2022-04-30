@@ -20,12 +20,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { InitialSharedStateTypes } from './shared.initial';
 
-/**
- * Plik przechowujący wszystkie selektory dla globalnego ngrx stora (używanego przez całą aplikację).
- */
+//----------------------------------------------------------------------------------------------------------------------
 
 export const SHARED_REDUCER = 'sharedReducer' as const;
 const getSharedState = createFeatureSelector<InitialSharedStateTypes>(SHARED_REDUCER);
 
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
+    createSelector(getSharedState, payload);
 
-export const getSuspenseLoading = createSelector(getSharedState, state => state.suspenseLoading);
+//----------------------------------------------------------------------------------------------------------------------
+
+export const getSuspenseLoading = selectorWithInjectedStore(
+    state => state.suspenseLoading
+);

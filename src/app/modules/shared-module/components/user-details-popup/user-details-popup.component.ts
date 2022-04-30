@@ -55,7 +55,7 @@ export class UserDetailsPopupComponent {
     };
 
     public handleUserLogout(): void {
-        this._store.dispatch(userLogout());
+        this._store.dispatch(userLogout({ ifRedirectToRoot: true }));
         this._store.dispatch(userLogoutModalSetVisibility({ modalVisibility: true }));
     };
 }

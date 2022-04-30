@@ -71,7 +71,7 @@ export class EndSessionModalComponent implements OnDestroy {
     };
 
     public handleCloseModalAndLogoutUser(): void {
-        this._store.dispatch(userLogout());
+        this._store.dispatch(userLogout({ ifRedirectToRoot: true }));
         this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
         this._endSessionModalSequencerService.sequencerForceStop();
     };

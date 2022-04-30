@@ -19,8 +19,11 @@
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { MiscHelper } from '../../utils/misc.helper';
+
 import { InitialSessionStateTypes } from './session.initial';
 import { UserIdentityModel } from './ngrx-models/user-identity.model';
+import { SavedUsersEffects } from './ngrx-effects/saved-users.effects';
 
 /**
  * Plik przechowujący wszystkie selektory dla ngrx stora przechowującego informacje o stanie sesji użytkownika.
@@ -31,6 +34,8 @@ const getSessionState = createFeatureSelector<InitialSessionStateTypes>(SESSION_
 
 const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
     createSelector(getSessionState, payload);
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const getUserDetailsPopupButtonTitle = createSelector(getSessionState, state => (
     Boolean(state.userData) ? 'Otwórz panel użytkownika' : 'Przejdź do logowania'
@@ -45,12 +50,7 @@ export const getUserInitials = selectorWithInjectedStore(state => {
 });
 
 export const getUserAuthLevel = selectorWithInjectedStore(state => {
-    switch(state.userData?.role) {
-        case 'ADMINISTRATOR':   return 'administrator';
-        case 'EDITOR':          return 'edytor';
-        case 'TEACHER':         return 'nauczyciel';
-        default:                return 'student';
-    }
+    return MiscHelper.convertEngToPlUserRole(state.userData?.role);
 });
 
 export const getUserData = selectorWithInjectedStore(
@@ -102,4 +102,16 @@ export const getUserSessionCurrentTime = selectorWithInjectedStore(
 
 export const getSessionSoonLogout = selectorWithInjectedStore(
     state => state.sessionLeftTime < 15,
+);
+
+export const getAllSavedAccounts = selectorWithInjectedStore(
+    state => state.allSavedAccounts,
+);
+
+export const disableAddingNewAccountsToSaved = selectorWithInjectedStore(
+    state => state.allSavedAccounts.length > SavedUsersEffects.SAVED_MAX_USERS,
+);
+
+export const getAutoFilledEmail = selectorWithInjectedStore(
+    state => state.autoFilledEmail,
 );

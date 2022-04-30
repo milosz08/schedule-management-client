@@ -19,50 +19,48 @@
 
 import { createReducer, on } from '@ngrx/store';
 
-import {
-    serverConnectionFailure, userFailuredGetImage, userFailureLogin, userFailureSetNewToken, userLogout,
-    userLogoutModalSetVisibility, userSessionSetModalVisibility, userSessionSetTime, userSuccesedGetImage,
-    userSuccesedSetNewToken, userSuccessLogin
-} from './session.actions';
-
+import * as ReducerAction from './session.actions';
 import { initialSessionState } from './session.initial';
 
+/**
+ * Reducer function for session ngrx store.
+ */
 
 const _sessionReducer = createReducer(
     initialSessionState,
-    on(userSuccessLogin, (state, action) => {
+    on(ReducerAction.userSuccessLogin, (state, action) => {
         return { ...state,
             userData: action.data,
         };
     }),
-    on(userFailureLogin, (state, action) => {
+    on(ReducerAction.userFailureLogin, (state, action) => {
         return { ...state,
             errorMessage: action.errorMessage
         };
     }),
-    on(userLogout, state => {
+    on(ReducerAction.userLogout, state => {
         return { ...state,
             userData: null,
             userImage: '',
             sessionLeftTime: 0,
         };
     }),
-    on(userSuccesedGetImage, (state, action) => {
+    on(ReducerAction.userSuccesedGetImage, (state, action) => {
         return { ...state,
             userImage: action.imageUri,
         };
     }),
-    on(userFailuredGetImage, state => {
+    on(ReducerAction.userFailuredGetImage, state => {
         return { ...state,
             userImage: '',
         };
     }),
-    on(serverConnectionFailure, state => {
+    on(ReducerAction.serverConnectionFailure, state => {
         return { ...state,
             errorMessage: 'Brak połączenia z serwerem. Spróbuj ponownie później.',
         };
     }),
-    on(userSuccesedSetNewToken, (state, action) => {
+    on(ReducerAction.userSuccesedSetNewToken, (state, action) => {
         if (state.userData) {
             const { bearerToken, refreshBearerToken, tokenExpirationDate } = action.newTokens;
             return { ...state,
@@ -75,27 +73,65 @@ const _sessionReducer = createReducer(
         }
         return state;
     }),
-    on(userFailureSetNewToken, state => {
+    on(ReducerAction.userFailureSetNewToken, state => {
         return { ...state,
             errorMessage: 'Nieudane pozyskanie tokenu odświeżającego. Spróbuj ponownie później.',
         }
     }),
-    on(userSessionSetTime, (state, action) => {
+    on(ReducerAction.userSessionSetTime, (state, action) => {
         return { ...state,
             sessionLeftTime: action.time,
         };
     }),
-    on(userSessionSetModalVisibility, (state, action) => {
+    on(ReducerAction.userSessionSetModalVisibility, (state, action) => {
         return { ...state,
             sessionEndModalVisibility: action.modalVisibility,
         };
     }),
-    on(userLogoutModalSetVisibility, (state, action) => {
+    on(ReducerAction.userLogoutModalSetVisibility, (state, action) => {
         return { ...state,
             logoutModalVisibility: action.modalVisibility,
         };
     }),
+    on(ReducerAction.userToggleIfSaveAccount, (state, action) => {
+        return { ...state,
+            ifSaveUserInLastLogin: action.ifSaveAccount,
+        };
+    }),
+    on(ReducerAction.saveAllAccounts, (state, action) => {
+        return { ...state,
+            allSavedAccounts: action.usersAccounts,
+        };
+    }),
+    on(ReducerAction.saveSingleAccount, (state, action) => {
+        if (action.userAccount) {
+            return { ...state,
+                allSavedAccounts: [ ...state.allSavedAccounts, action.userAccount ],
+            };
+        }
+        return state;
+    }),
+    on(ReducerAction.succesedRemoveAllSavedAccounts, state => {
+        if (state.allSavedAccounts.length !== 0) {
+            return { ...state,
+                allSavedAccounts: [],
+            };
+        }
+        return state;
+    }),
+    on(ReducerAction.succesedRemoveSingleSavedAccount, (state, action) => {
+        return { ...state,
+            allSavedAccounts: action.accountsArrayAfterRemove,
+        };
+    }),
+    on(ReducerAction.userSetAutoFilledEmail, (state, action) => {
+        return { ...state,
+            autoFilledEmail: action.emailValue,
+        };
+    }),
 );
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export function sessionReducer(state: any, action: any) {
     return _sessionReducer(state, action);

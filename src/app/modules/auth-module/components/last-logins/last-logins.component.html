@@ -16,3 +16,38 @@
   ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
   ~ Obiektowe".
   -->
+
+<ul class = 'last-logins__list-container'>
+	<li
+		*ngFor = 'let savedAccount of _getAllSavedAccounts$ | async'
+		[title] = 'createUserInfoOnHover(savedAccount)'
+		class = 'last-logins__list-element'
+	>
+		<button
+			(click) = 'handleAutoFilledLoginFormElement(savedAccount.email)'
+			class = 'last-logins__button-element'
+		>
+			{{ createUserIdentity(savedAccount.nameWithSurname) }}
+			<span [class] = '"button-element__role-dot " + createUserRoleSingleLetter(savedAccount.role).class'>
+				{{ createUserRoleSingleLetter(savedAccount.role).letter }}
+			</span>
+		</button>
+		<button
+			(click) = 'handleRemoveSelectedSavedAccount(savedAccount.dictionaryHash)'
+			class = 'last-logins__remove-button'
+			title = 'Kliknij aby usunąć konto z zapisanej listy'
+		>
+			Usuń konto
+		</button>
+	</li>
+</ul>
+<div class = 'last-logins__delete-container'>
+	<button
+		(click) = 'handleRemoveAllSavedAccounts()'
+		class = 'app__button app__button--light app__button--hollow-light last-login__delete-all-accounts'
+		title = 'Kliknij aby usunąc wszystkie zapisane konta'
+	>
+		Usuń wszystkie zapisane konta
+		<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+	</button>
+</div>

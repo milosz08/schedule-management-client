@@ -19,19 +19,22 @@
 
 import { createReducer, on } from '@ngrx/store';
 
+import * as ReducerAction from './shared.actions';
 import { initialSharedState } from './shared.initial';
-import { setSuspenseLoader } from './shared.actions';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 const _sharedReducer = createReducer(
     initialSharedState,
-    on(setSuspenseLoader, (state, action) => {
+    on(ReducerAction.setSuspenseLoader, (state, action) => {
         const { status: suspenseLoading } = action;
         return { ...state,
             suspenseLoading,
         };
     }),
 );
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export function sharedReducer(state: any, action: any) {
     return _sharedReducer(state, action);

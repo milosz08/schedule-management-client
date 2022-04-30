@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: shared.effects.ts
- * Last modified | Ostatnia modyfikacja: 24/04/2022, 18:08
+ * Last modified | Ostatnia modyfikacja: 30/04/2022, 17:50
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -23,8 +23,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { setSuspenseLoader } from './shared.actions';
-import { AppGlobalState } from '../combine-reducers';
+import { setSuspenseLoader } from '../shared.actions';
+import { AppGlobalState } from '../../combine-reducers';
 
 /**
  * Serwis efektów dla obsługi dziedziczonego ngrx stora (dla całej aplikacji).
@@ -38,6 +38,8 @@ export class SharedEffects {
         private _store$: Store<AppGlobalState>,
     ) {
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Efekt uruchamiany podczas wywoływania zapytania do stora do ustawiania kontentu leniwego ładowania.
