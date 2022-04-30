@@ -47,6 +47,8 @@ export class AuthService {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Żądanie HTTP POST do API w celu uzyskania uwierzytelnienia.
      */
@@ -57,6 +59,8 @@ export class AuthService {
         );
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Żądanie HTTP POST do API w celu uzyskania nowego token JWT na podstawie tokenu odświeżającego.
      */
@@ -66,6 +70,8 @@ export class AuthService {
             { bearerToken: befToken, refreshBearerToken: refreshToken }
         );
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Żądanie HTTP GET do API w celu pozyskania avataru (żądanie chronione przez JWT).

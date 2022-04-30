@@ -34,6 +34,8 @@ export class BrowserStorageService {
     public static readonly USER_DATA_KEY: string = "user__autologin" as const;
     public static readonly USER_IMAGE_KEY: string = "user__image" as const;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Pozyskanie obiektu użytkownika z local storage (jeśli obiekt nie istnieje, zwraca null).
      */
@@ -45,6 +47,8 @@ export class BrowserStorageService {
         return null;
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Zapis obiektu reprezentującego użytkownika do local storage. Dodatkowo konwertuje ciąg znaków
      * na postać obiektu Date reprezentującego wygaśnięcie JWT.
@@ -54,6 +58,8 @@ export class BrowserStorageService {
         localStorage.setItem(BrowserStorageService.USER_DATA_KEY, JSON.stringify(user));
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Usuwanie użytkownika z magazynu local storage (oraz jego zdjęcia, jeśli było zapisane).
      */
@@ -61,6 +67,8 @@ export class BrowserStorageService {
         localStorage.removeItem(BrowserStorageService.USER_DATA_KEY);
         localStorage.removeItem(BrowserStorageService.USER_IMAGE_KEY);
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Pozyskanie obrazu użytkownika z local storage (jeśli nie znajdzie, zwróć pusty string).
@@ -79,6 +87,8 @@ export class BrowserStorageService {
         return '';
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Zapis obrazka (Blob) do local storage i zwrócenie adresu URL do zapisu w ngrx state.
      */
@@ -90,6 +100,8 @@ export class BrowserStorageService {
         reader.readAsDataURL(image);
         return window.URL.createObjectURL(image);
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Odświeżenia stanu użytkownika (JWT, token odświeżający oraz czas życia nowego JWT).

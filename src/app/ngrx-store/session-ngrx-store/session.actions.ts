@@ -22,6 +22,7 @@ import { createAction, props } from '@ngrx/store';
 import { AuthResponseDataModel } from './ngrx-models/auth-response-data.model';
 import { RefreshTokenResposneModel } from './ngrx-models/refresh-token.model';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 export const SESSION_LOGIN = '[SESSION] LOGIN';
 export const SESSION_AUTO_LOGIN = '[SESSION] AUTO LOGIN';
@@ -29,18 +30,28 @@ export const SESSION_SUCCESS_LOGIN = '[SESSION] SUCCESS LOGIN';
 export const SESSION_FAILURE_LOGIN = '[SESSION] FAILURE LOGIN';
 export const SESSION_LOGOUT = '[SESSION] LOGOUT';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export const SESSION_GET_IMAGE = '[SESSION] GET USER IMAGE';
 export const SESSION_SUCCESS_GET_IMAGE = '[SESSION] SUCCESS GET IMAGE';
 export const SESSION_FAILURE_GET_IMAGE = '[SESSION] FAILURE GET IMAGE';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const SESSION_SET_NEW_TOKEN = '[SESSION] SET NEW TOKEN';
 export const SESSION_SUCCESS_SET_NEW_TOKEN = '[SESSION] SUCCESS SET NEW TOKEN';
 export const SESSION_FAILURE_SET_NEW_TOKEN = '[SESSION] FAILURE SET NEW TOKEN';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export const SESSION_UNEXPECTED_SERVER_ERROR = '[SESSION] UNEXPECTED SERVER ERROR';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const SESSION_SET_TIME = '[SESSION] SET TIME';
 export const SESSION_RENEW = '[SESSION] RENEW SESSION';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const SESSION_SET_MODAL_VISIBILITY = '[SESSION] SET END SESSION MODAL VISIBILITY';
 export const SESSION_SET_LOGOUT_MODAL_VISIBILITY = '[SESSION] SET LOGOUT MODAL VISIBILITY';
@@ -57,7 +68,7 @@ export const userAutoLogin = createAction(
 
 export const userSuccessLogin = createAction(
     SESSION_SUCCESS_LOGIN,
-    props<{ data: AuthResponseDataModel | null, ifRedirectToRoot: boolean }>()
+    props<{ data: AuthResponseDataModel | null, ifRedirectToRoot: boolean }>(),
 );
 
 export const userFailureLogin = createAction(
@@ -67,7 +78,10 @@ export const userFailureLogin = createAction(
 
 export const userLogout = createAction(
     SESSION_LOGOUT,
+    props<{ ifRedirectToRoot: boolean }>()
 );
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const userGetImage = createAction(
     SESSION_GET_IMAGE,
@@ -83,6 +97,8 @@ export const userFailuredGetImage = createAction(
     SESSION_FAILURE_GET_IMAGE,
 );
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export const userSetNewToken = createAction(
     SESSION_SET_NEW_TOKEN,
     props<{ data: AuthResponseDataModel | null }>(),
@@ -97,22 +113,28 @@ export const userFailureSetNewToken = createAction(
     SESSION_FAILURE_SET_NEW_TOKEN,
 );
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export const serverConnectionFailure = createAction(
     SESSION_UNEXPECTED_SERVER_ERROR,
 );
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const userSessionSetTime = createAction(
     SESSION_SET_TIME,
     props<{ time: number }>(),
 );
 
+export const userRenewSession = createAction(
+    SESSION_RENEW,
+);
+
+//----------------------------------------------------------------------------------------------------------------------
+
 export const userSessionSetModalVisibility = createAction(
     SESSION_SET_MODAL_VISIBILITY,
     props<{ modalVisibility: boolean }>(),
-);
-
-export const userRenewSession = createAction(
-    SESSION_RENEW,
 );
 
 export const userLogoutModalSetVisibility = createAction(

@@ -53,13 +53,14 @@ export class SessionService {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Rejestrowanie czasu sesji użytkownika, po jej przekroczeniu wyświetlenie modala z informacją o
      * automatycznym wylogowaniu za X sekund.
      */
     public sessionStartInterval(tokenRefreshSeconds: number): void {
         let counting: number = tokenRefreshSeconds;
-        this._store.dispatch(userSessionSetTime({ time: counting }));
         const sequencer = (): void => {
             this._store.dispatch(userSessionSetTime({ time: counting }));
             if (counting-- <= 0) {
@@ -70,10 +71,17 @@ export class SessionService {
         this._timeoutInterval = setInterval(sequencer, 1000);
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Ponowne uruchomienie sesji użytkownika.
+     */
     public sessionRerunInterval(tokenRefreshSeconds: number) {
         clearInterval(this._timeoutInterval);
         this.sessionStartInterval(tokenRefreshSeconds);
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Rozpoczęcie działania sekwencera odświeżającego token JWT oraz uruchamianie aktywnej sesji użytkownika.
@@ -82,6 +90,8 @@ export class SessionService {
         this.sessionStartInterval(data.tokenRefreshInSeconds);
         this.refreshingJwtTokenIntervals(data.tokenRefreshInSeconds, data);
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Sekwencer odświeżający token JWT co X - 1000ms czasu w zależności od końca ważności tokena.
@@ -92,6 +102,8 @@ export class SessionService {
         }, intervalSeconds * 1000 - 1000);
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Zakończenie rejestrowania czasu sesji użytkownika.
      */
@@ -99,6 +111,8 @@ export class SessionService {
         clearInterval(this._jwtRefresherInterval);
         clearInterval(this._timeoutInterval);
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Potok RXJS odpowiadający za uruchomienie odliczania czasu sesji od początku. Dodatkowo posiada zabezpieczenie
@@ -116,6 +130,8 @@ export class SessionService {
             });
         });
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Metoda uruchamiająca się przy każdym naciścięciu na główną kanwę aplikacji.

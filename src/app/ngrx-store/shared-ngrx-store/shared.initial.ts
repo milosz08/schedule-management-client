@@ -21,6 +21,8 @@ export interface InitialSharedStateTypes {
     suspenseLoading: boolean;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export const initialSharedState: InitialSharedStateTypes = {
     suspenseLoading: false,
 }

@@ -28,14 +28,14 @@ import { SESSION_REDUCER } from './session-ngrx-store/session.selectors';
 import { SHARED_REDUCER } from './shared-ngrx-store/shared.selectors';
 import { sharedReducer } from './shared-ngrx-store/shared.reducer';
 
-/**
- * Plik przechowujący obiekt scalający wszystkie reducery z ngrx stora.
- */
+//----------------------------------------------------------------------------------------------------------------------
 
 export interface AppGlobalState {
     [SESSION_REDUCER]: InitialSessionStateTypes;
     [SHARED_REDUCER]: InitialSharedStateTypes;
 }
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const combinedReducers: ActionReducerMap<AppGlobalState> = {
     sessionReducer,

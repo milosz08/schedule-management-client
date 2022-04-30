@@ -17,11 +17,21 @@
  * Obiektowe".
  */
 
+import { UserIdentityModel } from '../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
+
 /**
  * Dodatkowe metody pomocnicze używane w aplikacji.
  */
+
 export class MiscHelper {
 
+    private static _randomCharacters: string = 'abcdefghijklmnoprstquvwxyzABCDEFGHIJKLMNOPRSTQUWXYZ0123456789';
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda umożliwiająca porówanie typu enum.
+     */
     public static compareEnum = <T>(e: T) => (key: any): key is T[keyof T] => {
         return (Object as any).values(e).includes(key as T[keyof T])
     };

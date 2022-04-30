@@ -21,7 +21,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppGlobalState } from './ngrx-store/combine-reducers';
-import { userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
+import { loadAllAccounts, userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
 
 import { AuthService } from './services/auth.service';
 import { SessionService } from './services/session.service';
@@ -44,8 +44,9 @@ export class AppComponent implements OnInit {
     };
 
     public ngOnInit(): void {
-        this._store.dispatch(userAutoLogin());
-        this._sequencerService.refreshSession();
+        this._store.dispatch(userAutoLogin());      // automatyczne logowanie
+        this._store.dispatch(loadAllAccounts());    // automatyczne ładowanie zapisanych kont
+        this._sequencerService.refreshSession();    // odświeżenie sesji
     };
 
     @HostListener('document:click', ['$event'])

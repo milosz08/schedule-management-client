@@ -19,8 +19,11 @@
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { MiscHelper } from '../../utils/misc.helper';
+
 import { InitialSessionStateTypes } from './session.initial';
 import { UserIdentityModel } from './ngrx-models/user-identity.model';
+import { SavedUsersEffects } from './ngrx-effects/saved-users.effects';
 
 /**
  * Plik przechowujący wszystkie selektory dla ngrx stora przechowującego informacje o stanie sesji użytkownika.
@@ -31,6 +34,8 @@ const getSessionState = createFeatureSelector<InitialSessionStateTypes>(SESSION_
 
 const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
     createSelector(getSessionState, payload);
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export const getUserDetailsPopupButtonTitle = createSelector(getSessionState, state => (
     Boolean(state.userData) ? 'Otwórz panel użytkownika' : 'Przejdź do logowania'

@@ -29,6 +29,8 @@ export interface InitialSessionStateTypes {
     logoutModalVisibility: boolean;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export const initialSessionState: InitialSessionStateTypes = {
     userData: null,
     errorMessage: '',
