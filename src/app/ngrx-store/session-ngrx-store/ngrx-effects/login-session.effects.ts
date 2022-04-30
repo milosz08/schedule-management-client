@@ -46,6 +46,7 @@ export class LoginSessionEffects {
         private _actions$: Actions,
         private _authService: AuthService,
         private _sessionService: SessionService,
+        private _rememberUserStorageService: RememberUserStorageService,
         private _storageService: BrowserStorageService,
         private _store: Store<AppGlobalState>,
         private _router: Router,
@@ -171,21 +172,6 @@ export class LoginSessionEffects {
                 if (ifRedirect) {
                     this._router.navigate([ '/' ]).then(r => r);
                 }
-            }),
-        );
-    }, { dispatch: false });
-
-    /**
-     *
-     */
-    public sessionRenew$ = createEffect(() => {
-        return this._actions$.pipe(
-            ofType(userRenewSession),
-            withLatestFrom(this._store.select(SESSION_REDUCER)),
-            map(([ action, state ]) => {
-                this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
-                this._store.dispatch(userSetNewToken({ data: state.userData }));
-                this._sessionService.allSessionCountersRerun(state.userData!);
             }),
         );
     }, { dispatch: false });
