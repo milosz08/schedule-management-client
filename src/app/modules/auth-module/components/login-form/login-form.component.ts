@@ -21,12 +21,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
-import { getLoginError } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 import { setSuspenseLoader } from '../../../../ngrx-store/shared-ngrx-store/shared.actions';
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
-import { userFailureLogin, userLogin } from '../../../../ngrx-store/session-ngrx-store/session.actions';
+import { SavedUsersEffects } from '../../../../ngrx-store/session-ngrx-store/ngrx-effects/saved-users.effects';
+
+import {
+    disableAddingNewAccountsToSaved, getAutoFilledEmail, getLoginError
+} from '../../../../ngrx-store/session-ngrx-store/session.selectors';
+
+import {
+    userFailureLogin, userLogin, userToggleIfSaveAccount
+} from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 /**
  * Komponent odpowiedzialny za renderowanie widoku formularza logowania oraz jego obsługę
@@ -40,10 +47,17 @@ import { userFailureLogin, userLogin } from '../../../../ngrx-store/session-ngrx
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 
+    public _disableAddingNewAccounts$: Observable<boolean> = this._store.select(disableAddingNewAccountsToSaved);
+    public _getAutoFilledEmail$: Observable<string> = this._store.select(getAutoFilledEmail);
+
+    public _saveAccountLabel: string = 'Zapamiętaj konto';
+    public _outOfBoundSavedAccountsArray: string = `Możesz zapamiętać maksymalnie ${SavedUsersEffects.SAVED_MAX_USERS} kont`;
+
     public readonly _loginForm: FormGroup;
     public _ifPasswordVisibility: boolean = false;
 
     private _storeSubscription: Subscription | undefined;
+    private readonly _autoFilledSubscription: Subscription | undefined;
     public _loginError: string = '';
 
     constructor(
@@ -53,18 +67,21 @@ export class LoginFormComponent implements OnInit, OnDestroy {
             login: new FormControl('', [ Validators.required ]),
             password: new FormControl('', [ Validators.required ]),
         });
+        this._autoFilledSubscription = this._getAutoFilledEmail$.subscribe(emailValue => {
+            this._loginForm.setValue({ ...this._loginForm.getRawValue(), login: emailValue });
+        });
     };
 
     public ngOnInit(): void {
+        this._store.dispatch(userToggleIfSaveAccount({ ifSaveAccount: true }));
         this._storeSubscription = this._store
             .select(getLoginError)
             .subscribe(loginError => this._loginError = loginError);
     };
 
     public ngOnDestroy(): void {
-        if (this._storeSubscription) {
-            this._storeSubscription.unsubscribe();
-        }
+        this._storeSubscription!.unsubscribe();
+        this._autoFilledSubscription!.unsubscribe();
     };
 
     public handleSubmitForm(): void {
@@ -87,5 +104,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     public ifFieldHasErrors(fieldName: string): boolean {
         return this._loginForm.get(fieldName)!.touched && !this._loginForm.get(fieldName)!.valid;
+    };
+
+    public handleEventEmitter(value: boolean) {
+        this._store.dispatch(userToggleIfSaveAccount({ ifSaveAccount: value }));
     };
 }
