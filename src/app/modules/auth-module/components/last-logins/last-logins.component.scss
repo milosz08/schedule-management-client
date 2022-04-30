@@ -16,3 +16,86 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+.last-logins__list-container {
+    display: grid;
+    margin: 30px 0;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-gap: 40px;
+    list-style-type: none;
+}
+
+.last-logins__list-element {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-top: 20px;
+    align-items: center;
+    height: 170px;
+    border: 1px solid var(--extraLightGrayColor);
+    border-radius: var(--borderRadius);
+    transition: var(--transitionDuration);
+    &:hover {
+        box-shadow: var(--modalsBoxShadow);
+    }
+}
+
+.last-logins__button-element {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    background-color: var(--extraLightGrayColor);
+    border-radius: 50%;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--darkBlueColor);
+    font-weight: 500;
+}
+
+.button-element__role-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    font-size: .8rem;
+    color: var(--mainWhiteColor);
+    background-color: var(--darkBlueColor);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.role-dot--administrator {
+        background-color: var(--administratorColor);
+    }
+    &.role-dot--editor {
+        background-color: var(--editorColor);
+    }
+    &.role-dot--teacher {
+        background-color: var(--teacherColor);
+    }
+    &.role-dot--student {
+        background-color: var(--studentColor);
+    }
+}
+
+.last-logins__remove-button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    border-bottom-left-radius: var(--borderRadius);
+    border-bottom-right-radius: var(--borderRadius);
+    color: var(--mainWhiteColor);
+    background-color: var(--darkBlueColor);
+}
+
+.last-logins__delete-container {
+    display: flex;
+    justify-content: flex-end;
+    .last-login__delete-all-accounts {
+        width: fit-content;
+    }
+}

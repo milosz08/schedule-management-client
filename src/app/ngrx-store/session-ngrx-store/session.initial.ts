@@ -18,6 +18,7 @@
  */
 
 import { AuthResponseDataModel } from './ngrx-models/auth-response-data.model';
+import { RememberAccountModel } from './ngrx-models/remember-account.model';
 
 
 export interface InitialSessionStateTypes {
@@ -27,6 +28,9 @@ export interface InitialSessionStateTypes {
     sessionLeftTime: number;
     sessionEndModalVisibility: boolean;
     logoutModalVisibility: boolean;
+    ifSaveUserInLastLogin: boolean;
+    allSavedAccounts: Array<RememberAccountModel>;
+    autoFilledEmail: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -38,4 +42,7 @@ export const initialSessionState: InitialSessionStateTypes = {
     sessionLeftTime: 0,
     sessionEndModalVisibility: false,
     logoutModalVisibility: false,
+    ifSaveUserInLastLogin: true,
+    allSavedAccounts: [],
+    autoFilledEmail: '',
 };

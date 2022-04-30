@@ -27,12 +27,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as ReducerAction from '../session.actions';
 import { AppGlobalState } from '../../combine-reducers';
-import { SESSION_SUCCESS_LOGIN, userSetAutoFilledEmail, } from '../session.actions';
 import { setSuspenseLoader } from '../../shared-ngrx-store/shared.actions';
+import { SESSION_SUCCESS_LOGIN, userSetAutoFilledEmail, } from '../session.actions';
 
 import { AuthService } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
 import { BrowserStorageService } from '../../../services/browser-storage.service';
+import { RememberUserStorageService } from '../../../services/remember-user-storage.service';
 
 /**
  * Klasa efektów (middleware) dla ngrx stora obsługującego autentykację użytkowników.
@@ -81,7 +82,7 @@ export class LoginSessionEffects {
                             this._sessionService.sessionEndInterval();
                             // nieoczekiwany błąd serwera (brak połączenia z backendem)
                             if (error.statusText.toLowerCase().includes('error') || error.status === 0) {
-                                return of(serverConnectionFailure());
+                                return of(ReducerAction.serverConnectionFailure());
                             }
                             return of(ReducerAction.userFailureLogin({ errorMessage: error.error.message }));
                         }),
@@ -165,8 +166,9 @@ export class LoginSessionEffects {
         return this._actions$.pipe(
             ofType(ReducerAction.userSuccessLogin, ReducerAction.userLogout),
             tap(action => {
-                const ifRedirect = action.type === SESSION_SUCCESS_LOGIN && action.ifRedirectToRoot;
-                if (ifRedirect || action.type === SESSION_LOGOUT) {
+                this._store.dispatch(userSetAutoFilledEmail({ emailValue: '' }));
+                const ifRedirect = action.type === SESSION_SUCCESS_LOGIN || action.ifRedirectToRoot;
+                if (ifRedirect) {
                     this._router.navigate([ '/' ]).then(r => r);
                 }
             }),

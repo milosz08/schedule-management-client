@@ -103,3 +103,15 @@ export const getUserSessionCurrentTime = selectorWithInjectedStore(
 export const getSessionSoonLogout = selectorWithInjectedStore(
     state => state.sessionLeftTime < 15,
 );
+
+export const getAllSavedAccounts = selectorWithInjectedStore(
+    state => state.allSavedAccounts,
+);
+
+export const disableAddingNewAccountsToSaved = selectorWithInjectedStore(
+    state => state.allSavedAccounts.length > SavedUsersEffects.SAVED_MAX_USERS,
+);
+
+export const getAutoFilledEmail = selectorWithInjectedStore(
+    state => state.autoFilledEmail,
+);

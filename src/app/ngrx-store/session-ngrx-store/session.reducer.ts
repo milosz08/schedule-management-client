@@ -93,6 +93,42 @@ const _sessionReducer = createReducer(
             logoutModalVisibility: action.modalVisibility,
         };
     }),
+    on(ReducerAction.userToggleIfSaveAccount, (state, action) => {
+        return { ...state,
+            ifSaveUserInLastLogin: action.ifSaveAccount,
+        };
+    }),
+    on(ReducerAction.saveAllAccounts, (state, action) => {
+        return { ...state,
+            allSavedAccounts: action.usersAccounts,
+        };
+    }),
+    on(ReducerAction.saveSingleAccount, (state, action) => {
+        if (action.userAccount) {
+            return { ...state,
+                allSavedAccounts: [ ...state.allSavedAccounts, action.userAccount ],
+            };
+        }
+        return state;
+    }),
+    on(ReducerAction.succesedRemoveAllSavedAccounts, state => {
+        if (state.allSavedAccounts.length !== 0) {
+            return { ...state,
+                allSavedAccounts: [],
+            };
+        }
+        return state;
+    }),
+    on(ReducerAction.succesedRemoveSingleSavedAccount, (state, action) => {
+        return { ...state,
+            allSavedAccounts: action.accountsArrayAfterRemove,
+        };
+    }),
+    on(ReducerAction.userSetAutoFilledEmail, (state, action) => {
+        return { ...state,
+            autoFilledEmail: action.emailValue,
+        };
+    }),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
