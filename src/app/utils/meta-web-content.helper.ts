@@ -101,7 +101,7 @@ export enum AllMainWebpages {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Klucze obiektów meta właściwości dla stron chronionych (panel administratora).
+ * Klucze obiektów meta właściwości dla stron chronionych (panel cms).
  */
 export enum AllCmsWebpages {
     DASHBOARD = 'dashboard',

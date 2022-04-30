@@ -50,12 +50,7 @@ export const getUserInitials = selectorWithInjectedStore(state => {
 });
 
 export const getUserAuthLevel = selectorWithInjectedStore(state => {
-    switch(state.userData?.role) {
-        case 'ADMINISTRATOR':   return 'administrator';
-        case 'EDITOR':          return 'edytor';
-        case 'TEACHER':         return 'nauczyciel';
-        default:                return 'student';
-    }
+    return MiscHelper.convertEngToPlUserRole(state.userData?.role);
 });
 
 export const getUserData = selectorWithInjectedStore(
