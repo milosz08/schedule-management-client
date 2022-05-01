@@ -114,8 +114,17 @@ export class BrowserStorageService {
             parseUser.bearerToken = bearerToken;
             parseUser.refreshBearerToken = refreshBearerToken;
             parseUser.tokenExpirationDate = tokenExpirationDate;
-            localStorage.removeItem(BrowserStorageService.USER_DATA_KEY);
-            localStorage.setItem(BrowserStorageService.USER_DATA_KEY, JSON.stringify(parseUser));
+            this.updateLocalStorageContent(BrowserStorageService.USER_DATA_KEY, parseUser);
         }
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Aktualizowanie magazynu localstorage na podstawie klucza i zmienionego kontentu (value).
+     */
+    public updateLocalStorageContent(key: string, value: any): void {
+        localStorage.removeItem(key);
+        localStorage.setItem(key, JSON.stringify(value));
     };
 }

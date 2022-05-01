@@ -26,6 +26,7 @@ import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-mod
 import { RememberAccountModel } from '../ngrx-store/session-ngrx-store/ngrx-models/remember-account.model';
 
 import { ImageManipulationService } from './image-manipulation.service';
+import { BrowserStorageService } from './browser-storage.service';
 
 /**
  * Serwis odpowiadający za mechanizm pamiętania ostatnio zalogowanych użytkowników w
@@ -41,6 +42,7 @@ export class RememberUserStorageService {
 
     public constructor(
         private _store: Store<AppGlobalState>,
+        private _storageService: BrowserStorageService,
         private _imageManipulationService: ImageManipulationService,
     ) {
     };
@@ -95,12 +97,12 @@ export class RememberUserStorageService {
      * Usuwanie pojedynczego zapisanego konta użytkownika na podstawie wartości klucza użytkownika.
      */
     public removeSaveUserFromLocalStorageBaseId(userId: string): void {
-        const { USER_REMEMBER_ACCOUNT, updateLocalStorageContent } = RememberUserStorageService;
+        const { USER_REMEMBER_ACCOUNT } = RememberUserStorageService;
         const allUsers = localStorage.getItem(USER_REMEMBER_ACCOUNT);
         if (allUsers) {
             const allUsersAfterParse: Array<RememberAccountModel> = JSON.parse(allUsers);
             const afterExcludedUserById = allUsersAfterParse.filter(user => user.dictionaryHash !== userId);
-            updateLocalStorageContent(USER_REMEMBER_ACCOUNT, afterExcludedUserById);
+            this._storageService.updateLocalStorageContent(USER_REMEMBER_ACCOUNT, afterExcludedUserById);
         }
     };
 
@@ -126,7 +128,7 @@ export class RememberUserStorageService {
      * Dodawanie nowego konta do magazynu local storage (walidacja w postaci sprawdzania duplikatów kont).
      */
     private setNewUserAccountInStorage(jsonAccounts: string, userData: AuthResponseDataModel, imageUri: string): void {
-        const { USER_REMEMBER_ACCOUNT, updateLocalStorageContent } = RememberUserStorageService;
+        const { USER_REMEMBER_ACCOUNT } = RememberUserStorageService;
         const existingItemsAfterParse: Array<RememberAccountModel> = JSON.parse(jsonAccounts);
 
         const findIfItemExist = existingItemsAfterParse
@@ -140,13 +142,13 @@ export class RememberUserStorageService {
                 image.onload = () => {
                     newUserData.image = this._imageManipulationService.changeImageDimensions(image, 80);
                     existingItemsAfterParse.push(newUserData);
-                    updateLocalStorageContent(USER_REMEMBER_ACCOUNT, existingItemsAfterParse);
+                    this._storageService.updateLocalStorageContent(USER_REMEMBER_ACCOUNT, existingItemsAfterParse);
                     newUserData.image = this._imageManipulationService.convertSingleImageFromBytesToUri(newUserData.image);
                     this._store.dispatch(saveSingleAccount({ userAccount: newUserData }));
                 };
             } else { // jeśli konto nie zawiera obrazka
                 existingItemsAfterParse.push(newUserData);
-                updateLocalStorageContent(USER_REMEMBER_ACCOUNT, existingItemsAfterParse);
+                this._storageService.updateLocalStorageContent(USER_REMEMBER_ACCOUNT, existingItemsAfterParse);
                 this._store.dispatch(saveSingleAccount({ userAccount: newUserData }));
             }
         }
@@ -177,15 +179,5 @@ export class RememberUserStorageService {
         return {
             dictionaryHash, nameWithSurname, role, email, image: '',
         };
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Aktualizowanie magazynu localstorage na podstawie klucza i zmienionego kontentu (value).
-     */
-    private static updateLocalStorageContent(key: string, value: any): void {
-        localStorage.removeItem(key);
-        localStorage.setItem(key, JSON.stringify(value));
     };
 }
