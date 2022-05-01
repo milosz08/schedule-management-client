@@ -52,8 +52,6 @@ export class FirstChangePasswordStorageService {
             const savedData = JSON.stringify([ new FirstChangePasswordDataModel(userId, true) ]);
             localStorage.setItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS, savedData);
         }
-
-
     };
 
     //------------------------------------------------------------------------------------------------------------------
