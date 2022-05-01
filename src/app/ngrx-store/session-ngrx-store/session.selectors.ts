@@ -115,3 +115,7 @@ export const disableAddingNewAccountsToSaved = selectorWithInjectedStore(
 export const getAutoFilledEmail = selectorWithInjectedStore(
     state => state.autoFilledEmail,
 );
+
+export const getInitialChangePasswordMessage = selectorWithInjectedStore(
+    state => state.initialChangePasswordMessage,
+);

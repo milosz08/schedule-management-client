@@ -30,6 +30,12 @@ import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-mod
 
 import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
 
+import {
+    RequestFirstChangePasswordModel
+} from '../ngrx-store/session-ngrx-store/ngrx-models/request-first-change-password.model';
+
+import { ResponseServerMessageModel } from '../ngrx-store/session-ngrx-store/ngrx-models/response-server-message.model';
+
 /**
  * Serwis odpowiadający za łączenie się z api w celu autoryzacji użytkownika.
  */
@@ -82,4 +88,18 @@ export class AuthService {
             { responseType: 'blob', headers: { Authorization: `Bearer ${jwt}` }, params: { userId } }
         );
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Żądanie HTTP POST do API w celu zmiany domyślnego hasła (wygenerowanego przez system).
+     */
+    public userChangeDefaultPassword(
+        userId: string, passwords: RequestFirstChangePasswordModel,
+    ): Observable<ResponseServerMessageModel> {
+        return this._http.post<ResponseServerMessageModel>(
+            this._endpoints.CHANGE_DEFAULT_PASSWORD,
+            passwords, { params: { userId } }
+        );
+    }
 }

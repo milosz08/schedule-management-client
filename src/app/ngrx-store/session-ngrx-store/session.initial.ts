@@ -31,6 +31,7 @@ export interface InitialSessionStateTypes {
     ifSaveUserInLastLogin: boolean;
     allSavedAccounts: Array<RememberAccountModel>;
     autoFilledEmail: string;
+    initialChangePasswordMessage: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -45,4 +46,5 @@ export const initialSessionState: InitialSessionStateTypes = {
     ifSaveUserInLastLogin: true,
     allSavedAccounts: [],
     autoFilledEmail: '',
+    initialChangePasswordMessage: '',
 };

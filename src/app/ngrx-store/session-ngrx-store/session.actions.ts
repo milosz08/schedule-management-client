@@ -19,9 +19,10 @@
 
 import { createAction, props } from '@ngrx/store';
 
-import { AuthResponseDataModel } from './ngrx-models/auth-response-data.model';
-import { RefreshTokenResposneModel } from './ngrx-models/refresh-token.model';
 import { RememberAccountModel } from './ngrx-models/remember-account.model';
+import { RefreshTokenResposneModel } from './ngrx-models/refresh-token.model';
+import { AuthResponseDataModel } from './ngrx-models/auth-response-data.model';
+import { RequestFirstChangePasswordModel } from './ngrx-models/request-first-change-password.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -68,6 +69,13 @@ export const SESSION_SUCCESS_REMOVE_ALL_SAVED_ACCOUNTS = '[SESSION] SUCCESS REMO
 export const SESSION_REMOVE_SINGLE_SAVED_ACCOUNT = '[SESSION] REMOVE SINGLE SAVED ACCOUNT';
 export const SESSION_SUCCESS_REMOVE_SINGLE_SAVED_ACCOUNT = '[SESSION] SUCCESS REMOVE SINGLE SAVED ACCOUNT';
 export const SESSION_SET_AUTO_FILLED_EMAIL_VALUE = '[SESSION] SET AUTO FILLED EMAIL VALUE';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const SESSION_TOGGLE_CHANGE_PASSWORD_PAGE = '[SESSION] TOGGLE CHANGE PASSWORD PAGE';
+export const SESSION_CHANGE_DEFAULT_PASSWORD = '[SESSION] CHANGE DEFAULT PASSWORD';
+export const SESSION_AFTER_CHANGE_DEFAULT_PASSWORD = '[SESSION] AFTER CHANGE DEFAULT PASSWORD';
+export const SESSION_RESET_CHANGE_DEFAULT_PASSWORD_MESSAGE = '[SESSION] RESET CHANGE DEFAULT PASSWORD MESSAGE';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -198,4 +206,25 @@ export const succesedRemoveSingleSavedAccount = createAction(
 export const userSetAutoFilledEmail = createAction(
     SESSION_SET_AUTO_FILLED_EMAIL_VALUE,
     props<{ emailValue: string }>(),
+);
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const userToggleChangePasswordPageVisible = createAction(
+    SESSION_TOGGLE_CHANGE_PASSWORD_PAGE,
+    props<{ pageVisibility: boolean }>(),
+);
+
+export const userChangeDefaultPassword = createAction(
+    SESSION_CHANGE_DEFAULT_PASSWORD,
+    props<{ passwordsPayload: RequestFirstChangePasswordModel }>(),
+);
+
+export const userAfterChangeDefaultPassword = createAction(
+    SESSION_AFTER_CHANGE_DEFAULT_PASSWORD,
+    props<{ message: string }>(),
+);
+
+export const userResetChangeDefaultPasswordMessage = createAction(
+    SESSION_RESET_CHANGE_DEFAULT_PASSWORD_MESSAGE,
 );
