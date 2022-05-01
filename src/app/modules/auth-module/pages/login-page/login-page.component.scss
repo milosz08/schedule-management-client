@@ -69,3 +69,22 @@
         }
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 839px) {
+    .login__wrapper {
+        flex-direction: column-reverse;
+    }
+    .login__login-form__container {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .login__wrapper {
+        margin: 0;
+        border: none;
+        width: 100%;
+    }
+}

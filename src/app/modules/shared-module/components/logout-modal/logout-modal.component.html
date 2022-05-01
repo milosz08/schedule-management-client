@@ -38,7 +38,12 @@
 		<div class = 'app__modal-buttons-container'>
 			<button
 				(click) = 'handleCloseModalAndLoginAgain()'
-				class = 'app__button app__button--light user-details-popup__button app__button--hollow-light'
+				class = '
+					app__button app__button--light
+					user-details-popup__button
+					app__button--hollow-light
+					app__button--full-size-window
+				'
 				title = 'Kliknij aby się zalogować ponownie do systemu'
 			>
 				Zaloguj ponownie
@@ -46,7 +51,12 @@
 			</button>
 			<button
 				(click) = 'handleCloseModal()'
-				class = 'app__button app__button--light user-details-popup__button buttons-container__button--left-modal'
+				class = '
+					app__button app__button--light
+					user-details-popup__button
+					buttons-container__button--left-modal
+					app__button--full-size-window
+				'
 				title = 'Kliknij aby zamknąć okno'
 			>
 				Zamknij okno
