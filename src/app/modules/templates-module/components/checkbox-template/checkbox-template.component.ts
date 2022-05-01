@@ -41,7 +41,10 @@ export class CheckboxTemplateComponent implements OnInit {
     public _checkboxLabel: string = '';
 
     @Input()
-    public _checkboxDisabled: boolean = false;
+    public _checkboxDisabled?: boolean = false;
+
+    @Input()
+    public _ifCheckedInitial?: boolean = false;
 
     @Output()
     public _checkedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();

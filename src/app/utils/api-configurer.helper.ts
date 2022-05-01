@@ -34,5 +34,6 @@ export class ApiConfigurerHelper {
     public readonly LOGIN_USER = ApiConfigurerHelper.API_PREFIX + 'auth/login';
     public readonly GET_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/get-avatar';
     public readonly GET_REFRESH_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/refresh-token';
+    public readonly CHANGE_DEFAULT_PASSWORD = ApiConfigurerHelper.API_PREFIX + 'auth/change-password';
 
 }

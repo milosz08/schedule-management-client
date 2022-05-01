@@ -168,7 +168,7 @@ export class LoginSessionEffects {
             ofType(ReducerAction.userSuccessLogin, ReducerAction.userLogout),
             tap(action => {
                 this._store.dispatch(userSetAutoFilledEmail({ emailValue: '' }));
-                const ifRedirect = action.type === SESSION_SUCCESS_LOGIN || action.ifRedirectToRoot;
+                const ifRedirect = action.type === SESSION_SUCCESS_LOGIN && action.ifRedirectToRoot;
                 if (ifRedirect) {
                     this._router.navigate([ '/' ]).then(r => r);
                 }

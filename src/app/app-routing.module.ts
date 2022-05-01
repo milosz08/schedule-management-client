@@ -21,8 +21,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminRedirectGuard } from './guards/login-redirectors/admin-redirect.guard';
-import { LoginRedirectGuard } from './guards/login-redirectors/login-redirect.guard';
-
 import { NotFoundPageComponent } from './modules/shared-module/pages/not-found-page/not-found.component';
 
 
@@ -34,7 +32,6 @@ const routes: Routes = [
     {
         path: 'auth',
         loadChildren: () => import('./modules/auth-module/auth-page.module').then(m => m.AuthPageModule),
-        canActivate: [ LoginRedirectGuard ],
     },
     {
         path: 'secure',

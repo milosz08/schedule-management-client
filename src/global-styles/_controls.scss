@@ -45,15 +45,27 @@
         color: var(--mainWhiteColor);
     }
     &.app__input--light {
-
+        color: var(--darkBlueColor);
+        &::placeholder {
+            color: var(--darkBlueColor);
+        }
     }
 }
 
 .app__input-error {
     margin: 0 50px 0 20px;
     color: var(--mainYellowColor);
-    .app__input-error--light {
+    line-height: 1.2;
+    &.app__input-error--light {
         color: var(--darkRedColor);
+    }
+}
+
+.app__input-message {
+    margin: 0 50px 0 20px;
+    line-height: 1.2;
+    &.app__input-message--light {
+        color: var(--greenDarkColor);
     }
 }
 
@@ -74,13 +86,21 @@
             color: var(--mainWhiteColor);
         }
     }
-    &.app__button--hollow-light {
+    &.app__button--hollow-light, &.app__button--hollow-dark {
         background-color: transparent;
         border: 1px solid var(--darkBlueColor);
         color: var(--darkBlueColor);
         font-weight: 500;
         .app__button__arrow {
             color: var(--darkBlueColor);
+        }
+    }
+    &.app__button--hollow-dark {
+        border: 1px solid var(--mainWhiteColor);
+        color: var(--mainWhiteColor);
+        font-weight: 400;
+        .app__button__arrow {
+            color: var(--mainWhiteColor);
         }
     }
     .app__button__arrow {
@@ -97,5 +117,14 @@
     &:disabled {
         opacity: .5;
         cursor: not-allowed;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 500px) {
+    .app__button--full-size-window {
+        width: 100% !important;
+        justify-content: center;
     }
 }

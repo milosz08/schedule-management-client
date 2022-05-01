@@ -51,7 +51,7 @@ export class SavedUsersEffects {
     /**
      * Zapisaywanie użytkownika przy logowaniu do magazuny local storage (tylko jeśli checkbox jest na true).
      */
-    public saveLastUserInStorage = createEffect(() => {
+    public saveLastUserInStorage$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(ReducerAction.userSuccessLogin),
             withLatestFrom(this._store.select(SESSION_REDUCER)),
@@ -72,7 +72,7 @@ export class SavedUsersEffects {
     /**
      * Ładowanie do aplikacji wszystkich zapisanych użytkowników z magazynu local storage oraz ngrx stora.
      */
-    public loadAllUsersAccounts = createEffect(() => {
+    public loadAllUsersAccounts$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(ReducerAction.loadAllAccounts),
             map(() => {
@@ -87,7 +87,7 @@ export class SavedUsersEffects {
     /**
      * Usuwanie wszystkich zapisanych użytkowników z magazynu local storage oraz ngrx stora aplikacji.
      */
-    public removeAllSavedUsers = createEffect(() => {
+    public removeAllSavedUsers$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(ReducerAction.removeAllSavedAccounts),
             map(() => {
@@ -102,7 +102,7 @@ export class SavedUsersEffects {
     /**
      * Usuwanie pojedynczego użytkownika z local storage i ngrx stora na podstawie wartości hash ID.
      */
-    public removeSingleSavedUser = createEffect(() => {
+    public removeSingleSavedUser$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(ReducerAction.removeSingleSavedAccount),
             withLatestFrom(this._store.select(SESSION_REDUCER)),

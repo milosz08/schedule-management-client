@@ -70,6 +70,8 @@
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 @media only screen and (max-width: 775px) {
     .app__modal-wrapper {
         margin: 30px;
@@ -86,19 +88,14 @@
     }
 }
 
-@media only screen and (max-width: 506px) {
+@media only screen and (max-width: 500px) {
     .app__modal-wrapper__h2-header {
         font-size: 1.3rem;
     }
     .app__modal-wrapper__description {
         font-size: .9rem;
     }
-    .app__modal-buttons-container button {
-        font-size: .9rem;
-        width: 100%;
-        justify-content: center;
-        &:nth-last-child(1) {
-            margin-top: 10px;
-        }
+    .app__modal-buttons-container button:nth-last-child(1) {
+        margin-top: 10px;
     }
 }

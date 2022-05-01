@@ -19,7 +19,7 @@
 
 <div class = 'app__checkbox-container'>
 	<input
-		checked
+		[checked] = '_ifCheckedInitial'
 		[disabled] = '_checkboxDisabled'
 		(change) = 'handleCheckboxToggle(this._checkboxValue)'
 		[id] = '__createChecboxIdBasedLabel'

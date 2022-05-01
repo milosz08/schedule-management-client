@@ -37,6 +37,8 @@ import { AuthFooterComponent } from './components/auth-footer/auth-footer.compon
 import { AuthService } from '../../services/auth.service';
 import { BrowserStorageService } from '../../services/browser-storage.service';
 import { TemplatesModule } from '../templates-module/templates.module';
+import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
+import { FirstChangePasswordFormComponent } from './components/first-change-password-form/first-change-password-form.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { TemplatesModule } from '../templates-module/templates.module';
         ForgotPasswordPageComponent,
         LastLoginsComponent,
         LoginFormComponent,
-        AuthFooterComponent
+        AuthFooterComponent,
+        FirstChangePasswordPageComponent,
+        FirstChangePasswordFormComponent
     ],
     imports: [
         CommonModule,

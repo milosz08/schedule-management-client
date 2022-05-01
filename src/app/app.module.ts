@@ -42,6 +42,7 @@ import { SharedEffects } from './ngrx-store/shared-ngrx-store/ngrx-effects/share
 import { SavedUsersEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/saved-users.effects';
 import { JwtSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/jwt-session.effects';
 import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
+import { FirstChangePasswordEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/first-change-password.effects';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
             LoginSessionEffects,
             JwtSessionEffects,
             SavedUsersEffects,
+            FirstChangePasswordEffects,
             SharedEffects,
         ]),
         // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)

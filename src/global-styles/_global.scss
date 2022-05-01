@@ -31,6 +31,16 @@
         color: var(--mainWhiteColor);
         margin: 30px 0 20px;
     }
+    &.app__header--exclude-margins {
+        margin: 0;
+    }
+    &::after {
+        margin-left: -4px;
+        content: '.';
+        line-height: 0;
+        font-size: 1.5em;
+        color: #30cece;
+    }
 }
 
 .app__label--relative {
@@ -59,4 +69,18 @@
 
 .app__root-container {
     padding-top: 100px;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 839px) {
+    .app__auth-container {
+        padding-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .app__auth-container {
+        padding-top: 0;
+    }
 }

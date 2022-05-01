@@ -129,6 +129,16 @@ const _sessionReducer = createReducer(
             autoFilledEmail: action.emailValue,
         };
     }),
+    on(ReducerAction.userAfterChangeDefaultPassword, (state, action) => {
+        return { ...state,
+            initialChangePasswordMessage: action.message,
+        };
+    }),
+    on(ReducerAction.userResetChangeDefaultPasswordMessage, state => {
+        return { ...state,
+            initialChangePasswordMessage: '',
+        };
+    }),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
