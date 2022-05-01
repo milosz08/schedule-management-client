@@ -41,23 +41,13 @@
 	</div>
 	<div class = 'login-form__element-container'>
 		<label class = 'app__label--relative'>
-			<input
-				(input) = 'handleClearErrorMessage()'
-				type = '{{ _ifPasswordVisibility ? "text" : "password" }}'
-				formControlName = 'password'
-				placeholder = 'Hasło'
-				class = 'app__input'
-			>
-			<button
-				(click) = 'handleChangePasswordVisibility()'
-				class = 'app__toggle-visibility-button'
-				title = '{{ _ifPasswordVisibility ? "Ukryj hasło" : "Pokaż hasło" }}'
-				type = 'button'
-			>
-				<mat-icon class = 'app__toggle-visibility-button__icon'>
-					{{ _ifPasswordVisibility ? 'visibility_off' : 'visibility' }}
-				</mat-icon>
-			</button>
+			<app-text-input-password
+				[_formGroup] = '_loginForm'
+				(_clearFormMessage) = 'handleClearErrorMessage($event)'
+				[_ifLightTheme] = 'false'
+				_inputPlaceholder = 'Hasło'
+				_formControlName = 'password'
+			></app-text-input-password>
 		</label>
 		<div
 			*ngIf = 'ifFieldHasErrors("password")'

@@ -20,21 +20,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CheckboxTemplateComponent } from './components/checkbox-template/checkbox-template.component';
+import { TextInputPasswordComponent } from './components/text-input-password/text-input-password.component';
 
 
 @NgModule({
     declarations: [
         CheckboxTemplateComponent,
+        TextInputPasswordComponent,
     ],
     imports: [
         CommonModule,
         MatIconModule,
+        ReactiveFormsModule,
     ],
     providers: [ ],
     exports: [
         CheckboxTemplateComponent,
+        TextInputPasswordComponent,
     ],
 })
 export class TemplatesModule {}
