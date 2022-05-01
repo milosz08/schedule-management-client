@@ -63,6 +63,7 @@
 		</div>
 	</div>
 	<app-checkbox-template
+		[_ifCheckedInitial] = 'true'
 		[_checkboxLabel] = '(_disableAddingNewAccounts$ | async) ? _outOfBoundSavedAccountsArray : _saveAccountLabel'
 		[_checkboxDisabled] = '!!(_disableAddingNewAccounts$ | async)'
 		(_checkedEmitter) = 'handleEventEmitter($event)'
