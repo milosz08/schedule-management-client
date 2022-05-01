@@ -21,6 +21,7 @@ import { Injectable } from '@angular/core';
 
 import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
 import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
+import { ImageManipulationService } from './image-manipulation.service';
 
 /**
  * Serwis odpowiadający za komunikację aplikacji z mechanizmem session/local storage.
@@ -33,6 +34,11 @@ export class BrowserStorageService {
 
     public static readonly USER_DATA_KEY: string = "user__autologin" as const;
     public static readonly USER_IMAGE_KEY: string = "user__image" as const;
+
+    public constructor(
+        private _imageManipulationService: ImageManipulationService,
+    ) {
+    };
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -76,13 +82,7 @@ export class BrowserStorageService {
     public getUserImageFromStorage(): string {
         const imageBlob: string | null = localStorage.getItem(BrowserStorageService.USER_IMAGE_KEY);
         if (imageBlob) { // dekodowanie stringa na wartość Blob i stworzenie z niej adresu URL
-            const parts = imageBlob.split(';base64,');
-            const decodedData = window.atob(parts[1]);
-            const uInt8Array = new Uint8Array(decodedData.length);
-            for (let i = 0; i < decodedData.length; i++) {
-                uInt8Array[i] = decodedData.charCodeAt(i);
-            }
-            return window.URL.createObjectURL(new Blob([uInt8Array], { type: parts[0].split(':')[1] }));
+            return this._imageManipulationService.convertSingleImageFromBytesToUri(imageBlob);
         }
         return '';
     };
