@@ -45,7 +45,7 @@ import { ResponseServerMessageModel } from '../ngrx-store/session-ngrx-store/ngr
 })
 export class AuthService {
 
-    constructor(
+    public constructor(
         private _http: HttpClient,
         private _store: Store<AppGlobalState>,
         private _storageService: BrowserStorageService,

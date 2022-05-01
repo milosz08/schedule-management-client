@@ -20,6 +20,7 @@
 import { Injectable } from '@angular/core';
 
 import { FirstChangePasswordDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/first-change-password-data.model';
+import { BrowserStorageService } from './browser-storage.service';
 
 /**
  * Serwis realizujący obsługę local storage dla zmiany oryginalnego hasła generowanego przez system.
@@ -34,23 +35,28 @@ export class FirstChangePasswordStorageService {
 
     //------------------------------------------------------------------------------------------------------------------
 
+    public constructor(
+        private _storageService: BrowserStorageService,
+    ) {
+    };
+
     /**
      * Aktywowanie zablokowania strony do zmiany początkowego hasła (na podstawie wartości userId).
      */
     public activeDisabledFirstChangePage(userId: string): void {
-        const userData = localStorage.getItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS);
+        const { DISABLE_SEE_CHANGE_PASS } = FirstChangePasswordStorageService;
+        const userData = localStorage.getItem(DISABLE_SEE_CHANGE_PASS);
         if (userData) { // jeśli jest to któryś z kolei użytkownik, dopisz
             const userDataAfterParse: Array<FirstChangePasswordDataModel> = JSON.parse(userData);
             const findExistUser = userDataAfterParse.find(user => user._dictionaryHash === userId);
             if (!findExistUser) { // dodaj tylko różnych użytkowników
                 userDataAfterParse.push(new FirstChangePasswordDataModel(userId, true));
                 const savedData = JSON.stringify(userDataAfterParse);
-                localStorage.removeItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS);
-                localStorage.setItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS, savedData);
+                this._storageService.updateLocalStorageContent(DISABLE_SEE_CHANGE_PASS, savedData);
             }
         } else { // jeśli jest to pierwszy użytkownik
             const savedData = JSON.stringify([ new FirstChangePasswordDataModel(userId, true) ]);
-            localStorage.setItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS, savedData);
+            localStorage.setItem(DISABLE_SEE_CHANGE_PASS, savedData);
         }
     };
 
@@ -76,12 +82,12 @@ export class FirstChangePasswordStorageService {
      * wygenerowanego przez system (na podstawie wartości userId).
      */
     public removeDisabledFirstChangePage(userId: string): void {
+        const { DISABLE_SEE_CHANGE_PASS } = FirstChangePasswordStorageService;
         const userData = localStorage.getItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS);
         if (userData) {
             const userDataAfterParsed: Array<FirstChangePasswordDataModel> = JSON.parse(userData);
             const excludeUser = userDataAfterParsed.filter(user => user._dictionaryHash !== userId);
-            localStorage.removeItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS);
-            localStorage.setItem(FirstChangePasswordStorageService.DISABLE_SEE_CHANGE_PASS, JSON.stringify(excludeUser));
+            this._storageService.updateLocalStorageContent(DISABLE_SEE_CHANGE_PASS, excludeUser);
         }
     };
 }
