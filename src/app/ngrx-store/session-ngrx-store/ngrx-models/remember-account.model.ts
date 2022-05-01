@@ -24,4 +24,5 @@ export interface RememberAccountModel {
     nameWithSurname: string;
     role: UserIdentityModel;
     email: string;
+    image: string;
 }

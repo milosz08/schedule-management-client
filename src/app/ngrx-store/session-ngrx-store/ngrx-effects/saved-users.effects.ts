@@ -49,23 +49,44 @@ export class SavedUsersEffects {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Zapisaywanie użytkownika przy logowaniu do magazuny local storage (tylko jeśli checkbox jest na true).
+     * Zapisaywanie użytkownika przy logowaniu do magazynu local storage (tylko jeśli checkbox jest na true).
+     * Efekt działa tylko dla użytkowników bez obrazka.
      */
     public saveLastUserInStorage$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(ReducerAction.userSuccessLogin),
             withLatestFrom(this._store.select(SESSION_REDUCER)),
             map(([ action, state ]) => {
-                const { ifSaveUserInLastLogin, userData, allSavedAccounts } = state;
-                const ifSaveUser = ifSaveUserInLastLogin && userData && action.ifRedirectToRoot;
-                if (ifSaveUser && allSavedAccounts.length < SavedUsersEffects.SAVED_MAX_USERS) {
-                    const userAccount = this._rememberUserStorageService.saveUserDataInLocalStorage(userData);
-                    return ReducerAction.saveSingleAccount({ userAccount });
+                if (state.userData && !state.userData.hasPicture) { // dla użytkowników bez obrazka
+                    const { ifSaveUserInLastLogin, userData, allSavedAccounts } = state;
+                    const ifSaveUser = ifSaveUserInLastLogin && userData && action.ifRedirectToRoot;
+                    if (ifSaveUser && allSavedAccounts.length < SavedUsersEffects.SAVED_MAX_USERS) {
+                        this._rememberUserStorageService.saveUserDataInLocalStorage(userData, '');
+                    }
                 }
-                return ReducerAction.saveSingleAccount({ userAccount: null });
             }),
         );
-    });
+    }, { dispatch: false });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Zapisaywanie użytkownika przy logowaniu do magazynu local storage (tylko jeśli checkbox jest na true).
+     * Efekt działa tylko dla użytkowników z dodanym obrazkiem.
+     */
+    public saveLastUserWithImageInStorage$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(ReducerAction.userSuccesedGetImage),
+            withLatestFrom(this._store.select(SESSION_REDUCER)),
+            map(([ _, state ]) => { // dla użytkowników z obrazkiem
+                const { ifSaveUserInLastLogin, userData, allSavedAccounts } = state;
+                const ifSaveUser = ifSaveUserInLastLogin && userData;
+                if (ifSaveUser && allSavedAccounts.length < SavedUsersEffects.SAVED_MAX_USERS) {
+                    this._rememberUserStorageService.saveUserDataInLocalStorage(userData, state.userImage);
+                }
+            }),
+        );
+    }, { dispatch: false });
 
     //------------------------------------------------------------------------------------------------------------------
 

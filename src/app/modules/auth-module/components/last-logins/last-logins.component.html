@@ -27,11 +27,19 @@
 			(click) = 'handleAutoFilledLoginFormElement(savedAccount.email)'
 			class = 'last-logins__button-element'
 		>
-			{{ createUserIdentity(savedAccount.nameWithSurname) }}
-			<span [class] = '"button-element__role-dot " + createUserRoleSingleLetter(savedAccount.role).class'>
-				{{ createUserRoleSingleLetter(savedAccount.role).letter }}
-			</span>
+			<img
+				*ngIf = 'savedAccount.image; else userIdentity'
+				[src] = 'getSaveImageURL(savedAccount.image)'
+				[alt] = 'createUserIdentity(savedAccount.nameWithSurname)'
+				class = 'last-logins__user-image'
+			/>
+			<ng-template #userIdentity>
+				{{ createUserIdentity(savedAccount.nameWithSurname) }}
+			</ng-template>
 		</button>
+		<span [class] = '"button-element__role-dot " + createUserRoleSingleLetter(savedAccount.role).class'>
+			{{ createUserRoleSingleLetter(savedAccount.role).letter }}
+		</span>
 		<button
 			(click) = 'handleRemoveSelectedSavedAccount(savedAccount.dictionaryHash)'
 			class = 'last-logins__remove-button'
