@@ -1,0 +1,6 @@
+co już zrobione:
+    - strona logowania (całość, logika + RWD)
+    - strona ustawiania początkowego hasła (całość, logika + RWD)
+
+co do zrobienia:
+    - strona do resetowania hasła
