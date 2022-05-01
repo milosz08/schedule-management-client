@@ -22,6 +22,9 @@ import { Title, Meta } from '@angular/platform-browser';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
+/**
+ * Widok odpowiadający za generowanie strony umożliwiającej przeglądanie planu.
+ */
 
 @Component({
     selector: 'app-root-schedule-page',

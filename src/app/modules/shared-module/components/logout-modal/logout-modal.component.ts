@@ -18,6 +18,7 @@
  */
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
@@ -25,7 +26,6 @@ import { getLogoutModalVisibility, } from '../../../../ngrx-store/session-ngrx-s
 import { userLogoutModalSetVisibility } from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
-import { Router } from '@angular/router';
 
 /**
  * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy wciścięciu

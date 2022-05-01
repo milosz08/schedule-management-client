@@ -20,6 +20,9 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+/**
+ * Komponent odpowiedzialny za renderowanie widoku stopki na stronach umożliwiających autoryzację.
+ */
 
 @Component({
     selector: 'app-auth-footer',

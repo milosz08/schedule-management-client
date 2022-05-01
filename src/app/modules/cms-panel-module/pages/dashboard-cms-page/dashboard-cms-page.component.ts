@@ -23,7 +23,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 /**
- *
+ * Widok odpowiadający za generowanie strony głównej panelu cms.
  */
 
 @Component({

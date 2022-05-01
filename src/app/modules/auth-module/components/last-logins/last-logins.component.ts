@@ -22,17 +22,15 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
+import * as ReducerAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
 import { getAllSavedAccounts } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
+
+import { UserIdentityModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
 import { RememberAccountModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/remember-account.model';
 
-import {
-    removeAllSavedAccounts, removeSingleSavedAccount, userSetAutoFilledEmail
-} from '../../../../ngrx-store/session-ngrx-store/session.actions';
-import { UserIdentityModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
-
 /**
- *
+ * Komponent odpowiedzialny za renderowanie widoku ostatnio zalogowanych użytkowników.
  */
 
 @Component({
@@ -52,17 +50,17 @@ export class LastLoginsComponent {
     public handleRemoveAllSavedAccounts(): void {
         this._getAllSavedAccounts$.subscribe(savedAccounts => {
             if (savedAccounts.length > 0) {
-                this._store.dispatch(removeAllSavedAccounts());
+                this._store.dispatch(ReducerAction.removeAllSavedAccounts());
             }
         }).unsubscribe();
     };
 
     public handleRemoveSelectedSavedAccount(userId: string): void {
-        this._store.dispatch(removeSingleSavedAccount({ userId }));
+        this._store.dispatch(ReducerAction.removeSingleSavedAccount({ userId }));
     };
 
     public handleAutoFilledLoginFormElement(emailValue: string): void {
-        this._store.dispatch(userSetAutoFilledEmail({ emailValue }));
+        this._store.dispatch(ReducerAction.userSetAutoFilledEmail({ emailValue }));
     };
 
     public createUserIdentity(nameAndSurname: string): string {

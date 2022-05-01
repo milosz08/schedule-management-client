@@ -19,17 +19,14 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Store } from '@ngrx/store';
+
 import { Observable, Subscription } from 'rxjs';
 
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
-import {
-    getSessionSoonLogout, getUserDetailsPopupButtonTitle, getUserHeaderName, getUserSessionCurrentTime
-} from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-
 import { AppGlobalState } from '../../../../ngrx-store/combine-reducers';
+import * as NgrxSelector from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 import { AuthResponseDataModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
 
 /**
@@ -45,10 +42,10 @@ import { AuthResponseDataModel } from '../../../../ngrx-store/session-ngrx-store
 })
 export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
 
-    public _userDetailsButtonTitle$: Observable<string> = this._store.select(getUserDetailsPopupButtonTitle);
-    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(getSessionSoonLogout);
-    public _sessionLeftTime$: Observable<number> = this._store.select(getUserSessionCurrentTime);
-    public _userHeaderName$: Observable<string> = this._store.select(getUserHeaderName);
+    public _userDetailsButtonTitle$: Observable<string> = this._store.select(NgrxSelector.getUserDetailsPopupButtonTitle);
+    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(NgrxSelector.getSessionSoonLogout);
+    public _sessionLeftTime$: Observable<number> = this._store.select(NgrxSelector.getUserSessionCurrentTime);
+    public _userHeaderName$: Observable<string> = this._store.select(NgrxSelector.getUserHeaderName);
 
     private _storeSubscription: Subscription | undefined;
     public _userData: AuthResponseDataModel | null = null;

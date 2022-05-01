@@ -18,9 +18,9 @@
  */
 
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
 
 import { fadeOutAnimation } from '../../../../animations/fade-animations';
 

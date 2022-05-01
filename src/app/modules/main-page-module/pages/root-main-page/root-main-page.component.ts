@@ -22,6 +22,10 @@ import { Title, Meta } from '@angular/platform-browser';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
+/**
+ * Widok odpowiadający za generowanie strony głównej (podstawowe informacje).
+ */
+
 
 @Component({
     selector: 'app-root-main-page',

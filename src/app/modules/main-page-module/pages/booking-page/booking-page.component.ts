@@ -22,6 +22,9 @@ import { Meta, Title } from '@angular/platform-browser';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
+/**
+ * Widok odpowiadający za generowanie strony umożliwiającej rezerwację grupy/sali/nauczyciela.
+ */
 
 @Component({
     selector: 'app-booking-page',

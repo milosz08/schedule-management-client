@@ -23,17 +23,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
+import * as NgrxAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
+import * as NgrxSelector from '../../../../ngrx-store/session-ngrx-store/session.selectors';
+
 import { setSuspenseLoader } from '../../../../ngrx-store/shared-ngrx-store/shared.actions';
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
 import { SavedUsersEffects } from '../../../../ngrx-store/session-ngrx-store/ngrx-effects/saved-users.effects';
-
-import {
-    disableAddingNewAccountsToSaved, getAutoFilledEmail, getLoginError
-} from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-
-import {
-    userFailureLogin, userLogin, userToggleIfSaveAccount
-} from '../../../../ngrx-store/session-ngrx-store/session.actions';
 
 /**
  * Komponent odpowiedzialny za renderowanie widoku formularza logowania oraz jego obsługę
@@ -47,8 +42,8 @@ import {
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 
-    public _disableAddingNewAccounts$: Observable<boolean> = this._store.select(disableAddingNewAccountsToSaved);
-    public _getAutoFilledEmail$: Observable<string> = this._store.select(getAutoFilledEmail);
+    public _disableAddingNewAccounts$: Observable<boolean> = this._store.select(NgrxSelector.disableAddingNewAccountsToSaved);
+    public _getAutoFilledEmail$: Observable<string> = this._store.select(NgrxSelector.getAutoFilledEmail);
 
     public _saveAccountLabel: string = 'Zapamiętaj konto';
     public _outOfBoundSavedAccountsArray: string = `Możesz zapamiętać maksymalnie ${SavedUsersEffects.SAVED_MAX_USERS} kont`;
@@ -73,9 +68,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     };
 
     public ngOnInit(): void {
-        this._store.dispatch(userToggleIfSaveAccount({ ifSaveAccount: true }));
+        this._store.dispatch(NgrxAction.userToggleIfSaveAccount({ ifSaveAccount: true }));
         this._storeSubscription = this._store
-            .select(getLoginError)
+            .select(NgrxSelector.getLoginError)
             .subscribe(loginError => this._loginError = loginError);
     };
 
@@ -87,7 +82,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     public handleSubmitForm(): void {
         const { login, password } = this._loginForm.getRawValue();
         this._store.dispatch(setSuspenseLoader({ status: true }));
-        this._store.dispatch(userLogin({ login, password }));
+        this._store.dispatch(NgrxAction.userLogin({ login, password }));
     };
 
     public handleChangePasswordVisibility(): void {
@@ -98,7 +93,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     public handleClearErrorMessage(): void {
         if (this._loginError !== '') {
-            this._store.dispatch(userFailureLogin({ errorMessage: '' }));
+            this._store.dispatch(NgrxAction.userFailureLogin({ errorMessage: '' }));
         }
     };
 
@@ -107,6 +102,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     };
 
     public handleEventEmitter(value: boolean) {
-        this._store.dispatch(userToggleIfSaveAccount({ ifSaveAccount: value }));
+        this._store.dispatch(NgrxAction.userToggleIfSaveAccount({ ifSaveAccount: value }));
     };
 }

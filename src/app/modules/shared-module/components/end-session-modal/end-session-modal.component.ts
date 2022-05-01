@@ -20,16 +20,14 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { Subscription } from 'rxjs';
+
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 import { EndSessionModalSequencerService } from '../../services/end-session-modal-sequencer.service';
 
+import * as NgrxAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
 import { getSessionEndModalVisibility } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-
-import {
-    userLogout, userRenewSession, userSessionSetModalVisibility
-} from '../../../../ngrx-store/session-ngrx-store/session.actions';
-import { Subscription } from 'rxjs';
 
 /**
  * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy końcu sesji.
@@ -66,13 +64,13 @@ export class EndSessionModalComponent implements OnDestroy {
     };
 
     public handleCloseModalAndRenewSession(): void {
-        this._store.dispatch(userRenewSession());
+        this._store.dispatch(NgrxAction.userRenewSession());
         this._endSessionModalSequencerService.sequencerForceStop();
     };
 
     public handleCloseModalAndLogoutUser(): void {
-        this._store.dispatch(userLogout({ ifRedirectToRoot: true }));
-        this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: false }));
+        this._store.dispatch(NgrxAction.userLogout({ ifRedirectToRoot: true }));
+        this._store.dispatch(NgrxAction.userSessionSetModalVisibility({ modalVisibility: false }));
         this._endSessionModalSequencerService.sequencerForceStop();
     };
 }

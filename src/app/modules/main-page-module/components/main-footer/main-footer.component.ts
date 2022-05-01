@@ -19,6 +19,9 @@
 
 import { Component } from '@angular/core';
 
+/**
+ * Widok odpowiadający za generowanie widoku głównej stopki aplikacji na stronach niestrzeżonych.
+ */
 
 @Component({
     selector: 'app-main-footer',

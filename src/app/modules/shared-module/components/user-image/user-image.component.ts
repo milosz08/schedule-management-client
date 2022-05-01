@@ -23,10 +23,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
 
-import {
-    getIfUserHasImage, getIfUserNotLogged, getUserImageURL, getUserInitials
-} from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-
+import * as NgrxSelector from '../../../../ngrx-store/session-ngrx-store/session.selectors';
 import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
 
 /**
@@ -42,9 +39,9 @@ import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-st
 })
 export class UserImageComponent implements OnInit, OnDestroy {
 
-    public _ifUserNotLogged$: Observable<boolean> = this._store.select(getIfUserNotLogged);
-    public _ifUserHasImage$: Observable<boolean> = this._store.select(getIfUserHasImage);
-    public _userInitials$: Observable<string> = this._store.select(getUserInitials);
+    public _ifUserNotLogged$: Observable<boolean> = this._store.select(NgrxSelector.getIfUserNotLogged);
+    public _ifUserHasImage$: Observable<boolean> = this._store.select(NgrxSelector.getIfUserHasImage);
+    public _userInitials$: Observable<string> = this._store.select(NgrxSelector.getUserInitials);
 
     private _storeSubscription: Subscription | undefined;
     private _imageURL: string = '';
@@ -57,7 +54,7 @@ export class UserImageComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this._storeSubscription = this._store
-            .select(getUserImageURL)
+            .select(NgrxSelector.getUserImageURL)
             .subscribe(imageURL => this._imageURL = imageURL);
     };
 
