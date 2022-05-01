@@ -93,6 +93,7 @@ export enum AllMainWebpages {
     SCHEDULE = 'schedule',
     LOGIN = 'login',
     FORGOT_PASSWORD = 'forgotPassword',
+    FIRST_CHANGE_PASSWORD = 'firstChangePassword',
     BOOKING = 'booking',
     SEARCH = 'search',
     NOT_FOUND = 'notFound',

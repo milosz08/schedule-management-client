@@ -15,6 +15,10 @@
             "title": "Logowanie",
             "description": "Na tej stronie masz możliwość zalogowania do systemu jako administrator, edytor lub nauczyciel."
         },
+        "firstChangePassword": {
+            "title": "Ustaw hasło",
+            "description": "Na tej stronie masz możliwość zmiany domyślnego hasła systemowego na własne."
+        },
         "forgotPassword": {
             "title": "Resetuj Hasło",
             "description": "Na tej stronie masz możliwość stworzenia nowego hasła po weryfikacji tożsamości."
