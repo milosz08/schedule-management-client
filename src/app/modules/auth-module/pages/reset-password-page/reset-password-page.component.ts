@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: forgot-password-page.component.ts
+ * File name | Nazwa pliku: reset-password-page.component.ts
  * Last modified | Ostatnia modyfikacja: 19/04/2022, 14:42
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -27,16 +27,16 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
  */
 
 @Component({
-    selector: 'app-forgot-password-page',
-    templateUrl: './forgot-password-page.component.html',
-    styleUrls: [ './forgot-password-page.component.scss' ]
+    selector: 'app-reset-password-page',
+    templateUrl: './reset-password-page.component.html',
+    styleUrls: [ './reset-password-page.component.scss' ]
 })
-export class ForgotPasswordPageComponent extends MetaWebContentHelper {
+export class ResetPasswordPageComponent extends MetaWebContentHelper {
 
     constructor(
         titleService: Title,
         metaService: Meta,
     ) {
-        super(titleService, metaService, AllMainWebpages.FORGOT_PASSWORD);
+        super(titleService, metaService, AllMainWebpages.RESET_PASSWORD);
     };
 }

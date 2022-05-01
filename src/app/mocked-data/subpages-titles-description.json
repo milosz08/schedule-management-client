@@ -19,7 +19,7 @@
             "title": "Ustaw hasło",
             "description": "Na tej stronie masz możliwość zmiany domyślnego hasła systemowego na własne."
         },
-        "forgotPassword": {
+        "resetPassword": {
             "title": "Resetuj Hasło",
             "description": "Na tej stronie masz możliwość stworzenia nowego hasła po weryfikacji tożsamości."
         },

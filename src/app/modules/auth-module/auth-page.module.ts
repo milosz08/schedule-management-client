@@ -28,7 +28,7 @@ import { AuthPageComponent } from './auth-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 
 import { LastLoginsComponent } from './components/last-logins/last-logins.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
@@ -45,7 +45,7 @@ import { FirstChangePasswordFormComponent } from './components/first-change-pass
     declarations: [
         AuthPageComponent,
         LoginPageComponent,
-        ForgotPasswordPageComponent,
+        ResetPasswordPageComponent,
         LastLoginsComponent,
         LoginFormComponent,
         AuthFooterComponent,

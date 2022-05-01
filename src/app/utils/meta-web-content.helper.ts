@@ -92,7 +92,7 @@ export enum AllMainWebpages {
     ROOT = 'root',
     SCHEDULE = 'schedule',
     LOGIN = 'login',
-    FORGOT_PASSWORD = 'forgotPassword',
+    RESET_PASSWORD = 'resetPassword',
     FIRST_CHANGE_PASSWORD = 'firstChangePassword',
     BOOKING = 'booking',
     SEARCH = 'search',

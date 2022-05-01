@@ -22,7 +22,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthPageComponent } from './auth-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 
 import { FirstChangePasswordRedirectGuard } from '../../guards/login-redirectors/first-change-password-redirect.guard';
@@ -38,8 +38,8 @@ const routes: Routes = [
                 canActivate: [ LoginRedirectGuard ],
             },
             {
-                path: 'forgot-password',
-                component: ForgotPasswordPageComponent,
+                path: 'reset-password',
+                component: ResetPasswordPageComponent,
                 canActivate: [ LoginRedirectGuard ],
             },
             {
