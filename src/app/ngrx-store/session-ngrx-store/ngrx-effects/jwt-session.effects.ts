@@ -76,13 +76,13 @@ export class JwtSessionEffects {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     *
+     * Efekt uruchamiający procedurę odnowienia sesji użytkownika.
      */
     public sessionRenew$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(ReducerAction.userRenewSession),
             withLatestFrom(this._store.select(SESSION_REDUCER)),
-            map(([ action, state ]) => {
+            map(([ _, state ]) => {
                 this._store.dispatch(ReducerAction.userSessionSetModalVisibility({ modalVisibility: false }));
                 this._store.dispatch(ReducerAction.userSetNewToken({ data: state.userData }));
                 this._sessionService.allSessionCountersRerun(state.userData!);

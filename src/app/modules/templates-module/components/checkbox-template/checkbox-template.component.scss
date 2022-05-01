@@ -20,7 +20,7 @@
 .app__checkbox-label {
     margin-left: 10px;
     cursor: pointer;
-    color: var(--lightGrayColor);
+    color: var(--mainWhiteColor);
 }
 
 .app__checkbox-container {
@@ -37,7 +37,7 @@
     width: 17px;
     height: 17px;
     &:checked ~ .app__checkbox-container__checkmark {
-        background-color: var(--lightGrayColor);
+        background-color: var(--mainWhiteColor);
         &::after {
             display: block;
         }
@@ -58,7 +58,7 @@
     border-radius: var(--borderRadius);
     width: 17px;
     height: 17px;
-    border: 1px solid var(--lightGrayColor);
+    border: 1px solid var(--mainWhiteColor);
     transition: var(--transitionDuration);
     &::after {
         content: '';
