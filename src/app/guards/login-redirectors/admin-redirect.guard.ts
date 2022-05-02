@@ -17,8 +17,9 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { map, Observable } from 'rxjs';
 
@@ -37,7 +38,7 @@ import { SessionReducerType } from '../../modules/shared-module/ngrx-store/sessi
 })
 export class AdminRedirectGuard implements CanActivate {
 
-    private readonly _ifNotLogged$: Observable<boolean> = this._store.select(getIfUserNotLogged);
+    private readonly _ifNotLogged$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserNotLogged);
 
     //------------------------------------------------------------------------------------------------------------------
 

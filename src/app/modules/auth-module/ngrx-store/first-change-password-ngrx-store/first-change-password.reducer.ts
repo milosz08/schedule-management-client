@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-page.component.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 01:16
+ * File name | Nazwa pliku: first-change-password.reducer.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:10
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,31 +17,29 @@
  * Obiektowe".
  */
 
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import * as NgrxAction_REM from './ngrx-store/remember-user-ngrx-store/remember-user.actions';
-import { RememberUserReducerType } from './ngrx-store/remember-user-ngrx-store/remember-user.selectors';
+import * as NgrxAction from './first-change-password.actions';
+import { initialFirstChangePasswordState } from './first-change-password.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Komponent inicjalizujący generowanie widoków ścieżek autentykacji użytkowników.
- */
+const _firstChangePasswordReducer = createReducer(
+    initialFirstChangePasswordState,
+    on(NgrxAction.__afterChangeDefaultPassword, (state, action) => {
+        return { ...state,
+            initialChangePasswordMessage: action.message,
+        };
+    }),
+    on(NgrxAction.__resetChangeDefaultPasswordMessage, state => {
+        return { ...state,
+            initialChangePasswordMessage: '',
+        };
+    }),
+);
 
-@Component({
-    selector: 'app-auth-page',
-    templateUrl: './auth-page.component.html',
-})
-export class AuthPageComponent implements OnInit {
+//----------------------------------------------------------------------------------------------------------------------
 
-    public constructor(
-       private _store: Store<RememberUserReducerType>,
-    ) {
-    };
-
-    // automatyczne ładowanie zapisanych kont
-    public ngOnInit(): void {
-        this._store.dispatch(NgrxAction_REM.__loadAllAccounts());
-    };
+export function firstChangePasswordReducer(state: any, action: any) {
+    return _firstChangePasswordReducer(state, action);
 }

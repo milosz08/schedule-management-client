@@ -18,18 +18,20 @@
  */
 
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
+
 import { MiscHelper } from '../../../../utils/misc.helper';
 
-import * as ReducerAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
-import { getAllSavedAccounts } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
+import { UserIdentityModel } from '../../../../models/user-identity.model';
+import { RememberAccountModel } from '../../../../models/remember-account.model';
 
-import { UserIdentityModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
-import { RememberAccountModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/remember-account.model';
+import * as NgrxAction_REM from '../../ngrx-store/remember-user-ngrx-store/remember-user.actions';
+import * as NgrxSelector_REM from '../../ngrx-store/remember-user-ngrx-store/remember-user.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent odpowiedzialny za renderowanie widoku ostatnio zalogowanych użytkowników.
@@ -42,28 +44,33 @@ import { RememberAccountModel } from '../../../../ngrx-store/session-ngrx-store/
 })
 export class LastLoginsComponent {
 
-    public _getAllSavedAccounts$: Observable<Array<RememberAccountModel>> = this._store.select(getAllSavedAccounts);
+    public _getAllSavedAccounts$: Observable<Array<RememberAccountModel>> = this._store
+        .select(NgrxSelector_REM.sel_allSavedAccounts);
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
+        private _store: Store,
         private _sanitizer: DomSanitizer,
-        private _store: Store<InitialSessionStateTypes>,
     ) {
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public handleRemoveAllSavedAccounts(): void {
         this._getAllSavedAccounts$.subscribe(savedAccounts => {
             if (savedAccounts.length > 0) {
-                this._store.dispatch(ReducerAction.removeAllSavedAccounts());
+                this._store.dispatch(NgrxAction_REM.__removeAllSavedAccounts());
             }
         }).unsubscribe();
     };
 
     public handleRemoveSelectedSavedAccount(userId: string): void {
-        this._store.dispatch(ReducerAction.removeSingleSavedAccount({ userId }));
+        this._store.dispatch(NgrxAction_REM.__removeSingleSavedAccount({ userId }));
     };
 
     public handleAutoFilledLoginFormElement(emailValue: string): void {
-        this._store.dispatch(ReducerAction.userSetAutoFilledEmail({ emailValue }));
+        this._store.dispatch(NgrxAction_REM.__setAutoFilledEmail({ emailValue }));
     };
 
     public createUserIdentity(nameAndSurname: string): string {

@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: saved-users.effects.ts
- * Last modified | Ostatnia modyfikacja: 30/04/2022, 16:26
+ * Last modified | Ostatnia modyfikacja: 01/05/2022, 19:01
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,17 +18,19 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { map, withLatestFrom } from 'rxjs';
 
-import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import * as ReducerAction from '../session.actions';
-import { SESSION_REDUCER } from '../session.selectors';
-import { AppGlobalState } from '../../combine-reducers';
+import * as NgrxAction_REM from '../remember-user.actions';
+import * as NgrxAction_SES from '../../../../shared-module/ngrx-store/session-ngrx-store/session.actions';
+import { REMEMBER_USER_REDUCER, RememberUserReducerType } from '../remember-user.selectors';
 
 import { RememberUserStorageService } from '../../../services/remember-user-storage.service';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Klasa efektów odpowiedzialna za obsługę zapisu/odczytu zapamiętanych ostatnio zalogowanych użytkowników.
@@ -39,9 +41,11 @@ export class SavedUsersEffects {
 
     public static readonly SAVED_MAX_USERS: number = 7;
 
-    constructor(
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         private _actions$: Actions,
-        private _store: Store<AppGlobalState>,
+        private _store: Store<RememberUserReducerType>,
         private _rememberUserStorageService: RememberUserStorageService,
     ) {
     };
@@ -54,14 +58,14 @@ export class SavedUsersEffects {
      */
     public saveLastUserInStorage$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userSuccessLogin),
-            withLatestFrom(this._store.select(SESSION_REDUCER)),
+            ofType(NgrxAction_SES.__saveUserAfterSuccessLogin),
+            withLatestFrom(this._store.select(REMEMBER_USER_REDUCER)),
             map(([ action, state ]) => {
-                if (state.userData && !state.userData.hasPicture) { // dla użytkowników bez obrazka
-                    const { ifSaveUserInLastLogin, userData, allSavedAccounts } = state;
-                    const ifSaveUser = ifSaveUserInLastLogin && userData && action.ifRedirectToRoot;
+                if (action.userData && !action.userData.hasPicture) { // dla użytkowników bez obrazka
+                    const { ifSaveUserInLastLogin, allSavedAccounts } = state;
+                    const ifSaveUser = ifSaveUserInLastLogin && action.userData && action.ifRedirectToRoot;
                     if (ifSaveUser && allSavedAccounts.length < SavedUsersEffects.SAVED_MAX_USERS) {
-                        this._rememberUserStorageService.saveUserDataInLocalStorage(userData, '');
+                        this._rememberUserStorageService.saveUserDataInLocalStorage(action.userData, '');
                     }
                 }
             }),
@@ -76,13 +80,13 @@ export class SavedUsersEffects {
      */
     public saveLastUserWithImageInStorage$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userSuccesedGetImage),
-            withLatestFrom(this._store.select(SESSION_REDUCER)),
-            map(([ _, state ]) => { // dla użytkowników z obrazkiem
-                const { ifSaveUserInLastLogin, userData, allSavedAccounts } = state;
-                const ifSaveUser = ifSaveUserInLastLogin && userData;
+            ofType(NgrxAction_SES.__saveUserImageAfterSuccessLogin),
+            withLatestFrom(this._store.select(REMEMBER_USER_REDUCER)),
+            map(([ action, state ]) => { // dla użytkowników z obrazkiem
+                const { ifSaveUserInLastLogin, allSavedAccounts } = state;
+                const ifSaveUser = ifSaveUserInLastLogin && action.userData;
                 if (ifSaveUser && allSavedAccounts.length < SavedUsersEffects.SAVED_MAX_USERS) {
-                    this._rememberUserStorageService.saveUserDataInLocalStorage(userData, state.userImage);
+                    this._rememberUserStorageService.saveUserDataInLocalStorage(action.userData!, action.userImage);
                 }
             }),
         );
@@ -95,10 +99,10 @@ export class SavedUsersEffects {
      */
     public loadAllUsersAccounts$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.loadAllAccounts),
+            ofType(NgrxAction_REM.__loadAllAccounts),
             map(() => {
                 const usersAccounts = this._rememberUserStorageService.loadAllSavedAccounts();
-                return ReducerAction.saveAllAccounts({ usersAccounts });
+                return NgrxAction_REM.__saveAllAccounts({ usersAccounts });
             }),
         );
     });
@@ -110,10 +114,10 @@ export class SavedUsersEffects {
      */
     public removeAllSavedUsers$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.removeAllSavedAccounts),
+            ofType(NgrxAction_REM.__removeAllSavedAccounts),
             map(() => {
                 this._rememberUserStorageService.removeAllSaveUsersFromLocalStorage();
-                return ReducerAction.succesedRemoveAllSavedAccounts();
+                return NgrxAction_REM.__succesedRemoveAllSavedAccounts();
             }),
         );
     });
@@ -125,13 +129,13 @@ export class SavedUsersEffects {
      */
     public removeSingleSavedUser$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.removeSingleSavedAccount),
-            withLatestFrom(this._store.select(SESSION_REDUCER)),
+            ofType(NgrxAction_REM.__removeSingleSavedAccount),
+            withLatestFrom(this._store.select(REMEMBER_USER_REDUCER)),
             map(([ action, state ]) => {
                 this._rememberUserStorageService.removeSaveUserFromLocalStorageBaseId(action.userId);
                 const accountsArrayAfterRemove = state.allSavedAccounts
                     .filter(account => account.dictionaryHash !== action.userId);
-                return ReducerAction.succesedRemoveSingleSavedAccount({ accountsArrayAfterRemove });
+                return NgrxAction_REM.__succesedRemoveSingleSavedAccount({ accountsArrayAfterRemove });
             }),
         );
     });

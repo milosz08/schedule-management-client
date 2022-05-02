@@ -19,20 +19,20 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-import { Subscription } from 'rxjs';
-import { AngularFormValidator } from '../../../../validators/angular-form.validator';
-
 import { Store } from '@ngrx/store';
 
-import * as ReducerAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
-import { setSuspenseLoader } from '../../../../ngrx-store/shared-ngrx-store/shared.actions';
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
-import { getInitialChangePasswordMessage } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
+import { Subscription } from 'rxjs';
 
-import {
-    RequestFirstChangePasswordModel
-} from '../../../../ngrx-store/session-ngrx-store/ngrx-models/request-first-change-password.model';
+import { AngularFormValidator } from '../../../../validators/angular-form.validator';
+
+import * as NgrxAction_SHA from '../../../shared-module/ngrx-store/shared-ngrx-store/shared.actions';
+import * as NgrxAction_FCP from '../../ngrx-store/first-change-password-ngrx-store/first-change-password.actions';
+import * as NgrxSelector_FCP from '../../ngrx-store/first-change-password-ngrx-store/first-change-password.selectors';
+
+import { RequestFirstChangePasswordModel } from '../../../../models/request-first-change-password.model';
+import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Widok odpowiadający za generowanie formularza umożliwiającego zmianę początkowo
@@ -51,8 +51,10 @@ export class FirstChangePasswordFormComponent implements OnInit, OnDestroy {
     public _newPasswordServerMessage: string = '';
     private _storeSubscription?: Subscription;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public constructor(
-        private _store: Store<InitialSessionStateTypes>,
+        private _store: Store<SessionReducerType>,
     ) {
         this._newPasswordForm = new FormGroup({
             oldPassword: new FormControl('', [ Validators.required ]),
@@ -63,10 +65,12 @@ export class FirstChangePasswordFormComponent implements OnInit, OnDestroy {
         });
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public ngOnInit(): void {
-        this._store.dispatch(ReducerAction.userResetChangeDefaultPasswordMessage());
+        this._store.dispatch(NgrxAction_FCP.__resetChangeDefaultPasswordMessage());
         this._storeSubscription = this._store
-            .select(getInitialChangePasswordMessage)
+            .select(NgrxSelector_FCP.sel_initialChangePasswordMessage)
             .subscribe(passwordError => this._newPasswordServerMessage = passwordError);
     };
 
@@ -76,13 +80,13 @@ export class FirstChangePasswordFormComponent implements OnInit, OnDestroy {
 
     public handleSubmitForm(): void {
         const passwordsPayload: RequestFirstChangePasswordModel = this._newPasswordForm.getRawValue();
-        this._store.dispatch(setSuspenseLoader({ status: true }));
-        this._store.dispatch(ReducerAction.userChangeDefaultPassword({ passwordsPayload }));
+        this._store.dispatch(NgrxAction_SHA.__setSuspenseLoader({ status: true }));
+        this._store.dispatch(NgrxAction_FCP.__changeDefaultPassword({ passwordsPayload }));
     };
 
     public handleClearErrorMessage(): void {
         if (this._newPasswordServerMessage !== '') {
-            this._store.dispatch(ReducerAction.userAfterChangeDefaultPassword({ message: '' }))
+            this._store.dispatch(NgrxAction_FCP.__afterChangeDefaultPassword({ message: '' }))
         }
     };
 

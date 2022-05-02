@@ -18,14 +18,14 @@
  */
 
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { Store } from '@ngrx/store';
-
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
-import { userToggleChangePasswordPageVisible } from '../../../../ngrx-store/session-ngrx-store/session.actions';
-
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import * as NgrxAction_FCP from '../../ngrx-store/first-change-password-ngrx-store/first-change-password.actions';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Widok odpowiadający za generowanie strony początkowej zmiany hasła systemowego.
@@ -41,7 +41,7 @@ export class FirstChangePasswordPageComponent extends MetaWebContentHelper {
     constructor(
         titleService: Title,
         metaService: Meta,
-        private _store: Store<InitialSessionStateTypes>,
+        private _store: Store,
     ) {
         super(titleService, metaService, AllMainWebpages.FIRST_CHANGE_PASSWORD);
     };
@@ -49,6 +49,6 @@ export class FirstChangePasswordPageComponent extends MetaWebContentHelper {
     //------------------------------------------------------------------------------------------------------------------
 
     public handleDisableShowThisPageAgain(ifChecked: boolean): void {
-        this._store.dispatch(userToggleChangePasswordPageVisible({ pageVisibility: ifChecked }));
+        this._store.dispatch(NgrxAction_FCP.__toggleChangePasswordPageVisible({ pageVisibility: ifChecked }));
     };
 }

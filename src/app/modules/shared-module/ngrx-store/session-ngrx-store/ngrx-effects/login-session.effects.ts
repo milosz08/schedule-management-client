@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: login-session.effects.ts
- * Last modified | Ostatnia modyfikacja: 24/04/2022, 18:06
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:56
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,17 +18,16 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
-
 import { Store } from '@ngrx/store';
+
+import { catchError, map, mergeMap, of } from 'rxjs';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import * as ReducerAction from '../session.actions';
-import { AppGlobalState } from '../../combine-reducers';
-import { setSuspenseLoader } from '../../shared-ngrx-store/shared.actions';
-import { SESSION_SUCCESS_LOGIN, userSetAutoFilledEmail, } from '../session.actions';
+import * as NgrxAction_SES from '../session.actions';
+import * as NgrxAction_SHA from '../../shared-ngrx-store/shared.actions';
+
+import { SessionReducerType } from '../session.selectors';
 
 import { AuthService } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
@@ -43,14 +42,12 @@ import { BrowserStorageService } from '../../../services/browser-storage.service
 @Injectable()
 export class LoginSessionEffects {
 
-    constructor(
+    public constructor(
         private _actions$: Actions,
         private _authService: AuthService,
         private _sessionService: SessionService,
-        private _rememberUserStorageService: RememberUserStorageService,
+        private _store: Store<SessionReducerType>,
         private _storageService: BrowserStorageService,
-        private _store: Store<AppGlobalState>,
-        private _router: Router,
     ) {
     };
 
@@ -62,7 +59,7 @@ export class LoginSessionEffects {
      */
     public userLogin$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userLogin),
+            ofType(NgrxAction_SES.__login),
             mergeMap(action => {
                 return this._authService
                     .userLogin(action.login, action.password)
@@ -71,22 +68,23 @@ export class LoginSessionEffects {
                             const { dictionaryHash, bearerToken } = data;
                             if (data.hasPicture) {
                                 this._store
-                                    .dispatch(ReducerAction.userGetImage({ userId: dictionaryHash, jwt: bearerToken }));
+                                    .dispatch(NgrxAction_SES.__getImage({ userId: dictionaryHash, jwt: bearerToken }));
                             } else {
-                                setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
+                                this._store.dispatch(NgrxAction_SHA.__setSuspenseLoaderDelay({ status: false }));
                             }
                             this._storageService.setUserInStorage(data);
                             this._sessionService.allSessionCountersRerun(data);
-                            return ReducerAction.userSuccessLogin({ data, ifRedirectToRoot: true });
+                            return NgrxAction_SES.__successLogin({ data, ifRedirectToRoot: true });
                         }),
-                        catchError(error => {
-                            setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
+                        catchError(({ error }) => {
+                            this._store.dispatch(NgrxAction_SHA.__setSuspenseLoaderDelay({ status: false }));
                             this._sessionService.sessionEndInterval();
-                            // nieoczekiwany błąd serwera (brak połączenia z backendem)
-                            if (error.statusText.toLowerCase().includes('error') || error.status === 0) {
-                                return of(ReducerAction.serverConnectionFailure());
+                            if (error.message) {
+                                return of(NgrxAction_SES.__failureLogin({ errorMessage: error.message }));
                             }
-                            return of(ReducerAction.userFailureLogin({ errorMessage: error.error.message }));
+                            return of(NgrxAction_SES.__failureLogin({
+                                errorMessage: 'Brak połączenia z serwerem. Spróbuj ponownie później.'
+                            }));
                         }),
                     );
             }),
@@ -100,43 +98,20 @@ export class LoginSessionEffects {
      */
     public userGetImage$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userGetImage),
+            ofType(NgrxAction_SES.__getImage),
             mergeMap(action => {
                 return this._authService
                     .userGetImage(action.userId, action.jwt)
                     .pipe(
                         map(data => {
                             const imageUri = this._storageService.setUserImageInStorage(data)
-                            setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
-                            return ReducerAction.userSuccesedGetImage({ imageUri });
+                            this._store.dispatch(NgrxAction_SHA.__setSuspenseLoaderDelay({ status: false }));
+                            return NgrxAction_SES.__succesedGetImage({ imageUri });
                         }),
                         catchError(() => {
-                            return of(ReducerAction.userFailuredGetImage());
+                            return of(NgrxAction_SES.__failuredGetImage());
                         }),
                     );
-            }),
-        );
-    });
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Efekt uruchamiający procedurę automatycznego logowania (przy uruchomieniu strony)
-     * pobierając dane z magazynu local storage przy pomocy serwisu BrowserStorageService
-     */
-    public userAutoLogin$ = createEffect(() => {
-        return this._actions$.pipe(
-            ofType(ReducerAction.userAutoLogin),
-            map(() => {
-                const data = this._storageService.getUserFromStorage();
-                if (data) {
-                    const imageUri = this._storageService.getUserImageFromStorage();
-                    this._store.dispatch(ReducerAction.userSuccesedGetImage({ imageUri }));
-                    this._store.dispatch(ReducerAction.userSetNewToken({ data }));
-                    this._sessionService.allSessionCountersRerun(data);
-                    return ReducerAction.userSuccessLogin({ data, ifRedirectToRoot: false });
-                }
-                return ReducerAction.userLogout({ ifRedirectToRoot: false });
             }),
         );
     });
@@ -150,29 +125,10 @@ export class LoginSessionEffects {
      */
     public userLogout$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userLogout),
+            ofType(NgrxAction_SES.__logout),
             map(() => {
                 this._sessionService.sessionEndInterval();
                 this._storageService.removeUserWithImageFromStorage();
-            }),
-        );
-    }, { dispatch: false });
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Efekt uruchamiający procedurę przejścia na stronę startową przy wywołaniu akcji poprawnego zalogowania
-     * lub wylogowania z systemu.
-     */
-    public loginLogoutRedirect$ = createEffect(() => {
-        return this._actions$.pipe(
-            ofType(ReducerAction.userSuccessLogin, ReducerAction.userLogout),
-            tap(action => {
-                this._store.dispatch(userSetAutoFilledEmail({ emailValue: '' }));
-                const ifRedirect = action.type === SESSION_SUCCESS_LOGIN && action.ifRedirectToRoot;
-                if (ifRedirect) {
-                    this._router.navigate([ '/' ]).then(r => r);
-                }
             }),
         );
     }, { dispatch: false });

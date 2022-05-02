@@ -24,6 +24,9 @@ import { Observable } from 'rxjs';
 
 import { fadeOutAnimation } from '../../../../animations/fade-animations';
 
+import * as NgrxSelector_SHA from '../../ngrx-store/shared-ngrx-store/shared.selectors';
+import { InitialSharedStateTypes } from '../../ngrx-store/shared-ngrx-store/shared.initial';
+
 import { SuspenseService } from '../../services/suspense.service';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -41,7 +44,9 @@ import { SuspenseService } from '../../services/suspense.service';
 })
 export class LoadingSuspenseCardComponent {
 
-    public _suspenseLoading$: Observable<boolean> = this._store.select(getSuspenseLoading);
+    public _suspenseLoading$: Observable<boolean> = this._store.select(NgrxSelector_SHA.sel_suspenseLoading);
+
+    //------------------------------------------------------------------------------------------------------------------
 
     constructor(
         private _store: Store<InitialSharedStateTypes>,

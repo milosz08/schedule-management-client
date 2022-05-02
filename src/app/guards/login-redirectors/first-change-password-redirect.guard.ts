@@ -17,14 +17,16 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { map, Observable } from 'rxjs';
 
-import { Store } from '@ngrx/store';
-import { AppGlobalState } from '../../ngrx-store/combine-reducers';
-import { FirstChangePasswordStorageService } from '../../services/first-change-password-storage.service';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { FirstChangePasswordStorageService } from '../../modules/auth-module/services/first-change-password-storage.service';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Redirektor przekierowujący na stronę główną w przypadku próby odwołania się do widoku zmiany pierwszego
@@ -36,14 +38,16 @@ import { FirstChangePasswordStorageService } from '../../services/first-change-p
 })
 export class FirstChangePasswordRedirectGuard implements CanActivate {
 
-    constructor(
+    public constructor(
         private _router: Router,
-        private _store: Store<AppGlobalState>,
         private _storageService: FirstChangePasswordStorageService,
+        private _store: Store<SessionReducerType>,
     ) {
     };
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    //------------------------------------------------------------------------------------------------------------------
+
+    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
         return this._store.pipe(map(({ sessionReducer }) => {
             if (sessionReducer.userData) {
                 const ifDisabled = this._storageService

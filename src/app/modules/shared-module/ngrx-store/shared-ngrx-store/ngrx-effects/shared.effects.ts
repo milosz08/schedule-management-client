@@ -19,12 +19,14 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { setSuspenseLoader } from '../shared.actions';
-import { AppGlobalState } from '../../combine-reducers';
+import { tap } from 'rxjs';
+
+import * as NgrxAction_SHA from '../shared.actions';
+import { SharedReducerType } from '../shared.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis efektów dla obsługi dziedziczonego ngrx stora (dla całej aplikacji).
@@ -33,9 +35,9 @@ import { AppGlobalState } from '../../combine-reducers';
 @Injectable()
 export class SharedEffects {
 
-    constructor(
+    public constructor(
         private _actions$: Actions,
-        private _store$: Store<AppGlobalState>,
+        private _store: Store<SharedReducerType>,
     ) {
     };
 
@@ -47,7 +49,7 @@ export class SharedEffects {
      */
     public disablePageScrollOnSuspense$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(setSuspenseLoader),
+            ofType(NgrxAction_SHA.__setSuspenseLoader),
             tap(action => {
                 if (action.status) {
                     document.body.classList.add('app--disable-scroll');

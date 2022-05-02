@@ -20,7 +20,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { Store } from '@ngrx/store';
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent uniwersalny odpowiadający za renderowania inputa typu password z możliwością zmiany
@@ -30,7 +30,7 @@ import { Store } from '@ngrx/store';
 @Component({
     selector: 'app-text-input-password',
     templateUrl: './text-input-password.component.html',
-    styleUrls: [ ],
+    styleUrls: [],
 })
 export class TextInputPasswordComponent {
 
@@ -43,13 +43,15 @@ export class TextInputPasswordComponent {
     public _inputPlaceholder: string = '';
 
     @Output()
-    public _clearFormMessage: EventEmitter<Store> = new EventEmitter<Store>();
+    public _clearFormMessage: EventEmitter<void> = new EventEmitter<void>();
 
     @Input()
     public _formGroup?: FormGroup;
 
     @Input()
     public _ifLightTheme?: boolean = true;
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public handleChangePasswordVisibility(): void {
         if (this._formGroup!.getRawValue()[this._formControlName] !== '') {

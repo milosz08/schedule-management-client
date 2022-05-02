@@ -17,14 +17,16 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { map, Observable } from 'rxjs';
 
-import { Store } from '@ngrx/store';
-import { AppGlobalState } from '../../ngrx-store/combine-reducers';
-import { getIfUserNotLogged } from '../../ngrx-store/session-ngrx-store/session.selectors';
+import * as NgrxSelector_SES from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Redirektor przekierowujący na stronę panel systemu zarządzania w przypadku próby odwołania się do widoku
@@ -36,13 +38,13 @@ import { getIfUserNotLogged } from '../../ngrx-store/session-ngrx-store/session.
 })
 export class LoginRedirectGuard implements CanActivate {
 
-    private readonly _ifNotLogged$: Observable<boolean> = this._store.select(getIfUserNotLogged);
+    private readonly _ifNotLogged$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserNotLogged);
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _router: Router,
-        private _store: Store<AppGlobalState>
+        private _store: Store<SessionReducerType>
     ) {
     };
 

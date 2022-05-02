@@ -20,11 +20,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AppGlobalState } from './ngrx-store/combine-reducers';
-import { loadAllAccounts, userAutoLogin } from './ngrx-store/session-ngrx-store/session.actions';
+import * as NgrxAction_SES from './modules/shared-module/ngrx-store/session-ngrx-store/session.actions';
+import { SessionReducerType } from './modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
-import { AuthService } from './services/auth.service';
-import { SessionService } from './services/session.service';
+import { AuthService } from './modules/shared-module/services/auth.service';
+import { SessionService } from './modules/shared-module/services/session.service';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent główny (automatyczne logowanie, uruchamia sekwencerów mierzenia czasu sesji użytkownika).
@@ -37,16 +39,15 @@ import { SessionService } from './services/session.service';
 export class AppComponent implements OnInit {
 
     public constructor(
-        private _store: Store<AppGlobalState>,
         private _authService: AuthService,
+        private _store: Store<SessionReducerType>,
         private _sequencerService: SessionService,
-        ) {
+    ) {
     };
 
     public ngOnInit(): void {
-        this._store.dispatch(userAutoLogin());      // automatyczne logowanie
-        this._store.dispatch(loadAllAccounts());    // automatyczne ładowanie zapisanych kont
-        this._sequencerService.refreshSession();    // odświeżenie sesji
+        this._store.dispatch(NgrxAction_SES.__autoLogin());   // automatyczne logowanie
+        this._sequencerService.refreshSession();              // odświeżenie sesji
     };
 
     @HostListener('document:click', ['$event'])

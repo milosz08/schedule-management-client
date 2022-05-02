@@ -21,11 +21,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
-import { getLogoutModalVisibility, } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-import { userLogoutModalSetVisibility } from '../../../../ngrx-store/session-ngrx-store/session.actions';
-
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
+
+import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
+import * as NgrxSelector_MOD from '../../ngrx-store/modals-ngrx-store/modals.selectors';
+import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy wciścięciu
@@ -35,12 +37,14 @@ import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 @Component({
     selector: 'app-logout-modal',
     templateUrl: './logout-modal.component.html',
-    styleUrls: [ ],
-    animations: [ fadeInOutAnimation ]
+    styleUrls: [],
+    animations: [ fadeInOutAnimation ],
 })
 export class LogoutModalComponent {
 
-    public _modalVisibility$ = this._store.select(getLogoutModalVisibility);
+    public _modalVisibility$ = this._store.select(NgrxSelector_MOD.sel_logoutModalVisibility);
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _router: Router,
@@ -51,7 +55,7 @@ export class LogoutModalComponent {
     //------------------------------------------------------------------------------------------------------------------
 
     public handleCloseModal(): void {
-        this._store.dispatch(userLogoutModalSetVisibility({ modalVisibility: false }));
+        this._store.dispatch(NgrxAction_MOD.__logoutModalSetVisibility({ modalVisibility: false }));
     };
 
     public handleCloseModalAndLoginAgain(): void {

@@ -23,8 +23,10 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
 
-import * as NgrxSelector from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
+import * as NgrxSelector_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
+import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent renderujący widok avataru użytkownika. Jeśli takowy nie znajduje się w storze, wygeneruje
@@ -39,9 +41,9 @@ import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-st
 })
 export class UserImageComponent implements OnInit, OnDestroy {
 
-    public _ifUserNotLogged$: Observable<boolean> = this._store.select(NgrxSelector.getIfUserNotLogged);
-    public _ifUserHasImage$: Observable<boolean> = this._store.select(NgrxSelector.getIfUserHasImage);
-    public _userInitials$: Observable<string> = this._store.select(NgrxSelector.getUserInitials);
+    public _ifUserNotLogged$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserNotLogged);
+    public _ifUserHasImage$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserHasImage);
+    public _userInitials$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userInitials);
 
     private _storeSubscription: Subscription | undefined;
     private _imageURL: string = '';
@@ -58,7 +60,7 @@ export class UserImageComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this._storeSubscription = this._store
-            .select(NgrxSelector.getUserImageURL)
+            .select(NgrxSelector_SES.sel_userImageURL)
             .subscribe(imageURL => this._imageURL = imageURL);
     };
 

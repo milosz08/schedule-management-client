@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: first-change-password.effects.ts
- * Last modified | Ostatnia modyfikacja: 30/04/2022, 23:33
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 16:35
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,19 +19,22 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 
-import { Store } from '@ngrx/store';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import * as NgrxAction from '../first-change-password.actions';
+import * as NgrxAction_SHA from '../../../../shared-module/ngrx-store/shared-ngrx-store/shared.actions';
+import * as NgrxAction_SES from '../../../../shared-module/ngrx-store/session-ngrx-store/session.actions';
 
-import * as ReducerAction from '../session.actions';
-import { SESSION_REDUCER } from '../session.selectors';
-import { AppGlobalState } from '../../combine-reducers';
+import { SESSION_REDUCER, SessionReducerType } from '../../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../../shared-module/services/auth.service';
+import { FirstChangePasswordService } from '../../../services/first-change-password.service';
 import { FirstChangePasswordStorageService } from '../../../services/first-change-password-storage.service';
-import { setSuspenseLoader } from '../../shared-ngrx-store/shared.actions';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Klasa efektów odpowiedzialna za obsługę zmiany początkowego hasła wygenerowanego przez system.
@@ -44,8 +47,9 @@ export class FirstChangePasswordEffects {
         private _router: Router,
         private _actions$: Actions,
         private _authService: AuthService,
-        private _store: Store<AppGlobalState>,
+        private _store: Store<SessionReducerType>,
         private _storageService: FirstChangePasswordStorageService,
+        private _firstChangePasswordService: FirstChangePasswordService,
     ) {
     };
 
@@ -53,11 +57,11 @@ export class FirstChangePasswordEffects {
 
     /**
      * Efekt uruchamiający procedurę przekierowania na stronę umożliwiająca zmianę domyślnego hasła. Następuje to
-     * tylko wtedy, gdy użytkownik jeszcze nie zmienił hasłą, bądź niezablokował tej strony ręcznie.
+     * tylko wtedy, gdy użytkownik jeszcze nie zmienił hasła, bądź niezablokował tej strony ręcznie.
      */
     public userSuccesedLoginRedirectToChangePassword$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userSuccessLogin),
+            ofType(NgrxAction_SES.__successLogin),
             withLatestFrom(this._store.select(SESSION_REDUCER)),
             tap(([ _, state ]) => {
                 if (state.userData) {
@@ -79,7 +83,7 @@ export class FirstChangePasswordEffects {
      */
     public userChangePasswordPageVisibility$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userToggleChangePasswordPageVisible),
+            ofType(NgrxAction.__toggleChangePasswordPageVisible),
             withLatestFrom(this._store.select(SESSION_REDUCER)),
             tap(([ action, state ]) => {
                 if (state.userData) {
@@ -101,26 +105,26 @@ export class FirstChangePasswordEffects {
      */
     public userChangeDefaultPassword$ = createEffect(() => {
         return this._actions$.pipe(
-            ofType(ReducerAction.userChangeDefaultPassword),
+            ofType(NgrxAction.__changeDefaultPassword),
             withLatestFrom(this._store.select(SESSION_REDUCER)),
             mergeMap(([ action, state ]) => {
-                return this._authService
+                return this._firstChangePasswordService
                     .userChangeDefaultPassword(state.userData!.dictionaryHash, action.passwordsPayload)
                     .pipe(
                         map(({ message }) => {
-                            setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
+                            this._store.dispatch(NgrxAction_SHA.__setSuspenseLoaderDelay({ status: false }));
                             this._storageService.activeDisabledFirstChangePage(state.userData!.dictionaryHash);
                             setTimeout(() => {
-                                this._store.dispatch(ReducerAction.userResetChangeDefaultPasswordMessage());
-                                this._router.navigate([ "/" ]).then(r => r);
+                                this._store.dispatch(NgrxAction.__resetChangeDefaultPasswordMessage());
+                                this._router.navigate([ '/' ]).then(r => r);
                             }, 5000);
-                            return ReducerAction.userAfterChangeDefaultPassword({
+                            return NgrxAction.__afterChangeDefaultPassword({
                                 message: `${message} Przekierowanie...`,
                             });
                         }),
                         catchError(({ error }) => {
-                            setTimeout(() => this._store.dispatch(setSuspenseLoader({ status: false })), 1000);
-                            return of(ReducerAction.userAfterChangeDefaultPassword({ message: error.message }));
+                            this._store.dispatch(NgrxAction_SHA.__setSuspenseLoaderDelay({ status: false }));
+                            return of(NgrxAction.__afterChangeDefaultPassword({ message: error.message }));
                         }),
                     );
             }),

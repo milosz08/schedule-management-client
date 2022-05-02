@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: shared.actions.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:13
+ * File name | Nazwa pliku: first-change-password.selectors.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:10
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,13 +17,21 @@
  * Obiektowe".
  */
 
-import { createAction, props } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-export const SET_SUSPENSE_LOADER = '[SHARED] SET_SUSPENSE_LOADER';
+import { InitialFirstChangePasswordStateTypes } from './first-change-password.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const setSuspenseLoader = createAction(
-    SET_SUSPENSE_LOADER,
-    props<{ status: boolean }>()
+export const FIRST_CHANGE_PASSWORD_REDUCER = 'firstChangePasswordReducer' as const;
+const getFirstChangePasswordState =
+    createFeatureSelector<InitialFirstChangePasswordStateTypes>(FIRST_CHANGE_PASSWORD_REDUCER);
+
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
+    createSelector(getFirstChangePasswordState, payload);
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const sel_initialChangePasswordMessage = selectorWithInjectedStore(
+    state => state.initialChangePasswordMessage,
 );

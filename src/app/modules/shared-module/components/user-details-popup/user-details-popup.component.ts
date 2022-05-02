@@ -22,9 +22,12 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import * as NgrxAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
-import * as NgrxSelector from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
+import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
+import * as NgrxAction_SES from '../../ngrx-store/session-ngrx-store/session.actions';
+import * as NgrxSelector_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
+import { SessionReducerType } from '../../ngrx-store/session-ngrx-store/session.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent odpowiadający za renderowanie widoku okna z informacją o użytkowniku (w
@@ -38,21 +41,23 @@ import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-st
 })
 export class UserDetailsPopupComponent {
 
-    public _sessionLeftTime$: Observable<number> = this._store.select(NgrxSelector.getUserSessionCurrentTime);
-    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(NgrxSelector.getSessionSoonLogout);
-    public _userNameAndSurname$: Observable<string> = this._store.select(NgrxSelector.getUserHeaderName);
-    public _userAuthLevel$: Observable<string> = this._store.select(NgrxSelector.getUserAuthLevel);
-    public _userLogin$: Observable<string> = this._store.select(NgrxSelector.getUserLogin);
+    public _sessionLeftTime$: Observable<number> = this._store.select(NgrxSelector_SES.sel_userSessionCurrentTime);
+    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_sessionSoonLogout);
+    public _userNameAndSurname$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userHeaderName);
+    public _userAuthLevel$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userAuthLevel);
+    public _userLogin$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userLogin);
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _store: Store<InitialSessionStateTypes>,
+        private _store: Store<SessionReducerType>,
     ) {
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     public handleUserLogout(): void {
-        this._store.dispatch(NgrxAction.userLogout({ ifRedirectToRoot: true }));
-        this._store.dispatch(NgrxAction.userLogoutModalSetVisibility({ modalVisibility: true }));
+        this._store.dispatch(NgrxAction_SES.__logout({ ifRedirectToRoot: true }));
+        this._store.dispatch(NgrxAction_MOD.__logoutModalSetVisibility({ modalVisibility: true }));
     };
 }

@@ -22,11 +22,10 @@ import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
 
 import { Observable } from 'rxjs';
 
-import { AppGlobalState } from '../ngrx-store/combine-reducers';
-import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
+import { AuthResponseDataModel } from '../models/auth-response-data.model';
 
-import { AuthService } from '../services/auth.service';
-import { BrowserStorageService } from '../services/browser-storage.service';
+import { AuthService } from '../modules/shared-module/services/auth.service';
+import { BrowserStorageService } from '../modules/shared-module/services/browser-storage.service';
 
 /**
  * Interceptor dodający do nagłówka każdego zapytania token JWT pobierany z local storage
@@ -39,7 +38,6 @@ export class JwtTokenInterceptor implements HttpInterceptor {
 
     public constructor(
         private _authService: AuthService,
-        private _store: Store<AppGlobalState>,
         private _storage: BrowserStorageService,
     ) {
     };

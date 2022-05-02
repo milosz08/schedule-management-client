@@ -22,17 +22,38 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
 import { NotFoundPageComponent } from './pages/not-found-page/not-found.component';
 
 import { UserImageComponent } from './components/user-image/user-image.component';
+import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
+import { EndSessionModalComponent } from './components/end-session-modal/end-session-modal.component';
 import { UserDetailsPopupComponent } from './components/user-details-popup/user-details-popup.component';
 import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
 import { UserHeaderDataWithPopupComponent } from './components/user-header-data-with-popup/user-header-data-with-popup.component';
 
-import { SuspenseService } from './services/suspense.service';
-import { EndSessionModalComponent } from './components/end-session-modal/end-session-modal.component';
-import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
+import { modalsReducer } from './ngrx-store/modals-ngrx-store/modals.reducer';
+import { MODALS_REDUCER } from './ngrx-store/modals-ngrx-store/modals.selectors';
+import { sessionReducer } from './ngrx-store/session-ngrx-store/session.reducer';
+import { SESSION_REDUCER } from './ngrx-store/session-ngrx-store/session.selectors';
+import { sharedReducer } from './ngrx-store/shared-ngrx-store/shared.reducer';
+import { SHARED_REDUCER } from './ngrx-store/shared-ngrx-store/shared.selectors';
 
+import { AuthService } from './services/auth.service';
+import { SessionService } from './services/session.service';
+import { SuspenseService } from './services/suspense.service';
+import { BrowserStorageService } from './services/browser-storage.service';
+import { ImageManipulationService } from './services/image-manipulation.service';
+import { EndSessionModalSequencerService } from './services/end-session-modal-sequencer.service';
+
+import { SharedEffects } from './ngrx-store/shared-ngrx-store/ngrx-effects/shared.effects';
+import { JwtSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/jwt-session.effects';
+import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
+import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-helpers.effects';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     declarations: [
@@ -40,19 +61,35 @@ import { LogoutModalComponent } from './components/logout-modal/logout-modal.com
         NotFoundPageComponent,
         // komponenty
         UserImageComponent,
+        LogoutModalComponent,
+        EndSessionModalComponent,
         UserDetailsPopupComponent,
         LoadingSuspenseCardComponent,
         UserHeaderDataWithPopupComponent,
-        EndSessionModalComponent,
-        LogoutModalComponent,
     ],
     imports: [
         CommonModule,
         RouterModule,
         MatIconModule,
+        // ngrx story
+        StoreModule.forFeature(MODALS_REDUCER, modalsReducer),
+        StoreModule.forFeature(SHARED_REDUCER, sharedReducer),
+        StoreModule.forFeature(SESSION_REDUCER, sessionReducer),
+        // ngrx effects
+        EffectsModule.forFeature([
+            SharedEffects,
+            JwtSessionEffects,
+            LoginSessionEffects,
+            LoginHelpersEffects,
+        ]),
     ],
     providers: [
+        AuthService,
+        SessionService,
         SuspenseService,
+        BrowserStorageService,
+        ImageManipulationService,
+        EndSessionModalSequencerService,
     ],
     exports: [
         LoadingSuspenseCardComponent,

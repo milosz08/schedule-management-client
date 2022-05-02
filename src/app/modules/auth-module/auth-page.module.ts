@@ -20,37 +20,56 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AuthPageComponent } from './auth-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { TemplatesModule } from '../templates-module/templates.module';
 
+import { AuthPageComponent } from './auth-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
-
-import { LastLoginsComponent } from './components/last-logins/last-logins.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { AuthFooterComponent } from './components/auth-footer/auth-footer.component';
-
-import { AuthService } from '../../services/auth.service';
-import { BrowserStorageService } from '../../services/browser-storage.service';
-import { TemplatesModule } from '../templates-module/templates.module';
+import { SendTokenViaEmailPageComponent } from './pages/send-token-via-email-page/send-token-via-email-page.component';
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
+
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LastLoginsComponent } from './components/last-logins/last-logins.component';
+import { AuthFooterComponent } from './components/auth-footer/auth-footer.component';
+import { InsertTokenFormComponent } from './components/insert-token-form/insert-token-form.component';
+import { SendTokenViaEmailFormComponent } from './components/send-token-via-email-form/send-token-via-email-form.component';
 import { FirstChangePasswordFormComponent } from './components/first-change-password-form/first-change-password-form.component';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { rememberUserReducer } from './ngrx-store/remember-user-ngrx-store/remember-user.reducer';
+import { REMEMBER_USER_REDUCER } from './ngrx-store/remember-user-ngrx-store/remember-user.selectors';
+import { firstChangePasswordReducer } from './ngrx-store/first-change-password-ngrx-store/first-change-password.reducer';
+import { FIRST_CHANGE_PASSWORD_REDUCER } from './ngrx-store/first-change-password-ngrx-store/first-change-password.selectors';
+import { resetPasswordReducer } from './ngrx-store/reset-password-ngrx-store/reset-password.reducer';
+import { RESET_PASSWORD_REDUCER } from './ngrx-store/reset-password-ngrx-store/reset-password.selectors';
+
+import { SavedUsersEffects } from './ngrx-store/remember-user-ngrx-store/ngrx-effects/saved-users.effects';
+import { ResetPasswordEffects } from './ngrx-store/reset-password-ngrx-store/ngrx-effects/reset-password.effects';
+import { FirstChangePasswordEffects } from './ngrx-store/first-change-password-ngrx-store/ngrx-effects/first-change-password.effects';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     declarations: [
+        // strony
         AuthPageComponent,
         LoginPageComponent,
         ResetPasswordPageComponent,
-        LastLoginsComponent,
-        LoginFormComponent,
-        AuthFooterComponent,
+        SendTokenViaEmailPageComponent,
         FirstChangePasswordPageComponent,
-        FirstChangePasswordFormComponent
+        // widoki
+        LoginFormComponent,
+        LastLoginsComponent,
+        AuthFooterComponent,
+        InsertTokenFormComponent,
+        SendTokenViaEmailFormComponent,
+        FirstChangePasswordFormComponent,
     ],
     imports: [
         CommonModule,
@@ -59,11 +78,18 @@ import { FirstChangePasswordFormComponent } from './components/first-change-pass
         ReactiveFormsModule,
         MatIconModule,
         TemplatesModule,
+        // ngrx store
+        StoreModule.forFeature(REMEMBER_USER_REDUCER, rememberUserReducer),
+        StoreModule.forFeature(RESET_PASSWORD_REDUCER, resetPasswordReducer),
+        StoreModule.forFeature(FIRST_CHANGE_PASSWORD_REDUCER, firstChangePasswordReducer),
+        // ngrx effects
+        EffectsModule.forFeature([
+            SavedUsersEffects,
+            ResetPasswordEffects,
+            FirstChangePasswordEffects,
+        ]),
     ],
-    providers: [
-        AuthService,
-        BrowserStorageService,
-    ],
+    providers: [],
     exports: []
 })
 export class AuthPageModule {}

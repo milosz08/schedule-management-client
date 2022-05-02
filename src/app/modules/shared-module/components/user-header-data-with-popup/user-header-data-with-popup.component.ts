@@ -25,9 +25,11 @@ import { Observable, Subscription } from 'rxjs';
 
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
-import { AppGlobalState } from '../../../../ngrx-store/combine-reducers';
-import * as NgrxSelector from '../../../../ngrx-store/session-ngrx-store/session.selectors';
-import { AuthResponseDataModel } from '../../../../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
+import { AuthResponseDataModel } from '../../../../models/auth-response-data.model';
+import * as NgrxSelector_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
+import { SessionReducerType } from '../../ngrx-store/session-ngrx-store/session.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent odpowiadający za renderowanie widoku reprezentującego przycisk z danymi użytkownika (wraz z obsługiwaną
@@ -42,10 +44,10 @@ import { AuthResponseDataModel } from '../../../../ngrx-store/session-ngrx-store
 })
 export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
 
-    public _userDetailsButtonTitle$: Observable<string> = this._store.select(NgrxSelector.getUserDetailsPopupButtonTitle);
-    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(NgrxSelector.getSessionSoonLogout);
-    public _sessionLeftTime$: Observable<number> = this._store.select(NgrxSelector.getUserSessionCurrentTime);
-    public _userHeaderName$: Observable<string> = this._store.select(NgrxSelector.getUserHeaderName);
+    public _userDetailsButtonTitle$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userDetailsPopupButtonTitle);
+    public _ifSessionSoonLogout$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_sessionSoonLogout);
+    public _sessionLeftTime$: Observable<number> = this._store.select(NgrxSelector_SES.sel_userSessionCurrentTime);
+    public _userHeaderName$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userHeaderName);
 
     private _storeSubscription: Subscription | undefined;
     public _userData: AuthResponseDataModel | null = null;
@@ -55,7 +57,7 @@ export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
 
     public constructor(
         private _router: Router,
-        private _store: Store<AppGlobalState>,
+        private _store: Store<SessionReducerType>,
     ) {
     };
 

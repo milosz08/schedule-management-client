@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: shared.selectors.ts
- * Last modified | Ostatnia modyfikacja: 24/04/2022, 19:03
+ * File name | Nazwa pliku: first-change-password.initial.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:10
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,19 +17,12 @@
  * Obiektowe".
  */
 
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { InitialSharedStateTypes } from './shared.initial';
+export interface InitialFirstChangePasswordStateTypes {
+    initialChangePasswordMessage: string;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const SHARED_REDUCER = 'sharedReducer' as const;
-const getSharedState = createFeatureSelector<InitialSharedStateTypes>(SHARED_REDUCER);
-
-const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
-    createSelector(getSharedState, payload);
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export const getSuspenseLoading = selectorWithInjectedStore(
-    state => state.suspenseLoading
-);
+export const initialFirstChangePasswordState: InitialFirstChangePasswordStateTypes = {
+    initialChangePasswordMessage: '',
+};

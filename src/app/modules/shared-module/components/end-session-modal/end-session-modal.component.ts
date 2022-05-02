@@ -23,6 +23,12 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
+
+import * as NgrxAction_SES from '../../ngrx-store/session-ngrx-store/session.actions';
+import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
+import * as NgrxSelector_MOD from '../../ngrx-store/modals-ngrx-store/modals.selectors';
+import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
+
 import { EndSessionModalSequencerService } from '../../services/end-session-modal-sequencer.service';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -34,12 +40,12 @@ import { EndSessionModalSequencerService } from '../../services/end-session-moda
 @Component({
     selector: 'app-end-session-modal',
     templateUrl: './end-session-modal.component.html',
-    styleUrls: [ ],
-    animations: [ fadeInOutAnimation ]
+    styleUrls: [],
+    animations: [ fadeInOutAnimation ],
 })
 export class EndSessionModalComponent implements OnDestroy {
 
-    public _modalVisibility$ = this._store.select(getSessionEndModalVisibility);
+    public _modalVisibility$ = this._store.select(NgrxSelector_MOD.sel_sessionEndModalVisibility);
     public _sequencerMaxInactivity = this._endSessionModalSequencerService.__sequencerMaxInactivityInSeconds;
     public _sequencerCurrValue$ = this._endSessionModalSequencerService._sequencerCurrentValue$;
 
@@ -66,13 +72,13 @@ export class EndSessionModalComponent implements OnDestroy {
     };
 
     public handleCloseModalAndRenewSession(): void {
-        this._store.dispatch(NgrxAction.userRenewSession());
+        this._store.dispatch(NgrxAction_SES.__renewSession());
         this._endSessionModalSequencerService.sequencerForceStop();
     };
 
     public handleCloseModalAndLogoutUser(): void {
-        this._store.dispatch(NgrxAction.userLogout({ ifRedirectToRoot: true }));
-        this._store.dispatch(NgrxAction.userSessionSetModalVisibility({ modalVisibility: false }));
+        this._store.dispatch(NgrxAction_SES.__logout({ ifRedirectToRoot: true }));
+        this._store.dispatch(NgrxAction_MOD.__sessionSetModalVisibility({ modalVisibility: false }));
         this._endSessionModalSequencerService.sequencerForceStop();
     };
 }

@@ -20,13 +20,16 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AppGlobalState } from '../ngrx-store/combine-reducers';
-import { saveSingleAccount } from '../ngrx-store/session-ngrx-store/session.actions';
-import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
-import { RememberAccountModel } from '../ngrx-store/session-ngrx-store/ngrx-models/remember-account.model';
+import * as NgrxAction_REM from '../ngrx-store/remember-user-ngrx-store/remember-user.actions';
+import { RememberUserReducerType } from '../ngrx-store/remember-user-ngrx-store/remember-user.selectors';
 
-import { ImageManipulationService } from './image-manipulation.service';
-import { BrowserStorageService } from './browser-storage.service';
+import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
+import { RememberAccountModel } from '../../../models/remember-account.model';
+
+import { BrowserStorageService } from '../../shared-module/services/browser-storage.service';
+import { ImageManipulationService } from '../../shared-module/services/image-manipulation.service';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis odpowiadający za mechanizm pamiętania ostatnio zalogowanych użytkowników w
@@ -34,7 +37,7 @@ import { BrowserStorageService } from './browser-storage.service';
  */
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class RememberUserStorageService {
 
@@ -43,9 +46,9 @@ export class RememberUserStorageService {
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _store: Store<AppGlobalState>,
         private _storageService: BrowserStorageService,
         private _imageManipulationService: ImageManipulationService,
+        private _store: Store<RememberUserReducerType>,
     ) {
     };
 
@@ -65,7 +68,7 @@ export class RememberUserStorageService {
                 this.saveFirstUserAccountWithImageInStorage(userDataMapped, imageUri);
             } else { // jeśli konto nie zawiera obrazka
                 localStorage.setItem(RememberUserStorageService.USER_REMEMBER_ACCOUNT, JSON.stringify([ userDataMapped ]));
-                this._store.dispatch(saveSingleAccount({ userAccount: userDataMapped }));
+                this._store.dispatch(NgrxAction_REM.__saveSingleAccount({ userAccount: userDataMapped }));
             }
         }
     };
@@ -120,7 +123,7 @@ export class RememberUserStorageService {
             userAccount.image = this._imageManipulationService.changeImageDimensions(image, 80);
             localStorage.setItem(RememberUserStorageService.USER_REMEMBER_ACCOUNT, JSON.stringify([ userAccount ]));
             userAccount.image = this._imageManipulationService.convertSingleImageFromBytesToUri(userAccount.image);
-            this._store.dispatch(saveSingleAccount({ userAccount }));
+            this._store.dispatch(NgrxAction_REM.__saveSingleAccount({ userAccount }));
         };
     };
 
@@ -146,12 +149,12 @@ export class RememberUserStorageService {
                     existingItemsAfterParse.push(newUserData);
                     this._storageService.updateLocalStorageContent(USER_REMEMBER_ACCOUNT, existingItemsAfterParse);
                     newUserData.image = this._imageManipulationService.convertSingleImageFromBytesToUri(newUserData.image);
-                    this._store.dispatch(saveSingleAccount({ userAccount: newUserData }));
+                    this._store.dispatch(NgrxAction_REM.__saveSingleAccount({ userAccount: newUserData }));
                 };
             } else { // jeśli konto nie zawiera obrazka
                 existingItemsAfterParse.push(newUserData);
                 this._storageService.updateLocalStorageContent(USER_REMEMBER_ACCOUNT, existingItemsAfterParse);
-                this._store.dispatch(saveSingleAccount({ userAccount: newUserData }));
+                this._store.dispatch(NgrxAction_REM.__saveSingleAccount({ userAccount: newUserData }));
             }
         }
     };

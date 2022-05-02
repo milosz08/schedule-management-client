@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: suspense.service.ts
- * Last modified | Ostatnia modyfikacja: 25/04/2022, 00:35
+ * File name | Nazwa pliku: first-change-password.service.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:16
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,39 +18,44 @@
  */
 
 import { Injectable } from '@angular/core';
-import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
 
-import * as NgrxAction_SHA from '../ngrx-store/shared-ngrx-store/shared.actions';
-import { SharedReducerType } from '../ngrx-store/shared-ngrx-store/shared.selectors';
+import { Observable } from 'rxjs';
+
+import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
+
+import { RequestFirstChangePasswordModel } from '../../../models/request-first-change-password.model';
+import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Serwis odpowiedzialny za planszę odpalaną przy leniwym ładowaniu kontenntu.
+ * Serwis obsługujący żądania HTTP dla efektów i reducerów odpowiadających za procedurę zmiany pierwszego hasła
+ * wygenerowanego przez system.
  */
 
-@Injectable()
-export class SuspenseService {
+@Injectable({
+    providedIn: 'root'
+})
+export class FirstChangePasswordService {
 
     public constructor(
-        private _router: Router,
-        private _store: Store<SharedReducerType>,
+        private _http: HttpClient,
+        private _endpoints: ApiConfigurerHelper,
     ) {
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Uruchamianie planszy leniwego ładowania przy każdym nowym wczytywaniem podstrony.
+     * Żądanie HTTP POST do API w celu zmiany domyślnego hasła (wygenerowanego przez system).
      */
-    public toggleSuspenseComponent(): void {
-        this._router.events.subscribe(event => {
-            if (event instanceof RouteConfigLoadStart) {
-                this._store.dispatch(NgrxAction_SHA.__setSuspenseLoader({ status: true }));
-            } else if (event instanceof RouteConfigLoadEnd) {
-                setTimeout(() => this._store.dispatch(NgrxAction_SHA.__setSuspenseLoader({ status: false })), 1000);
-            }
-        });
+    public userChangeDefaultPassword(
+        userId: string, passwords: RequestFirstChangePasswordModel,
+    ): Observable<ResponseServerMessageModel> {
+        return this._http.post<ResponseServerMessageModel>(
+            this._endpoints.CHANGE_DEFAULT_PASSWORD,
+            passwords, { params: { userId } }
+        );
     };
 }

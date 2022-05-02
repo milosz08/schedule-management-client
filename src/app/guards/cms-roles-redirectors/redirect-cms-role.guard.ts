@@ -18,10 +18,13 @@
  */
 
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { map, Observable } from 'rxjs';
 
-import { Store } from '@ngrx/store';
+import * as NgrxSelector_SHA from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { UserIdentityModel } from '../../models/user-identity.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -32,14 +35,16 @@ import { Store } from '@ngrx/store';
 
 export class RedirectCmsRoleGuard implements CanActivate {
 
-    private readonly _userIdentity$: Observable<UserIdentityModel> = this._store.select(getUserIdentity);
+    private readonly _userIdentity$: Observable<UserIdentityModel> = this._store
+        .select(NgrxSelector_SHA.sel_userIdentity);
+
     private readonly _userCurrentRole: UserIdentityModel;
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _router: Router,
-        private _store: Store<InitialSessionStateTypes>,
+        private _store: Store<SessionReducerType>,
         userCurrentRole: UserIdentityModel,
     ) {
         this._userCurrentRole = userCurrentRole;

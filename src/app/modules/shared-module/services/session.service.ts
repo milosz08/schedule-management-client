@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: session.service.ts
- * Last modified | Ostatnia modyfikacja: 29/04/2022, 16:03
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:17
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -22,34 +22,40 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subject, throttleTime } from 'rxjs';
 
-import { InitialSessionStateTypes } from '../ngrx-store/session-ngrx-store/session.initial';
-import { getTokenRefreshInSeconds } from '../ngrx-store/session-ngrx-store/session.selectors';
-import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
+import { ModalsReducerType } from '../ngrx-store/modals-ngrx-store/modals.selectors';
+import { SessionReducerType } from '../ngrx-store/session-ngrx-store/session.selectors';
+import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
 
-import {
-    userSessionSetModalVisibility, userSessionSetTime, userSetNewToken
-} from '../ngrx-store/session-ngrx-store/session.actions';
+import * as NgrxAction_MOD from '../ngrx-store/modals-ngrx-store/modals.actions';
+import * as NgrxAction_SES from '../ngrx-store/session-ngrx-store/session.actions';
+import * as NgrxSelector_SES from '../ngrx-store/session-ngrx-store/session.selectors';
 
 import { AuthService } from './auth.service';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+type CombinedReducers = SessionReducerType | ModalsReducerType;
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis odpowiedzialny za zarządzanie sesją użytkownika.
  */
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class SessionService {
 
     private subscriber$ = new Subject();
-    private tokenRefreshSeconds$: Observable<number> = this._store.select(getTokenRefreshInSeconds);
+    private tokenRefreshSeconds$: Observable<number> = this._store.select(NgrxSelector_SES.sel_tokenRefreshInSeconds);
 
     private _timeoutInterval?: number;
     private _jwtRefresherInterval?: number;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public constructor(
-        private _store: Store<InitialSessionStateTypes>,
         private _authService: AuthService,
+        private _store: Store<CombinedReducers>,
     ) {
     };
 
@@ -62,9 +68,9 @@ export class SessionService {
     public sessionStartInterval(tokenRefreshSeconds: number): void {
         let counting: number = tokenRefreshSeconds;
         const sequencer = (): void => {
-            this._store.dispatch(userSessionSetTime({ time: counting }));
+            this._store.dispatch(NgrxAction_SES.__sessionSetTime({ time: counting }));
             if (counting-- <= 0) {
-                this._store.dispatch(userSessionSetModalVisibility({ modalVisibility: true }));
+                this._store.dispatch(NgrxAction_MOD.__sessionSetModalVisibility({ modalVisibility: true }));
                 this.sessionEndInterval();
             }
         };
@@ -98,7 +104,7 @@ export class SessionService {
      */
     public refreshingJwtTokenIntervals(intervalSeconds: number, data: AuthResponseDataModel): void {
         this._jwtRefresherInterval = setInterval(() => {
-            this._store.dispatch(userSetNewToken({ data }));
+            this._store.dispatch(NgrxAction_SES.__setNewToken({ data }));
         }, intervalSeconds * 1000 - 1000);
     };
 

@@ -54,14 +54,8 @@ import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
         SharedModule,
         TemplatesModule,
         // Dodanie globalnego ngrx flux store + ngrx middleware effects
-        StoreModule.forRoot(combinedReducers),
-        EffectsModule.forRoot([
-            LoginSessionEffects,
-            JwtSessionEffects,
-            SavedUsersEffects,
-            FirstChangePasswordEffects,
-            SharedEffects,
-        ]),
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
         // Devtoolsy żeby można było używać Redux Extension w przeglądarce (tylko wersja deweloperska)
         StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     ],

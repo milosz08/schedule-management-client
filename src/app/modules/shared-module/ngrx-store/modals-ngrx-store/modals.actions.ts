@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-page.component.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 01:16
+ * File name | Nazwa pliku: modals.actions.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:35
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,31 +17,21 @@
  * Obiektowe".
  */
 
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import * as NgrxAction_REM from './ngrx-store/remember-user-ngrx-store/remember-user.actions';
-import { RememberUserReducerType } from './ngrx-store/remember-user-ngrx-store/remember-user.selectors';
+import { createAction, props } from '@ngrx/store';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Komponent inicjalizujący generowanie widoków ścieżek autentykacji użytkowników.
- */
+export const SET_MODAL_VISIBILITY = '[MODALS] SET END SESSION MODAL VISIBILITY';
+export const SET_LOGOUT_MODAL_VISIBILITY = '[MODALS] SET LOGOUT MODAL VISIBILITY';
 
-@Component({
-    selector: 'app-auth-page',
-    templateUrl: './auth-page.component.html',
-})
-export class AuthPageComponent implements OnInit {
+//----------------------------------------------------------------------------------------------------------------------
 
-    public constructor(
-       private _store: Store<RememberUserReducerType>,
-    ) {
-    };
+export const __sessionSetModalVisibility = createAction(
+    SET_MODAL_VISIBILITY,
+    props<{ modalVisibility: boolean }>(),
+);
 
-    // automatyczne ładowanie zapisanych kont
-    public ngOnInit(): void {
-        this._store.dispatch(NgrxAction_REM.__loadAllAccounts());
-    };
-}
+export const __logoutModalSetVisibility = createAction(
+    SET_LOGOUT_MODAL_VISIBILITY,
+    props<{ modalVisibility: boolean }>(),
+);

@@ -22,8 +22,10 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
-import { UserIdentityModel } from '../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { UserIdentityModel } from '../../models/user-identity.model';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
@@ -37,7 +39,7 @@ export class EditorRedirectGuard extends RedirectCmsRoleGuard {
 
     public constructor(
         router: Router,
-        store: Store<InitialSessionStateTypes>
+        store: Store<SessionReducerType>
     ) {
         super(router, store, UserIdentityModel.ADMINISTRATOR);
     };

@@ -19,12 +19,13 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Store } from '@ngrx/store';
 
 import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { UserIdentityModel } from '../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
-import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { UserIdentityModel } from '../../models/user-identity.model';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
@@ -36,9 +37,9 @@ import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/se
 })
 export class TeacherAndStudentRedirectGuard extends RedirectCmsRoleGuard {
 
-    constructor(
+    public constructor(
         router: Router,
-        store: Store<InitialSessionStateTypes>
+        store: Store<SessionReducerType>
     ) {
         super(router, store, UserIdentityModel.EDITOR);
     };

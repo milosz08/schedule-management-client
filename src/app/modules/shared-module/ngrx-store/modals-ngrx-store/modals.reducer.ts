@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: session.initial.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:49
+ * File name | Nazwa pliku: modals.reducer.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:35
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,34 +17,29 @@
  * Obiektowe".
  */
 
-import { AuthResponseDataModel } from './ngrx-models/auth-response-data.model';
-import { RememberAccountModel } from './ngrx-models/remember-account.model';
+import { createReducer, on } from '@ngrx/store';
 
-
-export interface InitialSessionStateTypes {
-    userData: AuthResponseDataModel | null;
-    errorMessage: string;
-    userImage: string;
-    sessionLeftTime: number;
-    sessionEndModalVisibility: boolean;
-    logoutModalVisibility: boolean;
-    ifSaveUserInLastLogin: boolean;
-    allSavedAccounts: Array<RememberAccountModel>;
-    autoFilledEmail: string;
-    initialChangePasswordMessage: string;
-}
+import * as NgrxAction from './modals.actions';
+import { initialModalsState } from './modals.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const initialSessionState: InitialSessionStateTypes = {
-    userData: null,
-    errorMessage: '',
-    userImage: '',
-    sessionLeftTime: 0,
-    sessionEndModalVisibility: false,
-    logoutModalVisibility: false,
-    ifSaveUserInLastLogin: true,
-    allSavedAccounts: [],
-    autoFilledEmail: '',
-    initialChangePasswordMessage: '',
-};
+const _modalsReducer = createReducer(
+    initialModalsState,
+    on(NgrxAction.__sessionSetModalVisibility, (state, action) => {
+        return { ...state,
+            sessionEndModalVisibility: action.modalVisibility,
+        };
+    }),
+    on(NgrxAction.__logoutModalSetVisibility, (state, action) => {
+        return { ...state,
+            logoutModalVisibility: action.modalVisibility,
+        };
+    }),
+);
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export function modalsReducer(state: any, action: any) {
+    return _modalsReducer(state, action);
+}

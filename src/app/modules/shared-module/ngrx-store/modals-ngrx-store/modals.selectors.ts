@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: shared.reducer.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:22
+ * File name | Nazwa pliku: modals.selectors.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:35
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,25 +17,27 @@
  * Obiektowe".
  */
 
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as ReducerAction from './shared.actions';
-import { initialSharedState } from './shared.initial';
+import { InitialModalsStateTypes } from './modals.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-const _sharedReducer = createReducer(
-    initialSharedState,
-    on(ReducerAction.setSuspenseLoader, (state, action) => {
-        const { status: suspenseLoading } = action;
-        return { ...state,
-            suspenseLoading,
-        };
-    }),
+export const MODALS_REDUCER = 'modalsReducer' as const;
+const getModalsState = createFeatureSelector<InitialModalsStateTypes>(MODALS_REDUCER);
+
+export type ModalsReducerType = { [MODALS_REDUCER]: InitialModalsStateTypes };
+
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
+    createSelector(getModalsState, payload)
 );
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export function sharedReducer(state: any, action: any) {
-    return _sharedReducer(state, action);
-}
+export const sel_sessionEndModalVisibility = selectorWithInjectedStore(
+    state => state.sessionEndModalVisibility && Boolean(state.userData),
+);
+
+export const sel_logoutModalVisibility = selectorWithInjectedStore(
+    state => state.logoutModalVisibility,
+);

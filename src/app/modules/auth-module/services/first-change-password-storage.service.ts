@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: first-change-password-storage.service.ts
- * Last modified | Ostatnia modyfikacja: 30/04/2022, 22:48
+ * Last modified | Ostatnia modyfikacja: 01/05/2022, 19:17
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,8 +19,10 @@
 
 import { Injectable } from '@angular/core';
 
-import { FirstChangePasswordDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/first-change-password-data.model';
-import { BrowserStorageService } from './browser-storage.service';
+import { BrowserStorageService } from '../../shared-module/services/browser-storage.service';
+import { FirstChangePasswordDataModel } from '../../../models/first-change-password-data.model';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis realizujący obsługę local storage dla zmiany oryginalnego hasła generowanego przez system.

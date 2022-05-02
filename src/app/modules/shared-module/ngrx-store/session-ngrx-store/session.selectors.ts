@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: session.selectors.ts
- * Last modified | Ostatnia modyfikacja: 24/04/2022, 19:43
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:42
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,29 +19,29 @@
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { MiscHelper } from '../../utils/misc.helper';
+import { MiscHelper } from '../../../../utils/misc.helper';
 
 import { InitialSessionStateTypes } from './session.initial';
-import { UserIdentityModel } from './ngrx-models/user-identity.model';
-import { SavedUsersEffects } from './ngrx-effects/saved-users.effects';
+import { UserIdentityModel } from '../../../../models/user-identity.model';
 
-/**
- * Plik przechowujący wszystkie selektory dla ngrx stora przechowującego informacje o stanie sesji użytkownika.
- */
+//----------------------------------------------------------------------------------------------------------------------
 
 export const SESSION_REDUCER = 'sessionReducer' as const;
 const getSessionState = createFeatureSelector<InitialSessionStateTypes>(SESSION_REDUCER);
 
-const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
-    createSelector(getSessionState, payload);
+export type SessionReducerType = { [SESSION_REDUCER]: InitialSessionStateTypes };
+
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
+    createSelector(getSessionState, payload)
+);
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const getUserDetailsPopupButtonTitle = createSelector(getSessionState, state => (
+export const sel_userDetailsPopupButtonTitle = createSelector(getSessionState, state => (
     Boolean(state.userData) ? 'Otwórz panel użytkownika' : 'Przejdź do logowania'
 ));
 
-export const getUserInitials = selectorWithInjectedStore(state => {
+export const sel_userInitials = selectorWithInjectedStore(state => {
     if (state.userData) {
         const [ name, surname ] = state.userData.nameWithSurname.split(' ');
         return name.charAt(0) + surname.charAt(0);
@@ -49,73 +49,45 @@ export const getUserInitials = selectorWithInjectedStore(state => {
     return '';
 });
 
-export const getUserAuthLevel = selectorWithInjectedStore(state => {
+export const sel_userAuthLevel = selectorWithInjectedStore(state => {
     return MiscHelper.convertEngToPlUserRole(state.userData?.role);
 });
 
-export const getUserData = selectorWithInjectedStore(
-    state => state.userData
-);
-
-export const getUserHeaderName = selectorWithInjectedStore(
+export const sel_userHeaderName = selectorWithInjectedStore(
     state => state.userData?.nameWithSurname || 'Zaloguj'
 );
 
-export const getUserLogin = selectorWithInjectedStore(
+export const sel_userLogin = selectorWithInjectedStore(
     state => state.userData?.login || ''
 );
 
-export const getIfUserNotLogged = selectorWithInjectedStore(
+export const sel_ifUserNotLogged = selectorWithInjectedStore(
     state => !Boolean(state.userData)
 );
 
-export const getIfUserHasImage = selectorWithInjectedStore(
+export const sel_ifUserHasImage = selectorWithInjectedStore(
     state => Boolean(state.userData?.hasPicture)
 );
 
-export const getUserImageURL = selectorWithInjectedStore(
+export const sel_userImageURL = selectorWithInjectedStore(
     state => state.userImage);
 
-export const getLoginError = selectorWithInjectedStore(
+export const sel_loginError = selectorWithInjectedStore(
     state => state.errorMessage
 );
 
-export const getUserIdentity = selectorWithInjectedStore(
+export const sel_userIdentity = selectorWithInjectedStore(
     state => state.userData ? state.userData.role : UserIdentityModel.UNDEFINED,
 );
 
-export const getSessionEndModalVisibility = selectorWithInjectedStore(
-    state => state.sessionEndModalVisibility && Boolean(state.userData),
-);
-
-export const getTokenRefreshInSeconds = selectorWithInjectedStore(
+export const sel_tokenRefreshInSeconds = selectorWithInjectedStore(
     state => state.userData ? !state.sessionEndModalVisibility ? state.userData.tokenRefreshInSeconds : 0 : false,
 );
 
-export const getLogoutModalVisibility = selectorWithInjectedStore(
-    state => state.logoutModalVisibility,
-);
-
-export const getUserSessionCurrentTime = selectorWithInjectedStore(
+export const sel_userSessionCurrentTime = selectorWithInjectedStore(
     state => state.sessionLeftTime * 1000,
 );
 
-export const getSessionSoonLogout = selectorWithInjectedStore(
+export const sel_sessionSoonLogout = selectorWithInjectedStore(
     state => state.sessionLeftTime < 15,
-);
-
-export const getAllSavedAccounts = selectorWithInjectedStore(
-    state => state.allSavedAccounts,
-);
-
-export const disableAddingNewAccountsToSaved = selectorWithInjectedStore(
-    state => state.allSavedAccounts.length > SavedUsersEffects.SAVED_MAX_USERS,
-);
-
-export const getAutoFilledEmail = selectorWithInjectedStore(
-    state => state.autoFilledEmail,
-);
-
-export const getInitialChangePasswordMessage = selectorWithInjectedStore(
-    state => state.initialChangePasswordMessage,
 );
