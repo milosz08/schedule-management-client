@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 15:52
+ * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:11
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,9 +19,10 @@
 
 import { Component } from '@angular/core';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 @Component({
-    selector: 'app-admin-panel',
+    selector: 'app-cms-page',
     templateUrl: './cms-page.component.html',
 })
 export class CmsPageComponent {}

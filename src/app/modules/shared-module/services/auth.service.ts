@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: auth.service.ts
- * Last modified | Ostatnia modyfikacja: 25/04/2022, 01:01
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:11
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -20,35 +20,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
-import { AppGlobalState } from '../ngrx-store/combine-reducers';
-import { BrowserStorageService } from './browser-storage.service';
-import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
-import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
+import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
+import { RefreshTokenResposneModel } from '../../../models/refresh-token.model';
 
-import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
-
-import {
-    RequestFirstChangePasswordModel
-} from '../ngrx-store/session-ngrx-store/ngrx-models/request-first-change-password.model';
-
-import { ResponseServerMessageModel } from '../ngrx-store/session-ngrx-store/ngrx-models/response-server-message.model';
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis odpowiadający za łączenie się z api w celu autoryzacji użytkownika.
  */
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
     public constructor(
         private _http: HttpClient,
-        private _store: Store<AppGlobalState>,
-        private _storageService: BrowserStorageService,
         private _endpoints: ApiConfigurerHelper,
     ) {
     };
@@ -88,18 +76,4 @@ export class AuthService {
             { responseType: 'blob', headers: { Authorization: `Bearer ${jwt}` }, params: { userId } }
         );
     };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Żądanie HTTP POST do API w celu zmiany domyślnego hasła (wygenerowanego przez system).
-     */
-    public userChangeDefaultPassword(
-        userId: string, passwords: RequestFirstChangePasswordModel,
-    ): Observable<ResponseServerMessageModel> {
-        return this._http.post<ResponseServerMessageModel>(
-            this._endpoints.CHANGE_DEFAULT_PASSWORD,
-            passwords, { params: { userId } }
-        );
-    }
 }

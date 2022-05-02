@@ -22,14 +22,14 @@ import { Title } from '@angular/platform-browser';
 
 import { BehaviorSubject } from 'rxjs';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Serwis realizujący logikę sekwencera odliczającego czas od automatycznego otworzenia modala z informacją
  * o końcu sesji. Głównym jego elementem jest BehaviorSubject, który emituje wartość przy każdej sekundzie.
  */
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class EndSessionModalSequencerService {
 
     private readonly _sequencerMaxInactivityInSeconds: number = 30;
@@ -39,12 +39,19 @@ export class EndSessionModalSequencerService {
 
     private _sequcenterIndex?: number;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public constructor(
         private _titleService: Title,
     ) {
         this._sequencerCurrentValue$ = new BehaviorSubject<number>(this._sequencerMaxInactivityInSeconds);
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Uruchomienie sekwencji odliczania do automatycznego wylogowania z systemu.
+     */
     public onInitSequencerStart(): void {
         let sequenceLeftTime: number = this._sequencerMaxInactivityInSeconds;
         const sequencerCallback = (): void => {
@@ -61,10 +68,17 @@ export class EndSessionModalSequencerService {
         this._sequcenterIndex = setInterval(sequencerCallback, 1000)
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Wyłączenie sekwencji odliczającej do automatycznego wylogowania.
+     */
     public sequencerForceStop(): void {
         clearInterval(this._sequcenterIndex!);
         this._titleService.setTitle(this._savedPageTitle);
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     get __sequencerMaxInactivityInSeconds(): number {
         return this._sequencerMaxInactivityInSeconds;

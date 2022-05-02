@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: image-manipulation.service.ts
- * Last modified | Ostatnia modyfikacja: 01/05/2022, 18:30
+ * Last modified | Ostatnia modyfikacja: 01/05/2022, 18:59
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,16 +17,15 @@
  * Obiektowe".
  */
 
-
 import { Injectable } from '@angular/core';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis odpowiedzialny za manipulację plikami typu image.
  */
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class ImageManipulationService {
 
     /**

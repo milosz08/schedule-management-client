@@ -19,7 +19,6 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Store } from '@ngrx/store';
 
 import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
@@ -36,7 +35,7 @@ import { UserIdentityModel } from '../../ngrx-store/session-ngrx-store/ngrx-mode
 })
 export class EditorRedirectGuard extends RedirectCmsRoleGuard {
 
-    constructor(
+    public constructor(
         router: Router,
         store: Store<InitialSessionStateTypes>
     ) {

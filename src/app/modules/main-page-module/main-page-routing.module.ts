@@ -27,6 +27,7 @@ import { SchedulePageComponent } from './pages/schedule-page/schedule-page.compo
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 const routes: Routes = [
     {
@@ -39,6 +40,7 @@ const routes: Routes = [
     },
 ];
 
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     imports: [

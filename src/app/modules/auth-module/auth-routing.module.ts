@@ -26,8 +26,8 @@ import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-pa
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 
 import { FirstChangePasswordRedirectGuard } from '../../guards/login-redirectors/first-change-password-redirect.guard';
-import { LoginRedirectGuard } from '../../guards/login-redirectors/login-redirect.guard';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 const routes: Routes = [
     {
@@ -51,6 +51,7 @@ const routes: Routes = [
     },
 ];
 
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     imports: [

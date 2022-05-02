@@ -38,13 +38,17 @@ export class LoginRedirectGuard implements CanActivate {
 
     private readonly _ifNotLogged$: Observable<boolean> = this._store.select(getIfUserNotLogged);
 
-    constructor(
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         private _router: Router,
         private _store: Store<AppGlobalState>
     ) {
     };
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    //------------------------------------------------------------------------------------------------------------------
+
+    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
         return this._ifNotLogged$.pipe(map(authenticate => {
             if (!authenticate) {
                 this._router.navigate([ '/secure/panel/dashboard' ]).then(r => r);

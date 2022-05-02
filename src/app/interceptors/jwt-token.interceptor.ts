@@ -21,7 +21,6 @@ import { Injectable } from '@angular/core';
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
 
 import { AppGlobalState } from '../ngrx-store/combine-reducers';
 import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
@@ -45,12 +44,16 @@ export class JwtTokenInterceptor implements HttpInterceptor {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Metoda pomocnicza dodająca token do wszystkich wysyłanych nagłówków.
      */
     private static addTokenHeader(req: HttpRequest<any>, token: string): HttpRequest<any> {
         return req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) })
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Metoda uruchamia przy każdym zapytaniu do API. Dodatkowo przechwytuje błędy HTTP 401 (błąd autoryzacji)

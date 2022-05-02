@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CheckboxTemplateComponent } from './components/checkbox-template/checkbox-template.component';
 import { TextInputPasswordComponent } from './components/text-input-password/text-input-password.component';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     declarations: [
@@ -36,7 +37,7 @@ import { TextInputPasswordComponent } from './components/text-input-password/tex
         MatIconModule,
         ReactiveFormsModule,
     ],
-    providers: [ ],
+    providers: [],
     exports: [
         CheckboxTemplateComponent,
         TextInputPasswordComponent,

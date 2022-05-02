@@ -33,6 +33,8 @@ import { AuthService } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
 import { BrowserStorageService } from '../../../services/browser-storage.service';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Klasa efektów odpowiedzialnych za zarządzanie tokenem JWT oraz sesją użytkownika (odświeżanie tokenu oraz sesji).
  */

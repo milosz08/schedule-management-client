@@ -39,7 +39,7 @@
         content: '.';
         line-height: 0;
         font-size: 1.5em;
-        color: #30cece;
+        color: var(--headerDotColor);
     }
 }
 
@@ -62,7 +62,7 @@
 }
 
 .app__auth-container {
-    padding-top: 120px;
+    padding-top: 80px;
     margin: 0 auto;
     max-width: var(--safetyAreaWidth);
 }

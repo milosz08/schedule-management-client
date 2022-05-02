@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: auth-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 16:22
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:57
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,6 +18,8 @@
  */
 
 import { UserIdentityModel } from './user-identity.model';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 export interface AuthResponseDataModel {
     dictionaryHash: string;

@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: remember-user-storage.service.ts
- * Last modified | Ostatnia modyfikacja: 30/04/2022, 14:08
+ * Last modified | Ostatnia modyfikacja: 01/05/2022, 19:13
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -39,6 +39,8 @@ import { BrowserStorageService } from './browser-storage.service';
 export class RememberUserStorageService {
 
     public static readonly USER_REMEMBER_ACCOUNT: string = "users__remember_accounts" as const;
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _store: Store<AppGlobalState>,

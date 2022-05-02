@@ -48,6 +48,8 @@ export class LogoutModalComponent {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public handleCloseModal(): void {
         this._store.dispatch(userLogoutModalSetVisibility({ modalVisibility: false }));
     };

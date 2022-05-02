@@ -36,14 +36,7 @@ import { SharedModule } from './modules/shared-module/shared.module';
 import { TemplatesModule } from './modules/templates-module/templates.module';
 import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 
-import { combinedReducers } from './ngrx-store/combine-reducers';
-
-import { SharedEffects } from './ngrx-store/shared-ngrx-store/ngrx-effects/shared.effects';
-import { SavedUsersEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/saved-users.effects';
-import { JwtSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/jwt-session.effects';
-import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
-import { FirstChangePasswordEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/first-change-password.effects';
-
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     declarations: [

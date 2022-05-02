@@ -19,7 +19,6 @@
 
 import { Injectable } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-
 import { Store } from '@ngrx/store';
 
 import { AppGlobalState } from '../../../ngrx-store/combine-reducers';
@@ -32,12 +31,17 @@ import { setSuspenseLoader } from '../../../ngrx-store/shared-ngrx-store/shared.
 @Injectable()
 export class SuspenseService {
 
-    constructor(
+    public constructor(
         private _router: Router,
         private _store: Store<AppGlobalState>,
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Uruchamianie planszy leniwego ładowania przy każdym nowym wczytywaniem podstrony.
+     */
     public toggleSuspenseComponent(): void {
         this._router.events.subscribe(event => {
             if (event instanceof RouteConfigLoadStart) {

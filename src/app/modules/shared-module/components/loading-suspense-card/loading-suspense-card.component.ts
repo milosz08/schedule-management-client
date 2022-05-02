@@ -25,8 +25,8 @@ import { Observable } from 'rxjs';
 import { fadeOutAnimation } from '../../../../animations/fade-animations';
 
 import { SuspenseService } from '../../services/suspense.service';
-import { getSuspenseLoading } from '../../../../ngrx-store/shared-ngrx-store/shared.selectors';
-import { InitialSharedStateTypes } from '../../../../ngrx-store/shared-ngrx-store/shared.initial';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent renderujący widok planszy ładowania kontentu (leniwe ładowanie treści, pobieranie

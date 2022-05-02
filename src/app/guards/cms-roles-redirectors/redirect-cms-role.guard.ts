@@ -23,9 +23,7 @@ import { map, Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
-import { getUserIdentity } from '../../ngrx-store/session-ngrx-store/session.selectors';
-import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
-import { UserIdentityModel } from '../../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Uniwersalny redirektor zasobów związanych z rolami użytkowników. Aby użyć należy rozszerzyć klasę o tą
@@ -37,7 +35,9 @@ export class RedirectCmsRoleGuard implements CanActivate {
     private readonly _userIdentity$: Observable<UserIdentityModel> = this._store.select(getUserIdentity);
     private readonly _userCurrentRole: UserIdentityModel;
 
-    constructor(
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         private _router: Router,
         private _store: Store<InitialSessionStateTypes>,
         userCurrentRole: UserIdentityModel,
@@ -45,7 +45,9 @@ export class RedirectCmsRoleGuard implements CanActivate {
         this._userCurrentRole = userCurrentRole;
     };
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    //------------------------------------------------------------------------------------------------------------------
+
+    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
         return this._userIdentity$.pipe(map(userRole => {
             if (userRole !== this._userCurrentRole) {
                 this._router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);

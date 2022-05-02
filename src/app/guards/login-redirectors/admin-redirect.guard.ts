@@ -22,9 +22,10 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 
 import { map, Observable } from 'rxjs';
 
-import { Store } from '@ngrx/store';
-import { getIfUserNotLogged } from '../../ngrx-store/session-ngrx-store/session.selectors';
-import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
+import * as NgrxSelector_SES from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Redirektor przekierowujący na stronę logowania w przypadku próby odwołania się do panelu zarządzania treścią
@@ -38,13 +39,17 @@ export class AdminRedirectGuard implements CanActivate {
 
     private readonly _ifNotLogged$: Observable<boolean> = this._store.select(getIfUserNotLogged);
 
-    constructor(
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         private _router: Router,
-        private _store: Store<InitialSessionStateTypes>
+        private _store: Store<SessionReducerType>
     ) {
     };
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    //------------------------------------------------------------------------------------------------------------------
+
+    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
         return this._ifNotLogged$.pipe(map(authenticate => {
             if (authenticate) {
                 this._router.navigate([ '/auth/login' ]).then(r => r);

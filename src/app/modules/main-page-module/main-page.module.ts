@@ -21,18 +21,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { MainPageRoutingModule } from './main-page-routing.module';
+
 import { MainPageComponent } from './main-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 
-import { MainPageRoutingModule } from './main-page-routing.module';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 
 import { SharedModule } from '../shared-module/shared.module';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     declarations: [
@@ -49,8 +51,8 @@ import { SharedModule } from '../shared-module/shared.module';
     imports: [
         CommonModule,
         RouterModule,
-        MainPageRoutingModule,
         SharedModule,
+        MainPageRoutingModule,
     ],
 })
 export class MainPageModule {}

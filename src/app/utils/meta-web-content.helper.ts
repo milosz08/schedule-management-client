@@ -22,6 +22,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { MiscHelper } from './misc.helper';
 import JsonMockedTitles from '../mocked-data/subpages-titles-description.json';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Klasa dodająca dodatkowe informacje dla SEO (tytuł strony oraz opis) na podstawie przekazywanej

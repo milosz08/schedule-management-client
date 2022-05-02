@@ -20,6 +20,8 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Komponent odpowiedzialny za renderowanie widoku stopki na stronach umożliwiających autoryzację.
  */
@@ -33,7 +35,9 @@ export class AuthFooterComponent {
 
     public readonly _latestDatePipe: string;
 
-    constructor(
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         private _datePipe: DatePipe,
     ) {
         this._latestDatePipe = this._datePipe.transform(new Date(), 'yyyy')!;

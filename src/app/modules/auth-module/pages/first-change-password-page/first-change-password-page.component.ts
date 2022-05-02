@@ -46,6 +46,8 @@ export class FirstChangePasswordPageComponent extends MetaWebContentHelper {
         super(titleService, metaService, AllMainWebpages.FIRST_CHANGE_PASSWORD);
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public handleDisableShowThisPageAgain(ifChecked: boolean): void {
         this._store.dispatch(userToggleChangePasswordPageVisible({ pageVisibility: ifChecked }));
     };

@@ -19,6 +19,8 @@
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Klasa przechowująca customowe walidatory używane w API angular forms użytych w aplikacji.
  */

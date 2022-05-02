@@ -17,7 +17,9 @@
  * Obiektowe".
  */
 
-import { UserIdentityModel } from '../ngrx-store/session-ngrx-store/ngrx-models/user-identity.model';
+import { UserIdentityModel } from '../models/user-identity.model';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Dodatkowe metody pomocnicze używane w aplikacji.

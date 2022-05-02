@@ -22,6 +22,8 @@ export interface RefreshTokenRequestModel {
     refreshBearerToken: string;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export interface RefreshTokenResposneModel extends RefreshTokenRequestModel {
     tokenExpirationDate: Date;
     tokenRefreshInSeconds: number;

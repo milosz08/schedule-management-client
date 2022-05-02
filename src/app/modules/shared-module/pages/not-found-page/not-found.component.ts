@@ -22,6 +22,8 @@ import { Meta, Title } from '@angular/platform-browser';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Komponent renderujący stronę błędu (404) w przypadku błędnego routingu lub
  * nieznalezienia zawartości.

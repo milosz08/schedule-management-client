@@ -21,7 +21,7 @@
 
     // Podstatowe kolory
     --darkBlueColor:        #011d3d;
-    --darkPurpleColor:      #1d1e3b;
+    --headerDotColor:       #30cece;
     --mainYellowColor:      #fff255;
     --mainBlackColor:       #212529;
     --lightGrayColor:       #818181;
@@ -39,8 +39,9 @@
     // Dostępność
     --accesibilityColor:    var(--lightGrayColor);
     --safetyAreaWidth:      1250px;
-    --mobileMargin:         0 30px;
-    --mobileExactMargins:   calc(100% - var(--mobileMargin) * 2);
+    --mobileMarginSingle:   30px;
+    --mobileMargin:         0 var(--mobileMarginSingle);
+    --mobileExactMargins:   calc(100% - var(--mobileMarginSingle) * 2);
 
     // Inne
     --transitionDuration:   .2s;

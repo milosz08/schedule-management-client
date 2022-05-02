@@ -27,6 +27,7 @@ import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 
+//----------------------------------------------------------------------------------------------------------------------
 
 const routes: Routes = [
     {
@@ -40,6 +41,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'admin-panel', pathMatch: 'full' },
 ];
 
+//----------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     imports: [

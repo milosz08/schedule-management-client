@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: remember-account.model.ts
- * Last modified | Ostatnia modyfikacja: 30/04/2022, 14:06
+ * File name | Nazwa pliku: shared.initial.ts
+ * Last modified | Ostatnia modyfikacja: 01/05/2022, 14:57
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,12 +17,12 @@
  * Obiektowe".
  */
 
-import { UserIdentityModel } from './user-identity.model';
-
-export interface RememberAccountModel {
-    dictionaryHash: string;
-    nameWithSurname: string;
-    role: UserIdentityModel;
-    email: string;
-    image: string;
+export interface InitialSharedStateTypes {
+    suspenseLoading: boolean;
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const initialSharedState: InitialSharedStateTypes = {
+    suspenseLoading: false,
+};

@@ -21,6 +21,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Komponent uniwersalny generujący strukturę dla inputa checbox.
  */
@@ -48,6 +50,8 @@ export class CheckboxTemplateComponent implements OnInit {
 
     @Output()
     public _checkedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
         this._checkboxId = MiscHelper.randomCharactersGenerator();

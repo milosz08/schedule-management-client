@@ -25,9 +25,7 @@ import { Subscription } from 'rxjs';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 import { EndSessionModalSequencerService } from '../../services/end-session-modal-sequencer.service';
 
-import * as NgrxAction from '../../../../ngrx-store/session-ngrx-store/session.actions';
-import { InitialSessionStateTypes } from '../../../../ngrx-store/session-ngrx-store/session.initial';
-import { getSessionEndModalVisibility } from '../../../../ngrx-store/session-ngrx-store/session.selectors';
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Komponent odpowiadający za renderowanie widoku modala otwierającego się automatycznie przy końcu sesji.
@@ -47,6 +45,8 @@ export class EndSessionModalComponent implements OnDestroy {
 
     private _subscription$: Subscription;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public constructor(
         private _store: Store<InitialSessionStateTypes>,
         private _endSessionModalSequencerService: EndSessionModalSequencerService,
@@ -57,6 +57,8 @@ export class EndSessionModalComponent implements OnDestroy {
             }
         });
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public ngOnDestroy(): void {
         this._endSessionModalSequencerService.sequencerForceStop();

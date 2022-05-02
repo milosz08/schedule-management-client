@@ -67,6 +67,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         });
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public ngOnInit(): void {
         this._store.dispatch(NgrxAction.userToggleIfSaveAccount({ ifSaveAccount: true }));
         this._storeSubscription = this._store

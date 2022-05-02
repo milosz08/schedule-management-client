@@ -27,7 +27,7 @@ import { BrowserStorageService } from './browser-storage.service';
  */
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class FirstChangePasswordStorageService {
 
@@ -39,6 +39,8 @@ export class FirstChangePasswordStorageService {
         private _storageService: BrowserStorageService,
     ) {
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /**
      * Aktywowanie zablokowania strony do zmiany początkowego hasła (na podstawie wartości userId).

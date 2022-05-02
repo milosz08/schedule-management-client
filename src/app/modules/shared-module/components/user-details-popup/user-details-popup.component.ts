@@ -49,6 +49,8 @@ export class UserDetailsPopupComponent {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public handleUserLogout(): void {
         this._store.dispatch(NgrxAction.userLogout({ ifRedirectToRoot: true }));
         this._store.dispatch(NgrxAction.userLogoutModalSetVisibility({ modalVisibility: true }));

@@ -51,11 +51,15 @@ export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
     public _userData: AuthResponseDataModel | null = null;
     private _ifModalOpen: boolean = false;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public constructor(
         private _router: Router,
         private _store: Store<AppGlobalState>,
     ) {
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
         this._storeSubscription = this._store

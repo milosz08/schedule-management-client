@@ -46,11 +46,15 @@ export class UserImageComponent implements OnInit, OnDestroy {
     private _storeSubscription: Subscription | undefined;
     private _imageURL: string = '';
 
-    constructor(
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         private _store: Store<InitialSessionStateTypes>,
         private _sanitizer: DomSanitizer,
     ) {
     };
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
         this._storeSubscription = this._store

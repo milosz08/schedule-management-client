@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: browser-storage.service.ts
- * Last modified | Ostatnia modyfikacja: 25/04/2022, 01:01
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:11
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,21 +19,24 @@
 
 import { Injectable } from '@angular/core';
 
-import { AuthResponseDataModel } from '../ngrx-store/session-ngrx-store/ngrx-models/auth-response-data.model';
-import { RefreshTokenResposneModel } from '../ngrx-store/session-ngrx-store/ngrx-models/refresh-token.model';
+import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
+import { RefreshTokenResposneModel } from '../../../models/refresh-token.model';
+
 import { ImageManipulationService } from './image-manipulation.service';
+
+//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Serwis odpowiadający za komunikację aplikacji z mechanizmem session/local storage.
  */
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class BrowserStorageService {
 
     public static readonly USER_DATA_KEY: string = "user__autologin" as const;
     public static readonly USER_IMAGE_KEY: string = "user__image" as const;
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _imageManipulationService: ImageManipulationService,
