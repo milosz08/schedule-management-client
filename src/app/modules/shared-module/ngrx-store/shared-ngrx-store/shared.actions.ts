@@ -28,3 +28,8 @@ export const __setSuspenseLoader = createAction(
     SET_SUSPENSE_LOADER,
     props<{ status: boolean }>(),
 );
+
+export const __setSuspenseLoaderDelay = createAction(
+    SET_SUSPENSE_LOADER_DELAY,
+    props<{ delayInSeconds?: number, status: boolean }>(),
+);

@@ -60,4 +60,20 @@ export class SharedEffects {
         );
     }, { dispatch: false });
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt opóźniający włączenie/wyłączenie planszy ładowania kontentu. Domyślnie opóźnia o wartość 1 sekundy.
+     * Można jednka to zmienić poprzez parametry akcji.
+     */
+    public suspenseLoaderDelay$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(NgrxAction_SHA.__setSuspenseLoaderDelay),
+            tap(action => {
+                setTimeout(() => {
+                    this._store.dispatch(NgrxAction_SHA.__setSuspenseLoader({ status: action.status }));
+                }, action.delayInSeconds ? action.delayInSeconds * 1000 : 1000);
+            }),
+        );
+    }, { dispatch: false });
 }
