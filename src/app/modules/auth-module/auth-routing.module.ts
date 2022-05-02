@@ -23,8 +23,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthPageComponent } from './auth-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
+import { SendTokenViaEmailPageComponent } from './pages/send-token-via-email-page/send-token-via-email-page.component';
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 
+import { ResetPasswordGuard } from '../../guards/login-redirectors/reset-password.guard';
+import { LoginRedirectGuard } from '../../guards/login-redirectors/login-redirect.guard';
 import { FirstChangePasswordRedirectGuard } from '../../guards/login-redirectors/first-change-password-redirect.guard';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -38,9 +41,14 @@ const routes: Routes = [
                 canActivate: [ LoginRedirectGuard ],
             },
             {
+                path: 'send-token-to-reset-password',
+                component: SendTokenViaEmailPageComponent,
+                canActivate: [ LoginRedirectGuard ],
+            },
+            {
                 path: 'reset-password',
                 component: ResetPasswordPageComponent,
-                canActivate: [ LoginRedirectGuard ],
+                canActivate: [ LoginRedirectGuard, ResetPasswordGuard ],
             },
             {
                 path: 'first-change-password',
