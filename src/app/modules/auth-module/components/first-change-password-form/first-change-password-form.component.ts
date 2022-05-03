@@ -102,5 +102,5 @@ export class FirstChangePasswordFormComponent implements OnInit, OnDestroy {
     get __ifErrorOrSimpleMessage(): string {
         return this._newPasswordServerMessage.toLowerCase().includes('przekierowanie')
             ? 'app__input-message app__input-message--light' : 'app__input-error app__input-error--light';
-    }
+    };
 }

@@ -20,6 +20,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Klasa przechowujący dane statyczne dla łączenia się z backendem.
  */
@@ -35,5 +37,7 @@ export class ApiConfigurerHelper {
     public readonly GET_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/get-avatar';
     public readonly GET_REFRESH_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/refresh-token';
     public readonly CHANGE_DEFAULT_PASSWORD = ApiConfigurerHelper.API_PREFIX + 'auth/change-password';
-
+    public readonly RESET_PASSWORD_SEND_TOKEN_VIA_EMAIL = ApiConfigurerHelper.API_PREFIX + 'auth/reset-password-email';
+    public readonly RESET_PASSWORD_VALIDATE_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/confirm-reset-password';
+    public readonly RESET_PASSWORD_VIA_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/reset-password';
 }

@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: combine-reducers.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:20
+ * File name | Nazwa pliku: request-reset-password.model.ts
+ * Last modified | Ostatnia modyfikacja: 03/05/2022, 02:08
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,27 +17,22 @@
  * Obiektowe".
  */
 
-import { ActionReducerMap } from '@ngrx/store';
-
-import { InitialSessionStateTypes } from './session-ngrx-store/session.initial';
-import { InitialSharedStateTypes } from './shared-ngrx-store/shared.initial';
-
-import { sessionReducer } from './session-ngrx-store/session.reducer';
-import { SESSION_REDUCER } from './session-ngrx-store/session.selectors';
-
-import { SHARED_REDUCER } from './shared-ngrx-store/shared.selectors';
-import { sharedReducer } from './shared-ngrx-store/shared.reducer';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface AppGlobalState {
-    [SESSION_REDUCER]: InitialSessionStateTypes;
-    [SHARED_REDUCER]: InitialSharedStateTypes;
+interface ResetPasswordFormModel {
+    newPassword: string;
+    newPasswordConfirmed: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const combinedReducers: ActionReducerMap<AppGlobalState> = {
-    sessionReducer,
-    sharedReducer,
-};
+export class RequestResetPasswordModel {
+
+    public newPassword: string;
+    public newPasswordConfirmed: string;
+    public bearerToken: string;
+
+    public constructor(withoutBearer: ResetPasswordFormModel, bearer: string) {
+        this.newPassword = withoutBearer.newPassword;
+        this.bearerToken = bearer;
+        this.newPasswordConfirmed = withoutBearer.newPasswordConfirmed;
+    };
+}

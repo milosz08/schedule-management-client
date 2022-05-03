@@ -36,6 +36,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { LastLoginsComponent } from './components/last-logins/last-logins.component';
 import { AuthFooterComponent } from './components/auth-footer/auth-footer.component';
 import { InsertTokenFormComponent } from './components/insert-token-form/insert-token-form.component';
+import { ResetPasswordFormComponent } from './components/reset-password-form/reset-password-form.component';
 import { SendTokenViaEmailFormComponent } from './components/send-token-via-email-form/send-token-via-email-form.component';
 import { FirstChangePasswordFormComponent } from './components/first-change-password-form/first-change-password-form.component';
 
@@ -68,6 +69,7 @@ import { FirstChangePasswordEffects } from './ngrx-store/first-change-password-n
         LastLoginsComponent,
         AuthFooterComponent,
         InsertTokenFormComponent,
+        ResetPasswordFormComponent,
         SendTokenViaEmailFormComponent,
         FirstChangePasswordFormComponent,
     ],

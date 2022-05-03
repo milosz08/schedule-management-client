@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: refresh-token.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:10
+ * File name | Nazwa pliku: reset-password-form-unsave-changes.guard.ts
+ * Last modified | Ostatnia modyfikacja: 03/05/2022, 04:22
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,14 +17,29 @@
  * Obiektowe".
  */
 
-export interface RefreshTokenRequestModel {
-    bearerToken: string;
-    refreshBearerToken: string;
-}
+import { Injectable } from '@angular/core';
+import { CanDeactivate } from '@angular/router';
+
+import {
+    ResetPasswordPageComponent
+} from '../../modules/auth-module/pages/reset-password-page/reset-password-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface RefreshTokenResponseModel extends RefreshTokenRequestModel {
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
+/**
+ * Prosty strażnik umożliwiający zmianę trasy dopiero po zaakceptowaniu modala dla formularzy odzyskiwania hasła
+ * (wysłanie nowego hasła).
+ */
+
+@Injectable({
+    providedIn: 'root',
+})
+export class ResetPasswordFormUnsaveChangesGuard implements CanDeactivate<ResetPasswordPageComponent> {
+
+    public canDeactivate(component: ResetPasswordPageComponent): boolean {
+        if (component._discardChangesForm) {
+            return window.confirm("Masz niezapisane zmiany. Nadal chcesz opuścić stronę?");
+        }
+        return true;
+    };
 }

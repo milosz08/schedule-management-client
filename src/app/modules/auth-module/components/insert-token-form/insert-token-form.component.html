@@ -1,0 +1,61 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: insert-token-form.component.html
+  ~ Last modified | Ostatnia modyfikacja: 02/05/2022, 13:20
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<form
+	[formGroup] = '_tokenFieldForm'
+	(ngSubmit) = 'handleSubmitCheckToken()'
+	class = 'check-token-form__container'
+>
+	<div class = 'check-token-form__element-container'>
+		<label for = 'send-token-via-email-form___$token'>
+			<input
+				(input) = 'handleClearErrorMessage()'
+				id = 'send-token-via-email-form___$token'
+				type = 'text'
+				formControlName = 'token'
+				placeholder = 'np. g4k7D38v'
+				maxlength = '8'
+				class = 'app__input app__input--light'
+			>
+		</label>
+		<div
+			*ngIf = '__ifTokenFieldHasErrors'
+			class = 'app__input-error app__input-error--light'
+		>
+			Proszę wpisać prawidłowy format tokenu.
+		</div>
+		<div
+			*ngIf = '_tokenValidMessage !== ""'
+			class = 'app__input-error app__input-error--light'
+		>
+			{{ _tokenValidMessage }}
+		</div>
+	</div>
+	<div class = 'check-token-form__submit-container'>
+		<button
+			[disabled] = '!_tokenFieldForm.valid'
+			type = 'submit'
+			class = 'app__button app__button--hollow-light app__button--full-size-window'
+			title = 'Kliknij wysłać token odzyskiwania hasła'
+		>
+			Odzyskaj hasło
+			<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+		</button>
+	</div>
+</form>

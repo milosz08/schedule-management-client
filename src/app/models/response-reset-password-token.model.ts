@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: refresh-token.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:10
+ * File name | Nazwa pliku: response-reset-password-token.model.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 15:26
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,14 +17,13 @@
  * Obiektowe".
  */
 
-export interface RefreshTokenRequestModel {
-    bearerToken: string;
-    refreshBearerToken: string;
-}
+export class ResponseResetPasswordTokenModel {
 
-//----------------------------------------------------------------------------------------------------------------------
+    public email: string;
+    public bearerToken: string;
 
-export interface RefreshTokenResponseModel extends RefreshTokenRequestModel {
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
+    public constructor(email: string, bearerToken: string) {
+        this.email = email;
+        this.bearerToken = bearerToken;
+    };
 }

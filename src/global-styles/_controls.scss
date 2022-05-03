@@ -104,15 +104,20 @@
         }
     }
     .app__button__arrow {
-        margin-top: 3px;
-        margin-left: 10px;
+        margin: 3px 0 0 10px;
         font-size: 1.5rem;
         line-height: .8;
         color: var(--darkBlueColor);
         transition: var(--transitionDuration) transform ease-in-out;
+        &.app__button__arrow--arrow-left {
+            margin: 5px 10px 3px 0;
+        }
     }
     &:hover:not(:disabled) .app__button__arrow {
         transform: translateX(3px);
+        &.app__button__arrow--arrow-left {
+            transform: translateX(-3px);
+        }
     }
     &:disabled {
         opacity: .5;

@@ -18,9 +18,16 @@
  */
 
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import * as NgrxSelector_RES from '../../ngrx-store/reset-password-ngrx-store/reset-password.selectors';
+import { ResetPasswordReducerType } from '../../ngrx-store/reset-password-ngrx-store/reset-password.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -35,10 +42,25 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
 })
 export class ResetPasswordPageComponent extends MetaWebContentHelper {
 
-    constructor(
+    public _ifPasswordNotSet$: Observable<boolean> = this._store.select(NgrxSelector_RES.sel_ifPasswordNotSet);
+    public _successFormMessage$: Observable<string> = this._store.select(NgrxSelector_RES.sel_resetPasswordFormMessage);
+
+    public _bearerTokenQueryParam: string | null = '';
+    public _discardChangesForm: boolean = true;
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         titleService: Title,
         metaService: Meta,
+        private _route: ActivatedRoute,
+        private _store: Store<ResetPasswordReducerType>,
     ) {
         super(titleService, metaService, AllMainWebpages.RESET_PASSWORD);
+        this._bearerTokenQueryParam = this._route.snapshot.queryParamMap.get('token');
+    };
+
+    public setDiscardChangesForm(ifChanges: boolean): void {
+        this._discardChangesForm = ifChanges;
     };
 }

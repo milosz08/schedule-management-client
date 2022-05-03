@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: send-token-via-email-page.component.html
+  ~ Last modified | Ostatnia modyfikacja: 02/05/2022, 12:41
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div class = 'send-token-via-email__container'>
+	<section class = 'send-token-via-email__send-token-wrapper'>
+		<img
+			src = 'assets/images/main-logo-light.svg' alt = ''
+			class = 'send-token-via-email__logo-image'
+		/>
+		<h3 class = 'app__header app__header--light app__header--exclude-margins'>
+			Odzyskiwanie hasła
+		</h3>
+		<p class = 'send-token-via-email__description'>
+			<ng-container *ngIf = '!(_tokenSuccessSend | async); else successSendToken'>
+				Na podany adres email zostanie wysłany token odzyskiwania hasła do systemu.
+			</ng-container>
+			<ng-template #successSendToken>
+				{{ _tokenSuccessSendMessage | async }}
+			</ng-template>
+		</p>
+		<app-send-token-via-email-form
+			*ngIf = '!(_tokenSuccessSend | async)'
+			(_discardEmitter) = "setDiscardChangesEmail($event)"
+			class = 'send-token-via-email__form-container'
+		></app-send-token-via-email-form>
+	</section>
+	<section
+		*ngIf = '_tokenSuccessSend | async'
+		class = 'send-token-via-email__paste-token-wrapper'
+	>
+		<h3 class = 'app__header app__header--exclude-margins'>
+			Wprowadź token
+		</h3>
+		<app-insert-token-form
+			(_discardEmitter) = "setDiscardChangesToken($event)"
+			class = 'send-token-via-email__form-container'
+		></app-insert-token-form>
+	</section>
+</div>

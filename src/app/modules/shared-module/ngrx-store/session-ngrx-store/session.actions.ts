@@ -19,7 +19,7 @@
 
 import { createAction, props } from '@ngrx/store';
 
-import { RefreshTokenResposneModel } from '../../../../models/refresh-token.model';
+import { RefreshTokenResponseModel } from '../../../../models/refresh-token.model';
 import { AuthResponseDataModel } from '../../../../models/auth-response-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ export const __setNewToken = createAction(
 
 export const __succesedSetNewToken = createAction(
     SUCCESS_SET_NEW_TOKEN,
-    props<{ newTokens: RefreshTokenResposneModel }>(),
+    props<{ newTokens: RefreshTokenResponseModel }>(),
 );
 
 export const __failureSetNewToken = createAction(

@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: reset-password-page.component.scss
- * Last modified | Ostatnia modyfikacja: 19/04/2022, 14:41
+ * File name | Nazwa pliku: send-token-via-email-page.component.scss
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 12:41
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,60 +17,56 @@
  * Obiektowe".
  */
 
-.reset-password__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.send-token-via-email__container {
     border-radius: var(--borderRadius);
     max-width: 500px;
     width: 100%;
     border: 1px solid var(--darkBlueColor);
     margin: auto;
-    padding: 20px 30px;
 }
 
-.reset-password__image-logo {
+.send-token-via-email__send-token-wrapper,
+.send-token-via-email__paste-token-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.send-token-via-email__form-container {
+    max-width: 360px;
+    width: 100%;
+}
+
+.send-token-via-email__send-token-wrapper {
+    background-color: var(--darkBlueColor);
+}
+
+.send-token-via-email__logo-image {
+    margin: 20px auto;
     width: 60px;
     height: 60px;
-    margin-bottom: 20px;
 }
 
-.reset-password__description {
-    margin: 20px 0;
-    color: var(--darkBlueColor);
+.send-token-via-email__description {
+    margin: 20px 50px 30px;
+    color: var(--mainWhiteColor);
     text-align: center;
 }
 
-.reset-password__description--success {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--greenDarkColor);
-}
-
-.reset-password__form-container {
-    width: 100%;
-}
-
-.reset-password__goto-home-container {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.send-token-via-email__paste-token-wrapper {
+    padding: 20px 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 @media only screen and (max-width: 500px) {
-    .reset-password__container {
+    .send-token-via-email__container {
         border: none;
         border-radius: 0;
     }
-    .reset-password__goto-home-container {
-        flex-direction: column-reverse;
-        .app__button {
-            width: 100%;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+    .send-token-via-email__form-container {
+        width: calc(100% - 60px);
+        max-width: var(--mobileExactMargins);
+        margin: var(--mobileMargin);
     }
 }

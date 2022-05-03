@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: refresh-token.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:10
+ * File name | Nazwa pliku: reset-password.initial.ts
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 16:09
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,14 +17,34 @@
  * Obiektowe".
  */
 
-export interface RefreshTokenRequestModel {
-    bearerToken: string;
-    refreshBearerToken: string;
+export interface InitialResetPasswordStateTypes {
+    resetPasswordViaEmail: {
+        resetPasswordSendTokenMessage: string;
+        ifSuccesedSendEmail: boolean;
+    };
+    resetPasswordValidateToken: {
+        resetPasswordValidTokenMessage: string;
+        ifValidateSuccessed: boolean;
+        userEmail: string;
+        bearerToken: string;
+    };
+    resetPasswordFormMessage: string;
+    ifSuccessedSetNewPassword: boolean;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface RefreshTokenResponseModel extends RefreshTokenRequestModel {
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
-}
+export const initialResetPasswordState: InitialResetPasswordStateTypes = {
+    resetPasswordViaEmail: {
+        resetPasswordSendTokenMessage: '',
+        ifSuccesedSendEmail: false,
+    },
+    resetPasswordValidateToken: {
+        resetPasswordValidTokenMessage: '',
+        ifValidateSuccessed: false,
+        userEmail: '',
+        bearerToken: '',
+    },
+    resetPasswordFormMessage: '',
+    ifSuccessedSetNewPassword: false,
+};

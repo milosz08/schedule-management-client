@@ -30,6 +30,9 @@ import { ResetPasswordGuard } from '../../guards/login-redirectors/reset-passwor
 import { LoginRedirectGuard } from '../../guards/login-redirectors/login-redirect.guard';
 import { FirstChangePasswordRedirectGuard } from '../../guards/login-redirectors/first-change-password-redirect.guard';
 
+import { ResetPasswordFormUnsaveChangesGuard } from '../../guards/route-leave-protector/reset-password-form-unsave-changes.guard';
+import { ResetPasswordTokenUnsaveChangesGuard } from '../../guards/route-leave-protector/reset-password-token-unsave-changes.guard';
+
 //----------------------------------------------------------------------------------------------------------------------
 
 const routes: Routes = [
@@ -44,16 +47,18 @@ const routes: Routes = [
                 path: 'send-token-to-reset-password',
                 component: SendTokenViaEmailPageComponent,
                 canActivate: [ LoginRedirectGuard ],
+                canDeactivate: [ ResetPasswordTokenUnsaveChangesGuard ],
             },
             {
                 path: 'reset-password',
                 component: ResetPasswordPageComponent,
                 canActivate: [ LoginRedirectGuard, ResetPasswordGuard ],
+                canDeactivate: [ ResetPasswordFormUnsaveChangesGuard ],
             },
             {
                 path: 'first-change-password',
                 component: FirstChangePasswordPageComponent,
-                canActivate: [ FirstChangePasswordRedirectGuard ]
+                canActivate: [ FirstChangePasswordRedirectGuard ],
             },
         ],
     },

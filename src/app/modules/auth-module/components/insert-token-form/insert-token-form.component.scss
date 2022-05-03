@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: refresh-token.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:10
+ * File name | Nazwa pliku: insert-token-form.component.scss
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 13:20
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,14 +17,18 @@
  * Obiektowe".
  */
 
-export interface RefreshTokenRequestModel {
-    bearerToken: string;
-    refreshBearerToken: string;
+.check-token-form__container {
+    margin: 30px 0;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+.check-token-form__element-container {
+    width: 100%;
+    margin: 10px 0;
+}
 
-export interface RefreshTokenResponseModel extends RefreshTokenRequestModel {
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
+.check-token-form__submit-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 15px;
 }

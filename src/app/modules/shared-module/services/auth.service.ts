@@ -24,7 +24,7 @@ import { Observable } from 'rxjs';
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
-import { RefreshTokenResposneModel } from '../../../models/refresh-token.model';
+import { RefreshTokenResponseModel } from '../../../models/refresh-token.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -58,8 +58,8 @@ export class AuthService {
     /**
      * Żądanie HTTP POST do API w celu uzyskania nowego token JWT na podstawie tokenu odświeżającego.
      */
-    public getNewJwtToken(befToken: string, refreshToken: string): Observable<RefreshTokenResposneModel> {
-        return this._http.post<RefreshTokenResposneModel>(
+    public getNewJwtToken(befToken: string, refreshToken: string): Observable<RefreshTokenResponseModel> {
+        return this._http.post<RefreshTokenResponseModel>(
             this._endpoints.GET_REFRESH_TOKEN,
             { bearerToken: befToken, refreshBearerToken: refreshToken }
         );

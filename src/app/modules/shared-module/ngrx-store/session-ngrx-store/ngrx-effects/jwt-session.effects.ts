@@ -28,7 +28,7 @@ import * as NgrxAction_SES from '../session.actions';
 import * as NgrxAction_MOD from '../../modals-ngrx-store/modals.actions';
 import { SESSION_REDUCER, SessionReducerType } from '../session.selectors';
 
-import { RefreshTokenResposneModel } from '../../../../../models/refresh-token.model';
+import { RefreshTokenResponseModel } from '../../../../../models/refresh-token.model';
 
 import { AuthService } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
@@ -65,7 +65,7 @@ export class JwtSessionEffects {
                     return this._authService
                         .getNewJwtToken(action.data.bearerToken, action.data.refreshBearerToken)
                         .pipe(
-                            map((newTokens: RefreshTokenResposneModel) => {
+                            map((newTokens: RefreshTokenResponseModel) => {
                                 this._storageService.setRefreshedJwtTokenInLocalStorage(newTokens);
                                 return NgrxAction_SES.__succesedSetNewToken({ newTokens });
                             }),

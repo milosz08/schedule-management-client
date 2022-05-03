@@ -20,7 +20,7 @@
 import { Injectable } from '@angular/core';
 
 import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
-import { RefreshTokenResposneModel } from '../../../models/refresh-token.model';
+import { RefreshTokenResponseModel } from '../../../models/refresh-token.model';
 
 import { ImageManipulationService } from './image-manipulation.service';
 
@@ -109,7 +109,7 @@ export class BrowserStorageService {
     /**
      * Odświeżenia stanu użytkownika (JWT, token odświeżający oraz czas życia nowego JWT).
      */
-    public setRefreshedJwtTokenInLocalStorage(refreshTokenRes: RefreshTokenResposneModel): void {
+    public setRefreshedJwtTokenInLocalStorage(refreshTokenRes: RefreshTokenResponseModel): void {
         const userDataBeforeParse = localStorage.getItem(BrowserStorageService.USER_DATA_KEY);
         const { bearerToken, refreshBearerToken, tokenExpirationDate } = refreshTokenRes;
         if (userDataBeforeParse) {
