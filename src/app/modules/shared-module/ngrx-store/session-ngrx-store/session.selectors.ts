@@ -61,6 +61,10 @@ export const sel_userLogin = selectorWithInjectedStore(
     state => state.userData?.login || ''
 );
 
+export const sel_userRole = selectorWithInjectedStore(
+    state => state.userData?.role || UserIdentityType.UNDEFINED,
+);
+
 export const sel_ifUserNotLogged = selectorWithInjectedStore(
     state => !Boolean(state.userData)
 );
