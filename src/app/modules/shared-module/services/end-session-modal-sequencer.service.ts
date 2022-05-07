@@ -22,8 +22,10 @@ import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
 import { BehaviorSubject } from 'rxjs';
-import { SessionReducerType } from '../ngrx-store/session-ngrx-store/session.selectors';
+
+import * as NgrxAction_MOD from '../ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxAction_SES from '../ngrx-store/session-ngrx-store/session.actions';
+import { SessionReducerType } from '../ngrx-store/session-ngrx-store/session.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -67,6 +69,7 @@ export class EndSessionModalSequencerService {
             if (sequenceLeftTime-- === 0) {
                 this._titleService.setTitle(this._savedPageTitle);
                 this._store.dispatch(NgrxAction_SES.__logout({ ifRedirectToRoot: true }));
+                this._store.dispatch(NgrxAction_MOD.__sessionSetModalVisibility({ modalVisibility: false }));
                 this.sequencerForceStop();
             }
         };
