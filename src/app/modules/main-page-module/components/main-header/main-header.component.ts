@@ -17,12 +17,11 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-
-import { MainNavigationModel } from '../../models/main-navigation.model';
+import { Component, HostListener } from '@angular/core';
 
 import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navigation-content.json';
+
+import { MainNavigationModel } from '../../models/main-navigation.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -38,16 +37,29 @@ import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navi
 })
 export class MainHeaderComponent {
 
-    private readonly _navigationData: MainNavigationModel[];
+    public readonly _navigationData: MainNavigationModel[];
+    public _ifHamburgerOpen: boolean = false;
 
-    public constructor(
-        private _sanitazer: DomSanitizer,
-    ) {
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor() {
         this._navigationData = MainPageNavigationMockedData;
     };
 
-    get navigationDataGet(): Array<MainNavigationModel> {
-        return this._navigationData;
+    //------------------------------------------------------------------------------------------------------------------
+
+    public handleHamburgerToggle(): void {
+        this._ifHamburgerOpen = !this._ifHamburgerOpen;
     };
 
+    @HostListener('window:resize', ['$event'])
+    public onResize(_: Event) {
+        if (window.innerWidth > 1090 && this._ifHamburgerOpen) {
+            this._ifHamburgerOpen = false;
+        }
+    };
+
+    get hamburgerActiveClass(): string {
+        return this._ifHamburgerOpen ? 'main-header__hamburger-bars hamburger--active' : 'main-header__hamburger-bars';
+    };
 }

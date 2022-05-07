@@ -17,13 +17,34 @@
  * Obiektowe".
  */
 
-.main-header__container {
+.main-header-with-mobile-nav__container {
     position: fixed;
+    width: 100%;
+}
+
+.main-header__mobile-navigation {
+    display: none;
+    background-color: var(--darkBlueColor);
+    padding: 30px;
+    .main-header__mobile-navigation-link {
+        display: block;
+        padding-top: 15px;
+        color: var(--lightBlueColor);
+        .main-header__mobile-navigation-separator {
+            display: block;
+            width: 100%;
+            height: 1px;
+            margin-top: 10px;
+            background-color: var(--lightBlueColor);
+        }
+    }
+}
+
+.main-header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
-    width: 100%;
     height: 80px;
     color: var(--darkBlueColor);
     font-weight: 500;
@@ -69,5 +90,69 @@
     }
     &:hover::after, &.link--active::after {
         transform: translateX(-50%) scaleX(1);
+    }
+}
+
+.main-header__right-content {
+    display: flex;
+    align-items: center;
+}
+
+.main-header__hamburger {
+    display: none;
+    margin-left: 20px;
+    height: 40px;
+    padding: 10px;
+}
+
+.main-header__hamburger-bars {
+    position: relative;
+    width: 25px;
+    height: 2px;
+    background-color: var(--darkBlueColor);
+    transition: var(--transitionDuration);
+    &::before, &::after {
+        position: absolute;
+        content: '';
+        left: 0;
+        top: -9px;
+        width: 100%;
+        height: 100%;
+        background-color: var(--darkBlueColor);
+        transition: var(--transitionDuration);
+    }
+    &::after {
+        top: 9px;
+    }
+    &.hamburger--active {
+        transform: rotate(45deg);
+        background-color: transparent;
+        &::before, &::after {
+            top: 0;
+        }
+        &::after {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1090px) {
+    .main-header-with-mobile-nav__container {
+        position: static;
+    }
+    .main-header__navigation {
+        display: none;
+    }
+    .main-header__hamburger,
+    .main-header__mobile-navigation {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .main-header__container {
+        padding: 0 20px;
     }
 }
