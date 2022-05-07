@@ -59,7 +59,7 @@ export class MainHeaderComponent {
         }
     };
 
-    get hamburgerActiveClass(): string {
-        return this._ifHamburgerOpen ? 'main-header__hamburger-bars hamburger--active' : 'main-header__hamburger-bars';
+    get __hamburgerActiveClass(): string {
+        return this._ifHamburgerOpen ? 'app__header__hamburger-bars hamburger--active' : 'app__header__hamburger-bars';
     };
 }

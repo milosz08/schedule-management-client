@@ -62,9 +62,9 @@
 			></app-user-header-data-with-popup>
 			<button
 				(click) = 'handleHamburgerToggle()'
-				class = 'main-header__hamburger'
+				class = 'app__header__hamburger'
 			>
-				<div [class] = 'hamburgerActiveClass'></div>
+				<div [ngClass] = '__hamburgerActiveClass'></div>
 			</button>
 		</div>
 	</header>

@@ -1,0 +1,76 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: _hamburger.scss
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 16:25
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.app__header__hamburger {
+    display: none;
+    margin-left: 20px;
+    height: 40px;
+    padding: 10px;
+    &.hamburger--remove-left-margin {
+        margin: 0 20px 0 0;
+    }
+    &.hamburger--always-show {
+        display: block;
+    }
+}
+
+.app__header__hamburger-bars {
+    position: relative;
+    width: 25px;
+    height: 2px;
+    background-color: var(--darkBlueColor);
+    transition: var(--transitionDuration);
+    &::before, &::after {
+        position: absolute;
+        content: '';
+        left: 0;
+        top: -9px;
+        width: 100%;
+        height: 100%;
+        background-color: var(--darkBlueColor);
+        transition: var(--transitionDuration);
+    }
+    &::after {
+        top: 9px;
+    }
+    &.hamburger--active {
+        transform: rotate(45deg);
+        background-color: transparent;
+        &::before, &::after {
+            top: 0;
+        }
+        &::after {
+            transform: rotate(90deg);
+        }
+    }
+    &.hamburger--dark-mode {
+        background-color: var(--mainWhiteColor);
+        &::before, &::after {
+            background-color: var(--mainWhiteColor);
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1090px) {
+    .app__header__hamburger {
+        display: block;
+    }
+}
