@@ -42,7 +42,7 @@
     color: var(--mainWhiteColor);
     border-radius: var(--borderRadius);
     &::placeholder {
-        color: var(--mainWhiteColor);
+        color: var(--lightGrayColor);
     }
     &.app__input--light {
         color: var(--darkBlueColor);

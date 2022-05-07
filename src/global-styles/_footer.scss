@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: main-footer.component.scss
- * Last modified | Ostatnia modyfikacja: 17/04/2022, 13:16
+ * File name | Nazwa pliku: _footer.scss
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 01:24
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,63 +17,62 @@
  * Obiektowe".
  */
 
-.main-footer__container {
-    background-color: var(--darkBlueColor);
-    color: var(--lightBlueColor);
-}
-
-.main-footer__all-links-container {
+.app__footer__wrapper {
     display: flex;
-    flex-grow: 1;
-    justify-content: space-around;
-    article {
-        margin: 0 50px;
-    }
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 0;
+    max-width: var(--safetyAreaWidth);
 }
 
-.main-footer__links-container {
-    width: fit-content;
-    .main-footer__link-navigation-header {
-        font-size: 1.2rem;
-        color: var(--mainWhiteColor);
-        &::after {
-            font-size: 1.7em;
-            content: '.';
-            color: var(--headerDotColor);
+.app__footer__logo-with-description {
+    width: 500px;
+    margin: 0 50px;
+    .app__footer__logo {
+        display: block;
+        width: 70px;
+        height: 70px;
+        img {
+            width: 100%;
+            height: 100%;
         }
     }
-    .main-footer__links-list {
-        list-style-type: none;
-        margin-top: 10px;
-        .main-footer__single-link-element {
-            margin: 10px 0;
-            .main-footer__single-anchor-tag:hover {
-                text-decoration: underline;
-            }
+    .app__footer__description {
+        margin-top: 30px;
+        strong {
+            color: var(--mainWhiteColor);
+            font-weight: normal;
         }
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
+@media only screen and (max-width: 1085px) {
+    .app__footer__logo-with-description {
+        width: 400px;
+    }
+}
+
 @media only screen and (max-width: 932px) {
-    .main-footer__wrapper {
+    .app__footer__wrapper {
         flex-direction: column;
         width: var(--mobileExactMargins);
         margin: var(--mobileMargin);
         padding: 30px 0;
     }
-    .main-footer__all-links-container {
-        margin-top: 30px;
-        article {
-            margin: 0;
-        }
+    .app__footer__logo-with-description {
+        width: var(--mobileExactMargins);
     }
 }
 
 @media only screen and (max-width: 530px) {
-    .main-footer__all-links-container {
-        flex-direction: column;
-        margin: 30px 0 0;
+    .app__footer__logo-with-description {
+        margin: 0;
+        width: 100%;
+        .app__footer__logo {
+            margin: 0 auto;
+        }
     }
 }

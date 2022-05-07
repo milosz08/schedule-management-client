@@ -18,6 +18,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { catchError, map, mergeMap, of } from 'rxjs';
@@ -43,6 +44,7 @@ import { BrowserStorageService } from '../../../services/browser-storage.service
 export class LoginSessionEffects {
 
     public constructor(
+        private _router: Router,
         private _actions$: Actions,
         private _authService: AuthService,
         private _sessionService: SessionService,
@@ -126,9 +128,12 @@ export class LoginSessionEffects {
     public userLogout$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(NgrxAction_SES.__logout),
-            map(() => {
+            map(action => {
                 this._sessionService.sessionEndInterval();
                 this._storageService.removeUserWithImageFromStorage();
+                if (action.ifRedirectToRoot) {
+                    this._router.navigate([ '/' ]).then(r => r);
+                }
             }),
         );
     }, { dispatch: false });

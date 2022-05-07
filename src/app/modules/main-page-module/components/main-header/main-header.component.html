@@ -17,29 +17,55 @@
   ~ Obiektowe".
   -->
 
-<header class = 'main-header__container'>
-	<a
-		[routerLink] = '[ "/" ]'
-		title = 'Przejdź do strony głównej'
-		class = 'main-header__logo'
+<div class = 'main-header-with-mobile-nav__container'>
+	<nav
+		*ngIf = '_ifHamburgerOpen'
+		class = 'main-header__mobile-navigation'
 	>
-		<img src = 'assets/images/main-logo-dark.svg' alt = 'logo'>
-	</a>
-	<nav class = 'main-header__navigation'>
-		<ng-container *ngFor = 'let nav of navigationDataGet; index as i;'>
-			<a
-				[routerLink] = 'nav.location'
-				[routerLinkActive] = '[ "link--active" ]'
-				[routerLinkActiveOptions] = '{ exact: true }'
-				class = 'main-header__navigation-link'
-				title = '{{ nav.ariaLabel }}'
-			>
-				{{ nav.name }}
-			</a>
-			<span *ngIf = 'i !== navigationDataGet.length - 1'
-				  class = 'app__dot-separator'
-			></span>
-		</ng-container>
+		<a
+			*ngFor = 'let nav of _navigationData'
+			[routerLink] = 'nav.location'
+			class = 'main-header__mobile-navigation-link'
+			title = '{{ nav.ariaLabel }}'
+		>
+			{{ nav.name }}
+			<span class = 'main-header__mobile-navigation-separator'></span>
+		</a>
 	</nav>
-	<app-user-header-data-with-popup></app-user-header-data-with-popup>
-</header>
+	<header class = 'main-header__container'>
+		<a
+			[routerLink] = '[ "/" ]'
+			title = 'Przejdź do strony głównej'
+			class = 'main-header__logo'
+		>
+			<img src = 'assets/images/main-logo-dark.svg' alt = ''>
+		</a>
+		<nav class = 'main-header__navigation'>
+			<ng-container *ngFor = 'let nav of _navigationData; index as i;'>
+				<a
+					[routerLink] = 'nav.location'
+					[routerLinkActive] = '[ "link--active" ]'
+					[routerLinkActiveOptions] = '{ exact: true }'
+					class = 'main-header__navigation-link'
+					title = '{{ nav.ariaLabel }}'
+				>
+					{{ nav.name }}
+				</a>
+				<span *ngIf = 'i !== _navigationData.length - 1'
+					  class = 'app__dot-separator'
+				></span>
+			</ng-container>
+		</nav>
+		<div class = 'main-header__right-content'>
+			<app-user-header-data-with-popup
+				[_blockedOpenPopup] = '!_ifHamburgerOpen'
+			></app-user-header-data-with-popup>
+			<button
+				(click) = 'handleHamburgerToggle()'
+				class = 'main-header__hamburger'
+			>
+				<div [class] = 'hamburgerActiveClass'></div>
+			</button>
+		</div>
+	</header>
+</div>

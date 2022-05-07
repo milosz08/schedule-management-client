@@ -3,7 +3,7 @@
  * Silesian University of Technology | Politechnika Śląska
  *
  * File name | Nazwa pliku: shared.reducer.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 17:22
+ * Last modified | Ostatnia modyfikacja: 02/05/2022, 16:39
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>

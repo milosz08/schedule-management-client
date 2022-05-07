@@ -36,10 +36,12 @@
 			<ng-template #userIdentity>
 				{{ createUserIdentity(savedAccount.nameWithSurname) }}
 			</ng-template>
+			<app-user-role-dot
+				[_userRole]='savedAccount.role'
+				class = 'button-element__role-dot-container'
+			>
+			</app-user-role-dot>
 		</button>
-		<span [class] = '"button-element__role-dot " + createUserRoleSingleLetter(savedAccount.role).class'>
-			{{ createUserRoleSingleLetter(savedAccount.role).letter }}
-		</span>
 		<button
 			(click) = 'handleRemoveSelectedSavedAccount(savedAccount.dictionaryHash)'
 			class = 'last-logins__remove-button'

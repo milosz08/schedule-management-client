@@ -56,38 +56,19 @@
     font-size: 2rem;
     color: var(--darkBlueColor);
     font-weight: 500;
-    overflow: hidden;
     .last-logins__user-image {
+        border-radius: 50%;
         width: 100%;
         height: 100%;
     }
 }
 
-.button-element__role-dot {
+.button-element__role-dot-container {
     position: absolute;
-    bottom: 70px;
-    right: 30px;
+    bottom: 2px;
+    right: 2px;
     width: 20px;
     height: 20px;
-    font-size: .8rem;
-    color: var(--mainWhiteColor);
-    background-color: var(--darkBlueColor);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &.role-dot--administrator {
-        background-color: var(--administratorColor);
-    }
-    &.role-dot--editor {
-        background-color: var(--editorColor);
-    }
-    &.role-dot--teacher {
-        background-color: var(--teacherColor);
-    }
-    &.role-dot--student {
-        background-color: var(--studentColor);
-    }
 }
 
 .last-logins__remove-button {

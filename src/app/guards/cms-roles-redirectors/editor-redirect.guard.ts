@@ -23,7 +23,7 @@ import { Store } from '@ngrx/store';
 
 import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
 import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { UserIdentityModel } from '../../models/user-identity.model';
+import { UserIdentityType } from '../../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -41,6 +41,6 @@ export class EditorRedirectGuard extends RedirectCmsRoleGuard {
         router: Router,
         store: Store<SessionReducerType>
     ) {
-        super(router, store, UserIdentityModel.ADMINISTRATOR);
+        super(router, store, UserIdentityType.ADMINISTRATOR);
     };
 }

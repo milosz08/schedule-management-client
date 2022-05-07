@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: remember-account.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:57
+ * File name | Nazwa pliku: user-role-dot.component.scss
+ * Last modified | Ostatnia modyfikacja: 06/05/2022, 17:55
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,12 +17,32 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../types/user-identity.type';
-
-export interface RememberAccountModel {
-    dictionaryHash: string;
-    nameWithSurname: string;
-    role: UserIdentityType;
-    email: string;
-    image: string;
+.role-dot {
+    width: 100%;
+    height: 100%;
+    font-size: .8rem;
+    color: var(--mainWhiteColor);
+    background-color: var(--darkBlueColor);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    box-sizing: content-box;
+    border: 2px solid var(--mainWhiteColor);
+    &.role-dot--administrator {
+        background-color: var(--administratorColor);
+    }
+    &.role-dot--editor {
+        background-color: var(--editorColor);
+    }
+    &.role-dot--teacher {
+        background-color: var(--teacherColor);
+    }
+    &.role-dot--student {
+        background-color: var(--studentColor);
+    }
+    &.role-dot--dark {
+        border-color: var(--darkBlueColor)
+    }
 }

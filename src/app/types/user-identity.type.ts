@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: user-identity.model.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 09:55
+ * File name | Nazwa pliku: user-identity.type.ts
+ * Last modified | Ostatnia modyfikacja: 27/04/2022, 09:58
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-export enum UserIdentityModel {
+export enum UserIdentityType {
     ADMINISTRATOR = 'ADMINISTRATOR',
     EDITOR = 'EDITOR',
     TEACHER = 'TEACHER',

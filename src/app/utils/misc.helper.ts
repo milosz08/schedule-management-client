@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { UserIdentityModel } from '../models/user-identity.model';
+import { UserIdentityType } from '../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -55,12 +55,26 @@ export class MiscHelper {
     /**
      * Metoda konwertująca typ enum nazwy roli użytkownika na nazwę spolszczoną.
      */
-    public static convertEngToPlUserRole(role: UserIdentityModel): string {
+    public static convertEngToPlUserRole(role: UserIdentityType): string {
         switch(role) {
             case 'ADMINISTRATOR':   return 'administrator';
             case 'EDITOR':          return 'edytor';
             case 'TEACHER':         return 'nauczyciel';
             default:                return 'student';
+        }
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca typ użytkownika i zwracająca literkę wraz z customową klasą.
+     */
+    public static createUserRoleSingleLetter(role: UserIdentityType): { letter: string, class: string } {
+        switch(role) {
+            case UserIdentityType.ADMINISTRATOR:    return { letter: 'a', class: 'role-dot--administrator' };
+            case UserIdentityType.EDITOR:           return { letter: 'e', class: 'role-dot--editor' };
+            case UserIdentityType.TEACHER:          return { letter: 'n', class: 'role-dot--teacher' };
+            default:                                return { letter: 's', class: 'role-dot--student' };
         }
     };
 }

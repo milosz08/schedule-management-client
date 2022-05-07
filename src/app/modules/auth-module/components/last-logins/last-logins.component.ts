@@ -24,8 +24,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-
-import { UserIdentityModel } from '../../../../models/user-identity.model';
 import { RememberAccountModel } from '../../../../models/remember-account.model';
 
 import * as NgrxAction_REM from '../../ngrx-store/remember-user-ngrx-store/remember-user.actions';
@@ -76,15 +74,6 @@ export class LastLoginsComponent {
     public createUserIdentity(nameAndSurname: string): string {
         const [ name, surname ] = nameAndSurname.split(' ');
         return name.charAt(0) + surname.charAt(0);
-    };
-
-    public createUserRoleSingleLetter(role: UserIdentityModel): { letter: string, class: string } {
-        switch(role) {
-            case 'ADMINISTRATOR':   return { letter: 'a', class: 'role-dot--administrator' };
-            case 'EDITOR':          return { letter: 'e', class: 'role-dot--editor' };
-            case 'TEACHER':         return { letter: 'n', class: 'role-dot--teacher' };
-            default:                return { letter: 's', class: 'role-dot--student' };
-        }
     };
 
     public createUserInfoOnHover(user: RememberAccountModel): string {

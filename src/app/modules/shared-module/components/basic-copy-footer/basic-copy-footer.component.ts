@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: modals.selectors.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:35
+ * File name | Nazwa pliku: basic-copy-footer.component.ts
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 01:31
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,27 +17,30 @@
  * Obiektowe".
  */
 
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-
-import { InitialModalsStateTypes } from './modals.initial';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export const MODALS_REDUCER = 'modalsReducer' as const;
-const getModalsState = createFeatureSelector<InitialModalsStateTypes>(MODALS_REDUCER);
-
-export type ModalsReducerType = { [MODALS_REDUCER]: InitialModalsStateTypes };
-
-const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
-    createSelector(getModalsState, payload)
-);
+import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const sel_sessionEndModalVisibility = selectorWithInjectedStore(
-    state => state.sessionEndModalVisibility,
-);
+/**
+ * Komponent renderujący widok standardowej stopki typu copyright (używanej jako dodatek do zwykłej stopki
+ * na stronach chronionych - panel cms, jak i niechronionych).
+ */
 
-export const sel_logoutModalVisibility = selectorWithInjectedStore(
-    state => state.logoutModalVisibility,
-);
+@Component({
+    selector: 'app-basic-copy-footer',
+    templateUrl: './basic-copy-footer.component.html',
+    styleUrls: [ './basic-copy-footer.component.scss' ]
+})
+export class BasicCopyFooterComponent {
+
+    public _latestDatePipe: string;
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
+        private _datePipe: DatePipe,
+    ) {
+        this._latestDatePipe = this._datePipe.transform(new Date(), 'yyyy')!;
+    };
+}

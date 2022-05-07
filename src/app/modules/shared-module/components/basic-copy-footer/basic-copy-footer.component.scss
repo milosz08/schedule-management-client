@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: modals.selectors.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:35
+ * File name | Nazwa pliku: basic-copy-footer.component.scss
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 01:30
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,27 +17,41 @@
  * Obiektowe".
  */
 
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+.basic-footer__disclaimer-section {
+    background-color: var(--darkWhiteColor);
+    color: var(--mainBlackColor);
+    text-align: center;
+}
 
-import { InitialModalsStateTypes } from './modals.initial';
+.basic-footer__disclaimer-section__wrapper {
+    width: calc(100% - 60px);
+    padding: 20px 0;
+    margin: 0 auto;
+    max-width: var(--safetyAreaWidth);
+    .basic-footer__disclaimer-description {
+        font-size: 1rem;
+        strong {
+            font-weight: normal;
+            color: var(--darkRedColor);
+        }
+    }
+}
+
+.basic-footer__disclaimer-separator {
+    display: block;
+    margin: 30px auto 10px;
+    width: calc(100% - 60px);
+    height: 1px;
+    background-color: var(--lightGrayColor);
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const MODALS_REDUCER = 'modalsReducer' as const;
-const getModalsState = createFeatureSelector<InitialModalsStateTypes>(MODALS_REDUCER);
-
-export type ModalsReducerType = { [MODALS_REDUCER]: InitialModalsStateTypes };
-
-const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
-    createSelector(getModalsState, payload)
-);
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export const sel_sessionEndModalVisibility = selectorWithInjectedStore(
-    state => state.sessionEndModalVisibility,
-);
-
-export const sel_logoutModalVisibility = selectorWithInjectedStore(
-    state => state.logoutModalVisibility,
-);
+@media only screen and (max-width: 530px) {
+    .basic-footer__disclaimer-section__wrapper {
+        text-align: left;
+    }
+    .basic-footer__disclaimer-separator {
+        width: 100%;
+    }
+}

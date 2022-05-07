@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: main-footer.component.ts
- * Last modified | Ostatnia modyfikacja: 17/04/2022, 13:16
+ * File name | Nazwa pliku: user-role-dot.component.ts
+ * Last modified | Ostatnia modyfikacja: 06/05/2022, 17:55
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,33 +17,41 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navigation-content.json';
-import AuthorizationNavigationContent from '../../../../mocked-data/authorization-navigation-content.json';
-
-import { MainNavigationModel } from '../../models/main-navigation.model';
+import { MiscHelper } from '../../../../utils/misc.helper';
+import { UserIdentityType } from '../../../../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Widok odpowiadający za generowanie widoku głównej stopki aplikacji na stronach niestrzeżonych.
+ * Komponent odpowiedzialny za renderowanie widoku kółka pokazującego rolę aktualnie zalogowanego użytkownika.
  */
 
 @Component({
-    selector: 'app-main-footer',
-    templateUrl: './main-footer.component.html',
-    styleUrls: [ './main-footer.component.scss' ],
+    selector: 'app-user-role-dot',
+    templateUrl: './user-role-dot.component.html',
+    styleUrls: [ './user-role-dot.component.scss' ]
 })
-export class MainFooterComponent {
+export class UserRoleDotComponent {
 
-    public readonly _navigationData: MainNavigationModel[];
-    public readonly _authNavigationData: MainNavigationModel[];
+    @Input()
+    public _userRole: UserIdentityType = UserIdentityType.UNDEFINED;
+
+    @Input()
+    public _ifShowLetter?: boolean = true;
+
+    @Input()
+    public _ifThemeIsDark?: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public constructor() {
-        this._navigationData = MainPageNavigationMockedData;
-        this._authNavigationData = AuthorizationNavigationContent;
+    public getUserRoleSingleLetterAndClass(): { letter: string, class: string } {
+        return MiscHelper.createUserRoleSingleLetter(this._userRole);
+    };
+
+    get __darkThemeClass(): string {
+        return 'role-dot ' + (this._ifThemeIsDark ? 'role-dot--dark' : '') + ' '
+            + this.getUserRoleSingleLetterAndClass().class;
     };
 }

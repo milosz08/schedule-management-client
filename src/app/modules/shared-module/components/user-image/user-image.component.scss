@@ -27,24 +27,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    &.header-auth__icon--logged,
+    &.header-auth__icon--without-image {
+        position: relative;
+    }
     &.header-auth__icon--logged {
         border: none;
-        overflow: hidden;
         img {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 2.5em;
             height: 2.5em;
+            border-radius: 50%;
         }
     }
     &.header-auth__icon--without-image {
         border: none;
         background-color: var(--darkBlueColor);
         color: var(--mainWhiteColor);
+        &.header-auth__icon--without-image--dark-theme {
+            background-color: var(--mainWhiteColor);
+            color: var(--darkBlueColor);
+        }
     }
     img {
         width: 100%;
         height: 100%;
     }
+}
+
+.header-auth__role-indicator {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    width: .6em;
+    height: .6em;
 }

@@ -27,6 +27,7 @@ import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 import * as NgrxAction_SES from '../../ngrx-store/session-ngrx-store/session.actions';
 import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxSelector_MOD from '../../ngrx-store/modals-ngrx-store/modals.selectors';
+import * as NgrxSelector_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
 import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
 
 import { EndSessionModalSequencerService } from '../../services/end-session-modal-sequencer.service';
@@ -46,6 +47,7 @@ import { EndSessionModalSequencerService } from '../../services/end-session-moda
 export class EndSessionModalComponent implements OnDestroy {
 
     public _modalVisibility$ = this._store.select(NgrxSelector_MOD.sel_sessionEndModalVisibility);
+    public _ifUserIsNotLogged$ = this._store.select(NgrxSelector_SES.sel_ifUserNotLogged)
     public _sequencerMaxInactivity = this._endSessionModalSequencerService.__sequencerMaxInactivityInSeconds;
     public _sequencerCurrValue$ = this._endSessionModalSequencerService._sequencerCurrentValue$;
 
@@ -58,9 +60,11 @@ export class EndSessionModalComponent implements OnDestroy {
         private _endSessionModalSequencerService: EndSessionModalSequencerService,
     ) {
         this._subscription$ = this._modalVisibility$.subscribe(visibility => {
-            if (visibility) {
-                this._endSessionModalSequencerService.onInitSequencerStart();
-            }
+            this._ifUserIsNotLogged$.subscribe(ifUserIsNotLogged => {
+                if (visibility && !ifUserIsNotLogged) {
+                    this._endSessionModalSequencerService.onInitSequencerStart();
+                }
+            }).unsubscribe();
         });
     };
 
