@@ -19,6 +19,11 @@
 
 import { Component } from '@angular/core';
 
+import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navigation-content.json';
+import AuthorizationNavigationContent from '../../../../mocked-data/authorization-navigation-content.json';
+
+import { MainNavigationModel } from '../../models/main-navigation.model';
+
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
@@ -30,4 +35,15 @@ import { Component } from '@angular/core';
     templateUrl: './main-footer.component.html',
     styleUrls: [ './main-footer.component.scss' ],
 })
-export class MainFooterComponent {}
+export class MainFooterComponent {
+
+    public readonly _navigationData: MainNavigationModel[];
+    public readonly _authNavigationData: MainNavigationModel[];
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor() {
+        this._navigationData = MainPageNavigationMockedData;
+        this._authNavigationData = AuthorizationNavigationContent;
+    };
+}

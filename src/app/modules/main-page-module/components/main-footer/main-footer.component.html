@@ -18,5 +18,56 @@
   -->
 
 <footer class = 'main-footer__container'>
-	stopka
+	<div class = 'app__footer__wrapper'>
+		<section class = 'app__footer__logo-with-description'>
+			<a
+				[routerLink] = '[ "/" ]'
+				title = 'Przejdź do strony głównej'
+				class = 'app__footer__logo'
+			>
+				<img src = 'assets/images/main-logo-light.svg' alt = ''>
+			</a>
+			<p class = 'app__footer__description'>
+				Aplikacja bazodanowa symulująca system zarządzania planem zajęć przykładowej uczelni wyższej technicznej.
+				Napisana przy użyciu technologii ASP.NET WebAPI (serwer) oraz Angular Framework (klient).
+			</p>
+		</section>
+		<section class = 'main-footer__all-links-container'>
+			<article class = 'main-footer__links-container'>
+				<h3 class = 'main-footer__link-navigation-header'>Nawigacja</h3>
+				<ul class = 'main-footer__links-list'>
+					<li
+						*ngFor = 'let nav of _navigationData; index as i;'
+						class = 'main-footer__single-link-element'
+					>
+						<a
+							[routerLink] = 'nav.location'
+							title = '{{ nav.ariaLabel }}'
+							class = 'main-footer__single-anchor-tag'
+						>
+							{{ nav.name }}
+						</a>
+					</li>
+				</ul>
+			</article>
+			<article class = 'main-footer__links-container'>
+				<h3 class = 'main-footer__link-navigation-header'>Autoryzacja</h3>
+				<ul class = 'main-footer__links-list'>
+					<li
+						*ngFor = 'let nav of _authNavigationData; index as i;'
+						class = 'main-footer__single-link-element'
+					>
+						<a
+							[routerLink] = 'nav.location'
+							title = '{{ nav.ariaLabel }}'
+							class = 'main-footer__single-anchor-tag'
+						>
+							{{ nav.name }}
+						</a>
+					</li>
+				</ul>
+			</article>
+		</section>
+	</div>
+	<app-basic-copy-footer></app-basic-copy-footer>
 </footer>
