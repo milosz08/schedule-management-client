@@ -33,6 +33,10 @@ import { MainHeaderComponent } from './components/main-header/main-header.compon
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 
 import { SharedModule } from '../shared-module/shared.module';
+import { StoreModule } from '@ngrx/store';
+
+import { domManipulationReducer } from '../cms-panel-module/ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.reducer';
+import { DOM_MANIPULATION_REDUCER } from '../cms-panel-module/ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -53,6 +57,7 @@ import { SharedModule } from '../shared-module/shared.module';
         RouterModule,
         SharedModule,
         MainPageRoutingModule,
+        StoreModule.forFeature(DOM_MANIPULATION_REDUCER, domManipulationReducer),
     ],
 })
 export class MainPageModule {}
