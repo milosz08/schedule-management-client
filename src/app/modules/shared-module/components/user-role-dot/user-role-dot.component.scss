@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: user-image.component.scss
- * Last modified | Ostatnia modyfikacja: 24/04/2022, 18:47
+ * File name | Nazwa pliku: user-role-dot.component.scss
+ * Last modified | Ostatnia modyfikacja: 06/05/2022, 17:55
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,46 +17,32 @@
  * Obiektowe".
  */
 
-.header-auth__icon {
-    border: 1px solid var(--lightGrayColor);
-    border-radius: 50%;
+.role-dot {
     width: 100%;
     height: 100%;
-    padding: 8px;
-    font-size: 1em;
+    font-size: .8rem;
+    color: var(--mainWhiteColor);
+    background-color: var(--darkBlueColor);
+    border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    &.header-auth__icon--logged,
-    &.header-auth__icon--without-image {
-        position: relative;
+    align-items: center;
+    text-transform: uppercase;
+    box-sizing: content-box;
+    border: 2px solid var(--mainWhiteColor);
+    &.role-dot--administrator {
+        background-color: var(--administratorColor);
     }
-    &.header-auth__icon--logged {
-        border: none;
-        img {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 2.5em;
-            height: 2.5em;
-            border-radius: 50%;
-        }
+    &.role-dot--editor {
+        background-color: var(--editorColor);
     }
-    &.header-auth__icon--without-image {
-        border: none;
-        background-color: var(--darkBlueColor);
-        color: var(--mainWhiteColor);
+    &.role-dot--teacher {
+        background-color: var(--teacherColor);
     }
-    img {
-        width: 100%;
-        height: 100%;
+    &.role-dot--student {
+        background-color: var(--studentColor);
     }
-}
-
-.header-auth__role-indicator {
-    position: absolute;
-    right: 2px;
-    bottom: 2px;
-    width: .6em;
-    height: .6em;
+    &.role-dot--dark {
+        border-color: var(--darkBlueColor)
+    }
 }

@@ -23,6 +23,8 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
 
+import { UserIdentityType } from '../../../../models/user-identity.type';
+
 import * as NgrxSelector_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
 import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';
 
@@ -44,6 +46,7 @@ export class UserImageComponent implements OnInit, OnDestroy {
     public _ifUserNotLogged$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserNotLogged);
     public _ifUserHasImage$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserHasImage);
     public _userInitials$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userInitials);
+    public _userRole$: Observable<UserIdentityType> = this._store.select(NgrxSelector_SES.sel_userRole);
 
     private _storeSubscription: Subscription | undefined;
     private _imageURL: string = '';

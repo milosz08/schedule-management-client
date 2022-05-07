@@ -35,10 +35,24 @@
 			[src] = '__imageURL'
 			[alt] = '_userInitials$ | async'
 		>
+		<app-user-role-dot
+			[_userRole] = '(_userRole$ | async)!'
+			[_ifShowLetter] = '_ifShowLetter'
+			[_ifThemeIsDark] = '_ifDarkBackgroundTheme'
+			class = 'header-auth__role-indicator'
+		>
+		</app-user-role-dot>
 	</div>
 	<ng-template #loggedUserWithoutPhoto>
 		<div class = 'header-auth__icon header-auth__icon--without-image'>
 			{{ _userInitials$ | async }}
+			<app-user-role-dot
+				[_userRole] = '(_userRole$ | async)!'
+				[_ifShowLetter] = '_ifShowLetter'
+				[_ifThemeIsDark] = '_ifDarkBackgroundTheme'
+				class = 'header-auth__role-indicator'
+			>
+			</app-user-role-dot>
 		</div>
 	</ng-template>
 </ng-template>

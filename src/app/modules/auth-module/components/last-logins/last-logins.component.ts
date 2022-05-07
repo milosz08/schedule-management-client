@@ -78,15 +78,6 @@ export class LastLoginsComponent {
         return name.charAt(0) + surname.charAt(0);
     };
 
-    public createUserRoleSingleLetter(role: UserIdentityModel): { letter: string, class: string } {
-        switch(role) {
-            case 'ADMINISTRATOR':   return { letter: 'a', class: 'role-dot--administrator' };
-            case 'EDITOR':          return { letter: 'e', class: 'role-dot--editor' };
-            case 'TEACHER':         return { letter: 'n', class: 'role-dot--teacher' };
-            default:                return { letter: 's', class: 'role-dot--student' };
-        }
-    };
-
     public createUserInfoOnHover(user: RememberAccountModel): string {
         const userRole = MiscHelper.convertEngToPlUserRole(user.role);
         return `Użytkownik: ${user.nameWithSurname}\nAdres email: ${user.email}\nRola w systemie: ${userRole}`;
