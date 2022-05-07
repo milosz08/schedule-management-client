@@ -43,13 +43,24 @@
 	</div>
 	<div class = 'user-details-popup__buttons-container'>
 		<a
-			[routerLink] = '[ "/secure/panel" ]'
+			*ngIf = '_ifIsCmsPanel; else gotoSecurePanel'
+			[routerLink] = '[ "/" ]'
 			class = 'app__button app__button--light app__button--hollow-light user-details-popup__button'
-			title = 'Kliknij aby przejść do panelu konta'
+			title = 'Kliknij aby przejść do strony głównej'
 		>
-			Konto
+			Start
 			<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
 		</a>
+		<ng-template #gotoSecurePanel>
+			<a
+				[routerLink] = '[ "/secure/panel" ]'
+				class = 'app__button app__button--light app__button--hollow-light user-details-popup__button'
+				title = 'Kliknij aby przejść do panelu konta'
+			>
+				Konto
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</a>
+		</ng-template>
 		<button
 			(click) = 'handleUserLogout()'
 			class = 'app__button app__button--light user-details-popup__button'

@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -46,6 +46,9 @@ export class UserDetailsPopupComponent {
     public _userNameAndSurname$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userHeaderName);
     public _userAuthLevel$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userAuthLevel);
     public _userLogin$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userLogin);
+
+    @Input()
+    public _ifIsCmsPanel?: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 

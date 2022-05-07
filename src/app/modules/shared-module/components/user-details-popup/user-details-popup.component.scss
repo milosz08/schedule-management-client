@@ -22,8 +22,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    right: 0;
-    top: 70px;
+    right: 50px;
+    top: 90px;
     width: 360px;
     background-color: var(--mainWhiteColor);
     border-radius: 8px;
@@ -81,5 +81,28 @@
     margin-top: 20px;
     .user-details-popup__button {
         font-size: 1rem;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 600px) {
+    .user-details-popup__container {
+        right: 0;
+        width: calc(100vw - 60px);
+        margin: var(--mobileMargin);
+        max-width: 360px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .user-details-popup__buttons-container {
+        flex-direction: column;
+        .user-details-popup__button {
+            justify-content: center;
+            &:nth-last-child(1) {
+                margin-top: 10px;
+            }
+        }
     }
 }
