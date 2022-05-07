@@ -19,18 +19,27 @@
 
 <div class = 'cms-header-and-role-bar__container'>
 	<header class = 'cms-header__container'>
-		<a
-			[routerLink] = '[ "/secure/panel" ]'
-			title = 'Przejdź do strony głównej'
-		>
-			<div class = 'cms-header__left-content-container'>
-				<img
-					class = 'cms-header__logo'
-					src = 'assets/images/main-logo-light.svg' alt = ''
-				>
-				<h1 class = 'cms-header__title'>System zarządzania planem</h1>
-			</div>
-		</a>
+		<div class = 'cms-header__title-with-hamburger'>
+			<button
+				(click) = 'handleHamburgerNavigationToggle()'
+				title = 'Kliknij aby otworzyć/zamkąć nawigację'
+				class = 'app__header__hamburger hamburger--remove-left-margin hamburger--always-show'
+			>
+				<div [ngClass] = '[ "app__header__hamburger-bars", "hamburger--dark-mode" ]'></div>
+			</button>
+			<a
+				[routerLink] = '[ "/secure/panel" ]'
+				title = 'Przejdź do strony głównej'
+			>
+				<div class = 'cms-header__left-content-container'>
+					<img
+						class = 'cms-header__logo'
+						src = 'assets/images/main-logo-light.svg' alt = ''
+					>
+					<h1 class = 'cms-header__title'>System zarządzania planem</h1>
+				</div>
+			</a>
+		</div>
 		<app-user-header-data-with-popup
 			[_ifIsCmsPanel] = 'true'
 			[_ifDarkBackgroundTheme] = 'true'
