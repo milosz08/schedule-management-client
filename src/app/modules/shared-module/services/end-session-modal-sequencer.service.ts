@@ -19,8 +19,11 @@
 
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 
 import { BehaviorSubject } from 'rxjs';
+import { SessionReducerType } from '../ngrx-store/session-ngrx-store/session.selectors';
+import * as NgrxAction_SES from '../ngrx-store/session-ngrx-store/session.actions';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -43,6 +46,7 @@ export class EndSessionModalSequencerService {
 
     public constructor(
         private _titleService: Title,
+        private _store: Store<SessionReducerType>,
     ) {
         this._sequencerCurrentValue$ = new BehaviorSubject<number>(this._sequencerMaxInactivityInSeconds);
     };
@@ -62,6 +66,7 @@ export class EndSessionModalSequencerService {
             }
             if (sequenceLeftTime-- === 0) {
                 this._titleService.setTitle(this._savedPageTitle);
+                this._store.dispatch(NgrxAction_SES.__logout({ ifRedirectToRoot: true }));
                 this.sequencerForceStop();
             }
         };
