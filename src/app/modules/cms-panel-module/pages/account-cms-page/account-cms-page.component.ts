@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: users-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:13
+ * File name | Nazwa pliku: account-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 17:42
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -25,20 +25,20 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Widok odpowiadający za generowanie strony panelu CMS ze wszystkimi użytkownikami (tylko ADMINISTRATOR).
+ * Komponent odpowiedzialny za renderowanie widoku związanego z ustawieniami konta użytkownika.
  */
 
 @Component({
-    selector: 'app-users-cms-page',
-    templateUrl: './users-cms-page.component.html',
-    styleUrls: [ './users-cms-page.component.scss' ]
+    selector: 'app-account-cms-page',
+    templateUrl: './account-cms-page.component.html',
+    styleUrls: [ './account-cms-page.component.scss' ]
 })
-export class UsersCmsPageComponent extends MetaWebContentHelper {
+export class AccountCmsPageComponent extends MetaWebContentHelper {
 
     public constructor(
         titleService: Title,
         metaService: Meta,
     ) {
-        super(titleService, metaService, AllCmsWebpages.USERS);
+        super(titleService, metaService, AllCmsWebpages.ACCOUNT);
     };
 }

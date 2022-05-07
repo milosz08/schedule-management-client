@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: users-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:13
+ * File name | Nazwa pliku: dom-manipulation.reducer.ts
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 16:47
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,28 +17,24 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { createReducer, on } from '@ngrx/store';
 
-import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+import * as NgrxAction from './dom-manipulation.actions';
+import { initialDomManipulationState } from './dom-manipulation.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Widok odpowiadający za generowanie strony panelu CMS ze wszystkimi użytkownikami (tylko ADMINISTRATOR).
- */
+const _domManipulationReducer = createReducer(
+    initialDomManipulationState,
+    on(NgrxAction.__toggleChangeLeftNavVisibility, state => {
+        return { ...state,
+            leftNavigationMenuToggle: !state.leftNavigationMenuToggle,
+        };
+    }),
+);
 
-@Component({
-    selector: 'app-users-cms-page',
-    templateUrl: './users-cms-page.component.html',
-    styleUrls: [ './users-cms-page.component.scss' ]
-})
-export class UsersCmsPageComponent extends MetaWebContentHelper {
+//----------------------------------------------------------------------------------------------------------------------
 
-    public constructor(
-        titleService: Title,
-        metaService: Meta,
-    ) {
-        super(titleService, metaService, AllCmsWebpages.USERS);
-    };
+export function domManipulationReducer(state: any, action: any) {
+    return _domManipulationReducer(state, action);
 }

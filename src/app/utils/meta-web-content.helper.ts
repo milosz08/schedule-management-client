@@ -108,4 +108,6 @@ export enum AllMainWebpages {
 export enum AllCmsWebpages {
     DASHBOARD = 'dashboard',
     USERS = 'users',
+    ACCOUNT = 'account',
+    BOOKINGS = 'bookings'
 }

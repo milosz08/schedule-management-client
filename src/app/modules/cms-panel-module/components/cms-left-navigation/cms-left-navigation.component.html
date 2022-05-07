@@ -2,8 +2,8 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: cms-page.component.html
-  ~ Last modified | Ostatnia modyfikacja: 27/04/2022, 10:11
+  ~ File name | Nazwa pliku: cms-left-navigation.component.html
+  ~ Last modified | Ostatnia modyfikacja: 07/05/2022, 13:52
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
   ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,11 +17,22 @@
   ~ Obiektowe".
   -->
 
-<app-cms-panel-header></app-cms-panel-header>
-<div class = 'app__cms-container'>
-	<app-cms-left-navigation class = 'app__cms-navigation-container'></app-cms-left-navigation>
-	<main class = 'app__cms-main-container'>
-		<router-outlet></router-outlet>
-	</main>
-</div>
-<app-cms-panel-footer></app-cms-panel-footer>
+<nav
+	*ngIf = '_ifNavVisible$ | async'
+	[@fadeInOutAnimation] = ''
+	class = 'cms-navigation__container'
+>
+	<ul class = 'cms-navigation__list-of-links'>
+		<li *ngFor = 'let link of getUserLinksBasedRole((_userRole$ | async)!)'>
+			<a
+				[routerLink] = '"/secure/panel/" + link.location'
+				[routerLinkActive] = '[ "link--active" ]'
+				[routerLinkActiveOptions] = '{ exact: true }'
+				class = 'single-list-element__navigation-link'
+				title = '{{ link.ariaLabel }}'
+			>
+				{{ link.name }}
+			</a>
+		</li>
+	</ul>
+</nav>

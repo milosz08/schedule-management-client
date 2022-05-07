@@ -22,13 +22,16 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 import { CmsPageComponent } from './cms-page.component';
+import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
+import { AccountCmsPageComponent } from './pages/account-cms-page/account-cms-page.component';
+import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
 import { CmsPanelHeaderComponent } from './components/cms-panel-header/cms-panel-header.component';
 import { CmsPanelFooterComponent } from './components/cms-panel-footer/cms-panel-footer.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms-left-navigation.component';
 
 import { SharedModule } from '../shared-module/shared.module';
 import { CmsPageRoutingModule } from './cms-page-routing.module';
-import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -39,6 +42,9 @@ import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.com
         UsersCmsPageComponent,
         CmsPanelHeaderComponent,
         CmsPanelFooterComponent,
+        CmsLeftNavigationComponent,
+        AccountCmsPageComponent,
+        BookingsCmsPageComponent,
     ],
     imports: [
         CommonModule,

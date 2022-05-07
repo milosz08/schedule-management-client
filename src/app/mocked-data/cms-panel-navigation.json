@@ -1,0 +1,26 @@
+[
+    {
+        "name": "panel główny",
+        "location": "dashboard",
+        "ariaLabel": "Kliknij aby przejść do panelu głównego",
+        "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
+    },
+    {
+        "name": "rezerwacje",
+        "location": "bookings",
+        "ariaLabel": "Kliknij aby przejść do przeglądu rezerwacji",
+        "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
+    },
+    {
+        "name": "użytkownicy",
+        "location": "users",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania użytkownikami",
+        "availableFor": "ADMINISTRATOR"
+    },
+    {
+        "name": "dane konta",
+        "location": "account",
+        "ariaLabel": "Kliknij aby przejść do ustawień konta",
+        "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
+    }
+]

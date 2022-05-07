@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: computed.scss
- * Last modified | Ostatnia modyfikacja: 07/04/2022, 18:59
+ * File name | Nazwa pliku: dom-manipulation.initial.ts
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 16:46
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,12 +17,12 @@
  * Obiektowe".
  */
 
-@import "font-faces";
-@import "variables";
-@import "resets";
-@import "mixins";
-@import "global";
-@import "controls";
-@import "modals";
-@import "footer";
-@import "hamburger";
+export interface InitialDomManipulationStateTypes {
+    leftNavigationMenuToggle: boolean;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const initialDomManipulationState: InitialDomManipulationStateTypes = {
+    leftNavigationMenuToggle: true,
+};

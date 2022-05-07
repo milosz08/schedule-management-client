@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: first-change-password.selectors.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:10
+ * File name | Nazwa pliku: cms-left-navigation.component.scss
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 13:52
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,22 +17,43 @@
  * Obiektowe".
  */
 
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+.cms-navigation__container {
+    margin: 20px 0 20px 20px;
+    width: 100%;
+}
 
-import { InitialFirstChangePasswordStateTypes } from './first-change-password.initial';
+.cms-navigation__list-of-links {
+    list-style-type: none;
+}
+
+.single-list-element__navigation-link {
+    display: block;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: var(--borderRadius);
+    width: 200px;
+    color: var(--lightGrayColor);
+    background-color: var(--darkWhiteColor);
+    text-transform: capitalize;
+    &.link--active {
+        color: var(--mainWhiteColor);
+        background-color: var(--darkBlueColor);
+    }
+    &:nth-child(1) {
+        margin: 0 0 10px;
+    }
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const FIRST_CHANGE_PASSWORD_REDUCER = 'firstChangePasswordReducer' as const;
-const getFirstChangePasswordState =
-    createFeatureSelector<InitialFirstChangePasswordStateTypes>(FIRST_CHANGE_PASSWORD_REDUCER);
-
-const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
-    createSelector(getFirstChangePasswordState, payload)
-);
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export const sel_initialChangePasswordMessage = selectorWithInjectedStore(
-    state => state.initialChangePasswordMessage,
-);
+@media only screen and (max-width: 839px) {
+    .cms-navigation__container {
+        position: absolute;
+        height: fit-content;
+        max-width: 240px;
+        background-color: var(--mainWhiteColor);
+        box-shadow: var(--modalsBoxShadow);
+        margin: 0;
+        padding: 20px;
+    }
+}

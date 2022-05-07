@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: users-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:13
+ * File name | Nazwa pliku: dom-manipulation.selectors.ts
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 16:47
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,28 +17,22 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+import { InitialDomManipulationStateTypes } from './dom-manipulation.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Widok odpowiadający za generowanie strony panelu CMS ze wszystkimi użytkownikami (tylko ADMINISTRATOR).
- */
+export const DOM_MANIPULATION_REDUCER = 'firstChangePasswordReducer' as const;
+const getDomManipulationState =
+    createFeatureSelector<InitialDomManipulationStateTypes>(DOM_MANIPULATION_REDUCER);
 
-@Component({
-    selector: 'app-users-cms-page',
-    templateUrl: './users-cms-page.component.html',
-    styleUrls: [ './users-cms-page.component.scss' ]
-})
-export class UsersCmsPageComponent extends MetaWebContentHelper {
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
+    createSelector(getDomManipulationState, payload)
+);
 
-    public constructor(
-        titleService: Title,
-        metaService: Meta,
-    ) {
-        super(titleService, metaService, AllCmsWebpages.USERS);
-    };
-}
+//----------------------------------------------------------------------------------------------------------------------
+
+export const sel_leftNavVisibility = selectorWithInjectedStore(
+    state => state.leftNavigationMenuToggle,
+);
