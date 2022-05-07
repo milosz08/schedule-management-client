@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../models/user-identity.type';
+import { UserIdentityType } from '../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 

@@ -23,7 +23,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { UserIdentityType } from '../../../../models/user-identity.type';
+import { UserIdentityType } from '../../../../types/user-identity.type';
 
 import * as NgrxSelector_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
 import { InitialSessionStateTypes } from '../../ngrx-store/session-ngrx-store/session.initial';

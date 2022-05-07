@@ -17,12 +17,12 @@
  * Obiektowe".
  */
 
-import { UserIdentityModel } from './user-identity.model';
+import { UserIdentityType } from '../types/user-identity.type';
 
 export interface RememberAccountModel {
     dictionaryHash: string;
     nameWithSurname: string;
-    role: UserIdentityModel;
+    role: UserIdentityType;
     email: string;
     image: string;
 }

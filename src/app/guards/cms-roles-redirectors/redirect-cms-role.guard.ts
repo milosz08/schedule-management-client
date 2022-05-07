@@ -22,9 +22,10 @@ import { Store } from '@ngrx/store';
 
 import { map, Observable } from 'rxjs';
 
+import { UserIdentityType } from '../../types/user-identity.type';
+
 import * as NgrxSelector_SHA from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { UserIdentityModel } from '../../models/user-identity.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -35,17 +36,17 @@ import { UserIdentityModel } from '../../models/user-identity.model';
 
 export class RedirectCmsRoleGuard implements CanActivate {
 
-    private readonly _userIdentity$: Observable<UserIdentityModel> = this._store
+    private readonly _userIdentity$: Observable<UserIdentityType> = this._store
         .select(NgrxSelector_SHA.sel_userIdentity);
 
-    private readonly _userCurrentRole: UserIdentityModel;
+    private readonly _userCurrentRole: UserIdentityType;
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _router: Router,
         private _store: Store<SessionReducerType>,
-        userCurrentRole: UserIdentityModel,
+        userCurrentRole: UserIdentityType,
     ) {
         this._userCurrentRole = userCurrentRole;
     };

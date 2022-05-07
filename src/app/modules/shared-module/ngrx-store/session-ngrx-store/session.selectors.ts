@@ -20,9 +20,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
+import { UserIdentityType } from '../../../../types/user-identity.type';
 
 import { InitialSessionStateTypes } from './session.initial';
-import { UserIdentityModel } from '../../../../models/user-identity.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -77,7 +77,7 @@ export const sel_loginError = selectorWithInjectedStore(
 );
 
 export const sel_userIdentity = selectorWithInjectedStore(
-    state => state.userData ? state.userData.role : UserIdentityModel.UNDEFINED,
+    state => state.userData ? state.userData.role : UserIdentityType.UNDEFINED,
 );
 
 export const sel_tokenRefreshInSeconds = selectorWithInjectedStore(

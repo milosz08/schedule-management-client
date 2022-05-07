@@ -20,7 +20,7 @@
 import { Component, Input } from '@angular/core';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-import { UserIdentityType } from '../../../../models/user-identity.type';
+import { UserIdentityType } from '../../../../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
