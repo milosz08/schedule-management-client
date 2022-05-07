@@ -27,8 +27,9 @@ export const FIRST_CHANGE_PASSWORD_REDUCER = 'firstChangePasswordReducer' as con
 const getFirstChangePasswordState =
     createFeatureSelector<InitialFirstChangePasswordStateTypes>(FIRST_CHANGE_PASSWORD_REDUCER);
 
-const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =>
-    createSelector(getFirstChangePasswordState, payload);
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
+    createSelector(getFirstChangePasswordState, payload)
+);
 
 //----------------------------------------------------------------------------------------------------------------------
 

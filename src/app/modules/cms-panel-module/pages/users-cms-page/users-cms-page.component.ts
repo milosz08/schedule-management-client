@@ -25,7 +25,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Widok odpowiadający za generowanie strony panelu CMS ze wszystkimi użytkownikami (TYLKO ADMINISTRATOR).
+ * Widok odpowiadający za generowanie strony panelu CMS ze wszystkimi użytkownikami (tylko ADMINISTRATOR).
  */
 
 @Component({
