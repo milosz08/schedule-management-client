@@ -46,6 +46,10 @@
         border: none;
         background-color: var(--darkBlueColor);
         color: var(--mainWhiteColor);
+        &.header-auth__icon--without-image--dark-theme {
+            background-color: var(--mainWhiteColor);
+            color: var(--darkBlueColor);
+        }
     }
     img {
         width: 100%;

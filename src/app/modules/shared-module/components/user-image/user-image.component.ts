@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
@@ -51,6 +51,12 @@ export class UserImageComponent implements OnInit, OnDestroy {
     private _storeSubscription: Subscription | undefined;
     private _imageURL: string = '';
 
+    @Input()
+    public _ifShowLetter?: boolean = true;
+
+    @Input()
+    public _ifDarkBackgroundTheme?: boolean = false;
+
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
@@ -75,5 +81,9 @@ export class UserImageComponent implements OnInit, OnDestroy {
 
     get __imageURL(): SafeUrl {
         return this._sanitizer.bypassSecurityTrustUrl(this._imageURL);
+    };
+
+    get __themeClass(): string {
+        return this._ifDarkBackgroundTheme ? 'header-auth__icon--without-image--dark-theme' : '';
     };
 }

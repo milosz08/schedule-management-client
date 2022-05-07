@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -53,6 +53,15 @@ export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
     public _userData: AuthResponseDataModel | null = null;
     private _ifModalOpen: boolean = false;
 
+    @Input()
+    public _blockedOpenPopup?: boolean = true;
+
+    @Input()
+    public _ifDarkBackgroundTheme?: boolean = false;
+
+    @Input()
+    public _ifIsCmsPanel?: boolean = false;
+
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
@@ -85,5 +94,17 @@ export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
 
     get __ifModalOpen(): boolean {
         return this._ifModalOpen && Boolean(this._userData);
+    };
+
+    get __headerAuthThemeCss(): string {
+        return `header-auth__button ${this._ifDarkBackgroundTheme && 'header-auth__button--dark'}`;
+    };
+
+    get __sessionLeftThemeCss(): string {
+        return `header-auth__session-info ${this._ifDarkBackgroundTheme && 'session-info--dark'}`;
+    };
+
+    get __sessionLeftLeftTileTheme(): string {
+        return `header-auth__session-info--${this._ifDarkBackgroundTheme ? 'yellow' : 'red'}-color`;
     };
 }

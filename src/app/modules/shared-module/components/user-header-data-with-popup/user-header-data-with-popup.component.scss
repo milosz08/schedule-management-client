@@ -27,6 +27,9 @@
     font-weight: 500;
     padding: 5px;
     color: var(--lightGrayColor);
+    &.header-auth__button--dark {
+        color: var(--mainWhiteColor);
+    }
 }
 
 .header-auth__text-area {
@@ -37,12 +40,17 @@
     .header-auth__session-info {
         display: flex;
         font-size: .8em;
+        color: var(--lightGrayColor);
         span {
             font-weight: 500;
             color: var(--darkBlueColor);
             display: block;
             min-width: 40px;
             text-align: right;
+            font-size: 1em;
+            &.session-info--dark {
+                color: var(--mainWhiteColor);
+            }
         }
         .header-auth__session-info--red-color {
             color: var(--darkRedColor);
@@ -51,6 +59,15 @@
 }
 
 .header-auth__image-container {
+    position: relative;
     width: 40px;
     height: 40px;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 700px) {
+    .header-auth__text-area {
+        display: none;
+    }
 }

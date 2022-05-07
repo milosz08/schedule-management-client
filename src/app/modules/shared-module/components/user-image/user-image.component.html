@@ -44,7 +44,7 @@
 		</app-user-role-dot>
 	</div>
 	<ng-template #loggedUserWithoutPhoto>
-		<div class = 'header-auth__icon header-auth__icon--without-image'>
+		<div [ngClass] = '[ "header-auth__icon header-auth__icon--without-image", __themeClass ]'>
 			{{ _userInitials$ | async }}
 			<app-user-role-dot
 				[_userRole] = '(_userRole$ | async)!'
