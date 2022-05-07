@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
+import { SharedModule } from '../shared-module/shared.module';
 import { TemplatesModule } from '../templates-module/templates.module';
 
 import { AuthPageComponent } from './auth-page.component';
@@ -75,11 +76,12 @@ import { FirstChangePasswordEffects } from './ngrx-store/first-change-password-n
     ],
     imports: [
         CommonModule,
-        AuthRoutingModule,
-        RouterModule,
-        ReactiveFormsModule,
+        SharedModule,
         MatIconModule,
+        RouterModule,
         TemplatesModule,
+        AuthRoutingModule,
+        ReactiveFormsModule,
         // ngrx store
         StoreModule.forFeature(REMEMBER_USER_REDUCER, rememberUserReducer),
         StoreModule.forFeature(RESET_PASSWORD_REDUCER, resetPasswordReducer),

@@ -19,10 +19,14 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 import { CmsPageComponent } from './cms-page.component';
+import { CmsPanelHeaderComponent } from './components/cms-panel-header/cms-panel-header.component';
+import { CmsPanelFooterComponent } from './components/cms-panel-footer/cms-panel-footer.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
 
+import { SharedModule } from '../shared-module/shared.module';
 import { CmsPageRoutingModule } from './cms-page-routing.module';
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 
@@ -33,10 +37,14 @@ import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.com
         CmsPageComponent,
         DashboardCmsPageComponent,
         UsersCmsPageComponent,
+        CmsPanelHeaderComponent,
+        CmsPanelFooterComponent,
     ],
     imports: [
         CommonModule,
         CmsPageRoutingModule,
+        SharedModule,
+        MatIconModule,
     ],
 })
 export class CmsPageModule {}

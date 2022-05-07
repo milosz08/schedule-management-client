@@ -29,6 +29,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found.componen
 
 import { UserImageComponent } from './components/user-image/user-image.component';
 import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
+import { UserRoleDotComponent } from './components/user-role-dot/user-role-dot.component';
+import { BasicCopyFooterComponent } from './components/basic-copy-footer/basic-copy-footer.component';
 import { EndSessionModalComponent } from './components/end-session-modal/end-session-modal.component';
 import { UserDetailsPopupComponent } from './components/user-details-popup/user-details-popup.component';
 import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
@@ -62,6 +64,8 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         // komponenty
         UserImageComponent,
         LogoutModalComponent,
+        UserRoleDotComponent,
+        BasicCopyFooterComponent,
         EndSessionModalComponent,
         UserDetailsPopupComponent,
         LoadingSuspenseCardComponent,
@@ -96,6 +100,9 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         UserHeaderDataWithPopupComponent,
         EndSessionModalComponent,
         LogoutModalComponent,
+        UserRoleDotComponent,
+        BasicCopyFooterComponent,
+        UserImageComponent,
     ],
 })
 export class SharedModule {}
