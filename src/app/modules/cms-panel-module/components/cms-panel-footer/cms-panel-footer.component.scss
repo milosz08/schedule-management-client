@@ -1,0 +1,70 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: cms-panel-footer.component.scss
+ * Last modified | Ostatnia modyfikacja: 06/05/2022, 22:48
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.cms-footer__container {
+    background-color: var(--extraDarkWhiteColor);
+    color: var(--lightBlueColor);
+}
+
+.cms-footer__description--dark {
+    color: var(--darkBlueColor);
+}
+
+.cms-footer__login-status-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr;
+    flex-grow: 1;
+    margin: 0 50px;
+    .cms-footer__user-data {
+        min-width: 250px;
+        grid-column-end: span 1;
+        margin: 20px 20px 20px 0;
+        .cms-footer__user-data__data {
+            font-size: 1.1rem;
+            color: var(--darkBlueColor);
+            &.cms-footer__user-data__data--capitalised {
+                text-transform: capitalize;
+            }
+        }
+    }
+    .cms-footer__logout-button {
+        grid-column-start: 1;
+        display: flex;
+        align-items: center;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 709px) {
+    .cms-footer__login-status-info {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 1fr 1fr;
+        .cms-footer__user-data {
+            grid-column-end: span 2;
+        }
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .cms-footer__login-status-info {
+        margin: 0;
+    }
+}
