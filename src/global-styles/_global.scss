@@ -67,11 +67,18 @@
     max-width: var(--safetyAreaWidth);
 }
 
-.app__root-container {
+.app__root-container,
+.app__cms-container {
     padding-top: 100px;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1090px) {
+    .app__root-container {
+        padding-top: 0;
+    }
+}
 
 @media only screen and (max-width: 839px) {
     .app__auth-container {
@@ -80,7 +87,8 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .app__auth-container {
+    .app__auth-container,
+    .app__cms-container{
         padding-top: 0;
     }
 }
