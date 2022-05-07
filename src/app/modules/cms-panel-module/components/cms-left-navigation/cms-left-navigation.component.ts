@@ -27,9 +27,15 @@ import { UserIdentityType } from '../../../../types/user-identity.type';
 import CmsPanelNavigation from '../../../../mocked-data/cms-panel-navigation.json';
 import { CmsPanelNavigationDataModel } from '../../models/cms-panel-navigation-data.model';
 
-import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import * as NgrxSelector_DOM from '../../ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.selectors';
+
+import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { DomManipulatorReducerType } from '../../ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.selectors';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+type ComputedStores = SessionReducerType | DomManipulatorReducerType;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -53,7 +59,7 @@ export class CmsLeftNavigationComponent {
     //------------------------------------------------------------------------------------------------------------------
 
     constructor(
-        private _store: Store<SessionReducerType>,
+        private _store: Store<ComputedStores>,
     ) {
         this._navigationAllData = CmsPanelNavigation;
     };

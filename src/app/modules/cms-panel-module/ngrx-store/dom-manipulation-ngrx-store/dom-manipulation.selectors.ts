@@ -23,9 +23,11 @@ import { InitialDomManipulationStateTypes } from './dom-manipulation.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const DOM_MANIPULATION_REDUCER = 'firstChangePasswordReducer' as const;
+export const DOM_MANIPULATION_REDUCER = 'domManipulationReducer' as const;
 const getDomManipulationState =
     createFeatureSelector<InitialDomManipulationStateTypes>(DOM_MANIPULATION_REDUCER);
+
+export type DomManipulatorReducerType = { [DOM_MANIPULATION_REDUCER]: InitialDomManipulationStateTypes };
 
 const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
     createSelector(getDomManipulationState, payload)
