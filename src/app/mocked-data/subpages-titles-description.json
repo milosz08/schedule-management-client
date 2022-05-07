@@ -44,6 +44,14 @@
         "users": {
             "title": "Użytkownicy",
             "description": "W tej sekcji możesz przeglądać wszystkich użytkowników aktywnych w systemie."
+        },
+        "account": {
+            "title": "Konto",
+            "description": "W tej sekcji możesz przeglądać oraz edytować dane konta."
+        },
+        "bookings": {
+            "title": "Moje rezerwacje",
+            "description": "W tej sekcji możesz przeglądać oraz wszystkie stworzone rezerwacje"
         }
     }
 }
