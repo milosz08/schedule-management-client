@@ -24,8 +24,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-
-import { UserIdentityModel } from '../../../../models/user-identity.model';
 import { RememberAccountModel } from '../../../../models/remember-account.model';
 
 import * as NgrxAction_REM from '../../ngrx-store/remember-user-ngrx-store/remember-user.actions';

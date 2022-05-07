@@ -35,7 +35,7 @@ const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =
 //----------------------------------------------------------------------------------------------------------------------
 
 export const sel_sessionEndModalVisibility = selectorWithInjectedStore(
-    state => state.sessionEndModalVisibility && Boolean(state.userData),
+    state => state.sessionEndModalVisibility,
 );
 
 export const sel_logoutModalVisibility = selectorWithInjectedStore(
