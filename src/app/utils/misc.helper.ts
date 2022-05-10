@@ -77,4 +77,16 @@ export class MiscHelper {
             default:                                return { letter: 's', class: 'role-dot--student' };
         }
     };
+
+    /**
+     * Metoda pobierająca typ użytkownika i zwracająca pełną nazwę wraz z klasą ustawiającą kolor.
+     */
+    public static createUserRoleAllPhrase(role: UserIdentityType): { label: string, class: string } {
+        switch(role) {
+            case UserIdentityType.ADMINISTRATOR:    return { label: 'administrator', class: 'role--administrator' };
+            case UserIdentityType.EDITOR:           return { label: 'edytor', class: 'role--editor' };
+            case UserIdentityType.TEACHER:          return { label: 'nauczyciel', class: 'role--teacher' };
+            default:                                return { label: 'student', class: 'role--student' };
+        }
+    };
 }

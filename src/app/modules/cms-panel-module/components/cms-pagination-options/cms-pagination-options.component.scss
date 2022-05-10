@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-left-navigation.component.scss
- * Last modified | Ostatnia modyfikacja: 07/05/2022, 13:52
+ * File name | Nazwa pliku: cms-pagination-options.component.scss
+ * Last modified | Ostatnia modyfikacja: 09/05/2022, 21:08
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,44 +17,52 @@
  * Obiektowe".
  */
 
-.cms-navigation__container {
-    margin: 20px 0 20px 20px;
-    width: 100%;
+.cms-pagination__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .cms-pagination__all-pages,
+    .cms-pagination__size-of-page {
+        margin-top: 15px;
+    }
+    .cms-pagination__all-pages {
+        display: flex;
+        align-items: center;
+    }
+    .cms-pagination__size-of-page {
+
+    }
 }
 
-.cms-navigation__list-of-links {
-    list-style-type: none;
-}
-
-.single-list-element__navigation-link {
-    display: block;
-    margin: 10px 0;
-    padding: 12px;
-    border-radius: var(--borderRadius);
-    width: 200px;
-    color: var(--lightGrayColor);
+.cms-pagination__pagination-button {
     background-color: var(--darkWhiteColor);
-    text-transform: capitalize;
-    &.link--active {
-        color: var(--mainWhiteColor);
+    color: var(--lightGrayColor);
+    border-radius: var(--borderRadius);
+    margin: 0 4px;
+    padding: 2px 6px;
+    width: 30px;
+    &.pagination-button--active {
         background-color: var(--darkBlueColor);
+        color: var(--mainWhiteColor);
     }
-    &:nth-child(1) {
-        margin: 0 0 10px;
+    &.pagination-button__page-prev-next {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 0;
     }
+}
+
+.cms-pagination__dots {
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    margin: 0 5px;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-@media only screen and (max-width: 839px) {
-    .cms-navigation__container {
-        position: absolute;
-        z-index: 8;
-        height: fit-content;
-        max-width: 240px;
-        background-color: var(--mainWhiteColor);
-        box-shadow: var(--modalsBoxShadow);
-        margin: 0;
-        padding: 20px;
+@media only screen and (max-width: 699px) {
+    .cms-pagination__container {
+        justify-content: center;
     }
 }

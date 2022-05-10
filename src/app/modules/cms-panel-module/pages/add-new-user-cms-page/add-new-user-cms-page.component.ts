@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: editor-redirect.guard.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:53
+ * File name | Nazwa pliku: add-new-user-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 08/05/2022, 23:39
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,30 +17,28 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
-import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { UserIdentityType } from '../../types/user-identity.type';
+import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
- * chronionego zasobu do którego dostęp ma tylko administrator.
+ * Komponent odpowiedzialny za renderowanie widoku umożliwiającego dodawanie nowych użytkowników
  */
 
-@Injectable({
-    providedIn: 'root',
+@Component({
+    selector: 'app-add-new-user-cms-page',
+    templateUrl: './add-new-user-cms-page.component.html',
+    styleUrls: [ './add-new-user-cms-page.component.scss' ]
 })
-export class AdminRedirectGuard extends RedirectCmsRoleGuard {
+export class AddNewUserCmsPageComponent extends MetaWebContentHelper {
 
-    public constructor(
-        router: Router,
-        store: Store<SessionReducerType>
+    constructor(
+        titleService: Title,
+        metaService: Meta,
     ) {
-        super(router, store, UserIdentityType.ADMINISTRATOR);
+        super(titleService, metaService, AllCmsWebpages.ADD_USER);
     };
 }

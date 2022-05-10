@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: editor-redirect.guard.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:53
+ * File name | Nazwa pliku: helpers-connector.service.ts
+ * Last modified | Ostatnia modyfikacja: 09/05/2022, 21:10
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,29 +18,42 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
 
-import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { UserIdentityType } from '../../types/user-identity.type';
+import { map, Observable } from 'rxjs';
+
+import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
- * chronionego zasobu do którego dostęp ma tylko administrator.
+ * Klasa serwisu pomocniczego do łączenia z backendem dla tabel w systemie zarządzania treścią.
  */
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
-export class AdminRedirectGuard extends RedirectCmsRoleGuard {
+export class HelpersConnectorService {
 
     public constructor(
-        router: Router,
-        store: Store<SessionReducerType>
+        private _http: HttpClient,
+        private _endpoints: ApiConfigurerHelper,
     ) {
-        super(router, store, UserIdentityType.ADMINISTRATOR);
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda zaciągająca z API dostępne opcje ilości elementów na jednej stronie (paginacja).
+     */
+    public getAvailablePaginations(): Observable<{ availablePaginations: Array<number> }> {
+        return this._http.get<{ availablePaginations: Array<number> }>(
+            this._endpoints.AVAILABLE_PAGINATIONS,
+        ).pipe(
+            map(data => {
+                return data;
+            }),
+        );
+    };
+
 }

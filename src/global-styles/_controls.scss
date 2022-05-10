@@ -86,6 +86,11 @@
             color: var(--mainWhiteColor);
         }
     }
+    &.app__button--danger-light {
+        background-color: transparent;
+        border: 1px solid var(--darkRedColor);
+        color: var(--darkRedColor);
+    }
     &.app__button--hollow-light, &.app__button--hollow-dark {
         background-color: transparent;
         border: 1px solid var(--darkBlueColor);
@@ -104,7 +109,7 @@
         }
     }
     .app__button__arrow {
-        margin: 3px 0 0 10px;
+        margin: 4px 0 0 10px;
         font-size: 1.5rem;
         line-height: .8;
         color: var(--darkBlueColor);
@@ -113,10 +118,20 @@
             margin: 5px 10px 3px 0;
         }
     }
+    .app__button__text {
+        font-size: 1.5em;
+        line-height: 1;
+        color: inherit;
+        margin-right: 10px;
+        font-weight: 400;
+    }
     &:hover:not(:disabled) .app__button__arrow {
         transform: translateX(3px);
         &.app__button__arrow--arrow-left {
             transform: translateX(-3px);
+        }
+        &.app__button-animation-disabled {
+            transform: translateX(0);
         }
     }
     &:disabled {

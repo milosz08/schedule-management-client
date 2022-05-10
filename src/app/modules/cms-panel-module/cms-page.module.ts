@@ -20,6 +20,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 import { CmsPageComponent } from './cms-page.component';
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
@@ -32,6 +35,16 @@ import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms
 
 import { SharedModule } from '../shared-module/shared.module';
 import { CmsPageRoutingModule } from './cms-page-routing.module';
+import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
+import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
+import { CmsUsersTableComponent } from './components/cms-users-table/cms-users-table.component';
+import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
+import { CmsSortingButtonComponent } from './components/cms-sorting-button/cms-sorting-button.component';
+import { SingleUserDetailsCmsPageComponent } from './pages/single-user-details-cms-page/single-user-details-cms-page.component';
+
+import { LIST_NAVIGATIONS_REDUCER } from './ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
+import { listNavigationsReducer } from './ngrx-store/list-navigations-ngrx-store/list-navigations.reducer';
+import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store/ngrx-effects/list-navigations.effects';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -45,12 +58,23 @@ import { CmsPageRoutingModule } from './cms-page-routing.module';
         CmsLeftNavigationComponent,
         AccountCmsPageComponent,
         BookingsCmsPageComponent,
+        SearchFormInputComponent,
+        AddNewUserCmsPageComponent,
+        CmsUsersTableComponent,
+        CmsPaginationOptionsComponent,
+        CmsSortingButtonComponent,
+        SingleUserDetailsCmsPageComponent,
     ],
     imports: [
         CommonModule,
         CmsPageRoutingModule,
         SharedModule,
         MatIconModule,
+        ReactiveFormsModule,
+        StoreModule.forFeature(LIST_NAVIGATIONS_REDUCER, listNavigationsReducer),
+        EffectsModule.forFeature([
+            ListNavigationsEffects,
+        ]),
     ],
 })
 export class CmsPageModule {}

@@ -1,0 +1,96 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: cms-users-table.component.html
+  ~ Last modified | Ostatnia modyfikacja: 09/05/2022, 16:53
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<aside
+	*ngIf = '!_usersPagination; else showContent'
+	class = 'app-cms__loading-table-content'
+>
+	<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+</aside>
+<ng-template #showContent>
+	<p class = 'app-cms__query-parameters'>
+		Pobrano {{ _usersPagination!.elementsFrom }}-{{ _usersPagination!.elementsTo }} wyników z
+		{{ _usersPagination!.totalElementsCount }} wszystkich możliwych wyników.
+	</p>
+	<table class = 'app-cms-table__container'>
+		<tr *ngIf = '_usersPagination!.elements.length > 0'>
+			<th class = 'app-cms-table__th-id app-cms-table--hide-column__small'>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Id'
+					[_sortingData] = '_userSortBy.ID'
+				></app-cms-sorting-button>
+			</th>
+			<th>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Nazwisko i imię'
+					[_sortingData] = '_userSortBy.SURNAME'
+				></app-cms-sorting-button>
+			</th>
+			<th class = 'app-cms-table--hide-column__large'>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Login'
+					[_sortingData] = '_userSortBy.LOGIN'
+				></app-cms-sorting-button>
+			</th>
+			<th class = 'app-cms-table--hide-column__medium'>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Rola w systemie'
+					[_sortingData] = '_userSortBy.ROLE'
+				></app-cms-sorting-button>
+			</th>
+			<th class = 'app-cms-table__th-details'></th>
+			<th class = 'app-cms-table__th-details'></th>
+		</tr>
+		<tr *ngFor = 'let user of _usersPagination!.elements'>
+			<td class = 'app-cms-table--hide-column__small'>{{ user.id }}</td>
+			<td>{{ user.nameWithSurname }}</td>
+			<td class = 'app-cms-table--hide-column__large'>{{ user.login }}</td>
+			<td class = 'app-cms-table--hide-column__medium'>
+				<span [ngClass] = '[ "cms-table__user-role", getUserRole(user.role).class ]'>
+					{{ getUserRole(user.role).label }}
+				</span>
+			</td>
+			<td>
+				<a
+					[routerLink] = '[ "/secure/panel/users/user/" + user.login ]'
+					class = 'app__button app__button--light app__button--hollow-light cms-table__details-button'
+					title = 'Kliknij aby przejść do szczegółów konta użytkownika'
+				>
+					<span class = 'app-cms-table--hide-details-button-text'>Szczegóły</span>
+					<mat-icon class = 'app__button__arrow cms-table-button--remove-arrow-margin'>arrow_right_alt</mat-icon>
+				</a>
+			</td>
+			<td>
+				<button
+					(click) = 'handleDeleteUser(user.id)'
+					class = 'app__button app__button--danger-light'
+					title = 'Kliknij aby usunąć konto użytkownika z systemu'
+					[disabled] = '!user.ifRemovable || user.login === (_userLogin$ | async)'
+				>
+					Usuń
+				</button>
+			</td>
+		</tr>
+	</table>
+	<app-cms-pagination-options
+		*ngIf = '_usersPagination!.elements.length > 0'
+		[_pagesMaxCount] = '_usersPagination!.totalPagesCount'
+		[_currentActivePages] = '_usersPagination!.currentActivePages'
+	></app-cms-pagination-options>
+</ng-template>

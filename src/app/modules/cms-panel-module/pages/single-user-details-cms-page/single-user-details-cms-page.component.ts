@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: users-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:13
+ * File name | Nazwa pliku: single-user-details-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 09/05/2022, 22:42
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,6 +18,7 @@
  */
 
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
@@ -25,20 +26,26 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Widok odpowiadający za generowanie strony panelu CMS ze wszystkimi użytkownikami (tylko ADMINISTRATOR).
+ * Komponent odpowiadający za renderowanie widoku strony pojedynczego użytkownika (tylko dla ADMINISTRATORA).
  */
 
 @Component({
-    selector: 'app-users-cms-page',
-    templateUrl: './users-cms-page.component.html',
-    styleUrls: [ './users-cms-page.component.scss' ],
+    selector: 'app-single-user-details-cms-page',
+    templateUrl: './single-user-details-cms-page.component.html',
+    styleUrls: [ './single-user-details-cms-page.component.scss' ]
 })
-export class UsersCmsPageComponent extends MetaWebContentHelper {
+export class SingleUserDetailsCmsPageComponent extends MetaWebContentHelper {
+
+    public _userLogin: string | null = '';
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         titleService: Title,
         metaService: Meta,
+        private _route: ActivatedRoute,
     ) {
-        super(titleService, metaService, AllCmsWebpages.USERS);
+        super(titleService, metaService, AllCmsWebpages.USER_DETAILS);
+        this._userLogin = this._route.snapshot.paramMap.get('userLogin');
     };
 }

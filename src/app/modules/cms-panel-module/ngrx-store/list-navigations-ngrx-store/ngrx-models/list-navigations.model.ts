@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: editor-redirect.guard.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:53
+ * File name | Nazwa pliku: list-navigations.model.ts
+ * Last modified | Ostatnia modyfikacja: 10/05/2022, 00:28
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,30 +17,16 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-
-import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { UserIdentityType } from '../../types/user-identity.type';
+import { BasicDataSortBy } from '../../../types/basic-data-sort-by.types';
+import { AvailablesSortingTypes } from '../../../types/availables-sorting.types';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
- * chronionego zasobu do którego dostęp ma tylko administrator.
- */
-
-@Injectable({
-    providedIn: 'root',
-})
-export class AdminRedirectGuard extends RedirectCmsRoleGuard {
-
-    public constructor(
-        router: Router,
-        store: Store<SessionReducerType>
-    ) {
-        super(router, store, UserIdentityType.ADMINISTRATOR);
-    };
+export interface ListNavigationsModel {
+    searchPhrase: string;
+    pageNumber: number;
+    pageSize: number;
+    allPageSizes: Array<number>;
+    sortBy: BasicDataSortBy;
+    sortDirection: AvailablesSortingTypes;
 }

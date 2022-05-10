@@ -40,4 +40,6 @@ export class ApiConfigurerHelper {
     public readonly RESET_PASSWORD_SEND_TOKEN_VIA_EMAIL = ApiConfigurerHelper.API_PREFIX + 'auth/reset-password-email';
     public readonly RESET_PASSWORD_VALIDATE_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/confirm-reset-password';
     public readonly RESET_PASSWORD_VIA_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/reset-password';
+    public readonly CMS_FILTERED_ALL_USERS = ApiConfigurerHelper.API_PREFIX + 'users/all-users';
+    public readonly AVAILABLE_PAGINATIONS = ApiConfigurerHelper.API_PREFIX + 'helper/available-paginations';
 }
