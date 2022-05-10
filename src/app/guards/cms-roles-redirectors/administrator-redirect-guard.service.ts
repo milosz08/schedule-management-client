@@ -35,7 +35,7 @@ import { UserIdentityType } from '../../types/user-identity.type';
 @Injectable({
     providedIn: 'root',
 })
-export class AdministratorRedirectGuard extends RedirectCmsRoleGuard {
+export class AdminRedirectGuard extends RedirectCmsRoleGuard {
 
     public constructor(
         router: Router,

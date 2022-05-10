@@ -31,7 +31,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 @Component({
     selector: 'app-users-cms-page',
     templateUrl: './users-cms-page.component.html',
-    styleUrls: [ './users-cms-page.component.scss' ]
+    styleUrls: [ './users-cms-page.component.scss' ],
 })
 export class UsersCmsPageComponent extends MetaWebContentHelper {
 

@@ -49,6 +49,7 @@
 @media only screen and (max-width: 839px) {
     .cms-navigation__container {
         position: absolute;
+        z-index: 8;
         height: fit-content;
         max-width: 240px;
         background-color: var(--mainWhiteColor);

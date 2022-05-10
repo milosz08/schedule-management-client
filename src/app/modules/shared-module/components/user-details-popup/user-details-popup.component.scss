@@ -19,6 +19,7 @@
 
 .user-details-popup__container {
     position: absolute;
+    z-index: 9;
     display: flex;
     flex-direction: column;
     align-items: center;
