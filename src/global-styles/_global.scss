@@ -77,7 +77,7 @@
     min-height: 100vh;
     .app__cms-main-container {
         flex-grow: 1;
-        padding: 20px 15px 15px;
+        padding: 20px 30px 15px;
         margin: 20px;
         border-radius: var(--borderRadius);
         border: 1px solid var(--extraLightGrayColor);
@@ -107,6 +107,7 @@
         padding-top: 0;
         .app__cms-main-container {
             margin: 0;
+            padding: 20px 15px 15px;
             border: none;
         }
     }
