@@ -45,6 +45,14 @@
             "title": "Użytkownicy",
             "description": "W tej sekcji możesz przeglądać wszystkich użytkowników aktywnych w systemie."
         },
+        "addUser": {
+            "title": "Dodaj użytkownika",
+            "description": "W tej sekcji możesz dodać nowego użytkownika do systemu."
+        },
+        "userDetails": {
+            "title": "Szczegóły konta",
+            "description": "W tej sekcji możesz podejrzeć szczegóły konta wybranego użytkownika."
+        },
         "account": {
             "title": "Konto",
             "description": "W tej sekcji możesz przeglądać oraz edytować dane konta."

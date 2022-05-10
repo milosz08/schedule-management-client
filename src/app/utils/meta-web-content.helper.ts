@@ -109,5 +109,7 @@ export enum AllCmsWebpages {
     DASHBOARD = 'dashboard',
     USERS = 'users',
     ACCOUNT = 'account',
-    BOOKINGS = 'bookings'
+    BOOKINGS = 'bookings',
+    ADD_USER = 'addUser',
+    USER_DETAILS = 'userDetails',
 }
