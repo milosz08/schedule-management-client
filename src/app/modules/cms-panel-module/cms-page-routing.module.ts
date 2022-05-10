@@ -20,7 +20,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdministratorRedirectGuard } from '../../guards/cms-roles-redirectors/administrator-redirect-guard.service';
+import { AdminRedirectGuard } from '../../guards/cms-roles-redirectors/administrator-redirect-guard.service';
 
 import { CmsPageComponent } from './cms-page.component';
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
@@ -28,6 +28,8 @@ import { AccountCmsPageComponent } from './pages/account-cms-page/account-cms-pa
 import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
+import { SingleUserDetailsCmsPageComponent } from './pages/single-user-details-cms-page/single-user-details-cms-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +39,9 @@ const routes: Routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardCmsPageComponent },
             { path: 'bookings', component: BookingsCmsPageComponent },
-            { path: 'users', component: UsersCmsPageComponent, canActivate: [ AdministratorRedirectGuard ] },
+            { path: 'users', component: UsersCmsPageComponent, canActivate: [ AdminRedirectGuard ] },
+            { path: 'users/add-new-user', component: AddNewUserCmsPageComponent, canActivate: [ AdminRedirectGuard ] },
+            { path: 'users/user/:userLogin', component: SingleUserDetailsCmsPageComponent, canActivate: [ AdminRedirectGuard ] },
             { path: 'account', component: AccountCmsPageComponent },
             { path: '**', component: NotFoundPageComponent, pathMatch: 'full' },
         ],

@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: computed.scss
- * Last modified | Ostatnia modyfikacja: 07/04/2022, 18:59
+ * File name | Nazwa pliku: basic-data-sort-by.types.ts
+ * Last modified | Ostatnia modyfikacja: 10/05/2022, 02:08
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,13 +17,9 @@
  * Obiektowe".
  */
 
-@import "font-faces";
-@import "variables";
-@import "resets";
-@import "mixins";
-@import "global";
-@import "controls";
-@import "modals";
-@import "footer";
-@import "hamburger";
-@import "cms-templates";
+export enum BasicDataSortBy {
+    ID = 'Id',
+    SURNAME = 'Surname',
+    LOGIN = 'Login',
+    ROLE = 'Role'
+}

@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: computed.scss
- * Last modified | Ostatnia modyfikacja: 07/04/2022, 18:59
+ * File name | Nazwa pliku: list-navigations.model.ts
+ * Last modified | Ostatnia modyfikacja: 10/05/2022, 00:28
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,13 +17,16 @@
  * Obiektowe".
  */
 
-@import "font-faces";
-@import "variables";
-@import "resets";
-@import "mixins";
-@import "global";
-@import "controls";
-@import "modals";
-@import "footer";
-@import "hamburger";
-@import "cms-templates";
+import { BasicDataSortBy } from '../../../types/basic-data-sort-by.types';
+import { AvailablesSortingTypes } from '../../../types/availables-sorting.types';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface ListNavigationsModel {
+    searchPhrase: string;
+    pageNumber: number;
+    pageSize: number;
+    allPageSizes: Array<number>;
+    sortBy: BasicDataSortBy;
+    sortDirection: AvailablesSortingTypes;
+}
