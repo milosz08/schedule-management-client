@@ -1,0 +1,163 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: _cms-templates.scss
+ * Last modified | Ostatnia modyfikacja: 08/05/2022, 21:07
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.app-cms__header-h2 {
+    font-size: 1.6rem;
+    color: var(--darkBlueColor);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.1;
+    &::after {
+        content: '.';
+        font-size: 1.3em;
+        color: var(--headerDotColor);
+    }
+}
+
+.app-cms__description-block__container {
+    position: relative;
+    z-index: -1;
+    border-radius: var(--borderRadius);
+    background-color: var(--darkWhiteColor);
+    color: var(--lightGrayColor);
+    max-width: 1000px;
+    margin: 20px 0;
+    padding: 20px 30px;
+    overflow: hidden;
+    line-height: 1.4;
+    &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: var(--darkBlueColor);
+    }
+}
+
+.app-cms__separator-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--extraLightGrayColor);
+    margin-bottom: 20px;
+}
+
+.app-cms-top-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.app-cms__loading-table-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.app-cms__query-parameters {
+    margin: 20px 0;
+    color: var(--darkBlueColor);
+}
+
+.app-cms-table__container {
+    margin: 20px 0;
+    border-style: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    th {
+        font-weight: 400;
+        color: var(--lightGrayColor);
+        &.app-cms-table__th-id {
+            width: 80px;
+        }
+        &.app-cms-table__th-details {
+            width: 40px;
+        }
+    }
+    td, th {
+        text-align: left;
+        padding: 8px 20px;
+    }
+    tr {
+        color: var(--mainBlackColor);
+        &:nth-child(even) {
+            background-color: var(--darkWhiteColor);
+        }
+    }
+    .cms-table__details-button {
+        width: fit-content;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1200px) {
+    .app-cms-table--hide-column__large {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .app-cms-table--hide-column__medium {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .app-cms-table__container td, th {
+        padding: 8px 12px;
+    }
+    .app-cms-table--hide-details-button-text {
+        display: none;
+    }
+    .cms-table-button--remove-arrow-margin {
+        margin-left: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .app-cms-table--hide-column__small {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 644px) {
+    .app-cms-top-header {
+        flex-direction: column-reverse;
+    }
+    .cms-search-input--max-size {
+        width: 100%;
+    }
+    .cms-def-button--max-size {
+        justify-content: center;
+        margin-bottom: 20px;
+        min-height: 40px;
+        width: 100%;
+    }
+    .app-cms-table__container th.app-cms-table__th-id {
+        width: auto;
+    }
+}
