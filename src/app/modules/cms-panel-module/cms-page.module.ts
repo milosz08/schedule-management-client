@@ -28,22 +28,31 @@ import { CmsPageComponent } from './cms-page.component';
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 import { AccountCmsPageComponent } from './pages/account-cms-page/account-cms-page.component';
 import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
+import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
+import { SingleUserDetailsCmsPageComponent } from './pages/single-user-details-cms-page/single-user-details-cms-page.component';
+
+import { CmsUsersTableComponent } from './components/cms-users-table/cms-users-table.component';
 import { CmsPanelHeaderComponent } from './components/cms-panel-header/cms-panel-header.component';
 import { CmsPanelFooterComponent } from './components/cms-panel-footer/cms-panel-footer.component';
-import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+import { AddNewUserFormComponent } from './components/add-new-user-form/add-new-user-form.component';
+import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
+import { CmsSortingButtonComponent } from './components/cms-sorting-button/cms-sorting-button.component';
 import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms-left-navigation.component';
+import { NewUserInformationsComponent } from './components/new-user-informations/new-user-informations.component';
+import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
 
 import { SharedModule } from '../shared-module/shared.module';
 import { CmsPageRoutingModule } from './cms-page-routing.module';
-import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
-import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
-import { CmsUsersTableComponent } from './components/cms-users-table/cms-users-table.component';
-import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
-import { CmsSortingButtonComponent } from './components/cms-sorting-button/cms-sorting-button.component';
-import { SingleUserDetailsCmsPageComponent } from './pages/single-user-details-cms-page/single-user-details-cms-page.component';
 
 import { LIST_NAVIGATIONS_REDUCER } from './ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { listNavigationsReducer } from './ngrx-store/list-navigations-ngrx-store/list-navigations.reducer';
+import { DOM_MANIPULATION_REDUCER } from './ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.selectors';
+import { domManipulationReducer } from './ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.reducer';
+import { POST_DATA_REDUCER } from './ngrx-store/post-data-ngrx-store/post-data.selectors';
+import { postDataReducer } from './ngrx-store/post-data-ngrx-store/post-data.reducer';
+
+import { PostDataEffects } from './ngrx-store/post-data-ngrx-store/ngrx-effects/post-data.effects';
 import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store/ngrx-effects/list-navigations.effects';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -64,6 +73,8 @@ import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store
         CmsPaginationOptionsComponent,
         CmsSortingButtonComponent,
         SingleUserDetailsCmsPageComponent,
+        AddNewUserFormComponent,
+        NewUserInformationsComponent,
     ],
     imports: [
         CommonModule,
@@ -72,7 +83,10 @@ import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store
         MatIconModule,
         ReactiveFormsModule,
         StoreModule.forFeature(LIST_NAVIGATIONS_REDUCER, listNavigationsReducer),
+        StoreModule.forFeature(DOM_MANIPULATION_REDUCER, domManipulationReducer),
+        StoreModule.forFeature(POST_DATA_REDUCER, postDataReducer),
         EffectsModule.forFeature([
+            PostDataEffects,
             ListNavigationsEffects,
         ]),
     ],

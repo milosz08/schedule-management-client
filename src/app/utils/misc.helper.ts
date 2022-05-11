@@ -78,6 +78,8 @@ export class MiscHelper {
         }
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /**
      * Metoda pobierająca typ użytkownika i zwracająca pełną nazwę wraz z klasą ustawiającą kolor.
      */
