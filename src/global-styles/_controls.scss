@@ -50,6 +50,20 @@
             color: var(--darkBlueColor);
         }
     }
+    &.app__input--exclude-margin {
+        margin-bottom: 0;
+    }
+}
+
+.app__select__container {
+    position: relative;
+    width: 100%;
+    .app__select__arrow-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
 }
 
 .app__input-error {
@@ -58,6 +72,9 @@
     line-height: 1.2;
     &.app__input-error--light {
         color: var(--darkRedColor);
+    }
+    &.app__input-error--margin-top {
+        margin: 5px 0 0 20px;
     }
 }
 
@@ -85,6 +102,10 @@
         .app__button__arrow {
             color: var(--mainWhiteColor);
         }
+    }
+    &.app__button--full-width {
+        width: 100%;
+        justify-content: center;
     }
     &.app__button--danger-light {
         background-color: transparent;

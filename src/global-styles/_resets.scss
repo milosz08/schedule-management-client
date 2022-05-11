@@ -41,8 +41,17 @@ body {
     }
 }
 
-body, input, textarea, button {
+body, input, textarea, button, select {
     font-family: 'Poppins', sans-serif;
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+}
+
+option {
+    text-transform: capitalize;
 }
 
 h1, h2, h3, h4, h5, h6 {
