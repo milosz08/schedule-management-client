@@ -84,6 +84,8 @@ router-outlet + app-add-new-user-cms-page {
     display: flex;
     padding-top: 84px;
     min-height: 100vh;
+    max-width: 1920px;
+    margin: 0 auto;
     .app__cms-main-container {
         flex-grow: 1;
         padding: 20px 30px 15px;
