@@ -25,7 +25,6 @@
 	<div class = 'login-form__element-container'>
 		<label>
 			<input
-				(input) = 'handleClearErrorMessage()'
 				type = 'text'
 				formControlName = 'login'
 				placeholder = 'Login/adres email'
@@ -43,7 +42,6 @@
 		<label class = 'app__label--relative'>
 			<app-text-input-password
 				[_formGroup] = '_loginForm'
-				(_clearFormMessage) = 'handleClearErrorMessage()'
 				[_ifLightTheme] = 'false'
 				_inputPlaceholder = 'Hasło'
 				_formControlName = 'password'

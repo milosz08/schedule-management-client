@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -42,9 +42,6 @@ export class TextInputPasswordComponent {
     @Input()
     public _inputPlaceholder: string = '';
 
-    @Output()
-    public _clearFormMessage: EventEmitter<void> = new EventEmitter<void>();
-
     @Input()
     public _formGroup?: FormGroup;
 
@@ -57,10 +54,6 @@ export class TextInputPasswordComponent {
         if (this._formGroup!.getRawValue()[this._formControlName] !== '') {
             this._ifPasswordVisibility = !this._ifPasswordVisibility;
         }
-    };
-
-    public handleClearErrorMessage(): void {
-        this._clearFormMessage.emit();
     };
 
     get __styleClassThemeForInput(): string {
