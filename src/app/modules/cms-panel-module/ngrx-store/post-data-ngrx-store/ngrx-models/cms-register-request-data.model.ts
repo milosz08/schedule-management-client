@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-user-cms-page.component.scss
- * Last modified | Ostatnia modyfikacja: 08/05/2022, 23:39
+ * File name | Nazwa pliku: cms-register-request-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 11/05/2022, 18:57
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,36 +17,10 @@
  * Obiektowe".
  */
 
-.cms-add-new-user__container {
-    display: flex;
-    flex-grow: 1;
-    width: 100%;
-}
-
-.cms-add-new-user__form-wrapper {
-    width: 100%;
-    max-width: 600px;
-    margin-right: 50px;
-}
-
-.cms-add-new-user__response-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    margin-left: 50px;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-@media only screen and (max-width: 1280px) {
-    .cms-add-new-user__container {
-        flex-direction: column;
-    }
-    .cms-add-new-user__form-wrapper,
-    .cms-add-new-user__response-wrapper {
-        margin: 0;
-    }
-    .cms-add-new-user__form-wrapper {
-        max-width: 100%;
-    }
+export interface CmsRegisterRequestDataModel {
+    name: string;
+    surname: string;
+    nationality: string;
+    city: string;
+    role: string;
 }

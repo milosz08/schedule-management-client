@@ -50,6 +50,12 @@
         height: 100%;
         background-color: var(--darkBlueColor);
     }
+    &.app-cms__description-block__container--warning-info {
+        color: var(--darkRedColor);
+        &::before {
+            background-color: var(--darkRedColor);
+        }
+    }
 }
 
 .app-cms__separator-line {
@@ -57,6 +63,10 @@
     height: 1px;
     background-color: var(--extraLightGrayColor);
     margin-bottom: 20px;
+    &.separator-line--vertical {
+        width: 1px;
+        height: 100%;
+    }
 }
 
 .app-cms-top-header {
@@ -112,6 +122,48 @@
     }
 }
 
+.cms__simple-grid__angular-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 20px;
+    grid-row-gap: 10px;
+    .cms__simple-grid__label {
+        padding-right: 20px;
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+        align-items: center;
+        font-size: 1.1rem;
+        color: var(--lightGrayColor);
+    }
+    .cms__simple-grid__input {
+        max-width: 360px;
+    }
+    .cms__simple-grid__text {
+        display: flex;
+        align-items: center;
+        color: var(--mainBlackColor);
+        font-size: 1.1rem;
+    }
+    .cms__simple-grid__submit-button {
+        margin-top: 10px;
+    }
+}
+
+.cms-return-link-anchor {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: var(--lightGrayColor);
+    width: fit-content;
+    .link-anchor__arrow {
+        margin-right: 10px;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 
 @media only screen and (max-width: 1200px) {
@@ -123,6 +175,19 @@
 @media only screen and (max-width: 1000px) {
     .app-cms-table--hide-column__medium {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .cms__simple-grid__angular-form {
+        grid-template-columns: repeat(1, 1fr);
+        .cms__simple-grid__label {
+            padding-right: 0;
+            justify-content: flex-start;
+        }
+        .cms__simple-grid__input, input, select {
+            max-width: 100%;
+        }
     }
 }
 

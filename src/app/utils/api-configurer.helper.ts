@@ -42,4 +42,5 @@ export class ApiConfigurerHelper {
     public readonly RESET_PASSWORD_VIA_TOKEN = ApiConfigurerHelper.API_PREFIX + 'auth/reset-password';
     public readonly CMS_FILTERED_ALL_USERS = ApiConfigurerHelper.API_PREFIX + 'users/all-users';
     public readonly AVAILABLE_PAGINATIONS = ApiConfigurerHelper.API_PREFIX + 'helper/available-paginations';
+    public readonly REGISTER_USER = ApiConfigurerHelper.API_PREFIX + 'auth/register';
 }

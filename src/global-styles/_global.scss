@@ -41,6 +41,9 @@
         font-size: 1.5em;
         color: var(--headerDotColor);
     }
+    &.app__header--exclude-dot-margin::after {
+        margin-left: 1px;
+    }
 }
 
 .app__label--relative {
@@ -61,6 +64,12 @@
     }
 }
 
+router-outlet + app-add-new-user-cms-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .app__auth-container {
     padding-top: 80px;
     margin: 0 auto;
@@ -75,6 +84,8 @@
     display: flex;
     padding-top: 84px;
     min-height: 100vh;
+    max-width: 1920px;
+    margin: 0 auto;
     .app__cms-main-container {
         flex-grow: 1;
         padding: 20px 30px 15px;

@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-user-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 08/05/2022, 23:39
+ * File name | Nazwa pliku: post-data.initial.ts
+ * Last modified | Ostatnia modyfikacja: 11/05/2022, 20:27
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,28 +17,24 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-
-import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+import { CmsRegisterResponseDataModel } from './ngrx-models/cms-register-response-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Komponent odpowiedzialny za renderowanie widoku umożliwiającego dodawanie nowych użytkowników
- */
-
-@Component({
-    selector: 'app-add-new-user-cms-page',
-    templateUrl: './add-new-user-cms-page.component.html',
-    styleUrls: [ './add-new-user-cms-page.component.scss' ],
-})
-export class AddNewUserCmsPageComponent extends MetaWebContentHelper {
-
-    constructor(
-        titleService: Title,
-        metaService: Meta,
-    ) {
-        super(titleService, metaService, AllCmsWebpages.ADD_USER);
+export interface InitialPostDataStateTypes {
+    registerNewUser: {
+        userData: CmsRegisterResponseDataModel | null;
+        ifFetching: boolean;
+        serverError: string;
     };
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const initialPostDataState: InitialPostDataStateTypes = {
+    registerNewUser: {
+        userData: null,
+        ifFetching: false,
+        serverError: '',
+    },
+};

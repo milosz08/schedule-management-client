@@ -57,8 +57,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     public readonly _loginForm: FormGroup;
     public _ifPasswordVisibility: boolean = false;
 
-    private _storeSubscription: Subscription | undefined;
-    private readonly _autoFilledSubscription: Subscription | undefined;
+    private _storeSubscription?: Subscription;
+    private readonly _autoFilledSubscription?: Subscription;
+    private _resetValuesSubscription?: Subscription;
     public _loginError: string = '';
 
     //------------------------------------------------------------------------------------------------------------------
@@ -73,6 +74,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         this._autoFilledSubscription = this._getAutoFilledEmail$.subscribe(emailValue => {
             this._loginForm.setValue({ ...this._loginForm.getRawValue(), login: emailValue });
         });
+        this._resetValuesSubscription = this._loginForm.valueChanges.subscribe(() => {
+            if (this._loginError !== '') {
+                this._store.dispatch(NgrxAction_SES.__failureLogin({ errorMessage: '' }));
+            }
+        });
     };
 
     //------------------------------------------------------------------------------------------------------------------
@@ -85,8 +91,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     };
 
     public ngOnDestroy(): void {
-        this._storeSubscription!.unsubscribe();
-        this._autoFilledSubscription!.unsubscribe();
+        this._storeSubscription?.unsubscribe();
+        this._autoFilledSubscription?.unsubscribe();
+        this._resetValuesSubscription?.unsubscribe();
     };
 
     public handleSubmitForm(): void {
@@ -98,12 +105,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     public handleChangePasswordVisibility(): void {
         if (this._loginForm.getRawValue().password !== '') {
             this._ifPasswordVisibility = !this._ifPasswordVisibility;
-        }
-    };
-
-    public handleClearErrorMessage(): void {
-        if (this._loginError !== '') {
-            this._store.dispatch(NgrxAction_SES.__failureLogin({ errorMessage: '' }));
         }
     };
 
