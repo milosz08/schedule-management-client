@@ -64,7 +64,8 @@
     }
 }
 
-router-outlet + app-add-new-user-cms-page {
+router-outlet + app-add-new-user-cms-page,
+router-outlet + app-users-cms-page {
     display: flex;
     flex-direction: column;
     height: 100%;

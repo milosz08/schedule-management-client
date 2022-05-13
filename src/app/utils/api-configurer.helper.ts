@@ -43,4 +43,7 @@ export class ApiConfigurerHelper {
     public readonly CMS_FILTERED_ALL_USERS = ApiConfigurerHelper.API_PREFIX + 'users/all-users';
     public readonly AVAILABLE_PAGINATIONS = ApiConfigurerHelper.API_PREFIX + 'helper/available-paginations';
     public readonly REGISTER_USER = ApiConfigurerHelper.API_PREFIX + 'auth/register';
+    public readonly MASSIVE_DELETE_USERS = ApiConfigurerHelper.API_PREFIX + 'users/delete-massive';
+    public readonly DELETE_USER = ApiConfigurerHelper.API_PREFIX + 'users/delete';
+    public readonly SEND_EMAIL_REGISTER = ApiConfigurerHelper.API_PREFIX + 'auth/send-emails-register';
 }

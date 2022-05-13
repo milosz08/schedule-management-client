@@ -44,6 +44,7 @@ import { CmsPaginationOptionsComponent } from './components/cms-pagination-optio
 
 import { SharedModule } from '../shared-module/shared.module';
 import { CmsPageRoutingModule } from './cms-page-routing.module';
+import { TemplatesModule } from '../templates-module/templates.module';
 
 import { LIST_NAVIGATIONS_REDUCER } from './ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { listNavigationsReducer } from './ngrx-store/list-navigations-ngrx-store/list-navigations.reducer';
@@ -78,10 +79,11 @@ import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store
     ],
     imports: [
         CommonModule,
-        CmsPageRoutingModule,
         SharedModule,
         MatIconModule,
+        TemplatesModule,
         ReactiveFormsModule,
+        CmsPageRoutingModule,
         StoreModule.forFeature(LIST_NAVIGATIONS_REDUCER, listNavigationsReducer),
         StoreModule.forFeature(DOM_MANIPULATION_REDUCER, domManipulationReducer),
         StoreModule.forFeature(POST_DATA_REDUCER, postDataReducer),
