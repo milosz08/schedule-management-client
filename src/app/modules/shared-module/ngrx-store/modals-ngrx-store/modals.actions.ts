@@ -19,10 +19,19 @@
 
 import { createAction, props } from '@ngrx/store';
 
+import { UserCredentialsType } from '../../../../types/user-credentials.type';
+
 //----------------------------------------------------------------------------------------------------------------------
 
 export const SET_MODAL_VISIBILITY = '[MODALS] SET END SESSION MODAL VISIBILITY';
 export const SET_LOGOUT_MODAL_VISIBILITY = '[MODALS] SET LOGOUT MODAL VISIBILITY';
+export const OPEN_REMOVE_CONTENT_MODAL = '[MODALS] OPEN REMOVE CONTENT MODAL';
+export const REMOVE_CONTENT_MODAL = '[MODALS] REMOVE CONTENT MODAL';
+export const SUCCESS_REMOVE_CONTENT = '[MODALS] SUCCESS REMOVE CONTENT';
+export const FAILURE_REMOVE_CONTENT = '[MODALS] FAILURE REMOVE CONTENT';
+export const CLOSE_REMOVE_CONTENT_MODAL = '[MODALS] CLOSE REMOVE CONTENT MODAL';
+export const SET_SUSPENSE_REMOVING_CONTENT_MODAL = '[MODALS] SET SUSPENSE REMOVING CONTENT MODAL';
+export const CLEAR_SERVER_MESSAGE_REMOVE_CONTENT_MODAL = '[MODALS] CLEAR SERVER MESSAGE REMOVE CONTENT MODAL';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -34,4 +43,36 @@ export const __sessionSetModalVisibility = createAction(
 export const __logoutModalSetVisibility = createAction(
     SET_LOGOUT_MODAL_VISIBILITY,
     props<{ modalVisibility: boolean }>(),
+);
+
+export const __openRemoveContentModal = createAction(
+    OPEN_REMOVE_CONTENT_MODAL,
+    props<{ removeContentPath: string, removeContentIds?: Array<number> }>(),
+);
+
+export const __removeContentModal = createAction(
+    REMOVE_CONTENT_MODAL,
+    props<{ credentials: UserCredentialsType }>(),
+);
+
+export const __successRemoveContentModal = createAction(
+    SUCCESS_REMOVE_CONTENT,
+);
+
+export const __failureRemoveContentModal = createAction(
+    FAILURE_REMOVE_CONTENT,
+    props<{ errorMessage?: string }>(),
+);
+
+export const __closeRemoveContentModal = createAction(
+    CLOSE_REMOVE_CONTENT_MODAL,
+);
+
+export const __setSuspenseRemovingContentModal = createAction(
+    SET_SUSPENSE_REMOVING_CONTENT_MODAL,
+    props<{ visibility: boolean }>(),
+);
+
+export const __clearServerMessageRemoveContentModal = createAction(
+    CLEAR_SERVER_MESSAGE_REMOVE_CONTENT_MODAL,
 );

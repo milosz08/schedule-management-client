@@ -36,6 +36,65 @@ const _modalsReducer = createReducer(
             logoutModalVisibility: action.modalVisibility,
         };
     }),
+    on(NgrxAction.__openRemoveContentModal, (state, action) => {
+        return { ...state,
+            deleteContentModal: { ...state.deleteContentModal,
+                removeContentPath: action.removeContentPath,
+                removeContentIds: action.removeContentIds || [],
+                modalVisibility: true,
+            },
+        };
+    }),
+    on(NgrxAction.__successRemoveContentModal, state => {
+        return { ...state,
+            deleteContentModal: { ...state.deleteContentModal,
+                removeServerMessage: {
+                    message: 'Usunięto poprawnie wybrane elementy z bazy danych. Możesz zamknąć okno.',
+                    ifError: false,
+                },
+            },
+        };
+    }),
+    on(NgrxAction.__failureRemoveContentModal, (state, action) => {
+        return { ...state,
+            deleteContentModal: { ...state.deleteContentModal,
+                removeServerMessage: {
+                    message: action.errorMessage || '',
+                    ifError: true,
+                },
+            },
+        };
+    }),
+    on(NgrxAction.__closeRemoveContentModal, state => {
+        return { ...state,
+            deleteContentModal: { ...state.deleteContentModal,
+                removeContentPath: '',
+                removeContentIds: [],
+                modalVisibility: false,
+                removeServerMessage: {
+                    message: '',
+                    ifError: false,
+                },
+            },
+        };
+    }),
+    on(NgrxAction.__setSuspenseRemovingContentModal, (state, action) => {
+        return { ...state,
+            deleteContentModal: { ...state.deleteContentModal,
+                suspenseRemovingContent: action.visibility,
+            },
+        };
+    }),
+    on(NgrxAction.__clearServerMessageRemoveContentModal, state => {
+        return { ...state,
+            deleteContentModal: { ...state.deleteContentModal,
+                removeServerMessage: {
+                    message: '',
+                    ifError: false,
+                },
+            },
+        };
+    }),
 );
 
 //----------------------------------------------------------------------------------------------------------------------

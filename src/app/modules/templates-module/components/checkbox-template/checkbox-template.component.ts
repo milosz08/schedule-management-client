@@ -48,6 +48,12 @@ export class CheckboxTemplateComponent implements OnInit {
     @Input()
     public _ifCheckedInitial?: boolean = false;
 
+    @Input()
+    public _ifShowLabel?: boolean = true;
+
+    @Input()
+    public _ifWhiteBackground?: boolean = false;
+
     @Output()
     public _checkedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -57,9 +63,9 @@ export class CheckboxTemplateComponent implements OnInit {
         this._checkboxId = MiscHelper.randomCharactersGenerator();
     };
 
-    public handleCheckboxToggle(ifChecked: boolean): void {
+    public handleCheckboxToggle(): void {
         this._checkboxValue = !this._checkboxValue;
-        this._checkedEmitter.emit(ifChecked);
+        this._checkedEmitter.emit(this._checkboxValue);
     };
 
     get __createChecboxIdBasedLabel(): string {

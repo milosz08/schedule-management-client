@@ -23,23 +23,27 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
+import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
 import { UserIdentityType } from '../../../../types/user-identity.type';
 import { BasicDataSortBy } from '../../types/basic-data-sort-by.types';
 import { CmsPaginationDataModel } from '../../models/cms-pagination-data.model';
 
+import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxAction_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.actions';
 import * as NgrxSelector_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { ModalsReducerType } from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.selectors';
 import { ListNavigationsReducerType } from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { InitialListNavigationStateTypes } from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.initial';
 
 import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsDeleteConnectorService } from '../../services/cms-delete-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-type CombinedStore = ListNavigationsReducerType | SessionReducerType;
+type CombinedStore = ListNavigationsReducerType | SessionReducerType | ModalsReducerType;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +56,7 @@ type CombinedStore = ListNavigationsReducerType | SessionReducerType;
     selector: 'app-cms-users-table',
     templateUrl: './cms-users-table.component.html',
     styleUrls: [ './cms-users-table.component.scss' ],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetConnectorService, CmsDeleteConnectorService ],
 })
 export class CmsUsersTableComponent implements OnInit, OnDestroy {
 
@@ -67,16 +71,20 @@ export class CmsUsersTableComponent implements OnInit, OnDestroy {
     public _navigationSubscription?: Subscription;
     public _serviceSubscription?: Subscription;
 
+    public _deleteUsers: Array<number> = new Array<number>();
+
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _service: CmsGetConnectorService,
         private _store: Store<CombinedStore>,
+        private _endpoints: ApiConfigurerHelper,
+        private _serviceGET: CmsGetConnectorService,
+        private _serviceDELETE: CmsDeleteConnectorService,
     ) {
         this._navigationSubscription = this._navigationState$.subscribe(data => {
             if (data.pageSize !== 1) {
                 const { searchPhrase, sortBy, sortDirection, pageSize, pageNumber } = data;
-                this._serviceSubscription = this._service
+                this._serviceSubscription = this._serviceGET
                     .getAllUsers({ searchPhrase, pageNumber, pageSize, sortBy, sortDirection })
                     .subscribe(filteredPagination => {
                         this._usersPagination = filteredPagination;
@@ -102,6 +110,25 @@ export class CmsUsersTableComponent implements OnInit, OnDestroy {
     };
 
     public handleDeleteUser(userId: number): void {
-        console.log(userId);
+        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
+            removeContentPath: this._endpoints.MASSIVE_DELETE_USERS, removeContentIds: [ userId ] }));
+    };
+
+    public handleDeleteAllUsers(): void {
+        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
+            removeContentPath: this._endpoints.DELETE_USER }));
+    };
+
+    public handleMassiveDeleteUsers(): void {
+        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
+            removeContentPath: this._endpoints.MASSIVE_DELETE_USERS, removeContentIds: this._deleteUsers }));
+    };
+
+    public toggleSelectedDeleteUser(ifChecked: boolean, userId: number) {
+        if (ifChecked) {
+            this._deleteUsers.push(userId);
+        } else {
+            this._deleteUsers = this._deleteUsers.filter(id => id !== userId);
+        }
     };
 }
