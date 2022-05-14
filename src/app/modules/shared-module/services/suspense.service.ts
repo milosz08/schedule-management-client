@@ -53,4 +53,17 @@ export class SuspenseService {
             }
         });
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Przeładowanie leniwe strony na podstawie routingu angularRouter. Uwaga! Metoda nie przeładowuje całej strony
+     * (ponowne wysłanie zapytania do serwera).
+     */
+    public reloadAngularPageWithRouter(): void {
+        let currentUrl = this._router.url;
+        this._router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this._router.navigate([ currentUrl ]).then(r => r);
+        });
+    }
 }

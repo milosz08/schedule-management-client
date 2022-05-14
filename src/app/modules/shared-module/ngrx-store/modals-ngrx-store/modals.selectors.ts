@@ -41,3 +41,19 @@ export const sel_sessionEndModalVisibility = selectorWithInjectedStore(
 export const sel_logoutModalVisibility = selectorWithInjectedStore(
     state => state.logoutModalVisibility,
 );
+
+export const sel_removeModalVisibility = selectorWithInjectedStore(
+    state => state.deleteContentModal.modalVisibility,
+);
+
+export const sel_suspenseRemovingContent = selectorWithInjectedStore(
+    state => state.deleteContentModal.suspenseRemovingContent,
+)
+
+export const sel_removeModalServerMessage = selectorWithInjectedStore(
+    state => state.deleteContentModal.removeServerMessage.message,
+);
+
+export const sel_serverMessageIfError = selectorWithInjectedStore(
+    state => state.deleteContentModal.removeServerMessage.ifError,
+);

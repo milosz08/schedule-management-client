@@ -55,7 +55,8 @@
 				></app-cms-sorting-button>
 			</th>
 			<th class = 'app-cms-table__th-details'></th>
-			<th class = 'app-cms-table__th-details'></th>
+			<th class = 'app-cms-table__th-remove'></th>
+			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
 		<tr *ngFor = 'let user of _usersPagination!.elements'>
 			<td class = 'app-cms-table--hide-column__small'>{{ user.id }}</td>
@@ -86,8 +87,34 @@
 					Usuń
 				</button>
 			</td>
+			<td class = 'app-cms-table-td-select-box app-cms-table--hide-column__small'>
+				<app-checkbox-template
+					[_checkboxDisabled] = '!user.ifRemovable || user.login === (_userLogin$ | async)'
+					[_checkboxValue] = 'false'
+					[_ifShowLabel] = 'false'
+					[_ifWhiteBackground] = 'true'
+					(_checkedEmitter) = 'toggleSelectedDeleteUser($event, user.id)'
+				></app-checkbox-template>
+			</td>
 		</tr>
 	</table>
+	<section class = 'app-cms__danger-zone-deleting__container'>
+		<button
+			class = 'app__button app__button--danger-light app__button--small-full-size-window'
+			title = 'Kliknij aby usunąć wszystkich zaznaczonych użytkowników'
+			(click) = 'handleMassiveDeleteUsers()'
+			[disabled] = '_deleteUsers.length === 0'
+		>
+			Usuń zaznaczone
+		</button>
+		<button
+			class = 'app__button app__button--danger-light app__button--filled app__button--small-full-size-window'
+			title = 'Kliknij aby usunąć wszystkich użytkowników'
+			(click) = 'handleDeleteAllUsers()'
+		>
+			Usuń wszystko
+		</button>
+	</section>
 	<app-cms-pagination-options
 		*ngIf = '_usersPagination!.elements.length > 0'
 		[_pagesMaxCount] = '_usersPagination!.totalPagesCount'

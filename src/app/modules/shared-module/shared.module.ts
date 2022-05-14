@@ -21,6 +21,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { TemplatesModule } from '../templates-module/templates.module';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -33,6 +36,7 @@ import { UserRoleDotComponent } from './components/user-role-dot/user-role-dot.c
 import { BasicCopyFooterComponent } from './components/basic-copy-footer/basic-copy-footer.component';
 import { EndSessionModalComponent } from './components/end-session-modal/end-session-modal.component';
 import { UserDetailsPopupComponent } from './components/user-details-popup/user-details-popup.component';
+import { RemoveContentModalComponent } from './components/remove-content-modal/remove-content-modal.component';
 import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
 import { UserHeaderDataWithPopupComponent } from './components/user-header-data-with-popup/user-header-data-with-popup.component';
 
@@ -50,6 +54,7 @@ import { BrowserStorageService } from './services/browser-storage.service';
 import { ImageManipulationService } from './services/image-manipulation.service';
 import { EndSessionModalSequencerService } from './services/end-session-modal-sequencer.service';
 
+import { RemoveContentModalEffects } from './ngrx-store/modals-ngrx-store/ngrx-effects/remove-content-modal.effects';
 import { SharedEffects } from './ngrx-store/shared-ngrx-store/ngrx-effects/shared.effects';
 import { JwtSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/jwt-session.effects';
 import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
@@ -68,6 +73,7 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         BasicCopyFooterComponent,
         EndSessionModalComponent,
         UserDetailsPopupComponent,
+        RemoveContentModalComponent,
         LoadingSuspenseCardComponent,
         UserHeaderDataWithPopupComponent,
     ],
@@ -75,6 +81,8 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         CommonModule,
         RouterModule,
         MatIconModule,
+        TemplatesModule,
+        ReactiveFormsModule,
         // ngrx story
         StoreModule.forFeature(MODALS_REDUCER, modalsReducer),
         StoreModule.forFeature(SHARED_REDUCER, sharedReducer),
@@ -82,6 +90,7 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         // ngrx effects
         EffectsModule.forFeature([
             SharedEffects,
+            RemoveContentModalEffects,
             JwtSessionEffects,
             LoginSessionEffects,
             LoginHelpersEffects,
@@ -96,13 +105,14 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         EndSessionModalSequencerService,
     ],
     exports: [
-        LoadingSuspenseCardComponent,
-        UserHeaderDataWithPopupComponent,
-        EndSessionModalComponent,
+        UserImageComponent,
         LogoutModalComponent,
         UserRoleDotComponent,
+        EndSessionModalComponent,
         BasicCopyFooterComponent,
-        UserImageComponent,
+        RemoveContentModalComponent,
+        LoadingSuspenseCardComponent,
+        UserHeaderDataWithPopupComponent,
     ],
 })
 export class SharedModule {}

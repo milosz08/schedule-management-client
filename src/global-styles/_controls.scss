@@ -92,7 +92,7 @@
     padding: 6px 15px;
     font-size: 1rem;
     border-radius: var(--borderRadius);
-    font-weight: 500;
+    font-weight: 400;
     display: flex;
     align-items: center;
     &.app__button--light {
@@ -111,12 +111,16 @@
         background-color: transparent;
         border: 1px solid var(--darkRedColor);
         color: var(--darkRedColor);
+        &.app__button--filled {
+            background-color: var(--darkRedColor);
+            color: var(--mainWhiteColor);
+        }
     }
     &.app__button--hollow-light, &.app__button--hollow-dark {
         background-color: transparent;
         border: 1px solid var(--darkBlueColor);
         color: var(--darkBlueColor);
-        font-weight: 500;
+        font-weight: 400;
         .app__button__arrow {
             color: var(--darkBlueColor);
         }
@@ -167,5 +171,12 @@
     .app__button--full-size-window {
         width: 100% !important;
         justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .app__button--small-full-size-window {
+        width: 100% !important;
+        text-align: center;
     }
 }

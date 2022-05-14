@@ -20,6 +20,16 @@
 export interface InitialModalsStateTypes {
     sessionEndModalVisibility: boolean;
     logoutModalVisibility: boolean;
+    deleteContentModal: {
+        removeContentPath: string;
+        removeContentIds: Array<number>;
+        modalVisibility: boolean;
+        removeServerMessage: {
+            message: string;
+            ifError: boolean;
+        };
+        suspenseRemovingContent: boolean;
+    };
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -27,4 +37,14 @@ export interface InitialModalsStateTypes {
 export const initialModalsState: InitialModalsStateTypes = {
     sessionEndModalVisibility: false,
     logoutModalVisibility: false,
+    deleteContentModal: {
+        removeContentPath: '',
+        removeContentIds: [],
+        modalVisibility: false,
+        removeServerMessage: {
+            message: '',
+            ifError: false,
+        },
+        suspenseRemovingContent: false,
+    },
 };

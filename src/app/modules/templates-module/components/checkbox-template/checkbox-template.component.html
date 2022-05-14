@@ -17,17 +17,20 @@
   ~ Obiektowe".
   -->
 
-<div class = 'app__checkbox-container'>
+<div [ngClass] = '[ "app__checkbox-label", _ifWhiteBackground ? "app__checkbox-label" : "" ]'>
 	<input
+		type = 'checkbox'
 		[checked] = '_ifCheckedInitial'
 		[disabled] = '_checkboxDisabled'
-		(change) = 'handleCheckboxToggle(this._checkboxValue)'
+		(change) = 'handleCheckboxToggle()'
 		[id] = '__createChecboxIdBasedLabel'
-		type = 'checkbox'
-		class = 'app__checkbox-input'
+		[ngClass] = '[ "app__checkbox-input", _ifWhiteBackground ? "checkmark--white-background" : "" ]'
 	/>
-	<span class = 'app__checkbox-container__checkmark'></span>
+	<span
+		[ngClass] = '[ "app__checkbox-container__checkmark", _ifWhiteBackground ? "checkmark--white-background" : "" ]'
+	></span>
 	<label
+		*ngIf = '_ifShowLabel'
 		[for] = '__createChecboxIdBasedLabel'
 		class = 'app__checkbox-label'
 	>

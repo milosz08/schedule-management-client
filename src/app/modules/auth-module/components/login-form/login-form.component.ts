@@ -55,7 +55,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     public _outOfBoundSavedAccountsArray: string = `Możesz zapamiętać maksymalnie ${SavedUsersEffects.SAVED_MAX_USERS} kont`;
 
     public readonly _loginForm: FormGroup;
-    public _ifPasswordVisibility: boolean = false;
 
     private _storeSubscription?: Subscription;
     private readonly _autoFilledSubscription?: Subscription;
@@ -100,12 +99,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         const { login, password } = this._loginForm.getRawValue();
         this._store.dispatch(NgrxAction_SHA.__setSuspenseLoader({ status: true }));
         this._store.dispatch(NgrxAction_SES.__login({ login, password }));
-    };
-
-    public handleChangePasswordVisibility(): void {
-        if (this._loginForm.getRawValue().password !== '') {
-            this._ifPasswordVisibility = !this._ifPasswordVisibility;
-        }
     };
 
     public ifFieldHasErrors(fieldName: string): boolean {
