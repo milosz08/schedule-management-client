@@ -35,13 +35,35 @@ const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =
 //----------------------------------------------------------------------------------------------------------------------
 
 export const sel_registeredUserData = selectorWithInjectedStore(
-    state => Boolean(state.registerNewUser.userData) ? state.registerNewUser.userData : false,
+    state => Boolean(state.registerNewUserData) ? state.registerNewUserData : false,
 );
 
-export const sel_registerSuspenseLoading = selectorWithInjectedStore(
-    state => state.registerNewUser.ifFetching,
+export const sel_newDepartmentData = selectorWithInjectedStore(
+    state => Boolean(state.addNewDepartmentData) ? state.addNewDepartmentData : false,
 );
 
-export const sel_registerServerErrorMessage = selectorWithInjectedStore(
-    state => state.registerNewUser.serverError,
+export const sel_newCathedralData = selectorWithInjectedStore(
+    state => Boolean(state.addNewCathedralData) ? state.addNewCathedralData : false,
+);
+
+export const sel_newStudySpecializationData = selectorWithInjectedStore(
+    state => Boolean(state.addNewStudySpecialization) ? state.addNewStudySpecialization : false,
+);
+
+export const sel_newStudyRoomData = selectorWithInjectedStore(
+    state => Boolean(state.addNewStudyRoom) ? state.addNewStudyRoom : false,
+);
+
+export const sel_newStudySubjectData = selectorWithInjectedStore(
+    state => Boolean(state.addNewStudySubject) ? state.addNewStudySubject : false,
+);
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const sel_postDataSuspenseLoading = selectorWithInjectedStore(
+    state => state.ifFetching,
+);
+
+export const sel_postDataServerErrorMessage = selectorWithInjectedStore(
+    state => state.serverError,
 );

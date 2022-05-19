@@ -21,9 +21,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of, tap } from 'rxjs';
 
 import * as NgrxAction_PDE from '../post-data.actions';
+import * as NgrxAction_PDA from '../post-data.actions';
 import { PostDataReducerType } from '../post-data.selectors';
 
 import { CmsPostConnectorService } from '../../../services/cms-post-connector.service';
@@ -38,7 +39,7 @@ import { CmsPostConnectorService } from '../../../services/cms-post-connector.se
 export class PostDataEffects {
 
     public constructor(
-        private _action: Actions,
+        private _action$: Actions,
         private _store: Store<PostDataReducerType>,
         private _postConnectorService: CmsPostConnectorService,
     ) {
@@ -49,21 +50,159 @@ export class PostDataEffects {
     /**
      * Efekt inizalizujący rejestrację nowego użytkownika.
      */
-    public registerNewUser$ =  createEffect(() => {
-        return this._action.pipe(
+    public registerNewUser$ = createEffect(() => {
+        return this._action$.pipe(
             ofType(NgrxAction_PDE.__registerNewUser),
             mergeMap(action => {
-                return this._postConnectorService
-                    .registerUser(action.userData)
-                    .pipe(
-                        map(data => {
-                            return NgrxAction_PDE.__successRegisterNewUser({ userData: data });
-                        }),
-                        catchError(() => {
-                            return of(NgrxAction_PDE.__failureRegisterNewUser());
-                        }),
-                    );
+                return this._postConnectorService.registerUser(action.userData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successRegisterNewUser({ userData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'użytkownika');
+                    }),
+                );
             }),
         );
     });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący dodanie nowego wydziału.
+     */
+    public addNewDepartment$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_PDE.__addNewDepartment),
+            mergeMap(action => {
+                return this._postConnectorService.addNewDepartment(action.deptData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successAddNewDepartment({ deptData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'wydziału');
+                    }),
+                );
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący dodanie nowej katedry do wydziału.
+     */
+    public addNewCathedral$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_PDE.__addNewCathedral),
+            mergeMap(action => {
+                return this._postConnectorService.addNewCathedra(action.cathData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successAddNewCathedral({ cathData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'katedry');
+                    }),
+                );
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący dodanie nowego kierunku studiów do wydziału.
+     */
+    public addNewSpecialization$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_PDE.__addNewStudySpec),
+            mergeMap(action => {
+                return this._postConnectorService.addNewStudySpecialization(action.studyData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successAddNewStudySpecialization({ studyData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'kierunku studiów');
+                    }),
+                );
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący dodanie nowej sali zajęciowej do wydziału.
+     */
+    public addNewStudyRoom$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_PDE.__addNewStudyRoom),
+            mergeMap(action => {
+                return this._postConnectorService.addNewStudyRoom(action.roomData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successAddNewStudyRoom({ roomData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'sali zajęciowej');
+                    }),
+                )
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący dodanie nowego przedmiotu do wybranego kierunku studiów.
+     */
+    public addNewStudySubject$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_PDE.__addNewStudySubject),
+            mergeMap(action => {
+                return this._postConnectorService.addNewStudySubject(action.subjectData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successAddNewStudySubject({ subjectData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'przedmiotu');
+                    }),
+                )
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Funkcja wyłapująca wyjątki z warstwy serwerowej i zwracająca obserwabla.
+     */
+    private static handledServerExceptions(error: any, message: string): Observable<any> {
+        if (error) {
+            return of(NgrxAction_PDE.__failureAddNewContent({ failureMess: error.message }));
+        }
+        return of(NgrxAction_PDE.__failureAddNewContent({
+            failureMess: `Problem z dodaniem ${message}. Spróbuj ponownie.` }));
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt uruchamiający efekt leniwego ładowania danych z serwera na wszystkich efektach wywołujących
+     * umieszczanie elementów w bazie danych.
+     */
+    public turnOffSuspenseLoading$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(
+                NgrxAction_PDE.__registerNewUser,
+                NgrxAction_PDE.__addNewDepartment,
+                NgrxAction_PDE.__addNewCathedral,
+                NgrxAction_PDE.__addNewStudySpec,
+                NgrxAction_PDE.__addNewStudyRoom,
+                NgrxAction_PDE.__addNewStudySubject,
+            ),
+            tap(() => {
+                this._store.dispatch(NgrxAction_PDA.__setFetchingNewContent());
+            }),
+        );
+    }, { dispatch: false });
 }

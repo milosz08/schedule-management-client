@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: basic-data-sort-by.types.ts
- * Last modified | Ostatnia modyfikacja: 10/05/2022, 02:08
+ * File name | Nazwa pliku: cms-drop-lists-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 19/05/2022, 00:32
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,17 +17,20 @@
  * Obiektowe".
  */
 
-export enum BasicDataSortBy {
-    ID = 'Id',
-    SURNAME = 'Surname',
-    LOGIN = 'Login',
-    ROLE = 'Role',
-    NAME = 'Name',
-    ALIAS = 'Alias',
-    DEPT_NAME = 'DepartmentName',
-    DEPT_ALIAS = 'DepartmentAlias',
-    CATH_ALIAS = 'CathedralAlias',
-    CAPACITY = 'Capacity',
-    ROOM_TYPE_ALIAS = 'RoomTypeAlias',
-    SPEC_TYPE_ALIAS = 'SpecAlias',
+export interface AvailableDataModel<T> {
+    dataElements: Array<T>;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface RoomDataModel {
+    name: string;
+    alias: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface StudyDataModel {
+    name: string;
+    alias: string;
 }

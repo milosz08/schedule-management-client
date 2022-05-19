@@ -17,24 +17,35 @@
  * Obiektowe".
  */
 
-import { CmsRegisterResponseDataModel } from './ngrx-models/cms-register-response-data.model';
+import { CmsRegisterResDataModel } from './ngrx-models/cms-register-req-res-data.model';
+import { CmsStudySpecResDataModel } from './ngrx-models/cms-study-spec-req-res-data.model';
+import { CmsStudyRoomResDataModel } from './ngrx-models/cms-study-room-req-res-data.model';
+import { CmsCathedralReqResDataModel } from './ngrx-models/cms-cathedral-req-res-data.model';
+import { CmsDepartmentReqResDataModel } from './ngrx-models/cms-department-req-res-data.model';
+import { CmsStudySubjectResDataModel } from './ngrx-models/cms-study-subject-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface InitialPostDataStateTypes {
-    registerNewUser: {
-        userData: CmsRegisterResponseDataModel | null;
-        ifFetching: boolean;
-        serverError: string;
-    };
+    registerNewUserData: CmsRegisterResDataModel | null;
+    addNewDepartmentData: CmsDepartmentReqResDataModel | null;
+    addNewCathedralData: CmsCathedralReqResDataModel | null;
+    addNewStudySpecialization: Array<CmsStudySpecResDataModel> | null;
+    addNewStudyRoom: CmsStudyRoomResDataModel | null;
+    addNewStudySubject: CmsStudySubjectResDataModel | null;
+    ifFetching: boolean;
+    serverError: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 export const initialPostDataState: InitialPostDataStateTypes = {
-    registerNewUser: {
-        userData: null,
-        ifFetching: false,
-        serverError: '',
-    },
+    registerNewUserData: null,
+    addNewDepartmentData: null,
+    addNewCathedralData: null,
+    addNewStudySpecialization: null,
+    addNewStudyRoom: null,
+    addNewStudySubject: null,
+    ifFetching: false,
+    serverError: '',
 };
