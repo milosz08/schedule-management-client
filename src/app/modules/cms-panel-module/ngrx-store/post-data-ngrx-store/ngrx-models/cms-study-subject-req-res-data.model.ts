@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-panel-navigation-data.model.ts
- * Last modified | Ostatnia modyfikacja: 07/05/2022, 14:08
+ * File name | Nazwa pliku: cms-study-subject-req-res-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 18/05/2022, 02:03
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,9 +17,16 @@
  * Obiektowe".
  */
 
-export interface CmsPanelNavigationDataModel {
+export interface CmsStudySubjectReqDataModel {
     name: string;
-    location: string;
-    ariaLabel: string;
-    availableFor: string;
+    departmentName: string;
+    studySpecName: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsStudySubjectResDataModel extends CmsStudySubjectReqDataModel {
+    alias: string;
+    departmentAlias: string;
+    studySpecAlias: string;
 }

@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-register-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 20:19
+ * File name | Nazwa pliku: cms-register-req-res-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 11/05/2022, 18:57
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -19,9 +19,20 @@
 
 import { UserIdentityType } from '../../../../../types/user-identity.type';
 
+export interface CmsRegisterReqDataModel {
+    name: string;
+    surname: string;
+    nationality: string;
+    city: string;
+    role: string;
+    departmentName: string;
+    cathedralName: string;
+    studySpecName: string;
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsRegisterResponseDataModel {
+export interface CmsRegisterResDataModel {
     name: string;
     surname: string;
     nationality: string;
@@ -29,4 +40,7 @@ export interface CmsRegisterResponseDataModel {
     role: UserIdentityType;
     email: string;
     emailPassword: string;
+    departmentData: string;
+    cathedralData: string;
+    studySpecName: string;
 }
