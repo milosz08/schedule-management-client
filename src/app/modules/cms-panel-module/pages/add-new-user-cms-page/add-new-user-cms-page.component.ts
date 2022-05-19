@@ -25,13 +25,13 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiedzialny za renderowanie widoku umożliwiającego dodawanie nowych użytkowników
+ * Komponent odpowiedzialny za renderowanie widoku umożliwiającego dodawanie nowych użytkowników.
  */
 
 @Component({
     selector: 'app-add-new-user-cms-page',
     templateUrl: './add-new-user-cms-page.component.html',
-    styleUrls: [ './add-new-user-cms-page.component.scss' ],
+    styleUrls: [],
 })
 export class AddNewUserCmsPageComponent extends MetaWebContentHelper {
 

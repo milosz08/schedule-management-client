@@ -45,6 +45,12 @@ body, input, textarea, button, select {
     font-family: 'Poppins', sans-serif;
 }
 
+textarea {
+    &.resize--only-vertical {
+        resize: vertical;
+    }
+}
+
 select {
     cursor: pointer;
     appearance: none;
@@ -92,4 +98,8 @@ strong {
 
 p, li {
     line-height: 1.4;
+}
+
+.non-style-list {
+    list-style-type: none;
 }

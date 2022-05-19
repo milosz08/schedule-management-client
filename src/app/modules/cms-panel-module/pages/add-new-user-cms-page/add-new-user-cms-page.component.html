@@ -27,21 +27,24 @@
 	</nav>
 	<div class = 'app-cms__description-block__container'>
 		W tej sekcji możesz dodać nowego użytkownika do systemu. Początkowe dane jakie należy wprowadzić to imię,
-		nazwisko, miejsce zamieszkania, kraj pochodzenia oraz ewentualne tytuły naukowe (pole może pozostać puste). W
-		rezultacie serwer wygeneruje login, początkowe hasło oraz dostęp do poczty. Potwierdzenie zostanie wysłane na
-		twój adres email. Dane uwierzytelniające do systemu zostaną wysłane użytkownikowi na stworzoną skrzynkę pocztową.
-		Twoim zadaniem po stworzeniu użytkownika jest przekazać mu dane logowania do poczty (dane te są również dostępne
-		w sekcji dodatkowych informacji).
+		nazwisko, miejsce zamieszkania oraz kraj pochodzenia. W rezultacie serwer wygeneruje login, początkowe hasło
+		oraz dostęp do poczty. Potwierdzenie zostanie wysłane na Twój adres email. Dane uwierzytelniające do systemu
+		zostaną wysłane użytkownikowi na stworzoną skrzynkę pocztową. Twoim zadaniem po stworzeniu użytkownika jest
+		przekazać mu dane logowania do poczty (dane te są również dostępne w sekcji dodatkowych informacji).
+	</div>
+	<div class = 'app-cms__description-block__container app-cms__description-block__container--important-info'>
+		Pola związane z przypisaniem do wydziału (i katedry) są opcjonalne. Jeśli nie zostaną zapełnione przy tworzeniu
+		użytkownika, właściwości te można dodać bezpośrednio w panelu edycji danych wybranego użytkownika.
 	</div>
 	<aside class = 'app-cms__separator-line'></aside>
 </div>
-<div class = 'cms-add-new-user__container'>
-	<section class = 'cms-add-new-user__form-wrapper'>
+<div class = 'app-cms__add-new-content__container'>
+	<section class = 'app-cms__add-new-content__form-wrapper'>
 		<h3 class = 'app__header app__header--exclude-dot-margin app__header--exclude-margins'>Dodaj użytkownika</h3>
 		<app-add-new-user-form></app-add-new-user-form>
 	</section>
 	<aside class = 'app-cms__separator-line separator-line--vertical'></aside>
-	<section class = 'cms-add-new-user__response-wrapper'>
+	<section class = 'app-cms__add-new-content__response-wrapper'>
 		<h3 class = 'app__header app__header--exclude-dot-margin app__header--exclude-margins'>Informacje o użytkowniku</h3>
 		<app-new-user-informations></app-new-user-informations>
 	</section>

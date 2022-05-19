@@ -45,8 +45,7 @@ export class SearchFormInputComponent implements OnDestroy {
 
     public readonly _forId: string = MiscHelper.randomCharactersGenerator();
 
-    @Input()
-    public _inputPlaceholder: string = '';
+    @Input() public _inputPlaceholder: string = '';
 
     //------------------------------------------------------------------------------------------------------------------
 

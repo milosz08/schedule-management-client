@@ -52,7 +52,7 @@
 				_formControlName = 'password'
 			></app-text-input-password>
 			<div
-				*ngIf = 'ifFieldHasErrors("password")'
+				*ngIf = '_checkError("password")'
 				class = 'app__input-error app__input-error--light'
 			>
 				Proszę wpisać hasło

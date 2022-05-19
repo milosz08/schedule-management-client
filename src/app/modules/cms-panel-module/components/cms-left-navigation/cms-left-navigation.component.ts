@@ -51,7 +51,7 @@ type ComputedStores = SessionReducerType | DomManipulatorReducerType;
 })
 export class CmsLeftNavigationComponent {
 
-    private _navigationAllData: CmsPanelNavigationDataModel[];
+    private _navigationAllData: Array<CmsPanelNavigationDataModel>;
 
     public _userRole$: Observable<UserIdentityType> = this._store.select(NgrxSelector_SES.sel_userRole);
     public _ifNavVisible$: Observable<boolean> = this._store.select(NgrxSelector_DOM.sel_leftNavVisibility);
@@ -66,7 +66,7 @@ export class CmsLeftNavigationComponent {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public getUserLinksBasedRole(role: UserIdentityType): CmsPanelNavigationDataModel[] {
+    public getUserLinksBasedRole(role: UserIdentityType): Array<CmsPanelNavigationDataModel> {
         return this._navigationAllData.filter(el => el.availableFor.includes(role as string));
     };
 }

@@ -47,11 +47,9 @@ export class CmsPaginationOptionsComponent implements OnInit, OnDestroy {
     public _activePagination?: number;
     public _currentPage?: number;
 
-    @Input()
-    public _pagesMaxCount?: number;
+    @Input() public _pagesMaxCount?: number;
 
-    @Input()
-    public _currentActivePages?: CurrentActivePages;
+    @Input() public _currentActivePages?: CurrentActivePages;
 
     //------------------------------------------------------------------------------------------------------------------
 

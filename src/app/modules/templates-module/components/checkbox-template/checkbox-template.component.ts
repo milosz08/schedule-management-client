@@ -36,26 +36,14 @@ export class CheckboxTemplateComponent implements OnInit {
 
     private _checkboxId: string = '';
 
-    @Input()
-    public _checkboxValue: boolean = false;
+    @Input() public _checkboxValue?: boolean = false;
+    @Input() public _checkboxLabel?: string = '';
+    @Input() public _checkboxDisabled?: boolean = false;
+    @Input() public _ifCheckedInitial?: boolean = false;
+    @Input() public _ifShowLabel?: boolean = true;
+    @Input() public _ifWhiteBackground?: boolean = false;
 
-    @Input()
-    public _checkboxLabel: string = '';
-
-    @Input()
-    public _checkboxDisabled?: boolean = false;
-
-    @Input()
-    public _ifCheckedInitial?: boolean = false;
-
-    @Input()
-    public _ifShowLabel?: boolean = true;
-
-    @Input()
-    public _ifWhiteBackground?: boolean = false;
-
-    @Output()
-    public _checkedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() public _checkedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -69,6 +57,9 @@ export class CheckboxTemplateComponent implements OnInit {
     };
 
     get __createChecboxIdBasedLabel(): string {
-        return `${this._checkboxId}__${this._checkboxLabel.replaceAll(' ', '_').toLowerCase()}`;
+        if (this._checkboxLabel) {
+            return `${this._checkboxId}__${this._checkboxLabel.replaceAll(' ', '_').toLowerCase()}`;
+        }
+        return '';
     };
 }

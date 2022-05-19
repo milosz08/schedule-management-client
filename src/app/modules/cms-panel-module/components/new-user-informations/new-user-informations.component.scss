@@ -17,21 +17,6 @@
  * Obiektowe".
  */
 
-.new-user-info__suspense-loading-container {
-    width: 100%;
-    margin-top: 150px;
-    display: flex;
-    justify-content: center;
-    img {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-.new-user-info__basic-info-container {
-    margin-top: 20px;
-}
-
 .new-user-info__user-data--role {
     text-transform: capitalize;
 }
