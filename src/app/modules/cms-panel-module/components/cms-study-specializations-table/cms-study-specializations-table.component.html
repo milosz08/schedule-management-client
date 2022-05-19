@@ -1,0 +1,86 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: cms-study-specializations-table.component.html
+  ~ Last modified | Ostatnia modyfikacja: 18/05/2022, 23:12
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<app-cms-list-element-removable-with-pagination
+	[_pagination] = '_studySpecsPagination!'
+	[_deleteContentArray] = '_deleteStudySpecs'
+	[_deletEndpoint] = '_endpoints.DELETE_STUDY_SPEC'
+	[_massiveDeleteEndpoint] = '_endpoints.MASSIVE_DELETE_STUDY_SPECS'
+>
+	<table
+		*ngIf = '_studySpecsPagination'
+		class = 'app-cms-table__container'
+	>
+		<tr *ngIf = '_studySpecsPagination!.elements!.length > 0'>
+			<th class = 'app-cms-table__th-id app-cms-table--hide-column__small'>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Id'
+					[_sortingData] = '_studySpecsSortBy.ID'
+				></app-cms-sorting-button>
+			</th>
+			<th>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Nazwa'
+					[_sortingData] = '_studySpecsSortBy.NAME'
+				></app-cms-sorting-button>
+			</th>
+			<th class = 'app-cms-table--hide-column__large'>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Alias wydziału'
+					[_sortingData] = '_studySpecsSortBy.DEPT_ALIAS'
+				></app-cms-sorting-button>
+			</th>
+			<th>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Alias typu kierunku'
+					[_sortingData] = '_studySpecsSortBy.ROOM_TYPE_ALIAS'
+				></app-cms-sorting-button>
+			</th>
+			<th class = 'app-cms-table__th-remove'></th>
+			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
+		</tr>
+		<tr
+			app-cms-list-delete-single-element
+			*ngFor = 'let spec of _studySpecsPagination!.elements'
+			[_deleteContentId] = 'spec.id'
+			[_deleteContentList] = '_deleteStudySpecs'
+			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_STUDY_SPECS'
+			[_ifContentRemovable] = 'true'
+		>
+			<td class = 'app-cms-table--hide-column__small'>{{ spec.id }}</td>
+			<td
+				[title] = 'spec.departmentName'
+				class = 'app-cms__on-hover-show-info'
+			>
+				{{ spec.name }}
+			</td>
+			<td
+				[title] = 'spec.departmentName'
+				class = 'app-cms-table--hide-column__large app-cms__on-hover-show-info'
+			>
+				{{ spec.departmentAlias }}
+			</td>
+			<td
+				[title] = 'spec.specTypeName'
+				class = 'app-cms__on-hover-show-info'>
+				{{ spec.specTypeAlias }}
+			</td>
+		</tr>
+	</table>
+</app-cms-list-element-removable-with-pagination>
