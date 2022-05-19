@@ -24,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CheckboxTemplateComponent } from './components/checkbox-template/checkbox-template.component';
 import { TextInputPasswordComponent } from './components/text-input-password/text-input-password.component';
+import { SelectListTemplateComponent } from './components/select-list-template/select-list-template.component';
+import { SelectDropBoxTemplateComponent } from './components/select-drop-box-template/select-drop-box-template.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -31,6 +33,8 @@ import { TextInputPasswordComponent } from './components/text-input-password/tex
     declarations: [
         CheckboxTemplateComponent,
         TextInputPasswordComponent,
+        SelectListTemplateComponent,
+        SelectDropBoxTemplateComponent,
     ],
     imports: [
         CommonModule,
@@ -41,6 +45,8 @@ import { TextInputPasswordComponent } from './components/text-input-password/tex
     exports: [
         CheckboxTemplateComponent,
         TextInputPasswordComponent,
+        SelectListTemplateComponent,
+        SelectDropBoxTemplateComponent,
     ],
 })
 export class TemplatesModule {}
