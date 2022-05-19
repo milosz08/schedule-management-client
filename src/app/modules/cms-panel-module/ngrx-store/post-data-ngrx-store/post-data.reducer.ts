@@ -28,41 +28,66 @@ const _postDataReducer = createReducer(
     initialPostDataState,
     on(NgrxAction.__successRegisterNewUser, (state, action) => {
         return { ...state,
-            registerNewUser: { ...state.registerNewUser,
-                userData: action.userData,
-                ifFetching: false,
-            },
+            registerNewUserData: action.userData,
+            ifFetching: false,
         };
     }),
-    on(NgrxAction.__failureRegisterNewUser, state => {
+    on(NgrxAction.__successAddNewDepartment, (state, action) => {
         return { ...state,
-            registerNewUser: { ...state.registerNewUser,
-                serverError: 'Problem z dodaniem użytkownika. Spróbuj ponownie.',
-                ifFetching: false,
-            },
+            addNewDepartmentData: action.deptData,
+            ifFetching: false,
         };
     }),
-    on(NgrxAction.__setFetchingRegisterNewUser, state => {
+    on(NgrxAction.__successAddNewCathedral, (state, action) => {
         return { ...state,
-            registerNewUser: { ...state.registerNewUser,
-                ifFetching: true,
-            },
+            addNewCathedralData: action.cathData,
+            ifFetching: false,
         };
     }),
-    on(NgrxAction.__clearRegisterUserData, state => {
+    on(NgrxAction.__successAddNewStudySpecialization, (state, action) => {
         return { ...state,
-            registerNewUser: {
-                userData: null,
-                ifFetching: false,
-                serverError: '',
-            },
+            addNewStudySpecialization: action.studyData,
+            ifFetching: false,
         };
     }),
-    on(NgrxAction.__clearRegisterServerError, state => {
+    on(NgrxAction.__successAddNewStudyRoom, (state, action) => {
         return { ...state,
-            registerNewUser: { ...state.registerNewUser,
-                serverError: '',
-            },
+            addNewStudyRoom: action.roomData,
+            ifFetching: false,
+        };
+    }),
+    on(NgrxAction.__successAddNewStudySubject, (state, action) => {
+        return { ...state,
+            addNewStudySubject: action.subjectData,
+            ifFetching: false,
+        };
+    }),
+    on(NgrxAction.__clearAllPostData, state => {
+        return { ...state,
+            registerNewUserData: null,
+            addNewDepartmentData: null,
+            addNewCathedralData: null,
+            addNewStudySpecialization: null,
+            addNewStudyRoom: null,
+            addNewStudySubject: null,
+            ifFetching: false,
+            serverError: '',
+        };
+    }),
+    on(NgrxAction.__failureAddNewContent, (state, action) => {
+        return { ...state,
+            serverError: action.failureMess,
+            ifFetching: false,
+        };
+    }),
+    on(NgrxAction.__setFetchingNewContent, state => {
+        return { ...state,
+            ifFetching: true,
+        };
+    }),
+    on(NgrxAction.__clearNewContentServerError, state => {
+        return { ...state,
+            serverError: '',
         };
     }),
 );

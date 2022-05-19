@@ -24,8 +24,12 @@ import { Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
-import { CmsRegisterRequestDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-request-data.model';
-import { CmsRegisterResponseDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-response-data.model';
+import { CmsDepartmentReqResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
+import { CmsRegisterReqDataModel, CmsRegisterResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
+import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-spec-req-res-data.model';
+import { CmsStudyRoomReqDataModel, CmsStudyRoomResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-room-req-res-data.model';
+import { CmsCathedralReqResDataModel, CmsCathedralResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
+import { CmsStudySubjectReqDataModel, CmsStudySubjectResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-subject-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -49,10 +53,70 @@ export class CmsPostConnectorService {
     /**
      * Rejestrowanie nowego użytkownika.
      */
-    public registerUser(newUserData: CmsRegisterRequestDataModel): Observable<CmsRegisterResponseDataModel> {
-        return this._http.post<CmsRegisterResponseDataModel>(
+    public registerUser(newUserData: CmsRegisterReqDataModel): Observable<CmsRegisterResDataModel> {
+        return this._http.post<CmsRegisterResDataModel>(
             this._endpoints.REGISTER_USER,
             newUserData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowego wydziału do bazy danych.
+     */
+    public addNewDepartment(deptData: CmsDepartmentReqResDataModel): Observable<CmsDepartmentReqResDataModel> {
+        return this._http.post<CmsDepartmentReqResDataModel>(
+            this._endpoints.ADD_NEW_DEPARTMENT,
+            deptData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowej katedry do wydziału do bazy danych.
+     */
+    public addNewCathedra(cathData: CmsCathedralReqResDataModel): Observable<CmsCathedralResDataModel> {
+        return this._http.post<CmsCathedralResDataModel>(
+            this._endpoints.ADD_NEW_CATHEDRAL,
+            cathData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowego kierunku (powiązanego z wydziałem) do bazy danych.
+     */
+    public addNewStudySpecialization(studyData: CmsStudySpecReqDataModel): Observable<Array<CmsStudySpecResDataModel>> {
+        return this._http.post<Array<CmsStudySpecResDataModel>>(
+            this._endpoints.ADD_STUDY_SPECIALIZATION,
+            studyData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowego pokoju (powiązanego z katedrą i wydziałem).
+     */
+    public addNewStudyRoom(roomData: CmsStudyRoomReqDataModel): Observable<CmsStudyRoomResDataModel> {
+        return this._http.post<CmsStudyRoomResDataModel>(
+            this._endpoints.ADD_NEW_STUDY_ROOM,
+            roomData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowego przedmiotu (powiązanego z wydziałem i kierunkiem studiów).
+     */
+    public addNewStudySubject(subjectData: CmsStudySubjectReqDataModel): Observable<CmsStudySubjectResDataModel> {
+        return this._http.post<CmsStudySubjectResDataModel>(
+            this._endpoints.ADD_NEW_STUDY_SUBJECT,
+            subjectData,
         );
     };
 }

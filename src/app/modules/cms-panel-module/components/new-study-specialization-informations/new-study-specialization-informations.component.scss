@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-register-request-data.model.ts
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 18:57
+ * File name | Nazwa pliku: new-study-specialization-informations.component.scss
+ * Last modified | Ostatnia modyfikacja: 15/05/2022, 06:41
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,10 +17,6 @@
  * Obiektowe".
  */
 
-export interface CmsRegisterRequestDataModel {
-    name: string;
-    surname: string;
-    nationality: string;
-    city: string;
-    role: string;
+.new-study-spec-info__res-data-container {
+    margin: 30px 0;
 }

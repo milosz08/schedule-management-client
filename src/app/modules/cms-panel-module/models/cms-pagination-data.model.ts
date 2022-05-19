@@ -21,16 +21,14 @@ import { UserIdentityType } from '../../../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsPaginationDataModel {
-    elements: Array<CmsSingleUserDataModel>;
+export interface CmsPaginationDataModel<T> {
+    elements: Array<T>;
     totalPagesCount: number;
     elementsFrom: number;
     elementsTo: number;
     totalElementsCount: number;
     currentActivePages: CurrentActivePages;
 }
-
-//----------------------------------------------------------------------------------------------------------------------
 
 export interface CurrentActivePages {
     activePages: Array<number>;
@@ -40,19 +38,67 @@ export interface CurrentActivePages {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export class CmsSingleUserDataModel {
+export interface CmsSingleUserDataModel {
+    id: number;
+    ifRemovable: boolean;
+    nameWithSurname: string;
+    login: string;
+    role: UserIdentityType;
+}
 
-    public id: number;
-    public nameWithSurname: string;
-    public login: string;
-    public role: UserIdentityType;
-    public ifRemovable: boolean;
+//----------------------------------------------------------------------------------------------------------------------
 
-    public constructor(id: number, nameWithSurname: string, login: string, role: string, ifRemovable: boolean) {
-        this.id = id;
-        this.nameWithSurname = nameWithSurname;
-        this.login = login;
-        this.role = UserIdentityType[role];
-        this.ifRemovable = ifRemovable;
-    }
+export interface CmsSingleDeptDataModel {
+    id: number;
+    ifRemovable: boolean;
+    name: string;
+    alias: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsSingleCathDataModel {
+    id: number;
+    ifRemovable: boolean;
+    name: string;
+    alias: string;
+    departmentName: string;
+    departmentAlias: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsSingleRoomTypeDataModel {
+    id: number;
+    name: string;
+    description: string;
+    capacity: number;
+    departmentName: string;
+    departmentAlias: string;
+    cathedralName: string;
+    cathedralAlias: string;
+    roomTypeName: string;
+    roomTypeAlias: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsSingleStudySpecDataModel {
+    id: number;
+    name: string;
+    specTypeName: string;
+    specTypeAlias: string;
+    departmentName: string;
+    departmentAlias: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsSingleStudySubjectDataModel {
+    id: number;
+    name: string;
+    specName: string;
+    specAlias: string;
+    departmentName: string;
+    departmentAlias: string;
 }

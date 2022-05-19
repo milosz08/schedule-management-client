@@ -20,24 +20,24 @@
 <form
 	[formGroup] = '_registerUserForm'
 	(ngSubmit) = 'handleSubmitRegisterUser()'
-	class = 'cms__simple-grid__angular-form add-new-user__form-container'
+	class = 'cms__simple-grid__angular-form app-cms__new-content__form-container angular-form--extended-width'
 >
 	<label
 		for = 'add-user-form___name'
 		class = 'cms__simple-grid__label'
 	>
-		Imię użytkownika:
+		Imię:
 	</label>
-	<div class = 'cms__simple-grid__input'>
+	<div>
 		<input
 			type = 'text'
 			id = 'add-user-form___name'
 			formControlName = 'name'
-			placeholder = 'np. Adam'
+			placeholder = 'np. Jan'
 			class = 'app__input app__input--light app__input--exclude-margin'
 		/>
 		<div
-			*ngIf = 'ifFieldHasErrors("name")'
+			*ngIf = '_checkError("name")'
 			class = 'app__input-error app__input-error--light app__input-error--margin-top'
 		>
 			Proszę wpisać imię
@@ -47,9 +47,9 @@
 		for = 'add-user-form___surname'
 		class = 'cms__simple-grid__label'
 	>
-		Nazwisko użytkownika:
+		Nazwisko:
 	</label>
-	<div class = 'cms__simple-grid__input'>
+	<div>
 		<input
 			type = 'text'
 			id = 'add-user-form___surname'
@@ -58,7 +58,7 @@
 			class = 'app__input app__input--light app__input--exclude-margin'
 		/>
 		<div
-			*ngIf = 'ifFieldHasErrors("surname")'
+			*ngIf = '_checkError("surname")'
 			class = 'app__input-error app__input-error--light app__input-error--margin-top'
 		>
 			Proszę wpisać imię
@@ -68,9 +68,9 @@
 		for = 'add-user-form___city'
 		class = 'cms__simple-grid__label'
 	>
-		Miejscowość zamieszkania:
+		Miejscowość:
 	</label>
-	<div class = 'cms__simple-grid__input'>
+	<div>
 		<input
 			type = 'text'
 			id = 'add-user-form___city'
@@ -79,7 +79,7 @@
 			class = 'app__input app__input--light app__input--exclude-margin'
 		/>
 		<div
-			*ngIf = 'ifFieldHasErrors("city")'
+			*ngIf = '_checkError("city")'
 			class = 'app__input-error app__input-error--light app__input-error--margin-top'
 		>
 			Proszę wpisać miasto zamieszkania
@@ -91,7 +91,7 @@
 	>
 		Narodowość:
 	</label>
-	<div class = 'cms__simple-grid__input'>
+	<div>
 		<input
 			type = 'text'
 			id = 'add-user-form___nationality'
@@ -100,38 +100,33 @@
 			class = 'app__input app__input--light app__input--exclude-margin'
 		/>
 		<div
-			*ngIf = 'ifFieldHasErrors("nationality")'
+			*ngIf = '_checkError("nationality")'
 			class = 'app__input-error app__input-error--light app__input-error--margin-top'
 		>
 			Proszę wpisać narodowość
 		</div>
 	</div>
 	<label
-		for = 'add-user-form___role'
+		[for] = '[ "add-user-form___role" ]'
 		class = 'cms__simple-grid__label'
 	>
-		Narodowość:
+		Rola w systemie:
 	</label>
-	<div class = 'cms__simple-grid__input'>
-		<div class = 'app__select__container'>
-			<select
-				id = 'add-user-form___role'
-				formControlName = 'role'
-				class = 'app__input app__input--light app__input--exclude-margin'
-			>
-				<ng-container *ngFor = 'let role of _allRoles'>
-					<option [value] = 'role'>{{ getPolishRole(role) }}</option>
-				</ng-container>
-			</select>
-			<mat-icon class = 'app__select__arrow-icon'>keyboard_arrow_down</mat-icon>
-		</div>
-		<div
-			*ngIf = '_serverError !== ""'
-			class = 'app__input-error app__input-error--light app__input-error--margin-top'
-		>
-			{{ _serverError }}
-		</div>
+	<div>
+		<app-select-list-template
+			[_formGroup] = '_registerUserForm'
+			[_listElements] = '_allRoles'
+			_formControlName = 'role'
+			_inputId = 'add-user-form___role'
+			_placeholder = 'np. Nauczyciel'
+			_errorField = 'prawidłowy typ roli'
+		></app-select-list-template>
 	</div>
+	<app-department-with-cathedral-inputs
+		*ngIf = '_registerUserForm.get("role")!.value !== _studentRole || _registerUserForm.get("role")!.dirty'
+		[_angularForm] = '_registerUserForm'
+		class = 'app__show-only-content'
+	></app-department-with-cathedral-inputs>
 	<div></div>
 	<div class = 'cms__simple-grid__submit-button'>
 		<button
@@ -143,5 +138,11 @@
 			Dodaj użytkownika
 			<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
 		</button>
+		<div
+			*ngIf = '_serverError !== ""'
+			class = 'app__input-error app__input-error--light app__input-error--server'
+		>
+			{{ _serverError }}
+		</div>
 	</div>
 </form>

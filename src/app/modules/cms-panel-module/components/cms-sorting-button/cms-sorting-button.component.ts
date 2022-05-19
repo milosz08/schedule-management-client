@@ -41,11 +41,8 @@ export class CmsSortingButtonComponent {
 
     public _sortingDir: AvailablesSortingTypes = AvailablesSortingTypes.ASC;
 
-    @Input()
-    public _sortingPlaceholder: string = '';
-
-    @Input()
-    public _sortingData: BasicDataSortBy = BasicDataSortBy.ID;
+    @Input() public _sortingPlaceholder: string = '';
+    @Input() public _sortingData: BasicDataSortBy = BasicDataSortBy.ID;
 
     //------------------------------------------------------------------------------------------------------------------
 

@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-register-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 20:19
+ * File name | Nazwa pliku: add-new-department-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 15/05/2022, 02:16
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,16 +17,28 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../../../../../types/user-identity.type';
+import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+
+import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsRegisterResponseDataModel {
-    name: string;
-    surname: string;
-    nationality: string;
-    city: string;
-    role: UserIdentityType;
-    email: string;
-    emailPassword: string;
+/**
+ * Komponent odpowiedzialny za renderowanie strony wyświetlającej możliwość dodania nowego wydziału.
+ */
+
+@Component({
+    selector: 'app-add-new-department-cms-page',
+    templateUrl: './add-new-department-cms-page.component.html',
+    styleUrls: [],
+})
+export class AddNewDepartmentCmsPageComponent extends MetaWebContentHelper {
+
+    public constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
+        super(titleService, metaService, AllCmsWebpages.ADD_DEPARTMENT);
+    };
 }

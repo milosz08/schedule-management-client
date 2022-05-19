@@ -1,0 +1,74 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: _cms-add-new-content-templates.scss
+ * Last modified | Ostatnia modyfikacja: 15/05/2022, 02:35
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.app-cms__add-new-content__container {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.app-cms__add-new-content__form-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin-right: 50px;
+    &.form-wrapper--extended-form-section {
+        max-width: 700px;
+    }
+}
+
+.app-cms__add-new-content__response-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 50px;
+}
+
+.app-cms__new-content__form-container {
+    margin: 30px auto 0;
+}
+
+.app-cms__new-content-info__basic-info-container {
+    margin-top: 20px;
+}
+
+.app-cms__new-content-info__suspense-loading-container {
+    width: 100%;
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1280px) {
+    .app-cms__add-new-content__container {
+        flex-direction: column;
+    }
+    .cms-add-new-content__form-wrapper,
+    .app-cms__add-new-content__response-wrapper {
+        margin: 0;
+    }
+    .app-cms__add-new-content__form-wrapper {
+        max-width: 100%;
+    }
+}

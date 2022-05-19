@@ -25,10 +25,12 @@ import { Observable, Subscription } from 'rxjs';
 import { MiscHelper } from '../../../../utils/misc.helper';
 import { UserIdentityType } from '../../../../types/user-identity.type';
 
+import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
+import { CmsRegisterResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
+
 import { CmsFileIoCommunicationService } from '../../services/cms-file-io-communication.service';
-import { CmsRegisterResponseDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-response-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -45,9 +47,10 @@ import { CmsRegisterResponseDataModel } from '../../ngrx-store/post-data-ngrx-st
 export class NewUserInformationsComponent implements OnInit, OnDestroy {
 
     private _subscription?: Subscription;
-    public _userData?: CmsRegisterResponseDataModel;
+    public _userData?: CmsRegisterResDataModel;
 
-    public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_registerSuspenseLoading);
+    public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_postDataSuspenseLoading);
+    public _getPlName = (role: UserIdentityType): string => MiscHelper.convertEngToPlUserRole(role)
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -67,10 +70,7 @@ export class NewUserInformationsComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this._subscription?.unsubscribe();
-    };
-
-    public getPolishNameOfUserRole(role: UserIdentityType): string {
-        return MiscHelper.convertEngToPlUserRole(role);
+        this._store.dispatch(NgrxAction_PDA.__clearAllPostData());
     };
 
     public saveDataToFile(): void {

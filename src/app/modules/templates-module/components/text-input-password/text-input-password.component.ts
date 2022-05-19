@@ -36,17 +36,10 @@ export class TextInputPasswordComponent {
 
     public _ifPasswordVisibility: boolean = false;
 
-    @Input()
-    public _formControlName: string = '';
-
-    @Input()
-    public _inputPlaceholder: string = '';
-
-    @Input()
-    public _formGroup?: FormGroup;
-
-    @Input()
-    public _ifLightTheme?: boolean = true;
+    @Input() public _formControlName: string = '';
+    @Input() public _inputPlaceholder: string = '';
+    @Input() public _formGroup?: FormGroup;
+    @Input() public _ifLightTheme?: boolean = true;
 
     //------------------------------------------------------------------------------------------------------------------
 

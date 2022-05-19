@@ -1,0 +1,49 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: study-rooms-cms-page.component.html
+  ~ Last modified | Ostatnia modyfikacja: 16/05/2022, 13:24
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div class = 'app-cms__top-description-container'>
+	<h2 class = 'app-cms__header-h2'>Sale zajęciowe</h2>
+	<div class = 'app-cms__description-block__container'>
+		W tej sekcji możesz przeglądać i edytować sale zajęciowe. Każda sala ma przydzielony swój typ (sala wykładowa/
+		ćwiczeniowa/laboratoryjna) i oznaczone są odpowiednim kolorem. Jeśli przeznaczenie sali nie jest sprecyzowane,
+		oznaczona jest ona jaki "inna".
+	</div>
+	<aside class = 'app-cms__separator-line'></aside>
+</div>
+<header class = 'app-cms-top-header'>
+	<app-search-form-input
+		_inputPlaceholder = 'Wyszukaj po aliasie (np. B102)'
+		class = 'cms-search-input--max-size'
+	></app-search-form-input>
+	<a
+		[routerLink] = '[ "/secure/panel/study-rooms/add-study-room" ]'
+		class = '
+			app__button
+			cms-def-button--max-size
+			app__button--light
+			first-change-pass__redir
+			app__button--full-size-window
+		'
+		title = 'Kliknij aby dodać nową salę zajęciową'
+	>
+		<span class = 'app__button__text'>+</span>
+		Dodaj nową salę zajęciową
+	</a>
+</header>
+<app-cms-study-rooms-table class = 'app-cms__table-loading-container'></app-cms-study-rooms-table>

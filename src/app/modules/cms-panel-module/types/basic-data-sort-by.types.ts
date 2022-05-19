@@ -21,5 +21,13 @@ export enum BasicDataSortBy {
     ID = 'Id',
     SURNAME = 'Surname',
     LOGIN = 'Login',
-    ROLE = 'Role'
+    ROLE = 'Role',
+    NAME = 'Name',
+    ALIAS = 'Alias',
+    DEPT_NAME = 'DepartmentName',
+    DEPT_ALIAS = 'DepartmentAlias',
+    CATH_ALIAS = 'CathedralAlias',
+    CAPACITY = 'Capacity',
+    ROOM_TYPE_ALIAS = 'RoomTypeAlias',
+    SPEC_TYPE_ALIAS = 'SpecAlias',
 }

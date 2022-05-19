@@ -1,0 +1,58 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: new-study-room-informations.component.html
+  ~ Last modified | Ostatnia modyfikacja: 16/05/2022, 13:38
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<ng-container *ngIf = '_roomData; else basicDataInfoAndSusLoading'>
+	<div class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'>
+		Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres zostaną usunięte z podglądu.
+	</div>
+	<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container'>
+		<div class = 'cms__simple-grid__label'>Nazwa (alias) sali:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.name }}</div>
+		<ng-container *ngIf = '_roomData.description'>
+			<div class = 'cms__simple-grid__label'>Dodatkowy opis sali:</div>
+			<div class = 'cms__simple-grid__text'>{{ _roomData.description }}</div>
+		</ng-container>
+		<div class = 'cms__simple-grid__label'>Wydział:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.departmentName }}</div>
+		<div class = 'cms__simple-grid__label'>Alias wydziału:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.departmentAlias }}</div>
+		<div class = 'cms__simple-grid__label'>Katedra:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.cathedralName }}</div>
+		<div class = 'cms__simple-grid__label'>Alias katedry:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.cathedralAlias }}</div>
+		<div class = 'cms__simple-grid__label'>Pojemność sali:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.capacity }} osób</div>
+		<div class = 'cms__simple-grid__label'>Typ sali:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.roomTypeName }} ({{ _roomData.roomType }})</div>
+	</div>
+</ng-container>
+<ng-template #basicDataInfoAndSusLoading>
+	<ng-container *ngIf = '(_loadingSus$ | async); else suspenseLoading'>
+		<div class = 'app-cms__new-content-info__suspense-loading-container'>
+			<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+		</div>
+	</ng-container>
+</ng-template>
+<ng-template #suspenseLoading>
+	<div class = 'app-cms__description-block__container'>
+		Po dodaniu nowej sali zajęciowej w tym oknie zostaną wyświetlone informacje o dodanej sali (nazwa oraz alias)
+		oraz inne powiązanie z nią informacje (wydział, katedra itp.) Informacje te zostaną utracone po przeładowaniu
+		strony.
+	</div>
+</ng-template>

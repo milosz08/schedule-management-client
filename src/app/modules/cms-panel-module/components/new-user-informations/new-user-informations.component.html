@@ -22,7 +22,7 @@
 		Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres zostaną usunięte z podglądu. Zaleca się
 		zapisanie ich do pliku tekstowego.
 	</div>
-	<div class = 'cms__simple-grid__angular-form new-user-info__basic-info-container'>
+	<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container'>
 		<div class = 'cms__simple-grid__label'>Imię i nazwisko:</div>
 		<div class = 'cms__simple-grid__text'>{{ _userData.name }} {{ _userData.surname }}</div>
 		<div class = 'cms__simple-grid__label'>Miejscowość zamieszkania:</div>
@@ -31,12 +31,18 @@
 		<div class = 'cms__simple-grid__text'>{{ _userData.nationality }}</div>
 		<div class = 'cms__simple-grid__label'>Rola użytkownika:</div>
 		<div class = 'cms__simple-grid__text new-user-info__user-data--role'>
-			{{ getPolishNameOfUserRole(_userData.role) }}
+			{{ _getPlName(_userData.role) }}
 		</div>
 		<div class = 'cms__simple-grid__label'>Adres email:</div>
 		<div class = 'cms__simple-grid__text'>{{ _userData.email }}</div>
 		<div class = 'cms__simple-grid__label'>Hasło do adresu email:</div>
 		<div class = 'cms__simple-grid__text'>{{ _userData.emailPassword }}</div>
+		<ng-container *ngIf = '_userData.departmentData && _userData.cathedralData'>
+			<div class = 'cms__simple-grid__label'>Przypisany do wydziału:</div>
+			<div class = 'cms__simple-grid__text'>{{ _userData.departmentData }}</div>
+			<div class = 'cms__simple-grid__label'>Przypisany do katedry:</div>
+			<div class = 'cms__simple-grid__text'>{{ _userData.cathedralData }}</div>
+		</ng-container>
 	</div>
 	<div class = 'new-user-info__save-to-file-container'>
 		<button
@@ -51,7 +57,7 @@
 </ng-container>
 <ng-template #basicDataInfoAndSusLoading>
 	<ng-container *ngIf = '(_loadingSus$ | async); else suspenseLoading'>
-		<div class = 'new-user-info__suspense-loading-container'>
+		<div class = 'app-cms__new-content-info__suspense-loading-container'>
 			<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
 		</div>
 	</ng-container>

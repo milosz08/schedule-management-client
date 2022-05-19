@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: new-cathedral-informations.component.html
+  ~ Last modified | Ostatnia modyfikacja: 15/05/2022, 03:40
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<ng-container *ngIf = '_cathData; else basicDataInfoAndSusLoading'>
+	<div class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'>
+		Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres zostaną usunięte z podglądu.
+	</div>
+	<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container'>
+		<div class = 'cms__simple-grid__label'>Nazwa katedry:</div>
+		<div class = 'cms__simple-grid__text'>{{ _cathData.name }}</div>
+		<div class = 'cms__simple-grid__label'>Alias nazwy katedry:</div>
+		<div class = 'cms__simple-grid__text'>{{ _cathData.alias }}</div>
+		<div class = 'cms__simple-grid__label'>Nazwa wydziału katedry:</div>
+		<div class = 'cms__simple-grid__text'>{{ _cathData.departmentName }}</div>
+		<div class = 'cms__simple-grid__label'>Alias nazwy wydziału katedry:</div>
+		<div class = 'cms__simple-grid__text'>{{ _cathData.departmentAlias }}</div>
+	</div>
+</ng-container>
+<ng-template #basicDataInfoAndSusLoading>
+	<ng-container *ngIf = '(_loadingSus$ | async); else suspenseLoading'>
+		<div class = 'app-cms__new-content-info__suspense-loading-container'>
+			<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+		</div>
+	</ng-container>
+</ng-template>
+<ng-template #suspenseLoading>
+	<div class = 'app-cms__description-block__container'>
+		Po dodaniu nowej katedry w tym oknie zostaną wyświetlone informacje o dodanej katedrze (nazwa oraz alias) oraz
+		dodatkowe informacje wydziale do którym została przypisana katedra. Informacje te zostaną utracone po
+		przeładowaniu strony.
+	</div>
+</ng-template>

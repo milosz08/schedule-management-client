@@ -1,0 +1,124 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: add-new-study-room-form.component.html
+  ~ Last modified | Ostatnia modyfikacja: 16/05/2022, 13:38
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<form
+	[formGroup] = '_newStudyRoom'
+	(ngSubmit) = 'handleSubmitNewStudyRoom()'
+	class = 'cms__simple-grid__angular-form app-cms__new-content__form-container angular-form--extended-width'
+>
+	<label
+		for = 'add-study-room-form___name'
+		class = 'cms__simple-grid__label'
+	>
+		Nazwa (alias) sali:
+	</label>
+	<div>
+		<input
+			type = 'text'
+			id = 'add-study-room-form___name'
+			formControlName = 'name'
+			maxlength = '50'
+			placeholder = 'np. B102'
+			class = 'app__input app__input--light app__input--exclude-margin'
+		/>
+		<div
+			*ngIf = '_checkError("name")'
+			class = 'app__input-error app__input-error--light app__input-error--margin-top'
+		>
+			Proszę wpisać nazwę (alias) sali
+		</div>
+	</div>
+	<label
+		for = 'add-study-room-form___description'
+		class = 'cms__simple-grid__label'
+	>
+		Krótki opis (opcjonalny):
+	</label>
+	<div>
+		<textarea
+			id = 'add-study-room-form___description'
+			formControlName = 'description'
+			placeholder = 'np. Laboratorium Programowania Komputerów'
+			rows = '4'
+			maxlength = '150'
+			class = 'app__input app__input--light app__input--exclude-margin resize--only-vertical'
+		></textarea>
+	</div>
+	<app-department-with-cathedral-inputs
+		[_angularForm] = '_newStudyRoom'
+		class = 'app__show-only-content'
+	></app-department-with-cathedral-inputs>
+	<label
+		for = 'add-study-room-form___capacity'
+		class = 'cms__simple-grid__label'
+	>
+		Pojemność sali:
+	</label>
+	<div>
+		<input
+			type = 'text'
+			pattern = '^(0|[1-9][0-9]*)$'
+			min = '0'
+			id = 'add-study-room-form___capacity'
+			formControlName = 'capacity'
+			placeholder = 'np. 40'
+			class = 'app__input app__input--light app__input--exclude-margin'
+		/>
+		<div
+			*ngIf = '_checkError("capacity")'
+			class = 'app__input-error app__input-error--light app__input-error--margin-top'
+		>
+			Proszę wpisać poprawną pojemność sali
+		</div>
+	</div>
+	<label
+		[for] = '[ "add-study-room-form___type" ]'
+		class = 'cms__simple-grid__label'
+	>
+		Typ sali zajęciowej:
+	</label>
+	<div>
+		<app-select-list-template
+			[_formGroup] = '_newStudyRoom'
+			[_listElements] = '_allRoomTypes'
+			_formControlName = 'roomType'
+			_inputId = 'add-study-room-form___type'
+			_placeholder = 'np. Wykładowa'
+			_errorField = 'prawidłowy typ sali zajęciowej'
+		></app-select-list-template>
+	</div>
+	<div></div>
+	<div class = 'cms__simple-grid__submit-button'>
+		<button
+			[disabled] = '!_newStudyRoom.valid'
+			type = 'submit'
+			class = 'app__button app__button--full-width app__button--light'
+			title = 'Kliknij aby dodać nowa salę zajęciową'
+		>
+			Dodaj nową salę
+			<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+		</button>
+		<div
+			*ngIf = '_serverError !== ""'
+			class = 'app__input-error app__input-error--light app__input-error--server'
+		>
+			{{ _serverError }}
+		</div>
+	</div>
+</form>

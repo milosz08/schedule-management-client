@@ -19,10 +19,13 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { MiscHelper } from '../../../../utils/misc.helper';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
 import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
@@ -54,18 +57,16 @@ type CombinedReducers = ModalsReducerType | SessionReducerType;
 export class RemoveContentModalComponent implements OnInit, OnDestroy {
 
     public readonly _authPassForm: FormGroup;
-    public _submitDisabled: boolean = false;
+    public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._authPassForm, name);
 
-    private _subscription?: Subscription;
     private _userLogin: string = '';
     public _srvMessage: string = '';
+    public _submitDisabled: boolean = false;
 
-    private _resetValuesSubscription?: Subscription;
-    private _messageSubscription? : Subscription;
+    private _unsubscribe: Subject<void> = new Subject();
 
     public _modalVisibility$: Observable<boolean> = this._store.select(NgrxSelector_MOD.sel_removeModalVisibility);
     public _ifSuspenseVisible$: Observable<boolean> = this._store.select(NgrxSelector_MOD.sel_suspenseRemovingContent);
-
     public _ifMessageError$: Observable<boolean> = this._store.select(NgrxSelector_MOD.sel_serverMessageIfError);
     public _serverMessage$: Observable<string> = this._store.select(NgrxSelector_MOD.sel_removeModalServerMessage);
 
@@ -79,7 +80,7 @@ export class RemoveContentModalComponent implements OnInit, OnDestroy {
         this._authPassForm = new FormGroup({
             password: new FormControl('', [ Validators.required ]),
         });
-        this._resetValuesSubscription = this._authPassForm.valueChanges.subscribe(() => {
+        this._authPassForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._srvMessage !== '') {
                 this._submitDisabled = false;
                 this._store.dispatch(NgrxAction_MOD.__clearServerMessageRemoveContentModal());
@@ -90,17 +91,17 @@ export class RemoveContentModalComponent implements OnInit, OnDestroy {
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
-        this._subscription = this._store
-            .select(NgrxSelector_SES.sel_userLogin)
+        this._store
+            .pipe(takeUntil(this._unsubscribe), select(NgrxSelector_SES.sel_userLogin))
             .subscribe(userLogin => this._userLogin = userLogin);
-        this._messageSubscription = this._serverMessage$
+        this._serverMessage$
+            .pipe(takeUntil(this._unsubscribe))
             .subscribe(message => this._srvMessage = message);
     };
 
     public ngOnDestroy(): void {
-        this._subscription?.unsubscribe();
-        this._messageSubscription?.unsubscribe();
-        this._resetValuesSubscription?.unsubscribe();
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
     };
 
     public handleRemoveElements(): void {
@@ -115,9 +116,6 @@ export class RemoveContentModalComponent implements OnInit, OnDestroy {
         this._store.dispatch(NgrxAction_MOD.__closeRemoveContentModal());
         this._suspenseService.reloadAngularPageWithRouter();
         this._authPassForm.reset();
-    };
-
-    public ifFieldHasErrors(fieldName: string): boolean {
-        return this._authPassForm.get(fieldName)!.touched && !this._authPassForm.get(fieldName)!.valid;
+        this._submitDisabled = false;
     };
 }

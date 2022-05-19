@@ -31,12 +31,19 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const routes: Routes = [
     {
-        path: '', component: MainPageComponent, children: [
-            { path: '', component: RootMainPageComponent },
-            { path: 'schedule', component: SchedulePageComponent },
-            { path: 'booking', component: BookingPageComponent },
-            { path: 'search', component: SearchPageComponent },
-        ],
+        path: '', component: MainPageComponent, children: [ {
+            path: '',
+            component: RootMainPageComponent
+        }, {
+            path: 'schedule',
+            component: SchedulePageComponent
+        }, {
+            path: 'booking',
+            component: BookingPageComponent
+        }, {
+            path: 'search',
+            component: SearchPageComponent
+        }, ],
     },
 ];
 

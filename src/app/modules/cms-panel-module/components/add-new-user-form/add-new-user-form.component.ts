@@ -19,12 +19,15 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
 import { UserIdentityType } from '../../../../types/user-identity.type';
+import { ObjectMapperHelper } from '../../../../utils/object-mapper.helper';
+import { SelectListTupleModel } from '../../../templates-module/models/select-list-tuple.model';
 
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
@@ -40,21 +43,23 @@ import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-
 @Component({
     selector: 'app-add-new-user-form',
     templateUrl: './add-new-user-form.component.html',
-    styleUrls: [ './add-new-user-form.component.scss' ],
+    styleUrls: [],
 })
 export class AddNewUserFormComponent implements OnInit, OnDestroy {
 
     public readonly _registerUserForm: FormGroup;
+    public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._registerUserForm, name);
+
+    public readonly _studentRole = UserIdentityType.STUDENT;
+    public readonly _allRoles: Array<SelectListTupleModel> = this._mapper.__allRoles;
     public _serverError?: string;
 
-    private _resetValuesSubscription?: Subscription;
-    private _subscription?: Subscription;
+    private _unsubscribe: Subject<void> = new Subject();
 
-    public readonly _allRoles = Object.keys(UserIdentityType).filter(r => r !== UserIdentityType.UNDEFINED).reverse();
-    
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
+        private _mapper: ObjectMapperHelper,
         private _store: Store<PostDataReducerType>,
     ) {
         this._registerUserForm = new FormGroup({
@@ -62,12 +67,14 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
             surname: new FormControl('', [ Validators.required ]),
             city: new FormControl('', [ Validators.required ]),
             nationality: new FormControl('', [ Validators.required ]),
-            role: new FormControl(UserIdentityType.STUDENT, [ Validators.required ]),
+            role: new FormControl('', [ Validators.required ]),
+            departmentName: new FormControl(''),
+            cathedralName: new FormControl(''),
+            studySpecName: new FormControl(''),
         });
-        this._store.dispatch(NgrxAction_PDA.__clearRegisterUserData());
-        this._resetValuesSubscription = this._registerUserForm.valueChanges.subscribe(() => {
+        this._registerUserForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._serverError !== '') {
-                this._store.dispatch(NgrxAction_PDA.__clearRegisterServerError());
+                this._store.dispatch(NgrxAction_PDA.__clearNewContentServerError());
             }
         });
     };
@@ -75,27 +82,18 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
-        this._subscription = this._store
-            .select(NgrxSelector_PDA.sel_registerServerErrorMessage)
+        this._store
+            .pipe(takeUntil(this._unsubscribe), select(NgrxSelector_PDA.sel_postDataServerErrorMessage))
             .subscribe(errorMessage => this._serverError = errorMessage);
     };
 
     public ngOnDestroy(): void {
-        this._subscription?.unsubscribe();
-        this._resetValuesSubscription?.unsubscribe();
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
     };
 
     public handleSubmitRegisterUser(): void {
-        this._store.dispatch(NgrxAction_PDA.__setFetchingRegisterNewUser());
-        this._store.dispatch(NgrxAction_PDA.__registerNewUser({ userData: this._registerUserForm.getRawValue() }))
-        this._registerUserForm.reset({ role: UserIdentityType.STUDENT });
-    };
-
-    public getPolishRole(role: string): string {
-        return MiscHelper.createUserRoleAllPhrase(role as UserIdentityType).label;
-    };
-
-    public ifFieldHasErrors(fieldName: string): boolean {
-        return this._registerUserForm.get(fieldName)!.touched && !this._registerUserForm.get(fieldName)!.valid;
+        this._store.dispatch(NgrxAction_PDA.__registerNewUser({ userData: this._registerUserForm.getRawValue() }));
+        this._registerUserForm.reset();
     };
 }

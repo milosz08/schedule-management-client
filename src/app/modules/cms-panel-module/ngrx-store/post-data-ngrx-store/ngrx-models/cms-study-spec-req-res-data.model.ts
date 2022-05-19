@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-user-form.component.scss
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 14:17
+ * File name | Nazwa pliku: cms-study-spec-req-res-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 15/05/2022, 06:00
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,7 +17,16 @@
  * Obiektowe".
  */
 
-.add-new-user__form-container {
-    max-width: 600px;
-    margin: 30px auto 0;
+export interface CmsStudySpecReqDataModel {
+    name: string;
+    alias: string;
+    departmentName: string;
+    studyType: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsStudySpecResDataModel extends CmsStudySpecReqDataModel {
+    departmentAlias: string;
+    studyTypeFullName: string;
 }

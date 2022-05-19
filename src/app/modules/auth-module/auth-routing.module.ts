@@ -37,30 +37,25 @@ import { ResetPasswordTokenUnsaveChangesGuard } from '../../guards/route-leave-p
 
 const routes: Routes = [
     {
-        path: '', component: AuthPageComponent, children: [
-            {
-                path: 'login',
-                component: LoginPageComponent,
-                canActivate: [ LoginRedirectGuard ],
-            },
-            {
-                path: 'send-token-to-reset-password',
-                component: SendTokenViaEmailPageComponent,
-                canActivate: [ LoginRedirectGuard ],
-                canDeactivate: [ ResetPasswordTokenUnsaveChangesGuard ],
-            },
-            {
-                path: 'reset-password',
-                component: ResetPasswordPageComponent,
-                canActivate: [ LoginRedirectGuard, ResetPasswordGuard ],
-                canDeactivate: [ ResetPasswordFormUnsaveChangesGuard ],
-            },
-            {
-                path: 'first-change-password',
-                component: FirstChangePasswordPageComponent,
-                canActivate: [ FirstChangePasswordRedirectGuard ],
-            },
-        ],
+        path: '', component: AuthPageComponent, children: [ {
+            path: 'login',
+            component: LoginPageComponent,
+            canActivate: [ LoginRedirectGuard ],
+        }, {
+            path: 'send-token-to-reset-password',
+            component: SendTokenViaEmailPageComponent,
+            canActivate: [ LoginRedirectGuard ],
+            canDeactivate: [ ResetPasswordTokenUnsaveChangesGuard ],
+        }, {
+            path: 'reset-password',
+            component: ResetPasswordPageComponent,
+            canActivate: [ LoginRedirectGuard, ResetPasswordGuard ],
+            canDeactivate: [ ResetPasswordFormUnsaveChangesGuard ],
+        }, {
+            path: 'first-change-password',
+            component: FirstChangePasswordPageComponent,
+            canActivate: [ FirstChangePasswordRedirectGuard ],
+        }, ],
     },
 ];
 

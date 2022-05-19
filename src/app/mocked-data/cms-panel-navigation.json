@@ -12,6 +12,36 @@
         "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
     },
     {
+        "name": "wydziały",
+        "location": "departments",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania wydziałami",
+        "availableFor": "ADMINISTRATOR"
+    },
+    {
+        "name": "katedry",
+        "location": "cathedrals",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania katedrami",
+        "availableFor": "ADMINISTRATOR"
+    },
+    {
+        "name": "sale zajęciowe",
+        "location": "study-rooms",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania salami na wydziałach",
+        "availableFor": "ADMINISTRATOR"
+    },
+    {
+        "name": "kierunki studiów",
+        "location": "study-specializations",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania kierunkami studiów",
+        "availableFor": "ADMINISTRATOR"
+    },
+    {
+        "name": "przedmioty",
+        "location": "study-subjects",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania przedmiotami na studiach",
+        "availableFor": "ADMINISTRATOR"
+    },
+    {
         "name": "użytkownicy",
         "location": "users",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania użytkownikami",

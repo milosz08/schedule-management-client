@@ -17,17 +17,9 @@
  * Obiektowe".
  */
 
-export class CmsPanelNavigationDataModel {
-
-    public name: string;
-    public location: string;
-    public ariaLabel: string;
-    public availableFor: string;
-
-    public constructor(name: string, location: string, ariaLabel: string, availableFor: string) {
-        this.name = name;
-        this.location = location;
-        this.ariaLabel = ariaLabel;
-        this.availableFor = availableFor;
-    };
+export interface CmsPanelNavigationDataModel {
+    name: string;
+    location: string;
+    ariaLabel: string;
+    availableFor: string;
 }

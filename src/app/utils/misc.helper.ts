@@ -18,6 +18,7 @@
  */
 
 import { UserIdentityType } from '../types/user-identity.type';
+import { FormGroup } from '@angular/forms';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -90,5 +91,14 @@ export class MiscHelper {
             case UserIdentityType.TEACHER:          return { label: 'nauczyciel', class: 'role--teacher' };
             default:                                return { label: 'student', class: 'role--student' };
         }
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda sprawdzająca pole w reaktywnym formularzu angular po wzlgędem zgodności (tylko w przypadku focusa).
+     */
+    public static checkNgFormError(form: FormGroup, inputName: string): boolean {
+        return form.get(inputName)!.touched && !form.get(inputName)!.valid;
     };
 }
