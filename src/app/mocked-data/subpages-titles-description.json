@@ -59,7 +59,47 @@
         },
         "bookings": {
             "title": "Moje rezerwacje",
-            "description": "W tej sekcji możesz przeglądać oraz wszystkie stworzone rezerwacje"
+            "description": "W tej sekcji możesz przeglądać wszystkie stworzone rezerwacje."
+        },
+        "departments": {
+            "title": "Wydziały",
+            "description": "W tej sekcji możesz zarządzać wydziałami."
+        },
+        "addDepartment": {
+            "title": "Dodaj wydział",
+            "description": "W tej sekcji możesz dodać nowy wydział."
+        },
+        "cathedrals": {
+            "title": "Katedry",
+            "description": "W tej sekcji możesz zarządzać katedrami poszczególnych wydziałów."
+        },
+        "addCathedral": {
+            "title": "Dodaj katedrę",
+            "description": "W tej sekcji możesz dodać nową katedrę do istniejącego wydziału."
+        },
+        "studySpecialization": {
+            "title": "Kierunki studiów",
+            "description": "W tej sekcji możesz zarządzać kierunkami studiów na poszczególnych wydziałach."
+        },
+        "addStudySpecialization": {
+            "title": "Nowy kierunek studiów",
+            "description": "W tej sekcji możesz dodać nowy kierunek studiów na wybranym wydziale."
+        },
+        "studyRooms": {
+            "title": "Sale zajęciowe",
+            "description": "W tej sekcji możesz zarządzać salami zajęciowymi poszczególnych wydziałów."
+        },
+        "addStudyRoom": {
+            "title": "Nowa sala zajęciowa",
+            "description": "W tej sekcji możesz dodać nową salę zajęciową na instniejący już wydział."
+        },
+        "studySubjects": {
+            "title": "Przedmioty",
+            "description": "W tej sekcji możesz zarządzać przedmiotami poszczególnych kierunków."
+        },
+        "addStudySubject": {
+            "title": "Nowy przedmiot",
+            "description": "W tej sekcji możesz dodać nowy przedmiot do istniejącego już kierunku."
         }
     }
 }
