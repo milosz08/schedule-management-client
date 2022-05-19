@@ -18,32 +18,30 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
 import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
 import { UserIdentityType } from '../../../../types/user-identity.type';
 import { BasicDataSortBy } from '../../types/basic-data-sort-by.types';
-import { CmsPaginationDataModel } from '../../models/cms-pagination-data.model';
+import { CmsPaginationDataModel, CmsSingleUserDataModel } from '../../models/cms-pagination-data.model';
 
-import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxAction_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.actions';
-import * as NgrxSelector_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import * as NgrxSelector_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { ModalsReducerType } from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.selectors';
 import { ListNavigationsReducerType } from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
-import { InitialListNavigationStateTypes } from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.initial';
+import { PaginationNavSender } from '../../ngrx-store/list-navigations-ngrx-store/ngrx-models/pagination-nav-sender.model';
 
 import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
-import { CmsDeleteConnectorService } from '../../services/cms-delete-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-type CombinedStore = ListNavigationsReducerType | SessionReducerType | ModalsReducerType;
+type CombinedStore = ListNavigationsReducerType | SessionReducerType;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -56,36 +54,30 @@ type CombinedStore = ListNavigationsReducerType | SessionReducerType | ModalsRed
     selector: 'app-cms-users-table',
     templateUrl: './cms-users-table.component.html',
     styleUrls: [ './cms-users-table.component.scss' ],
-    providers: [ CmsGetConnectorService, CmsDeleteConnectorService ],
+    providers: [ CmsGetConnectorService ],
 })
 export class CmsUsersTableComponent implements OnInit, OnDestroy {
 
-    public _usersPagination?: CmsPaginationDataModel;
+    public _usersPagination?: CmsPaginationDataModel<CmsSingleUserDataModel>;
     public _userSortBy: typeof BasicDataSortBy = BasicDataSortBy;
 
     public _userLogin$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userLogin);
 
-    public _navigationState$: Observable<InitialListNavigationStateTypes> = this._store
-        .select(NgrxSelector_NAV.sel_combinedNavData);
-
-    public _navigationSubscription?: Subscription;
-    public _serviceSubscription?: Subscription;
-
     public _deleteUsers: Array<number> = new Array<number>();
+    private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _store: Store<CombinedStore>,
-        private _endpoints: ApiConfigurerHelper,
+        public _endpoints: ApiConfigurerHelper,
         private _serviceGET: CmsGetConnectorService,
-        private _serviceDELETE: CmsDeleteConnectorService,
     ) {
-        this._navigationSubscription = this._navigationState$.subscribe(data => {
+        this._store.pipe(takeUntil(this._unsubscribe), select(NgrxSelector_NAV.sel_combinedNavData)).subscribe(data => {
             if (data.pageSize !== 1) {
-                const { searchPhrase, sortBy, sortDirection, pageSize, pageNumber } = data;
-                this._serviceSubscription = this._serviceGET
-                    .getAllUsers({ searchPhrase, pageNumber, pageSize, sortBy, sortDirection })
+                this._serviceGET
+                    .getAllUsers(new PaginationNavSender(data))
+                    .pipe(takeUntil(this._unsubscribe))
                     .subscribe(filteredPagination => {
                         this._usersPagination = filteredPagination;
                     });
@@ -100,35 +92,11 @@ export class CmsUsersTableComponent implements OnInit, OnDestroy {
     };
 
     public ngOnDestroy(): void {
-        this._navigationSubscription?.unsubscribe();
-        this._serviceSubscription?.unsubscribe();
-        this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
     };
 
     public getUserRole(role: UserIdentityType): { label: string, class: string } {
         return MiscHelper.createUserRoleAllPhrase(role);
-    };
-
-    public handleDeleteUser(userId: number): void {
-        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
-            removeContentPath: this._endpoints.MASSIVE_DELETE_USERS, removeContentIds: [ userId ] }));
-    };
-
-    public handleDeleteAllUsers(): void {
-        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
-            removeContentPath: this._endpoints.DELETE_USER }));
-    };
-
-    public handleMassiveDeleteUsers(): void {
-        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
-            removeContentPath: this._endpoints.MASSIVE_DELETE_USERS, removeContentIds: this._deleteUsers }));
-    };
-
-    public toggleSelectedDeleteUser(ifChecked: boolean, userId: number) {
-        if (ifChecked) {
-            this._deleteUsers.push(userId);
-        } else {
-            this._deleteUsers = this._deleteUsers.filter(id => id !== userId);
-        }
     };
 }

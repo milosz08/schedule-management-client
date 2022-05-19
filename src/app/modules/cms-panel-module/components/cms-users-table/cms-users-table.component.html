@@ -17,18 +17,16 @@
   ~ Obiektowe".
   -->
 
-<aside
-	*ngIf = '!_usersPagination; else showContent'
-	class = 'app-cms__loading-table-content'
+<app-cms-list-element-removable-with-pagination
+	[_pagination] = '_usersPagination!'
+	[_deleteContentArray] = '_deleteUsers'
+	[_deletEndpoint] = '_endpoints.DELETE_USER'
+	[_massiveDeleteEndpoint] = '_endpoints.MASSIVE_DELETE_USERS'
 >
-	<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
-</aside>
-<ng-template #showContent>
-	<p class = 'app-cms__query-parameters'>
-		Pobrano {{ _usersPagination!.elementsFrom }}-{{ _usersPagination!.elementsTo }} wyników z
-		{{ _usersPagination!.totalElementsCount }} wszystkich możliwych wyników.
-	</p>
-	<table class = 'app-cms-table__container'>
+	<table
+		*ngIf = '_usersPagination'
+		class = 'app-cms-table__container'
+	>
 		<tr *ngIf = '_usersPagination!.elements.length > 0'>
 			<th class = 'app-cms-table__th-id app-cms-table--hide-column__small'>
 				<app-cms-sorting-button
@@ -58,7 +56,14 @@
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
-		<tr *ngFor = 'let user of _usersPagination!.elements'>
+		<tr
+			app-cms-list-delete-single-element
+			[_deleteContentId] = 'user.id'
+			[_deleteContentList] = '_deleteUsers'
+			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_USERS'
+			[_ifContentRemovable] = '(_userLogin$ | async) !== user.login || user.ifRemovable'
+			*ngFor = 'let user of _usersPagination!.elements'
+		>
 			<td class = 'app-cms-table--hide-column__small'>{{ user.id }}</td>
 			<td>{{ user.nameWithSurname }}</td>
 			<td class = 'app-cms-table--hide-column__large'>{{ user.login }}</td>
@@ -74,50 +79,11 @@
 					title = 'Kliknij aby przejść do szczegółów konta użytkownika'
 				>
 					<span class = 'app-cms-table--hide-details-button-text'>Szczegóły</span>
-					<mat-icon class = 'app__button__arrow cms-table-button--remove-arrow-margin'>arrow_right_alt</mat-icon>
+					<mat-icon class = 'app__button__arrow cms-table-button--remove-arrow-margin'>
+						arrow_right_alt
+					</mat-icon>
 				</a>
-			</td>
-			<td>
-				<button
-					(click) = 'handleDeleteUser(user.id)'
-					class = 'app__button app__button--danger-light'
-					title = 'Kliknij aby usunąć konto użytkownika z systemu'
-					[disabled] = '!user.ifRemovable || user.login === (_userLogin$ | async)'
-				>
-					Usuń
-				</button>
-			</td>
-			<td class = 'app-cms-table-td-select-box app-cms-table--hide-column__small'>
-				<app-checkbox-template
-					[_checkboxDisabled] = '!user.ifRemovable || user.login === (_userLogin$ | async)'
-					[_checkboxValue] = 'false'
-					[_ifShowLabel] = 'false'
-					[_ifWhiteBackground] = 'true'
-					(_checkedEmitter) = 'toggleSelectedDeleteUser($event, user.id)'
-				></app-checkbox-template>
 			</td>
 		</tr>
 	</table>
-	<section class = 'app-cms__danger-zone-deleting__container'>
-		<button
-			class = 'app__button app__button--danger-light app__button--small-full-size-window'
-			title = 'Kliknij aby usunąć wszystkich zaznaczonych użytkowników'
-			(click) = 'handleMassiveDeleteUsers()'
-			[disabled] = '_deleteUsers.length === 0'
-		>
-			Usuń zaznaczone
-		</button>
-		<button
-			class = 'app__button app__button--danger-light app__button--filled app__button--small-full-size-window'
-			title = 'Kliknij aby usunąć wszystkich użytkowników'
-			(click) = 'handleDeleteAllUsers()'
-		>
-			Usuń wszystko
-		</button>
-	</section>
-	<app-cms-pagination-options
-		*ngIf = '_usersPagination!.elements.length > 0'
-		[_pagesMaxCount] = '_usersPagination!.totalPagesCount'
-		[_currentActivePages] = '_usersPagination!.currentActivePages'
-	></app-cms-pagination-options>
-</ng-template>
+</app-cms-list-element-removable-with-pagination>
