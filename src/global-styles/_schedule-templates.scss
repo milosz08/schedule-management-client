@@ -1,0 +1,67 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: _schedule-templates.scss
+ * Last modified | Ostatnia modyfikacja: 19/05/2022, 18:15
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.app__schedule-nav-list__second-level {
+    margin-left: 20px;
+}
+
+.app__schedule-nav-list__third-level {
+    margin-left: 30px;
+}
+
+.app__schedule-nav-list__fourth-level {
+    margin-left: 40px;
+}
+
+.app__schedule-nav-list__last-level {
+    padding-left: 10px;
+}
+
+.app__schedule-nav-list__button-element {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1.1;
+    margin: 5px 0;
+}
+
+.app__schedule-nav-loading-spinner__container {
+    width: 24px;
+    flex-shrink: 0;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 60%;
+        height: 60%;
+    }
+}
+
+.app__schedule-nav-list__loading-all-list-elements__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    img {
+        width: 80px;
+        height: 80px;
+    }
+}
