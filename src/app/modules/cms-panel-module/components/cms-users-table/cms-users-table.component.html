@@ -62,6 +62,7 @@
 			[_deleteContentList] = '_deleteUsers'
 			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_USERS'
 			[_ifContentRemovable] = '(_userLogin$ | async) !== user.login || user.ifRemovable'
+			[_editRoute] = '"users/edit-user/" + user.id'
 			*ngFor = 'let user of _usersPagination!.elements'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ user.id }}</td>
@@ -71,18 +72,6 @@
 				<span [ngClass] = '[ "cms-table__user-role", getUserRole(user.role).class ]'>
 					{{ getUserRole(user.role).label }}
 				</span>
-			</td>
-			<td>
-				<a
-					[routerLink] = '[ "/secure/panel/users/user/" + user.login ]'
-					class = 'app__button app__button--light app__button--hollow-light cms-table__details-button'
-					title = 'Kliknij aby przejść do szczegółów konta użytkownika'
-				>
-					<span class = 'app-cms-table--hide-details-button-text'>Szczegóły</span>
-					<mat-icon class = 'app__button__arrow cms-table-button--remove-arrow-margin'>
-						arrow_right_alt
-					</mat-icon>
-				</a>
 			</td>
 		</tr>
 	</table>
