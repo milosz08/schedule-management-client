@@ -37,7 +37,8 @@ export class CheckboxTemplateComponent implements OnInit {
     private _checkboxId: string = '';
 
     @Input() public _checkboxValue?: boolean = false;
-    @Input() public _checkboxLabel?: string = '';
+    @Input() public _dataValue: string = '';
+    @Input() public _checkboxLabel: string = '';
     @Input() public _checkboxDisabled?: boolean = false;
     @Input() public _ifCheckedInitial?: boolean = false;
     @Input() public _ifShowLabel?: boolean = true;

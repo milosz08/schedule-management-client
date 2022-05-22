@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -42,10 +42,11 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
 export class DepartmentWithCathedralInputsComponent implements OnInit, OnChanges, OnDestroy {
 
     public _allDepartments: Array<string> = new Array<string>();
-    public _allCathedrals:  Array<string> = new Array<string>();
+    public _allCathedrals: Array<string> = new Array<string>();
     public _cathedraVisible: boolean = false;
 
     @Input() public _angularForm?: FormGroup;
+    @Output() public _emitNextLevel: EventEmitter<void> = new EventEmitter<void>();
 
     private _unsubscribe: Subject<void> = new Subject();
 
@@ -78,6 +79,10 @@ export class DepartmentWithCathedralInputsComponent implements OnInit, OnChanges
 
     public handleShowCathedralInput(): void {
         this._cathedraVisible = true;
+    };
+
+    public handleShowNextLevelInput(): void  {
+        this._emitNextLevel.emit();
     };
 
     public handleEmitDepartmentQuery(departmentName: string): void {

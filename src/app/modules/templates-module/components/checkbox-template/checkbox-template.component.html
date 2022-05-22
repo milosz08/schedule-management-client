@@ -17,7 +17,7 @@
   ~ Obiektowe".
   -->
 
-<div [ngClass] = '[ "app__checkbox-label", _ifWhiteBackground ? "app__checkbox-label" : "" ]'>
+<div class = 'app__checkbox-container'>
 	<input
 		type = 'checkbox'
 		[checked] = '_ifCheckedInitial'
@@ -32,7 +32,7 @@
 	<label
 		*ngIf = '_ifShowLabel'
 		[for] = '__createChecboxIdBasedLabel'
-		class = 'app__checkbox-label'
+		[ngClass] = '[ "app__checkbox-label", _ifWhiteBackground ? "checkbox-label--white-background" : "" ]'
 	>
 		{{ _checkboxLabel }}
 	</label>
