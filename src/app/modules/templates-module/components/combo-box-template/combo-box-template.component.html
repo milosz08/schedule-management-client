@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: combo-box-template.component.html
+  ~ Last modified | Ostatnia modyfikacja: 20/05/2022, 11:42
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div
+	[formGroup] = '_formGroup!'
+	(mouseleave) = 'handleChangeFocus(true)'
+	class = 'app__select__container select-drop-box__container'
+>
+	<button
+		type = 'button'
+		(click) = 'handleOpenList()'
+		[ngClass] = '[ "app__input app__input--light app__input--exclude-margin", __countOfElementsCssClassActive ]'
+	>
+		<ng-container *ngIf = 'valuesArrayLenght() === 0; else valueWasSelected'>
+			Wybierz {{ _placeholder }}
+		</ng-container>
+		<ng-template #valueWasSelected>
+			Wybrano {{ valuesArrayLenght() }} z {{ _allOptions.length }}
+		</ng-template>
+		<mat-icon class = 'app__select__arrow-icon combo-box__arrow'>keyboard_arrow_down</mat-icon>
+	</button>
+	<div
+		*ngIf = '_listVisible && _allOptions.length > 0'
+		class = 'combo-box__list-container'
+	>
+		<ul class = 'combo-box__list-wrapper'>
+			<li
+				*ngFor = 'let option of _allOptions'
+				class = 'app-combo-box-list__list-element'
+			>
+				<app-checkbox-template
+					[_checkboxLabel] = 'option.name'
+					[_ifWhiteBackground] = 'true'
+					[_ifCheckedInitial] = 'checkedInitial(option.id)'
+					[_checkboxValue] = 'checkedInitial(option.id)'
+					(_checkedEmitter) = 'handleToggleValuesInArray($event, option.id)'
+				></app-checkbox-template>
+			</li>
+		</ul>
+	</div>
+</div>
