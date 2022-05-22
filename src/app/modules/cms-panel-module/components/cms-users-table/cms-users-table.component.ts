@@ -26,8 +26,8 @@ import { takeUntil } from 'rxjs/operators';
 import { MiscHelper } from '../../../../utils/misc.helper';
 import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
-import { UserIdentityType } from '../../../../types/user-identity.type';
 import { BasicDataSortBy } from '../../types/basic-data-sort-by.types';
+import { UserIdentityType } from '../../../../types/user-identity.type';
 import { CmsPaginationDataModel, CmsSingleUserDataModel } from '../../models/cms-pagination-data.model';
 
 import * as NgrxAction_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.actions';
@@ -37,7 +37,7 @@ import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ng
 import { ListNavigationsReducerType } from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { PaginationNavSender } from '../../ngrx-store/list-navigations-ngrx-store/ngrx-models/pagination-nav-sender.model';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetTablesConnectorService } from '../../services/cms-get-tables-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ type CombinedStore = ListNavigationsReducerType | SessionReducerType;
     selector: 'app-cms-users-table',
     templateUrl: './cms-users-table.component.html',
     styleUrls: [ './cms-users-table.component.scss' ],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetTablesConnectorService ],
 })
 export class CmsUsersTableComponent implements OnInit, OnDestroy {
 
@@ -71,7 +71,7 @@ export class CmsUsersTableComponent implements OnInit, OnDestroy {
     public constructor(
         private _store: Store<CombinedStore>,
         public _endpoints: ApiConfigurerHelper,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetTablesConnectorService,
     ) {
     };
 

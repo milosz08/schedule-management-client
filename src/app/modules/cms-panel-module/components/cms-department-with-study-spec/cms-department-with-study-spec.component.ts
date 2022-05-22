@@ -23,7 +23,7 @@ import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-cms-department-with-study-spec',
     templateUrl: './cms-department-with-study-spec.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetQueryConnectorService ],
 })
 export class CmsDepartmentWithStudySpecComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -52,7 +52,7 @@ export class CmsDepartmentWithStudySpecComponent implements OnInit, OnChanges, O
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetQueryConnectorService,
     ) {
     };
 

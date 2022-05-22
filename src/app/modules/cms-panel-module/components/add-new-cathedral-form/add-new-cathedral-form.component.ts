@@ -30,7 +30,7 @@ import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-add-new-cathedral-form',
     templateUrl: './add-new-cathedral-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetQueryConnectorService ],
 })
 export class AddNewCathedralFormComponent implements OnInit, OnDestroy {
 
@@ -59,7 +59,7 @@ export class AddNewCathedralFormComponent implements OnInit, OnDestroy {
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetQueryConnectorService,
     ) {
         this._newCathedralForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),

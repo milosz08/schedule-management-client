@@ -32,7 +32,7 @@ import * as NgrxAction_NAV from '../../ngrx-store/list-navigations-ngrx-store/li
 import * as NgrxSelector_NAV from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { PaginationNavSender } from '../../ngrx-store/list-navigations-ngrx-store/ngrx-models/pagination-nav-sender.model';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetTablesConnectorService } from '../../services/cms-get-tables-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-cms-study-rooms-table',
     templateUrl: './cms-study-rooms-table.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetTablesConnectorService ],
 })
 export class CmsStudyRoomsTableComponent implements OnInit, OnDestroy {
 
@@ -60,7 +60,7 @@ export class CmsStudyRoomsTableComponent implements OnInit, OnDestroy {
     public constructor(
         private _store: Store<ListNavigationsReducerType>,
         public _endpoints: ApiConfigurerHelper,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetTablesConnectorService,
     ) {
     };
 

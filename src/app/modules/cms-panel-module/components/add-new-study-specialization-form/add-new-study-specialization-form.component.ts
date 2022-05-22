@@ -25,13 +25,14 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
+import { NameWithId } from '../../models/cms-drop-lists-data.model';
 
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
-import { NameWithId } from '../../models/cms-drop-lists-data.model';
+import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +44,7 @@ import { NameWithId } from '../../models/cms-drop-lists-data.model';
     selector: 'app-add-new-study-specialization-form',
     templateUrl: './add-new-study-specialization-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetAllConnectorService ],
 })
 export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy {
 
@@ -62,7 +63,8 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetAllConnectorService,
+        private _serviceQueryGet: CmsGetQueryConnectorService,
     ) {
         this._newStudySpecForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -106,7 +108,7 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
     };
 
     public handleEmitNewQuery(queryValue: string): void {
-        this._serviceGET.getQueryDepartmentsList(queryValue)
+        this._serviceQueryGet.getQueryDepartmentsList(queryValue)
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(q => this._queryResultArray = q.dataElements);
     };

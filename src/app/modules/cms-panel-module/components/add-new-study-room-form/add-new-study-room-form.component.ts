@@ -30,7 +30,7 @@ import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-add-new-study-room-form',
     templateUrl: './add-new-study-room-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetAllConnectorService ],
 })
 export class AddNewStudyRoomFormComponent implements OnInit, OnDestroy {
 
@@ -58,7 +58,7 @@ export class AddNewStudyRoomFormComponent implements OnInit, OnDestroy {
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetAllConnectorService,
     ) {
         this._newStudyRoom = new FormGroup({
             name: new FormControl('', [ Validators.required ]),

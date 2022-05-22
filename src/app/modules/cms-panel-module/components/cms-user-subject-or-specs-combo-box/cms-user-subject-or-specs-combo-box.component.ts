@@ -25,7 +25,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { NameWithId } from '../../models/cms-drop-lists-data.model';
 import { UserIdentityType } from '../../../../types/user-identity.type';
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +39,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-cms-user-subject-or-specs-combo-box',
     templateUrl: './cms-user-subject-or-specs-combo-box.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetQueryConnectorService ],
 })
 export class CmsUserSubjectOrSpecsComboBoxComponent implements OnInit, OnDestroy, OnChanges {
 
@@ -59,7 +60,7 @@ export class CmsUserSubjectOrSpecsComboBoxComponent implements OnInit, OnDestroy
     //------------------------------------------------------------------------------------------------------------------
 
     constructor(
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetQueryConnectorService,
     ) {
     };
 
