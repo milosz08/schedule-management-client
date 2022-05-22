@@ -37,7 +37,10 @@
 		*ngIf = '_listVisible && _optionsList.length > 0'
 		class = 'app-select-list__list-container'
 	>
-		<li *ngFor = 'let option of _optionsList'>
+		<li
+			*ngFor = 'let option of _optionsList'
+			class = 'app-select-list__list-element'
+		>
 			<button
 				type = 'button'
 				(click) = 'handleSelectSingleListElement(option)'
