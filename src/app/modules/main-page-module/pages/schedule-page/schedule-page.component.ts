@@ -20,7 +20,17 @@
 import { Component } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 
+import { Observable } from 'rxjs';
+
+import { ScheduleNavListModel } from '../../models/schedule-nav-list.model';
+import { ScheduleNavLinksType } from '../../../../types/schedule-nav-links.type';
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import { GetConnectorService } from '../../services/get-connector.service';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+type ObservableTuple = Observable<Array<ScheduleNavListModel>>;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -31,14 +41,60 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
 @Component({
     selector: 'app-root-schedule-page',
     templateUrl: './schedule-page.component.html',
-    styleUrls: [ './schedule-page.component.scss' ]
+    styleUrls: [ './schedule-page.component.scss' ],
 })
 export class SchedulePageComponent extends MetaWebContentHelper {
+
+    public readonly _buttons: string[] = Object.keys(ScheduleNavLinksType);
+
+    public _navElms: typeof ScheduleNavLinksType = ScheduleNavLinksType;
+    public _navChoose: ScheduleNavLinksType = ScheduleNavLinksType.GROUPS;
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         titleService: Title,
         metaService: Meta,
     ) {
         super(titleService, metaService, AllMainWebpages.SCHEDULE);
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public insertCathedralsData(deptId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllCathedrals(deptId);
+    };
+
+    public insertStudyRoomsData(deptId: number, cathId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllStudyRooms(deptId, cathId);
+    };
+
+    public insertEmployeersData(deptId: number, cathId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllEmployeers(deptId, cathId);
+    };
+
+    public insertStudyDegrees(deptId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllDegreesBaseStudySpecs(deptId);
+    };
+
+    public insertStudySpecializationsData(deptId: number, degreeId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllStudySpecs(deptId, degreeId);
+    };
+
+    public insertStudySemesters(deptId: number, studySpecId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllSemesterBaseStudyGroup(deptId, studySpecId);
+    };
+
+    public insertStudyGroups(studySpecId: number, semId: number, service: GetConnectorService): ObservableTuple {
+        return service.getAllGroupsBaseStudySpecAndSem(studySpecId, semId);
+    };
+
+    public handleToggleActiveSection(section: string) {
+        this._navChoose = ScheduleNavLinksType[section];
+    };
+
+    public _ifChooseElementActive(element: string): string {
+        return `left-bar__single-link-button
+                ${this._navChoose === ScheduleNavLinksType[element] ? 'single-link-button--active' : ''}`;
     };
 }

@@ -40,30 +40,25 @@
 					[_sortingData] = '_roomsSortBy.NAME'
 				></app-cms-sorting-button>
 			</th>
-			<th>
+			<th class = 'app-cms-table--hide-column__large'>
 				<app-cms-sorting-button
-					_sortingPlaceholder = 'Alias wydziału'
+					_sortingPlaceholder = 'Wydział i katedra'
 					[_sortingData] = '_roomsSortBy.DEPT_ALIAS'
 				></app-cms-sorting-button>
 			</th>
 			<th class = 'app-cms-table--hide-column__large'>
 				<app-cms-sorting-button
-					_sortingPlaceholder = 'Alias katedry'
-					[_sortingData] = '_roomsSortBy.CATH_ALIAS'
-				></app-cms-sorting-button>
-			</th>
-			<th class = 'app-cms-table--hide-column__small'>
-				<app-cms-sorting-button
 					_sortingPlaceholder = 'Pojemność'
 					[_sortingData] = '_roomsSortBy.CAPACITY'
 				></app-cms-sorting-button>
 			</th>
-			<th class = 'app-cms-table--hide-column__small'>
+			<th class = 'app-cms-table--hide-column__large'>
 				<app-cms-sorting-button
 					_sortingPlaceholder = 'Alias Typu'
 					[_sortingData] = '_roomsSortBy.ROOM_TYPE_ALIAS'
 				></app-cms-sorting-button>
 			</th>
+			<th class = 'app-cms-table__th-details'></th>
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
@@ -74,30 +69,25 @@
 			[_deleteContentList] = '_deleteRooms'
 			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_ROOMS'
 			[_ifContentRemovable] = 'true'
+			[_editRoute] = '"study-rooms/edit-study-room/" + room.id'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ room.id }}</td>
 			<td
-				[title] = 'room.description'
+				[title] = 'room.description + ", " + room.departmentName + ", " + room.cathedralName'
 				class = 'app-cms__on-hover-show-info'
 			>
 				{{ room.name }}
 			</td>
 			<td
-				[title] = 'room.departmentName'
-				class = 'app-cms__on-hover-show-info'
+				[title] = 'room.departmentName + ", " + room.cathedralName'
+				class = 'app-cms-table--hide-column__large app-cms__on-hover-show-info'
 			>
-				{{ room.departmentAlias }}
+				{{ room.deptWithCathAlias }}
 			</td>
-			<td
-				[title] = 'room.cathedralName'
-				class = 'app-cms__on-hover-show-info app-cms-table--hide-column__large'
-			>
-				{{ room.cathedralAlias }}
-			</td>
-			<td class = 'app-cms-table--hide-column__small'>{{ room.capacity }}</td>
+			<td class = 'app-cms-table--hide-column__large'>{{ room.capacity }}</td>
 			<td
 				[title] = 'room.roomTypeName'
-				class = 'app-cms__on-hover-show-info app-cms-table--hide-column__small'>
+				class = 'app-cms__on-hover-show-info app-cms-table--hide-column__large'>
 				{{ room.roomTypeAlias }}
 			</td>
 		</tr>

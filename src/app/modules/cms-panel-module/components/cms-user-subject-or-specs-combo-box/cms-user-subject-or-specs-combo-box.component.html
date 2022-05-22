@@ -1,0 +1,76 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: cms-user-subject-or-specs-combo-box.component.html
+  ~ Last modified | Ostatnia modyfikacja: 20/05/2022, 11:35
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+
+<ng-container *ngIf = 'this._angularForm!.get("role")?.value'>
+	<app-department-with-cathedral-inputs
+		*ngIf = '_allRoles.STUDENT !== _currentRole'
+		[_angularForm] = '_angularForm'
+		(_emitNextLevel) = 'handleShowStudySubjects()'
+		class = 'app__show-only-content'
+	></app-department-with-cathedral-inputs>
+	<ng-container *ngIf = '_allRoles.STUDENT === _currentRole'>
+		<label
+			[for] = '[ "cathedral-and-department___department" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Wydział:
+		</label>
+		<app-select-drop-box-template
+			[_formGroup] = '_angularForm'
+			[_optionsList] = '_allDepartments'
+			(_emitNewQuery) = 'handleEmitDepartmentQuery($event)'
+			(_addedValue) = 'handleShowStudySpecsInput()'
+			_formControlName = 'departmentName'
+			_selectId = 'cathedral-and-department___department'
+			_placeholder = 'np. Elektryczny'
+			_errorField = 'prawidłowy wydział'
+		></app-select-drop-box-template>
+		<ng-container *ngIf = '_studySpecsVisible'>
+			<label
+				[for] = '[ "add-user-form___role" ]'
+				class = 'cms__simple-grid__label'
+			>
+				Kierunki studiów:
+			</label>
+			<app-combo-box-template
+				[_formGroup] = '_angularForm'
+				[_allOptions] = '_allStudySpecs'
+				_formControlName = 'studySpecsOrSubjects'
+				_placeholder = 'kierunki studiów'
+			></app-combo-box-template>
+		</ng-container>
+	</ng-container>
+	<ng-container
+		*ngIf = '(_allRoles.TEACHER === _currentRole || _allRoles.EDITOR === _currentRole) && _studySubjectsVisible'
+	>
+		<label
+			[for] = '[ "add-user-form___role" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Przedmioty:
+		</label>
+		<app-combo-box-template
+			[_formGroup] = '_angularForm'
+			[_allOptions] = '_allSubjects'
+			_formControlName = 'studySpecsOrSubjects'
+			_placeholder = 'przedmioty'
+		></app-combo-box-template>
+	</ng-container>
+</ng-container>

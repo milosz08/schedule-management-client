@@ -22,9 +22,6 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { MiscHelper } from '../../../../utils/misc.helper';
-import { UserIdentityType } from '../../../../types/user-identity.type';
-
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
@@ -50,7 +47,6 @@ export class NewUserInformationsComponent implements OnInit, OnDestroy {
     public _userData?: CmsRegisterResDataModel;
 
     public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_postDataSuspenseLoading);
-    public _getPlName = (role: UserIdentityType): string => MiscHelper.convertEngToPlUserRole(role)
 
     //------------------------------------------------------------------------------------------------------------------
 

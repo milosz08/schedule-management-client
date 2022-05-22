@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-get-connector.service.ts
- * Last modified | Ostatnia modyfikacja: 09/05/2022, 16:22
+ * File name | Nazwa pliku: cms-get-tables-connector.service.ts
+ * Last modified | Ostatnia modyfikacja: 22/05/2022, 17:45
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -21,42 +21,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
-import { AvailableDataModel, RoomDataModel, StudyDataModel } from '../models/cms-drop-lists-data.model';
 
 import {
     CmsPaginationDataModel, CmsSingleCathDataModel, CmsSingleDeptDataModel, CmsSingleRoomTypeDataModel,
-    CmsSingleStudySpecDataModel, CmsSingleStudySubjectDataModel, CmsSingleUserDataModel
+    CmsSingleStudyGroupDataModel, CmsSingleStudySpecDataModel, CmsSingleStudySubjectDataModel, CmsSingleUserDataModel
 } from '../models/cms-pagination-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Klasa serwisu służąca do pobierania danych z encji bazy danych dla systemu zarządzania treścią (łączenie się
+ * Klasa serwisu służąca do pobierania danych z encji bazy danych dla tabel systemu zarządzania treścią (łączenie się
  * do bazy danych).
  */
 
 @Injectable()
-export class CmsGetConnectorService {
+export class CmsGetTablesConnectorService {
 
     public constructor(
         private _http: HttpClient,
         private _endpoints: ApiConfigurerHelper,
     ) {
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Metoda pobierająca wszystkich użytkowników z bazy danych (parametryzacja zapytania,
-     * paginacja i dynamiczne filtrowanie).
-     */
-    public getAllUsers(params: any): Observable<CmsPaginationDataModel<CmsSingleUserDataModel>> {
-        return this._http.get<CmsPaginationDataModel<CmsSingleUserDataModel>>(
-            this._endpoints.CMS_FILTERED_ALL_USERS,
-            { params },
-        );
     };
 
     //------------------------------------------------------------------------------------------------------------------
@@ -114,6 +99,19 @@ export class CmsGetConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
+     * Metoda pobierająca wszystkich użytkowników z bazy danych (parametryzacja zapytania,
+     * paginacja i dynamiczne filtrowanie).
+     */
+    public getAllUsers(params: any): Observable<CmsPaginationDataModel<CmsSingleUserDataModel>> {
+        return this._http.get<CmsPaginationDataModel<CmsSingleUserDataModel>>(
+            this._endpoints.CMS_FILTERED_ALL_USERS,
+            { params },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
      * Metoda pobierająca wszystkie przedmioty wszystkich kierunków studiów z bazy danych (parametryzacja zapytania,
      * paginacja i dynamiczne filtrowanie).
      */
@@ -127,58 +125,13 @@ export class CmsGetConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Metoda pobierająca wszystkie możliwy typy studiów (stacjonarne/niestacjonarne itp).
+     * Metoda pobierająca wszystkie grupy dziekańskie wszystkich kierunków studiów z bazy danych (parametryzacja zapytania,
+     * paginacja i dynamiczne filtrowanie).
      */
-    public getAllAvailableStudyTypes(): Observable<AvailableDataModel<StudyDataModel>> {
-        return this._http.get<AvailableDataModel<StudyDataModel>>(
-            this._endpoints.GET_AVAILABLE_STUDY_TYPES
-        );
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Metoda pobierająca wszystkie możliwe typy sal zajęciowych (laboratoryjna).
-     */
-    public getAllAvailableRoomTypes(): Observable<AvailableDataModel<RoomDataModel>> {
-        return this._http.get<AvailableDataModel<RoomDataModel>>(
-            this._endpoints.GET_AVAILABLE_ROOM_TYPES
-        );
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Metoda pobierająca listę wydziałów na podstawie parametru wyszukiwania.
-     */
-    public getQueryDepartmentsList(deptQuerySearch: string): Observable<AvailableDataModel<string>> {
-        return this._http.get<AvailableDataModel<string>>(
-            this._endpoints.GET_ALL_DEPARTMENTS_LIST,
-            { params: { deptQuerySearch } },
-        );
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Metoda pobierająca listę katedr przypisanych do danego wydziału (na podstawie parametrów zapytania).
-     */
-    public getQueryCathedralsBasedDeptList(cathQuery: string, deptQuery: string): Observable<AvailableDataModel<string>> {
-        return this._http.get<AvailableDataModel<string>>(
-            this._endpoints.GET_ALL_CATHEDRALS_BASED_DEPARTMENT,
-            { params: { cathQuery, deptQuery } },
-        );
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Metoda pobierająca listę kierunków studiów przypisanych do danego wydziału (na podstawie parametrów zapytania).
-     */
-    public getQueryStudySpecsBasedDeptList(specQuery: string, deptQuery: string): Observable<AvailableDataModel<string>> {
-        return this._http.get<AvailableDataModel<string>>(
-            this._endpoints.GET_ALL_STUDY_SPEC_BASED_DEPARTMENT,
-            { params: { specQuery, deptQuery } },
+    public getAllStudyGroups(params: any): Observable<CmsPaginationDataModel<CmsSingleStudyGroupDataModel>> {
+        return this._http.get<CmsPaginationDataModel<CmsSingleStudyGroupDataModel>>(
+            this._endpoints.CMS_FILTERED_ALL_STUDY_GROUPS,
+            { params },
         );
     };
 }

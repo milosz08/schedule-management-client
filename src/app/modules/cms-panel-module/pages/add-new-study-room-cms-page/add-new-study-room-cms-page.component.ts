@@ -31,7 +31,8 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 @Component({
     selector: 'app-add-new-study-room-cms-page',
     templateUrl: './add-new-study-room-cms-page.component.html',
-    styleUrls: []
+    styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
 export class AddNewStudyRoomCmsPageComponent extends MetaWebContentHelper {
 

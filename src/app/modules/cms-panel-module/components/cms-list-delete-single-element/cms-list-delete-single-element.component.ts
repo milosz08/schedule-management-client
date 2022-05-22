@@ -20,8 +20,9 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
 import { ModalsReducerType } from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.selectors';
+
+import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ import { ModalsReducerType } from '../../../shared-module/ngrx-store/modals-ngrx
 })
 export class CmsListDeleteSingleElementComponent {
 
+    @Input() public _editRoute: string = '';
     @Input() public _deleteEndpoint: string = '';
     @Input() public _deleteContentList: Array<number> = new Array<number>();
     @Input() public _deleteContentId: number = NaN;

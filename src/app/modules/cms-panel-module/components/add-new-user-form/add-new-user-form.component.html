@@ -122,11 +122,10 @@
 			_errorField = 'prawidłowy typ roli'
 		></app-select-list-template>
 	</div>
-	<app-department-with-cathedral-inputs
-		*ngIf = '_registerUserForm.get("role")!.value !== _studentRole || _registerUserForm.get("role")!.dirty'
+	<app-cms-user-subject-or-specs-combo-box
 		[_angularForm] = '_registerUserForm'
 		class = 'app__show-only-content'
-	></app-department-with-cathedral-inputs>
+	></app-cms-user-subject-or-specs-combo-box>
 	<div></div>
 	<div class = 'cms__simple-grid__submit-button'>
 		<button

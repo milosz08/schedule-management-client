@@ -24,23 +24,37 @@ import { AdminRedirectGuard } from '../../guards/cms-roles-redirectors/administr
 
 import { CmsPageComponent } from './cms-page.component';
 
-import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
-import { AccountCmsPageComponent } from './pages/account-cms-page/account-cms-page.component';
-import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
+import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
-import { CathedralsCmsPageComponent } from './pages/cathedrals-cms-page/cathedrals-cms-page.component';
-import { StudyRoomsCmsPageComponent } from './pages/study-rooms-cms-page/study-rooms-cms-page.component';
-import { DepartmentsCmsPageComponent } from './pages/departments-cms-page/departments-cms-page.component';
+
+import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
-import { StudySubjectsCmsPageComponent } from './pages/study-subjects-cms-page/study-subjects-cms-page.component';
-import { AddNewCathedralCmsPageComponent } from './pages/add-new-cathedral-cms-page/add-new-cathedral-cms-page.component';
-import { AddNewStudyRoomCmsPageComponent } from './pages/add-new-study-room-cms-page/add-new-study-room-cms-page.component';
+import { EditUserCmsPageComponent } from './pages/edit-user-cms-page/edit-user-cms-page.component';
+
+import { DepartmentsCmsPageComponent } from './pages/departments-cms-page/departments-cms-page.component';
 import { AddNewDepartmentCmsPageComponent } from './pages/add-new-department-cms-page/add-new-department-cms-page.component';
-import { SingleUserDetailsCmsPageComponent } from './pages/single-user-details-cms-page/single-user-details-cms-page.component';
+import { EditDepartmentCmsPageComponent } from './pages/edit-department-cms-page/edit-department-cms-page.component';
+
+import { CathedralsCmsPageComponent } from './pages/cathedrals-cms-page/cathedrals-cms-page.component';
+import { AddNewCathedralCmsPageComponent } from './pages/add-new-cathedral-cms-page/add-new-cathedral-cms-page.component';
+import { EditCathedralCmsPageComponent } from './pages/edit-cathedral-cms-page/edit-cathedral-cms-page.component';
+
+import { StudyRoomsCmsPageComponent } from './pages/study-rooms-cms-page/study-rooms-cms-page.component';
+import { AddNewStudyRoomCmsPageComponent } from './pages/add-new-study-room-cms-page/add-new-study-room-cms-page.component';
+import { EditStudyRoomCmsPageComponent } from './pages/edit-study-room-cms-page/edit-study-room-cms-page.component';
+
 import { StudySpecializationCmsPageComponent } from './pages/study-specialization-cms-page/study-specialization-cms-page.component';
 import { AddNewStudySpecializationCmsPageComponent } from './pages/add-new-study-specialization-cms-page/add-new-study-specialization-cms-page.component';
+import { EditStudySpecializationCmsPageComponent } from './pages/edit-study-specialization-cms-page/edit-study-specialization-cms-page.component';
+
+import { StudySubjectsCmsPageComponent } from './pages/study-subjects-cms-page/study-subjects-cms-page.component';
 import { AddNewStudySubjectCmsPageComponent } from './pages/add-new-study-subject-cms-page/add-new-study-subject-cms-page.component';
+import { EditStudySubjectCmsPageComponent } from './pages/edit-study-subject-cms-page/edit-study-subject-cms-page.component';
+
+import { StudyGroupsCmsPageComponent } from './pages/study-groups-cms-page/study-groups-cms-page.component';
+import { AddNewStudyGroupCmsPageComponent } from './pages/add-new-study-group-cms-page/add-new-study-group-cms-page.component';
+import { EditStudyGroupCmsPageComponent } from './pages/edit-study-group-cms-page/edit-study-group-cms-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -59,58 +73,87 @@ const routes: Routes = [
         }, {
             path: 'departments',
             component: DepartmentsCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'departments/add-department',
             component: AddNewDepartmentCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'departments/edit-department/:deptId',
+            component: EditDepartmentCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'cathedrals',
             component: CathedralsCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'cathedrals/add-cathedral',
             component: AddNewCathedralCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'cathedrals/edit-cathedral/:cathId',
+            component: EditCathedralCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'study-specializations',
             component: StudySpecializationCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'study-specializations/add-study-specialization',
             component: AddNewStudySpecializationCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'study-specializations/edit-study-specialization/:specId',
+            component: EditStudySpecializationCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'study-rooms',
             component: StudyRoomsCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'study-rooms/add-study-room',
             component: AddNewStudyRoomCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'study-rooms/edit-study-room/:roomId',
+            component: EditStudyRoomCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'study-subjects',
             component: StudySubjectsCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'study-subjects/add-study-subject',
             component: AddNewStudySubjectCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'study-subjects/edit-study-subject/:subjId',
+            component: EditStudySubjectCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'study-groups',
+            component: StudyGroupsCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'study-groups/add-study-group',
+            component: AddNewStudyGroupCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
+        }, {
+            path: 'study-groups/edit-study-group/:groupId',
+            component: EditStudyGroupCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'users',
             component: UsersCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'users/add-new-user',
             component: AddNewUserCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
+            canActivate: [ AdminRedirectGuard ],
         }, {
-            path: 'users/user/:userLogin',
-            component: SingleUserDetailsCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ]
-        }, {
-            path: 'account',
-            component: AccountCmsPageComponent
+            path: 'users/edit-user/:userId',
+            component: EditUserCmsPageComponent,
+            canActivate: [ AdminRedirectGuard ],
         }, {
             path: '**',
             component: NotFoundPageComponent,

@@ -40,7 +40,7 @@
 					[_sortingData] = '_studySubjectsSortBy.NAME'
 				></app-cms-sorting-button>
 			</th>
-			<th class = 'app-cms-table--hide-column__small'>
+			<th class = 'app-cms-table--hide-column__large'>
 				<app-cms-sorting-button
 					_sortingPlaceholder = 'Kierunek'
 					[_sortingData] = '_studySubjectsSortBy.SPEC_TYPE_ALIAS'
@@ -52,6 +52,7 @@
 					[_sortingData] = '_studySubjectsSortBy.DEPT_ALIAS'
 				></app-cms-sorting-button>
 			</th>
+			<th class = 'app-cms-table__th-details'></th>
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
@@ -62,6 +63,7 @@
 			[_deleteContentList] = '_deleteStudySubject'
 			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_STUDY_SUBJECTS'
 			[_ifContentRemovable] = 'true'
+			[_editRoute] = '"study-subjects/edit-study-subject/" + subject.id'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ subject.id }}</td>
 			<td
@@ -72,7 +74,7 @@
 			</td>
 			<td
 				[title] = 'subject.specName'
-				class = 'app-cms-table--hide-column__small app-cms__on-hover-show-info'
+				class = 'app-cms-table--hide-column__large app-cms__on-hover-show-info'
 			>
 				{{ subject.specAlias }}
 			</td>

@@ -21,9 +21,10 @@ import { createAction, props } from '@ngrx/store';
 
 import { CmsDepartmentReqResDataModel } from './ngrx-models/cms-department-req-res-data.model';
 import { CmsRegisterReqDataModel, CmsRegisterResDataModel } from './ngrx-models/cms-register-req-res-data.model';
+import { CmsCathedralReqDataModel, CmsCathedralResDataModel } from './ngrx-models/cms-cathedral-req-res-data.model';
 import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from './ngrx-models/cms-study-spec-req-res-data.model';
 import { CmsStudyRoomReqDataModel, CmsStudyRoomResDataModel } from './ngrx-models/cms-study-room-req-res-data.model';
-import { CmsCathedralReqResDataModel, CmsCathedralResDataModel } from './ngrx-models/cms-cathedral-req-res-data.model';
+import { CmsStudyGroupReqDataModel, CmsStudyGroupResDataModel } from './ngrx-models/cms-study-group-req-res-data.model';
 import { CmsStudySubjectReqDataModel, CmsStudySubjectResDataModel } from './ngrx-models/cms-study-subject-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -40,6 +41,8 @@ export const ADD_NEW_STUDY_ROOM = '[POST DATA] ADD NEW STUDY ROOM';
 export const SUCCESS_ADD_NEW_STUDY_ROOM = '[POST DATA] SUCCESS ADD NEW STUDY ROOM';
 export const ADD_NEW_STUDY_SUBJECT = '[POST] ADD NEW STUDY SUBJECT';
 export const SUCCESS_ADD_NEW_STUDY_SUBJECT = '[POST] SUCCESS ADD NEW STUDY SUBJECT';
+export const ADD_NEW_STUDY_GROUP = '[POST] ADD NEW STUDY GROUP';
+export const SUCCESS_ADD_NEW_STUDY_GROUP = '[POST] SUCCESS ADD NEW STUDY GROUP';
 
 export const CLEAR_ALL_POST_DATA = '[POST DATA] CLEAR ALL POST DATA';
 export const SET_FETCHING_NEW_CONTENT = '[POST DATA] SET FETCHING NEW CONTENT';
@@ -74,7 +77,7 @@ export const __successAddNewDepartment = createAction(
 
 export const __addNewCathedral = createAction(
     ADD_NEW_CATHEDRAL,
-    props<{ cathData: CmsCathedralReqResDataModel }>(),
+    props<{ cathData: CmsCathedralReqDataModel }>(),
 );
 
 export const __successAddNewCathedral = createAction(
@@ -116,6 +119,18 @@ export const __addNewStudySubject = createAction(
 export const __successAddNewStudySubject = createAction(
     SUCCESS_ADD_NEW_STUDY_SUBJECT,
     props<{ subjectData: CmsStudySubjectResDataModel }>(),
+);
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const __addNewStudyGroup = createAction(
+    ADD_NEW_STUDY_GROUP,
+    props<{ groupData: CmsStudyGroupReqDataModel }>(),
+);
+
+export const __successAddNewStudyGroup = createAction(
+    SUCCESS_ADD_NEW_STUDY_GROUP,
+    props<{ groupData: Array<CmsStudyGroupResDataModel> }>(),
 );
 
 //----------------------------------------------------------------------------------------------------------------------

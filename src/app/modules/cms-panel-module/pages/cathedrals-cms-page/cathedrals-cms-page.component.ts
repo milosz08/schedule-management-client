@@ -32,6 +32,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
     selector: 'app-cathedrals-cms-page',
     templateUrl: './cathedrals-cms-page.component.html',
     styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
 export class CathedralsCmsPageComponent extends MetaWebContentHelper {
 

@@ -46,6 +46,7 @@
 					[_sortingData] = '_deptsSortBy.ALIAS'
 				></app-cms-sorting-button>
 			</th>
+			<th class = 'app-cms-table__th-details'></th>
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
@@ -56,6 +57,7 @@
 			[_deleteContentList] = '_deleteDepts'
 			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_DEPTS'
 			[_ifContentRemovable] = 'dept.ifRemovable'
+			[_editRoute] = '"departments/edit-department/" + dept.id'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ dept.id }}</td>
 			<td>{{ dept.name }}</td>

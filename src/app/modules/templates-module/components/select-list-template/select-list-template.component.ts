@@ -20,8 +20,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { SelectListTupleModel } from '../../models/select-list-tuple.model';
-
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
@@ -38,7 +36,7 @@ export class SelectListTemplateComponent {
 
     public _listVisible: boolean = false;
 
-    @Input() public _listElements: Array<SelectListTupleModel> = new Array<SelectListTupleModel>();
+    @Input() public _listElements: Array<string> = new Array<string>();
 
     @Input() public _formGroup?: FormGroup;
     @Input() public _formControlName: string = '';
@@ -56,9 +54,8 @@ export class SelectListTemplateComponent {
         setTimeout(() => this._listVisible = false, 200);
     };
 
-    public handleInsertToInputValue({ name, value }: SelectListTupleModel): void {
-        this._formGroup?.patchValue({ [this._formControlName]: name });
-        this._formGroup?.get(this._formControlName)!.setValue(value, { emitModelToViewChange: false });
+    public handleInsertToInputValue(value: string): void {
+        this._formGroup?.patchValue({ [this._formControlName]: value });
         this._listVisible = false;
     };
 }

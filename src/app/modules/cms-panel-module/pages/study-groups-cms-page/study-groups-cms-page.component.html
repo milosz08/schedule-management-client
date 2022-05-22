@@ -2,8 +2,8 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: single-user-details-cms-page.component.html
-  ~ Last modified | Ostatnia modyfikacja: 09/05/2022, 22:42
+  ~ File name | Nazwa pliku: study-groups-cms-page.component.html
+  ~ Last modified | Ostatnia modyfikacja: 21/05/2022, 13:40
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
   ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,20 +18,31 @@
   -->
 
 <div class = 'app-cms__top-description-container'>
-	<h2 class = 'app-cms__header-h2'>Szczegóły użytkownika</h2>
-	<nav class = 'cms-return-link-anchor'>
-		<mat-icon class = 'link-anchor__arrow'>keyboard_backspace</mat-icon>
-		<a [routerLink] = '[ "/secure/panel/users" ]'>
-			Powróć do listy użytkowników
-		</a>
-	</nav>
+	<h2 class = 'app-cms__header-h2'>Grupy dziekańskie</h2>
 	<div class = 'app-cms__description-block__container'>
-		W tej sekcji możesz podejrzeć zawartość informacji o użytkowniku zapisanych w systemie. Część informacji możesz
-		edytować w tej części systemu. Informacje takie jak imię i nazwisko nie podlegają edycji (należy usunąć użytkownika
-		i dodać nowego).
+		W tej sekcji możesz przeglądać i edytować grupy dziekańskie. Każda grupa dziekańska przypisana jest do konkretnego
+		kierunku na wybranym wydziale.
 	</div>
 	<aside class = 'app-cms__separator-line'></aside>
 </div>
-
-
-<p>user id {{ _userLogin }}</p>
+<header class = 'app-cms-top-header'>
+	<app-search-form-input
+		_inputPlaceholder = 'Wyszukaj (np. SI RE Inf sII)'
+		class = 'cms-search-input--max-size'
+	></app-search-form-input>
+	<a
+		[routerLink] = '[ "/secure/panel/study-groups/add-study-group" ]'
+		class = '
+			app__button
+			cms-def-button--max-size
+			app__button--light
+			first-change-pass__redir
+			app__button--full-size-window
+		'
+		title = 'Kliknij aby dodać nową grupę dziekańską'
+	>
+		<span class = 'app__button__text'>+</span>
+		Dodaj nową grupę dziekańską
+	</a>
+</header>
+<app-cms-study-groups-table class = 'app-cms__table-loading-container'></app-cms-study-groups-table>

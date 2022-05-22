@@ -25,14 +25,14 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-import { ObjectMapperHelper } from '../../../../utils/object-mapper.helper';
-import { SelectListTupleModel } from '../../../templates-module/models/select-list-tuple.model';
+import { NameWithId } from '../../models/cms-drop-lists-data.model';
 
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -44,14 +44,15 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-add-new-study-specialization-form',
     templateUrl: './add-new-study-specialization-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetAllConnectorService ],
 })
 export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy {
 
     public readonly _newStudySpecForm: FormGroup;
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newStudySpecForm, name);
 
-    public _studyAllSpec: Array<SelectListTupleModel> = new Array<SelectListTupleModel>();
+    public _studyAllSpec: Array<NameWithId> = new Array<NameWithId>();
+    public _studyDegrees: Array<NameWithId> = new Array<NameWithId>();
     public _queryResultArray: Array<string> = new Array<string>();
 
     public _serverError?: string;
@@ -61,15 +62,16 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _mapper: ObjectMapperHelper,
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetAllConnectorService,
+        private _serviceQueryGet: CmsGetQueryConnectorService,
     ) {
         this._newStudySpecForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
             alias: new FormControl('', [ Validators.required ]),
             departmentName: new FormControl('', [ Validators.required ]),
-            studyType: new FormControl('', [ Validators.required ]),
+            studyType: new FormControl([], [ Validators.required ]),
+            studyDegree: new FormControl([], [ Validators.required ]),
         });
         this._newStudySpecForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._serverError !== '') {
@@ -88,7 +90,11 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
         this._serviceGET
             .getAllAvailableStudyTypes()
             .pipe(takeUntil(this._unsubscribe))
-            .subscribe(types => this._studyAllSpec = this._mapper.__allStudyTypes(types.dataElements));
+            .subscribe(types => this._studyAllSpec = types.dataElements);
+        this._serviceGET
+            .getAllAvailableStudyDegrees()
+            .pipe(takeUntil(this._unsubscribe))
+            .subscribe(types => this._studyDegrees = types.dataElements);
     };
 
     public ngOnDestroy(): void {
@@ -98,11 +104,11 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
 
     public handleSubmitNewStudySpec(): void {
         this._store.dispatch(NgrxAction_PDA.__addNewStudySpec({ studyData: this._newStudySpecForm.getRawValue() }));
-        this._newStudySpecForm.reset();
+        this._newStudySpecForm.reset({ studyType: [], studyDegree: [] });
     };
 
     public handleEmitNewQuery(queryValue: string): void {
-        this._serviceGET.getQueryDepartmentsList(queryValue)
+        this._serviceQueryGet.getQueryDepartmentsList(queryValue)
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(q => this._queryResultArray = q.dataElements);
     };

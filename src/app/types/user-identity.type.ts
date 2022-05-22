@@ -18,9 +18,9 @@
  */
 
 export enum UserIdentityType {
-    ADMINISTRATOR = 'ADMINISTRATOR',
-    EDITOR = 'EDITOR',
-    TEACHER = 'TEACHER',
-    STUDENT = 'STUDENT',
-    UNDEFINED = 'UNDEFINED',
+    ADMINISTRATOR = 'administrator',
+    EDITOR = 'edytor',
+    TEACHER = 'nauczyciel',
+    STUDENT = 'student',
+    UNDEFINED = 'niezdefiniowana',
 }

@@ -25,8 +25,9 @@ export interface CmsStudySubjectReqDataModel {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsStudySubjectResDataModel extends CmsStudySubjectReqDataModel {
+export interface CmsStudySubjectResDataModel {
+    name: string;
     alias: string;
-    departmentAlias: string;
-    studySpecAlias: string;
+    departmentFullName: string;
+    studySpecFullName: string;
 }

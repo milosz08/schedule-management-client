@@ -51,6 +51,13 @@ export class ApiConfigurerHelper {
     public readonly AVAILABLE_PAGINATIONS = ApiConfigurerHelper.API_PREFIX + 'helper/available-paginations';
     public readonly GET_AVAILABLE_ROOM_TYPES = ApiConfigurerHelper.API_PREFIX + 'helper/available-room-types';
     public readonly GET_AVAILABLE_STUDY_TYPES = ApiConfigurerHelper.API_PREFIX  + 'helper/available-study-types';
+    public readonly GET_AVAILABLE_STUDY_DEGREES = ApiConfigurerHelper.API_PREFIX + 'helper/available-study-degrees';
+    public readonly GET_AVAILABLE_ROLES = ApiConfigurerHelper.API_PREFIX + 'helper/available-roles';
+    public readonly GET_AVAILABLE_STUDY_SPECS_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'helper/available-study-specs-base-dept';
+    public readonly GET_AVAILABLE_SUBJECTS_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'helper/available-subjects-base-dept';
+    public readonly GET_AVAILABLE_SEMESTERS = ApiConfigurerHelper.API_PREFIX + 'helper/available-semesters';
+    public readonly GET_AVAILABLE_SEM_BASE_STUDY_GROUP = ApiConfigurerHelper.API_PREFIX + 'helper/available-sem-base-study-group';
+    public readonly GET_AVAIALBLE_DEGREES_BASE_STUDY_SPEC = ApiConfigurerHelper.API_PREFIX + 'helper/available-degrees-base-study-spec';
 
     public readonly DELETE_DEPT = ApiConfigurerHelper.API_PREFIX + 'departments/delete';
     public readonly ADD_NEW_DEPARTMENT = ApiConfigurerHelper.API_PREFIX + 'departments/add-department';
@@ -83,4 +90,10 @@ export class ApiConfigurerHelper {
     public readonly ADD_NEW_STUDY_SUBJECT = ApiConfigurerHelper.API_PREFIX + 'studysubject/add-study-subject';
     public readonly MASSIVE_DELETE_STUDY_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'studysubject/delete-massive';
     public readonly CMS_FILTERED_ALL_STUDY_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'studysubject/all-study-subjects';
+
+    public readonly DELETE_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/delete';
+    public readonly ADD_NEW_STUDY_GROUP = ApiConfigurerHelper.API_PREFIX + 'studygroup/add-study-group';
+    public readonly MASSIVE_DELETE_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/delete-massive';
+    public readonly CMS_FILTERED_ALL_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/all-study-groups';
+    public readonly GET_AVAILABLE_GROUPS_BASE_SPEC_AND_SEM = ApiConfigurerHelper.API_PREFIX + 'studygroup/available-groups-base-study-spec-and-sem';
 }

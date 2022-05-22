@@ -32,6 +32,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
     selector: 'app-users-cms-page',
     templateUrl: './users-cms-page.component.html',
     styleUrls: [ './users-cms-page.component.scss' ],
+    host: { class: 'app__main-flex-columned' }
 })
 export class UsersCmsPageComponent extends MetaWebContentHelper {
 

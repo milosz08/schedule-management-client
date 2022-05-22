@@ -30,7 +30,7 @@ import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-add-new-study-subject-form',
     templateUrl: './add-new-study-subject-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetQueryConnectorService ],
 })
 export class AddNewStudySubjectFormComponent implements OnInit, OnDestroy {
 
@@ -51,18 +51,13 @@ export class AddNewStudySubjectFormComponent implements OnInit, OnDestroy {
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newStudySubjectForm, name);
 
     public _serverError?: string;
-    public _studySpecVisible: boolean = false;
-
-    public _allDepartments: Array<string> = new Array<string>();
-    public _allStudySpecs: Array<string> = new Array<string>();
-
     private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetQueryConnectorService,
     ) {
         this._newStudySubjectForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -74,18 +69,11 @@ export class AddNewStudySubjectFormComponent implements OnInit, OnDestroy {
                 this._store.dispatch(NgrxAction_PDA.__clearNewContentServerError());
             }
         });
-        this._newStudySubjectForm?.get('departmentName')?.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
-            this.handleEmitStudySpecQuery('');
-            this._newStudySubjectForm?.get('studySpecName')?.patchValue('');
-            this._studySpecVisible = false;
-        });
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
-        this.handleEmitDepartmentQuery('');
-        this.handleEmitStudySpecQuery('');
         this._store
             .pipe(takeUntil(this._unsubscribe), select(NgrxSelector_PDA.sel_postDataServerErrorMessage))
             .subscribe(errorMessage => this._serverError = errorMessage);
@@ -94,23 +82,6 @@ export class AddNewStudySubjectFormComponent implements OnInit, OnDestroy {
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();
-    };
-
-    public handleShowStudySpecInput(): void {
-        this._studySpecVisible = true;
-    };
-
-    public handleEmitDepartmentQuery(departmentName: string): void {
-        this._serviceGET.getQueryDepartmentsList(departmentName)
-            .pipe(takeUntil(this._unsubscribe))
-            .subscribe(r => this._allDepartments = r.dataElements);
-    };
-
-    public handleEmitStudySpecQuery(studySpecName: string): void {
-        this._serviceGET
-            .getQueryStudySpecsBasedDeptList(studySpecName, this._newStudySubjectForm.get('departmentName')!.value)
-            .pipe(takeUntil(this._unsubscribe))
-            .subscribe(r => this._allStudySpecs = r.dataElements);
     };
 
     public handleSubmitNewStudySubject(): void {

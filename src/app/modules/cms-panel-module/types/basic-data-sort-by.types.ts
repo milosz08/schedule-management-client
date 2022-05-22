@@ -26,8 +26,8 @@ export enum BasicDataSortBy {
     ALIAS = 'Alias',
     DEPT_NAME = 'DepartmentName',
     DEPT_ALIAS = 'DepartmentAlias',
-    CATH_ALIAS = 'CathedralAlias',
     CAPACITY = 'Capacity',
     ROOM_TYPE_ALIAS = 'RoomTypeAlias',
-    SPEC_TYPE_ALIAS = 'SpecAlias',
+    SPEC_TYPE_ALIAS = 'SpecTypeAlias',
+    DEGREE_TYPE_ALIAS = 'SpecDegree'
 }

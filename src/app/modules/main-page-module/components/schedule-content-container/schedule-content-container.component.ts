@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: account-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 07/05/2022, 17:42
+ * File name | Nazwa pliku: schedule-content-container.component.ts
+ * Last modified | Ostatnia modyfikacja: 19/05/2022, 16:23
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,27 +18,17 @@
  */
 
 import { Component } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-
-import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiedzialny za renderowanie widoku związanego z ustawieniami konta użytkownika.
+ * Komponent odpowiedzialny za renderowanie widoku planu.
  */
 
 @Component({
-    selector: 'app-account-cms-page',
-    templateUrl: './account-cms-page.component.html',
-    styleUrls: [ './account-cms-page.component.scss' ]
+    selector: 'app-schedule-content-container',
+    templateUrl: './schedule-content-container.component.html',
+    styleUrls: [ './schedule-content-container.component.scss' ]
 })
-export class AccountCmsPageComponent extends MetaWebContentHelper {
-
-    public constructor(
-        titleService: Title,
-        metaService: Meta,
-    ) {
-        super(titleService, metaService, AllCmsWebpages.ACCOUNT);
-    };
+export class ScheduleContentContainerComponent {
 }

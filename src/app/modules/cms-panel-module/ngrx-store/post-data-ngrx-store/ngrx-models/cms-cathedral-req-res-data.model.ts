@@ -17,14 +17,16 @@
  * Obiektowe".
  */
 
-export interface CmsCathedralReqResDataModel {
+export interface CmsCathedralReqDataModel {
     name: string;
     alias: string;
-    departmentName: string;
+    departmentName: number;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsCathedralResDataModel extends CmsCathedralReqResDataModel {
-    departmentAlias: string;
+export interface CmsCathedralResDataModel {
+    name: string;
+    alias: string;
+    departmentFullName: string;
 }

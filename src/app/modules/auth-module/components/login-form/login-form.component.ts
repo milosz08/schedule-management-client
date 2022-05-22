@@ -105,7 +105,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         return this._loginForm.get(fieldName)!.touched && !this._loginForm.get(fieldName)!.valid;
     };
 
-    public handleEventEmitter(value: boolean) {
-        this._store.dispatch(NgrxAction_REM.__toggleIfSaveAccount({ ifSaveAccount: value }));
+    public handleEventEmitter(ifSaveAccount: boolean) {
+        this._store.dispatch(NgrxAction_REM.__toggleIfSaveAccount({ ifSaveAccount }));
     };
 }

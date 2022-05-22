@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: single-user-details-cms-page.component.scss
- * Last modified | Ostatnia modyfikacja: 09/05/2022, 22:42
+ * File name | Nazwa pliku: cms-study-group-req-res-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 22/05/2022, 01:56
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -16,3 +16,19 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+export interface CmsStudyGroupReqDataModel {
+    departmentName: string;
+    studySpecName: string;
+    semesters: Array<number>;
+    countOfGroups: number;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsStudyGroupResDataModel {
+    name: string;
+    departmentFullName: string;
+    studySpecFullName: string;
+    semesterName: string;
+}

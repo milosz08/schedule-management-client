@@ -23,14 +23,7 @@ export interface AvailableDataModel<T> {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface RoomDataModel {
+export interface NameWithId {
+    id: number;
     name: string;
-    alias: string;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface StudyDataModel {
-    name: string;
-    alias: string;
 }

@@ -25,14 +25,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-import { ObjectMapperHelper } from '../../../../utils/object-mapper.helper';
-import { SelectListTupleModel } from '../../../templates-module/models/select-list-tuple.model';
 
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -44,14 +42,14 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-add-new-study-room-form',
     templateUrl: './add-new-study-room-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetAllConnectorService ],
 })
 export class AddNewStudyRoomFormComponent implements OnInit, OnDestroy {
 
     public readonly _newStudyRoom: FormGroup;
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newStudyRoom, name);
 
-    public _allRoomTypes: Array<SelectListTupleModel> = new Array<SelectListTupleModel>();
+    public _allRoomTypes: Array<string> = new Array<string>();
     public _serverError?: string;
 
     private _unsubscribe: Subject<void> = new Subject();
@@ -59,9 +57,8 @@ export class AddNewStudyRoomFormComponent implements OnInit, OnDestroy {
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _mapper: ObjectMapperHelper,
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetAllConnectorService,
     ) {
         this._newStudyRoom = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -69,7 +66,7 @@ export class AddNewStudyRoomFormComponent implements OnInit, OnDestroy {
             departmentName: new FormControl('', [ Validators.required ]),
             cathedralName: new FormControl('', [ Validators.required ]),
             capacity: new FormControl(5, [ Validators.required, Validators.min(5) ]),
-            roomType: new FormControl('', [ Validators.required ]),
+            roomTypeName: new FormControl('', [ Validators.required ]),
         });
         this._newStudyRoom.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._serverError !== '') {
@@ -87,7 +84,7 @@ export class AddNewStudyRoomFormComponent implements OnInit, OnDestroy {
         this._serviceGET
             .getAllAvailableRoomTypes()
             .pipe(takeUntil(this._unsubscribe))
-            .subscribe(types => this._allRoomTypes = this._mapper.__allRoomTypes(types.dataElements));
+            .subscribe(types => this._allRoomTypes = types.dataElements);
     };
 
     public ngOnDestroy(): void {

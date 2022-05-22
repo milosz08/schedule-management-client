@@ -174,6 +174,27 @@ export class PostDataEffects {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
+     * Efekt inicjalizujący dodanie nowej grupy dziekańskiej do wybranego kierunku studiów.
+     */
+    public addNewStudyGroup$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_PDE.__addNewStudyGroup),
+            mergeMap(action => {
+                return this._postConnectorService.addNewStudyGroup(action.groupData).pipe(
+                    map(data => {
+                        return NgrxAction_PDE.__successAddNewStudyGroup({ groupData: data });
+                    }),
+                    catchError(({ error }) => {
+                        return PostDataEffects.handledServerExceptions(error, 'grupy dziekańskej');
+                    }),
+                )
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
      * Funkcja wyłapująca wyjątki z warstwy serwerowej i zwracająca obserwabla.
      */
     private static handledServerExceptions(error: any, message: string): Observable<any> {
@@ -181,7 +202,7 @@ export class PostDataEffects {
             return of(NgrxAction_PDE.__failureAddNewContent({ failureMess: error.message }));
         }
         return of(NgrxAction_PDE.__failureAddNewContent({
-            failureMess: `Problem z dodaniem ${message}. Spróbuj ponownie.` }));
+            failureMess: `Nastąpił problem z dodaniem ${message}. Spróbuj ponownie.` }));
     };
 
     //------------------------------------------------------------------------------------------------------------------
@@ -199,6 +220,7 @@ export class PostDataEffects {
                 NgrxAction_PDE.__addNewStudySpec,
                 NgrxAction_PDE.__addNewStudyRoom,
                 NgrxAction_PDE.__addNewStudySubject,
+                NgrxAction_PDE.__addNewStudyGroup,
             ),
             tap(() => {
                 this._store.dispatch(NgrxAction_PDA.__setFetchingNewContent());

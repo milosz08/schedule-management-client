@@ -71,31 +71,41 @@
 	>
 		Przypisany do wydziału:
 	</label>
-	<div>
-		<app-select-drop-box-template
-			[_formGroup] = '_newStudySpecForm'
-			[_optionsList] = '_queryResultArray'
-			(_emitNewQuery) = handleEmitNewQuery($event)
-			_formControlName = 'departmentName'
-			_selectId = 'add-study-specialization-form___department'
-			_placeholder = 'np. Elektryczny'
-			_errorField = 'prawidłowy wydział'
-		></app-select-drop-box-template>
-	</div>
+	<app-select-drop-box-template
+		[_formGroup] = '_newStudySpecForm'
+		[_optionsList] = '_queryResultArray'
+		(_emitNewQuery) = handleEmitNewQuery($event)
+		_formControlName = 'departmentName'
+		_selectId = 'add-study-specialization-form___department'
+		_placeholder = 'np. Elektryczny'
+		_errorField = 'prawidłowy wydział'
+	></app-select-drop-box-template>
 	<label
-		[for] = '[ "add-study-specialization-form___type" ]'
+		for = 'add-study-specialization-form___type'
 		class = 'cms__simple-grid__label'
 	>
 		Typ studiów:
 	</label>
-		<app-select-list-template
-			[_formGroup] = '_newStudySpecForm'
-			[_listElements] = '_studyAllSpec'
-			_formControlName = 'studyType'
-			_inputId = 'add-study-specialization-form___type'
-			_placeholder = 'np. Stacjonarne'
-			_errorField = 'prawidłowy typ studiów'
-		></app-select-list-template>
+	<app-combo-box-template
+		id = 'add-study-specialization-form___type'
+		[_formGroup] = '_newStudySpecForm'
+		[_allOptions] = '_studyAllSpec'
+		_formControlName = 'studyType'
+		_placeholder = 'typ studiów'
+	></app-combo-box-template>
+	<label
+		for = 'add-study-specialization-form___degree'
+		class = 'cms__simple-grid__label'
+	>
+		Stopień studiów:
+	</label>
+	<app-combo-box-template
+		[_formGroup] = '_newStudySpecForm'
+		[_allOptions] = '_studyDegrees'
+		id = 'add-study-specialization-form___degree'
+		_formControlName = 'studyDegree'
+		_placeholder = 'stopień studiów'
+	></app-combo-box-template>
 	<div></div>
 	<div class = 'cms__simple-grid__submit-button'>
 		<button

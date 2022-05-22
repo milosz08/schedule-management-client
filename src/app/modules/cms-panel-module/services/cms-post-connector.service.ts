@@ -26,9 +26,10 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import { CmsDepartmentReqResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
 import { CmsRegisterReqDataModel, CmsRegisterResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
+import { CmsCathedralReqDataModel, CmsCathedralResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
 import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-spec-req-res-data.model';
 import { CmsStudyRoomReqDataModel, CmsStudyRoomResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-room-req-res-data.model';
-import { CmsCathedralReqResDataModel, CmsCathedralResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
+import { CmsStudyGroupReqDataModel, CmsStudyGroupResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-group-req-res-data.model';
 import { CmsStudySubjectReqDataModel, CmsStudySubjectResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-subject-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ export class CmsPostConnectorService {
     /**
      * Dodawanie nowej katedry do wydziału do bazy danych.
      */
-    public addNewCathedra(cathData: CmsCathedralReqResDataModel): Observable<CmsCathedralResDataModel> {
+    public addNewCathedra(cathData: CmsCathedralReqDataModel): Observable<CmsCathedralResDataModel> {
         return this._http.post<CmsCathedralResDataModel>(
             this._endpoints.ADD_NEW_CATHEDRAL,
             cathData,
@@ -117,6 +118,18 @@ export class CmsPostConnectorService {
         return this._http.post<CmsStudySubjectResDataModel>(
             this._endpoints.ADD_NEW_STUDY_SUBJECT,
             subjectData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowej grupy dziekańskiej (powiązanego z wydziałem i kierunkiem studiów).
+     */
+    public addNewStudyGroup(groupData: CmsStudyGroupReqDataModel): Observable<Array<CmsStudyGroupResDataModel>> {
+        return this._http.post<Array<CmsStudyGroupResDataModel>>(
+            this._endpoints.ADD_NEW_STUDY_GROUP,
+            groupData,
         );
     };
 }

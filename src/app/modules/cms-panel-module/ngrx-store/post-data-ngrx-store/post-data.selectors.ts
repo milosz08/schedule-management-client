@@ -58,6 +58,10 @@ export const sel_newStudySubjectData = selectorWithInjectedStore(
     state => Boolean(state.addNewStudySubject) ? state.addNewStudySubject : false,
 );
 
+export const sel_newStudyGroupData = selectorWithInjectedStore(
+    state => Boolean(state.addNewStudyGroup) ? state.addNewStudyGroup : false,
+);
+
 //----------------------------------------------------------------------------------------------------------------------
 
 export const sel_postDataSuspenseLoading = selectorWithInjectedStore(

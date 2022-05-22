@@ -36,12 +36,15 @@
 		*ngIf = '_listElements.length > 0 && _listVisible'
 		class = 'app-select-list__list-container'
 	>
-		<li *ngFor = 'let result of _listElements'>
+		<li
+			*ngFor = 'let result of _listElements'
+			class = 'app-select-list__list-element'
+		>
 			<button
 				type = 'button'
 				(click) = 'handleInsertToInputValue(result)'
 			>
-				{{ result.name }}
+				{{ result }}
 			</button>
 		</li>
 	</ul>

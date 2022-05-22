@@ -32,6 +32,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
     selector: 'app-study-specialization-cms-page',
     templateUrl: './study-specialization-cms-page.component.html',
     styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
 export class StudySpecializationCmsPageComponent extends MetaWebContentHelper {
 

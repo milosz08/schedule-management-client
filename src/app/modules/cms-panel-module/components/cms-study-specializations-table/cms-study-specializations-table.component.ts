@@ -20,7 +20,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BasicDataSortBy } from '../../types/basic-data-sort-by.types';
@@ -32,7 +32,7 @@ import * as NgrxSelector_NAV from '../../ngrx-store/list-navigations-ngrx-store/
 import { ListNavigationsReducerType } from '../../ngrx-store/list-navigations-ngrx-store/list-navigations.selectors';
 import { PaginationNavSender } from '../../ngrx-store/list-navigations-ngrx-store/ngrx-models/pagination-nav-sender.model';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetTablesConnectorService } from '../../services/cms-get-tables-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-cms-study-specializations-table',
     templateUrl: './cms-study-specializations-table.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetTablesConnectorService ],
 })
 export class CmsStudySpecializationsTableComponent implements OnInit, OnDestroy {
 
@@ -60,9 +60,20 @@ export class CmsStudySpecializationsTableComponent implements OnInit, OnDestroy 
     public constructor(
         private _store: Store<ListNavigationsReducerType>,
         public _endpoints: ApiConfigurerHelper,
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetTablesConnectorService,
     ) {
-        this._store.pipe(takeUntil(this._unsubscribe), select(NgrxSelector_NAV.sel_combinedNavData)).subscribe(data => {
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public ngOnInit(): void {
+        this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
+        this._store.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            takeUntil(this._unsubscribe),
+            select(NgrxSelector_NAV.sel_combinedNavData)
+        ).subscribe(data => {
             if (data.pageSize !== 1) {
                 this._serviceGET
                     .getAllStudySpecs(new PaginationNavSender(data))
@@ -72,12 +83,6 @@ export class CmsStudySpecializationsTableComponent implements OnInit, OnDestroy 
                     });
             }
         });
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    public ngOnInit(): void {
-        this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
     };
 
     public ngOnDestroy(): void {

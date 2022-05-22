@@ -29,17 +29,13 @@
 			<div class = 'cms__simple-grid__text'>{{ _roomData.description }}</div>
 		</ng-container>
 		<div class = 'cms__simple-grid__label'>Wydział:</div>
-		<div class = 'cms__simple-grid__text'>{{ _roomData.departmentName }}</div>
-		<div class = 'cms__simple-grid__label'>Alias wydziału:</div>
-		<div class = 'cms__simple-grid__text'>{{ _roomData.departmentAlias }}</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.departmentFullName }}</div>
 		<div class = 'cms__simple-grid__label'>Katedra:</div>
-		<div class = 'cms__simple-grid__text'>{{ _roomData.cathedralName }}</div>
-		<div class = 'cms__simple-grid__label'>Alias katedry:</div>
-		<div class = 'cms__simple-grid__text'>{{ _roomData.cathedralAlias }}</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.cathedralFullName }}</div>
 		<div class = 'cms__simple-grid__label'>Pojemność sali:</div>
 		<div class = 'cms__simple-grid__text'>{{ _roomData.capacity }} osób</div>
 		<div class = 'cms__simple-grid__label'>Typ sali:</div>
-		<div class = 'cms__simple-grid__text'>{{ _roomData.roomTypeName }} ({{ _roomData.roomType }})</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.roomTypeFullName }}</div>
 	</div>
 </ng-container>
 <ng-template #basicDataInfoAndSusLoading>

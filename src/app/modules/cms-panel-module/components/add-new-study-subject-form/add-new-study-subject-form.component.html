@@ -43,43 +43,11 @@
 			Proszę wpisać nazwę kierunku
 		</div>
 	</div>
-	<label
-		[for] = '[ "study-subject___department" ]'
-		class = 'cms__simple-grid__label'
-	>
-		Wydział:
-	</label>
-	<div>
-		<app-select-drop-box-template
-			[_formGroup] = '_newStudySubjectForm'
-			[_optionsList] = '_allDepartments'
-			(_emitNewQuery) = 'handleEmitDepartmentQuery($event)'
-			(_addedValue) = 'handleShowStudySpecInput()'
-			_formControlName = 'departmentName'
-			_selectId = 'study-subject___department'
-			_placeholder = 'np. Elektryczny'
-			_errorField = 'prawidłowy wydział'
-		></app-select-drop-box-template>
-	</div>
-	<ng-container *ngIf = '_studySpecVisible && _allDepartments.length > 0'>
-		<label
-			[for] = '[ "study-subject___study-spec" ]'
-			class = 'cms__simple-grid__label'
-		>
-			Kierunek studiów:
-		</label>
-		<div>
-			<app-select-drop-box-template
-				[_formGroup] = '_newStudySubjectForm'
-				[_optionsList] = '_allStudySpecs'
-				(_emitNewQuery) = handleEmitStudySpecQuery($event)
-				_formControlName = 'studySpecName'
-				_selectId = 'study-subject___study-spec'
-				_placeholder = 'np. Informatyka'
-				_errorField = 'prawidłowy kierunek studiów'
-			></app-select-drop-box-template>
-		</div>
-	</ng-container>
+	<app-cms-department-with-study-spec
+		[_angularForm] = '_newStudySubjectForm'
+		_labelId = 'study-group'
+		class = 'display-only-content'
+	></app-cms-department-with-study-spec>
 	<div></div>
 	<div class = 'cms__simple-grid__submit-button'>
 		<button

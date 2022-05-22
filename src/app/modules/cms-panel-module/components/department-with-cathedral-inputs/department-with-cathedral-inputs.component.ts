@@ -17,13 +17,13 @@
  * Obiektowe".
  */
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -37,22 +37,23 @@ import { CmsGetConnectorService } from '../../services/cms-get-connector.service
     selector: 'app-department-with-cathedral-inputs',
     templateUrl: './department-with-cathedral-inputs.component.html',
     styleUrls: [],
-    providers: [ CmsGetConnectorService ],
+    providers: [ CmsGetQueryConnectorService ],
 })
 export class DepartmentWithCathedralInputsComponent implements OnInit, OnChanges, OnDestroy {
 
     public _allDepartments: Array<string> = new Array<string>();
-    public _allCathedrals:  Array<string> = new Array<string>();
+    public _allCathedrals: Array<string> = new Array<string>();
     public _cathedraVisible: boolean = false;
 
     @Input() public _angularForm?: FormGroup;
+    @Output() public _emitNextLevel: EventEmitter<void> = new EventEmitter<void>();
 
     private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _serviceGET: CmsGetConnectorService,
+        private _serviceGET: CmsGetQueryConnectorService,
     ) {
     };
 
@@ -78,6 +79,10 @@ export class DepartmentWithCathedralInputsComponent implements OnInit, OnChanges
 
     public handleShowCathedralInput(): void {
         this._cathedraVisible = true;
+    };
+
+    public handleShowNextLevelInput(): void  {
+        this._emitNextLevel.emit();
     };
 
     public handleEmitDepartmentQuery(departmentName: string): void {
