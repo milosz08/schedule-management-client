@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: account-cms-page.component.scss
- * Last modified | Ostatnia modyfikacja: 07/05/2022, 17:40
+ * File name | Nazwa pliku: schedule-content-container.component.ts
+ * Last modified | Ostatnia modyfikacja: 19/05/2022, 16:23
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -16,3 +16,19 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+import { Component } from '@angular/core';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Komponent odpowiedzialny za renderowanie widoku planu.
+ */
+
+@Component({
+    selector: 'app-schedule-content-container',
+    templateUrl: './schedule-content-container.component.html',
+    styleUrls: [ './schedule-content-container.component.scss' ]
+})
+export class ScheduleContentContainerComponent {
+}
