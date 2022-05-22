@@ -20,7 +20,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
-import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
@@ -73,7 +73,18 @@ export class CmsUsersTableComponent implements OnInit, OnDestroy {
         public _endpoints: ApiConfigurerHelper,
         private _serviceGET: CmsGetConnectorService,
     ) {
-        this._store.pipe(takeUntil(this._unsubscribe), select(NgrxSelector_NAV.sel_combinedNavData)).subscribe(data => {
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public ngOnInit(): void {
+        this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
+        this._store.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            takeUntil(this._unsubscribe),
+            select(NgrxSelector_NAV.sel_combinedNavData)
+        ).subscribe(data => {
             if (data.pageSize !== 1) {
                 this._serviceGET
                     .getAllUsers(new PaginationNavSender(data))
@@ -83,12 +94,6 @@ export class CmsUsersTableComponent implements OnInit, OnDestroy {
                     });
             }
         });
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    public ngOnInit(): void {
-        this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
     };
 
     public ngOnDestroy(): void {
