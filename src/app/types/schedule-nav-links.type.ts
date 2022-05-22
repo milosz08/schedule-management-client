@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: single-user-details-cms-page.component.scss
- * Last modified | Ostatnia modyfikacja: 09/05/2022, 22:42
+ * File name | Nazwa pliku: schedule-nav-links.type.ts
+ * Last modified | Ostatnia modyfikacja: 19/05/2022, 17:25
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -16,3 +16,9 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+export enum ScheduleNavLinksType {
+    ROOMS = 'sale',
+    WORKERS = 'pracownicy',
+    GROUPS = 'grupy',
+}
