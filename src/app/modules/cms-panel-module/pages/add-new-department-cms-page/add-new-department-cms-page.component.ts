@@ -32,6 +32,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
     selector: 'app-add-new-department-cms-page',
     templateUrl: './add-new-department-cms-page.component.html',
     styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
 export class AddNewDepartmentCmsPageComponent extends MetaWebContentHelper {
 

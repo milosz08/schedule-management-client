@@ -64,18 +64,7 @@
     }
 }
 
-router-outlet + app-users-cms-page,
-router-outlet + app-add-new-user-cms-page,
-router-outlet + app-departments-cms-page,
-router-outlet + app-add-new-department-cms-page,
-router-outlet + app-cathedrals-cms-page,
-router-outlet + app-add-new-cathedral-cms-page,
-router-outlet + app-study-specialization-cms-page,
-router-outlet + app-add-new-study-specialization-cms-page,
-router-outlet + app-study-rooms-cms-page,
-router-outlet + app-add-new-study-room-cms-page,
-router-outlet + app-study-subjects-cms-page,
-router-outlet + app-add-new-study-subject-cms-page, {
+.app__main-flex-columned {
     display: flex;
     flex-direction: column;
     height: 100%;

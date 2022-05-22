@@ -43,12 +43,10 @@
     border-radius: var(--borderRadius);
     &::placeholder {
         color: var(--lightGrayColor);
+        opacity: 1;
     }
     &.app__input--light {
         color: var(--darkBlueColor);
-        &::placeholder {
-            color: var(--darkBlueColor);
-        }
     }
     &.app__input--exclude-margin {
         margin-bottom: 0;
@@ -176,7 +174,7 @@
     position: absolute;
     z-index: 5;
     left: 0;
-    top: calc(100% + 5px);
+    top: calc(100% + 8px);
     width: 100%;
     border: 1px solid var(--lightGrayColor);
     background-color: var(--mainWhiteColor);
@@ -185,25 +183,23 @@
     list-style-type: none;
     max-height: 200px;
     overflow-y: scroll;
-    li {
-        color: var(--darkBlueColor);
-        border-radius: var(--borderRadius);
-        padding: 4px 10px;
-        &:hover {
-            cursor: pointer;
-            background-color: var(--darkBlueColor);
-            button {
-                color: var(--mainWhiteColor);
-            }
-        }
+}
+
+.app-select-list__list-element {
+    color: var(--darkBlueColor);
+    border-radius: var(--borderRadius);
+    padding: 4px 10px;
+    &:hover {
+        cursor: pointer;
+        background-color: var(--darkBlueColor);
         button {
-            width: 100%;
-            text-align: left;
-            color: var(--darkBlueColor);
+            color: var(--mainWhiteColor);
         }
     }
-    &.container--disactive {
-        display: none;
+    button {
+        width: 100%;
+        text-align: left;
+        color: var(--darkBlueColor);
     }
 }
 

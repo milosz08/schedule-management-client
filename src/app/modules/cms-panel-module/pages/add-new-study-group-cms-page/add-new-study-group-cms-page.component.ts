@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: account-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 07/05/2022, 17:42
+ * File name | Nazwa pliku: add-new-study-group-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 21/05/2022, 13:40
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -25,20 +25,21 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiedzialny za renderowanie widoku związanego z ustawieniami konta użytkownika.
+ *
  */
 
 @Component({
-    selector: 'app-account-cms-page',
-    templateUrl: './account-cms-page.component.html',
-    styleUrls: [ './account-cms-page.component.scss' ]
+    selector: 'app-add-new-study-group-cms-page',
+    templateUrl: './add-new-study-group-cms-page.component.html',
+    styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
-export class AccountCmsPageComponent extends MetaWebContentHelper {
+export class AddNewStudyGroupCmsPageComponent extends MetaWebContentHelper {
 
     public constructor(
         titleService: Title,
         metaService: Meta,
     ) {
-        super(titleService, metaService, AllCmsWebpages.ACCOUNT);
+        super(titleService, metaService, AllCmsWebpages.ADD_STUDY_GROUP);
     };
 }
