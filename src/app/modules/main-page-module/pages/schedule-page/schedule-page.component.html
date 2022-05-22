@@ -17,4 +17,105 @@
   ~ Obiektowe".
   -->
 
-<p>komponent planu zajęć</p>
+<main class = 'schedule-container__main'>
+	<div class = 'schedule-choose-with-navigation__container'>
+		<nav class = 'schedule-navigation__left-bar'>
+			<button
+				*ngFor='let buttonKey of _buttons'
+				(click) = 'handleToggleActiveSection(buttonKey)'
+				[ngClass] = '_ifChooseElementActive(buttonKey)'
+			>
+				{{ _navElms[buttonKey] }}
+			</button>
+		</nav>
+		<div
+			[ngSwitch] = '_navChoose'
+			class = 'schedule-navigation__container'
+		>
+			<app-schedule-departments-list *ngSwitchCase = '_navElms.ROOMS'>
+				<ng-template let-deptData = 'deptData'>
+					<app-schedule-second-level-tree-list
+						[_firstLvlData] = 'deptData'
+						[_insertDataCallback] = 'insertCathedralsData'
+					>
+						<ng-template let-cathData = 'secondLvlData'>
+							<app-schedule-next-level-tree-list
+								[_firstLvlData] = 'deptData'
+								[_secondLvlData] = 'cathData'
+								[_insertDataCallback] = 'insertStudyRoomsData'
+								_levelCssClass = 'app__schedule-nav-list__fourth-level'
+							>
+								<ng-template let-roomData = 'nextLvlData'>
+									{{ roomData.name }}
+								</ng-template>
+							</app-schedule-next-level-tree-list>
+						</ng-template>
+					</app-schedule-second-level-tree-list>
+				</ng-template>
+			</app-schedule-departments-list>
+			<app-schedule-departments-list *ngSwitchCase = '_navElms.WORKERS'>
+				<ng-template let-deptData = 'deptData'>
+					<app-schedule-second-level-tree-list
+						[_firstLvlData] = 'deptData'
+						[_insertDataCallback] = 'insertCathedralsData'
+					>
+						<ng-template let-cathData = 'secondLvlData'>
+							<app-schedule-next-level-tree-list
+								[_firstLvlData] = 'deptData'
+								[_secondLvlData] = 'cathData'
+								[_insertDataCallback] = 'insertEmployeersData'
+								_levelCssClass = 'app__schedule-nav-list__fourth-level'
+							>
+								<ng-template let-employeerData = 'nextLvlData'>
+									{{ employeerData.name }}
+								</ng-template>
+							</app-schedule-next-level-tree-list>
+						</ng-template>
+					</app-schedule-second-level-tree-list>
+				</ng-template>
+			</app-schedule-departments-list>
+			<app-schedule-departments-list *ngSwitchCase = '_navElms.GROUPS'>
+				<ng-template let-deptData = 'deptData'>
+					<app-schedule-second-level-tree-list
+						[_firstLvlData] = 'deptData'
+						[_insertDataCallback] = 'insertStudyDegrees'
+					>
+						<ng-template let-studyDegreeData = 'secondLvlData'>
+							<app-schedule-next-level-tree-list
+								[_firstLvlData] = 'deptData'
+								[_secondLvlData] = 'studyDegreeData'
+								[_insertDataCallback] = 'insertStudySpecializationsData'
+								[_ifLast] = 'false'
+								_levelCssClass = 'app__schedule-nav-list__second-level'
+							>
+								<ng-template let-studySpecData = 'nextLvlData'>
+									<app-schedule-next-level-tree-list
+										[_firstLvlData] = 'deptData'
+										[_secondLvlData] = 'studySpecData'
+										[_insertDataCallback] = 'insertStudySemesters'
+										[_ifLast] = 'false'
+										_levelCssClass = 'app__schedule-nav-list__third-level'
+									>
+										<ng-template let-semesterData = 'nextLvlData'>
+											<app-schedule-next-level-tree-list
+												[_firstLvlData] = 'studySpecData'
+												[_secondLvlData] = 'semesterData'
+												[_insertDataCallback] = 'insertStudyGroups'
+												_levelCssClass = 'app__schedule-nav-list__fourth-level'
+											>
+												<ng-template let-studyGroupData = 'nextLvlData'>
+													{{ studyGroupData.name }}
+												</ng-template>
+											</app-schedule-next-level-tree-list>
+										</ng-template>
+									</app-schedule-next-level-tree-list>
+								</ng-template>
+							</app-schedule-next-level-tree-list>
+						</ng-template>
+					</app-schedule-second-level-tree-list>
+				</ng-template>
+			</app-schedule-departments-list>
+		</div>
+	</div>
+	<app-schedule-content-container class = 'schedule-content__container'></app-schedule-content-container>
+</main>
