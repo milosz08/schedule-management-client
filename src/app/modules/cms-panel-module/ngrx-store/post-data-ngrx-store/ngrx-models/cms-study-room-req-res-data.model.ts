@@ -23,13 +23,16 @@ export interface CmsStudyRoomReqDataModel {
     departmentName: string;
     cathedralName: string;
     capacity: number;
-    roomType: string;
+    roomTypeName: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsStudyRoomResDataModel extends CmsStudyRoomReqDataModel {
-    departmentAlias: string;
-    cathedralAlias: string;
-    roomTypeName: string;
+export interface CmsStudyRoomResDataModel {
+    name: string;
+    description: string;
+    capacity: number;
+    departmentFullName: string;
+    cathedralFullName: string;
+    roomTypeFullName: string;
 }

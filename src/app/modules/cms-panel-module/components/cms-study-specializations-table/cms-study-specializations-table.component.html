@@ -46,12 +46,19 @@
 					[_sortingData] = '_studySpecsSortBy.DEPT_ALIAS'
 				></app-cms-sorting-button>
 			</th>
-			<th>
+			<th class = 'app-cms-table--hide-column__large'>
 				<app-cms-sorting-button
 					_sortingPlaceholder = 'Alias typu kierunku'
-					[_sortingData] = '_studySpecsSortBy.ROOM_TYPE_ALIAS'
+					[_sortingData] = '_studySpecsSortBy.SPEC_TYPE_ALIAS'
 				></app-cms-sorting-button>
 			</th>
+			<th class = 'app-cms-table--hide-column__large'>
+				<app-cms-sorting-button
+					_sortingPlaceholder = 'Alias stopnia'
+					[_sortingData] = '_studySpecsSortBy.DEGREE_TYPE_ALIAS'
+				></app-cms-sorting-button>
+			</th>
+			<th class = 'app-cms-table__th-details'></th>
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
@@ -66,7 +73,7 @@
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ spec.id }}</td>
 			<td
-				[title] = 'spec.departmentName'
+				[title] = 'spec.departmentName + ", " + spec.specTypeName + ", " + spec.studyDegree'
 				class = 'app-cms__on-hover-show-info'
 			>
 				{{ spec.name }}
@@ -79,8 +86,13 @@
 			</td>
 			<td
 				[title] = 'spec.specTypeName'
-				class = 'app-cms__on-hover-show-info'>
+				class = 'app-cms-table--hide-column__large app-cms__on-hover-show-info'>
 				{{ spec.specTypeAlias }}
+			</td>
+			<td
+				[title] = 'spec.studyDegree'
+				class = 'app-cms-table--hide-column__large app-cms__on-hover-show-info'>
+				{{ spec.studyDegreeAlias }}
 			</td>
 		</tr>
 	</table>

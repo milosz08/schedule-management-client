@@ -79,6 +79,7 @@ export interface CmsSingleRoomTypeDataModel {
     cathedralAlias: string;
     roomTypeName: string;
     roomTypeAlias: string;
+    deptWithCathAlias: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -90,6 +91,8 @@ export interface CmsSingleStudySpecDataModel {
     specTypeAlias: string;
     departmentName: string;
     departmentAlias: string;
+    studyDegree: string;
+    studyDegreeAlias: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -101,4 +104,15 @@ export interface CmsSingleStudySubjectDataModel {
     specAlias: string;
     departmentName: string;
     departmentAlias: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsSingleStudyGroupDataModel {
+    id: number;
+    name: string;
+    departmentName: string;
+    departmentAlias: string;
+    studySpecName: string;
+    studySpecAlias: string;
 }

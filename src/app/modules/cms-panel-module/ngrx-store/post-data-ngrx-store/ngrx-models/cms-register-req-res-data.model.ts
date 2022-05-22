@@ -19,6 +19,8 @@
 
 import { UserIdentityType } from '../../../../../types/user-identity.type';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export interface CmsRegisterReqDataModel {
     name: string;
     surname: string;
@@ -27,7 +29,7 @@ export interface CmsRegisterReqDataModel {
     role: string;
     departmentName: string;
     cathedralName: string;
-    studySpecName: string;
+    studySpecsOrSubjects: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -42,5 +44,4 @@ export interface CmsRegisterResDataModel {
     emailPassword: string;
     departmentData: string;
     cathedralData: string;
-    studySpecName: string;
 }

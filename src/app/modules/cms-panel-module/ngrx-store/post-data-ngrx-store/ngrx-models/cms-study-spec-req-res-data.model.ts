@@ -21,12 +21,16 @@ export interface CmsStudySpecReqDataModel {
     name: string;
     alias: string;
     departmentName: string;
-    studyType: string;
+    studyType: Array<number>;
+    studyDegree: Array<number>;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsStudySpecResDataModel extends CmsStudySpecReqDataModel {
-    departmentAlias: string;
+export interface CmsStudySpecResDataModel {
+    name: string;
+    alias: string;
+    departmentFullName: string;
     studyTypeFullName: string;
+    studyDegreeFullName: string;
 }
