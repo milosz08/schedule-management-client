@@ -62,6 +62,12 @@ const _postDataReducer = createReducer(
             ifFetching: false,
         };
     }),
+    on(NgrxAction.__successAddNewStudyGroup, (state, action) => {
+        return { ...state,
+            addNewStudyGroup: action.groupData,
+            ifFetching: false,
+        };
+    }),
     on(NgrxAction.__clearAllPostData, state => {
         return { ...state,
             registerNewUserData: null,
@@ -70,6 +76,7 @@ const _postDataReducer = createReducer(
             addNewStudySpecialization: null,
             addNewStudyRoom: null,
             addNewStudySubject: null,
+            addNewStudyGroup: null,
             ifFetching: false,
             serverError: '',
         };
