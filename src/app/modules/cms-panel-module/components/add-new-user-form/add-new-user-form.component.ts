@@ -25,13 +25,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-import { UserIdentityType } from '../../../../types/user-identity.type';
-import { ObjectMapperHelper } from '../../../../utils/object-mapper.helper';
-import { SelectListTupleModel } from '../../../templates-module/models/select-list-tuple.model';
 
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
+
+import { CmsGetConnectorService } from '../../services/cms-get-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -44,14 +43,14 @@ import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-
     selector: 'app-add-new-user-form',
     templateUrl: './add-new-user-form.component.html',
     styleUrls: [],
+    providers: [ CmsGetConnectorService ],
 })
 export class AddNewUserFormComponent implements OnInit, OnDestroy {
 
     public readonly _registerUserForm: FormGroup;
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._registerUserForm, name);
 
-    public readonly _studentRole = UserIdentityType.STUDENT;
-    public readonly _allRoles: Array<SelectListTupleModel> = this._mapper.__allRoles;
+    public _allRoles: Array<string> = new Array<string>();
     public _serverError?: string;
 
     private _unsubscribe: Subject<void> = new Subject();
@@ -59,8 +58,8 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _mapper: ObjectMapperHelper,
         private _store: Store<PostDataReducerType>,
+        private _serviceGET: CmsGetConnectorService,
     ) {
         this._registerUserForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -68,9 +67,9 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
             city: new FormControl('', [ Validators.required ]),
             nationality: new FormControl('', [ Validators.required ]),
             role: new FormControl('', [ Validators.required ]),
-            departmentName: new FormControl(''),
+            departmentName: new FormControl('', [ Validators.required ]),
             cathedralName: new FormControl(''),
-            studySpecName: new FormControl(''),
+            studySpecsOrSubjects: new FormControl([], [ Validators.required ]),
         });
         this._registerUserForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._serverError !== '') {
@@ -85,6 +84,10 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
         this._store
             .pipe(takeUntil(this._unsubscribe), select(NgrxSelector_PDA.sel_postDataServerErrorMessage))
             .subscribe(errorMessage => this._serverError = errorMessage);
+        this._serviceGET
+            .getAllAvailableRoles()
+            .pipe(takeUntil(this._unsubscribe))
+            .subscribe(q => this._allRoles = q.dataElements);
     };
 
     public ngOnDestroy(): void {
@@ -94,6 +97,6 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
 
     public handleSubmitRegisterUser(): void {
         this._store.dispatch(NgrxAction_PDA.__registerNewUser({ userData: this._registerUserForm.getRawValue() }));
-        this._registerUserForm.reset();
+        this._registerUserForm.reset({ studySpecsOrSubjects: [] });
     };
 }
