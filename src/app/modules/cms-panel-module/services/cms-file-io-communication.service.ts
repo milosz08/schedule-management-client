@@ -19,7 +19,6 @@
 
 import { Injectable } from '@angular/core';
 
-import { MiscHelper } from '../../../utils/misc.helper';
 import { CmsRegisterResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -64,7 +63,7 @@ export class CmsFileIoCommunicationService {
             'Imię i nazwisko:           ' + data.name + ' ' + data.surname + '\n' +
             'Miejscowość zamieszkania:  ' + data.city + '\n' +
             'Narodowość:                ' + data.nationality + '\n' +
-            'Rola w systemie:           ' + MiscHelper.convertEngToPlUserRole(data.role) + '\n' +
+            'Rola w systemie:           ' + data.role + '\n' +
             'Adres email:               ' + data.email + '\n' +
             'Hasło do adresu email:     ' + data.emailPassword + '\n'
         );

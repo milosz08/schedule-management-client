@@ -3,54 +3,54 @@
         "name": "panel główny",
         "location": "dashboard",
         "ariaLabel": "Kliknij aby przejść do panelu głównego",
-        "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
+        "availableFor": "student nauczyciel edytor administrator"
     },
     {
         "name": "rezerwacje",
         "location": "bookings",
         "ariaLabel": "Kliknij aby przejść do przeglądu rezerwacji",
-        "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
+        "availableFor": "student nauczyciel edytor administrator"
     },
     {
         "name": "wydziały",
         "location": "departments",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania wydziałami",
-        "availableFor": "ADMINISTRATOR"
+        "availableFor": "administrator"
     },
     {
         "name": "katedry",
         "location": "cathedrals",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania katedrami",
-        "availableFor": "ADMINISTRATOR"
+        "availableFor": "administrator"
     },
     {
         "name": "sale zajęciowe",
         "location": "study-rooms",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania salami na wydziałach",
-        "availableFor": "ADMINISTRATOR"
+        "availableFor": "administrator"
     },
     {
         "name": "kierunki studiów",
         "location": "study-specializations",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania kierunkami studiów",
-        "availableFor": "ADMINISTRATOR"
+        "availableFor": "administrator"
     },
     {
         "name": "przedmioty",
         "location": "study-subjects",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania przedmiotami na studiach",
-        "availableFor": "ADMINISTRATOR"
+        "availableFor": "administrator"
+    },
+    {
+        "name": "grupy dziekańskie",
+        "location": "study-groups",
+        "ariaLabel": "Kliknij aby przejść do panelu zarządzania grupami dziekańskimi",
+        "availableFor": "administrator"
     },
     {
         "name": "użytkownicy",
         "location": "users",
         "ariaLabel": "Kliknij aby przejść do panelu zarządzania użytkownikami",
-        "availableFor": "ADMINISTRATOR"
-    },
-    {
-        "name": "dane konta",
-        "location": "account",
-        "ariaLabel": "Kliknij aby przejść do ustawień konta",
-        "availableFor": "STUDENT TEACHER EDITOR ADMINISTRATOR"
+        "availableFor": "administrator"
     }
 ]

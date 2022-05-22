@@ -19,10 +19,8 @@
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { MiscHelper } from '../../../../utils/misc.helper';
-import { UserIdentityType } from '../../../../types/user-identity.type';
-
 import { InitialSessionStateTypes } from './session.initial';
+import { UserIdentityType } from '../../../../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +48,7 @@ export const sel_userInitials = selectorWithInjectedStore(state => {
 });
 
 export const sel_userAuthLevel = selectorWithInjectedStore(state => {
-    return MiscHelper.convertEngToPlUserRole(state.userData?.role);
+    return state.userData?.role;
 });
 
 export const sel_userHeaderName = selectorWithInjectedStore(

@@ -23,7 +23,6 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { MiscHelper } from '../../../../utils/misc.helper';
 import MainPageNavigationMockedData from '../../../../mocked-data/main-page-navigation-content.json';
 import AuthorizationNavigationContent from '../../../../mocked-data/authorization-navigation-content.json';
 
@@ -63,11 +62,5 @@ export class CmsPanelFooterComponent {
         this._navigationData = MainPageNavigationMockedData;
         this._authNavigationData = AuthorizationNavigationContent;
         this._latestDatePipe = this._datePipe.transform(new Date(), 'yyyy')!;
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    public getUserRoleAfterConvert(role: UserIdentityType): string {
-        return MiscHelper.convertEngToPlUserRole(role);
     };
 }

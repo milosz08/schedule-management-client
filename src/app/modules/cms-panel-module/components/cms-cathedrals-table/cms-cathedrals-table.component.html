@@ -52,12 +52,13 @@
 					[_sortingData] = '_cathsSortBy.DEPT_NAME'
 				></app-cms-sorting-button>
 			</th>
-			<th class = 'app-cms-table--hide-column__small'>
+			<th class = 'app-cms-table--hide-column__large'>
 				<app-cms-sorting-button
 					_sortingPlaceholder = 'Alias wydziału'
 					[_sortingData] = '_cathsSortBy.DEPT_ALIAS'
 				></app-cms-sorting-button>
 			</th>
+			<th class = 'app-cms-table__th-details'></th>
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
@@ -78,7 +79,7 @@
 			</td>
 			<td class = 'app-cms-table--hide-column__large'>{{ cath.alias }}</td>
 			<td class = 'app-cms-table--hide-column__large'>{{ cath.departmentName }}</td>
-			<td class = 'app-cms-table--hide-column__small'>{{ cath.departmentAlias }}</td>
+			<td class = 'app-cms-table--hide-column__large'>{{ cath.departmentAlias }}</td>
 		</tr>
 	</table>
 </app-cms-list-element-removable-with-pagination>

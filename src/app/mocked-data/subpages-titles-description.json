@@ -49,13 +49,9 @@
             "title": "Dodaj użytkownika",
             "description": "W tej sekcji możesz dodać nowego użytkownika do systemu."
         },
-        "userDetails": {
-            "title": "Szczegóły konta",
-            "description": "W tej sekcji możesz podejrzeć szczegóły konta wybranego użytkownika."
-        },
-        "account": {
-            "title": "Konto",
-            "description": "W tej sekcji możesz przeglądać oraz edytować dane konta."
+        "editUser": {
+            "title": "Edytuj konto użytkownika",
+            "description": "W tej sekcji możesz edytować wybrane konto użytkownika systemu."
         },
         "bookings": {
             "title": "Moje rezerwacje",
@@ -69,6 +65,10 @@
             "title": "Dodaj wydział",
             "description": "W tej sekcji możesz dodać nowy wydział."
         },
+        "editDepartment": {
+            "title": "Edytuj wydział",
+            "description": "W tej sekcji możesz edytować wcześniej stworzony wydział."
+        },
         "cathedrals": {
             "title": "Katedry",
             "description": "W tej sekcji możesz zarządzać katedrami poszczególnych wydziałów."
@@ -76,6 +76,10 @@
         "addCathedral": {
             "title": "Dodaj katedrę",
             "description": "W tej sekcji możesz dodać nową katedrę do istniejącego wydziału."
+        },
+        "editCathedral": {
+            "title": "Edytuj katedrę",
+            "description": "W tej sekcji możesz edytować wcześniej stworzoną katedrę."
         },
         "studySpecialization": {
             "title": "Kierunki studiów",
@@ -85,6 +89,10 @@
             "title": "Nowy kierunek studiów",
             "description": "W tej sekcji możesz dodać nowy kierunek studiów na wybranym wydziale."
         },
+        "editStudySpecialization": {
+            "title": "Edytuj kierunek studiów",
+            "description": "W tej sekcji możesz edytować wcześniej stworzony kierunek studiów."
+        },
         "studyRooms": {
             "title": "Sale zajęciowe",
             "description": "W tej sekcji możesz zarządzać salami zajęciowymi poszczególnych wydziałów."
@@ -93,6 +101,10 @@
             "title": "Nowa sala zajęciowa",
             "description": "W tej sekcji możesz dodać nową salę zajęciową na instniejący już wydział."
         },
+        "editStudyRoom": {
+            "title": "Edytuj salę zajęciową",
+            "description": "W tej sekcji możesz edytować wcześniej stworzoną salę zajęciową."
+        },
         "studySubjects": {
             "title": "Przedmioty",
             "description": "W tej sekcji możesz zarządzać przedmiotami poszczególnych kierunków."
@@ -100,6 +112,22 @@
         "addStudySubject": {
             "title": "Nowy przedmiot",
             "description": "W tej sekcji możesz dodać nowy przedmiot do istniejącego już kierunku."
+        },
+        "editStudySubject": {
+            "title": "Edytuj przedmiot",
+            "description": "W tej sekcji możesz edytować wcześniej stworzony przedmiot."
+        },
+        "studyGroups": {
+            "title": "Grupy dziekańskiw",
+            "description": "W tej sekcji możesz zarządzać grupami dziekańskimi poszczególnych kierunków."
+        },
+        "addStudyGroup": {
+            "title": "Nowa grupa dziekańska",
+            "description": "W tej sekcji możesz dodać nową grupę dziekańską do istniejącego już kierunku."
+        },
+        "editStudyGroup": {
+            "title": "Edytuj grupę dziekańską",
+            "description": "W tej sekcji możesz edytować wcześniej stworzoną grupę dziekańską."
         }
     }
 }

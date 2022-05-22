@@ -48,7 +48,7 @@ export class FirstChangePasswordPageComponent extends MetaWebContentHelper {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    public handleDisableShowThisPageAgain(ifChecked: boolean): void {
-        this._store.dispatch(NgrxAction_FCP.__toggleChangePasswordPageVisible({ pageVisibility: ifChecked }));
+    public handleDisableShowThisPageAgain(pageVisibility: boolean): void {
+        this._store.dispatch(NgrxAction_FCP.__toggleChangePasswordPageVisible({ pageVisibility }));
     };
 }

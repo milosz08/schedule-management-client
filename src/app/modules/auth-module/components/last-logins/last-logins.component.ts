@@ -23,7 +23,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 
-import { MiscHelper } from '../../../../utils/misc.helper';
 import { RememberAccountModel } from '../../../../models/remember-account.model';
 
 import * as NgrxAction_REM from '../../ngrx-store/remember-user-ngrx-store/remember-user.actions';
@@ -77,8 +76,7 @@ export class LastLoginsComponent {
     };
 
     public createUserInfoOnHover(user: RememberAccountModel): string {
-        const userRole = MiscHelper.convertEngToPlUserRole(user.role);
-        return `Użytkownik: ${user.nameWithSurname}\nAdres email: ${user.email}\nRola w systemie: ${userRole}`;
+        return `Użytkownik: ${user.nameWithSurname}\nAdres email: ${user.email}\nRola w systemie: ${user.role}`;
     };
 
     public getSaveImageURL(imageUrl: string): SafeUrl {

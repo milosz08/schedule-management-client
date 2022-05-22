@@ -42,7 +42,7 @@
 			<div class = 'cms-footer__user-data'>
 				<p>Rola w systemie:</p>
 				<p class = 'cms-footer__user-data__data cms-footer__user-data__data--capitalised'>
-					{{ getUserRoleAfterConvert((_userRole$ | async)!) }}
+					{{ _userRole$ | async }}
 				</p>
 			</div>
 			<div class = 'cms-footer__logout-button'>

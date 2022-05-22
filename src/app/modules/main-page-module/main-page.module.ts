@@ -20,6 +20,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MainPageRoutingModule } from './main-page-routing.module';
 
@@ -31,12 +32,18 @@ import { RootMainPageComponent } from './pages/root-main-page/root-main-page.com
 
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
+import { ScheduleRoomsListComponent } from './components/schedule-rooms-list/schedule-rooms-list.component';
+import { ScheduleCathedralsListComponent } from './components/schedule-cathedrals-list/schedule-cathedrals-list.component';
+import { ScheduleDepartmentsListComponent } from './components/schedule-departments-list/schedule-departments-list.component';
+import { ScheduleContentContainerComponent } from './components/schedule-content-container/schedule-content-container.component';
 
 import { SharedModule } from '../shared-module/shared.module';
 import { StoreModule } from '@ngrx/store';
 
 import { domManipulationReducer } from '../cms-panel-module/ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.reducer';
 import { DOM_MANIPULATION_REDUCER } from '../cms-panel-module/ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.selectors';
+import { ScheduleSecondLevelTreeListComponent } from './components/schedule-second-level-tree-list/schedule-second-level-tree-list.component';
+import { ScheduleNextLevelTreeListComponent } from './components/schedule-next-level-tree-list/schedule-next-level-tree-list.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -51,6 +58,12 @@ import { DOM_MANIPULATION_REDUCER } from '../cms-panel-module/ngrx-store/dom-man
         // komponenty
         MainHeaderComponent,
         MainFooterComponent,
+        ScheduleRoomsListComponent,
+        ScheduleCathedralsListComponent,
+        ScheduleDepartmentsListComponent,
+        ScheduleContentContainerComponent,
+        ScheduleNextLevelTreeListComponent,
+        ScheduleSecondLevelTreeListComponent,
     ],
     imports: [
         CommonModule,
@@ -58,6 +71,7 @@ import { DOM_MANIPULATION_REDUCER } from '../cms-panel-module/ngrx-store/dom-man
         SharedModule,
         MainPageRoutingModule,
         StoreModule.forFeature(DOM_MANIPULATION_REDUCER, domManipulationReducer),
+        MatIconModule,
     ],
 })
 export class MainPageModule {}

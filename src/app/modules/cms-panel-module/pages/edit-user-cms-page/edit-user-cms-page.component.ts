@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: single-user-details-cms-page.component.ts
+ * File name | Nazwa pliku: edit-user-cms-page.component.ts
  * Last modified | Ostatnia modyfikacja: 09/05/2022, 22:42
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -30,13 +30,14 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
  */
 
 @Component({
-    selector: 'app-single-user-details-cms-page',
-    templateUrl: './single-user-details-cms-page.component.html',
-    styleUrls: [ './single-user-details-cms-page.component.scss' ]
+    selector: 'app-edit-user-cms-page',
+    templateUrl: './edit-user-cms-page.component.html',
+    styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
-export class SingleUserDetailsCmsPageComponent extends MetaWebContentHelper {
+export class EditUserCmsPageComponent extends MetaWebContentHelper {
 
-    public _userLogin: string | null = '';
+    public _userId: string | null = '';
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +46,7 @@ export class SingleUserDetailsCmsPageComponent extends MetaWebContentHelper {
         metaService: Meta,
         private _route: ActivatedRoute,
     ) {
-        super(titleService, metaService, AllCmsWebpages.USER_DETAILS);
-        this._userLogin = this._route.snapshot.paramMap.get('userLogin');
+        super(titleService, metaService, AllCmsWebpages.EDIT_USER);
+        this._userId = this._route.snapshot.paramMap.get('userId');
     };
 }

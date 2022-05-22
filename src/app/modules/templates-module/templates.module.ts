@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CheckboxTemplateComponent } from './components/checkbox-template/checkbox-template.component';
+import { ComboBoxTemplateComponent } from './components/combo-box-template/combo-box-template.component';
 import { TextInputPasswordComponent } from './components/text-input-password/text-input-password.component';
 import { SelectListTemplateComponent } from './components/select-list-template/select-list-template.component';
 import { SelectDropBoxTemplateComponent } from './components/select-drop-box-template/select-drop-box-template.component';
@@ -35,6 +36,7 @@ import { SelectDropBoxTemplateComponent } from './components/select-drop-box-tem
         TextInputPasswordComponent,
         SelectListTemplateComponent,
         SelectDropBoxTemplateComponent,
+        ComboBoxTemplateComponent,
     ],
     imports: [
         CommonModule,
@@ -47,6 +49,7 @@ import { SelectDropBoxTemplateComponent } from './components/select-drop-box-tem
         TextInputPasswordComponent,
         SelectListTemplateComponent,
         SelectDropBoxTemplateComponent,
+        ComboBoxTemplateComponent,
     ],
 })
 export class TemplatesModule {}
