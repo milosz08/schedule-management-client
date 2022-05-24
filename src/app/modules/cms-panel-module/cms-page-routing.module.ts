@@ -21,12 +21,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminRedirectGuard } from '../../guards/cms-roles-redirectors/administrator-redirect-guard.service';
+import { TeacherAndStudentRedirectGuard } from '../../guards/cms-roles-redirectors/teacher-and-student-redirect.guard';
 
 import { CmsPageComponent } from './cms-page.component';
 
 import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
 import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+
+import { ScheduleCmsPageComponent } from './pages/schedule-cms-page/schedule-cms-page.component';
+import { ChooseScheduleCmsPageComponent } from './pages/choose-schedule-cms-page/choose-schedule-cms-page.component';
 
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
 import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
@@ -66,10 +70,18 @@ const routes: Routes = [
             pathMatch: 'full'
         }, {
             path: 'dashboard',
-            component: DashboardCmsPageComponent
+            component: DashboardCmsPageComponent,
         }, {
             path: 'bookings',
-            component: BookingsCmsPageComponent
+            component: BookingsCmsPageComponent,
+        }, {
+            path: 'choose-schedule',
+            component: ChooseScheduleCmsPageComponent,
+            canActivate: [ TeacherAndStudentRedirectGuard ],
+        }, {
+            path: 'choose-schedule/schedule',
+            component: ScheduleCmsPageComponent,
+            canActivate: [ TeacherAndStudentRedirectGuard ],
         }, {
             path: 'departments',
             component: DepartmentsCmsPageComponent,

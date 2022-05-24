@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: editor-redirect.guard.ts
- * Last modified | Ostatnia modyfikacja: 27/04/2022, 10:53
+ * File name | Nazwa pliku: schedule-manipulator.selectors.ts
+ * Last modified | Ostatnia modyfikacja: 24/05/2022, 21:38
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,30 +17,23 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import { UserIdentityType } from '../../types/user-identity.type';
+import { InitialScheduleManipulatorStateTypes } from './schedule-manipulator.initial';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-/**
- * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
- * chronionego zasobu do którego dostęp ma tylko administrator.
- */
+export const SCHEDULE_MANIPULATOR_REDUCER = 'scheduleManipulatorReducer' as const;
+const getPostDataState = createFeatureSelector<InitialScheduleManipulatorStateTypes>(SCHEDULE_MANIPULATOR_REDUCER);
 
-@Injectable({
-    providedIn: 'root',
-})
-export class AdminRedirectGuard extends RedirectCmsRoleGuard {
+export type ScheduleManipulatorReducerType = { [SCHEDULE_MANIPULATOR_REDUCER]: InitialScheduleManipulatorStateTypes };
 
-    public constructor(
-        router: Router,
-        store: Store<SessionReducerType>
-    ) {
-        super(router, store, [ UserIdentityType.ADMINISTRATOR ]);
-    };
-}
+const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) => (
+    createSelector(getPostDataState, payload)
+);
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export const sel_isDataFetching = selectorWithInjectedStore(
+    state => state.ifFetching,
+);

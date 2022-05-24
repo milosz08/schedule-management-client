@@ -52,7 +52,7 @@
 	<mat-icon class = 'app__select__arrow-icon'>keyboard_arrow_down</mat-icon>
 </div>
 <div
-	*ngIf = 'this._formGroup!.get(_formControlName)!.touched && findIfInsertedValueExistInArray()'
+	*ngIf = 'this._formGroup!.get(_formControlName)!.touched && !this._formGroup!.get(_formControlName)!.valid'
 	class = 'app__input-error app__input-error--light app__input-error--margin-top'
 >
 	Proszę wybrać {{ _errorField }}

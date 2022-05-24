@@ -108,6 +108,8 @@ export enum AllMainWebpages {
 export enum AllCmsWebpages {
     DASHBOARD = 'dashboard',
     USERS = 'users',
+    CHOOSE_SCHEDULE = 'chooseSchedule',
+    SCHEDULE = 'schedule',
     BOOKINGS = 'bookings',
     ADD_USER = 'addUser',
     EDIT_USER = 'editUser',

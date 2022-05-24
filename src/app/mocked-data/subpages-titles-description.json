@@ -45,6 +45,14 @@
             "title": "Użytkownicy",
             "description": "W tej sekcji możesz przeglądać wszystkich użytkowników aktywnych w systemie."
         },
+        "chooseSchedule": {
+            "title": "Wybierz grupę",
+            "description": "W tej sekcji możesz wybrać edytowaną grupę dziekańską na planie zajęć."
+        },
+        "schedule": {
+            "title": "Edytuj plan zajęć",
+            "description": "W tej sekcji możesz edytować plan zajęć wybranej grupy dziekańskiej."
+        },
         "addUser": {
             "title": "Dodaj użytkownika",
             "description": "W tej sekcji możesz dodać nowego użytkownika do systemu."

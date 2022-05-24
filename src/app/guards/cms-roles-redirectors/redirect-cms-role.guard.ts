@@ -39,14 +39,14 @@ export class RedirectCmsRoleGuard implements CanActivate {
     private readonly _userIdentity$: Observable<UserIdentityType> = this._store
         .select(NgrxSelector_SHA.sel_userIdentity);
 
-    private readonly _userCurrentRole: UserIdentityType;
+    private readonly _userCurrentRole: Array<UserIdentityType> = new Array<UserIdentityType>();
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _router: Router,
         private _store: Store<SessionReducerType>,
-        userCurrentRole: UserIdentityType,
+        userCurrentRole: Array<UserIdentityType>,
     ) {
         this._userCurrentRole = userCurrentRole;
     };
@@ -55,8 +55,8 @@ export class RedirectCmsRoleGuard implements CanActivate {
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
         return this._userIdentity$.pipe(map(userRole => {
-            if (userRole !== this._userCurrentRole) {
-                this._router.navigate([ '/secure/admin-panel/dashboard' ]).then(r => r);
+            if (!this._userCurrentRole.includes(userRole)) {
+                this._router.navigate([ '/secure/panel/dashboard' ]).then(r => r);
             }
             return true;
         }));

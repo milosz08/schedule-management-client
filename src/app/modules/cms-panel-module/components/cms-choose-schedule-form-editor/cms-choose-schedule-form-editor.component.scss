@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:01
+ * File name | Nazwa pliku: cms-choose-schedule-form-editor.component.scss
+ * Last modified | Ostatnia modyfikacja: 24/05/2022, 20:28
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,21 +17,15 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../types/user-identity.type';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface AuthResponseDataModel {
-    dictionaryHash: string;
-    role: UserIdentityType;
-    bearerToken: string;
-    refreshBearerToken: string;
-    nameWithSurname: string;
-    login: string;
-    email: string;
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
-    firstAccess: boolean;
-    hasPicture: boolean;
-    connectedWithDepartment: string;
+.cms-choose-editor-schedule__connected-with-department__container {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    .connected-with-department__description {
+        color: var(--lightGrayColor);
+    }
+    .connected-with-department__department-name {
+        font-size: 1.2rem;
+        margin-top: 3px;
+        color: var(--darkBlueColor);
+    }
 }

@@ -22,8 +22,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
-import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import { UserIdentityType } from '../../types/user-identity.type';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -41,6 +41,6 @@ export class TeacherAndStudentRedirectGuard extends RedirectCmsRoleGuard {
         router: Router,
         store: Store<SessionReducerType>
     ) {
-        super(router, store, UserIdentityType.EDITOR);
+        super(router, store, [ UserIdentityType.EDITOR, UserIdentityType.ADMINISTRATOR ]);
     };
 }

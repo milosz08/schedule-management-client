@@ -18,7 +18,7 @@
   -->
 
 <label
-	[for] = '"add-" + _labelId + "-form___department"'
+	[for] = '_labelId + "-form___department"'
 	class = 'cms__simple-grid__label'
 >
 	Wydział:
@@ -29,13 +29,13 @@
 	(_emitNewQuery) = handleEmitDepartmentQuery($event)
 	(_addedValue) = 'handleShowStudySpecInput()'
 	_formControlName = 'departmentName'
-	[_selectId] = '"add-" + _labelId + "-form___department"'
+	[_selectId] = '_labelId + "-form___department"'
 	_placeholder = 'np. Elektryczny'
 	_errorField = 'prawidłowy wydział'
 ></app-select-drop-box-template>
 <ng-container *ngIf = '_studySpecVisible && _allDepartments.length > 0'>
 	<label
-		[for] = '"add-" + _labelId + "-form___study-spec"'
+		[for] = '_labelId + "-form___study-spec"'
 		class = 'cms__simple-grid__label'
 	>
 		Kierunek studiów:
@@ -43,9 +43,10 @@
 	<app-select-drop-box-template
 		[_formGroup] = '_angularForm'
 		[_optionsList] = '_allStudySpecs'
-		(_emitNewQuery) = handleEmitStudySpecQuery($event)
+		(_emitNewQuery) = 'handleEmitStudySpecQuery($event)'
+		(_addedValue) = 'handleAddNextValue()'
 		_formControlName = 'studySpecName'
-		[_selectId] = '"add-" + _labelId + "-form___study-spec"'
+		[_selectId] = '_labelId + "-form___study-spec"'
 		_placeholder = 'np. Informatyka'
 		_errorField = 'prawidłowy kierunek studiów'
 	></app-select-drop-box-template>

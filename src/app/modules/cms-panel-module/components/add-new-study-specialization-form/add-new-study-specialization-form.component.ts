@@ -44,7 +44,7 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
     selector: 'app-add-new-study-specialization-form',
     templateUrl: './add-new-study-specialization-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService ],
+    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService  ],
 })
 export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy {
 

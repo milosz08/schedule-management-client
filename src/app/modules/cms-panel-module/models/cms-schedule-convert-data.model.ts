@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:01
+ * File name | Nazwa pliku: cms-schedule-convert-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 24/05/2022, 21:31
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,21 +17,14 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../types/user-identity.type';
+export interface CmsScheduleConvertReqDataModel {
+    departmentName: string;
+    studySpecName: string;
+    studyGroupName: string;
+}
 
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface AuthResponseDataModel {
-    dictionaryHash: string;
-    role: UserIdentityType;
-    bearerToken: string;
-    refreshBearerToken: string;
-    nameWithSurname: string;
-    login: string;
-    email: string;
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
-    firstAccess: boolean;
-    hasPicture: boolean;
-    connectedWithDepartment: string;
+export interface CmsScheduleConvertResDataModel {
+    deptId: number;
+    studySpecId: number;
+    studyGroupId: number;
 }

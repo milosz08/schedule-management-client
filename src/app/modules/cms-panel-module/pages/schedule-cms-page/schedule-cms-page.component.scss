@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-response-data.model.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 18:01
+ * File name | Nazwa pliku: schedule-cms-page.component.scss
+ * Last modified | Ostatnia modyfikacja: 24/05/2022, 13:32
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -16,22 +16,3 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
-
-import { UserIdentityType } from '../types/user-identity.type';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface AuthResponseDataModel {
-    dictionaryHash: string;
-    role: UserIdentityType;
-    bearerToken: string;
-    refreshBearerToken: string;
-    nameWithSurname: string;
-    login: string;
-    email: string;
-    tokenExpirationDate: Date;
-    tokenRefreshInSeconds: number;
-    firstAccess: boolean;
-    hasPicture: boolean;
-    connectedWithDepartment: string;
-}
