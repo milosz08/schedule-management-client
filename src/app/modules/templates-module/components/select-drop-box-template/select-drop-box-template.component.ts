@@ -17,10 +17,11 @@
  * Obiektowe".
  */
 
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -33,10 +34,12 @@ import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs'
     templateUrl: './select-drop-box-template.component.html',
     styleUrls: [ './select-drop-box-template.component.scss' ]
 })
-export class SelectDropBoxTemplateComponent implements OnDestroy {
+export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
 
     public _searchQuery$: Subject<string> = new Subject<string>();
     public _listVisible: boolean = false;
+
+    private _unsubscribe: Subject<void> = new Subject();
 
     private _subscription?: Subscription;
 
@@ -57,6 +60,7 @@ export class SelectDropBoxTemplateComponent implements OnDestroy {
         this._subscription = this._searchQuery$.pipe(
             debounceTime(400),
             distinctUntilChanged(),
+            takeUntil(this._unsubscribe),
         ).subscribe(textQuery => {
             this._emitNewQuery.emit(textQuery);
         });
@@ -64,8 +68,19 @@ export class SelectDropBoxTemplateComponent implements OnDestroy {
 
     //------------------------------------------------------------------------------------------------------------------
 
+    public ngOnChanges(changes: SimpleChanges): void {
+        this._formGroup?.get(this._formControlName)!.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(data => {
+            if (!this._optionsList.includes(data as string)) {
+                this._formGroup?.get(this._formControlName)?.setErrors({ 'error': true });
+            } else {
+                this._formGroup?.get(this._formControlName)?.setErrors(null);
+            }
+        });
+    };
+
     public ngOnDestroy(): void {
-        this._subscription?.unsubscribe();
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
     };
 
     public handleOpenListVisibility(): void {
@@ -74,13 +89,6 @@ export class SelectDropBoxTemplateComponent implements OnDestroy {
 
     public handleCloseListVisibility(): void {
         setTimeout(() => this._listVisible = false, 200);
-    };
-
-    public findIfInsertedValueExistInArray(): boolean {
-        if (!this._formGroup?.get(this._formControlName)!) {
-            return true;
-        }
-        return !this._optionsList.includes(this._formGroup?.get(this._formControlName)!.value);
     };
 
     public handleSelectSingleListElement(value: string): void {
