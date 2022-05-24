@@ -100,4 +100,17 @@ export class CmsGetQueryConnectorService {
             { params: { specQuery, deptQuery } },
         );
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie możliwy typy studiów (stacjonarne/niestacjonarne itp).
+     */
+    public getQueryGroupsBaseDeptAndSpec(groupName: string, deptName: string, studySpecName: string)
+        : Observable<AvailableDataModel<string>> {
+        return this._http.get<AvailableDataModel<string>>(
+            this._endpoints.GET_AVAILABLE_GROUPS_BASE_SPEC,
+            { params: { groupName, deptName, studySpecName } },
+        );
+    };
 }

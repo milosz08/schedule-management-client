@@ -74,6 +74,9 @@ import { EditStudyGroupCmsPageComponent } from './pages/edit-study-group-cms-pag
 import { EditStudySubjectCmsPageComponent } from './pages/edit-study-subject-cms-page/edit-study-subject-cms-page.component';
 import { EditStudySpecializationCmsPageComponent } from './pages/edit-study-specialization-cms-page/edit-study-specialization-cms-page.component';
 
+import { ScheduleCmsPageComponent } from './pages/schedule-cms-page/schedule-cms-page.component';
+import { ChooseScheduleCmsPageComponent } from './pages/choose-schedule-cms-page/choose-schedule-cms-page.component';
+
 import { CmsPanelHeaderComponent } from './components/cms-panel-header/cms-panel-header.component';
 import { CmsPanelFooterComponent } from './components/cms-panel-footer/cms-panel-footer.component';
 import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
@@ -82,8 +85,10 @@ import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms
 import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
 import { CmsDepartmentWithStudySpecComponent } from './components/cms-department-with-study-spec/cms-department-with-study-spec.component';
 import { CmsListDeleteSingleElementComponent } from './components/cms-list-delete-single-element/cms-list-delete-single-element.component';
+import { CmsChooseScheduleFormEditorComponent } from './components/cms-choose-schedule-form-editor/cms-choose-schedule-form-editor.component';
 import { DepartmentWithCathedralInputsComponent } from './components/department-with-cathedral-inputs/department-with-cathedral-inputs.component';
 import { CmsUserSubjectOrSpecsComboBoxComponent } from './components/cms-user-subject-or-specs-combo-box/cms-user-subject-or-specs-combo-box.component';
+import { CmsChooseScheduleFormAdministratorComponent } from './components/cms-choose-schedule-form-administrator/cms-choose-schedule-form-administrator.component';
 import { CmsListElementRemovableWithPaginationComponent } from './components/cms-list-element-removable-with-pagination/cms-list-element-removable-with-pagination.component';
 
 import { SharedModule } from '../shared-module/shared.module';
@@ -109,12 +114,14 @@ import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store
         UsersCmsPageComponent,
         EditUserCmsPageComponent,
         BookingsCmsPageComponent,
+        ScheduleCmsPageComponent,
         DashboardCmsPageComponent,
         StudyRoomsCmsPageComponent,
         CathedralsCmsPageComponent,
         StudyGroupsCmsPageComponent,
         DepartmentsCmsPageComponent,
         StudySubjectsCmsPageComponent,
+        ChooseScheduleCmsPageComponent,
         StudySpecializationCmsPageComponent,
         // strony (dodawanie kontentu)
         AddNewUserCmsPageComponent,
@@ -164,8 +171,10 @@ import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store
         CmsPaginationOptionsComponent,
         CmsDepartmentWithStudySpecComponent,
         CmsListDeleteSingleElementComponent,
+        CmsChooseScheduleFormEditorComponent,
         DepartmentWithCathedralInputsComponent,
         CmsUserSubjectOrSpecsComboBoxComponent,
+        CmsChooseScheduleFormAdministratorComponent,
         CmsListElementRemovableWithPaginationComponent,
     ],
     imports: [

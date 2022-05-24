@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -49,6 +49,8 @@ export class CmsDepartmentWithStudySpecComponent implements OnInit, OnChanges, O
     @Input() public _angularForm?: FormGroup;
     @Input() public _labelId: string = '';
 
+    @Output() public _emitNextSelect: EventEmitter<void> = new EventEmitter<void>();
+
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
@@ -74,6 +76,10 @@ export class CmsDepartmentWithStudySpecComponent implements OnInit, OnChanges, O
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();
+    };
+
+    public handleAddNextValue(): void {
+        this._emitNextSelect.emit();
     };
 
     public handleShowStudySpecInput(): void {

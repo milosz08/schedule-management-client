@@ -6,6 +6,12 @@
         "availableFor": "student nauczyciel edytor administrator"
     },
     {
+        "name": "Edycja planów",
+        "location": "choose-schedule",
+        "ariaLabel": "Kliknij aby przejść do wybrania edycji planu wybranego kierunku",
+        "availableFor": "edytor administrator"
+    },
+    {
         "name": "rezerwacje",
         "location": "bookings",
         "ariaLabel": "Kliknij aby przejść do przeglądu rezerwacji",
