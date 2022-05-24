@@ -33,4 +33,5 @@ export interface AuthResponseDataModel {
     tokenRefreshInSeconds: number;
     firstAccess: boolean;
     hasPicture: boolean;
+    connectedWithDepartment: string;
 }

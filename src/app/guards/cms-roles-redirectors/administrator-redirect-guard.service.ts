@@ -41,6 +41,6 @@ export class AdminRedirectGuard extends RedirectCmsRoleGuard {
         router: Router,
         store: Store<SessionReducerType>
     ) {
-        super(router, store, UserIdentityType.ADMINISTRATOR);
+        super(router, store, [ UserIdentityType.ADMINISTRATOR ]);
     };
 }

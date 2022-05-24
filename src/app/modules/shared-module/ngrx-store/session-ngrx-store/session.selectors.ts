@@ -93,3 +93,7 @@ export const sel_userSessionCurrentTime = selectorWithInjectedStore(
 export const sel_sessionSoonLogout = selectorWithInjectedStore(
     state => state.sessionLeftTime < 15,
 );
+
+export const sel_userConnectedDepartment = selectorWithInjectedStore(
+    state => state.userData?.connectedWithDepartment || '',
+);

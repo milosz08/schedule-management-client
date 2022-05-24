@@ -47,7 +47,7 @@ export class CmsGetAllConnectorService {
      */
     public getAllAvailableStudyTypes(): Observable<AvailableDataModel<NameWithId>> {
         return this._http.get<AvailableDataModel<NameWithId>>(
-            this._endpoints.GET_AVAILABLE_STUDY_TYPES
+            this._endpoints.GET_AVAILABLE_STUDY_TYPES,
         );
     };
 
@@ -58,7 +58,7 @@ export class CmsGetAllConnectorService {
      */
     public getAllAvailableStudyDegrees(): Observable<AvailableDataModel<NameWithId>> {
         return this._http.get<AvailableDataModel<NameWithId>>(
-            this._endpoints.GET_AVAILABLE_STUDY_DEGREES
+            this._endpoints.GET_AVAILABLE_STUDY_DEGREES,
         );
     };
 
@@ -69,7 +69,7 @@ export class CmsGetAllConnectorService {
      */
     public getAllAvailableRoles(): Observable<AvailableDataModel<string>> {
         return this._http.get<AvailableDataModel<string>>(
-            this._endpoints.GET_AVAILABLE_ROLES
+            this._endpoints.GET_AVAILABLE_ROLES,
         );
     };
 
@@ -80,7 +80,7 @@ export class CmsGetAllConnectorService {
      */
     public getAllAvailableRoomTypes(): Observable<AvailableDataModel<string>> {
         return this._http.get<AvailableDataModel<string>>(
-            this._endpoints.GET_AVAILABLE_ROOM_TYPES
+            this._endpoints.GET_AVAILABLE_ROOM_TYPES,
         );
     };
 
@@ -91,7 +91,7 @@ export class CmsGetAllConnectorService {
      */
     public getAllAvailableSemesters(): Observable<AvailableDataModel<NameWithId>> {
         return this._http.get<AvailableDataModel<NameWithId>>(
-            this._endpoints.GET_AVAILABLE_SEMESTERS
+            this._endpoints.GET_AVAILABLE_SEMESTERS,
         );
     };
 }
