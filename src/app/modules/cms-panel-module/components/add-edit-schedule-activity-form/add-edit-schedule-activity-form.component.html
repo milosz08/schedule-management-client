@@ -28,7 +28,6 @@
 		<app-select-drop-box-template
 			[_formGroup] = '_addNewContentForm'
 			[_optionsList] = '_subjQueryResultArray'
-			[_ifValidateField] = 'false'
 			(_emitNewQuery) = 'handleEmitSubjectQuery($event)'
 			(_addedValue) = 'handleGetAllTeachersBaseDeptAndSubj()'
 			_formControlName = 'subjectOrActivityName'
@@ -86,7 +85,7 @@
 			[for] = '[ "add-activity-form___schedule-type-name" ]'
 			class = 'cms__simple-grid__label'
 		>
-			Typ przedmiotu:
+			Typ przedmiotu/aktywności:
 		</label>
 		<app-select-drop-box-template
 			[_formGroup] = '_addNewContentForm'

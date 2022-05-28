@@ -46,7 +46,6 @@ export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
     @Input() public _formGroup?: FormGroup;
     @Input() public _formControlName: string = '';
 
-    @Input() public _ifValidateField: boolean = true;
     @Input() public _selectId: string = '';
     @Input() public _placeholder!: string;
     @Input() public _errorField: string = '';
@@ -71,12 +70,10 @@ export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges): void {
         this._formGroup?.get(this._formControlName)!.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(data => {
-            if (this._ifValidateField) {
-                if (!this._optionsList.includes(data as string)) {
-                    this._formGroup?.get(this._formControlName)?.setErrors({ 'error': true });
-                } else {
+            if (!this._optionsList.includes(data as string)) {
+                this._formGroup?.get(this._formControlName)?.setErrors({ 'error': true });
+            } else {
                     this._formGroup?.get(this._formControlName)?.setErrors(null);
-                }
             }
         });
     };

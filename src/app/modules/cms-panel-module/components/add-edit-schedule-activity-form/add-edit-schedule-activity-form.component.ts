@@ -81,12 +81,6 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     };
 
     public ngOnChanges(changes: SimpleChanges): void {
-        this._addNewContentForm!.get('subjectOrActivityName')?.valueChanges
-            .pipe(takeUntil(this._unsubscribe))
-            .subscribe(() => {
-                this._addNewContentForm?.get('subjectTeachers')?.patchValue([]);
-                this.handleGetAllTeachersBaseDeptAndSubj();
-            });
         this._store.select(NgrxSelector_SMA.sel_departmentAndStudySpecDataId)
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(deptAndSpecData => {
@@ -127,6 +121,7 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     };
 
     public handleGetAllTeachersBaseDeptAndSubj(): void {
+        this._addNewContentForm?.get('subjectTeachers')?.patchValue([]);
         this._serviceAllGet
             .getAllAvailableTeachersBaseDeptAndSpec(this._deptAndSpecData?.dept!,
                 this._addNewContentForm.get('subjectOrActivityName')?.value)
