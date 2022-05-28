@@ -17,8 +17,74 @@
   ~ Obiektowe".
   -->
 
-<p>schedule-cms-page works!</p>
-
-{{ _deptIdParam }}
-{{ _specIdParam }}
-{{ _groupIdParam }}
+<aside
+	*ngIf = '_ifError$ | async; else loadingWithoutErrors'
+	class = 'loading-schedule-problem__container'
+>
+	<img src = 'assets/images/info-important-icon.svg' alt = ''/>
+	<h3 class = 'loading-schedule-problem__header'>Ładowanie planu zakończone niepowodzeniem.</h3>
+	<p class = 'loading-schedule-problem__description'>{{ _ifError$ | async }}</p>
+</aside>
+<ng-template #loadingWithoutErrors>
+	<aside
+		*ngIf = '_tableLoading; else showContent'
+		class = 'loading-schedule__container'
+	>
+		<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+	</aside>
+	<ng-template #showContent>
+		<section class = 'app__schedule-info__container'>
+			<div class = 'info__container-trace-info'>
+				<ng-container *ngFor = 'let trace of _scheduleData!.traceDetails; index as idx'>
+					<div class = 'trace-info__value'>{{ trace }}</div>
+					<mat-icon
+						*ngIf = 'idx !== _scheduleData!.traceDetails.length - 1'
+						class = 'trace-info__arrow'
+					>
+						keyboard_arrow_right
+					</mat-icon>
+				</ng-container>
+			</div>
+			<div class = 'info__container-schedule-group-data'>
+				{{ _scheduleData!.scheduleHeaderData }}
+			</div>
+		</section>
+		<section class = 'app__schedule-main-canvas__container main-canvas__container--schedule-editor'>
+			<div class = 'schedule-main-canvas__hours-container'>
+				<div class = 'schedule-main-canvas__single-hour hour-indicator--schedule-editor'></div>
+				<div
+					*ngFor = 'let hour of _hoursData'
+					class = 'schedule-main-canvas__single-hour'
+				>
+					{{ hour + 7 }}:00
+				</div>
+			</div>
+			<aside class = 'schedule-main-canvas__days-separator'></aside>
+			<ng-container *ngFor = 'let dayData of _scheduleData!.scheduleCanvasData; index as idx'>
+				<div
+					[ngClass] = '[
+						"schedule-main-canvas__days-container",
+						dayData.ifEmpty ? "schedule-main-canvas--no-content" : ""
+					]'
+				>
+					<button
+						(click) = 'handleOpenModalInsertingNewScheduleContent(dayData.weekdayNameWithId)'
+						class = 'app__button app__button--light schedule__add-content-button'
+						title = 'Kliknij aby dodać nowy element do wybranego dla tygodnia'
+					>+</button>
+					<div class = 'schedule-main-canvas__single-day day-indicator--schedule-editor'>
+						{{ dayData.weekdayNameWithId.name }}
+					</div>
+					<div
+						*ngFor = 'let hour of _hoursData'
+						class = 'schedule-main-canvas__single-day single-grid-picker'
+					></div>
+				</div>
+				<aside
+					*ngIf = 'idx !== _scheduleData!.scheduleCanvasData.length - 1'
+					class = 'schedule-main-canvas__days-separator'
+				></aside>
+			</ng-container>
+		</section>
+	</ng-template>
+</ng-template>

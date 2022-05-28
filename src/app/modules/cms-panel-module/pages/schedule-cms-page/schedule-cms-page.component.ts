@@ -20,8 +20,25 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 
+import { takeUntil } from 'rxjs/operators';
+import { delay, Observable, Subject } from 'rxjs';
+
+import { MiscHelper } from '../../../../utils/misc.helper';
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import { NameWithId } from '../../models/cms-drop-lists-data.model';
+import { CmsScheduleConvertFromIdsReqDataModel } from '../../models/cms-schedule-convert-data.model';
+
+import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';
+import { ScheduleDataRes, ScheduleGroupQuery, ScheduleGroups } from '../../../../types/schedule-data.type';
+
+import * as NgrxAction_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.actions';
+import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
+import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
+
+import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -33,12 +50,18 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
     selector: 'app-schedule-cms-page',
     templateUrl: './schedule-cms-page.component.html',
     styleUrls: [ './schedule-cms-page.component.scss' ],
+    providers: [ ScheduleDataGetConnectorService ],
 })
 export class ScheduleCmsPageComponent extends MetaWebContentHelper implements OnInit, OnDestroy {
 
-    public _deptIdParam: string | null = '';
-    public _specIdParam: string | null = '';
-    public _groupIdParam: string | null = '';
+    public _ifError$: Observable<string> = this._store.select(NgrxSelector_SMA.sel_ifFetchingError);
+
+    public _tableLoading: boolean = true;
+    public _scheduleData?: ScheduleDataRes<ScheduleGroups>;
+    public _hoursData: Array<number> = MiscHelper._hoursTable;
+
+    private readonly _queryParams: { deptId: number, specId: number, groupId: number };
+    private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -46,20 +69,38 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
         titleService: Title,
         metaService: Meta,
         private _route: ActivatedRoute,
+        private _store: Store<ScheduleManipulatorReducerType>,
+        private _scheduleGET: ScheduleDataGetConnectorService,
     ) {
         super(titleService, metaService, AllCmsWebpages.SCHEDULE);
-        this._deptIdParam = this._route.snapshot.queryParamMap.get('deptId');
-        this._specIdParam = this._route.snapshot.queryParamMap.get('specId');
-        this._groupIdParam = this._route.snapshot.queryParamMap.get('groupId');
+        this._queryParams = this._route.snapshot.queryParams as { deptId: number, specId: number, groupId: number };
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
-
+        const { deptId, specId, groupId } = this._queryParams;
+        this._scheduleGET
+            .getScheduleDataBaseGroup(new ScheduleGroupQuery(deptId, specId, groupId))
+            .pipe(
+                delay(500),
+                takeUntil(this._unsubscribe),
+            )
+            .subscribe(data => {
+                this._tableLoading = false;
+                this._scheduleData = data;
+            });
+        this._store.dispatch(NgrxAction_SMA.__convertScheduleDataReversed({
+            schedData: new CmsScheduleConvertFromIdsReqDataModel(deptId, specId, groupId)
+        }));
     };
 
     public ngOnDestroy(): void {
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
+    };
 
+    public handleOpenModalInsertingNewScheduleContent(selectedDay: NameWithId): void {
+        this._store.dispatch(NgrxAction_SMA.__setModalOpen({ selectedDay, modalType: AvailableScheduleModalTypes.ADD }));
     };
 }
