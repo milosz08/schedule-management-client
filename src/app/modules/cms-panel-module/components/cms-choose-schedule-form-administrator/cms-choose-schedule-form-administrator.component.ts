@@ -21,10 +21,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import * as NgrxAction_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.actions';
+import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
@@ -42,6 +43,8 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
     styleUrls: [],
 })
 export class CmsChooseScheduleFormAdministratorComponent implements OnInit, OnDestroy {
+
+    public _isFetching$: Observable<boolean> = this._store.select(NgrxSelector_SMA.sel_isDataFetching);
 
     public _allScheduleGroups: Array<string> = new Array<string>();
     public _groupsVisibility: boolean = false;

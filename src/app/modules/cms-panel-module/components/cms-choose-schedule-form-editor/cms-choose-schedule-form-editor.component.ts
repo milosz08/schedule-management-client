@@ -21,13 +21,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { CmsScheduleConvertReqDataModel } from '../../models/cms-schedule-convert-data.model';
+import { CmsScheduleConvertFromNamesReqDataModel } from '../../models/cms-schedule-convert-data.model';
 
 import * as NgrxSelectro_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import * as NgrxAction_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.actions';
+import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 
@@ -47,6 +48,8 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
     providers: [ CmsGetQueryConnectorService ],
 })
 export class CmsChooseScheduleFormEditorComponent implements OnInit, OnDestroy {
+
+    public _isFetching$: Observable<boolean> = this._store.select(NgrxSelector_SMA.sel_isDataFetching);
 
     public _userDepartment: string = '';
     public _serverError?: string;
@@ -98,7 +101,7 @@ export class CmsChooseScheduleFormEditorComponent implements OnInit, OnDestroy {
     };
 
     public handleSubmitSelectScheduleGroup(): void {
-        const schedData: CmsScheduleConvertReqDataModel = this._selectScheduleGroupForm.getRawValue();
+        const schedData: CmsScheduleConvertFromNamesReqDataModel = this._selectScheduleGroupForm.getRawValue();
         schedData.departmentName = this._userDepartment;
         this._store.dispatch(NgrxAction_SMA.__convertScheduleData({ schedData }));
     };

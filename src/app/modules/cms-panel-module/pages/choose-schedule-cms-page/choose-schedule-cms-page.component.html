@@ -32,10 +32,4 @@
 	<ng-template #ifUserIsEditor>
 		<app-cms-choose-schedule-form-editor></app-cms-choose-schedule-form-editor>
 	</ng-template>
-	<div
-		*ngIf = '_isFetching$ | async'
-		class = 'choose-schedule__loading-container'
-	>
-		<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
-	</div>
 </div>

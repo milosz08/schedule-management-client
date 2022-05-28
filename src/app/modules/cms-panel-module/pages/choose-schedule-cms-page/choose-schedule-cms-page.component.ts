@@ -27,7 +27,6 @@ import { UserIdentityType } from '../../../../types/user-identity.type';
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
-import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 
@@ -50,8 +49,6 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
 export class ChooseScheduleCmsPageComponent extends MetaWebContentHelper {
 
     public _userRole$: Observable<UserIdentityType> = this._store.select(NgrxSelector_SES.sel_userIdentity);
-    public _isFetching$: Observable<boolean> = this._store.select(NgrxSelector_SMA.sel_isDataFetching);
-
     public _userIdentifier: typeof UserIdentityType = UserIdentityType;
 
     //------------------------------------------------------------------------------------------------------------------
