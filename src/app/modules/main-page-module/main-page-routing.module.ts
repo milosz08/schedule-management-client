@@ -22,10 +22,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainPageComponent } from './main-page.component';
 
-import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
-import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
-import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
+import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
+import { WelcomeSchedulePageComponent } from './pages/welcome-schedule-page/welcome-schedule-page.component';
+import { SelectedSchedulePageComponent } from './pages/selected-schedule-page/selected-schedule-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +38,13 @@ const routes: Routes = [
             component: RootMainPageComponent
         }, {
             path: 'schedule',
-            component: SchedulePageComponent
+            component: SchedulePageComponent, children: [ {
+                path: '',
+                component: WelcomeSchedulePageComponent,
+            }, {
+                path: 'selected-schedule/:scheduleType',
+                component: SelectedSchedulePageComponent,
+            } ],
         }, {
             path: 'booking',
             component: BookingPageComponent

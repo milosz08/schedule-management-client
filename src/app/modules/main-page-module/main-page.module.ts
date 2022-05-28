@@ -30,6 +30,8 @@ import { BookingPageComponent } from './pages/booking-page/booking-page.componen
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
+import { WelcomeSchedulePageComponent } from './pages/welcome-schedule-page/welcome-schedule-page.component';
+import { SelectedSchedulePageComponent } from './pages/selected-schedule-page/selected-schedule-page.component';
 
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
@@ -48,6 +50,8 @@ import { ScheduleSecondLevelTreeListComponent } from './components/schedule-seco
         SearchPageComponent,
         SchedulePageComponent,
         RootMainPageComponent,
+        WelcomeSchedulePageComponent,
+        SelectedSchedulePageComponent,
         // komponenty
         MainHeaderComponent,
         MainFooterComponent,
