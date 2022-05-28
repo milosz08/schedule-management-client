@@ -23,8 +23,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
+import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
 
 import { CmsDepartmentReqResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
+import { CmsScheduleActivityReqModel } from '../ngrx-store/schedule-manipulator-ngrx-store/ngrx-models/cms-schedule-activity-req.model';
 import { CmsRegisterReqDataModel, CmsRegisterResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
 import { CmsCathedralReqDataModel, CmsCathedralResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
 import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-spec-req-res-data.model';
@@ -130,6 +132,18 @@ export class CmsPostConnectorService {
         return this._http.post<Array<CmsStudyGroupResDataModel>>(
             this._endpoints.ADD_NEW_STUDY_GROUP,
             groupData,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie nowej aktywności do wybranego planu zajęć (na podstawie parametrów w ciele zapytania).
+     */
+    public addNewScheduleActivity(reqData: CmsScheduleActivityReqModel): Observable<ResponseServerMessageModel> {
+        return this._http.post<ResponseServerMessageModel>(
+            this._endpoints.ADD_SCHEDULE_ACTIVITY,
+            reqData,
         );
     };
 }

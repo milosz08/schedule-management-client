@@ -45,7 +45,7 @@
 				<a
 					[routerLink] = 'nav.location'
 					[routerLinkActive] = '[ "link--active" ]'
-					[routerLinkActiveOptions] = '{ exact: true }'
+					[routerLinkActiveOptions] = 'nav.location === "/" ? { exact: true } : { exact: false }'
 					class = 'main-header__navigation-link'
 					title = '{{ nav.ariaLabel }}'
 				>

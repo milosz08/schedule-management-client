@@ -62,8 +62,8 @@ export class SuspenseService {
      */
     public reloadAngularPageWithRouter(): void {
         let currentUrl = this._router.url;
-        this._router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this._router.navigate([ currentUrl ]).then(r => r);
+        this._router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this._router.navigateByUrl(currentUrl).then(r => r);
         });
     }
 }

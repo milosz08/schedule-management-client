@@ -155,6 +155,11 @@
         margin-right: 10px;
         font-weight: 400;
     }
+    .app__button--loading-content-spinner {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+    }
     &:hover:not(:disabled) .app__button__arrow {
         transform: translateX(3px);
         &.app__button__arrow--arrow-left {

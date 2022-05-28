@@ -70,11 +70,11 @@ export class ComboBoxTemplateComponent {
         return this._formGroup?.get(this._formControlName)!.value.length;
     };
 
-    public checkedInitial(dbIdx: number): boolean {
+    public checkedInitial(dbIdx: number | string): boolean {
         return this._formGroup!.get(this._formControlName)!.value.includes(dbIdx);
     };
 
-    public handleToggleValuesInArray(status: boolean, value: number): void {
+    public handleToggleValuesInArray(status: boolean, value: number | string): void {
         const allElements = this._formGroup!.get(this._formControlName)!.value;
         const control =  this._formGroup!.get(this._formControlName)!;
         if (status) {

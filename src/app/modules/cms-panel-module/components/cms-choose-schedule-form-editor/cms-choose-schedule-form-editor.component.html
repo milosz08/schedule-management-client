@@ -67,8 +67,17 @@
 			class = 'app__button app__button--full-width app__button--light'
 			title = 'Kliknij aby przejść do planu'
 		>
-			Przejdź do planu
-			<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			<ng-container *ngIf = '(_isFetching$ | async); else showArrow'>
+				Ładowanie...
+				<img
+					src = 'assets/gifs/suspense-loading-light.gif' alt = ''
+					class = 'app__button--loading-content-spinner'
+				/>
+			</ng-container>
+			<ng-template #showArrow>
+				Przejdź do planu
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</ng-template>
 		</button>
 		<div
 			*ngIf = '_serverError !== ""'

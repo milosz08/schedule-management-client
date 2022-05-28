@@ -24,6 +24,10 @@ import { map, Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
+import {
+    CmsScheduleConvertFromIdsReqDataModel, CmsScheduleConvertFromNamesReqDataModel, CmsScheduleConvertResDataModel
+} from '../models/cms-schedule-convert-data.model';
+
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
@@ -56,4 +60,27 @@ export class HelpersConnectorService {
         );
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda konwertująca id parametrów na tuple składające się z id oraz nazwy z bazy danych.
+     */
+    public convertScheduleParametersReverse(req: CmsScheduleConvertFromIdsReqDataModel): Observable<CmsScheduleConvertResDataModel> {
+        return this._http.post<CmsScheduleConvertResDataModel>(
+            this._endpoints.CONVERT_SCHEDULE_DATA_IDS_TO_NAMES,
+            req,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda konwertująca nazwy parametrów na tuple id w bazie danych.
+     */
+    public convertScheduleParameters(req: CmsScheduleConvertFromNamesReqDataModel): Observable<CmsScheduleConvertResDataModel> {
+        return this._http.post<CmsScheduleConvertResDataModel>(
+            this._endpoints.CONVERT_SCHEDULE_DATA_NAMES_TO_IDS,
+            req,
+        );
+    };
 }

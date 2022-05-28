@@ -1,0 +1,133 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: add-edit-schedule-activity-form.component.html
+  ~ Last modified | Ostatnia modyfikacja: 28/05/2022, 22:16
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<ng-container [formGroup] = '_addNewContentForm'>
+	<section class = 'cms__simple-grid__angular-form angular-form--max-half-width'>
+		<label
+			[for] = '[ "add-activity-form___schedule-name" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Przedmiot/aktywność:
+		</label>
+		<app-select-drop-box-template
+			[_formGroup] = '_addNewContentForm'
+			[_optionsList] = '_subjQueryResultArray'
+			[_ifValidateField] = 'false'
+			(_emitNewQuery) = 'handleEmitSubjectQuery($event)'
+			(_addedValue) = 'handleGetAllTeachersBaseDeptAndSubj()'
+			_formControlName = 'subjectOrActivityName'
+			_selectId = 'add-activity-form___schedule-name'
+			_placeholder = 'np. Programowanie Komputerów'
+			_errorField = 'prawidłowy przedmiot lub dodać własną aktywność'
+		></app-select-drop-box-template>
+		<label
+			[for] = '[ "add-user-form___role" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Sale zajęciowe:
+		</label>
+		<app-combo-box-template
+			[_formGroup] = '_addNewContentForm'
+			[_allOptions] = '_allStudyRooms'
+			_formControlName = 'subjectRooms'
+			_placeholder = 'sale'
+		></app-combo-box-template>
+		<label
+			for = 'add-activity-form___schedule-start-hour'
+			class = 'cms__simple-grid__label'
+		>
+			Godzina rozpoczęcia:
+		</label>
+		<div>
+			<input
+				type = 'time'
+				id = 'add-activity-form___schedule-start-hour'
+				formControlName = 'hourStart'
+				class = 'app__input app__input--light app__input--exclude-margin'
+			/>
+			<div
+				*ngIf = '_checkError("hourStart")'
+				class = 'app__input-error app__input-error--light app__input-error--margin-top'
+			>
+				Proszę wpisać prawidłową godzinę rozpoczęcia
+			</div>
+		</div>
+		<label
+			[for] = '[ "add-activity-form___schedule-occuring" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Występowanie:
+		</label>
+		<app-combo-box-template
+			[_formGroup] = '_addNewContentForm'
+			[_allOptions] = '_allWeeksData'
+			_formControlName = 'weeksData'
+			_placeholder = 'tygodnie'
+		></app-combo-box-template>
+	</section>
+	<section class = 'cms__simple-grid__angular-form angular-form--max-half-width'>
+		<label
+			[for] = '[ "add-activity-form___schedule-type-name" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Typ przedmiotu:
+		</label>
+		<app-select-drop-box-template
+			[_formGroup] = '_addNewContentForm'
+			[_optionsList] = '_subjTypesQueryResultArray'
+			(_emitNewQuery) = 'handleEmitSubjectTypeQuery($event)'
+			_formControlName = 'subjectTypeName'
+			_selectId = 'add-activity-form___schedule-type-name'
+			_placeholder = 'np. Laboratoria'
+			_errorField = 'prawidłowy typ przedmiotu/aktywności'
+		></app-select-drop-box-template>
+		<label
+			[for] = '[ "add-activity-form___schedule-teachers" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Nauczyciele:
+		</label>
+		<app-combo-box-template
+			[_formGroup] = '_addNewContentForm'
+			[_allOptions] = '_allStudyTeachers'
+			_formControlName = 'subjectTeachers'
+			_placeholder = 'nauczycieli'
+		></app-combo-box-template>
+		<label
+			for = 'add-activity-form___schedule-end-hour'
+			class = 'cms__simple-grid__label'
+		>
+			Godzina zakończenia:
+		</label>
+		<div>
+			<input
+				type = 'time'
+				id = 'add-activity-form___schedule-end-hour'
+				formControlName = 'hourEnd'
+				class = 'app__input app__input--light app__input--exclude-margin'
+			/>
+			<div
+				*ngIf = '_checkError("hourEnd")'
+				class = 'app__input-error app__input-error--light app__input-error--margin-top'
+			>
+				Proszę wpisać prawidłową godzinę zakończenia
+			</div>
+		</div>
+	</section>
+</ng-container>

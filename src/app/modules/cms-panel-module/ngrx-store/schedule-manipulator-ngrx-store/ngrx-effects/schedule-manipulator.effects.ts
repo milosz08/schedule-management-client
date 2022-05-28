@@ -22,12 +22,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { catchError, delay, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, delay, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 
 import * as NgrxAction_SMA from '../schedule-manipulator.actions';
-import { PostDataReducerType } from '../../post-data-ngrx-store/post-data.selectors';
 
-import { CmsScheduleConnectorService } from '../../../services/cms-schedule-connector.service';
+import { HelpersConnectorService } from '../../../services/helpers-connector.service';
+import { CmsPostConnectorService } from '../../../services/cms-post-connector.service';
+import { CmsScheduleActivityReqModel } from '../ngrx-models/cms-schedule-activity-req.model';
+import { SCHEDULE_MANIPULATOR_REDUCER, ScheduleManipulatorReducerType } from '../schedule-manipulator.selectors';
+
+import { SuspenseService } from '../../../../shared-module/services/suspense.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -41,21 +45,23 @@ export class ScheduleManipulatorEffects {
     public constructor(
         private _router: Router,
         private _action$: Actions,
-        private _store: Store<PostDataReducerType>,
-        private _scheduleConnectorService: CmsScheduleConnectorService,
+        private _suspenseService: SuspenseService,
+        private _store: Store<ScheduleManipulatorReducerType>,
+        private _postConnectorService: CmsPostConnectorService,
+        private _helperConnectorService: HelpersConnectorService,
     ) {
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Efekt inizalizujący konwersję parametrów wartości string na wartości ID z bazy danych.
+     * Efekt inizalizujący konwersję parametrów wartości string na wartości name oraz id z bazy danych.
      */
     public convertScheduleData$ = createEffect(() => {
         return this._action$.pipe(
             ofType(NgrxAction_SMA.__convertScheduleData),
             mergeMap(action => {
-                return this._scheduleConnectorService.convertScheduleParameters(action.schedData).pipe(
+                return this._helperConnectorService.convertScheduleParameters(action.schedData).pipe(
                     delay(500),
                     map(data => {
                         return NgrxAction_SMA.__successConvertScheduleData({ schedData: data });
@@ -75,6 +81,64 @@ export class ScheduleManipulatorEffects {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
+     * Efekt inizalizujący konwersję parametrów wartości id na wartości name oraz id z bazy danych.
+     */
+    public convertScheduleDataOnSchedulePage$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_SMA.__convertScheduleDataReversed),
+            mergeMap(action => {
+                return this._helperConnectorService.convertScheduleParametersReverse(action.schedData).pipe(
+                    map(data => {
+                        return NgrxAction_SMA.__successConvertScheduleData({ schedData: data });
+                    }),
+                    catchError(({ error }) => {
+                        if (error) {
+                            return of(NgrxAction_SMA.__failureConvertScheduleData({ serverMess: error.message }));
+                        }
+                        return of(NgrxAction_SMA.__failureConvertScheduleData({
+                            serverMess: 'Nastąpił problem z konwersją wartości. Spróbuj ponownie.' }));
+                    }),
+                );
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicializujący dodanie nowej aktywności do wybranej grupy dziekańskiej.
+     */
+    public addNewScheduleActivity$ = createEffect(() => {
+        return this._action$.pipe(
+            ofType(NgrxAction_SMA.__addNewScheduleActivity),
+            delay(500), // opóźnienie w celu zniwelowania efektu stroboskopowego
+            withLatestFrom(this._store.select(SCHEDULE_MANIPULATOR_REDUCER)),
+            mergeMap(([ action, state ]) => {
+                const reqData = new CmsScheduleActivityReqModel(
+                    action.activityData, state.selectedDay!.id, state.selectedGroupData!);
+                return this._postConnectorService.addNewScheduleActivity(reqData).pipe(
+                    map(() => {
+                        this._store.dispatch(NgrxAction_SMA.__setAddingNewContentState({ ifAdding: false }));
+                        this._suspenseService.reloadAngularPageWithRouter();
+                        return NgrxAction_SMA.__successAddNewScheduleActivity()
+                    }),
+                    catchError(({ error }) => {
+                        this._store.dispatch(NgrxAction_SMA.__setAddingNewContentState({ ifAdding: false }));
+                        if (error) {
+                            return of(NgrxAction_SMA.__failureAddNewScheduleActivity({ serverMess: error.message }));
+                        }
+                        return of(NgrxAction_SMA.__failureAddNewScheduleActivity({
+                            serverMess: 'Nastąpił nieznany problem z próbą dodania nowej aktywności. ' +
+                                'Spróbuj ponownie.' }));
+                    }),
+                );
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
      * Efekt uruchamiany po pomyślnej procedurze konwersji nazw na numery id i przekierowujący na stronę z planem.
      */
     public redirectToSchedulePage$ = createEffect(() => {
@@ -83,13 +147,12 @@ export class ScheduleManipulatorEffects {
             tap(({ schedData }) => {
                 this._router.navigate([ '/secure/panel/choose-schedule/schedule' ], {
                     queryParams: {
-                        deptId: schedData.deptId,
-                        specId: schedData.studySpecId,
-                        groupId: schedData.studyGroupId,
+                        deptId: schedData.deptData.id,
+                        specId: schedData.studySpecData.id,
+                        groupId: schedData.studyGroupData.id,
                     }}).then(r => r);
             }),
-        )
-
+        );
     }, { dispatch: false });
 
     //------------------------------------------------------------------------------------------------------------------
@@ -98,7 +161,7 @@ export class ScheduleManipulatorEffects {
      * Efekt uruchamiający efekt leniwego ładowania danych z serwera na wszystkich efektach wywołujących
      * pobieranie danych z serwera/umieszczanie danych na serwerze w tej klasie efektów.
      */
-    public turnOffSuspenseLoading$ = createEffect(() => {
+    public turnOnSuspenseLoading$ = createEffect(() => {
         return this._action$.pipe(
             ofType(
                 NgrxAction_SMA.__convertScheduleData,

@@ -17,14 +17,34 @@
  * Obiektowe".
  */
 
-export interface CmsScheduleConvertReqDataModel {
+import { NameWithId } from './cms-drop-lists-data.model';
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsScheduleConvertFromNamesReqDataModel {
     departmentName: string;
     studySpecName: string;
     studyGroupName: string;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
+export class CmsScheduleConvertFromIdsReqDataModel {
+    public departmentId: number;
+    public studySpecId: number;
+    public studyGroupId: number;
+
+    public constructor(departmentId: number, studySpecId: number, studyGroupId: number) {
+        this.departmentId = departmentId;
+        this.studySpecId = studySpecId;
+        this.studyGroupId = studyGroupId;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 export interface CmsScheduleConvertResDataModel {
-    deptId: number;
-    studySpecId: number;
-    studyGroupId: number;
+    deptData: NameWithId;
+    studySpecData: NameWithId;
+    studyGroupData: NameWithId;
 }

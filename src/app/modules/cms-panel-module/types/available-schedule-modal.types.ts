@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: _mixins.scss
- * Last modified | Ostatnia modyfikacja: 07/04/2022, 19:00
+ * File name | Nazwa pliku: available-schedule-modal.types.ts
+ * Last modified | Ostatnia modyfikacja: 25/05/2022, 18:01
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -16,3 +16,9 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+export enum AvailableScheduleModalTypes {
+    ADD = 'ADD',
+    EDIT = 'EDIT',
+    INITIAL = 'INITIAL',
+}

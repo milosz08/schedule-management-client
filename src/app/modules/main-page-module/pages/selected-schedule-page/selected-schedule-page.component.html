@@ -2,8 +2,8 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: schedule-cms-page.component.html
-  ~ Last modified | Ostatnia modyfikacja: 24/05/2022, 13:32
+  ~ File name | Nazwa pliku: selected-schedule-page.component.html
+  ~ Last modified | Ostatnia modyfikacja: 24/05/2022, 23:06
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
   ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -18,12 +18,12 @@
   -->
 
 <aside
-	*ngIf = '_ifError$ | async; else loadingWithoutErrors'
+	*ngIf = '_serverError; else loadingWithoutErrors'
 	class = 'loading-schedule-problem__container'
 >
 	<img src = 'assets/images/info-important-icon.svg' alt = ''/>
 	<h3 class = 'loading-schedule-problem__header'>Ładowanie planu zakończone niepowodzeniem.</h3>
-	<p class = 'loading-schedule-problem__description'>{{ _ifError$ | async }}</p>
+	<p class = 'loading-schedule-problem__description'>{{ _serverError }}</p>
 </aside>
 <ng-template #loadingWithoutErrors>
 	<aside
@@ -49,9 +49,9 @@
 				{{ _scheduleData!.scheduleHeaderData }}
 			</div>
 		</section>
-		<section class = 'app__schedule-main-canvas__container main-canvas__container--schedule-editor'>
+		<section class = 'app__schedule-main-canvas__container'>
 			<div class = 'schedule-main-canvas__hours-container'>
-				<div class = 'schedule-main-canvas__single-hour hour-indicator--schedule-editor'></div>
+				<div class = 'schedule-main-canvas__single-hour single-hour--hour-indicator'></div>
 				<div
 					*ngFor = 'let hour of _hoursData'
 					class = 'schedule-main-canvas__single-hour'
@@ -67,12 +67,7 @@
 						dayData.ifEmpty ? "schedule-main-canvas--no-content" : ""
 					]'
 				>
-					<button
-						(click) = 'handleOpenModalInsertingNewScheduleContent(dayData.weekdayNameWithId)'
-						class = 'app__button app__button--light schedule__add-content-button'
-						title = 'Kliknij aby dodać nowy element do wybranego dla tygodnia'
-					>+</button>
-					<div class = 'schedule-main-canvas__single-day day-indicator--schedule-editor'>
+					<div class = 'schedule-main-canvas__single-day single-day--day-indicator'>
 						{{ dayData.weekdayNameWithId.name }}
 					</div>
 					<div

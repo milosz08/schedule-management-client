@@ -17,20 +17,35 @@
  * Obiektowe".
  */
 
+import { NameWithId } from '../../models/cms-drop-lists-data.model';
 import { CmsScheduleConvertResDataModel } from '../../models/cms-schedule-convert-data.model';
+
+import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface InitialScheduleManipulatorStateTypes {
     selectedGroupData: CmsScheduleConvertResDataModel | null;
-    ifFetching: boolean;
-    serverErrorMessage: string;
+    ifFetchingContent: boolean;
+    ifAddingNewActivity: boolean;
+    ifFetchingServerError: boolean;
+    ifAddingServerError: boolean;
+    serverMessage: string;
+    selectedDay: NameWithId | null;
+    ifModalOpen: boolean;
+    modalType: AvailableScheduleModalTypes;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 export const initialScheduleManipulatorState: InitialScheduleManipulatorStateTypes = {
     selectedGroupData: null,
-    ifFetching: false,
-    serverErrorMessage: '',
+    ifFetchingContent: false,
+    ifAddingNewActivity: false,
+    ifFetchingServerError: false,
+    ifAddingServerError: true,
+    serverMessage: '',
+    selectedDay: null,
+    ifModalOpen: false,
+    modalType: AvailableScheduleModalTypes.ADD,
 };

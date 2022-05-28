@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: reset-password-token-unsave-changes.guard.ts
- * Last modified | Ostatnia modyfikacja: 03/05/2022, 03:44
+ * File name | Nazwa pliku: welcome-schedule-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 24/05/2022, 23:13
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,27 +17,18 @@
  * Obiektowe".
  */
 
-import { Injectable } from '@angular/core';
-import { CanDeactivate } from '@angular/router';
-
-import { SendTokenViaEmailPageComponent } from '../../modules/auth-module/pages/send-token-via-email-page/send-token-via-email-page.component';
+import { Component } from '@angular/core';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Prosty strażnik umożliwiający zmianę trasy dopiero po zaakceptowaniu modala dla formularzy odzyskiwania hasła
- * (wysyłanie wiadomości email oraz wprowadzanie tokenu).
+ * Strona wyświetlająca się przy załadowaniu strony planu zajęć (początkowa strona).
  */
 
-@Injectable({
-    providedIn: 'root',
+@Component({
+    selector: 'app-welcome-schedule-page',
+    templateUrl: './welcome-schedule-page.component.html',
+    styleUrls: [ './welcome-schedule-page.component.css' ]
 })
-export class ResetPasswordTokenUnsaveChangesGuard implements CanDeactivate<SendTokenViaEmailPageComponent> {
-
-    public canDeactivate(component: SendTokenViaEmailPageComponent): boolean {
-        if (component._discardChangesEmail || component._discardChangesToken) {
-            return window.confirm("Masz niezapisane zmiany. Nadal chcesz opuścić stronę?");
-        }
-        return true;
-    };
+export class WelcomeSchedulePageComponent {
 }

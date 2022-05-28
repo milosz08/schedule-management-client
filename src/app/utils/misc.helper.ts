@@ -29,6 +29,7 @@ import { FormGroup } from '@angular/forms';
 export class MiscHelper {
 
     private static _randomCharacters: string = 'abcdefghijklmnoprstquvwxyzABCDEFGHIJKLMNOPRSTQUWXYZ0123456789';
+    public static _hoursTable: Array<number> = Array.from({ length: 16 }, (v, j) => j);
 
     //------------------------------------------------------------------------------------------------------------------
 

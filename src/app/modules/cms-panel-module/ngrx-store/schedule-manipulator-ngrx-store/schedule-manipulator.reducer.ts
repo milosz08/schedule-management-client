@@ -21,6 +21,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import * as NgrxAction from './schedule-manipulator.actions';
 import { initialScheduleManipulatorState } from './schedule-manipulator.initial';
+import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -29,18 +30,24 @@ const _scheduleManipulatorReducer = createReducer(
     on(NgrxAction.__successConvertScheduleData, (state, action) => {
         return { ...state,
             selectedGroupData: action.schedData,
-            ifFetching: false,
+            ifFetchingContent: false,
         };
     }),
     on(NgrxAction.__failureConvertScheduleData, (state, action) => {
         return { ...state,
-            serverErrorMessage: action.serverMess,
-            ifFetching: false,
+            ifFetchingServerError: true,
+            serverMessage: action.serverMess,
+            ifFetchingContent: false,
         };
     }),
     on(NgrxAction.__setFetchingNewContent, state => {
         return { ...state,
-            ifFetching: true,
+            ifFetchingContent: true,
+        };
+    }),
+    on(NgrxAction.__setAddingNewContentState, (state, action) => {
+        return { ...state,
+            ifAddingNewActivity: action.ifAdding,
         };
     }),
     on(NgrxAction.__clearConvertScheduleData, state => {
@@ -50,7 +57,40 @@ const _scheduleManipulatorReducer = createReducer(
     }),
     on(NgrxAction.__clearServerErrorMessage, state => {
         return { ...state,
-            serverErrorMessage: '',
+            ifAddingServerError: false,
+            ifFetchingServerError: false,
+            serverMessage: '',
+        };
+    }),
+    on(NgrxAction.__setModalOpen, (state, action) => {
+        return { ...state,
+            selectedDay: action.selectedDay,
+            modalType: action.modalType,
+            ifModalOpen: true,
+        };
+    }),
+    on(NgrxAction.__setModalClose, state => {
+        return { ...state,
+            selectedDay: null,
+            modalType: AvailableScheduleModalTypes.INITIAL,
+            serverMessage: '',
+            ifAddingServerError: false,
+            ifFetchingServerError: false,
+            ifModalOpen: false,
+        };
+    }),
+    on(NgrxAction.__successAddNewScheduleActivity, state => {
+        return { ...state,
+            ifAddingNewActivity: false,
+            modalType: AvailableScheduleModalTypes.INITIAL,
+            ifModalOpen: false,
+        };
+    }),
+    on(NgrxAction.__failureAddNewScheduleActivity, (state, action) => {
+        return { ...state,
+            ifAddingServerError: true,
+            serverMessage: action.serverMess,
+            ifAddingNewActivity: false,
         };
     }),
 );

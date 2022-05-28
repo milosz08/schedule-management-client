@@ -45,6 +45,7 @@ export class ApiConfigurerHelper {
     public readonly CMS_FILTERED_ALL_USERS = ApiConfigurerHelper.API_PREFIX + 'users/all-users';
     public readonly MASSIVE_DELETE_USERS = ApiConfigurerHelper.API_PREFIX + 'users/delete-massive';
     public readonly GET_ALL_EMPLOYEERS_SCHEDULE = ApiConfigurerHelper.API_PREFIX + 'users/all-employeers-schedule';
+    public readonly GET_ALL_TEACHERS_BASE_DEPT_AND_SUBJ = ApiConfigurerHelper.API_PREFIX + 'users/all-teachers-base-dept-and-subj';
 
     public readonly GET_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/get-avatar';
 
@@ -59,6 +60,8 @@ export class ApiConfigurerHelper {
     public readonly GET_AVAILABLE_SEM_BASE_STUDY_GROUP = ApiConfigurerHelper.API_PREFIX + 'helper/available-sem-base-study-group';
     public readonly GET_AVAIALBLE_DEGREES_BASE_STUDY_SPEC = ApiConfigurerHelper.API_PREFIX + 'helper/available-degrees-base-study-spec';
     public readonly CONVERT_SCHEDULE_DATA_NAMES_TO_IDS = ApiConfigurerHelper.API_PREFIX + 'helper/convert-schedule-data-from-names-to-ids';
+    public readonly CONVERT_SCHEDULE_DATA_IDS_TO_NAMES = ApiConfigurerHelper.API_PREFIX + 'helper/convert-schedule-data-from-ids-to-names';
+    public readonly GET_AVAILABLE_SUBJECT_TYPES = ApiConfigurerHelper.API_PREFIX + 'helper/available-subject-types';
 
     public readonly DELETE_DEPT = ApiConfigurerHelper.API_PREFIX + 'departments/delete';
     public readonly ADD_NEW_DEPARTMENT = ApiConfigurerHelper.API_PREFIX + 'departments/add-department';
@@ -86,11 +89,13 @@ export class ApiConfigurerHelper {
     public readonly MASSIVE_DELETE_ROOMS = ApiConfigurerHelper.API_PREFIX + 'studyrooms/delete-massive';
     public readonly CMS_FILTERED_ALL_STUDY_ROOMS = ApiConfigurerHelper.API_PREFIX + 'studyrooms/all-study-rooms';
     public readonly GET_ALL_STUDY_ROOMS_SCHEDULE = ApiConfigurerHelper.API_PREFIX + 'studyrooms/all-study-rooms-schedule';
+    public readonly GET_ALL_STUDY_ROOMS_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'studyrooms/all-study-rooms-base-dept';
 
     public readonly DELETE_STUDY_SUBJECT = ApiConfigurerHelper.API_PREFIX + 'studysubject/delete';
     public readonly ADD_NEW_STUDY_SUBJECT = ApiConfigurerHelper.API_PREFIX + 'studysubject/add-study-subject';
     public readonly MASSIVE_DELETE_STUDY_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'studysubject/delete-massive';
     public readonly CMS_FILTERED_ALL_STUDY_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'studysubject/all-study-subjects';
+    public readonly GET_ALL_STUDY_SUBJECTs_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'studysubject/all-study-subjects-dept';
 
     public readonly DELETE_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/delete';
     public readonly ADD_NEW_STUDY_GROUP = ApiConfigurerHelper.API_PREFIX + 'studygroup/add-study-group';
@@ -98,4 +103,11 @@ export class ApiConfigurerHelper {
     public readonly CMS_FILTERED_ALL_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/all-study-groups';
     public readonly GET_AVAILABLE_GROUPS_BASE_SPEC_AND_SEM = ApiConfigurerHelper.API_PREFIX + 'studygroup/available-groups-base-study-spec-and-sem';
     public readonly GET_AVAILABLE_GROUPS_BASE_SPEC = ApiConfigurerHelper.API_PREFIX + 'studygroup/available-groups-base-study-spec';
+
+    public readonly ADD_SCHEDULE_ACTIVITY = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/add-new-schedule-activity';
+    public readonly GET_SCHEDULE_SUBJECTS_BASE_GROUP_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-group';
+    public readonly GET_SCHEDULE_SUBJECTS_BASE_TEACHER_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-teacher';
+    public readonly GET_SCHEDULE_SUBJECTS_BASE_ROOM_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-room';
+
+    public readonly GET_WEEKSDATA_BASE_CURR_YEAR = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-weeks-data-base-curr-year';
 }

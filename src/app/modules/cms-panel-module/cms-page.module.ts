@@ -86,6 +86,8 @@ import { CmsPaginationOptionsComponent } from './components/cms-pagination-optio
 import { CmsDepartmentWithStudySpecComponent } from './components/cms-department-with-study-spec/cms-department-with-study-spec.component';
 import { CmsListDeleteSingleElementComponent } from './components/cms-list-delete-single-element/cms-list-delete-single-element.component';
 import { CmsChooseScheduleFormEditorComponent } from './components/cms-choose-schedule-form-editor/cms-choose-schedule-form-editor.component';
+import { AddEditScheduleActivityFormComponent } from './components/add-edit-schedule-activity-form/add-edit-schedule-activity-form.component';
+import { AddEditScheduleActivityModalComponent } from './components/add-edit-schedule-activity-modal/add-edit-schedule-activity-modal.component';
 import { DepartmentWithCathedralInputsComponent } from './components/department-with-cathedral-inputs/department-with-cathedral-inputs.component';
 import { CmsUserSubjectOrSpecsComboBoxComponent } from './components/cms-user-subject-or-specs-combo-box/cms-user-subject-or-specs-combo-box.component';
 import { CmsChooseScheduleFormAdministratorComponent } from './components/cms-choose-schedule-form-administrator/cms-choose-schedule-form-administrator.component';
@@ -174,7 +176,9 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsPaginationOptionsComponent,
         CmsDepartmentWithStudySpecComponent,
         CmsListDeleteSingleElementComponent,
+        AddEditScheduleActivityFormComponent,
         CmsChooseScheduleFormEditorComponent,
+        AddEditScheduleActivityModalComponent,
         DepartmentWithCathedralInputsComponent,
         CmsUserSubjectOrSpecsComboBoxComponent,
         CmsChooseScheduleFormAdministratorComponent,
