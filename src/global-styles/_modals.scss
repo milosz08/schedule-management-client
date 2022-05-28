@@ -25,6 +25,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
+    overflow-y: scroll;
 }
 
 .app__modal-wrapper {
@@ -74,7 +75,8 @@
 
 @media only screen and (max-width: 775px) {
     .app__modal-wrapper {
-        margin: 30px;
+        margin: 15px;
+        width: calc(100% - 30px);
     }
     .app__modal-wrapper__description {
         margin: 20px 0 30px;

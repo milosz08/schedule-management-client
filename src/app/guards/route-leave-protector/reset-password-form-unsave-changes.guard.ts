@@ -20,9 +20,7 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 
-import {
-    ResetPasswordPageComponent
-} from '../../modules/auth-module/pages/reset-password-page/reset-password-page.component';
+import { ResetPasswordPageComponent } from '../../modules/auth-module/pages/reset-password-page/reset-password-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 

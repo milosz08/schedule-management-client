@@ -62,6 +62,10 @@
             background-color: var(--orangeDarkColor);
         }
     }
+    &.app-cms__description-block__container--layeyed-top {
+        z-index: 0;
+        margin: 10px 0 20px;
+    }
 }
 
 .app-cms__separator-line {

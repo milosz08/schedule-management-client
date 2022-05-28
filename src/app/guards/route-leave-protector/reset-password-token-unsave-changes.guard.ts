@@ -20,9 +20,7 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 
-import {
-    SendTokenViaEmailPageComponent
-} from '../../modules/auth-module/pages/send-token-via-email-page/send-token-via-email-page.component';
+import { SendTokenViaEmailPageComponent } from '../../modules/auth-module/pages/send-token-via-email-page/send-token-via-email-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 

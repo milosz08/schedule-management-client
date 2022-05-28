@@ -24,6 +24,6 @@ export interface AvailableDataModel<T> {
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface NameWithId {
-    id: number;
+    id: number | string;
     name: string;
 }
