@@ -134,7 +134,7 @@ export class CmsGetQueryConnectorService {
     public getQuerySubjectsBaseDeptAndSpec(subjcName: string, deptId: number, studySpecId: number)
         : Observable<AvailableDataModel<string>> {
         return this._http.get<AvailableDataModel<string>>(
-            this._endpoints.GET_ALL_STUDY_SUBJECTs_BASE_DEPT,
+            this._endpoints.GET_ALL_STUDY_SUBJECTS_BASE_DEPT,
             { params: { subjcName, deptId, studySpecId } },
         );
     };

@@ -94,7 +94,7 @@ export class ApiConfigurerHelper {
     public readonly ADD_NEW_STUDY_SUBJECT = ApiConfigurerHelper.API_PREFIX + 'studysubject/add-study-subject';
     public readonly MASSIVE_DELETE_STUDY_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'studysubject/delete-massive';
     public readonly CMS_FILTERED_ALL_STUDY_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'studysubject/all-study-subjects';
-    public readonly GET_ALL_STUDY_SUBJECTs_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'studysubject/all-study-subjects-dept';
+    public readonly GET_ALL_STUDY_SUBJECTS_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'studysubject/all-study-subjects-dept';
     public readonly GET_AVAILABLE_SUBJECTS_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'studysubject/available-subjects-base-dept';
 
     public readonly DELETE_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/delete';
