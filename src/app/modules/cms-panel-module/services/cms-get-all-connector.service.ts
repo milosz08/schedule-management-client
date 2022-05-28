@@ -94,4 +94,40 @@ export class CmsGetAllConnectorService {
             this._endpoints.GET_AVAILABLE_SEMESTERS,
         );
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie możliwe sale zajęciowe na wybranym wydziale.
+     */
+    public getAllAvailableStudyRoomsBaseDept(deptId: number): Observable<Array<NameWithId>> {
+        return this._http.get<Array<NameWithId>>(
+            this._endpoints.GET_ALL_STUDY_ROOMS_BASE_DEPT,
+            { params: { deptId } }
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkich możliwych nauczycieli na wybranym wydziale na podstawie przypisanego przedmiotu.
+     */
+    public getAllAvailableTeachersBaseDeptAndSpec(deptId: number, subjName: string): Observable<Array<NameWithId>> {
+        return this._http.get<Array<NameWithId>>(
+            this._endpoints.GET_ALL_TEACHERS_BASE_DEPT_AND_SUBJ,
+            { params: { deptId, subjName } }
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie dygodnie (w postaci tupli: pierwszy i ostatni dzień oraz numer tygodnia) na
+     * podstawie bieżącego roku akademickiego (obliczane przez serwer).
+     */
+    public getAllWeeksDataBaseCurrYear(): Observable<Array<string>> {
+        return this._http.get<Array<string>>(
+            this._endpoints.GET_WEEKSDATA_BASE_CURR_YEAR,
+        );
+    };
 }

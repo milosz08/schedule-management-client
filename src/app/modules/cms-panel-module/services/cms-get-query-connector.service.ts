@@ -80,6 +80,18 @@ export class CmsGetQueryConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
+     * Metoda pobierająca listę typów przedmiotów na podstawie parametru wyszukiwania.
+     */
+    public getQueryScheduleSubjectTypesList(subjTypeName: string): Observable<AvailableDataModel<string>> {
+        return this._http.get<AvailableDataModel<string>>(
+            this._endpoints.GET_AVAILABLE_SUBJECT_TYPES,
+            { params: { subjTypeName } },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
      * Metoda pobierająca listę katedr przypisanych do danego wydziału (na podstawie parametrów zapytania).
      */
     public getQueryCathedralsBasedDeptList(cathQuery: string, deptQuery: string): Observable<AvailableDataModel<string>> {
@@ -111,6 +123,19 @@ export class CmsGetQueryConnectorService {
         return this._http.get<AvailableDataModel<string>>(
             this._endpoints.GET_AVAILABLE_GROUPS_BASE_SPEC,
             { params: { groupName, deptName, studySpecName } },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie możliwy typy studiów (stacjonarne/niestacjonarne itp).
+     */
+    public getQuerySubjectsBaseDeptAndSpec(subjcName: string, deptId: number, studySpecId: number)
+        : Observable<AvailableDataModel<string>> {
+        return this._http.get<AvailableDataModel<string>>(
+            this._endpoints.GET_ALL_STUDY_SUBJECTs_BASE_DEPT,
+            { params: { subjcName, deptId, studySpecId } },
         );
     };
 }
