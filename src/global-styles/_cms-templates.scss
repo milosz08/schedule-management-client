@@ -184,6 +184,9 @@
             justify-content: flex-start;
         }
     }
+    &.angular-form--max-half-width {
+        flex-basis: 50%;
+    }
 }
 
 .cms-return-link-anchor {

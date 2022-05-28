@@ -18,7 +18,7 @@
   -->
 
 <ng-container [formGroup] = '_addNewContentForm'>
-	<section class = 'cms__simple-grid__angular-form form-wrapper__single-container'>
+	<section class = 'cms__simple-grid__angular-form angular-form--max-half-width'>
 		<label
 			[for] = '[ "add-activity-form___schedule-name" ]'
 			class = 'cms__simple-grid__label'
@@ -34,7 +34,7 @@
 			_formControlName = 'subjectOrActivityName'
 			_selectId = 'add-activity-form___schedule-name'
 			_placeholder = 'np. Programowanie Komputerów'
-			_errorField = 'prawidłowy przedmiot'
+			_errorField = 'prawidłowy przedmiot lub dodać własną aktywność'
 		></app-select-drop-box-template>
 		<label
 			[for] = '[ "add-user-form___role" ]'
@@ -81,7 +81,7 @@
 			_placeholder = 'tygodnie'
 		></app-combo-box-template>
 	</section>
-	<section class = 'cms__simple-grid__angular-form form-wrapper__single-container'>
+	<section class = 'cms__simple-grid__angular-form angular-form--max-half-width'>
 		<label
 			[for] = '[ "add-activity-form___schedule-type-name" ]'
 			class = 'cms__simple-grid__label'
@@ -95,7 +95,7 @@
 			_formControlName = 'subjectTypeName'
 			_selectId = 'add-activity-form___schedule-type-name'
 			_placeholder = 'np. Laboratoria'
-			_errorField = 'prawidłowy typ przedmiotu'
+			_errorField = 'prawidłowy typ przedmiotu/aktywności'
 		></app-select-drop-box-template>
 		<label
 			[for] = '[ "add-activity-form___schedule-teachers" ]'
