@@ -71,3 +71,31 @@
         margin: 20px;
     }
 }
+
+.schedule-nav__link-element {
+    text-decoration: underline;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1000px) {
+    .schedule-container__main {
+        flex-direction: column;
+        .schedule-navigation__container {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+    }
+    .schedule-choose-with-navigation__container {
+        min-height: 500px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .schedule-container__main {
+        .schedule-content__container {
+            padding: 15px 0;
+            border: none;
+        }
+    }
+}
