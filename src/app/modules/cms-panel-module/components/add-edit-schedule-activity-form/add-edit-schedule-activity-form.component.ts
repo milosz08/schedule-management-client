@@ -121,11 +121,13 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     };
 
     public handleGetAllTeachersBaseDeptAndSubj(): void {
-        this._addNewContentForm?.get('subjectTeachers')?.patchValue([]);
         this._serviceAllGet
             .getAllAvailableTeachersBaseDeptAndSpec(this._deptAndSpecData?.dept!,
                 this._addNewContentForm.get('subjectOrActivityName')?.value)
             .pipe(takeUntil(this._unsubscribe))
-            .subscribe(q => this._allStudyTeachers = q);
+            .subscribe(q => {
+                this._addNewContentForm?.get('subjectTeachers')?.patchValue([]);
+                this._allStudyTeachers = q;
+            });
     };
 }

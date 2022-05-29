@@ -96,7 +96,7 @@ export class AddEditScheduleActivityModalComponent implements OnInit, OnDestroy 
 
     public handleSubmitNewScheduleActivity(): void {
         this._store.dispatch(NgrxAction_SMA.__setAddingNewContentState({ ifAdding: true }));
-        this._store.dispatch(NgrxAction_SMA.__addNewScheduleActivity({ activityData: this._addNewContentForm.getRawValue() }))
+        this._store.dispatch(NgrxAction_SMA.__addNewScheduleActivity({ activityData: this._addNewContentForm.getRawValue() }));
         this._addNewContentForm.reset({ subjectRooms: [], subjectTeachers: [], weeksData: [] });
     };
 
