@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -61,6 +61,7 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     private _unsubscribe: Subject<void> = new Subject();
 
     @Input() _addNewContentForm!: FormGroup;
+    @Output() _emitAddForAllGroups: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -81,12 +82,6 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     };
 
     public ngOnChanges(changes: SimpleChanges): void {
-        this._addNewContentForm!.get('subjectOrActivityName')?.valueChanges
-            .pipe(takeUntil(this._unsubscribe))
-            .subscribe(() => {
-                this._addNewContentForm?.get('subjectTeachers')?.patchValue([]);
-                this.handleGetAllTeachersBaseDeptAndSubj();
-            });
         this._store.select(NgrxSelector_SMA.sel_departmentAndStudySpecDataId)
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(deptAndSpecData => {
@@ -103,6 +98,10 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();
+    };
+
+    public handleToggleAddingForMultipleGroups(ifAddedForAllGroups: boolean): void {
+        this._emitAddForAllGroups.emit(ifAddedForAllGroups);
     };
 
     public handleEmitSubjectTypeQuery(queryValue: string): void {
@@ -131,6 +130,9 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
             .getAllAvailableTeachersBaseDeptAndSpec(this._deptAndSpecData?.dept!,
                 this._addNewContentForm.get('subjectOrActivityName')?.value)
             .pipe(takeUntil(this._unsubscribe))
-            .subscribe(q => this._allStudyTeachers = q);
+            .subscribe(q => {
+                this._addNewContentForm?.get('subjectTeachers')?.patchValue([]);
+                this._allStudyTeachers = q;
+            });
     };
 }

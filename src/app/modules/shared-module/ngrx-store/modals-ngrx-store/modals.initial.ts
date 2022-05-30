@@ -20,6 +20,8 @@
 export interface InitialModalsStateTypes {
     sessionEndModalVisibility: boolean;
     logoutModalVisibility: boolean;
+    scheduleSubjectDetailsModalVisibility: boolean;
+    selectedSubjectId: number | null;
     deleteContentModal: {
         removeContentPath: string;
         removeContentIds: Array<number>;
@@ -37,6 +39,8 @@ export interface InitialModalsStateTypes {
 export const initialModalsState: InitialModalsStateTypes = {
     sessionEndModalVisibility: false,
     logoutModalVisibility: false,
+    scheduleSubjectDetailsModalVisibility: false,
+    selectedSubjectId: null,
     deleteContentModal: {
         removeContentPath: '',
         removeContentIds: [],

@@ -33,13 +33,14 @@
 		</h2>
 		<div class = 'app-cms__description-block__container app-cms__description-block__container--layeyed-top'>
 			W tym oknie możesz dodać nową aktywność/przedmiot do planu zajęć. Niezbędne pola to przedmiot/aktywność, typ
-			przedmiotu oraz godziny rozpoczęcia/zakończenia. Typ przedmiotu/aktywności możesz również wpisać własny,
-			wówczas zostanie ztworzony jako "inna aktywność". Jeśli nie podasz konkretnych tygodni odbywania zajęć,
-			wówczas zajęcia będą oznaczone jako "odbywane każdego tygodnia".
+			przedmiotu oraz godziny rozpoczęcia/zakończenia. Jeśli nie podasz konkretnych tygodni odbywania zajęć,
+			wówczas zajęcia będą oznaczone jako "odbywane każdego tygodnia". Aby dodać zajęcia wspólne dla wszystkich
+			grup dziekańskich wybranego kierunku należy zaznaczyć opcję "Dodaj do wyszstkich grup dziekańskich".
 		</div>
 		<aside class = 'app-cms__separator-line'></aside>
 		<app-add-edit-schedule-activity-form
 			[_addNewContentForm] = '_addNewContentForm'
+			(_emitAddForAllGroups) = 'handleToggleAddingForMultipleGroups($event)'
 			class = 'add-edit-schedule__form-wrapper'
 		></app-add-edit-schedule-activity-form>
 		<div

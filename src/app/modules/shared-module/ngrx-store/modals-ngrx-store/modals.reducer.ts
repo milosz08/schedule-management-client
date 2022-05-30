@@ -31,6 +31,12 @@ const _modalsReducer = createReducer(
             sessionEndModalVisibility: action.modalVisibility,
         };
     }),
+    on(NgrxAction.__scheduleSubjectDetailsModalVisibility, (state, action) => {
+        return { ...state,
+            scheduleSubjectDetailsModalVisibility: action.modalVisibility,
+            selectedSubjectId: action.selectedSubjectId || null,
+        };
+    }),
     on(NgrxAction.__logoutModalSetVisibility, (state, action) => {
         return { ...state,
             logoutModalVisibility: action.modalVisibility,

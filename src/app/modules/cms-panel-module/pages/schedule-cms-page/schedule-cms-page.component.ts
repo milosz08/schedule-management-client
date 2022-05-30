@@ -39,6 +39,8 @@ import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-st
 import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 
 import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
+import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
+import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -69,6 +71,7 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
         titleService: Title,
         metaService: Meta,
         private _route: ActivatedRoute,
+        private _endpoints: ApiConfigurerHelper,
         private _store: Store<ScheduleManipulatorReducerType>,
         private _scheduleGET: ScheduleDataGetConnectorService,
     ) {
@@ -102,5 +105,16 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
 
     public handleOpenModalInsertingNewScheduleContent(selectedDay: NameWithId): void {
         this._store.dispatch(NgrxAction_SMA.__setModalOpen({ selectedDay, modalType: AvailableScheduleModalTypes.ADD }));
+    };
+
+    public handleClearAllScheduleBaseIds(): void {
+        const allIdsToRemove = this._scheduleData?.scheduleCanvasData.map(d => d.weekdayData.map(d => d.scheduleSubjectId));
+        const removeContentIds = allIdsToRemove!.reduce((prev, next) => prev.concat(next));
+        this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
+            removeContentPath: this._endpoints.MASSIVE_DELETE_SCHEDULE_SUBJECTS, removeContentIds }));
+    };
+
+    public ifSomeDataExist(ifEmpty: boolean): boolean {
+        return !this._scheduleData?.scheduleCanvasData.every(d => d.ifEmpty) && ifEmpty;
     };
 }

@@ -46,6 +46,14 @@ export const sel_removeModalVisibility = selectorWithInjectedStore(
     state => state.deleteContentModal.modalVisibility,
 );
 
+export const sel_scheduleSubjectDetailsModalVisibility = selectorWithInjectedStore(
+    state => state.scheduleSubjectDetailsModalVisibility,
+);
+
+export const sel_selectedSubjectId = selectorWithInjectedStore(
+    state => state.selectedSubjectId,
+);
+
 export const sel_suspenseRemovingContent = selectorWithInjectedStore(
     state => state.deleteContentModal.suspenseRemovingContent,
 )

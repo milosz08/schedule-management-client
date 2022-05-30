@@ -23,7 +23,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
-import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
 
 import { CmsDepartmentReqResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
 import { CmsScheduleActivityReqModel } from '../ngrx-store/schedule-manipulator-ngrx-store/ngrx-models/cms-schedule-activity-req.model';
@@ -140,8 +139,8 @@ export class CmsPostConnectorService {
     /**
      * Dodawanie nowej aktywności do wybranego planu zajęć (na podstawie parametrów w ciele zapytania).
      */
-    public addNewScheduleActivity(reqData: CmsScheduleActivityReqModel): Observable<ResponseServerMessageModel> {
-        return this._http.post<ResponseServerMessageModel>(
+    public addNewScheduleActivity(reqData: CmsScheduleActivityReqModel): Observable<void> {
+        return this._http.post<void>(
             this._endpoints.ADD_SCHEDULE_ACTIVITY,
             reqData,
         );

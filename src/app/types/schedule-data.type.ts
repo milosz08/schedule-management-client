@@ -29,6 +29,7 @@ export class ScheduleDataRes<T> {
 
 export interface ScheduleCanvasData<T> {
     weekdayNameWithId: NameWithId;
+    weekdayDateTime: string;
     ifEmpty: boolean;
     weekdayData: Array<T>;
 }
@@ -36,27 +37,35 @@ export interface ScheduleCanvasData<T> {
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface ScheduleGroups extends BaseScheduleData {
-    teachersAliases: Array<ScheduleTeacherQuery>;
-    roomsAliases: Array<ScheduleRoomQuery>;
+    teachersAliases: Array<ScheduleMultipleValues<ScheduleTeacherQuery>>;
+    roomsAliases: Array<ScheduleMultipleValues<ScheduleRoomQuery>>;
 }
 
 export interface ScheduleTeachers extends BaseScheduleData {
-    studyGroupAlias: ScheduleGroupQuery;
-    roomsAliases: Array<ScheduleRoomQuery>;
+    studyGroupAliases: Array<ScheduleMultipleValues<ScheduleGroupQuery>>;
+    roomsAliases: Array<ScheduleMultipleValues<ScheduleRoomQuery>>;
 }
 
 export interface ScheduleRooms extends BaseScheduleData {
-    studyGroupAlias: ScheduleGroupQuery;
-    teachersAliases: Array<ScheduleTeacherQuery>;
+    studyGroupAliases: Array<ScheduleMultipleValues<ScheduleGroupQuery>>;
+    teachersAliases: Array<ScheduleMultipleValues<ScheduleTeacherQuery>>;
 }
 
 export interface BaseScheduleData {
+    scheduleSubjectId: number;
     subjectWithTypeAlias: string;
     subjectTypeHexColor: string;
     subjectTime: string;
     positionFromTop: number;
-    elementWidth: number;
+    elementHeight: number;
     subjectOccuredData: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface ScheduleMultipleValues<T> {
+    alias: string;
+    pathValues: T,
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -95,4 +104,24 @@ export class ScheduleRoomQuery {
         this.cathId = cathId;
         this.roomId = roomId;
     };
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export enum AvailableScheduleEntityTypes {
+    GROUPS = 'groups',
+    EMPLOYEERS = 'employeers',
+    ROOMS = 'rooms',
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface ScheduleSubjectDetailsRes {
+    subjectName: string;
+    subjectTypeColor: string;
+    subjectHours: string;
+    teachers: string;
+    typeAndRoomsName: string;
+    departmentName: string;
+    subjectOccur: string;
 }

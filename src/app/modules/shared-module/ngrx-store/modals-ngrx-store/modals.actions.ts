@@ -23,7 +23,8 @@ import { UserCredentialsType } from '../../../../types/user-credentials.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const SET_MODAL_VISIBILITY = '[MODALS] SET END SESSION MODAL VISIBILITY';
+export const SET_END_SESSION_MODAL_VISIBILITY = '[MODALS] SET END SESSION MODAL VISIBILITY';
+export const SET_SCHEDULE_SUBJECT_DETAILS_MODAL_VISIBILITY = '[MODALS] SET SCHEDULE SUBJECT DETAILS MODAL VISIBILITY';
 export const SET_LOGOUT_MODAL_VISIBILITY = '[MODALS] SET LOGOUT MODAL VISIBILITY';
 export const OPEN_REMOVE_CONTENT_MODAL = '[MODALS] OPEN REMOVE CONTENT MODAL';
 export const REMOVE_CONTENT_MODAL = '[MODALS] REMOVE CONTENT MODAL';
@@ -36,8 +37,13 @@ export const CLEAR_SERVER_MESSAGE_REMOVE_CONTENT_MODAL = '[MODALS] CLEAR SERVER 
 //----------------------------------------------------------------------------------------------------------------------
 
 export const __sessionSetModalVisibility = createAction(
-    SET_MODAL_VISIBILITY,
+    SET_END_SESSION_MODAL_VISIBILITY,
     props<{ modalVisibility: boolean }>(),
+);
+
+export const __scheduleSubjectDetailsModalVisibility = createAction(
+    SET_SCHEDULE_SUBJECT_DETAILS_MODAL_VISIBILITY,
+    props<{ modalVisibility: boolean, selectedSubjectId?: number | null }>(),
 );
 
 export const __logoutModalSetVisibility = createAction(

@@ -28,7 +28,6 @@
 		<app-select-drop-box-template
 			[_formGroup] = '_addNewContentForm'
 			[_optionsList] = '_subjQueryResultArray'
-			[_ifValidateField] = 'false'
 			(_emitNewQuery) = 'handleEmitSubjectQuery($event)'
 			(_addedValue) = 'handleGetAllTeachersBaseDeptAndSubj()'
 			_formControlName = 'subjectOrActivityName'
@@ -86,7 +85,7 @@
 			[for] = '[ "add-activity-form___schedule-type-name" ]'
 			class = 'cms__simple-grid__label'
 		>
-			Typ przedmiotu:
+			Typ przedmiotu/aktywności:
 		</label>
 		<app-select-drop-box-template
 			[_formGroup] = '_addNewContentForm'
@@ -129,5 +128,12 @@
 				Proszę wpisać prawidłową godzinę zakończenia
 			</div>
 		</div>
+		<div class = 'add-activity-form__min-checkbox-height'></div>
+		<app-checkbox-template
+			_checkboxLabel = 'Dodaj do wszystkich grup dziekańskich na wybranym kierunku'
+			[_ifWhiteBackground] = 'true'
+			(_checkedEmitter) = 'handleToggleAddingForMultipleGroups($event)'
+			class = 'add-activity-form__min-checkbox-height'
+		></app-checkbox-template>
 	</section>
 </ng-container>

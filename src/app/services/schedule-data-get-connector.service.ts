@@ -26,8 +26,8 @@ import { Observable, of } from 'rxjs';
 import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
 
 import {
-    ScheduleDataRes, ScheduleGroupQuery, ScheduleGroups, ScheduleRoomQuery, ScheduleRooms, ScheduleTeacherQuery,
-    ScheduleTeachers,
+    ScheduleDataRes, ScheduleGroupQuery, ScheduleGroups, ScheduleRoomQuery, ScheduleRooms, ScheduleSubjectDetailsRes,
+    ScheduleTeacherQuery, ScheduleTeachers,
 } from '../types/schedule-data.type';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -79,6 +79,16 @@ export class ScheduleDataGetConnectorService {
         return this._http.get<ScheduleDataRes<ScheduleRooms>>(
             this._endpoints.GET_SCHEDULE_SUBJECTS_BASE_ROOM_ID,
             { params: { ...query } },
+        );
+    };
+
+    /**
+     * Pobieranie szczegółowych danych danego przedmiotu w planie na podstawie ID.
+     */
+    public getScheduleSubjectDetailsBaseSubjectId(schedSubjId: number): Observable<ScheduleSubjectDetailsRes> {
+        return this._http.get<ScheduleSubjectDetailsRes>(
+            this._endpoints.GET_SCHEDULE_SUBJECT_DETAILS,
+            { params: { schedSubjId } },
         );
     };
 

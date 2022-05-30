@@ -1,0 +1,83 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: single-schedule-entity-block.component.html
+  ~ Last modified | Ostatnia modyfikacja: 29/05/2022, 15:55
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div
+	class = 'schedule-block-component__container'
+	(click) = 'handleOpenDetailsModal(_activityData.scheduleSubjectId)'
+	[ngStyle] = '{
+		height: _activityData.elementHeight + "px",
+		top: (_activityData.positionFromTop + _addedPxFromTop) + "px",
+		backgroundColor: _activityData.subjectTypeHexColor
+	}'
+>
+	<button class = 'schedule-block-component__layered-button'></button>
+	<p>{{ _activityData.subjectWithTypeAlias }}</p>
+	<p class = 'hide-elements-on-small-devices'>{{ _activityData.subjectTime }}</p>
+	<p
+		*ngIf = '_entityType === _availableEntities.GROUPS || _entityType === _availableEntities.ROOMS'
+		class = 'hide-elements-on-small-devices'
+	>
+		<a
+			*ngFor = 'let teacher of _activityData.teachersAliases; index as idx'
+			[routerLink] = '[ "/schedule/selected-schedule/employeers" ]'
+			[queryParams] = 'teacher.pathValues'
+			(click) = 'eventBubblingDisableExecutingProparation($event)'
+			[ngClass] = '[ "schedule-block__anchor-element", _disableHrefEvents ? "anchor--disable-events" : "" ]'
+		>
+			{{ teacher.alias }}
+			<ng-container *ngIf = 'idx !== _activityData.teachersAliases.length - 1'>,</ng-container>
+		</a>
+	</p>
+	<p *ngIf = '_entityType === _availableEntities.GROUPS || _entityType === _availableEntities.EMPLOYEERS'>
+		<a
+			*ngFor = 'let room of _activityData.roomsAliases; index as idx'
+			[routerLink] = '[ "/schedule/selected-schedule/rooms" ]'
+			[queryParams] = 'room.pathValues'
+			(click) = 'eventBubblingDisableExecutingProparation($event)'
+			[ngClass] = '[ "schedule-block__anchor-element", _disableHrefEvents ? "anchor--disable-events" : "" ]'
+		>
+			{{ room.alias }}
+			<ng-container *ngIf = 'idx !== _activityData.roomsAliases.length - 1'>,</ng-container>
+		</a>
+	</p>
+	<p
+		*ngIf = '_entityType === _availableEntities.EMPLOYEERS || _entityType === _availableEntities.ROOMS'
+		class = 'hide-elements-on-small-devices'
+	>
+		<a
+			*ngFor = 'let group of _activityData["studyGroupAliases"]; index as idx'
+			[routerLink] = '[ "/schedule/selected-schedule/groups" ]'
+			[queryParams] = 'group["pathValues"]'
+			(click) = 'eventBubblingDisableExecutingProparation($event)'
+			[ngClass] = '[
+				"schedule-block__anchor-element", "group-alias__anchor-element",
+				_disableHrefEvents ? "anchor--disable-events" : ""
+			]'
+		>
+			{{ group["alias"] }}
+		</a>
+	</p>
+	<div
+		*ngIf = '_activityData.subjectOccuredData !== ""'
+		class = 'schedule-block__occur-container hide-elements-on-small-devices'
+	>
+		<p>występowanie:</p>
+		<p>{{ _activityData.subjectOccuredData }}</p>
+	</div>
+</div>

@@ -21,6 +21,7 @@
     margin-left: 10px;
     cursor: pointer;
     color: var(--mainWhiteColor);
+    line-height: 1.1;
     &.checkbox-label--white-background {
         color: var(--darkBlueColor);
     }
@@ -67,6 +68,7 @@
     height: 17px;
     border: 1px solid var(--mainWhiteColor);
     transition: var(--transitionDuration);
+    flex-shrink: 0;
     &::after {
         content: '';
         position: absolute;

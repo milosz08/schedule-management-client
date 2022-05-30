@@ -28,6 +28,7 @@ import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 import * as NgrxAction_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.actions';
 import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
+import { CmsScheduleActivityFormModel } from '../../ngrx-store/schedule-manipulator-ngrx-store/ngrx-models/cms-schedule-activity-req.model';
 
 import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
@@ -53,6 +54,7 @@ export class AddEditScheduleActivityModalComponent implements OnInit, OnDestroy 
     public _selDay$: Observable<string> = this._store.select(NgrxSelector_SMA.sel_selectedDayToEdit);
 
     public _addNewContentForm: FormGroup;
+    private _ifAddForAllGroups: boolean = false;
     public _serverError: string = '';
 
     private _unsubscribe: Subject<void> = new Subject();
@@ -94,9 +96,15 @@ export class AddEditScheduleActivityModalComponent implements OnInit, OnDestroy 
         this._unsubscribe.complete();
     };
 
+    public handleToggleAddingForMultipleGroups(ifAddedForAllGroups: boolean): void {
+        this._ifAddForAllGroups = ifAddedForAllGroups;
+    };
+
     public handleSubmitNewScheduleActivity(): void {
         this._store.dispatch(NgrxAction_SMA.__setAddingNewContentState({ ifAdding: true }));
-        this._store.dispatch(NgrxAction_SMA.__addNewScheduleActivity({ activityData: this._addNewContentForm.getRawValue() }))
+        const formData =  this._addNewContentForm.getRawValue();
+        const addedFlag: CmsScheduleActivityFormModel = { ...formData, ifAddForAllGroups: this._ifAddForAllGroups };
+        this._store.dispatch(NgrxAction_SMA.__addNewScheduleActivity({ activityData: addedFlag }));
         this._addNewContentForm.reset({ subjectRooms: [], subjectTeachers: [], weeksData: [] });
     };
 

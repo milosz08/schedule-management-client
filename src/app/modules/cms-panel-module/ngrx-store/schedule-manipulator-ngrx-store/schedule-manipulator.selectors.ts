@@ -36,7 +36,7 @@ const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =
 //----------------------------------------------------------------------------------------------------------------------
 
 export const sel_isDataFetching = selectorWithInjectedStore(
-    state => state.ifFetching,
+    state => state.ifFetchingContent,
 );
 
 export const sel_isDataAdding = selectorWithInjectedStore(

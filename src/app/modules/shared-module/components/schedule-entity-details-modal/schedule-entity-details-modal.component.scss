@@ -1,0 +1,81 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: schedule-entity-details-modal.component.scss
+ * Last modified | Ostatnia modyfikacja: 29/05/2022, 20:56
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.schedule-entity-details-modal__container {
+    align-items: center;
+    .schedule-entity-details-modal__wrapper {
+        max-width: 500px;
+        margin: 0 15px;
+        padding: 20px;
+        width: calc(100% - 30px);
+    }
+}
+
+.schedule-entity-details-modal__subject-data-modal {
+    text-align: center;
+    padding: 10px 25px;
+    width: 100%;
+    border-radius: var(--borderRadius);
+    color: var(--mainBlackColor);
+    .subject-data-modal__single-block {
+        margin: 7px 0;
+    }
+}
+
+.schedule-entity__buttons-container {
+    display: flex;
+    width: 100%;
+    margin-top: 15px;
+    .schedule-entity-details__close-button,
+    .schedule-entity-details__remove-content-button {
+        flex-basis: 50%;
+        justify-content: center;
+    }
+    .schedule-entity-details__close-button {
+        margin-left: 10px;
+        &.close-button--full-size {
+            flex-basis: 100%;
+        }
+    }
+    .schedule-entity-details__remove-content-button {
+        margin-right: 10px;
+    }
+
+}
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 500px) {
+    .schedule-entity-details-modal__container {
+        align-items: flex-start;
+        .schedule-entity-details-modal__wrapper {
+            margin-top: 15px;
+        }
+    }
+    .schedule-entity__buttons-container {
+        flex-direction: column;
+        .schedule-entity-details__close-button,
+        .schedule-entity-details__remove-content-button {
+            flex-basis: 100%;
+            margin: 10px 0 0 0;
+        }
+        .schedule-entity-details__close-button {
+            min-height: 39px;
+        }
+    }
+}

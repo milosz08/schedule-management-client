@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: schedule-content-container.component.ts
- * Last modified | Ostatnia modyfikacja: 19/05/2022, 16:23
+ * File name | Nazwa pliku: remove-content-modal.component.scss
+ * Last modified | Ostatnia modyfikacja: 13/05/2022, 17:03
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,18 +17,23 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+.remove-content-modal__suspense-container {
+    margin-bottom: 20px;
+    img {
+        width: 80px;
+        height: 80px;
+    }
+}
 
-//----------------------------------------------------------------------------------------------------------------------
+.remove-content-modal__server-message {
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--greenDarkColor);
+    &.message--error {
+        color: var(--darkRedColor);
+    }
+}
 
-/**
- * Komponent odpowiedzialny za renderowanie widoku planu.
- */
-
-@Component({
-    selector: 'app-schedule-content-container',
-    templateUrl: './schedule-content-container.component.html',
-    styleUrls: [ './schedule-content-container.component.scss' ]
-})
-export class ScheduleContentContainerComponent {
+.remove-content-modal__password-label {
+    margin-bottom: 30px;
 }
