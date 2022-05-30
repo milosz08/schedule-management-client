@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { catchError, delay, of, Subject } from 'rxjs';
@@ -41,7 +41,7 @@ import { ScheduleDataGetConnectorService } from '../../../../services/schedule-d
     host: { class: 'app__main-flex-columned' },
     providers: [ ScheduleDataGetConnectorService ],
 })
-export class SelectedSchedulePageComponent implements AfterViewInit {
+export class SelectedSchedulePageComponent implements OnDestroy {
 
     public _serverError: string = '';
     public _tableLoading: boolean = true;
@@ -59,6 +59,7 @@ export class SelectedSchedulePageComponent implements AfterViewInit {
         private _scheduleGET: ScheduleDataGetConnectorService,
     ) {
         this._route.params.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
+            this._tableLoading = true;
             this._scheduleType = String(this._route.snapshot.paramMap.get('scheduleType'));
         });
         this._route.queryParams.pipe(
@@ -75,6 +76,11 @@ export class SelectedSchedulePageComponent implements AfterViewInit {
     };
 
     //------------------------------------------------------------------------------------------------------------------
+
+    public ngOnDestroy(): void {
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
+    };
 
     private loadTableContent(paramsToNumbers: { [key: string]: string  }): void {
         const params = JSON.parse(JSON.stringify(paramsToNumbers));
@@ -100,24 +106,7 @@ export class SelectedSchedulePageComponent implements AfterViewInit {
             });
     };
 
-    ngAfterViewInit(): void {
-        // const element = document.querySelectorAll('.schedule-main-canvas__days-container')[0];
-        // const spanElement = document.createElement('span');
-        // spanElement.style.position = 'absolute';
-        // spanElement.style.top = '200px';
-        // spanElement.style.width = '100%';
-        // spanElement.style.height = '60px';
-        // spanElement.style.borderRadius = '5px';
-        // spanElement.style.backgroundColor = 'rgb(121, 249, 209)';
-        //
-        // const spandwaelement = document.createElement('span');
-        // spandwaelement.style.position = 'absolute';
-        // spandwaelement.style.top = '270px';
-        // spandwaelement.style.width = '100%';
-        // spandwaelement.style.height = '60px';
-        // spandwaelement.style.borderRadius = '5px';
-        // spandwaelement.style.backgroundColor = 'rgb(239, 131, 221)';
-
-        //console.log(elements);
-    }
+    public ifSomeDataExist(ifEmpty: boolean): boolean {
+        return !this._scheduleData.scheduleCanvasData.every(d => d.ifEmpty) && ifEmpty;
+    };
 }
