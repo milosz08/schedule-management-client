@@ -23,6 +23,7 @@ export class CmsScheduleActivityReqModel {
     public deptId: number;
     public studySpecId: number;
     public studyGroupId: number;
+    public ifAddForAllGroups: boolean;
     public weekDayId: number;
     public subjectOrActivityName: string;
     public subjectTypeName: string;
@@ -38,6 +39,7 @@ export class CmsScheduleActivityReqModel {
         this.deptId = schedData.deptData.id as number;
         this.studySpecId = schedData.studySpecData.id as number;
         this.studyGroupId = schedData.studyGroupData.id as number;
+        this.ifAddForAllGroups = formData.ifAddForAllGroups;
         this.weekDayId = weekDayId as number;
         this.subjectOrActivityName = formData.subjectOrActivityName;
         this.subjectTypeName = formData.subjectTypeName;
@@ -52,6 +54,7 @@ export class CmsScheduleActivityReqModel {
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface CmsScheduleActivityFormModel {
+    ifAddForAllGroups: boolean;
     subjectOrActivityName: string;
     subjectTypeName: string;
     subjectRooms: Array<number>;

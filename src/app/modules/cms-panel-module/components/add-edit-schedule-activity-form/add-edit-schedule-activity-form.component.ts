@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -61,6 +61,7 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     private _unsubscribe: Subject<void> = new Subject();
 
     @Input() _addNewContentForm!: FormGroup;
+    @Output() _emitAddForAllGroups: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -97,6 +98,10 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();
+    };
+
+    public handleToggleAddingForMultipleGroups(ifAddedForAllGroups: boolean): void {
+        this._emitAddForAllGroups.emit(ifAddedForAllGroups);
     };
 
     public handleEmitSubjectTypeQuery(queryValue: string): void {

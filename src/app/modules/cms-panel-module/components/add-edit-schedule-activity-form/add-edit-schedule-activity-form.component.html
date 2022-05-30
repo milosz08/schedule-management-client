@@ -128,5 +128,12 @@
 				Proszę wpisać prawidłową godzinę zakończenia
 			</div>
 		</div>
+		<div class = 'add-activity-form__min-checkbox-height'></div>
+		<app-checkbox-template
+			_checkboxLabel = 'Dodaj do wszystkich grup dziekańskich na wybranym kierunku'
+			[_ifWhiteBackground] = 'true'
+			(_checkedEmitter) = 'handleToggleAddingForMultipleGroups($event)'
+			class = 'add-activity-form__min-checkbox-height'
+		></app-checkbox-template>
 	</section>
 </ng-container>
