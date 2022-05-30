@@ -147,6 +147,9 @@
         &.app__button__arrow--arrow-left {
             margin: 5px 10px 3px 0;
         }
+        &.arrow--red {
+            color: var(--darkRedColor);
+        }
     }
     .app__button__text {
         font-size: 1.5em;

@@ -39,6 +39,7 @@ import { UserDetailsPopupComponent } from './components/user-details-popup/user-
 import { RemoveContentModalComponent } from './components/remove-content-modal/remove-content-modal.component';
 import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
 import { UserHeaderDataWithPopupComponent } from './components/user-header-data-with-popup/user-header-data-with-popup.component';
+import { SingleScheduleEntityBlockComponent } from './components/single-schedule-entity-block/single-schedule-entity-block.component';
 
 import { modalsReducer } from './ngrx-store/modals-ngrx-store/modals.reducer';
 import { MODALS_REDUCER } from './ngrx-store/modals-ngrx-store/modals.selectors';
@@ -54,11 +55,12 @@ import { BrowserStorageService } from './services/browser-storage.service';
 import { ImageManipulationService } from './services/image-manipulation.service';
 import { EndSessionModalSequencerService } from './services/end-session-modal-sequencer.service';
 
-import { RemoveContentModalEffects } from './ngrx-store/modals-ngrx-store/ngrx-effects/remove-content-modal.effects';
 import { SharedEffects } from './ngrx-store/shared-ngrx-store/ngrx-effects/shared.effects';
 import { JwtSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/jwt-session.effects';
 import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-session.effects';
 import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-helpers.effects';
+import { RemoveContentModalEffects } from './ngrx-store/modals-ngrx-store/ngrx-effects/remove-content-modal.effects';
+import { ScheduleEntityDetailsModalComponent } from './components/schedule-entity-details-modal/schedule-entity-details-modal.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -76,6 +78,8 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         RemoveContentModalComponent,
         LoadingSuspenseCardComponent,
         UserHeaderDataWithPopupComponent,
+        SingleScheduleEntityBlockComponent,
+        ScheduleEntityDetailsModalComponent,
     ],
     imports: [
         CommonModule,
@@ -113,6 +117,8 @@ import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
         RemoveContentModalComponent,
         LoadingSuspenseCardComponent,
         UserHeaderDataWithPopupComponent,
+        SingleScheduleEntityBlockComponent,
+        ScheduleEntityDetailsModalComponent,
     ],
 })
 export class SharedModule {}

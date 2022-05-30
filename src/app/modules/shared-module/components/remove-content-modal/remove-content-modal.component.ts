@@ -51,7 +51,7 @@ type CombinedReducers = ModalsReducerType | SessionReducerType;
 @Component({
     selector: 'app-remove-content-modal',
     templateUrl: './remove-content-modal.component.html',
-    styleUrls: [ './remove-content.modal.component.scss' ],
+    styleUrls: [ './remove-content-modal.component.scss' ],
     animations: [ fadeInOutAnimation ],
 })
 export class RemoveContentModalComponent implements OnInit, OnDestroy {
