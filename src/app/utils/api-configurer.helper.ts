@@ -105,6 +105,8 @@ export class ApiConfigurerHelper {
     public readonly GET_AVAILABLE_GROUPS_BASE_SPEC = ApiConfigurerHelper.API_PREFIX + 'studygroup/available-groups-base-study-spec';
 
     public readonly ADD_SCHEDULE_ACTIVITY = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/add-new-schedule-activity';
+    public readonly MASSIVE_DELETE_SCHEDULE_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/delete-massive';
+    public readonly GET_SCHEDULE_SUBJECT_DETAILS = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/schedule-subject-details';
     public readonly GET_SCHEDULE_SUBJECTS_BASE_ROOM_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-room';
     public readonly GET_SCHEDULE_SUBJECTS_BASE_GROUP_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-group';
     public readonly GET_SCHEDULE_SUBJECTS_BASE_TEACHER_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-teacher';
