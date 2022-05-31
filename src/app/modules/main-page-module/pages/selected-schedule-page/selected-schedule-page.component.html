@@ -27,7 +27,7 @@
 </aside>
 <ng-template #loadingWithoutErrors>
 	<aside
-		*ngIf = '_tableLoading; else showContent'
+		*ngIf = '_tableLoading || !_scheduleData; else showContent'
 		class = 'loading-schedule__container'
 	>
 		<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
@@ -49,6 +49,11 @@
 				{{ _scheduleData!.scheduleHeaderData }}
 			</div>
 		</section>
+		<app-schedule-navigation-filtering-panel
+			[_selectedWeek] = '_selectedWeek'
+			[_selectedFilterForm] = '_selectedFilterForm'
+			(_emitGetParameters) = 'handleEmitNewScheduleQuery($event)'
+		></app-schedule-navigation-filtering-panel>
 		<section class = 'app__schedule-main-canvas__container'>
 			<div class = 'schedule-main-canvas__hours-container'>
 				<div class = 'schedule-main-canvas__single-hour single-hour--hour-indicator'></div>
@@ -64,12 +69,17 @@
 				<div
 					[ngClass] = '[
 						"schedule-main-canvas__days-container",
-						ifSomeDataExist(dayData.ifEmpty) ? "schedule-main-canvas--no-content" : ""
+						ifSomeDataExist(dayData.weekdayData.length === 0) ? "schedule-main-canvas--no-content" : ""
 					]'
 				>
 					<div class = 'schedule-main-canvas__single-day single-day--day-indicator'>
 						<p>{{ dayData.weekdayNameWithId.name }}</p>
-						<p class = 'single-day__date-value'>{{ dayData.weekdayDateTime }}</p>
+						<p
+							*ngIf = '!dayData.ifNotShowingOccuredDates'
+							class = 'single-day__date-value'
+						>
+							{{ dayData.weekdayDateTime }}
+						</p>
 					</div>
 					<div
 						*ngFor = 'let hour of _hoursData'

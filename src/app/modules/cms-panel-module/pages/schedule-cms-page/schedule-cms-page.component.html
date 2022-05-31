@@ -51,13 +51,18 @@
 			<div class = 'info__container-schedule__delete-all-data'>
 				<button
 					(click) = 'handleClearAllScheduleBaseIds()'
-					class = 'app__button app__button--danger-light app__button--light'
+					class = 'app__button app__button--danger-light app__button--light schedule-cms__delete-activity'
 					title = 'Kliknij aby wyczyścić cały plan wybranej grupy (UWAGA! Wyczyści to również zajęcia wspólne)'
 				>
 					Wyczyść cały plan (niezalecane)
 				</button>
 			</div>
 		</section>
+		<app-schedule-navigation-filtering-panel
+			[_selectedWeek] = '_selectedWeek'
+			[_selectedFilterForm] = '_selectedFilterForm'
+			(_emitGetParameters) = 'handleEmitNewScheduleQuery($event)'
+		></app-schedule-navigation-filtering-panel>
 		<section class = 'app__schedule-main-canvas__container main-canvas__container--schedule-editor'>
 			<div class = 'schedule-main-canvas__hours-container'>
 				<div class = 'schedule-main-canvas__single-hour hour-indicator--schedule-editor'></div>
@@ -73,7 +78,7 @@
 				<div
 					[ngClass] = '[
 						"schedule-main-canvas__days-container",
-						ifSomeDataExist(dayData.ifEmpty) ? "schedule-main-canvas--no-content" : ""
+						ifSomeDataExist(dayData.weekdayData.length === 0) ? "schedule-main-canvas--no-content" : ""
 					]'
 				>
 					<button
@@ -83,7 +88,12 @@
 					>+</button>
 					<div class = 'schedule-main-canvas__single-day day-indicator--schedule-editor'>
 						<p>{{ dayData.weekdayNameWithId.name }}</p>
-						<p class = 'single-day__date-value'>{{ dayData.weekdayDateTime }}</p>
+						<p
+							*ngIf = '!dayData.ifNotShowingOccuredDates'
+							class = 'single-day__date-value'
+						>
+							{{ dayData.weekdayDateTime }}
+						</p>
 					</div>
 					<div
 						*ngFor = 'let hour of _hoursData'

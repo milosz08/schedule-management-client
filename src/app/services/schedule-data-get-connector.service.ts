@@ -26,8 +26,8 @@ import { Observable, of } from 'rxjs';
 import { ApiConfigurerHelper } from '../utils/api-configurer.helper';
 
 import {
-    ScheduleDataRes, ScheduleGroupQuery, ScheduleGroups, ScheduleRoomQuery, ScheduleRooms, ScheduleSubjectDetailsRes,
-    ScheduleTeacherQuery, ScheduleTeachers,
+    ScheduleDataRes, ScheduleFilteringData, ScheduleGroupQuery, ScheduleGroups, ScheduleRoomQuery, ScheduleRooms,
+    ScheduleSubjectDetailsRes, ScheduleTeacherQuery, ScheduleTeachers,
 } from '../types/schedule-data.type';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -51,9 +51,11 @@ export class ScheduleDataGetConnectorService {
     /**
      * Pobieranie danych planu zajęć na podstawie wybranej grupy dziekańskiej.
      */
-    public getScheduleDataBaseGroup(query: ScheduleGroupQuery | Params): Observable<ScheduleDataRes<ScheduleGroups>> {
-        return this._http.get<ScheduleDataRes<ScheduleGroups>>(
+    public getScheduleDataBaseGroup(query: ScheduleGroupQuery | Params, filter: ScheduleFilteringData):
+        Observable<ScheduleDataRes<ScheduleGroups>> {
+        return this._http.post<ScheduleDataRes<ScheduleGroups>>(
             this._endpoints.GET_SCHEDULE_SUBJECTS_BASE_GROUP_ID,
+            filter,
             { params: { ...query } },
         );
     };
@@ -63,9 +65,11 @@ export class ScheduleDataGetConnectorService {
     /**
      * Pobieranie danych planu zajęć na podstawie wybranego nauczyciela.
      */
-    public getScheduleDataBaseTeacher(query: ScheduleTeacherQuery | Params): Observable<ScheduleDataRes<ScheduleTeachers>> {
-        return this._http.get<ScheduleDataRes<ScheduleTeachers>>(
+    public getScheduleDataBaseTeacher(query: ScheduleTeacherQuery | Params, filter: ScheduleFilteringData):
+        Observable<ScheduleDataRes<ScheduleTeachers>> {
+        return this._http.post<ScheduleDataRes<ScheduleTeachers>>(
             this._endpoints.GET_SCHEDULE_SUBJECTS_BASE_TEACHER_ID,
+            filter,
             { params: { ...query } },
         );
     };
@@ -75,9 +79,11 @@ export class ScheduleDataGetConnectorService {
     /**
      * Pobieranie danych planu zajęć na podstawie wybranej sali zajęciowej.
      */
-    public getScheduleDataBaseRoom(query: ScheduleRoomQuery | Params): Observable<ScheduleDataRes<ScheduleRooms>> {
-        return this._http.get<ScheduleDataRes<ScheduleRooms>>(
+    public getScheduleDataBaseRoom(query: ScheduleRoomQuery | Params, filter: ScheduleFilteringData):
+        Observable<ScheduleDataRes<ScheduleRooms>> {
+        return this._http.post<ScheduleDataRes<ScheduleRooms>>(
             this._endpoints.GET_SCHEDULE_SUBJECTS_BASE_ROOM_ID,
+            filter,
             { params: { ...query } },
         );
     };
@@ -95,16 +101,40 @@ export class ScheduleDataGetConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
+     * Pobieranie wszystkich dat roków akademickich z wyprzedzeniem o 1 rok.
+     */
+    public getAllYearsData(): Observable<Array<string>> {
+        return this._http.get<Array<string>>(
+            this._endpoints.GET_STUDY_YEARS,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie dygodnie (w postaci tupli: pierwszy i ostatni dzień oraz numer tygodnia) na
+     * podstawie bieżącego roku akademickiego (obliczane przez serwer).
+     */
+    public getAllWeeksDataBaseYear(startYear: number, endYear: number): Observable<Array<string>> {
+        return this._http.get<Array<string>>(
+            this._endpoints.GET_WEEKSDATA_BASE_CURR_YEAR,
+            { params: { startYear, endYear } }
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
      * Metoda pobierająca odpowiednio sale zajęciowe, pracowników albo grupy na podstawie przekazywanego parametru.
      */
-    public getSheduleBaseType(type: string, queryParams: Params): Observable<any> {
+    public getSheduleBaseType(type: string, queryParams: Params, filter: ScheduleFilteringData): Observable<any> {
         switch(type) {
             case 'rooms':
-                return this.getScheduleDataBaseRoom(queryParams);
+                return this.getScheduleDataBaseRoom(queryParams, filter);
             case 'employeers':
-                return this.getScheduleDataBaseTeacher(queryParams);
+                return this.getScheduleDataBaseTeacher(queryParams, filter);
             case 'groups':
-                return this.getScheduleDataBaseGroup(queryParams);
+                return this.getScheduleDataBaseGroup(queryParams, filter);
             default:
                 return of(null);
         }

@@ -68,17 +68,27 @@
 			</div>
 		</div>
 		<label
-			[for] = '[ "add-activity-form___schedule-occuring" ]'
+			[for] = '[ "add-activity-form___schedule-study-year" ]'
 			class = 'cms__simple-grid__label'
 		>
-			Występowanie:
+			Rok akademicki:
 		</label>
-		<app-combo-box-template
+		<app-select-drop-box-template
 			[_formGroup] = '_addNewContentForm'
-			[_allOptions] = '_allWeeksData'
-			_formControlName = 'weeksData'
-			_placeholder = 'tygodnie'
-		></app-combo-box-template>
+			[_optionsList] = '_allYearsData'
+			(_addedValue) = 'handleGetAllStudyWeeksBaseStudyYear()'
+			_formControlName = 'studyYear'
+			_selectId = 'add-activity-form___schedule-study-year'
+			_placeholder = 'np. 2021/2022'
+			_errorField = 'prawidłowy typ roku studiów'
+		></app-select-drop-box-template>
+		<div class = 'add-activity-form__min-checkbox-height'></div>
+		<app-checkbox-template
+			_checkboxLabel = 'Dodaj do wszystkich grup dziekańskich na wybranym kierunku'
+			[_ifWhiteBackground] = 'true'
+			(_checkedEmitter) = 'handleToggleAddingForMultipleGroups($event)'
+			class = 'add-activity-form__min-checkbox-height'
+		></app-checkbox-template>
 	</section>
 	<section class = 'cms__simple-grid__angular-form angular-form--max-half-width'>
 		<label
@@ -128,12 +138,17 @@
 				Proszę wpisać prawidłową godzinę zakończenia
 			</div>
 		</div>
-		<div class = 'add-activity-form__min-checkbox-height'></div>
-		<app-checkbox-template
-			_checkboxLabel = 'Dodaj do wszystkich grup dziekańskich na wybranym kierunku'
-			[_ifWhiteBackground] = 'true'
-			(_checkedEmitter) = 'handleToggleAddingForMultipleGroups($event)'
-			class = 'add-activity-form__min-checkbox-height'
-		></app-checkbox-template>
+		<label
+			[for] = '[ "add-activity-form___schedule-occuring" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Występowanie:
+		</label>
+		<app-combo-box-template
+			[_formGroup] = '_addNewContentForm'
+			[_allOptions] = '_allWeeksData'
+			_formControlName = 'weeksData'
+			_placeholder = 'tygodnie'
+		></app-combo-box-template>
 	</section>
 </ng-container>

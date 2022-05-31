@@ -111,5 +111,6 @@ export class ApiConfigurerHelper {
     public readonly GET_SCHEDULE_SUBJECTS_BASE_GROUP_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-group';
     public readonly GET_SCHEDULE_SUBJECTS_BASE_TEACHER_ID = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/all-schedule-subjects-base-teacher';
 
+    public readonly GET_STUDY_YEARS = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-study-years';
     public readonly GET_WEEKSDATA_BASE_CURR_YEAR = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-weeks-data-base-curr-year';
 }

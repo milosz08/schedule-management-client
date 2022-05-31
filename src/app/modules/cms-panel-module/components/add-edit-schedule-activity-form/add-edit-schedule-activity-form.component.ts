@@ -32,6 +32,7 @@ import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipu
 
 import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
+import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
     selector: 'app-add-edit-schedule-activity-form',
     templateUrl: './add-edit-schedule-activity-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService ],
+    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService, ScheduleDataGetConnectorService ],
 })
 export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, OnChanges {
 
@@ -52,6 +53,7 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
 
     public _subjQueryResultArray: Array<string> = new Array<string>();
     public _subjTypesQueryResultArray: Array<string> = new Array<string>();
+    public _allYearsData: Array<string> = new Array<string>();
 
     public _allWeeksData: Array<NameWithId> = new Array<NameWithId>();
     public _allStudyRooms: Array<NameWithId> = new Array<NameWithId>();
@@ -66,19 +68,20 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
-        private _serviceAllGet: CmsGetAllConnectorService,
         private _serviceQueryGet: CmsGetQueryConnectorService,
         private _store: Store<ScheduleManipulatorReducerType>,
+        private _cmsGETconnectorService: CmsGetAllConnectorService,
+        private _serviceScheduleGET: ScheduleDataGetConnectorService,
     ) {
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
-        this._serviceAllGet
-            .getAllWeeksDataBaseCurrYear()
+        this._serviceScheduleGET
+            .getAllYearsData()
             .pipe(takeUntil(this._unsubscribe))
-            .subscribe(q => this._allWeeksData = q.map(el => ({ id: el, name: el })));
+            .subscribe(q => this._allYearsData = q);
     };
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -118,15 +121,23 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
             .subscribe(q => this._subjQueryResultArray = q.dataElements);
     };
 
+    public handleGetAllStudyWeeksBaseStudyYear(): void {
+        const [ startYear, endYear ] = this._addNewContentForm.get('studyYear')?.value.split('/');
+        this._serviceScheduleGET
+            .getAllWeeksDataBaseYear(Number(startYear), Number(endYear))
+            .pipe(takeUntil(this._unsubscribe))
+            .subscribe(q => this._allWeeksData = q.map(el => ({ id: el, name: el })));
+    };
+
     public handleGetAllRoomsBaseDeptId(): void {
-        this._serviceAllGet
+        this._cmsGETconnectorService
             .getAllAvailableStudyRoomsBaseDept(this._deptAndSpecData?.dept!)
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(q => this._allStudyRooms = q);
     };
 
     public handleGetAllTeachersBaseDeptAndSubj(): void {
-        this._serviceAllGet
+        this._cmsGETconnectorService
             .getAllAvailableTeachersBaseDeptAndSpec(this._deptAndSpecData?.dept!,
                 this._addNewContentForm.get('subjectOrActivityName')?.value)
             .pipe(takeUntil(this._unsubscribe))

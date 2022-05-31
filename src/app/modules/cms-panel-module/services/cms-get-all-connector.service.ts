@@ -118,16 +118,4 @@ export class CmsGetAllConnectorService {
             { params: { deptId, subjName } }
         );
     };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Metoda pobierająca wszystkie dygodnie (w postaci tupli: pierwszy i ostatni dzień oraz numer tygodnia) na
-     * podstawie bieżącego roku akademickiego (obliczane przez serwer).
-     */
-    public getAllWeeksDataBaseCurrYear(): Observable<Array<string>> {
-        return this._http.get<Array<string>>(
-            this._endpoints.GET_WEEKSDATA_BASE_CURR_YEAR,
-        );
-    };
 }

@@ -21,6 +21,7 @@ import { CmsScheduleConvertResDataModel } from '../../../models/cms-schedule-con
 
 export class CmsScheduleActivityReqModel {
     public deptId: number;
+    public studyYear: string;
     public studySpecId: number;
     public studyGroupId: number;
     public ifAddForAllGroups: boolean;
@@ -42,6 +43,7 @@ export class CmsScheduleActivityReqModel {
         this.ifAddForAllGroups = formData.ifAddForAllGroups;
         this.weekDayId = weekDayId as number;
         this.subjectOrActivityName = formData.subjectOrActivityName;
+        this.studyYear = formData.studyYear;
         this.subjectTypeName = formData.subjectTypeName;
         this.subjectRooms = formData.subjectRooms;
         this.subjectTeachers = formData.subjectTeachers;
@@ -54,6 +56,7 @@ export class CmsScheduleActivityReqModel {
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface CmsScheduleActivityFormModel {
+    studyYear: string;
     ifAddForAllGroups: boolean;
     subjectOrActivityName: string;
     subjectTypeName: string;

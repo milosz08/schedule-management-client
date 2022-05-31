@@ -18,8 +18,9 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { takeUntil } from 'rxjs/operators';
@@ -32,7 +33,7 @@ import { NameWithId } from '../../models/cms-drop-lists-data.model';
 import { CmsScheduleConvertFromIdsReqDataModel } from '../../models/cms-schedule-convert-data.model';
 
 import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';
-import { ScheduleDataRes, ScheduleGroupQuery, ScheduleGroups } from '../../../../types/schedule-data.type';
+import { ScheduleDataRes, ScheduleFilteringData, ScheduleGroupQuery, ScheduleGroups } from '../../../../types/schedule-data.type';
 
 import * as NgrxAction_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.actions';
 import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
@@ -62,7 +63,10 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
     public _scheduleData?: ScheduleDataRes<ScheduleGroups>;
     public _hoursData: Array<number> = MiscHelper._hoursTable;
 
-    private readonly _queryParams: { deptId: number, specId: number, groupId: number };
+    public _selectedFilterForm: FormGroup;
+    public _selectedWeek: string = 'Pokaż wszystko';
+    public _selectedYear: string = MiscHelper.__currentStudyYear;
+
     private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
@@ -76,15 +80,28 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
         private _scheduleGET: ScheduleDataGetConnectorService,
     ) {
         super(titleService, metaService, AllCmsWebpages.SCHEDULE);
-        this._queryParams = this._route.snapshot.queryParams as { deptId: number, specId: number, groupId: number };
+        this._selectedFilterForm = new FormGroup({
+            selectedStudyYear: new FormControl(this._selectedYear, [ Validators.required ]),
+            selectedWeekData: new FormControl(this._selectedWeek, [ Validators.required ]),
+        });
+        this.loadAllScheduleSubjectsData(new ScheduleFilteringData(this._selectedWeek, this._selectedYear));
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
-        const { deptId, specId, groupId } = this._queryParams;
+        const { deptId, specId, groupId } = this._route.snapshot.queryParams;
+        this.loadAllScheduleSubjectsData(new ScheduleFilteringData(this._selectedWeek, this._selectedYear));
+        this._store.dispatch(NgrxAction_SMA.__convertScheduleDataReversed({
+            schedData: new CmsScheduleConvertFromIdsReqDataModel(deptId, specId, groupId)
+        }));
+    };
+
+    private loadAllScheduleSubjectsData(filter: ScheduleFilteringData): void {
+        this._tableLoading = true;
+        const { deptId, specId, groupId } = this._route.snapshot.queryParams;
         this._scheduleGET
-            .getScheduleDataBaseGroup(new ScheduleGroupQuery(deptId, specId, groupId))
+            .getScheduleDataBaseGroup(new ScheduleGroupQuery(deptId, specId, groupId), filter)
             .pipe(
                 delay(500),
                 takeUntil(this._unsubscribe),
@@ -92,10 +109,8 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
             .subscribe(data => {
                 this._tableLoading = false;
                 this._scheduleData = data;
+                this._selectedWeek = this._scheduleData.currentChooseWeek;
             });
-        this._store.dispatch(NgrxAction_SMA.__convertScheduleDataReversed({
-            schedData: new CmsScheduleConvertFromIdsReqDataModel(deptId, specId, groupId)
-        }));
     };
 
     public ngOnDestroy(): void {
@@ -114,7 +129,12 @@ export class ScheduleCmsPageComponent extends MetaWebContentHelper implements On
             removeContentPath: this._endpoints.MASSIVE_DELETE_SCHEDULE_SUBJECTS, removeContentIds }));
     };
 
+    public handleEmitNewScheduleQuery(payload: string): void {
+        const inputValue = this._selectedFilterForm.get('selectedStudyYear')?.value;
+        this.loadAllScheduleSubjectsData(new ScheduleFilteringData(payload, inputValue));
+    };
+
     public ifSomeDataExist(ifEmpty: boolean): boolean {
-        return !this._scheduleData?.scheduleCanvasData.every(d => d.ifEmpty) && ifEmpty;
+        return !this._scheduleData?.scheduleCanvasData.every(d => d.weekdayData.length === 0) && ifEmpty;
     };
 }

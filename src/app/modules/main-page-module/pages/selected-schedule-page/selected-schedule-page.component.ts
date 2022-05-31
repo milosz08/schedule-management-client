@@ -19,12 +19,13 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { catchError, delay, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-import { ScheduleDataRes, ScheduleGroups } from '../../../../types/schedule-data.type';
+import { ScheduleDataRes, ScheduleFilteringData, ScheduleGroups } from '../../../../types/schedule-data.type';
 
 import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
 
@@ -50,6 +51,10 @@ export class SelectedSchedulePageComponent implements OnDestroy {
     public _scheduleData: ScheduleDataRes<ScheduleGroups> = new ScheduleDataRes<ScheduleGroups>();
     public _hoursData: Array<number> = MiscHelper._hoursTable;
 
+    public _selectedFilterForm: FormGroup;
+    public _selectedWeek: string = MiscHelper.__currentWeekData;
+    public _selectedYear: string = MiscHelper.__currentStudyYear;
+
     private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
@@ -58,6 +63,10 @@ export class SelectedSchedulePageComponent implements OnDestroy {
         private _route: ActivatedRoute,
         private _scheduleGET: ScheduleDataGetConnectorService,
     ) {
+        this._selectedFilterForm = new FormGroup({
+            selectedWeekData: new FormControl(this._selectedWeek, [ Validators.required ]),
+            selectedStudyYear: new FormControl(this._selectedYear, [ Validators.required ]),
+        });
         this._route.params.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             this._tableLoading = true;
             this._scheduleType = String(this._route.snapshot.paramMap.get('scheduleType'));
@@ -70,7 +79,8 @@ export class SelectedSchedulePageComponent implements OnDestroy {
                 this._serverError = 'Skontaktuj się z administratorem systemu';
             } else {
                 this._serverError = '';
-                this.loadTableContent(this._route.snapshot.queryParams);
+                this.loadTableContent(this._route.snapshot.queryParams,
+                    new ScheduleFilteringData(this._selectedWeek, this._selectedYear));
             }
         });
     };
@@ -82,11 +92,11 @@ export class SelectedSchedulePageComponent implements OnDestroy {
         this._unsubscribe.complete();
     };
 
-    private loadTableContent(paramsToNumbers: { [key: string]: string  }): void {
+    private loadTableContent(paramsToNumbers: { [key: string]: string }, filter: ScheduleFilteringData): void {
         const params = JSON.parse(JSON.stringify(paramsToNumbers));
         Object.keys(params).forEach(key => params[key] = parseInt(params[key]));
         this._tableLoading = true;
-        this._scheduleGET.getSheduleBaseType(this._scheduleType, params)
+        this._scheduleGET.getSheduleBaseType(this._scheduleType, params, filter)
             .pipe(
                 delay(400),
                 takeUntil(this._unsubscribe),
@@ -103,10 +113,16 @@ export class SelectedSchedulePageComponent implements OnDestroy {
             .subscribe(data => {
                 this._tableLoading = false;
                 this._scheduleData = data;
+                this._selectedWeek = this._scheduleData.currentChooseWeek;
             });
     };
 
     public ifSomeDataExist(ifEmpty: boolean): boolean {
-        return !this._scheduleData.scheduleCanvasData.every(d => d.ifEmpty) && ifEmpty;
+        return !this._scheduleData.scheduleCanvasData.every(d => d.weekdayData.length === 0) && ifEmpty;
+    };
+
+    public handleEmitNewScheduleQuery(payload: string): void {
+        this.loadTableContent(this._route.snapshot.queryParams,new ScheduleFilteringData(
+            payload, this._selectedFilterForm.get('selectedStudyYear')?.value));
     };
 }
