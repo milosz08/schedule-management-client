@@ -63,8 +63,4 @@ export class CmsListElementRemovableWithPaginationComponent {
         this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
             removeContentPath: this._massiveDeleteEndpoint, removeContentIds: this._deleteContentArray }));
     };
-
-    public disableRemoveAllButton(): boolean {
-        return this._pagination!.elements.every(e => !Boolean(e.ifRemovable));
-    };
 }
