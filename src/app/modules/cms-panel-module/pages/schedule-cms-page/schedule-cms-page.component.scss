@@ -23,9 +23,6 @@
     .data-info__description {
         color: var(--lightGrayColor);
     }
-    .data-info__data {
-
-    }
 }
 
 .schedule__add-content-button {
@@ -35,4 +32,16 @@
     font-weight: 600;
     height: 40px;
     max-height: 40px;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1000px) {
+    .info__container-schedule-group-data,
+    .schedule-cms__delete-activity {
+        width: 100%;
+    }
+    .schedule-cms__delete-activity {
+        margin-top: 10px;
+    }
 }
