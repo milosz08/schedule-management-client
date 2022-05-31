@@ -76,9 +76,9 @@ export class AddEditScheduleActivityModalComponent implements OnInit, OnDestroy 
             studyYear: new FormControl('', [ Validators.required ]),
             weeksData: new FormControl([]),
         });
-        this._addNewContentForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
-            if (this._serverError !== '') {
-                //this._store.dispatch(NgrxAction_SMA.__clearServerErrorMessage());
+        this._addNewContentForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(data => {
+            if (this._serverError !== '' && data.subjectOrActivityName) {
+                this._store.dispatch(NgrxAction_SMA.__clearServerErrorMessage());
             }
         });
 
