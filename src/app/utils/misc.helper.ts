@@ -17,8 +17,10 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../types/user-identity.type';
 import { FormGroup } from '@angular/forms';
+import moment from 'moment';
+
+import { UserIdentityType } from '../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -87,5 +89,27 @@ export class MiscHelper {
      */
     public static checkNgFormError(form: FormGroup, inputName: string): boolean {
         return form.get(inputName)!.touched && !form.get(inputName)!.valid;
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda zwracająca aktualny rok studiów na podstawie bieżącego roku kalendarzowego. Metoda zwraca dane w formacie
+     * YYYY/YYYY.
+     */
+    public static get __currentStudyYear(): string {
+        const now = moment();
+        return now.month() < 10 ? `${now.year() - 1}/${now.year()}` : `${now.year()}/${now.year() + 1}`;
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda zwracająca dane aktualnego tygodnia (numer, data początkowa i końcowa oraz numer tygodnia). Metoda zwraca
+     * dane w formacie DD.MM - DD.MM (YYYY, DN).
+     */
+    public static get __currentWeekData(): string {
+        const now = moment();
+        return `${now.weekday(1).format("DD.MM")} - ${now.weekday(7).format("DD.MM")} (${now.year()}, ${now.isoWeek()})`;
     };
 }
