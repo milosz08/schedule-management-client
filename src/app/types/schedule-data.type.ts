@@ -24,13 +24,14 @@ import { NameWithId } from '../modules/cms-panel-module/models/cms-drop-lists-da
 export class ScheduleDataRes<T> {
     public traceDetails: Array<string> = new Array<string>();
     public scheduleHeaderData: string = '';
+    public currentChooseWeek: string = '';
     public scheduleCanvasData: Array<ScheduleCanvasData<T>> = new Array<ScheduleCanvasData<T>>();
 }
 
 export interface ScheduleCanvasData<T> {
     weekdayNameWithId: NameWithId;
     weekdayDateTime: string;
-    ifEmpty: boolean;
+    ifNotShowingOccuredDates: boolean;
     weekdayData: Array<T>;
 }
 
@@ -59,6 +60,7 @@ export interface BaseScheduleData {
     positionFromTop: number;
     elementHeight: number;
     subjectOccuredData: string;
+    ifNotShowingOccuredDates: boolean;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -124,4 +126,16 @@ export interface ScheduleSubjectDetailsRes {
     typeAndRoomsName: string;
     departmentName: string;
     subjectOccur: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export class ScheduleFilteringData {
+    public selectedYears: string;
+    public weekInputOptions: string;
+
+    public constructor(weekInputOptions: string, selectedYears: string) {
+        this.weekInputOptions = weekInputOptions;
+        this.selectedYears = selectedYears;
+    }
 }
