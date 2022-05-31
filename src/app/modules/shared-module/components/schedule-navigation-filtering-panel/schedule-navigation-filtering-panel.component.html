@@ -1,0 +1,80 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: schedule-navigation-filtering-panel.component.html
+  ~ Last modified | Ostatnia modyfikacja: 31/05/2022, 00:30
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<form
+	[formGroup] = '_selectedFilterForm'
+	class = 'schedule-navigation-filtering__container'
+>
+	<button
+		[disabled] = '_disableButtons || _disablePrevButton'
+		(click) = 'handleGotoPrevWeek()'
+		class = 'app__button app__button--light schedule-button__max-height schedule-navigation--disable-mobile'
+		title = 'Kliknij aby przejść do poprzedniego tygodnia'
+	>
+		<mat-icon class = 'app__button__arrow app__button__arrow--arrow-left'>keyboard_arrow_left</mat-icon>
+		Poprzedni tydzień
+	</button>
+	<div class = 'schedule-navigation-mobile-buttons__container'>
+		<button
+			[disabled] = '_disableButtons || _disablePrevButton'
+			(click) = 'handleGotoPrevWeek()'
+			class = 'app__button app__button--light schedule-button__max-height schedule-navigation--disable-full-width'
+			title = 'Kliknij aby przejść do poprzedniego tygodnia'
+		>
+			<mat-icon class = 'app__button__arrow app__button__arrow--arrow-left'>keyboard_arrow_left</mat-icon>
+		</button>
+		<button
+			[disabled] = '_disableButtons || _disableNextButton'
+			(click) = 'handleGotoNextWeek()'
+			class = 'app__button app__button--light schedule-button__max-height schedule-navigation--disable-full-width'
+			title = 'Kliknij aby przejść do następnego tygodnia'
+		>
+			<mat-icon class = 'app__button__arrow'>keyboard_arrow_right</mat-icon>
+		</button>
+	</div>
+	<nav class = 'schedule-navigation-filtering__inputs'>
+		<app-select-drop-box-template
+			[_formGroup] = '_selectedFilterForm'
+			[_optionsList] = '_allYearsData'
+			(_addedValue) = 'handleGetAllWeeksBaseStudyYear()'
+			_formControlName = 'selectedStudyYear'
+			_placeholder = 'Wybierz rok'
+			_errorField = 'prawidłowy rok z rozwijanej listy'
+			class = 'schedule-year-input__container'
+		></app-select-drop-box-template>
+		<app-select-drop-box-template
+			[_formGroup] = '_selectedFilterForm'
+			[_optionsList] = '_allWeeksData'
+			(_addedValue) = 'handleSubmitWeek()'
+			_formControlName = 'selectedWeekData'
+			_placeholder = 'Wybierz tydzień'
+			_errorField = 'prawidłowy tydzień z rozwijanej listy'
+			class = 'schedule-week-input__container'
+		></app-select-drop-box-template>
+	</nav>
+	<button
+		[disabled] = '_disableButtons || _disableNextButton'
+		(click) = 'handleGotoNextWeek()'
+		class = 'app__button app__button--light schedule-button__max-height schedule-navigation--disable-mobile'
+		title = 'Kliknij aby przejść do następnego tygodnia'
+	>
+		Następny tydzień
+		<mat-icon class = 'app__button__arrow'>keyboard_arrow_right</mat-icon>
+	</button>
+</form>

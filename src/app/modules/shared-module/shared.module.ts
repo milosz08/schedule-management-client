@@ -61,6 +61,7 @@ import { LoginSessionEffects } from './ngrx-store/session-ngrx-store/ngrx-effect
 import { LoginHelpersEffects } from './ngrx-store/session-ngrx-store/ngrx-effects/login-helpers.effects';
 import { RemoveContentModalEffects } from './ngrx-store/modals-ngrx-store/ngrx-effects/remove-content-modal.effects';
 import { ScheduleEntityDetailsModalComponent } from './components/schedule-entity-details-modal/schedule-entity-details-modal.component';
+import { ScheduleNavigationFilteringPanelComponent } from './components/schedule-navigation-filtering-panel/schedule-navigation-filtering-panel.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -80,6 +81,7 @@ import { ScheduleEntityDetailsModalComponent } from './components/schedule-entit
         UserHeaderDataWithPopupComponent,
         SingleScheduleEntityBlockComponent,
         ScheduleEntityDetailsModalComponent,
+        ScheduleNavigationFilteringPanelComponent,
     ],
     imports: [
         CommonModule,
@@ -119,6 +121,7 @@ import { ScheduleEntityDetailsModalComponent } from './components/schedule-entit
         UserHeaderDataWithPopupComponent,
         SingleScheduleEntityBlockComponent,
         ScheduleEntityDetailsModalComponent,
+        ScheduleNavigationFilteringPanelComponent,
     ],
 })
 export class SharedModule {}
