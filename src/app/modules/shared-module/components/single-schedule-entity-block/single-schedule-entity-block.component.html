@@ -74,7 +74,7 @@
 		</a>
 	</p>
 	<div
-		*ngIf = '_activityData.subjectOccuredData !== ""'
+		*ngIf = '_activityData.subjectOccuredData !== "" && !_activityData.ifNotShowingOccuredDates'
 		class = 'schedule-block__occur-container hide-elements-on-small-devices'
 	>
 		<p>występowanie:</p>
