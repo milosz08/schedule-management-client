@@ -27,6 +27,9 @@
     border-radius: var(--borderRadius);
     overflow: hidden;
     color: var(--mainBlackColor);
+    p {
+        text-align: center;
+    }
     .schedule-block__anchor-element {
         text-decoration: underline;
         &.anchor--disable-events {
