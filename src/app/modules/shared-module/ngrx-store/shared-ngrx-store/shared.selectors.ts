@@ -36,3 +36,7 @@ const selectorWithInjectedStore = (payload: (state: any, action?: any) => any) =
 export const sel_suspenseLoading = selectorWithInjectedStore(
     state => state.suspenseLoading,
 );
+
+export const sel_rememberScheduleDataLinks = selectorWithInjectedStore(
+    state => state.allRememberScheduleData,
+);

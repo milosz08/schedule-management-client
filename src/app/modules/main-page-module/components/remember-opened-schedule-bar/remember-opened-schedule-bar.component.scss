@@ -1,0 +1,73 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: remember-opened-schedule-bar.component.scss
+ * Last modified | Ostatnia modyfikacja: 01/06/2022, 18:45
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.remember-schedule-bar__container {
+    display: flex;
+    position: relative;
+    bottom: -1px;
+    .remember-schedule-bar__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid var(--extraLightGrayColor);
+        border-top-left-radius: var(--borderRadius);
+        border-top-right-radius: var(--borderRadius);
+        padding: 4px 8px 3px 20px;
+        margin-right: 5px;
+        color: var(--lightGrayColor);
+        background-color: var(--darkWhiteColor);
+        min-height: 34px;
+        &.button--not-include-delete-icon {
+            padding: 2px 20px;
+        }
+        &.button--active {
+            border: 1px solid var(--extraLightGrayColor);
+            border-bottom-color: var(--mainWhiteColor);
+            background-color: var(--mainWhiteColor);
+            color: var(--darkBlueColor);
+        }
+        .remember-schedule__remove-button {
+            margin-left: 10px;
+            .remove-button__time-icon {
+                display: flex;
+                align-items: center;
+                font-size: 1.1rem;
+                color: var(--darkRedColor);
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 700px) {
+    .remember-schedule-bar__container {
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        .remember-schedule-bar__button {
+            margin-top: 10px;
+            border: 1px solid var(--extraLightGrayColor);
+            border-radius: var(--borderRadius);
+            &.button--active {
+                border-bottom-color: var(--extraLightGrayColor);
+            }
+        }
+    }
+}

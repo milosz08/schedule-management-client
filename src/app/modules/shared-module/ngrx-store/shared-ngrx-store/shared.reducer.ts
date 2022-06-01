@@ -27,9 +27,14 @@ import { initialSharedState } from './shared.initial';
 const _sharedReducer = createReducer(
     initialSharedState,
     on(NgrxAction.__setSuspenseLoader, (state, action) => {
-        const { status: suspenseLoading } = action;
         return { ...state,
-            suspenseLoading,
+            suspenseLoading: action.status
+        };
+    }),
+    on(NgrxAction.__successUpdateScheduleData, (state, action) => {
+        return { ...state,
+            allRememberScheduleData: action.rememberScheduleData,
+            ifInitialLoad: false,
         };
     }),
 );

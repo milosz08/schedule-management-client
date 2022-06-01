@@ -20,12 +20,16 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { catchError, delay, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
 import { ScheduleDataRes, ScheduleFilteringData, ScheduleGroups } from '../../../../types/schedule-data.type';
+
+import * as NgrxAction_SHA from '../../../shared-module/ngrx-store/shared-ngrx-store/shared.actions';
+import { SharedReducerType } from '../../../shared-module/ngrx-store/shared-ngrx-store/shared.selectors';
 
 import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
 
@@ -61,6 +65,7 @@ export class SelectedSchedulePageComponent implements OnDestroy {
 
     public constructor(
         private _route: ActivatedRoute,
+        private _store: Store<SharedReducerType>,
         private _scheduleGET: ScheduleDataGetConnectorService,
     ) {
         this._selectedFilterForm = new FormGroup({
@@ -114,6 +119,8 @@ export class SelectedSchedulePageComponent implements OnDestroy {
                 this._tableLoading = false;
                 this._scheduleData = data;
                 this._selectedWeek = this._scheduleData.currentChooseWeek;
+                this._store.dispatch(NgrxAction_SHA.__addNewScheduleData({ scheduleData: this._scheduleData,
+                    param: String(this._route.snapshot.paramMap.get('scheduleType')) }));
             });
     };
 

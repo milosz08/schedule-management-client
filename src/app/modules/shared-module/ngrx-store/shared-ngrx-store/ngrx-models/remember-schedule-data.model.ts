@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: shared.initial.ts
- * Last modified | Ostatnia modyfikacja: 01/05/2022, 14:57
+ * File name | Nazwa pliku: remember-schedule-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 01/06/2022, 19:29
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,20 +17,14 @@
  * Obiektowe".
  */
 
-import { RememberScheduleDataModel } from './ngrx-models/remember-schedule-data.model';
+export class RememberScheduleDataModel {
+    public scheduleName: string;
+    public scheduleRoute: string;
+    public params: { [key: string]: string };
 
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface InitialSharedStateTypes {
-    suspenseLoading: boolean;
-    allRememberScheduleData: Array<RememberScheduleDataModel>;
-    ifInitialLoad: boolean;
+    public constructor(scheduleName: string, scheduleRoute: string, params: { [key: string]: string }) {
+        this.scheduleName = scheduleName;
+        this.scheduleRoute = scheduleRoute;
+        this.params = params;
+    }
 }
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export const initialSharedState: InitialSharedStateTypes = {
-    suspenseLoading: false,
-    allRememberScheduleData: [],
-    ifInitialLoad: true,
-};

@@ -19,12 +19,16 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { tap } from 'rxjs';
+import { map, tap, withLatestFrom } from 'rxjs';
 
 import * as NgrxAction_SHA from '../shared.actions';
-import { SharedReducerType } from '../shared.selectors';
+import { SHARED_REDUCER, SharedReducerType } from '../shared.selectors';
+import { RememberScheduleDataModel } from '../ngrx-models/remember-schedule-data.model';
+
+import { RememberScheduleLocalStorageService } from '../../../services/remember-schedule-local-storage.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -36,8 +40,11 @@ import { SharedReducerType } from '../shared.selectors';
 export class SharedEffects {
 
     public constructor(
+        private _router: Router,
         private _actions$: Actions,
+        private _route: ActivatedRoute,
         private _store: Store<SharedReducerType>,
+        private _storageService: RememberScheduleLocalStorageService,
     ) {
     };
 
@@ -76,4 +83,76 @@ export class SharedEffects {
             }),
         );
     }, { dispatch: false });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący dodanie nowego zapamiętanego planu zajęć. Metoda nie dodaje duplikatów oraz maksymalna ilość
+     * dodanych elementów to 5. Jeśli dojdzie do próby dodania kolejnego elementu, zastąpi on element ostatni.
+     */
+    public addNewRememberContent = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(NgrxAction_SHA.__addNewScheduleData),
+            withLatestFrom(this._store.select(SHARED_REDUCER)),
+            map(([ action, store ]) => {
+                const headerData = action.scheduleData.scheduleHeaderData;
+                const headerFormat = action.scheduleData.scheduleHeaderData
+                    .substring(headerData.indexOf('-') + 2, headerData.indexOf(','));
+                const scheduleData = new RememberScheduleDataModel(headerFormat, action.param,
+                    this._route.snapshot.queryParams);
+                let allScheduleData = store.allRememberScheduleData;
+                const findDuplicats = allScheduleData.find(el => el.scheduleName === headerFormat);
+                if (!Boolean(findDuplicats)) {
+                    if (allScheduleData.length < 5) {
+                        allScheduleData = [ ...allScheduleData, scheduleData ];
+                    } else {
+                        const removeLastElement = allScheduleData.filter((_, idx) => idx !== 4);
+                        allScheduleData = [ ...removeLastElement, scheduleData ];
+                    }
+                }
+                if (store.ifInitialLoad) {
+                    allScheduleData = this._storageService.getScheduleRememberLinks();
+                } else {
+                    this._storageService.updateScheduleRememberLinks(allScheduleData);
+                }
+                return NgrxAction_SHA.__successUpdateScheduleData({ rememberScheduleData: allScheduleData });
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący usunięcie wybranego zapamiętanego planu zajęć na podstawie nazwy grupy/sali/nauczyciela.
+     * Efekt usuwa również zawartość z local storage przy pomocy wyspecjalizowanego serwisu.
+     */
+    public handleRemoveRememberContent = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(NgrxAction_SHA.__removeSelectedScheduleData),
+            withLatestFrom(this._store.select(SHARED_REDUCER)),
+            map(([ action, store ]) => {
+                const scheduleData = store.allRememberScheduleData;
+                const updatedData = scheduleData.filter(data => data.scheduleName !== action.scheduleName);
+                this._storageService.updateScheduleRememberLinks(updatedData);
+                this._router.navigate([ '/schedule' ]).then(r => r);
+                return NgrxAction_SHA.__successUpdateScheduleData({ rememberScheduleData: updatedData });
+            }),
+        );
+    });
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Efekt inicjalizujący początkowe pobranie zapisanych planów z mechanizmu local storage i umieszczenie ich w
+     * ngrx storze aplikacji.
+     */
+    public handleInitialLoadScheduleData = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(NgrxAction_SHA.__initialLoadScheduleData),
+            map(() => {
+                const rememberScheduleData = this._storageService.getScheduleRememberLinks();
+                return NgrxAction_SHA.__successUpdateScheduleData({ rememberScheduleData });
+            }),
+        );
+    });
 }

@@ -19,12 +19,16 @@
 
 import { Component } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
 import { ScheduleNavListModel } from '../../models/schedule-nav-list.model';
 import { ScheduleNavLinksType } from '../../../../types/schedule-nav-links.type';
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import * as NgrxAction_SHA from '../../../shared-module/ngrx-store/shared-ngrx-store/shared.actions';
+import { SharedReducerType } from '../../../shared-module/ngrx-store/shared-ngrx-store/shared.selectors';
 
 import { GetConnectorService } from '../../services/get-connector.service';
 
@@ -55,8 +59,10 @@ export class SchedulePageComponent extends MetaWebContentHelper {
     public constructor(
         titleService: Title,
         metaService: Meta,
+        private _store: Store<SharedReducerType>,
     ) {
         super(titleService, metaService, AllMainWebpages.SCHEDULE);
+        this._store.dispatch(NgrxAction_SHA.__initialLoadScheduleData());
     };
 
     //------------------------------------------------------------------------------------------------------------------

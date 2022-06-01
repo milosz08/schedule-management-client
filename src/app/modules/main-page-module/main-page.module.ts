@@ -36,6 +36,7 @@ import { SelectedSchedulePageComponent } from './pages/selected-schedule-page/se
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { ScheduleDepartmentsListComponent } from './components/schedule-departments-list/schedule-departments-list.component';
+import { RememberOpenedScheduleBarComponent } from './components/remember-opened-schedule-bar/remember-opened-schedule-bar.component';
 import { ScheduleNextLevelTreeListComponent } from './components/schedule-next-level-tree-list/schedule-next-level-tree-list.component';
 import { ScheduleSecondLevelTreeListComponent } from './components/schedule-second-level-tree-list/schedule-second-level-tree-list.component';
 
@@ -55,6 +56,7 @@ import { ScheduleSecondLevelTreeListComponent } from './components/schedule-seco
         MainHeaderComponent,
         MainFooterComponent,
         ScheduleDepartmentsListComponent,
+        RememberOpenedScheduleBarComponent,
         ScheduleNextLevelTreeListComponent,
         ScheduleSecondLevelTreeListComponent,
     ],
