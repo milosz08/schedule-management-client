@@ -39,6 +39,8 @@ import { ScheduleDepartmentsListComponent } from './components/schedule-departme
 import { RememberOpenedScheduleBarComponent } from './components/remember-opened-schedule-bar/remember-opened-schedule-bar.component';
 import { ScheduleNextLevelTreeListComponent } from './components/schedule-next-level-tree-list/schedule-next-level-tree-list.component';
 import { ScheduleSecondLevelTreeListComponent } from './components/schedule-second-level-tree-list/schedule-second-level-tree-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TemplatesModule } from '../templates-module/templates.module';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -61,11 +63,14 @@ import { ScheduleSecondLevelTreeListComponent } from './components/schedule-seco
         ScheduleSecondLevelTreeListComponent,
     ],
     imports: [
+        FormsModule,
         CommonModule,
         RouterModule,
         SharedModule,
-        MainPageRoutingModule,
         MatIconModule,
+        TemplatesModule,
+        ReactiveFormsModule,
+        MainPageRoutingModule,
     ],
 })
 export class MainPageModule {}

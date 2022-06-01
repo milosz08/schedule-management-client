@@ -99,6 +99,12 @@
     display: contents;
 }
 
+.app__safety-area-container {
+    max-width: var(--safetyAreaWidth);
+    margin: 30px auto 50px;
+    padding: 0 30px;
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 
 @media only screen and (max-width: 1090px) {
