@@ -17,4 +17,79 @@
   ~ Obiektowe".
   -->
 
-<p>komponent podstrony do wyszukiwania nauczyciela/sali/grupy</p>
+<section class = 'app__safety-area-container'>
+	<h2 class = 'app-cms__header-h2 header--margin-from-bottom'>Wyszukiwanie planu zajęć</h2>
+	<aside class = 'app-cms__separator-line'></aside>
+	<div class = 'app-cms__description-block__container description-block-container__disabled-max-width'>
+		W tej zakładce masz możliwość wyszukania planów grup/pracowników/sal zajęciowych. Wyniki można filtrować poprzez
+		odznaczenie lub zaznaczenie kontrolek poniżej pola wyszukiwania. Po kliknięciu w wyszukany element, zostaniesz
+		przeniesiony do strony z wybranym planem grupy, pracownika bądź sali zajęciowej.
+	</div>
+	<form
+		[formGroup] = '_searchParamsForm'
+		class = 'search-param__form-container'
+	>
+		<label
+			for = 'search-query-base-params___search-box'
+			class = 'search-param__query-input-label-container'
+		>
+			<input
+				type = 'text'
+				id = 'search-query-base-params___search-box'
+				formControlName = 'searchQuery'
+				placeholder = 'np. Informatyka'
+				class = 'search-param__query-input-element'
+			/>
+			<div class = 'search-param__pseudo-button'>
+				<span class = 'search-text-content'>Szukaj</span>
+				<mat-icon class = 'seach-icon'>search</mat-icon>
+			</div>
+		</label>
+		<div class = 'search-query-form__checkboxes-container'>
+			<app-checkbox-template
+				[_ifWhiteBackground] = 'true'
+				[_ifCheckedInitial] = 'true'
+				(_checkedEmitter) = 'handleCheckedCheckboxParamsQuery($event, "ifGroupsActive")'
+				_checkboxLabel = 'Szukaj grup dziekańskich'
+			></app-checkbox-template>
+			<app-checkbox-template
+				[_ifWhiteBackground] = 'true'
+				[_ifCheckedInitial] = 'true'
+				(_checkedEmitter) = 'handleCheckedCheckboxParamsQuery($event, "ifTeachersActive")'
+				_checkboxLabel = 'Szukaj pracowników'
+				class = 'search-param__center-checkbox-element'
+			></app-checkbox-template>
+			<app-checkbox-template
+				[_ifWhiteBackground] = 'true'
+				[_ifCheckedInitial] = 'true'
+				(_checkedEmitter) = 'handleCheckedCheckboxParamsQuery($event, "ifRoomsActive")'
+				_checkboxLabel = 'Szukaj sal zajęciowych'
+			></app-checkbox-template>
+		</div>
+	</form>
+	<aside
+		*ngIf = '_loadingElements; else showLoadedElements'
+		class = 'search-page__loading-data-container'
+	>
+		<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+	</aside>
+	<ng-template #showLoadedElements>
+		<ul class = 'non-style-list search-page__loaded-elements-container'>
+			<li *ngFor = 'let foundElement of _allFoundElements'>
+				<a
+					[routerLink] = '[ "/schedule/selected-schedule/" + foundElement.pathParam ]'
+					[queryParams] = 'foundElement.pathQueryParams'
+					title = 'Przejdź do wybranego elemenu w planie zajęć'
+					class = 'loaded-single-element'
+				>
+					<p>Typ: <strong>{{ foundElement.typeName }}</strong></p>
+					<p>Pełna nazwa: <strong>{{ foundElement.fullName }}</strong></p>
+					<p>Wydział: <strong>{{ foundElement.departmentName }}</strong></p>
+					<div class = 'single-element__move-to-arrow__container'>
+						<mat-icon class = 'move-to-arrow__arrow'>arrow_right_alt</mat-icon>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</ng-template>
+</section>

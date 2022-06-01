@@ -17,10 +17,17 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { FormControl, FormGroup } from '@angular/forms';
+
+import { takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, mergeMap, Subject } from 'rxjs';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import { GetConnectorService } from '../../services/get-connector.service';
+import { SearchQueryResModel } from '../../models/search-query.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -31,14 +38,55 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
 @Component({
     selector: 'app-search-page',
     templateUrl: './search-page.component.html',
-    styleUrls: [ './search-page.component.scss' ]
+    styleUrls: [ './search-page.component.scss' ],
+    providers: [ GetConnectorService ],
 })
-export class SearchPageComponent extends MetaWebContentHelper {
+export class SearchPageComponent extends MetaWebContentHelper implements OnDestroy {
+
+    public _searchParamsForm: FormGroup;
+
+    public _allFoundElements: Array<SearchQueryResModel> = new Array<SearchQueryResModel>();
+    public _loadingElements: boolean = false;
+
+    private _unsubscribe: Subject<void> = new Subject();
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         titleService: Title,
         metaService: Meta,
+        private _serviceGET: GetConnectorService,
     ) {
         super(titleService, metaService, AllMainWebpages.SEARCH);
+        this._searchParamsForm = new FormGroup({
+            searchQuery: new FormControl(''),
+            ifGroupsActive: new FormControl(true),
+            ifTeachersActive: new FormControl(true),
+            ifRoomsActive: new FormControl(true),
+        });
+        this._searchParamsForm.valueChanges.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            takeUntil(this._unsubscribe),
+            mergeMap(query => {
+                this._loadingElements = true;
+                return this._serviceGET.getAllElementsBaseSearchQueryPage(query);
+            }),
+            delay(1000),
+        ).subscribe(foundElements => {
+            this._loadingElements = false;
+            this._allFoundElements = foundElements;
+        });
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public ngOnDestroy(): void {
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
+    };
+
+    public handleCheckedCheckboxParamsQuery(ifChecked: boolean, controlName: string): void {
+        this._searchParamsForm.get(controlName)?.patchValue(!ifChecked);
     };
 }
