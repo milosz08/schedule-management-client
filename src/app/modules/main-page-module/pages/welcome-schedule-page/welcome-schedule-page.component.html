@@ -26,6 +26,15 @@
 		Aby rozpocząć przeglądanie planu zajęć rozwiń menu z lewej strony. Możesz przeglądać plany grup, plany pracowników
 		oraz plany sal zajęciowych. Każdy otwarty plan (jeśli w przeglądarce uruchomiony jest mechanizm local storage)
 		zapisze się w nowej karcie na górnej belce. Po ponownym wejściu na stronę, zamiast wyszukiwać konkretnego planu
-		grupy/pracownika/sali wystraczy że klikniesz w zapisany link na górnej belce.
+		grupy/pracownika/sali wystraczy że klikniesz w zapisany link na górnej belce. Możesz również wyszukać konkretny
+		plan. W tym celu kliknij w przycisk poniżej.
 	</p>
+	<a
+		[routerLink] = '[ "/search" ]'
+		class = 'app__button app__button--light'
+		title = 'Kliknij aby przejść do wyszukiwarki planów'
+	>
+		Przejdź do wyszukiwarki
+		<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+	</a>
 </div>
