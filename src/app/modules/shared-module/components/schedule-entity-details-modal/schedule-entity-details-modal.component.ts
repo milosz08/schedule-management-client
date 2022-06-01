@@ -21,7 +21,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
@@ -69,7 +69,7 @@ export class ScheduleEntityDetailsModalComponent implements OnDestroy {
         private _store: Store<ModalsReducerType>,
         private _serviceConnectorGET: ScheduleDataGetConnectorService,
     ) {
-        this._router.events.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
+        this._router.events.pipe(takeUntil(this._unsubscribe), take(1)).subscribe(() => {
             this.handleCloseModal();
         });
         this._store.select(NgrxSeletecto_SES.sel_userIdentity)
