@@ -16,3 +16,24 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+.welcome-schedule-page__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.1rem;
+    .welcome-schedule-page__image-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+    .welcome-schedule-page__text-wrapper {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 1200px;
+        text-align: center;
+        color: var(--lightGrayColor);
+    }
+}
