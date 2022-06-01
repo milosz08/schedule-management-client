@@ -33,8 +33,8 @@ import { ImageManipulationService } from './image-manipulation.service';
 @Injectable()
 export class BrowserStorageService {
 
-    public static readonly USER_DATA_KEY: string = "user__autologin" as const;
-    public static readonly USER_IMAGE_KEY: string = "user__image" as const;
+    public static readonly USER_DATA_KEY: string = 'user__autologin' as const;
+    public static readonly USER_IMAGE_KEY: string = 'user__image' as const;
 
     //------------------------------------------------------------------------------------------------------------------
 

@@ -25,19 +25,22 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
 
+import { UserIdentityType } from '../../../../types/user-identity.type';
+import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
+import { ScheduleSubjectDetailsRes } from '../../../../types/schedule-data.type';
+
 import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxSelector_MOD from '../../ngrx-store/modals-ngrx-store/modals.selectors';
 import { ModalsReducerType } from '../../ngrx-store/modals-ngrx-store/modals.selectors';
 import * as NgrxSeletecto_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
-import { ScheduleSubjectDetailsRes } from '../../../../types/schedule-data.type';
+
 import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
-import { UserIdentityType } from '../../../../types/user-identity.type';
-import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- *
+ * Komponent odpowiadający za renderowanie widoku wybranego planu zajęć (pobranie zasobów z serwera na podstawie
+ * parametrów zapytania).
  */
 
 @Component({

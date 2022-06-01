@@ -38,7 +38,7 @@ import { ScheduleDataGetConnectorService } from '../../../../services/schedule-d
 @Component({
     selector: 'app-selected-schedule-page',
     templateUrl: './selected-schedule-page.component.html',
-    styleUrls: [ './selected-schedule-page.component.scss' ],
+    styleUrls: [],
     host: { class: 'app__main-flex-columned' },
     providers: [ ScheduleDataGetConnectorService ],
 })
