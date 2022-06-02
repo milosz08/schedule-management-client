@@ -20,7 +20,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -41,8 +41,6 @@ export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
 
     private _unsubscribe: Subject<void> = new Subject();
 
-    private _subscription?: Subscription;
-
     @Input() public _formGroup?: FormGroup;
     @Input() public _formControlName: string = '';
 
@@ -57,7 +55,7 @@ export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor() {
-        this._subscription = this._searchQuery$.pipe(
+        this._searchQuery$.pipe(
             debounceTime(400),
             distinctUntilChanged(),
             takeUntil(this._unsubscribe),

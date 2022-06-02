@@ -58,6 +58,7 @@
     .schedule-content__container {
         border: 1px solid var(--extraLightGrayColor);
         border-radius: var(--borderRadius);
+        border-top-left-radius: 0;
         padding: 15px 20px;
     }
     .schedule-navigation__container {
@@ -68,8 +69,15 @@
     }
     .schedule-content__container {
         flex-grow: 1;
-        margin: 20px;
     }
+}
+
+.schedule-navigation-with-content {
+    width: calc(100% - 40px);
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .schedule-nav__link-element {

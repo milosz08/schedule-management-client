@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: shared.reducer.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 16:39
+ * File name | Nazwa pliku: search-query.model.ts
+ * Last modified | Ostatnia modyfikacja: 01/06/2022, 23:00
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,30 +17,19 @@
  * Obiektowe".
  */
 
-import { createReducer, on } from '@ngrx/store';
-
-import * as NgrxAction from './shared.actions';
-import { initialSharedState } from './shared.initial';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-const _sharedReducer = createReducer(
-    initialSharedState,
-    on(NgrxAction.__setSuspenseLoader, (state, action) => {
-        return { ...state,
-            suspenseLoading: action.status
-        };
-    }),
-    on(NgrxAction.__successUpdateScheduleData, (state, action) => {
-        return { ...state,
-            allRememberScheduleData: action.rememberScheduleData,
-            ifInitialLoad: false,
-        };
-    }),
-);
+export interface SearchQueryReqModel {
+    searchQuery: string;
+    ifGroupsActive: boolean;
+    ifTeachersActive: boolean;
+    ifRoomsActive: boolean;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export function sharedReducer(state: any, action: any) {
-    return _sharedReducer(state, action);
+export interface SearchQueryResModel {
+    pathQueryParams: { [key: string]: number };
+    departmentName: string;
+    pathParam: string;
+    typeName: string;
+    fullName: string;
 }

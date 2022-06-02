@@ -22,8 +22,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 import { ScheduleNavListModel } from '../models/schedule-nav-list.model';
+import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
+import { SearchQueryReqModel, SearchQueryResModel } from '../models/search-query.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -140,6 +141,19 @@ export class GetConnectorService {
         return this._http.get<Array<ScheduleNavListModel>>(
             this._endpoints.GET_AVAIALBLE_DEGREES_BASE_STUDY_SPEC,
             { params: { deptId } },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda filtrująca i zwracająca rezultat zapytania masowego wyszukiwania treści serwera. Jeśli nic nie znajdzie,
+     * zwracana jest pusta tablica opakowana w Observable object.
+     */
+    public getAllElementsBaseSearchQueryPage(params: SearchQueryReqModel): Observable<Array<SearchQueryResModel>> {
+        return this._http.get<Array<SearchQueryResModel>>(
+            this._endpoints.GET_MASSIVE_QUERY_RESULT,
+            { params: { ...params } },
         );
     };
 }

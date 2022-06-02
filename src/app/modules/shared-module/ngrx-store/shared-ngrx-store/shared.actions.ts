@@ -19,8 +19,18 @@
 
 import { createAction, props } from '@ngrx/store';
 
+import { RememberScheduleDataModel } from './ngrx-models/remember-schedule-data.model';
+import { ScheduleDataRes, ScheduleGroups } from '../../../../types/schedule-data.type';
+
+//----------------------------------------------------------------------------------------------------------------------
+
 export const SET_SUSPENSE_LOADER = '[SHARED] SET SUSPENSE LOADER';
 export const SET_SUSPENSE_LOADER_DELAY = '[SHARED] SET SUSPENSE LOADER DELAY';
+
+export const ADD_NEW_SCHEDULE_REMEMBER_DATA = '[SHARED] ADD NEW SCHEDULE REMEMBER DATA';
+export const INITIAL_LOAD_SCHEDULE_REMEMBER_DATA = '[SHARED] INITIAL LOAD SCHEDULE REMEMBER DATA';
+export const REMOVE_SELECTED_SCHEDULE_REMEMBER_DATA = '[SHARED] REMOVE SELECTED SCHEDULE REMEMBER DATA';
+export const SUCCESS_UPDATE_SCHEDULE_REMEMBER_DATA = '[SHARED] SUCCESS UPDATE NEW SCHEDULE REMEMBER DATA';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -32,4 +42,23 @@ export const __setSuspenseLoader = createAction(
 export const __setSuspenseLoaderDelay = createAction(
     SET_SUSPENSE_LOADER_DELAY,
     props<{ delayInSeconds?: number, status: boolean }>(),
+);
+
+export const __addNewScheduleData = createAction(
+    ADD_NEW_SCHEDULE_REMEMBER_DATA,
+    props<{ scheduleData: ScheduleDataRes<ScheduleGroups>, param: string }>(),
+);
+
+export const __initialLoadScheduleData = createAction(
+    INITIAL_LOAD_SCHEDULE_REMEMBER_DATA,
+);
+
+export const __removeSelectedScheduleData = createAction(
+    REMOVE_SELECTED_SCHEDULE_REMEMBER_DATA,
+    props<{ scheduleName: string }>(),
+);
+
+export const __successUpdateScheduleData = createAction(
+    SUCCESS_UPDATE_SCHEDULE_REMEMBER_DATA,
+    props<{ rememberScheduleData: Array<RememberScheduleDataModel> }>(),
 );

@@ -1,9 +1,9 @@
-/*!
+/*
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: selected-schedule-page.component.scss
- * Last modified | Ostatnia modyfikacja: 24/05/2022, 23:06
+ * File name | Nazwa pliku: remember-schedule-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 01/06/2022, 19:29
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -16,3 +16,15 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+export class RememberScheduleDataModel {
+    public scheduleName: string;
+    public scheduleRoute: string;
+    public params: { [key: string]: string };
+
+    public constructor(scheduleName: string, scheduleRoute: string, params: { [key: string]: string }) {
+        this.scheduleName = scheduleName;
+        this.scheduleRoute = scheduleRoute;
+        this.params = params;
+    }
+}

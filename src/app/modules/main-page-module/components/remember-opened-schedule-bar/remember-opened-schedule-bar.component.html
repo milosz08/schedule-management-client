@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: remember-opened-schedule-bar.component.html
+  ~ Last modified | Ostatnia modyfikacja: 01/06/2022, 18:45
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div class = 'remember-schedule-bar__container'>
+	<a
+		[routerLink] = '[ "/schedule" ]'
+		[routerLinkActive] = '[ "button--active" ]'
+		[routerLinkActiveOptions] = '{ exact: true }'
+		class = 'remember-schedule-bar__button button--not-include-delete-icon'
+	>
+		Start
+	</a>
+	<a
+		*ngFor = 'let schedData of (_rememberScheduleData$ | async)'
+		[routerLink] = '[ "/schedule/selected-schedule/" + schedData.scheduleRoute ]'
+		[routerLinkActive] = '[ "button--active" ]'
+		[routerLinkActiveOptions] = '{ exact: true }'
+		[queryParams] = 'schedData.params'
+		class = 'remember-schedule-bar__button'
+	>
+		{{ schedData.scheduleName }}
+		<button
+			(click) = 'handleRemoveRememberElement($event, schedData.scheduleName)'
+			title = 'Kliknij aby usunąć zapisane okno'
+			class = 'remember-schedule__remove-button'
+		>
+			<mat-icon class = 'remove-button__time-icon'>clear</mat-icon>
+		</button>
+	</a>
+</div>

@@ -23,6 +23,9 @@
     font-weight: 500;
     margin: 0;
     line-height: 1.1;
+    &.header--margin-from-bottom {
+        margin-bottom: 15px;
+    }
     &::after {
         content: '.';
         font-size: 1.3em;
@@ -65,6 +68,9 @@
     &.app-cms__description-block__container--layeyed-top {
         z-index: 0;
         margin: 10px 0 20px;
+    }
+    &.description-block-container__disabled-max-width {
+        max-width: 100%;
     }
 }
 

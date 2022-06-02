@@ -17,12 +17,20 @@
  * Obiektowe".
  */
 
+import { RememberScheduleDataModel } from './ngrx-models/remember-schedule-data.model';
+
+//----------------------------------------------------------------------------------------------------------------------
+
 export interface InitialSharedStateTypes {
     suspenseLoading: boolean;
+    allRememberScheduleData: Array<RememberScheduleDataModel>;
+    ifInitialLoad: boolean;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 export const initialSharedState: InitialSharedStateTypes = {
     suspenseLoading: false,
+    allRememberScheduleData: [],
+    ifInitialLoad: true,
 };

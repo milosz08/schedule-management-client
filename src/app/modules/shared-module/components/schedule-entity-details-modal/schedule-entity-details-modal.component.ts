@@ -21,23 +21,26 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../../../animations/fade-animations';
+
+import { UserIdentityType } from '../../../../types/user-identity.type';
+import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
+import { ScheduleSubjectDetailsRes } from '../../../../types/schedule-data.type';
 
 import * as NgrxAction_MOD from '../../ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxSelector_MOD from '../../ngrx-store/modals-ngrx-store/modals.selectors';
 import { ModalsReducerType } from '../../ngrx-store/modals-ngrx-store/modals.selectors';
 import * as NgrxSeletecto_SES from '../../ngrx-store/session-ngrx-store/session.selectors';
-import { ScheduleSubjectDetailsRes } from '../../../../types/schedule-data.type';
+
 import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
-import { UserIdentityType } from '../../../../types/user-identity.type';
-import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- *
+ * Komponent odpowiadający za renderowanie widoku wybranego planu zajęć (pobranie zasobów z serwera na podstawie
+ * parametrów zapytania).
  */
 
 @Component({
@@ -66,7 +69,7 @@ export class ScheduleEntityDetailsModalComponent implements OnDestroy {
         private _store: Store<ModalsReducerType>,
         private _serviceConnectorGET: ScheduleDataGetConnectorService,
     ) {
-        this._router.events.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
+        this._router.events.pipe(takeUntil(this._unsubscribe), take(1)).subscribe(() => {
             this.handleCloseModal();
         });
         this._store.select(NgrxSeletecto_SES.sel_userIdentity)

@@ -113,4 +113,7 @@ export class ApiConfigurerHelper {
 
     public readonly GET_STUDY_YEARS = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-study-years';
     public readonly GET_WEEKSDATA_BASE_CURR_YEAR = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-weeks-data-base-curr-year';
+
+    public readonly GET_MASSIVE_QUERY_RESULT = ApiConfigurerHelper.API_PREFIX + 'searchcontent/massive-query-result';
+
 }

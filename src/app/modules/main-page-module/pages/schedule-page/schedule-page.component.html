@@ -141,7 +141,10 @@
 			</app-schedule-departments-list>
 		</div>
 	</section>
-	<section class = 'schedule-content__container'>
-		<router-outlet></router-outlet>
-	</section>
+	<div class = 'schedule-navigation-with-content'>
+		<app-remember-opened-schedule-bar></app-remember-opened-schedule-bar>
+		<section class = 'schedule-content__container'>
+			<router-outlet></router-outlet>
+		</section>
+	</div>
 </main>
