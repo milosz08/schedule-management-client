@@ -41,7 +41,7 @@ import { ImageManipulationService } from '../../shared-module/services/image-man
 })
 export class RememberUserStorageService {
 
-    public static readonly USER_REMEMBER_ACCOUNT: string = "users__remember_accounts" as const;
+    public static readonly USER_REMEMBER_ACCOUNT: string = 'users__remember_accounts' as const;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -114,6 +114,36 @@ export class RememberUserStorageService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
+     * Aktualizacja stanu zdjęcia zapamiętanych użytkownika na podstawie przekazywanego parametru ID (aktualizacja
+     * odbywa się w panelu administratora).
+     */
+    public updateOrDeleteSelectedUserImage(userId: string, imageUri: string, ifRemove: boolean): void {
+        const allAccounts = localStorage.getItem(RememberUserStorageService.USER_REMEMBER_ACCOUNT);
+        if (allAccounts) {
+            const allAccountsAfterParse: Array<RememberAccountModel> = JSON.parse(allAccounts);
+            const findAccountIndex = allAccountsAfterParse.findIndex(user => user.dictionaryHash === userId);
+            if (findAccountIndex !== -1) {
+                if (ifRemove) {
+                    allAccountsAfterParse[findAccountIndex].image = '';
+                    this._storageService.updateLocalStorageContent(RememberUserStorageService.USER_REMEMBER_ACCOUNT,
+                        allAccountsAfterParse);
+                } else {
+                    const image = new Image();
+                    image.src = imageUri;
+                    image.onload = () => {
+                        allAccountsAfterParse[findAccountIndex].image = this._imageManipulationService
+                            .changeImageDimensions(image, 80);
+                        this._storageService.updateLocalStorageContent(RememberUserStorageService.USER_REMEMBER_ACCOUNT,
+                            allAccountsAfterParse);
+                    };
+                }
+            }
+        }
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
      * Metoda zapisująca pierwszego użytkownika w local storage, który posiada zapisany obrazek.
      */
     private saveFirstUserAccountWithImageInStorage(userAccount: RememberAccountModel, imageUri: string): void {
@@ -137,7 +167,7 @@ export class RememberUserStorageService {
         const existingItemsAfterParse: Array<RememberAccountModel> = JSON.parse(jsonAccounts);
 
         const findIfItemExist = existingItemsAfterParse
-            .find(({ dictionaryHash }) => dictionaryHash === userData.dictionaryHash)
+            .find(({ dictionaryHash }) => dictionaryHash === userData.dictionaryHash);
 
         if (!findIfItemExist) { // jeśli konto nie istnieje
             const newUserData = RememberUserStorageService.userDataToStorageDataMapped(userData);

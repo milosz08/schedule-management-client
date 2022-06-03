@@ -83,6 +83,7 @@ import { SearchFormInputComponent } from './components/search-form-input/search-
 import { CmsSortingButtonComponent } from './components/cms-sorting-button/cms-sorting-button.component';
 import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms-left-navigation.component';
 import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
+import { DashboardUserDetailsPanelComponent } from './components/dashboard-user-details-panel/dashboard-user-details-panel.component';
 import { CmsDepartmentWithStudySpecComponent } from './components/cms-department-with-study-spec/cms-department-with-study-spec.component';
 import { CmsListDeleteSingleElementComponent } from './components/cms-list-delete-single-element/cms-list-delete-single-element.component';
 import { CmsChooseScheduleFormEditorComponent } from './components/cms-choose-schedule-form-editor/cms-choose-schedule-form-editor.component';
@@ -183,6 +184,7 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsUserSubjectOrSpecsComboBoxComponent,
         CmsChooseScheduleFormAdministratorComponent,
         CmsListElementRemovableWithPaginationComponent,
+        DashboardUserDetailsPanelComponent,
     ],
     imports: [
         CommonModule,

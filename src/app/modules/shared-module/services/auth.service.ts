@@ -25,6 +25,7 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import { AuthResponseDataModel } from '../../../models/auth-response-data.model';
 import { RefreshTokenResponseModel } from '../../../models/refresh-token.model';
+import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -74,6 +75,32 @@ export class AuthService {
         return this._http.get(
             this._endpoints.GET_USER_IMAGE,
             { responseType: 'blob', headers: { Authorization: `Bearer ${jwt}` }, params: { userId } }
+        );
+    };
+
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodanie zdjęcia/zmiana zdjęcia przez użytkownika.
+     */
+    public addChangeUserImage(image: File): Observable<ResponseServerMessageModel> {
+        const payload = new FormData();
+        payload.append('image', image, image.name);
+        return this._http.post<ResponseServerMessageModel>(
+            this._endpoints.ADD_CHANGE_USER_IMAGE,
+            payload,
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Usunięcie zdjęcia przez użytkownika.
+     */
+    public deleteUserImage(): Observable<ResponseServerMessageModel> {
+        return this._http.delete<ResponseServerMessageModel>(
+            this._endpoints.DELETE_USER_IMAGE,
         );
     };
 }

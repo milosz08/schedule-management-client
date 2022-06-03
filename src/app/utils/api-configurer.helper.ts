@@ -48,6 +48,8 @@ export class ApiConfigurerHelper {
     public readonly GET_ALL_TEACHERS_BASE_DEPT_AND_SUBJ = ApiConfigurerHelper.API_PREFIX + 'users/all-teachers-base-dept-and-subj';
 
     public readonly GET_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/get-avatar';
+    public readonly ADD_CHANGE_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/add-or-change-avatar';
+    public readonly DELETE_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/delete-avatar';
 
     public readonly GET_AVAILABLE_ROLES = ApiConfigurerHelper.API_PREFIX + 'helper/available-roles';
     public readonly AVAILABLE_PAGINATIONS = ApiConfigurerHelper.API_PREFIX + 'helper/available-paginations';

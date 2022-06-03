@@ -26,6 +26,8 @@ export interface InitialSessionStateTypes {
     errorMessage: string;
     userImage: string;
     sessionLeftTime: number;
+    updateImageServerRes: string;
+    ifUpdateImageServerError: boolean;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -35,4 +37,6 @@ export const initialSessionState: InitialSessionStateTypes = {
     errorMessage: '',
     userImage: '',
     sessionLeftTime: 0,
+    updateImageServerRes: '',
+    ifUpdateImageServerError: false,
 };

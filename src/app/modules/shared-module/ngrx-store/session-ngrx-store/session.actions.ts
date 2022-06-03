@@ -44,6 +44,14 @@ export const SESSION_RENEW = '[SESSION] RENEW SESSION';
 export const SAVE_USER_AFTER_SUCCESS_LOGIN = '[SESSION] SAVE USER AFTER SUCCESS LOGIN';
 export const SAVE_USER_IMAGE_AFTER_SUCCESS_LOGIN = '[SESSION] SAVE USER IMAGE AFTER SUCCESS LOGIN';
 
+export const UPDATE_OR_ADD_USER_IMAGE = '[SESSION] UPDATE OR ADD USER IMAGE';
+export const SUCCESS_UPDATE_OR_ADD_USER_IMAGE = '[SESSION] SUCCESS UPDATE OR ADD USER IMAGE';
+export const FAILURE_UPDATE_OR_ADD_USER_IMAGE = '[SESSION] FAILURE UPDATE OR ADD USER IMAGE';
+export const DELETE_USER_IMAGE = '[SESSION] DELETE USER IMAGE';
+export const SUCCESS_DELETE_USER_IMAGE = '[SESSION] SUCCESS DELETE USER IMAGE';
+export const FAILURE_DELETE_USER_IMAGE = '[SESSION] FAILURE DELETE USER IMAGE';
+export const CHANGE_USER_IMAGE_ERROR_MESSAGE = '[SESSION] CHANGE USER IMAGE ERROR MESSAGE';
+
 //----------------------------------------------------------------------------------------------------------------------
 
 export const __login = createAction(
@@ -115,4 +123,38 @@ export const __saveUserAfterSuccessLogin = createAction(
 export const __saveUserImageAfterSuccessLogin = createAction(
     SAVE_USER_IMAGE_AFTER_SUCCESS_LOGIN,
     props<{ userData: AuthResponseDataModel | null, userImage: string }>(),
+);
+
+export const __updateOrAddUserImage = createAction(
+    UPDATE_OR_ADD_USER_IMAGE,
+    props<{ userImage: File }>(),
+);
+
+export const __successUpdateOrAddUserImage = createAction(
+    SUCCESS_UPDATE_OR_ADD_USER_IMAGE,
+    props<{ serverRes: string, userImageUrl: string }>(),
+);
+
+export const __failureUpdateOrAddUserImage = createAction(
+    FAILURE_UPDATE_OR_ADD_USER_IMAGE,
+    props<{ serverRes: string }>(),
+);
+
+export const __deleteUserImage = createAction(
+    DELETE_USER_IMAGE,
+);
+
+export const __successDeleteUserImage = createAction(
+    SUCCESS_DELETE_USER_IMAGE,
+    props<{ serverRes: string }>(),
+);
+
+export const __failureDeleteUserImage = createAction(
+    FAILURE_DELETE_USER_IMAGE,
+    props<{ serverRes: string }>(),
+);
+
+export const __changeUserImageErrorMessage = createAction(
+    CHANGE_USER_IMAGE_ERROR_MESSAGE,
+    props<{ serverRes: string, ifError?: boolean }>(),
 );
