@@ -73,6 +73,7 @@
 
 .user-details__change-image-label {
     margin-bottom: 15px;
+    max-width: 200px;
     .user-details__change-image-input {
         opacity: 0;
         position: absolute;
@@ -99,12 +100,16 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 @media only screen and (max-width: 1634px) {
+    .user-details__change-image-label {
+        max-width: fit-content;
+    }
     .user-details__change-image-containter {
         flex-direction: row;
         width: 100%;
         margin: 30px 0 20px;
+        max-height: 37px;
         :nth-of-type(1) {
-            margin-right: 20px;
+            margin-right: 0;
         }
     }
 }
@@ -121,14 +126,15 @@
         margin-left: 0;
     }
     .user-details__change-image-containter {
+        height: fit-content;
+        max-height: fit-content;
         flex-direction: column;
         margin: 20px 0;
-        height: fit-content;
+        .user-details__change-image-label {
+            max-width: 100%;
+        }
         button, .user-details__change-image-text {
             width: 100%;
-        }
-        :nth-of-type(1) {
-            margin-right: 0;
         }
     }
 }
