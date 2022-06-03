@@ -105,6 +105,15 @@
     padding: 0 30px;
 }
 
+.app__server-response-field {
+    color: var(--darkRedColor);
+    text-align: center;
+    margin: 20px 0;
+    &.success-message {
+        color: var(--greenDarkColor);
+    }
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 
 @media only screen and (max-width: 1090px) {

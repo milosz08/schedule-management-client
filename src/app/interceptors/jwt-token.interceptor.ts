@@ -58,7 +58,6 @@ export class JwtTokenInterceptor implements HttpInterceptor {
      * sprawdzając ważność JWT (jeśli jest nieważny podczas wykonywania zapytanania, wygeneruje nowy).
      */
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
-        req = req.clone({ headers: req.headers.set('Content-Type', 'application/json; charset=utf-8') });
         const person: AuthResponseDataModel | null = this._storage.getUserFromStorage();
         if (person) {
             req = JwtTokenInterceptor.addTokenHeader(req, person.bearerToken);
