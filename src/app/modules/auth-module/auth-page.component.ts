@@ -17,10 +17,9 @@
  * Obiektowe".
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as NgrxAction_REM from './ngrx-store/remember-user-ngrx-store/remember-user.actions';
 import { RememberUserReducerType } from './ngrx-store/remember-user-ngrx-store/remember-user.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -33,15 +32,10 @@ import { RememberUserReducerType } from './ngrx-store/remember-user-ngrx-store/r
     selector: 'app-auth-page',
     templateUrl: './auth-page.component.html',
 })
-export class AuthPageComponent implements OnInit {
+export class AuthPageComponent {
 
     public constructor(
        private _store: Store<RememberUserReducerType>,
     ) {
-    };
-
-    // automatyczne ładowanie zapisanych kont
-    public ngOnInit(): void {
-        this._store.dispatch(NgrxAction_REM.__loadAllAccounts());
     };
 }
