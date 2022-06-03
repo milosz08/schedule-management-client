@@ -62,9 +62,9 @@
 }
 
 .user-additional-information__container {
+    word-break: break-all;
     .user-additional-informations__elements {
         margin-top: 10px;
-        font-size: 1.1rem;
         p {
             margin: 5px 0;
         }
@@ -72,7 +72,6 @@
 }
 
 .user-details__change-image-label {
-    max-width: 200px;
     margin-bottom: 15px;
     .user-details__change-image-input {
         opacity: 0;
@@ -102,10 +101,34 @@
 @media only screen and (max-width: 1634px) {
     .user-details__change-image-containter {
         flex-direction: row;
-        height: fit-content;
+        width: 100%;
         margin: 30px 0 20px;
         :nth-of-type(1) {
             margin-right: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .user-details__image-with-data {
+        flex-direction: column;
+        width: 100%;
+        .user-details__image {
+            margin-bottom: 20px;
+        }
+    }
+    .user-details__description {
+        margin-left: 0;
+    }
+    .user-details__change-image-containter {
+        flex-direction: column;
+        margin: 20px 0;
+        height: fit-content;
+        button, .user-details__change-image-text {
+            width: 100%;
+        }
+        :nth-of-type(1) {
+            margin-right: 0;
         }
     }
 }
