@@ -42,6 +42,7 @@
     }
     .user-details__paragraph {
         font-size: 1rem;
+        color: var(--lightGrayColor);
         strong {
             color: var(--darkBlueColor);
         }
@@ -66,7 +67,11 @@
     .user-additional-informations__elements {
         margin-top: 10px;
         p {
+            color: var(--lightGrayColor);
             margin: 5px 0;
+            strong {
+                color: var(--darkBlueColor);
+            }
         }
     }
 }

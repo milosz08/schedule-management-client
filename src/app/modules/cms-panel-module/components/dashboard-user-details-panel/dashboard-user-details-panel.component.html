@@ -71,7 +71,7 @@
 			</label>
 			<button
 				(click) = 'handleRemoveUserImage()'
-				[disabled] = '!(_ifHasImage | async)'
+				[disabled] = '!(_ifHasImage$ | async)'
 				class = 'app__button app__button--danger-light'
 				title = 'Kliknij aby usunąć zdjęcie'
 			>
@@ -80,25 +80,25 @@
 		</div>
 	</div>
 	<p
-		*ngIf = '_changeImageMess | async'
-		[ngClass] = '[ "app__server-response-field", (_ifChangeIsError | async) ? "" : "success-message" ]'
+		*ngIf = '_changeImageMess$ | async'
+		[ngClass] = '[ "app__server-response-field", (_ifChangeIsError$ | async) ? "" : "success-message" ]'
 	>
-		{{ _changeImageMess | async }}
+		{{ _changeImageMess$ | async }}
 	</p>
 	<div class = 'user-additional-information__container'>
 		<h2 class = 'app-cms__header-h2'>Dodatkowe informacje</h2>
 		<div class = 'user-additional-informations__elements'>
 			<p class = 'user-details__paragraph'>
-				Adres email: <strong>milosz.gilga456@schedule.miloszgilga.pl</strong>
+				Adres email: <strong>{{ _dashboardDetailsData.email }}</strong>
 			</p>
 			<p class = 'user-details__paragraph'>
-				Skrót systemowy: <strong>ShaDra</strong>
+				Skrót systemowy: <strong>{{ _dashboardDetailsData.shortcut }}</strong>
 			</p>
 			<p class = 'user-details__paragraph'>
-				Miejscowość zamieszkania: <strong>Gliwice</strong>
+				Miejscowość zamieszkania: <strong>{{ _dashboardDetailsData.city }}</strong>
 			</p>
 			<p class = 'user-details__paragraph'>
-				Narodowość: <strong>Polska</strong>
+				Narodowość: <strong>{{ _dashboardDetailsData.nationality }}</strong>
 			</p>
 		</div>
 	</div>
