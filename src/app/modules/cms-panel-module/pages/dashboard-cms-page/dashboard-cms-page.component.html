@@ -17,15 +17,40 @@
   ~ Obiektowe".
   -->
 
-<div class = 'cms-dashboard__grid-container'>
-	<app-dashboard-user-details-panel class = 'cms-dashboard__grid-element'></app-dashboard-user-details-panel>
-	<section class = 'cms-dashboard__grid-element'>
-		123
-	</section>
-	<section class = 'cms-dashboard__grid-element'>
-		123
-	</section>
-	<section class = 'cms-dashboard__grid-element'>
-		123
-	</section>
-</div>
+<aside
+	*ngIf = '_ifLoadingContent; else showContentOrError'
+	class = 'cms-dashboard__loading-content'
+>
+	<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+</aside>
+<ng-template #showContentOrError>
+	<aside
+		*ngIf = '_ifServerError; else showLoadedContent'
+		class = 'cms-dashboard__loading-data-issue'
+	>
+		<img src = 'assets/images/info-important-icon.svg' alt = ''/>
+		<p class = 'loading-data-issue__description'>
+			Wystąpił problem podczas ładowania danych.<br>Spróbuj ponownie lub odśwież stronę.
+		</p>
+	</aside>
+	<ng-template #showLoadedContent>
+		<div class = 'cms-dashboard__grid-container'>
+			<app-dashboard-user-details-panel
+				[_dashboardDetailsData] = '_dashboardDetailsData'
+				class = 'cms-dashboard__grid-element'
+			></app-dashboard-user-details-panel>
+			<app-dashboard-database-elements-plot
+				[_dashboardDetailsData] = '_dashboardDetailsData'
+				class = 'cms-dashboard__grid-element'
+			></app-dashboard-database-elements-plot>
+			<app-dashboard-user-connections
+				[_dashboardDetailsData] = '_dashboardDetailsData'
+				class = 'cms-dashboard__grid-element'
+			></app-dashboard-user-connections>
+			<app-dashboard-database-roles-plot
+				[_dashboardDetailsData] = '_dashboardDetailsData'
+				class = 'cms-dashboard__grid-element'
+			></app-dashboard-database-roles-plot>
+		</div>
+	</ng-template>
+</ng-template>

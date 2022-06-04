@@ -1,0 +1,115 @@
+/*!
+ * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+ * Silesian University of Technology | Politechnika Śląska
+ *
+ * File name | Nazwa pliku: _cms-round-plot-templates.scss
+ * Last modified | Ostatnia modyfikacja: 03/06/2022, 21:51
+ * Project name | Nazwa Projektu: angular-po-schedule-management-client
+ *
+ * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+ * Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+ *
+ * Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+ * for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+ *
+ * Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+ * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+ * Obiektowe".
+ */
+
+.app__cms-dashboard-round-plot__container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.dashboard-round-plot__data-and-plot__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+    .dashboard-round-plot__data-values__container {
+        .data-values__single-value {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            color: var(--lightGrayColor);
+            strong {
+                margin-left: 7px;
+                color: var(--darkBlueColor);
+            }
+        }
+    }
+}
+
+.single-value__dot-indicator {
+    display: block;
+    margin-right: 10px;
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    &.dot-color--teacher {
+        background-color: var(--teacherColor);
+    }
+    &.dot-color--editor {
+        background-color: var(--editorColor);
+    }
+    &.dot-color--administrator {
+        background-color: var(--administratorColor);
+    }
+    &.dot-color--student {
+        background-color: var(--studentColor);
+    }
+    &.dot-color--department {
+        background-color: var(--departmentColor);
+    }
+    &.dot-color--cathedral {
+        background-color: var(--cathedralColor);
+    }
+    &.dot-color--study-room {
+        background-color: var(--studyRoomColor);
+    }
+    &.dot-color--study-spec {
+        background-color: var(--studySpecColor);
+    }
+    &.dot-color--study-subject {
+        background-color: var(--studySubjectColor);
+    }
+    &.dot-color--study-group {
+        background-color: var(--studyGroupColor);
+    }
+}
+
+.dashboard-round-plot__plot-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .plot-container__total-number {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2.1rem;
+        font-weight: 500;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1250px) {
+    .app__cms-dashboard-round-plot__container {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .dashboard-round-plot__data-and-plot__container {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .dashboard-round-plot__plot-container {
+        margin-top: 20px;
+    }
+}

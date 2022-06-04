@@ -1,0 +1,84 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: dashboard-database-roles-plot.component.html
+  ~ Last modified | Ostatnia modyfikacja: 03/06/2022, 21:51
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<div
+	*ngIf = '(_userIdentity$ | async) === _identity.ADMINISTRATOR'
+	class = 'app__cms-dashboard-round-plot__container'
+>
+	<h2 class = 'app-cms__header-h2'>Użytkownicy w systemie</h2>
+	<div class = 'dashboard-round-plot__data-and-plot__container'>
+		<div class = 'dashboard-round-plot__data-values__container'>
+			<p class = 'data-values__single-value'>
+				<span class = 'single-value__dot-indicator dot-color--student'></span>
+				Ilość studentów:
+				<strong>{{ _dashboardDetailsData.dashboardUserTypesCount.studentsCount }}</strong>
+			</p>
+			<p class = 'data-values__single-value'>
+				<span class = 'single-value__dot-indicator dot-color--editor'></span>
+				Ilość edytorów:
+				<strong>{{ _dashboardDetailsData.dashboardUserTypesCount.editorsCount }}</strong>
+			</p>
+			<p class = 'data-values__single-value'>
+				<span class = 'single-value__dot-indicator dot-color--teacher'></span>
+				Ilość nauczycieli:
+				<strong>{{ _dashboardDetailsData.dashboardUserTypesCount.teachersCount }}</strong>
+			</p>
+			<p class = 'data-values__single-value'>
+				<span class = 'single-value__dot-indicator dot-color--administrator'></span>
+				Ilość administratorów:
+				<strong>{{ _dashboardDetailsData.dashboardUserTypesCount.administratorsCount }}</strong>
+			</p>
+		</div>
+		<div class = 'dashboard-round-plot__plot-container'>
+			<svg xmlns = 'http://www.w3.org/2000/svg' viewBox = '0 0 50 50' width = '200' height = '200'>
+				<circle
+					class = 'users-circles___svg'
+					r = '21' cx = '25' cy = '25'
+					fill = 'transparent' stroke = 'var(--administratorColor)'
+					stroke-width = '5'
+					transform = 'rotate(-90) translate(-50)'
+				/>
+				<circle
+					class = 'users-circles___svg'
+					r = '21' cx = '25' cy = '25'
+					fill = 'transparent' stroke = 'var(--editorColor)'
+					stroke-width = '5'
+					transform = 'rotate(-90) translate(-50)'
+				/>
+				<circle
+					class = 'users-circles___svg'
+					r = '21' cx = '25' cy = '25'
+					fill = 'transparent' stroke = 'var(--teacherColor)'
+					stroke-width = '5'
+					transform = 'rotate(-90) translate(-50)'
+				/>
+				<circle
+					class = 'users-circles___svg'
+					r = '21' cx = '25' cy = '25'
+					fill = 'transparent' stroke = 'var(--studentColor)'
+					stroke-width = '5'
+					transform = 'rotate(-90) translate(-50)'
+				/>
+			</svg>
+			<div class = 'plot-container__total-number'>
+				{{ _dashboardDetailsData.dashboardUserTypesCount.allElements }}
+			</div>
+		</div>
+	</div>
+</div>

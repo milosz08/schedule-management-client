@@ -17,6 +17,25 @@
  * Obiektowe".
  */
 
+.cms-dashboard__loading-content,
+.cms-dashboard__loading-data-issue {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    img {
+        width: 130px;
+        height: 130px;
+    }
+    .loading-data-issue__description {
+        color: var(--darkRedColor);
+        text-align: center;
+        font-size: 1.1rem;
+    }
+}
+
 .cms-dashboard__grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
