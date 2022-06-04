@@ -83,12 +83,15 @@ import { SearchFormInputComponent } from './components/search-form-input/search-
 import { CmsSortingButtonComponent } from './components/cms-sorting-button/cms-sorting-button.component';
 import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms-left-navigation.component';
 import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
+import { DashboardUserConnectionsComponent } from './components/dashboard-user-connections/dashboard-user-connections.component';
 import { DashboardUserDetailsPanelComponent } from './components/dashboard-user-details-panel/dashboard-user-details-panel.component';
+import { DashboardDatabaseRolesPlotComponent } from './components/dashboard-database-roles-plot/dashboard-database-roles-plot.component';
 import { CmsDepartmentWithStudySpecComponent } from './components/cms-department-with-study-spec/cms-department-with-study-spec.component';
 import { CmsListDeleteSingleElementComponent } from './components/cms-list-delete-single-element/cms-list-delete-single-element.component';
 import { CmsChooseScheduleFormEditorComponent } from './components/cms-choose-schedule-form-editor/cms-choose-schedule-form-editor.component';
 import { AddEditScheduleActivityFormComponent } from './components/add-edit-schedule-activity-form/add-edit-schedule-activity-form.component';
 import { AddEditScheduleActivityModalComponent } from './components/add-edit-schedule-activity-modal/add-edit-schedule-activity-modal.component';
+import { DashboardDatabaseElementsPlotComponent } from './components/dashboard-database-elements-plot/dashboard-database-elements-plot.component';
 import { DepartmentWithCathedralInputsComponent } from './components/department-with-cathedral-inputs/department-with-cathedral-inputs.component';
 import { CmsUserSubjectOrSpecsComboBoxComponent } from './components/cms-user-subject-or-specs-combo-box/cms-user-subject-or-specs-combo-box.component';
 import { CmsChooseScheduleFormAdministratorComponent } from './components/cms-choose-schedule-form-administrator/cms-choose-schedule-form-administrator.component';
@@ -185,6 +188,9 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsChooseScheduleFormAdministratorComponent,
         CmsListElementRemovableWithPaginationComponent,
         DashboardUserDetailsPanelComponent,
+        DashboardUserConnectionsComponent,
+        DashboardDatabaseElementsPlotComponent,
+        DashboardDatabaseRolesPlotComponent,
     ],
     imports: [
         CommonModule,
