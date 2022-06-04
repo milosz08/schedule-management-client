@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: session.initial.ts
- * Last modified | Ostatnia modyfikacja: 02/05/2022, 17:56
+ * File name | Nazwa pliku: dashboard-details-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 03/06/2022, 16:53
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,26 +17,41 @@
  * Obiektowe".
  */
 
-import { AuthResponseDataModel } from '../../../../models/auth-response-data.model';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface InitialSessionStateTypes {
-    userData: AuthResponseDataModel | null;
-    errorMessage: string;
-    userImage: string;
-    sessionLeftTime: number;
-    updateImageServerRes: string;
-    ifUpdateImageServerError: boolean;
+export interface DashboardDetailsDataModel {
+    email: string;
+    shortcut: string;
+    city: string;
+    nationality: string;
+    departmentFullName: string;
+    cathedralFullName: string;
+    studySpecializations: Array<string>;
+    studySubjects: Array<string>;
+    dashboardElementsCount: DashboardElementsCount,
+    dashboardUserTypesCount: DashboardUserTypesCount
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const initialSessionState: InitialSessionStateTypes = {
-    userData: null,
-    errorMessage: '',
-    userImage: '',
-    sessionLeftTime: 0,
-    updateImageServerRes: '',
-    ifUpdateImageServerError: false,
-};
+interface DashboardElementsCount extends DashboardBaseCount {
+    departmentsCount: number;
+    cathedralsCount: number;
+    studyRoomsCount: number;
+    studySpecializationsCount: number;
+    studySubjectsCount: number;
+    studyGroupsCount: number;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+interface DashboardUserTypesCount extends DashboardBaseCount {
+    studentsCount: number;
+    teachersCount: number;
+    editorsCount: number;
+    administratorsCount: number;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+interface DashboardBaseCount {
+    allElements: number;
+}

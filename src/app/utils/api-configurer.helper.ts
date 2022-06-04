@@ -43,11 +43,14 @@ export class ApiConfigurerHelper {
 
     public readonly DELETE_USER = ApiConfigurerHelper.API_PREFIX + 'users/delete';
     public readonly CMS_FILTERED_ALL_USERS = ApiConfigurerHelper.API_PREFIX + 'users/all-users';
+    public readonly GET_DASHBOARD_DETAILS = ApiConfigurerHelper.API_PREFIX + 'users/dashboard-details';
     public readonly MASSIVE_DELETE_USERS = ApiConfigurerHelper.API_PREFIX + 'users/delete-massive';
     public readonly GET_ALL_EMPLOYEERS_SCHEDULE = ApiConfigurerHelper.API_PREFIX + 'users/all-employeers-schedule';
     public readonly GET_ALL_TEACHERS_BASE_DEPT_AND_SUBJ = ApiConfigurerHelper.API_PREFIX + 'users/all-teachers-base-dept-and-subj';
 
     public readonly GET_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/get-avatar';
+    public readonly ADD_CHANGE_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/add-or-change-avatar';
+    public readonly DELETE_USER_IMAGE = ApiConfigurerHelper.API_PREFIX + 'file/delete-avatar';
 
     public readonly GET_AVAILABLE_ROLES = ApiConfigurerHelper.API_PREFIX + 'helper/available-roles';
     public readonly AVAILABLE_PAGINATIONS = ApiConfigurerHelper.API_PREFIX + 'helper/available-paginations';

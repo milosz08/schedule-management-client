@@ -76,6 +76,42 @@ const _sessionReducer = createReducer(
             sessionLeftTime: action.time,
         };
     }),
+    on(NgrxAction.__successUpdateOrAddUserImage, (state, action) => {
+        return { ...state,
+            userData: { ...state.userData!,
+                hasPicture: true,
+            },
+            userImage: action.userImageUrl,
+            updateImageServerRes: action.serverRes,
+        };
+    }),
+    on(NgrxAction.__failureUpdateOrAddUserImage, (state, action) => {
+        return { ...state,
+            updateImageServerRes: action.serverRes,
+            ifUpdateImageServerError: true,
+        };
+    }),
+    on(NgrxAction.__successDeleteUserImage, (state, action) => {
+        return { ...state,
+            userData: { ...state.userData!,
+                hasPicture: false,
+            },
+            userImage: '',
+            updateImageServerRes: action.serverRes,
+        };
+    }),
+    on(NgrxAction.__failureDeleteUserImage, (state, action) => {
+        return { ...state,
+            updateImageServerRes: action.serverRes,
+            ifUpdateImageServerError: true,
+        };
+    }),
+    on(NgrxAction.__changeUserImageErrorMessage, (state, action) => {
+        return { ...state,
+            updateImageServerRes: action.serverRes,
+            ifUpdateImageServerError: Boolean(action.ifError),
+        };
+    }),
 );
 
 //----------------------------------------------------------------------------------------------------------------------

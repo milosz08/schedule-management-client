@@ -97,3 +97,11 @@ export const sel_sessionSoonLogout = selectorWithInjectedStore(
 export const sel_userConnectedDepartment = selectorWithInjectedStore(
     state => state.userData?.connectedWithDepartment || '',
 );
+
+export const sel_updateUserImageServerMess = selectorWithInjectedStore(
+    state => state.updateImageServerRes,
+);
+
+export const sel_ifUpdateUserImageServerError = selectorWithInjectedStore(
+    state => state.ifUpdateImageServerError,
+);

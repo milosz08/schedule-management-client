@@ -24,6 +24,7 @@ import { Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 import { AvailableDataModel, NameWithId } from '../models/cms-drop-lists-data.model';
+import { DashboardDetailsDataModel } from '../models/dashboard-details-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -136,6 +137,17 @@ export class CmsGetQueryConnectorService {
         return this._http.get<AvailableDataModel<string>>(
             this._endpoints.GET_ALL_STUDY_SUBJECTS_BASE_DEPT,
             { params: { subjcName, deptId, studySpecId } },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca szegółowe dane na temat konta (oraz serwera dla admina) w panelu głównym.
+     */
+    public getDashboardUserData(): Observable<DashboardDetailsDataModel> {
+        return this._http.get<DashboardDetailsDataModel>(
+            this._endpoints.GET_DASHBOARD_DETAILS,
         );
     };
 }

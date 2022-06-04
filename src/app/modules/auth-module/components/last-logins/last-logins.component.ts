@@ -17,9 +17,9 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
@@ -39,7 +39,7 @@ import * as NgrxSelector_REM from '../../ngrx-store/remember-user-ngrx-store/rem
     templateUrl: './last-logins.component.html',
     styleUrls: [ './last-logins.component.scss' ]
 })
-export class LastLoginsComponent {
+export class LastLoginsComponent implements OnInit {
 
     public _getAllSavedAccounts$: Observable<Array<RememberAccountModel>> = this._store
         .select(NgrxSelector_REM.sel_allSavedAccounts);
@@ -53,6 +53,10 @@ export class LastLoginsComponent {
     };
 
     //------------------------------------------------------------------------------------------------------------------
+
+    public ngOnInit(): void { // automatyczne ładowanie zapisanych kont
+        this._store.dispatch(NgrxAction_REM.__loadAllAccounts());
+    };
 
     public handleRemoveAllSavedAccounts(): void {
         this._getAllSavedAccounts$.subscribe(savedAccounts => {

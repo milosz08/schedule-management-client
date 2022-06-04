@@ -17,10 +17,16 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
+import { catchError, delay, map, of, Subject, take } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { DashboardDetailsDataModel } from '../../models/dashboard-details-data.model';
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -31,14 +37,47 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 @Component({
     selector: 'app-dashboard-cms-page',
     templateUrl: './dashboard-cms-page.component.html',
-    styleUrls: [ './dashboard-cms-page.component.scss' ]
+    styleUrls: [ './dashboard-cms-page.component.scss' ],
+    providers: [ CmsGetQueryConnectorService ],
 })
-export class DashboardCmsPageComponent extends MetaWebContentHelper {
+export class DashboardCmsPageComponent extends MetaWebContentHelper implements OnDestroy {
 
-    constructor(
+    public _dashboardDetailsData!: DashboardDetailsDataModel;
+    public _ifLoadingContent: boolean = true;
+    public _ifServerError: boolean = false;
+
+    private _unsubscribe: Subject<void> = new Subject();
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public constructor(
         titleService: Title,
         metaService: Meta,
+        private _serviceGET: CmsGetQueryConnectorService,
     ) {
         super(titleService, metaService, AllCmsWebpages.DASHBOARD);
+        this._serviceGET.getDashboardUserData().pipe(
+            take(1),
+            takeUntil(this._unsubscribe),
+            delay(500),
+            map(data => {
+                this._ifLoadingContent = false;
+                return data;
+            }),
+            catchError(() => {
+                this._ifLoadingContent = false;
+                this._ifServerError = true;
+                return of(null);
+            }),
+        ).subscribe(data => {
+            this._dashboardDetailsData = data!;
+        });
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public ngOnDestroy(): void {
+        this._unsubscribe.next();
+        this._unsubscribe.complete();
     };
 }

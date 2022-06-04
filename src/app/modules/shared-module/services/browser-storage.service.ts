@@ -130,4 +130,34 @@ export class BrowserStorageService {
         localStorage.removeItem(key);
         localStorage.setItem(key, JSON.stringify(value));
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Dodawanie zdjęcia do local storage użytkownika.
+     */
+    public addUpdateUserImage(userImage: Blob): string {
+        const user = this.getUserFromStorage();
+        let image = '';
+        if (user) {
+            user.hasPicture = true;
+            image = this.setUserImageInStorage(userImage);
+        }
+        this.updateLocalStorageContent(BrowserStorageService.USER_DATA_KEY, user);
+        return image;
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Usuwanie zdjęcia użytkownika z magazynu local storage.
+     */
+    public deleteUserImage(): void {
+        const user = this.getUserFromStorage();
+        if (user) {
+            user.hasPicture = false;
+            localStorage.removeItem(BrowserStorageService.USER_IMAGE_KEY);
+        }
+        this.updateLocalStorageContent(BrowserStorageService.USER_DATA_KEY, user);
+    };
 }

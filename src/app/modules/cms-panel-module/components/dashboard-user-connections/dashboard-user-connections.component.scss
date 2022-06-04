@@ -1,9 +1,9 @@
-/*
+/*!
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: auth-page.component.ts
- * Last modified | Ostatnia modyfikacja: 22/04/2022, 01:16
+ * File name | Nazwa pliku: dashboard-user-connections.component.scss
+ * Last modified | Ostatnia modyfikacja: 03/06/2022, 19:33
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,25 +17,18 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+.dashboard-connections__container {
+    margin-top: 15px;
+}
 
-import { RememberUserReducerType } from './ngrx-store/remember-user-ngrx-store/remember-user.selectors';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-/**
- * Komponent inicjalizujący generowanie widoków ścieżek autentykacji użytkowników.
- */
-
-@Component({
-    selector: 'app-auth-page',
-    templateUrl: './auth-page.component.html',
-})
-export class AuthPageComponent {
-
-    public constructor(
-       private _store: Store<RememberUserReducerType>,
-    ) {
-    };
+.dashboard-connection__single-element-container {
+    margin: 10px 0;
+    .single-element__description {
+        color: var(--lightGrayColor);
+    }
+    .single-element__value {
+        margin-top: 3px;
+        color: var(--darkBlueColor);
+        font-weight: 500;
+    }
 }

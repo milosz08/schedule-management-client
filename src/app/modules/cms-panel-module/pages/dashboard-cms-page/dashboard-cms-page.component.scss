@@ -16,3 +16,53 @@
  * Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
  * Obiektowe".
  */
+
+.cms-dashboard__loading-content,
+.cms-dashboard__loading-data-issue {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    img {
+        width: 130px;
+        height: 130px;
+    }
+    .loading-data-issue__description {
+        color: var(--darkRedColor);
+        text-align: center;
+        font-size: 1.1rem;
+    }
+}
+
+.cms-dashboard__grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1px;
+    background-color: var(--extraLightGrayColor);
+    height: 100%;
+    width: 100%;
+    .cms-dashboard__grid-element {
+        padding: 30px;
+        background-color: var(--mainWhiteColor);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+@media only screen and (max-width: 1250px) {
+    .cms-dashboard__grid-container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: initial;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .cms-dashboard__grid-container {
+        .cms-dashboard__grid-element {
+            padding: 15px;
+        }
+    }
+}

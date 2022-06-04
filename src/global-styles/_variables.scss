@@ -35,10 +35,18 @@
     --orangeDarkColor:      #ce8906;
 
     // Role
-    --administratorColor:   #c51654;
-    --editorColor:          #18bec4;
-    --teacherColor: #de6e1e;
-    --studentColor:         #179837;
+    --administratorColor:   #ff9671;
+    --editorColor:          #b39cd0;
+    --teacherColor:         #ffc75f;
+    --studentColor:         #ff6f91;
+
+    // wykresy kołowe
+    --departmentColor:      #845ec2;
+    --cathedralColor:       #b39cd0;
+    --studyRoomColor:       #d65db1;
+    --studySpecColor:       #ff6f91;
+    --studySubjectColor:    #ff9671;
+    --studyGroupColor:      #ffc75f;
 
     // Dostępność
     --accesibilityColor:    var(--lightGrayColor);
