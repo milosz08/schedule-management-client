@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable, Subject } from 'rxjs';
@@ -25,15 +25,17 @@ import { Observable, Subject } from 'rxjs';
 import * as NgrxAction_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.actions';
 import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
-import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { DashboardDetailsDataModel } from '../../models/dashboard-details-data.model';
 import { BrowserStorageService } from '../../../shared-module/services/browser-storage.service';
+import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
 import { CmsPostConnectorService } from '../../services/cms-post-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- *
+ * Komponent odpowiedzialny za renderowanie sekcji z podstawowymi danymi użytkownika oraz możliwością zmiany lub
+ * usunięcia zdjęcia profilowego.
  */
 
 @Component({
@@ -49,9 +51,11 @@ export class DashboardUserDetailsPanelComponent implements OnDestroy {
     public _userAuthLevel$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userAuthLevel);
     public _userLogin$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userLogin);
 
-    public _changeImageMess: Observable<string> = this._store.select(NgrxSelector_SES.sel_updateUserImageServerMess);
-    public _ifChangeIsError: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUpdateUserImageServerError);
-    public _ifHasImage: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserHasImage);
+    public _changeImageMess$: Observable<string> = this._store.select(NgrxSelector_SES.sel_updateUserImageServerMess);
+    public _ifChangeIsError$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUpdateUserImageServerError);
+    public _ifHasImage$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserHasImage);
+
+    @Input() public _dashboardDetailsData!: DashboardDetailsDataModel;
 
     public _imageName: string = '';
     private _unsubscribe: Subject<void> = new Subject();
