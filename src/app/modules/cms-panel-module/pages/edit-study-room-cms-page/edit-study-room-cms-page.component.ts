@@ -37,7 +37,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 })
 export class EditStudyRoomCmsPageComponent extends MetaWebContentHelper {
 
-    public _editRoomId: string | null = '';
+    public _editRoomId: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +47,6 @@ export class EditStudyRoomCmsPageComponent extends MetaWebContentHelper {
         private _route: ActivatedRoute,
     ) {
         super(titleService, metaService, AllCmsWebpages.EDIT_STUDY_ROOM);
-        this._editRoomId = this._route.snapshot.paramMap.get('roomId');
+        this._editRoomId = Number(this._route.snapshot.paramMap.get('roomId'));
     };
 }
