@@ -2,7 +2,7 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: new-user-informations.component.html
+  ~ File name | Nazwa pliku: new-updatable-user-informations.component.html
   ~ Last modified | Ostatnia modyfikacja: 11/05/2022, 20:13
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
@@ -62,10 +62,14 @@
 </ng-template>
 <ng-template #suspenseLoading>
 	<div class = 'app-cms__description-block__container'>
-		Po dodaniu nowego użytkownika w tym oknie zostanie wyświetlona wygenerowana zawartość przez serwer składająca
-		się na imię, nazwisko oraz podstawowe informacje poczty. Kopia zostanie również wysłana na adres email.
+		Po {{ __textContentDependsOfFunc.first }} użytkownika w tym oknie zostanie wyświetlona wygenerowana zawartość
+		przez serwer składająca się na imię, nazwisko oraz podstawowe informacje poczty.
+		<ng-container *ngIf = '!_ifEditMode'>Kopia zostanie również wysłana na adres email.</ng-container>
 	</div>
-	<div class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'>
+	<div
+		*ngIf = '!_ifEditMode'
+		class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'
+	>
 		Część informacji (takich jak na przykład wygenerowane hasło dla użytkownika) zostanie wysłane w wiadomości email
 		tylko i wyłącznie do stworzonego użytkownika (z uwagi na ochronę danych).
 	</div>

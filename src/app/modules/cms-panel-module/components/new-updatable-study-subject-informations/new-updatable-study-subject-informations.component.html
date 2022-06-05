@@ -2,8 +2,8 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: new-study-group-informations.component.html
-  ~ Last modified | Ostatnia modyfikacja: 21/05/2022, 13:42
+  ~ File name | Nazwa pliku: new-updatable-study-subject-informations.component.html
+  ~ Last modified | Ostatnia modyfikacja: 18/05/2022, 01:29
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
   ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,24 +17,19 @@
   ~ Obiektowe".
   -->
 
-<ng-container *ngIf = '_groupData; else basicDataInfoAndSusLoading'>
+<ng-container *ngIf = '_subjectData; else basicDataInfoAndSusLoading'>
 	<div class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'>
 		Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres zostaną usunięte z podglądu.
 	</div>
-	<div
-		*ngFor = 'let group of _groupData'
-		class = 'new-study-spec-info__res-data-container'
-	>
-		<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container angular-info-grid'>
-			<div class = 'cms__simple-grid__label'>Nazwa grupy:</div>
-			<div class = 'cms__simple-grid__text'>{{ group.name }}</div>
-			<div class = 'cms__simple-grid__label'>Nazwa wydziału:</div>
-			<div class = 'cms__simple-grid__text'>{{ group.departmentFullName }}</div>
-			<div class = 'cms__simple-grid__label'>Nazwa kierunku:</div>
-			<div class = 'cms__simple-grid__text'>{{ group.studySpecFullName }}</div>
-			<div class = 'cms__simple-grid__label'>Semestr:</div>
-			<div class = 'cms__simple-grid__text'>{{ group.semesterName }}</div>
-		</div>
+	<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container'>
+		<div class = 'cms__simple-grid__label'>Nazwa przedmiotu:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.name }}</div>
+		<div class = 'cms__simple-grid__label'>Alias przedmiotu:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.alias }}</div>
+		<div class = 'cms__simple-grid__label'>Wydział:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.departmentFullName }}</div>
+		<div class = 'cms__simple-grid__label'>Kierunek:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.studySpecFullName }}</div>
 	</div>
 </ng-container>
 <ng-template #basicDataInfoAndSusLoading>
@@ -46,8 +41,8 @@
 </ng-template>
 <ng-template #suspenseLoading>
 	<div class = 'app-cms__description-block__container'>
-		Po dodaniu nowej grupy dziekańskiej w tym oknie zostaną wyświetlone informacje o dodanej grupie (nazwa oraz alias)
-		oraz inne powiązanie z nią informacje (wydział, kierunek itp.) Informacje te zostaną utracone po przeładowaniu
-		strony.
+		Po {{ __textContentDependsOfFunc.first }} przedmiotu w tym oknie zostaną wyświetlone informacje o
+		{{ __textContentDependsOfFunc.second }} przedmiocie (nazwa oraz alias) oraz inne powiązanie z nim informacje
+		(wydział, kierunek itp.) Informacje te zostaną utracone po przeładowaniu strony.
 	</div>
 </ng-template>

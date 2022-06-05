@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: new-cathedral-informations.component.ts
- * Last modified | Ostatnia modyfikacja: 15/05/2022, 03:41
+ * File name | Nazwa pliku: new-updatable-study-specialization-informations.component.ts
+ * Last modified | Ostatnia modyfikacja: 15/05/2022, 05:43
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,33 +17,35 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
 
-import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
+import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
-import { CmsCathedralResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
+import { CmsStudySpecResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-spec-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiadający za renderowanie widoku informacji o wprowadzonej nowej katedrze.
+ * Komponent odpowiedzialny za renderowanie widoku z informacjami odnośnie dodanego kierunku/kierunków studiów.
  */
 
 @Component({
-    selector: 'app-new-cathedral-informations',
-    templateUrl: './new-cathedral-informations.component.html',
-    styleUrls: [],
+    selector: 'app-new-updatable-study-specialization-informations',
+    templateUrl: './new-updatable-study-specialization-informations.component.html',
+    styleUrls: [ './new-updatable-study-specialization-informations.component.scss' ],
 })
-export class NewCathedralInformationsComponent implements OnInit, OnDestroy {
+export class NewUpdatableStudySpecializationInformationsComponent implements OnInit, OnDestroy {
 
     private _subscription?: Subscription;
-    public _cathData?: CmsCathedralResDataModel;
+    public _studySpecData: Array<CmsStudySpecResDataModel> = new Array<CmsStudySpecResDataModel>();
 
     public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_postDataSuspenseLoading);
+
+    @Input() public _ifEditMode: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -56,12 +58,17 @@ export class NewCathedralInformationsComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this._subscription = this._store
-            .select(NgrxSelector_PDA.sel_newCathedralData)
-            .subscribe(cathData => this._cathData = cathData);
+            .select(NgrxSelector_PDA.sel_newStudySpecializationData)
+            .subscribe(studySpecData => this._studySpecData = studySpecData);
     };
 
     public ngOnDestroy(): void {
         this._subscription?.unsubscribe();
         this._store.dispatch(NgrxAction_PDA.__clearAllPostData());
+    };
+
+    get __textContentDependsOfFunc(): { first: string, second: string } {
+        return this._ifEditMode
+            ? { first: 'edycji', second: 'edytowanym' } : { first: 'dodaniu nowego', second: 'dodanego' };
     };
 }

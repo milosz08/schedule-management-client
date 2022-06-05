@@ -2,8 +2,8 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: new-cathedral-informations.component.html
-  ~ Last modified | Ostatnia modyfikacja: 15/05/2022, 03:40
+  ~ File name | Nazwa pliku: new-updatable-study-room-informations.component.html
+  ~ Last modified | Ostatnia modyfikacja: 16/05/2022, 13:38
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
   ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,17 +17,25 @@
   ~ Obiektowe".
   -->
 
-<ng-container *ngIf = '_cathData; else basicDataInfoAndSusLoading'>
+<ng-container *ngIf = '_roomData; else basicDataInfoAndSusLoading'>
 	<div class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'>
 		Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres zostaną usunięte z podglądu.
 	</div>
 	<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container'>
-		<div class = 'cms__simple-grid__label'>Nazwa katedry:</div>
-		<div class = 'cms__simple-grid__text'>{{ _cathData.name }}</div>
-		<div class = 'cms__simple-grid__label'>Alias nazwy katedry:</div>
-		<div class = 'cms__simple-grid__text'>{{ _cathData.alias }}</div>
-		<div class = 'cms__simple-grid__label'>Nazwa wydziału katedry:</div>
-		<div class = 'cms__simple-grid__text'>{{ _cathData.departmentFullName }}</div>
+		<div class = 'cms__simple-grid__label'>Nazwa (alias) sali:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.name }}</div>
+		<ng-container *ngIf = '_roomData.description'>
+			<div class = 'cms__simple-grid__label'>Dodatkowy opis sali:</div>
+			<div class = 'cms__simple-grid__text'>{{ _roomData.description }}</div>
+		</ng-container>
+		<div class = 'cms__simple-grid__label'>Wydział:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.departmentFullName }}</div>
+		<div class = 'cms__simple-grid__label'>Katedra:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.cathedralFullName }}</div>
+		<div class = 'cms__simple-grid__label'>Pojemność sali:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.capacity }} osób</div>
+		<div class = 'cms__simple-grid__label'>Typ sali:</div>
+		<div class = 'cms__simple-grid__text'>{{ _roomData.roomTypeFullName }}</div>
 	</div>
 </ng-container>
 <ng-template #basicDataInfoAndSusLoading>
@@ -39,8 +47,8 @@
 </ng-template>
 <ng-template #suspenseLoading>
 	<div class = 'app-cms__description-block__container'>
-		Po dodaniu nowej katedry w tym oknie zostaną wyświetlone informacje o dodanej katedrze (nazwa oraz alias) oraz
-		dodatkowe informacje wydziale do którym została przypisana katedra. Informacje te zostaną utracone po
-		przeładowaniu strony.
+		Po {{ __textContentDependsOfFunc.first }} sali zajęciowej w tym oknie zostaną wyświetlone informacje o
+		{{ __textContentDependsOfFunc.second }} sali (nazwa oraz alias) oraz inne powiązanie z nią informacje
+		(wydział, katedra itp.) Informacje te zostaną utracone po przeładowaniu strony.
 	</div>
 </ng-template>

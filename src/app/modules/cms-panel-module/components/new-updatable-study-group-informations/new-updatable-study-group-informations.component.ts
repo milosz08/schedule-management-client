@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: new-department-informations.component.ts
- * Last modified | Ostatnia modyfikacja: 15/05/2022, 03:42
+ * File name | Nazwa pliku: new-updatable-study-group-informations.component.ts
+ * Last modified | Ostatnia modyfikacja: 21/05/2022, 13:42
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -25,23 +25,24 @@ import { Observable, Subscription } from 'rxjs';
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
-import { CmsDepartmentReqResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
+import { CmsStudyGroupResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-group-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiadający za renderowanie widoku informacji o wprowadzonym nowym wydziale.
+ * Komponent odpowiadający za renderowanie widoku informacji o wprowadzonej nowej grupie dziekańskiej/grupach
+ * dziekańskich.
  */
 
 @Component({
-    selector: 'app-new-department-informations',
-    templateUrl: './new-department-informations.component.html',
+    selector: 'app-new-updatable-study-group-informations',
+    templateUrl: './new-updatable-study-group-informations.component.html',
     styleUrls: [],
 })
-export class NewDepartmentInformationsComponent implements OnInit, OnDestroy {
+export class NewUpdatableStudyGroupInformationsComponent implements OnInit, OnDestroy {
 
     private _subscription?: Subscription;
-    public _deptData?: CmsDepartmentReqResDataModel;
+    public _groupData?: Array<CmsStudyGroupResDataModel>;
 
     public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_postDataSuspenseLoading);
 
@@ -56,8 +57,8 @@ export class NewDepartmentInformationsComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this._subscription = this._store
-            .select(NgrxSelector_PDA.sel_newDepartmentData)
-            .subscribe(deptData => this._deptData = deptData);
+            .select(NgrxSelector_PDA.sel_newStudyGroupData)
+            .subscribe(subjectData => this._groupData = subjectData);
     };
 
     public ngOnDestroy(): void {

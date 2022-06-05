@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: new-user-informations.component.ts
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 20:13
+ * File name | Nazwa pliku: new-updatable-study-room-informations.component.ts
+ * Last modified | Ostatnia modyfikacja: 16/05/2022, 13:38
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
@@ -25,34 +25,32 @@ import { Observable, Subscription } from 'rxjs';
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
-import { CmsRegisterResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
-
-import { CmsFileIoCommunicationService } from '../../services/cms-file-io-communication.service';
+import { CmsStudyRoomResDataModel } from '../../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-room-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiedzialny za renderowanie widoku informacji o dodanym użytkowniku.
+ * Komponent odpowiadający za renderowanie widoku informacji o wprowadzonej nowej sali zajęciowej.
  */
 
 @Component({
-    selector: 'app-new-user-informations',
-    templateUrl: './new-user-informations.component.html',
-    styleUrls: [ './new-user-informations.component.scss' ],
-    providers: [ CmsFileIoCommunicationService ],
+    selector: 'app-new-updatable-study-room-informations',
+    templateUrl: './new-updatable-study-room-informations.component.html',
+    styleUrls: [],
 })
-export class NewUserInformationsComponent implements OnInit, OnDestroy {
+export class NewUpdatableStudyRoomInformationsComponent implements OnInit, OnDestroy {
 
     private _subscription?: Subscription;
-    public _userData?: CmsRegisterResDataModel;
+    public _roomData?: CmsStudyRoomResDataModel;
 
     public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_postDataSuspenseLoading);
+
+    @Input() public _ifEditMode: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _fileIoService: CmsFileIoCommunicationService,
     ) {
     };
 
@@ -60,8 +58,8 @@ export class NewUserInformationsComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this._subscription = this._store
-            .select(NgrxSelector_PDA.sel_registeredUserData)
-            .subscribe(userData => this._userData = userData);
+            .select(NgrxSelector_PDA.sel_newStudyRoomData)
+            .subscribe(roomData => this._roomData = roomData);
     };
 
     public ngOnDestroy(): void {
@@ -69,7 +67,8 @@ export class NewUserInformationsComponent implements OnInit, OnDestroy {
         this._store.dispatch(NgrxAction_PDA.__clearAllPostData());
     };
 
-    public saveDataToFile(): void {
-        this._fileIoService.saveDataIntoFile(this._userData!);
+    get __textContentDependsOfFunc(): { first: string, second: string } {
+        return this._ifEditMode
+            ? { first: 'edycji', second: 'edytowanej' } : { first: 'dodaniu nowej', second: 'dodanej' };
     };
 }

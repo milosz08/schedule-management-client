@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: new-study-subject-informations.component.ts
+ * File name | Nazwa pliku: new-updatable-study-subject-informations.component.ts
  * Last modified | Ostatnia modyfikacja: 18/05/2022, 01:29
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
@@ -34,16 +34,18 @@ import { CmsStudySubjectResDataModel } from '../../ngrx-store/post-data-ngrx-sto
  */
 
 @Component({
-    selector: 'app-new-study-subject-informations',
-    templateUrl: './new-study-subject-informations.component.html',
+    selector: 'app-new-updatable-study-subject-informations',
+    templateUrl: './new-updatable-study-subject-informations.component.html',
     styleUrls: [],
 })
-export class NewStudySubjectInformationsComponent implements OnInit, OnDestroy {
+export class NewUpdatableStudySubjectInformationsComponent implements OnInit, OnDestroy {
 
     private _subscription?: Subscription;
     public _subjectData?: CmsStudySubjectResDataModel;
 
     public _loadingSus$: Observable<boolean> = this._store.select(NgrxSelector_PDA.sel_postDataSuspenseLoading);
+
+    @Input() public _ifEditMode: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -63,5 +65,10 @@ export class NewStudySubjectInformationsComponent implements OnInit, OnDestroy {
     public ngOnDestroy(): void {
         this._subscription?.unsubscribe();
         this._store.dispatch(NgrxAction_PDA.__clearAllPostData());
+    };
+
+    get __textContentDependsOfFunc(): { first: string, second: string } {
+        return this._ifEditMode
+            ? { first: 'edycji', second: 'edytowanym' } : { first: 'dodaniu nowego', second: 'dodanego' };
     };
 }
