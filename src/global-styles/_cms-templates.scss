@@ -228,6 +228,21 @@
     margin-left: 0 !important;
 }
 
+.cms-edit-not-found__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+    img {
+        width: 130px;
+        height: 130px;
+    }
+    .not-found__description-paragraph {
+        font-size: 1.1rem;
+        color: var(--darkRedColor);
+    }
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 
 @media only screen and (max-width: 1200px) {

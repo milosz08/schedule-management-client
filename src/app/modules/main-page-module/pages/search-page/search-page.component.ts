@@ -26,8 +26,8 @@ import { debounceTime, delay, distinctUntilChanged, mergeMap, Subject } from 'rx
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
-import { GetConnectorService } from '../../services/get-connector.service';
 import { SearchQueryResModel } from '../../models/search-query.model';
+import { GetConnectorService } from '../../services/get-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 

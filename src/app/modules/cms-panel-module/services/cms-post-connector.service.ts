@@ -40,7 +40,7 @@ import { CmsStudySubjectReqDataModel, CmsStudySubjectResDataModel } from '../ngr
  */
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CmsPostConnectorService {
 
@@ -79,7 +79,7 @@ export class CmsPostConnectorService {
     /**
      * Dodawanie nowej katedry do wydziału do bazy danych.
      */
-    public addNewCathedra(cathData: CmsCathedralReqDataModel): Observable<CmsCathedralResDataModel> {
+    public addNewCathedral(cathData: CmsCathedralReqDataModel): Observable<CmsCathedralResDataModel> {
         return this._http.post<CmsCathedralResDataModel>(
             this._endpoints.ADD_NEW_CATHEDRAL,
             cathData,
@@ -101,7 +101,7 @@ export class CmsPostConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowego pokoju (powiązanego z katedrą i wydziałem).
+     * Dodawanie nowego sali zajęciowej (powiązanego z katedrą i wydziałem).
      */
     public addNewStudyRoom(roomData: CmsStudyRoomReqDataModel): Observable<CmsStudyRoomResDataModel> {
         return this._http.post<CmsStudyRoomResDataModel>(

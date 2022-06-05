@@ -55,6 +55,9 @@
         max-height: 50px !important;
         overflow:auto;
     }
+    &:disabled {
+        opacity: .5;
+    }
 }
 
 .app__select__container {

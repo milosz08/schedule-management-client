@@ -18,7 +18,7 @@
   -->
 
 <ng-content></ng-content>
-<td>
+<td *ngIf = '!_ifDisableShowEditDetailsButton'>
 	<a
 		[routerLink] = '[ "/secure/panel/" + _editRoute ]'
 		class = 'app__button app__button--light app__button--hollow-light cms-table__edit-button'
