@@ -23,9 +23,10 @@ Projekt ma za zadanie symulować system zarządzania planem zajęć przykładowe
     - [Entity Framework](https://docs.microsoft.com/pl-pl/ef/)
     - [MySQL](https://www.mysql.com/)
     - [SSH.NET](https://github.com/sshnet/SSH.NET)
-- Pozostałe usługi / middleware services:     
+- Pozostałe usługi / other services:     
     - [JWT](https://jwt.io/)
     - [OAuth2](https://oauth.net/2/)
+    - [Docker](https://www.docker.com/)
 
 ## Konta / accounts
 Administrator systemu ma możliwość generowania kont, przy którym następuje dynamicznie generowana skrzynka pocztowa (przy użyciu protokołu SSH oraz serwera Nginx z zainstalowanym serwerem poczty SMTP/IMAP). Moderator może natomiast edytować plany na podstawie przypisania przez administratora do konkretnego wydziału. Nauczyciele i studenci mają możliwość wysyłania rezerwacji oraz ankiet wspomagających układanie planów.<br>
