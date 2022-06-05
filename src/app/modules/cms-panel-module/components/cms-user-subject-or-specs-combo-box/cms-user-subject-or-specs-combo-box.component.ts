@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -41,7 +41,7 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
     styleUrls: [],
     providers: [ CmsGetQueryConnectorService ],
 })
-export class CmsUserSubjectOrSpecsComboBoxComponent implements OnInit, OnDestroy, OnChanges {
+export class CmsUserSubjectOrSpecsComboBoxComponent implements OnInit, OnDestroy, OnChanges, AfterContentChecked {
 
     public _allSubjects: Array<NameWithId> = new Array<NameWithId>();
     public _allStudySpecs: Array<NameWithId> = new Array<NameWithId>();
@@ -54,12 +54,14 @@ export class CmsUserSubjectOrSpecsComboBoxComponent implements OnInit, OnDestroy
     public _studySubjectsVisible: boolean = false;
 
     @Input() public _angularForm?: FormGroup;
+    @Input() public _ifEditMode: boolean = false;
 
     private _unsubscribe: Subject<void> = new Subject();
 
     //------------------------------------------------------------------------------------------------------------------
 
     constructor(
+        private _changeDetector: ChangeDetectorRef,
         private _serviceGET: CmsGetQueryConnectorService,
     ) {
     };
@@ -72,15 +74,25 @@ export class CmsUserSubjectOrSpecsComboBoxComponent implements OnInit, OnDestroy
 
     public ngOnChanges(changes: SimpleChanges): void {
         this._angularForm!.get('role')!.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(role => {
-            this._angularForm?.get('departmentName')?.patchValue('');
             this._currentRole = role;
+            this._studySpecsVisible = false;
+            this._studySubjectsVisible = false;
+            this._angularForm?.get('departmentName')?.patchValue('');
         });
         this._angularForm!.get('departmentName')?.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
-            if (this._currentRole === UserIdentityType.STUDENT) {
-
-                this._angularForm?.get('studySpecsOrSubjects')?.patchValue([]);
+            this._angularForm?.get('studySpecsOrSubjects')?.patchValue([]);
+            if (this._ifEditMode && this._angularForm!.get('departmentName')?.value) {
+                if (this._currentRole === UserIdentityType.STUDENT) {
+                    this.handleShowStudySpecsInput();
+                } else if(this._currentRole === UserIdentityType.TEACHER || this._currentRole === UserIdentityType.EDITOR) {
+                    this.handleShowStudySubjects();
+                }
             }
         });
+    };
+
+    public ngAfterContentChecked(): void {
+        this._changeDetector.detectChanges();
     };
 
     public ngOnDestroy(): void {
