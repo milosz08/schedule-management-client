@@ -64,6 +64,7 @@
 			[_ifContentRemovable] = '(_userLogin$ | async) !== user.login || user.ifRemovable'
 			[_editRoute] = '"users/edit-user/" + user.id'
 			*ngFor = 'let user of _usersPagination!.elements'
+			(_emitNewListValues) = 'emitDeleteArrayValues($event)'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ user.id }}</td>
 			<td>{{ user.nameWithSurname }}</td>
