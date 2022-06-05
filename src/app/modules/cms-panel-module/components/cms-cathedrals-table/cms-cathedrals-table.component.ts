@@ -80,6 +80,10 @@ export class CmsCathedralsTableComponent implements OnInit, OnDestroy {
         this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
     };
 
+    public emitDeleteArrayValues(deletedValues: Array<number>): void {
+        this._deleteCaths = deletedValues;
+    };
+
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();

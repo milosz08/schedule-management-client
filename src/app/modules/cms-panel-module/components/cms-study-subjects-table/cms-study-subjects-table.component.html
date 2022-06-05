@@ -64,6 +64,7 @@
 			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_STUDY_SUBJECTS'
 			[_ifContentRemovable] = 'true'
 			[_editRoute] = '"study-subjects/edit-study-subject/" + subject.id'
+			(_emitNewListValues) = 'emitDeleteArrayValues($event)'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ subject.id }}</td>
 			<td

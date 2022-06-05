@@ -80,6 +80,10 @@ export class CmsDepartmentsTableComponent implements OnInit {
         this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
     };
 
+    public emitDeleteArrayValues(deletedValues: Array<number>): void {
+        this._deleteDepts = deletedValues;
+    };
+
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();

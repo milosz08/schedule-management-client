@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ModalsReducerType } from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.selectors';
@@ -42,6 +42,9 @@ export class CmsListDeleteSingleElementComponent {
     @Input() public _deleteContentList: Array<number> = new Array<number>();
     @Input() public _deleteContentId: number = NaN;
     @Input() public _ifContentRemovable: boolean = false;
+    @Input() public _ifDisableShowEditDetailsButton: boolean = false;
+
+    @Output() public _emitNewListValues: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +55,7 @@ export class CmsListDeleteSingleElementComponent {
 
     public handleDeleteContent(): void {
         this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
-            removeContentPath: this._deleteEndpoint, removeContentIds: [ this._deleteContentId ] }));
+            removeContentPath: this._deleteEndpoint, removeContentIds: [ this._deleteContentId! ] }));
     };
 
     public toggleSelectedDeleteContent(ifChecked: boolean) {
@@ -61,5 +64,6 @@ export class CmsListDeleteSingleElementComponent {
         } else {
             this._deleteContentList = this._deleteContentList.filter(id => id !== this._deleteContentId);
         }
+        this._emitNewListValues.emit(this._deleteContentList);
     };
 }

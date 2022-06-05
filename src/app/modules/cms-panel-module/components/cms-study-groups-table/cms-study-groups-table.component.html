@@ -52,7 +52,6 @@
 					[_sortingData] = '_groupsSortBy.SPEC_TYPE_ALIAS'
 				></app-cms-sorting-button>
 			</th>
-			<th class = 'app-cms-table__th-details'></th>
 			<th class = 'app-cms-table__th-remove'></th>
 			<th class = 'app-cms-table__th-select-box app-cms-table--hide-column__small'></th>
 		</tr>
@@ -64,6 +63,8 @@
 			[_deleteEndpoint] = '_endpoints.MASSIVE_DELETE_STUDY_GROUPS'
 			[_ifContentRemovable] = 'true'
 			[_editRoute] = '"study-groups/edit-study-group/" + group.id'
+			[_ifDisableShowEditDetailsButton] = 'true'
+			(_emitNewListValues) = 'emitDeleteArrayValues($event)'
 		>
 			<td class = 'app-cms-table--hide-column__small'>{{ group.id }}</td>
 			<td
