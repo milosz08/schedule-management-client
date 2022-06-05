@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-user-form.component.ts
+ * File name | Nazwa pliku: add-update-user-form.component.ts
  * Last modified | Ostatnia modyfikacja: 11/05/2022, 14:18
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -17,11 +17,11 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { catchError, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
@@ -31,6 +31,7 @@ import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-da
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
 import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
+import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -40,26 +41,33 @@ import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.
  */
 
 @Component({
-    selector: 'app-add-new-user-form',
-    templateUrl: './add-new-user-form.component.html',
+    selector: 'app-add-update-user-form',
+    templateUrl: './add-update-user-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService ],
+    providers: [ CmsGetAllConnectorService, CmsGetSingleForPostConnectorService ],
 })
-export class AddNewUserFormComponent implements OnInit, OnDestroy {
+export class AddUpdateUserFormComponent implements OnInit, OnDestroy, AfterContentChecked {
 
     public readonly _registerUserForm: FormGroup;
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._registerUserForm, name);
 
     public _allRoles: Array<string> = new Array<string>();
+    public _notFoundContent: string = '';
     public _serverError?: string;
 
     private _unsubscribe: Subject<void> = new Subject();
+    private _ifRegeneratePassword: boolean = false;
+
+    @Input() public _ifEditMode: boolean = false;
+    @Input() public _dataId!: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
+        private _changeDetector: ChangeDetectorRef,
         private _store: Store<PostDataReducerType>,
         private _serviceGET: CmsGetAllConnectorService,
+        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
     ) {
         this._registerUserForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -69,7 +77,7 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
             role: new FormControl('', [ Validators.required ]),
             departmentName: new FormControl('', [ Validators.required ]),
             cathedralName: new FormControl(''),
-            studySpecsOrSubjects: new FormControl([], [ Validators.required ]),
+            studySpecsOrSubjects: new FormControl([]),
         });
         this._registerUserForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._serverError !== '') {
@@ -88,6 +96,23 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
             .getAllAvailableRoles()
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(q => this._allRoles = q.dataElements);
+        if (this._ifEditMode && this._dataId) {
+            this._serviceSingleGET.getUserAccountDetailsBaseDbId(this._dataId).pipe(
+                takeUntil(this._unsubscribe),
+                catchError(({ error }) => {
+                    this._notFoundContent = error.message;
+                    return of();
+                })
+            ).subscribe(data => {
+                Object.keys(data).forEach(key => this._registerUserForm.get(key)?.patchValue(data[key]));
+                this._registerUserForm.get('name')?.disable();
+                this._registerUserForm.get('surname')?.disable();
+            });
+        }
+    };
+
+    public ngAfterContentChecked(): void {
+        this._changeDetector.detectChanges();
     };
 
     public ngOnDestroy(): void {
@@ -95,8 +120,15 @@ export class AddNewUserFormComponent implements OnInit, OnDestroy {
         this._unsubscribe.complete();
     };
 
+    public handleToggleGenerateNewEmailPassword(ifActive: boolean): void {
+        this._ifRegeneratePassword = ifActive;
+    };
+
     public handleSubmitRegisterUser(): void {
-        this._store.dispatch(NgrxAction_PDA.__registerNewUser({ userData: this._registerUserForm.getRawValue() }));
-        this._registerUserForm.reset({ studySpecsOrSubjects: [] });
+        this._store.dispatch(NgrxAction_PDA.__registerUpdateUser({ userData: this._registerUserForm.getRawValue(),
+            userId: this._dataId, ifUpdateEmailPass: this._ifRegeneratePassword }));
+        if (!this._ifEditMode) {
+            this._registerUserForm.reset({ studySpecsOrSubjects: [] });
+        }
     };
 }

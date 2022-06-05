@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-study-group-form.component.ts
- * Last modified | Ostatnia modyfikacja: 21/05/2022, 15:14
+ * File name | Nazwa pliku: add-update-department-form.component.ts
+ * Last modified | Ostatnia modyfikacja: 15/05/2022, 02:51
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,57 +17,57 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { catchError, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
-import { NameWithId } from '../../models/cms-drop-lists-data.model';
 
 import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.actions';
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
+import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiedzialny za renderowanie formularza umożliwiającego wprowadzenie nowej grupy dziekańskiej.
+ * Komponent odpowiedzialny za wyświetlanie formularza umożliwiającego dodanie nowego wydziału do systemu.
  */
 
 @Component({
-    selector: 'app-add-new-study-group-form',
-    templateUrl: './add-new-study-group-form.component.html',
+    selector: 'app-add-update-department-form',
+    templateUrl: './add-update-department-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService ],
+    providers: [ CmsGetSingleForPostConnectorService ],
 })
-export class AddNewStudyGroupFormComponent implements OnInit, OnDestroy {
+export class AddUpdateDepartmentFormComponent implements OnInit, OnDestroy {
 
-    public readonly _newStudyGroupForm: FormGroup;
-    public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newStudyGroupForm, name);
+    public readonly _newDepartmentForm: FormGroup;
+    public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newDepartmentForm, name);
 
-    public _allSemesters: Array<NameWithId> = new Array<NameWithId>();
-
+    public _notFoundContent: string = '';
     public _serverError?: string;
+
     private _unsubscribe: Subject<void> = new Subject();
+
+    @Input() public _ifEditMode: boolean = false;
+    @Input() public _dataId!: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _serviceGET: CmsGetAllConnectorService,
+        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
     ) {
-        this._newStudyGroupForm = new FormGroup({
-            departmentName: new FormControl('', [ Validators.required ]),
-            studySpecName: new FormControl('', [ Validators.required ]),
-            semesters: new FormControl([], [ Validators.required ]),
-            countOfGroups: new FormControl(1, [ Validators.required, Validators.min(1) ]),
+        this._newDepartmentForm = new FormGroup({
+            name: new FormControl('', [ Validators.required ]),
+            alias: new FormControl('', [ Validators.required ]),
         });
-        this._newStudyGroupForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
+        this._newDepartmentForm.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             if (this._serverError !== '') {
                 this._store.dispatch(NgrxAction_PDA.__clearNewContentServerError());
             }
@@ -80,9 +80,17 @@ export class AddNewStudyGroupFormComponent implements OnInit, OnDestroy {
         this._store
             .pipe(takeUntil(this._unsubscribe), select(NgrxSelector_PDA.sel_postDataServerErrorMessage))
             .subscribe(errorMessage => this._serverError = errorMessage);
-        this._serviceGET.getAllAvailableSemesters()
-            .pipe(takeUntil(this._unsubscribe))
-            .subscribe(q => this._allSemesters = q.dataElements);
+        if (this._ifEditMode && this._dataId) {
+            this._serviceSingleGET.getDepartmentBaseDbId(this._dataId).pipe(
+                takeUntil(this._unsubscribe),
+                catchError(({ error }) => {
+                    this._notFoundContent = error.message;
+                    return of();
+                })
+            ).subscribe(data => {
+                Object.keys(data).forEach(key => this._newDepartmentForm.get(key)?.patchValue(data[key]));
+            });
+        }
     };
 
     public ngOnDestroy(): void {
@@ -90,8 +98,11 @@ export class AddNewStudyGroupFormComponent implements OnInit, OnDestroy {
         this._unsubscribe.complete();
     };
 
-    public handleSubmitNewStudyGroup(): void {
-        this._store.dispatch(NgrxAction_PDA.__addNewStudyGroup({ groupData: this._newStudyGroupForm.getRawValue() }));
-        this._newStudyGroupForm.reset({ semesters: [] });
+    public handleSubmitNewDepartment(): void {
+        this._store.dispatch(NgrxAction_PDA.__addUpdateDepartment({
+            deptData: this._newDepartmentForm.getRawValue(), deptId: this._dataId }));
+        if (!this._ifEditMode) {
+            this._newDepartmentForm.reset();
+        }
     };
 }

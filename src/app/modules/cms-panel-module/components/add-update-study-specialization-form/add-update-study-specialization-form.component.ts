@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-study-specialization-form.component.ts
+ * File name | Nazwa pliku: add-update-study-specialization-form.component.ts
  * Last modified | Ostatnia modyfikacja: 15/05/2022, 05:41
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -17,11 +17,11 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { catchError, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
@@ -33,6 +33,7 @@ import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-
 
 import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
+import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -41,12 +42,12 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
  */
 
 @Component({
-    selector: 'app-add-new-study-specialization-form',
-    templateUrl: './add-new-study-specialization-form.component.html',
+    selector: 'app-add-update-study-specialization-form',
+    templateUrl: './add-update-study-specialization-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService  ],
+    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService, CmsGetSingleForPostConnectorService ],
 })
-export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy {
+export class AddUpdateStudySpecializationFormComponent implements OnInit, OnDestroy {
 
     public readonly _newStudySpecForm: FormGroup;
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newStudySpecForm, name);
@@ -55,9 +56,13 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
     public _studyDegrees: Array<NameWithId> = new Array<NameWithId>();
     public _queryResultArray: Array<string> = new Array<string>();
 
+    public _notFoundContent: string = '';
     public _serverError?: string;
 
     private _unsubscribe: Subject<void> = new Subject();
+
+    @Input() public _ifEditMode: boolean = false;
+    @Input() public _dataId!: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -65,6 +70,7 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
         private _store: Store<PostDataReducerType>,
         private _serviceGET: CmsGetAllConnectorService,
         private _serviceQueryGet: CmsGetQueryConnectorService,
+        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
     ) {
         this._newStudySpecForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -95,6 +101,18 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
             .getAllAvailableStudyDegrees()
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(types => this._studyDegrees = types.dataElements);
+        if (this._ifEditMode && this._dataId) {
+            this._serviceSingleGET.getStudySpecializationBaseDbId(this._dataId).pipe(
+                takeUntil(this._unsubscribe),
+                catchError(({ error }) => {
+                    this._notFoundContent = error.message;
+                    return of();
+                })
+            ).subscribe(data => {
+                Object.keys(data).forEach(key => this._newStudySpecForm.get(key)?.patchValue(data[key]));
+                this._newStudySpecForm.get('departmentName')?.disable();
+            });
+        }
     };
 
     public ngOnDestroy(): void {
@@ -103,8 +121,11 @@ export class AddNewStudySpecializationFormComponent implements OnInit, OnDestroy
     };
 
     public handleSubmitNewStudySpec(): void {
-        this._store.dispatch(NgrxAction_PDA.__addNewStudySpec({ studyData: this._newStudySpecForm.getRawValue() }));
-        this._newStudySpecForm.reset({ studyType: [], studyDegree: [] });
+        this._store.dispatch(NgrxAction_PDA.__addUpdateStudySpec({
+            studyData: this._newStudySpecForm.getRawValue(), specId: this._dataId }));
+        if (!this._ifEditMode) {
+            this._newStudySpecForm.reset({ studyType: [], studyDegree: [] });
+        }
     };
 
     public handleEmitNewQuery(queryValue: string): void {

@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: add-new-cathedral-form.component.ts
+ * File name | Nazwa pliku: add-update-cathedral-form.component.ts
  * Last modified | Ostatnia modyfikacja: 15/05/2022, 02:51
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -17,11 +17,11 @@
  * Obiektowe".
  */
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { catchError, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
@@ -31,6 +31,7 @@ import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-da
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
+import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -40,26 +41,31 @@ import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connec
  */
 
 @Component({
-    selector: 'app-add-new-cathedral-form',
-    templateUrl: './add-new-cathedral-form.component.html',
+    selector: 'app-add-update-cathedral-form',
+    templateUrl: './add-update-cathedral-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetQueryConnectorService ],
+    providers: [ CmsGetQueryConnectorService, CmsGetSingleForPostConnectorService ],
 })
-export class AddNewCathedralFormComponent implements OnInit, OnDestroy {
+export class AddUpdateCathedralFormComponent implements OnInit, OnDestroy {
 
     public readonly _newCathedralForm: FormGroup;
     public readonly _checkError = (name: string) => MiscHelper.checkNgFormError(this._newCathedralForm, name);
 
+    public _notFoundContent: string = '';
     public _queryResultArray: Array<string> = new Array<string>();
     public _serverError?: string;
 
     private _unsubscribe: Subject<void> = new Subject();
+
+    @Input() public _ifEditMode: boolean = false;
+    @Input() public _dataId!: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
     public constructor(
         private _store: Store<PostDataReducerType>,
         private _serviceGET: CmsGetQueryConnectorService,
+        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
     ) {
         this._newCathedralForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),
@@ -80,6 +86,18 @@ export class AddNewCathedralFormComponent implements OnInit, OnDestroy {
         this._store
             .pipe(takeUntil(this._unsubscribe), select(NgrxSelector_PDA.sel_postDataServerErrorMessage))
             .subscribe(errorMessage => this._serverError = errorMessage);
+        if (this._ifEditMode && this._dataId) {
+            this._serviceSingleGET.getCathedralBaseDbId(this._dataId).pipe(
+                takeUntil(this._unsubscribe),
+                catchError(({ error }) => {
+                    this._notFoundContent = error.message;
+                    return of();
+                })
+            ).subscribe(data => {
+                Object.keys(data).forEach(key => this._newCathedralForm.get(key)?.patchValue(data[key]));
+                this._newCathedralForm.get('departmentName')?.disable();
+            });
+        }
     };
 
     public ngOnDestroy(): void {
@@ -88,8 +106,11 @@ export class AddNewCathedralFormComponent implements OnInit, OnDestroy {
     };
 
     public handleSubmitNewCathedral(): void {
-        this._store.dispatch(NgrxAction_PDA.__addNewCathedral({ cathData: this._newCathedralForm.getRawValue() }));
-        this._newCathedralForm.reset();
+        this._store.dispatch(NgrxAction_PDA.__addUpdateCathedral({
+            cathData: this._newCathedralForm.getRawValue(), cathId: this._dataId }));
+        if (!this._ifEditMode) {
+            this._newCathedralForm.reset();
+        }
     };
 
     public handleEmitNewQuery(queryValue: string): void {
