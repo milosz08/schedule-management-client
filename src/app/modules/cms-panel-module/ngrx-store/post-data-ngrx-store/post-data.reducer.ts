@@ -26,37 +26,37 @@ import { initialPostDataState } from './post-data.initial';
 
 const _postDataReducer = createReducer(
     initialPostDataState,
-    on(NgrxAction.__successRegisterNewUser, (state, action) => {
+    on(NgrxAction.__successRegisterUpdateUser, (state, action) => {
         return { ...state,
             registerNewUserData: action.userData,
             ifFetching: false,
         };
     }),
-    on(NgrxAction.__successAddNewDepartment, (state, action) => {
+    on(NgrxAction.__successAddUpdateDepartment, (state, action) => {
         return { ...state,
             addNewDepartmentData: action.deptData,
             ifFetching: false,
         };
     }),
-    on(NgrxAction.__successAddNewCathedral, (state, action) => {
+    on(NgrxAction.__successAddUpdateCathedral, (state, action) => {
         return { ...state,
             addNewCathedralData: action.cathData,
             ifFetching: false,
         };
     }),
-    on(NgrxAction.__successAddNewStudySpecialization, (state, action) => {
+    on(NgrxAction.__successAddUpdateStudySpecialization, (state, action) => {
         return { ...state,
             addNewStudySpecialization: action.studyData,
             ifFetching: false,
         };
     }),
-    on(NgrxAction.__successAddNewStudyRoom, (state, action) => {
+    on(NgrxAction.__successAddUpdateStudyRoom, (state, action) => {
         return { ...state,
             addNewStudyRoom: action.roomData,
             ifFetching: false,
         };
     }),
-    on(NgrxAction.__successAddNewStudySubject, (state, action) => {
+    on(NgrxAction.__successAddUpdateStudySubject, (state, action) => {
         return { ...state,
             addNewStudySubject: action.subjectData,
             ifFetching: false,
@@ -81,7 +81,7 @@ const _postDataReducer = createReducer(
             serverError: '',
         };
     }),
-    on(NgrxAction.__failureAddNewContent, (state, action) => {
+    on(NgrxAction.__failureAddUpdateContent, (state, action) => {
         return { ...state,
             serverError: action.failureMess,
             ifFetching: false,

@@ -37,7 +37,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 })
 export class EditUserCmsPageComponent extends MetaWebContentHelper {
 
-    public _userId: string | null = '';
+    public _userId: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +47,6 @@ export class EditUserCmsPageComponent extends MetaWebContentHelper {
         private _route: ActivatedRoute,
     ) {
         super(titleService, metaService, AllCmsWebpages.EDIT_USER);
-        this._userId = this._route.snapshot.paramMap.get('userId');
+        this._userId = Number(this._route.snapshot.paramMap.get('userId'));
     };
 }

@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: new-updatable-study-subject-informations.component.html
+  ~ Last modified | Ostatnia modyfikacja: 18/05/2022, 01:29
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<ng-container *ngIf = '_subjectData; else basicDataInfoAndSusLoading'>
+	<div class = 'app-cms__description-block__container app-cms__description-block__container--warning-info'>
+		Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres zostaną usunięte z podglądu.
+	</div>
+	<div class = 'cms__simple-grid__angular-form app-cms__new-content-info__basic-info-container'>
+		<div class = 'cms__simple-grid__label'>Nazwa przedmiotu:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.name }}</div>
+		<div class = 'cms__simple-grid__label'>Alias przedmiotu:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.alias }}</div>
+		<div class = 'cms__simple-grid__label'>Wydział:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.departmentFullName }}</div>
+		<div class = 'cms__simple-grid__label'>Kierunek:</div>
+		<div class = 'cms__simple-grid__text'>{{ _subjectData.studySpecFullName }}</div>
+	</div>
+</ng-container>
+<ng-template #basicDataInfoAndSusLoading>
+	<ng-container *ngIf = '(_loadingSus$ | async); else suspenseLoading'>
+		<div class = 'app-cms__new-content-info__suspense-loading-container'>
+			<img src = 'assets/gifs/suspense-loading-dark.gif' alt = ''/>
+		</div>
+	</ng-container>
+</ng-template>
+<ng-template #suspenseLoading>
+	<div class = 'app-cms__description-block__container'>
+		Po {{ __textContentDependsOfFunc.first }} przedmiotu w tym oknie zostaną wyświetlone informacje o
+		{{ __textContentDependsOfFunc.second }} przedmiocie (nazwa oraz alias) oraz inne powiązanie z nim informacje
+		(wydział, kierunek itp.) Informacje te zostaną utracone po przeładowaniu strony.
+	</div>
+</ng-template>

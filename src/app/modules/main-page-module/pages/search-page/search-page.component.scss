@@ -92,9 +92,11 @@
     .loaded-single-element {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         background-color: var(--darkWhiteColor);
         border-radius: var(--borderRadius);
         padding: 15px;
+        height: 100%;
         p {
             margin: 3px 0;
             strong {

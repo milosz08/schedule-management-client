@@ -37,7 +37,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 })
 export class EditCathedralCmsPageComponent extends MetaWebContentHelper {
 
-    public _editCathId: string | null = '';
+    public _editCathId: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +47,6 @@ export class EditCathedralCmsPageComponent extends MetaWebContentHelper {
         private _route: ActivatedRoute,
     ) {
         super(titleService, metaService, AllCmsWebpages.EDIT_CATHEDRAL);
-        this._editCathId = this._route.snapshot.paramMap.get('cathId');
+        this._editCathId = Number(this._route.snapshot.paramMap.get('cathId'));
     };
 }

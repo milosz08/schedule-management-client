@@ -38,13 +38,14 @@
 <div class = 'app-cms__add-new-content__container'>
 	<section class = 'app-cms__add-new-content__form-wrapper form-wrapper--extended-form-section'>
 		<h3 class = 'app__header app__header--exclude-dot-margin app__header--exclude-margins'>Edytuj wydział</h3>
-		//
+		<app-add-update-department-form
+			[_ifEditMode] = 'true'
+			[_dataId] = '_editDeptId'
+		></app-add-update-department-form>
 	</section>
 	<aside class = 'app-cms__separator-line separator-line--vertical'></aside>
 	<section class = 'app-cms__add-new-content__response-wrapper'>
 		<h3 class = 'app__header app__header--exclude-dot-margin app__header--exclude-margins'>Informacje o wydziale</h3>
-		//
+		<app-new-updatable-department-informations [_ifEditMode] = 'true'></app-new-updatable-department-informations>
 	</section>
 </div>
-
-{{ _editDeptId }}

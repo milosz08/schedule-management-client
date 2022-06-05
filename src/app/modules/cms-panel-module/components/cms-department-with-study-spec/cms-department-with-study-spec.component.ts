@@ -48,6 +48,7 @@ export class CmsDepartmentWithStudySpecComponent implements OnInit, OnChanges, O
 
     @Input() public _angularForm?: FormGroup;
     @Input() public _labelId: string = '';
+    @Input() public _ifEditMode: boolean = false;
 
     @Output() public _emitNextSelect: EventEmitter<void> = new EventEmitter<void>();
 
@@ -68,8 +69,12 @@ export class CmsDepartmentWithStudySpecComponent implements OnInit, OnChanges, O
     public ngOnChanges(changes: SimpleChanges): void {
         this._angularForm?.get('departmentName')?.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             this.handleEmitStudySpecQuery('');
-            this._angularForm?.get('studySpecName')?.patchValue('');
-            this._studySpecVisible = false;
+            if (!this._ifEditMode) {
+                this._angularForm?.get('studySpecName')?.patchValue('');
+                this._studySpecVisible = false;
+            } else {
+                this._studySpecVisible = true;
+            }
         });
     };
 

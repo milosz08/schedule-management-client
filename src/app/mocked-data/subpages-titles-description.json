@@ -132,10 +132,6 @@
         "addStudyGroup": {
             "title": "Nowa grupa dziekańska",
             "description": "W tej sekcji możesz dodać nową grupę dziekańską do istniejącego już kierunku."
-        },
-        "editStudyGroup": {
-            "title": "Edytuj grupę dziekańską",
-            "description": "W tej sekcji możesz edytować wcześniej stworzoną grupę dziekańską."
         }
     }
 }

@@ -26,7 +26,7 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import { CmsDepartmentReqResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
 import { CmsScheduleActivityReqModel } from '../ngrx-store/schedule-manipulator-ngrx-store/ngrx-models/cms-schedule-activity-req.model';
-import { CmsRegisterReqDataModel, CmsRegisterResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
+import { CmsAddUpdateReqDataModel, CmsUserResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
 import { CmsCathedralReqDataModel, CmsCathedralResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
 import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-spec-req-res-data.model';
 import { CmsStudyRoomReqDataModel, CmsStudyRoomResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-room-req-res-data.model';
@@ -40,7 +40,7 @@ import { CmsStudySubjectReqDataModel, CmsStudySubjectResDataModel } from '../ngr
  */
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CmsPostConnectorService {
 
@@ -55,8 +55,8 @@ export class CmsPostConnectorService {
     /**
      * Rejestrowanie nowego użytkownika.
      */
-    public registerUser(newUserData: CmsRegisterReqDataModel): Observable<CmsRegisterResDataModel> {
-        return this._http.post<CmsRegisterResDataModel>(
+    public registerUser(newUserData: CmsAddUpdateReqDataModel): Observable<CmsUserResDataModel> {
+        return this._http.post<CmsUserResDataModel>(
             this._endpoints.REGISTER_USER,
             newUserData,
         );
@@ -79,7 +79,7 @@ export class CmsPostConnectorService {
     /**
      * Dodawanie nowej katedry do wydziału do bazy danych.
      */
-    public addNewCathedra(cathData: CmsCathedralReqDataModel): Observable<CmsCathedralResDataModel> {
+    public addNewCathedral(cathData: CmsCathedralReqDataModel): Observable<CmsCathedralResDataModel> {
         return this._http.post<CmsCathedralResDataModel>(
             this._endpoints.ADD_NEW_CATHEDRAL,
             cathData,
@@ -101,7 +101,7 @@ export class CmsPostConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowego pokoju (powiązanego z katedrą i wydziałem).
+     * Dodawanie nowego sali zajęciowej (powiązanego z katedrą i wydziałem).
      */
     public addNewStudyRoom(roomData: CmsStudyRoomReqDataModel): Observable<CmsStudyRoomResDataModel> {
         return this._http.post<CmsStudyRoomResDataModel>(

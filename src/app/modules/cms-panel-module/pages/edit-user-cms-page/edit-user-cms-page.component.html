@@ -35,6 +35,17 @@
 	</div>
 	<aside class = 'app-cms__separator-line'></aside>
 </div>
-
-
-<p>user id {{ _userId }}</p>
+<div class = 'app-cms__add-new-content__container'>
+	<section class = 'app-cms__add-new-content__form-wrapper form-wrapper--extended-form-section'>
+		<h3 class = 'app__header app__header--exclude-dot-margin app__header--exclude-margins'>Edytuj użytkownika</h3>
+		<app-add-update-user-form
+			[_ifEditMode] = 'true'
+			[_dataId] = '_userId'
+		></app-add-update-user-form>
+	</section>
+	<aside class = 'app-cms__separator-line separator-line--vertical'></aside>
+	<section class = 'app-cms__add-new-content__response-wrapper'>
+		<h3 class = 'app__header app__header--exclude-dot-margin app__header--exclude-margins'>Informacje o użytkowniku</h3>
+		<app-new-updatable-user-informations [_ifEditMode] = 'true'></app-new-updatable-user-informations>
+	</section>
+</div>

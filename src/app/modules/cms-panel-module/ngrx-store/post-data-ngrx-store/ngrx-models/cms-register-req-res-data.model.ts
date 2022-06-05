@@ -21,7 +21,7 @@ import { UserIdentityType } from '../../../../../types/user-identity.type';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsRegisterReqDataModel {
+export interface CmsAddUpdateReqDataModel {
     name: string;
     surname: string;
     nationality: string;
@@ -34,7 +34,7 @@ export interface CmsRegisterReqDataModel {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsRegisterResDataModel {
+export interface CmsUserResDataModel {
     name: string;
     surname: string;
     nationality: string;

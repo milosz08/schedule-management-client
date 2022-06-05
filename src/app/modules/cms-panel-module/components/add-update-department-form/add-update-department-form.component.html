@@ -1,0 +1,96 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: add-update-department-form.component.html
+  ~ Last modified | Ostatnia modyfikacja: 15/05/2022, 02:51
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<aside
+	*ngIf = '_notFoundContent && _ifEditMode; else showForm'
+	class = 'cms-edit-not-found__container'
+>
+	<img src = 'assets/images/info-important-icon.svg' alt = ''/>
+	<p class = 'not-found__description-paragraph'>{{ _notFoundContent }}</p>
+</aside>
+<ng-template #showForm>
+	<form
+		[formGroup] = '_newDepartmentForm'
+		(ngSubmit) = 'handleSubmitNewDepartment()'
+		class = 'cms__simple-grid__angular-form app-cms__new-content__form-container'
+	>
+		<label
+			for = 'add-department-form___name'
+			class = 'cms__simple-grid__label'
+		>
+			Nazwa wydziału:
+		</label>
+		<div>
+			<input
+				type = 'text'
+				id = 'add-department-form___name'
+				formControlName = 'name'
+				placeholder = 'np. Elektryczny'
+				class = 'app__input app__input--light app__input--exclude-margin'
+			/>
+			<div
+				*ngIf = '_checkError("name")'
+				class = 'app__input-error app__input-error--light app__input-error--margin-top'
+			>
+				Proszę wpisać nazwę wydziału
+			</div>
+		</div>
+		<label
+			for = 'add-department-form___alias'
+			class = 'cms__simple-grid__label'
+		>
+			Alias wydziału:
+		</label>
+		<div>
+			<input
+				type = 'text'
+				id = 'add-department-form___alias'
+				formControlName = 'alias'
+				placeholder = 'np. RE'
+				maxlength = '4'
+				class = 'app__input app__input--light app__input--exclude-margin'
+			/>
+			<div
+				*ngIf = '_checkError("alias")'
+				class = 'app__input-error app__input-error--light app__input-error--margin-top'
+			>
+				Proszę wpisać alias wydziału
+			</div>
+		</div>
+		<div></div>
+		<div class = 'cms__simple-grid__submit-button'>
+			<button
+				[disabled] = '!_newDepartmentForm.valid'
+				type = 'submit'
+				class = 'app__button app__button--full-width app__button--light'
+				title = 'Kliknij aby dodać nowy wydział'
+			>
+				<ng-container *ngIf = '_ifEditMode; else addNewContent'>Edytuj wybrany wydział</ng-container>
+				<ng-template #addNewContent>Dodaj nowy wydział</ng-template>
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</button>
+			<div
+				*ngIf = '_serverError !== ""'
+				class = 'app__input-error app__input-error--light app__input-error--server'
+			>
+				{{ _serverError }}
+			</div>
+		</div>
+	</form>
+</ng-template>

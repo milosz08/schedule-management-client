@@ -19,7 +19,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { CmsRegisterResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
+import { CmsUserResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ export class CmsFileIoCommunicationService {
     /**
      * Zapis danych strzonego użytkownika do pliku tekstowego.
      */
-    public saveDataIntoFile(data: CmsRegisterResDataModel): void {
+    public saveDataIntoFile(data: CmsUserResDataModel): void {
         const element = document.createElement('a');
         const file = new Blob([ CmsFileIoCommunicationService.generateFileContent(data) ], { type: 'text/plain' });
         element.href = URL.createObjectURL(file);
@@ -58,7 +58,7 @@ export class CmsFileIoCommunicationService {
     /**
      * Generowanie wewnętrznej treści pliku.
      */
-    private static generateFileContent(data: CmsRegisterResDataModel): string {
+    private static generateFileContent(data: CmsUserResDataModel): string {
         return (
             'Imię i nazwisko:           ' + data.name + ' ' + data.surname + '\n' +
             'Miejscowość zamieszkania:  ' + data.city + '\n' +

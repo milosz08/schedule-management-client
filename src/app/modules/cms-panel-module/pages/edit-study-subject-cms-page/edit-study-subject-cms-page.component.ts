@@ -37,7 +37,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 })
 export class EditStudySubjectCmsPageComponent extends MetaWebContentHelper {
 
-    public _editSubjId: string | null = '';
+    public _editSubjId: number;
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -47,7 +47,6 @@ export class EditStudySubjectCmsPageComponent extends MetaWebContentHelper {
         private _route: ActivatedRoute,
     ) {
         super(titleService, metaService, AllCmsWebpages.EDIT_STUDY_SUBJECT);
-        this._editSubjId = this._route.snapshot.paramMap.get('subjId');
+        this._editSubjId = Number(this._route.snapshot.paramMap.get('subjId'));
     };
-
 }

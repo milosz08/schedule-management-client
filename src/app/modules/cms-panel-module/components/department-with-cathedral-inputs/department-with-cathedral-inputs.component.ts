@@ -46,6 +46,8 @@ export class DepartmentWithCathedralInputsComponent implements OnInit, OnChanges
     public _cathedraVisible: boolean = false;
 
     @Input() public _angularForm?: FormGroup;
+    @Input() public _ifEditMode: boolean = false;
+    @Input() public _immediatelyLoadEditMode: boolean = false;
     @Output() public _emitNextLevel: EventEmitter<void> = new EventEmitter<void>();
 
     private _unsubscribe: Subject<void> = new Subject();
@@ -62,13 +64,24 @@ export class DepartmentWithCathedralInputsComponent implements OnInit, OnChanges
     public ngOnInit(): void {
         this.handleEmitDepartmentQuery('');
         this.handleEmitCathedralQuery('');
+        if (this._ifEditMode) {
+            this._cathedraVisible = true;
+        }
     };
 
     public ngOnChanges(changes: SimpleChanges): void {
         this._angularForm?.get('departmentName')?.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
             this.handleEmitCathedralQuery('');
-            this._angularForm?.get('cathedralName')?.patchValue('');
-            this._cathedraVisible = false;
+            if (this._immediatelyLoadEditMode) {
+                if (!this._ifEditMode) {
+                    this._angularForm?.get('cathedralName')?.patchValue('');
+                    this._cathedraVisible = false;
+                } else {
+                    this._cathedraVisible = true;
+                }
+            } else {
+                this._angularForm?.get('cathedralName')?.patchValue('');
+            }
         });
     };
 

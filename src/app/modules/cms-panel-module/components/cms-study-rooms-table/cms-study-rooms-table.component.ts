@@ -85,6 +85,10 @@ export class CmsStudyRoomsTableComponent implements OnInit, OnDestroy {
         });
     };
 
+    public emitDeleteArrayValues(deletedValues: Array<number>): void {
+        this._deleteRooms = deletedValues;
+    };
+
     public ngOnDestroy(): void {
         this._unsubscribe.next();
         this._unsubscribe.complete();

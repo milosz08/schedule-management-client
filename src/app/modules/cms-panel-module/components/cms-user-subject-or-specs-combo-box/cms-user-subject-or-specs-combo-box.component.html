@@ -21,6 +21,7 @@
 <ng-container *ngIf = 'this._angularForm!.get("role")?.value'>
 	<app-department-with-cathedral-inputs
 		*ngIf = '_allRoles.STUDENT !== _currentRole'
+		[_ifEditMode] = '_ifEditMode'
 		[_angularForm] = '_angularForm'
 		(_emitNextLevel) = 'handleShowStudySubjects()'
 		class = 'app__show-only-content'
