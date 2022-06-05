@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-register-req-res-data.model.ts
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 18:57
+ * File name | Nazwa pliku: cms-single-for-put-data.model.ts
+ * Last modified | Ostatnia modyfikacja: 04/06/2022, 12:45
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,31 +17,57 @@
  * Obiektowe".
  */
 
-import { UserIdentityType } from '../../../../../types/user-identity.type';
-
-//----------------------------------------------------------------------------------------------------------------------
-
-export interface CmsAddUpdateReqDataModel {
+export interface DepartmentBaseIdModel {
     name: string;
-    surname: string;
-    nationality: string;
-    city: string;
-    role: string;
-    departmentName: string;
-    cathedralName: string;
-    studySpecsOrSubjects: string;
+    alias: string;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface CmsUserResDataModel {
+export interface CathedralBaseIdModel {
+    name: string;
+    alias: string;
+    departmentName: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface StudyRoomBaseIdModel {
+    name: string;
+    alias: string;
+    departmentName: string;
+    cathedralName: string;
+    capacity: number;
+    roomTypeName: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface StudySpecializationBaseIdModel {
+    name: string;
+    alias: string;
+    departmentName: string;
+    studyType: Array<number>;
+    studyDegree: Array<number>;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface StudySubjectBaseIdModel {
+    name: string;
+    departmentName: string;
+    studySpecName: string;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface UserDetailsBaseIdModel {
     name: string;
     surname: string;
-    nationality: string;
     city: string;
-    role: UserIdentityType;
-    email: string;
-    emailPassword: string;
-    departmentData: string;
-    cathedralData: string;
+    nationality: string;
+    role: string;
+    departmentName: string;
+    cathedralName: string;
+    studySpecsOrSubjects: Array<number>;
 }

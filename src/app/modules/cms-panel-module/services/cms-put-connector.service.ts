@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-post-connector.service.ts
- * Last modified | Ostatnia modyfikacja: 11/05/2022, 18:43
+ * File name | Nazwa pliku: cms-put-connector.service.ts
+ * Last modified | Ostatnia modyfikacja: 04/06/2022, 15:49
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -25,24 +25,23 @@ import { Observable } from 'rxjs';
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import { CmsDepartmentReqResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-department-req-res-data.model';
-import { CmsScheduleActivityReqModel } from '../ngrx-store/schedule-manipulator-ngrx-store/ngrx-models/cms-schedule-activity-req.model';
 import { CmsAddUpdateReqDataModel, CmsUserResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-register-req-res-data.model';
 import { CmsCathedralReqDataModel, CmsCathedralResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-cathedral-req-res-data.model';
 import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-spec-req-res-data.model';
 import { CmsStudyRoomReqDataModel, CmsStudyRoomResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-room-req-res-data.model';
-import { CmsStudyGroupReqDataModel, CmsStudyGroupResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-group-req-res-data.model';
 import { CmsStudySubjectReqDataModel, CmsStudySubjectResDataModel } from '../ngrx-store/post-data-ngrx-store/ngrx-models/cms-study-subject-req-res-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Serwis odpowiedzialny za łączenie się z API i wykonywanie zapytań POST do serwera (dodawanie nowych danych).
+ * Serwis odpowiedzialny za aktualizowanie istniejących już treści w systmie na podstawie ciała zapytania oraz
+ * parametru identyfikującego ID edytowanego elementu.
  */
 
 @Injectable({
     providedIn: 'root',
 })
-export class CmsPostConnectorService {
+export class CmsPutConnectorService {
 
     public constructor(
         private _http: HttpClient,
@@ -53,96 +52,82 @@ export class CmsPostConnectorService {
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Rejestrowanie nowego użytkownika.
+     * Aktualizowanie informacji o użytkowniku.
      */
-    public registerUser(newUserData: CmsAddUpdateReqDataModel): Observable<CmsUserResDataModel> {
-        return this._http.post<CmsUserResDataModel>(
-            this._endpoints.REGISTER_USER,
-            newUserData,
+    public updateUser(userData: CmsAddUpdateReqDataModel, userId: number, ifUpdateEmailPass: boolean):
+        Observable<CmsUserResDataModel> {
+        return this._http.put<CmsUserResDataModel>(
+            this._endpoints.UPDATE_USER,
+            userData,
+            { params: { userId, ifUpdateEmailPass } },
         );
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowego wydziału do bazy danych.
+     * Aktualizowanie informacji wydziału do bazy danych.
      */
-    public addNewDepartment(deptData: CmsDepartmentReqResDataModel): Observable<CmsDepartmentReqResDataModel> {
-        return this._http.post<CmsDepartmentReqResDataModel>(
-            this._endpoints.ADD_NEW_DEPARTMENT,
+    public updateDepartment(deptData: CmsDepartmentReqResDataModel, deptId: number):
+        Observable<CmsDepartmentReqResDataModel> {
+        return this._http.put<CmsDepartmentReqResDataModel>(
+            this._endpoints.UPDATE_DEPARTMENT,
             deptData,
+            { params: { deptId } },
         );
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowej katedry do wydziału do bazy danych.
+     * Aktualizowanie informacji katedry do wydziału do bazy danych.
      */
-    public addNewCathedral(cathData: CmsCathedralReqDataModel): Observable<CmsCathedralResDataModel> {
-        return this._http.post<CmsCathedralResDataModel>(
-            this._endpoints.ADD_NEW_CATHEDRAL,
+    public updateCathedral(cathData: CmsCathedralReqDataModel, cathId: number): Observable<CmsCathedralResDataModel> {
+        return this._http.put<CmsCathedralResDataModel>(
+            this._endpoints.UPDATE_CATHEDRAL,
             cathData,
+            { params: { cathId } },
         );
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowego kierunku (powiązanego z wydziałem) do bazy danych.
+     * Aktualizowanie informacji kierunku (powiązanego z wydziałem) do bazy danych.
      */
-    public addNewStudySpecialization(studyData: CmsStudySpecReqDataModel): Observable<Array<CmsStudySpecResDataModel>> {
-        return this._http.post<Array<CmsStudySpecResDataModel>>(
-            this._endpoints.ADD_STUDY_SPECIALIZATION,
+    public updateStudySpecialization(studyData: CmsStudySpecReqDataModel, specId: number):
+        Observable<Array<CmsStudySpecResDataModel>> {
+        return this._http.put<Array<CmsStudySpecResDataModel>>(
+            this._endpoints.UPDATE_STUDY_SPECIALIZATION,
             studyData,
+            { params: { specId } },
         );
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowego sali zajęciowej (powiązanego z katedrą i wydziałem).
+     * Aktualizowanie informacji sali zajęciowej (powiązanego z katedrą i wydziałem).
      */
-    public addNewStudyRoom(roomData: CmsStudyRoomReqDataModel): Observable<CmsStudyRoomResDataModel> {
-        return this._http.post<CmsStudyRoomResDataModel>(
-            this._endpoints.ADD_NEW_STUDY_ROOM,
+    public updateStudyRoom(roomData: CmsStudyRoomReqDataModel, roomId: number): Observable<CmsStudyRoomResDataModel> {
+        return this._http.put<CmsStudyRoomResDataModel>(
+            this._endpoints.UPDATE_STUDY_ROOM,
             roomData,
+            { params: { roomId } },
         );
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Dodawanie nowego przedmiotu (powiązanego z wydziałem i kierunkiem studiów).
+     * Aktualizowanie informacji przedmiotu (powiązanego z wydziałem i kierunkiem studiów).
      */
-    public addNewStudySubject(subjectData: CmsStudySubjectReqDataModel): Observable<CmsStudySubjectResDataModel> {
-        return this._http.post<CmsStudySubjectResDataModel>(
-            this._endpoints.ADD_NEW_STUDY_SUBJECT,
+    public updateStudySubject(subjectData: CmsStudySubjectReqDataModel, subjId: number):
+        Observable<CmsStudySubjectResDataModel> {
+        return this._http.put<CmsStudySubjectResDataModel>(
+            this._endpoints.UPDATE_STUDY_SUBJECT,
             subjectData,
-        );
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Dodawanie nowej grupy dziekańskiej (powiązanego z wydziałem i kierunkiem studiów).
-     */
-    public addNewStudyGroup(groupData: CmsStudyGroupReqDataModel): Observable<Array<CmsStudyGroupResDataModel>> {
-        return this._http.post<Array<CmsStudyGroupResDataModel>>(
-            this._endpoints.ADD_NEW_STUDY_GROUP,
-            groupData,
-        );
-    };
-
-    //------------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Dodawanie nowej aktywności do wybranego planu zajęć (na podstawie parametrów w ciele zapytania).
-     */
-    public addNewScheduleActivity(reqData: CmsScheduleActivityReqModel): Observable<void> {
-        return this._http.post<void>(
-            this._endpoints.ADD_SCHEDULE_ACTIVITY,
-            reqData,
+            { params: { subjId } },
         );
     };
 }

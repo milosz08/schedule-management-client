@@ -20,7 +20,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { CmsDepartmentReqResDataModel } from './ngrx-models/cms-department-req-res-data.model';
-import { CmsRegisterReqDataModel, CmsRegisterResDataModel } from './ngrx-models/cms-register-req-res-data.model';
+import { CmsAddUpdateReqDataModel, CmsUserResDataModel } from './ngrx-models/cms-register-req-res-data.model';
 import { CmsCathedralReqDataModel, CmsCathedralResDataModel } from './ngrx-models/cms-cathedral-req-res-data.model';
 import { CmsStudySpecReqDataModel, CmsStudySpecResDataModel } from './ngrx-models/cms-study-spec-req-res-data.model';
 import { CmsStudyRoomReqDataModel, CmsStudyRoomResDataModel } from './ngrx-models/cms-study-room-req-res-data.model';
@@ -51,72 +51,72 @@ export const CLEAR_NEW_CONTENT_SERVER_ERROR = '[POST DATA] CLEAR NEW CONTENT SER
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const __registerNewUser = createAction(
+export const __registerUpdateUser = createAction(
     REGISTER_NEW_USER,
-    props<{ userData: CmsRegisterReqDataModel }>(),
+    props<{ userData: CmsAddUpdateReqDataModel, userId: number | null, ifUpdateEmailPass: boolean }>(),
 );
 
-export const __successRegisterNewUser = createAction(
+export const __successRegisterUpdateUser = createAction(
     SUCCESS_REGISTER_NEW_USER,
-    props<{ userData: CmsRegisterResDataModel }>(),
+    props<{ userData: CmsUserResDataModel }>(),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const __addNewDepartment = createAction(
+export const __addUpdateDepartment = createAction(
     ADD_NEW_DEPARTMENT,
-    props<{ deptData: CmsDepartmentReqResDataModel }>(),
+    props<{ deptData: CmsDepartmentReqResDataModel, deptId: number | null }>(),
 );
 
-export const __successAddNewDepartment = createAction(
+export const __successAddUpdateDepartment = createAction(
     SUCCESS_ADD_NEW_DEPARTMENT,
     props<{ deptData: CmsDepartmentReqResDataModel }>(),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const __addNewCathedral = createAction(
+export const __addUpdateCathedral = createAction(
     ADD_NEW_CATHEDRAL,
-    props<{ cathData: CmsCathedralReqDataModel }>(),
+    props<{ cathData: CmsCathedralReqDataModel, cathId: number | null }>(),
 );
 
-export const __successAddNewCathedral = createAction(
+export const __successAddUpdateCathedral = createAction(
     SUCCESS_ADD_NEW_CATHEDRAL,
     props<{ cathData: CmsCathedralResDataModel }>(),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const __addNewStudySpec = createAction(
+export const __addUpdateStudySpec = createAction(
     ADD_NEW_STUDY_SPECIALIZATION,
-    props<{ studyData: CmsStudySpecReqDataModel }>(),
+    props<{ studyData: CmsStudySpecReqDataModel, specId: number | null }>(),
 );
 
-export const __successAddNewStudySpecialization = createAction(
+export const __successAddUpdateStudySpecialization = createAction(
     SUCCESS_ADD_NEW_STUDY_SPECIALIZATION,
     props<{ studyData: Array<CmsStudySpecResDataModel> }>(),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const __addNewStudyRoom = createAction(
+export const __addUpdateStudyRoom = createAction(
     ADD_NEW_STUDY_ROOM,
-    props<{ roomData: CmsStudyRoomReqDataModel }>(),
+    props<{ roomData: CmsStudyRoomReqDataModel, roomId: number | null }>(),
 );
 
-export const __successAddNewStudyRoom = createAction(
+export const __successAddUpdateStudyRoom = createAction(
     SUCCESS_ADD_NEW_STUDY_ROOM,
     props<{ roomData: CmsStudyRoomResDataModel }>(),
 );
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export const __addNewStudySubject = createAction(
+export const __addUpdateStudySubject = createAction(
     ADD_NEW_STUDY_SUBJECT,
-    props<{ subjectData: CmsStudySubjectReqDataModel }>(),
+    props<{ subjectData: CmsStudySubjectReqDataModel, subjId: number | null }>(),
 );
 
-export const __successAddNewStudySubject = createAction(
+export const __successAddUpdateStudySubject = createAction(
     SUCCESS_ADD_NEW_STUDY_SUBJECT,
     props<{ subjectData: CmsStudySubjectResDataModel }>(),
 );
@@ -139,7 +139,7 @@ export const __clearAllPostData = createAction(
     CLEAR_ALL_POST_DATA,
 );
 
-export const __failureAddNewContent = createAction(
+export const __failureAddUpdateContent = createAction(
     FAILURE_ADD_NEW_CONTENT,
     props<{ failureMess: string }>(),
 );

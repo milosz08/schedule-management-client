@@ -110,7 +110,7 @@ import { postDataReducer } from './ngrx-store/post-data-ngrx-store/post-data.red
 import { SCHEDULE_MANIPULATOR_REDUCER } from './ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 import { scheduleManipulatorReducer } from './ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.reducer';
 
-import { PostDataEffects } from './ngrx-store/post-data-ngrx-store/ngrx-effects/post-data.effects';
+import { PostPutDataEffects } from './ngrx-store/post-data-ngrx-store/ngrx-effects/post-put-data-effects.service';
 import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store/ngrx-effects/list-navigations.effects';
 import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ngrx-store/ngrx-effects/schedule-manipulator.effects';
 
@@ -204,7 +204,7 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         StoreModule.forFeature(POST_DATA_REDUCER, postDataReducer),
         StoreModule.forFeature(SCHEDULE_MANIPULATOR_REDUCER, scheduleManipulatorReducer),
         EffectsModule.forFeature([
-            PostDataEffects,
+            PostPutDataEffects,
             ListNavigationsEffects,
             ScheduleManipulatorEffects,
         ]),

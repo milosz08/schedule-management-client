@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { CmsRegisterResDataModel } from './ngrx-models/cms-register-req-res-data.model';
+import { CmsUserResDataModel } from './ngrx-models/cms-register-req-res-data.model';
 import { CmsStudySpecResDataModel } from './ngrx-models/cms-study-spec-req-res-data.model';
 import { CmsStudyRoomResDataModel } from './ngrx-models/cms-study-room-req-res-data.model';
 import { CmsCathedralResDataModel } from './ngrx-models/cms-cathedral-req-res-data.model';
@@ -28,7 +28,7 @@ import { CmsStudyGroupResDataModel } from './ngrx-models/cms-study-group-req-res
 //----------------------------------------------------------------------------------------------------------------------
 
 export interface InitialPostDataStateTypes {
-    registerNewUserData: CmsRegisterResDataModel | null;
+    registerNewUserData: CmsUserResDataModel | null;
     addNewDepartmentData: CmsDepartmentReqResDataModel | null;
     addNewCathedralData: CmsCathedralResDataModel | null;
     addNewStudySpecialization: Array<CmsStudySpecResDataModel> | null;
