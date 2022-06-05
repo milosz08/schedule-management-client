@@ -89,11 +89,13 @@ export class AddEditScheduleActivityFormComponent implements OnInit, OnDestroy, 
             .pipe(takeUntil(this._unsubscribe))
             .subscribe(deptAndSpecData => {
                 this._deptAndSpecData = deptAndSpecData;
-                if (this._deptAndSpecData?.dept !== null && this._deptAndSpecData?.spec !== null) {
+                if (this._deptAndSpecData?.dept && this._deptAndSpecData?.spec) {
                     this.handleEmitSubjectQuery('');
                     this.handleEmitSubjectTypeQuery('');
                     this.handleGetAllRoomsBaseDeptId();
-                    this.handleGetAllTeachersBaseDeptAndSubj();
+                    if (this._addNewContentForm.get('subjectOrActivityName')?.value) {
+                        this.handleGetAllTeachersBaseDeptAndSubj();
+                    }
                 }
             });
     };
