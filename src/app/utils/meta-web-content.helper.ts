@@ -130,5 +130,4 @@ export enum AllCmsWebpages {
     EDIT_STUDY_SUBJECT = 'editStudySubject',
     STUDY_GROUPS = 'studyGroups',
     ADD_STUDY_GROUP = 'addStudyGroup',
-    EDIT_STUDY_GROUP = 'editStudyGroup',
 }

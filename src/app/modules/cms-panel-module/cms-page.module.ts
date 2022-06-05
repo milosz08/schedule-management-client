@@ -50,27 +50,26 @@ import { CmsStudyGroupsTableComponent } from './components/cms-study-groups-tabl
 import { CmsStudySubjectsTableComponent } from './components/cms-study-subjects-table/cms-study-subjects-table.component';
 import { CmsStudySpecializationsTableComponent } from './components/cms-study-specializations-table/cms-study-specializations-table.component';
 
-import { AddNewUserFormComponent } from './components/add-new-user-form/add-new-user-form.component';
-import { AddNewCathedralFormComponent } from './components/add-new-cathedral-form/add-new-cathedral-form.component';
-import { AddNewStudyRoomFormComponent } from './components/add-new-study-room-form/add-new-study-room-form.component';
-import { AddNewDepartmentFormComponent } from './components/add-new-department-form/add-new-department-form.component';
-import { AddNewStudyGroupFormComponent } from './components/add-new-study-group-form/add-new-study-group-form.component';
-import { AddNewStudySubjectFormComponent } from './components/add-new-study-subject-form/add-new-study-subject-form.component';
+import { AddUpdateUserFormComponent } from './components/add-update-user-form/add-update-user-form.component';
+import { AddUpdateCathedralFormComponent } from './components/add-update-cathedral-form/add-update-cathedral-form.component';
+import { AddUpdateStudyRoomFormComponent } from './components/add-update-study-room-form/add-update-study-room-form.component';
+import { AddUpdateDepartmentFormComponent } from './components/add-update-department-form/add-update-department-form.component';
+import { AddUpdateStudyGroupFormComponent } from './components/add-update-study-group-form/add-update-study-group-form.component';
+import { AddUpdateStudySubjectFormComponent } from './components/add-update-study-subject-form/add-update-study-subject-form.component';
 import { AddNewStudyGroupCmsPageComponent } from './pages/add-new-study-group-cms-page/add-new-study-group-cms-page.component';
-import { AddNewStudySpecializationFormComponent } from './components/add-new-study-specialization-form/add-new-study-specialization-form.component';
+import { AddUpdateStudySpecializationFormComponent } from './components/add-update-study-specialization-form/add-update-study-specialization-form.component';
 
-import { NewUserInformationsComponent } from './components/new-user-informations/new-user-informations.component';
-import { NewCathedralInformationsComponent } from './components/new-cathedral-informations/new-cathedral-informations.component';
-import { NewStudyRoomInformationsComponent } from './components/new-study-room-informations/new-study-room-informations.component';
-import { NewDepartmentInformationsComponent } from './components/new-department-informations/new-department-informations.component';
-import { NewStudyGroupInformationsComponent } from './components/new-study-group-informations/new-study-group-informations.component';
-import { NewStudySubjectInformationsComponent } from './components/new-study-subject-informations/new-study-subject-informations.component';
-import { NewStudySpecializationInformationsComponent } from './components/new-study-specialization-informations/new-study-specialization-informations.component';
+import { NewUpdatableUserInformationsComponent } from './components/new-updatable-user-informations/new-updatable-user-informations.component';
+import { NewUpdatableCathedralInformationsComponent } from './components/new-updatable-cathedral-informations/new-updatable-cathedral-informations.component';
+import { NewUpdatableStudyRoomInformationsComponent } from './components/new-updatable-study-room-informations/new-updatable-study-room-informations.component';
+import { NewUpdatableDepartmentInformationsComponent } from './components/new-updatable-department-informations/new-updatable-department-informations.component';
+import { NewUpdatableStudyGroupInformationsComponent } from './components/new-updatable-study-group-informations/new-updatable-study-group-informations.component';
+import { NewUpdatableStudySubjectInformationsComponent } from './components/new-updatable-study-subject-informations/new-updatable-study-subject-informations.component';
+import { NewUpdatableStudySpecializationInformationsComponent } from './components/new-updatable-study-specialization-informations/new-updatable-study-specialization-informations.component';
 
 import { EditCathedralCmsPageComponent } from './pages/edit-cathedral-cms-page/edit-cathedral-cms-page.component';
 import { EditStudyRoomCmsPageComponent } from './pages/edit-study-room-cms-page/edit-study-room-cms-page.component';
 import { EditDepartmentCmsPageComponent } from './pages/edit-department-cms-page/edit-department-cms-page.component';
-import { EditStudyGroupCmsPageComponent } from './pages/edit-study-group-cms-page/edit-study-group-cms-page.component';
 import { EditStudySubjectCmsPageComponent } from './pages/edit-study-subject-cms-page/edit-study-subject-cms-page.component';
 import { EditStudySpecializationCmsPageComponent } from './pages/edit-study-specialization-cms-page/edit-study-specialization-cms-page.component';
 
@@ -140,14 +139,14 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         AddNewStudySubjectCmsPageComponent,
         AddNewStudySpecializationCmsPageComponent,
         // formularze (dodawanie kontentu)
-        AddNewUserFormComponent,
-        AddNewCathedralFormComponent,
-        AddNewStudyRoomFormComponent,
-        AddNewDepartmentFormComponent,
-        AddNewStudyGroupFormComponent,
-        AddNewStudySubjectFormComponent,
+        AddUpdateUserFormComponent,
+        AddUpdateCathedralFormComponent,
+        AddUpdateStudyRoomFormComponent,
+        AddUpdateDepartmentFormComponent,
+        AddUpdateStudyGroupFormComponent,
+        AddUpdateStudySubjectFormComponent,
         AddNewStudyGroupCmsPageComponent,
-        AddNewStudySpecializationFormComponent,
+        AddUpdateStudySpecializationFormComponent,
         // widoki tabel
         CmsUsersTableComponent,
         CmsStudyRoomsTableComponent,
@@ -157,18 +156,17 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsStudySubjectsTableComponent,
         CmsStudySpecializationsTableComponent,
         // widoki dodanych treści
-        NewUserInformationsComponent,
-        NewStudyRoomInformationsComponent,
-        NewCathedralInformationsComponent,
-        NewDepartmentInformationsComponent,
-        NewStudyGroupInformationsComponent,
-        NewStudySubjectInformationsComponent,
-        NewStudySpecializationInformationsComponent,
+        NewUpdatableUserInformationsComponent,
+        NewUpdatableStudyRoomInformationsComponent,
+        NewUpdatableCathedralInformationsComponent,
+        NewUpdatableDepartmentInformationsComponent,
+        NewUpdatableStudyGroupInformationsComponent,
+        NewUpdatableStudySubjectInformationsComponent,
+        NewUpdatableStudySpecializationInformationsComponent,
         // widoki edycji treści
         EditStudyRoomCmsPageComponent,
         EditCathedralCmsPageComponent,
         EditDepartmentCmsPageComponent,
-        EditStudyGroupCmsPageComponent,
         EditStudySubjectCmsPageComponent,
         EditStudySpecializationCmsPageComponent,
         // inne

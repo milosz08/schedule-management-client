@@ -58,7 +58,6 @@ import { EditStudySubjectCmsPageComponent } from './pages/edit-study-subject-cms
 
 import { StudyGroupsCmsPageComponent } from './pages/study-groups-cms-page/study-groups-cms-page.component';
 import { AddNewStudyGroupCmsPageComponent } from './pages/add-new-study-group-cms-page/add-new-study-group-cms-page.component';
-import { EditStudyGroupCmsPageComponent } from './pages/edit-study-group-cms-page/edit-study-group-cms-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -149,10 +148,6 @@ const routes: Routes = [
         }, {
             path: 'study-groups/add-study-group',
             component: AddNewStudyGroupCmsPageComponent,
-            canActivate: [ AdminRedirectGuard ],
-        }, {
-            path: 'study-groups/edit-study-group/:groupId',
-            component: EditStudyGroupCmsPageComponent,
             canActivate: [ AdminRedirectGuard ],
         }, {
             path: 'users',
