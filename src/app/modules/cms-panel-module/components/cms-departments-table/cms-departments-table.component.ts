@@ -20,7 +20,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BasicDataSortBy } from '../../types/basic-data-sort-by.types';
@@ -62,22 +62,25 @@ export class CmsDepartmentsTableComponent implements OnInit {
         public _endpoints: ApiConfigurerHelper,
         private _serviceGET: CmsGetTablesConnectorService,
     ) {
-        this._store.pipe(takeUntil(this._unsubscribe), select(NgrxSelector_NAV.sel_combinedNavData)).subscribe(data => {
-            if (data.pageSize !== 1) {
-                this._serviceGET
-                    .getAllDepartments(new PaginationNavSender(data))
-                    .pipe(takeUntil(this._unsubscribe))
-                    .subscribe(filteredPagination => {
-                        this._deptsPagination = filteredPagination;
-                    });
-            }
-        });
     };
 
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnInit(): void {
         this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
+        this._store.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            takeUntil(this._unsubscribe),
+            select(NgrxSelector_NAV.sel_combinedNavData)
+        ).subscribe(data => {
+            if (data.pageSize !== 1) {
+                this._serviceGET
+                    .getAllDepartments(new PaginationNavSender(data))
+                    .pipe(takeUntil(this._unsubscribe))
+                    .subscribe(filteredPagination => this._deptsPagination = filteredPagination);
+            }
+        });
     };
 
     public emitDeleteArrayValues(deletedValues: Array<number>): void {

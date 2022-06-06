@@ -31,7 +31,7 @@ import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-da
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
 import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
-import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
+import { CmsGetSingleBaseIdConnectorService } from '../../services/cms-get-single-base-id-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-sing
     selector: 'app-add-update-user-form',
     templateUrl: './add-update-user-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService, CmsGetSingleForPostConnectorService ],
+    providers: [ CmsGetAllConnectorService, CmsGetSingleBaseIdConnectorService ],
 })
 export class AddUpdateUserFormComponent implements OnInit, OnDestroy, AfterContentChecked {
 
@@ -67,7 +67,7 @@ export class AddUpdateUserFormComponent implements OnInit, OnDestroy, AfterConte
         private _changeDetector: ChangeDetectorRef,
         private _store: Store<PostDataReducerType>,
         private _serviceGET: CmsGetAllConnectorService,
-        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
+        private _serviceSingleGET: CmsGetSingleBaseIdConnectorService,
     ) {
         this._registerUserForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),

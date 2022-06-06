@@ -25,7 +25,8 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import {
     CmsPaginationDataModel, CmsSingleCathDataModel, CmsSingleDeptDataModel, CmsSingleRoomTypeDataModel,
-    CmsSingleStudyGroupDataModel, CmsSingleStudySpecDataModel, CmsSingleStudySubjectDataModel, CmsSingleUserDataModel
+    CmsSingleStudyGroupDataModel, CmsSingleStudySpecDataModel, CmsSingleStudySubjectDataModel,
+    CmsSingleUserDataModel, CmsSingleUserMessageDataModel
 } from '../models/cms-pagination-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------

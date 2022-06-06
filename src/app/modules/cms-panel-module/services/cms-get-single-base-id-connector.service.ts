@@ -26,8 +26,8 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import {
     CathedralBaseIdModel, DepartmentBaseIdModel, StudyRoomBaseIdModel, StudySpecializationBaseIdModel,
-    StudySubjectBaseIdModel, UserDetailsBaseIdModel
-} from '../models/cms-single-for-put-data.model';
+    StudySubjectBaseIdModel, UserDetailsBaseIdModel, UserMessageBaseIdModel
+} from '../models/cms-single-base-id-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ import {
  */
 
 @Injectable()
-export class CmsGetSingleForPostConnectorService {
+export class CmsGetSingleBaseIdConnectorService {
 
     public constructor(
         private _http: HttpClient,

@@ -69,7 +69,7 @@ export class CmsStudySubjectsTableComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this._store.dispatch(NgrxAction_NAV.__insertBaseListNavigations());
         this._store.pipe(
-            debounceTime(200),
+            debounceTime(400),
             distinctUntilChanged(),
             takeUntil(this._unsubscribe),
             select(NgrxSelector_NAV.sel_combinedNavData)

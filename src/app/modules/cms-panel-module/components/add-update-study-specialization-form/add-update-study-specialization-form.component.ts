@@ -33,7 +33,7 @@ import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-
 
 import { CmsGetAllConnectorService } from '../../services/cms-get-all-connector.service';
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';
-import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
+import { CmsGetSingleBaseIdConnectorService } from '../../services/cms-get-single-base-id-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-sing
     selector: 'app-add-update-study-specialization-form',
     templateUrl: './add-update-study-specialization-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService, CmsGetSingleForPostConnectorService ],
+    providers: [ CmsGetAllConnectorService, CmsGetQueryConnectorService, CmsGetSingleBaseIdConnectorService ],
 })
 export class AddUpdateStudySpecializationFormComponent implements OnInit, OnDestroy {
 
@@ -70,7 +70,7 @@ export class AddUpdateStudySpecializationFormComponent implements OnInit, OnDest
         private _store: Store<PostDataReducerType>,
         private _serviceGET: CmsGetAllConnectorService,
         private _serviceQueryGet: CmsGetQueryConnectorService,
-        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
+        private _serviceSingleGET: CmsGetSingleBaseIdConnectorService,
     ) {
         this._newStudySpecForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),

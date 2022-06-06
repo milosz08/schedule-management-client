@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-single-for-put-data.model.ts
+ * File name | Nazwa pliku: cms-single-base-id-data.model.ts
  * Last modified | Ostatnia modyfikacja: 04/06/2022, 12:45
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -70,4 +70,18 @@ export interface UserDetailsBaseIdModel {
     departmentName: string;
     cathedralName: string;
     studySpecsOrSubjects: Array<number>;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface UserMessageBaseIdModel {
+    nameWithSurname: string;
+    email: string;
+    messageIdentifier: string;
+    issueType: string;
+    departmentName: string;
+    groups: Array<string>;
+    ifAnonymous: string;
+    createdDate: string;
+    description: string;
 }
