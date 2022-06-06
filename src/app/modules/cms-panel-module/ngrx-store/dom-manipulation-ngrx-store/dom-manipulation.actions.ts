@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -27,4 +27,5 @@ export const TOGGLE_CHANGE_LEFT_NAV_STATE = '[CMS DOM MANIPULATION] TOGGLE CHANG
 
 export const __toggleChangeLeftNavVisibility = createAction(
     TOGGLE_CHANGE_LEFT_NAV_STATE,
+    props<{ ifVisible?: boolean }>(),
 );

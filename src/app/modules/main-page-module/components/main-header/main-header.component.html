@@ -25,6 +25,7 @@
 		<a
 			*ngFor = 'let nav of _navigationData'
 			[routerLink] = 'nav.location'
+			(click) = 'handleCloseHambuerMenu()'
 			class = 'main-header__mobile-navigation-link'
 			title = '{{ nav.ariaLabel }}'
 		>

@@ -26,9 +26,9 @@ import { initialDomManipulationState } from './dom-manipulation.initial';
 
 const _domManipulationReducer = createReducer(
     initialDomManipulationState,
-    on(NgrxAction.__toggleChangeLeftNavVisibility, state => {
+    on(NgrxAction.__toggleChangeLeftNavVisibility, (state, action) => {
         return { ...state,
-            leftNavigationMenuToggle: !state.leftNavigationMenuToggle,
+            leftNavigationMenuToggle: action.ifVisible || !state.leftNavigationMenuToggle,
         };
     }),
 );

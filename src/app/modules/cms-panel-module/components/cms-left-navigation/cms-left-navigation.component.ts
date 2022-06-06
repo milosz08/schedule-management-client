@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -27,6 +27,7 @@ import { UserIdentityType } from '../../../../types/user-identity.type';
 import CmsPanelNavigation from '../../../../mocked-data/cms-panel-navigation.json';
 import { CmsPanelNavigationDataModel } from '../../models/cms-panel-navigation-data.model';
 
+import * as NgrxAction_DOM from '../../ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.actions';
 import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 import * as NgrxSelector_DOM from '../../ngrx-store/dom-manipulation-ngrx-store/dom-manipulation.selectors';
 
@@ -52,19 +53,31 @@ type ComputedStores = SessionReducerType | DomManipulatorReducerType;
 export class CmsLeftNavigationComponent {
 
     private _navigationAllData: Array<CmsPanelNavigationDataModel>;
+    private _ifAutoCloseActive: boolean = window.innerWidth <= 839;
 
     public _userRole$: Observable<UserIdentityType> = this._store.select(NgrxSelector_SES.sel_userRole);
     public _ifNavVisible$: Observable<boolean> = this._store.select(NgrxSelector_DOM.sel_leftNavVisibility);
 
     //------------------------------------------------------------------------------------------------------------------
 
-    constructor(
+    public constructor(
         private _store: Store<ComputedStores>,
     ) {
         this._navigationAllData = CmsPanelNavigation;
     };
 
     //------------------------------------------------------------------------------------------------------------------
+
+    @HostListener('window:resize', ['$event'])
+    public onResize(_: Event) {
+        this._ifAutoCloseActive = window.innerWidth <= 839;
+    };
+
+    public handleCloseHamburgerMenu(): void {
+        if (this._ifAutoCloseActive) {
+            this._store.dispatch(NgrxAction_DOM.__toggleChangeLeftNavVisibility({ ifVisible: false }));
+        }
+    };
 
     public getUserLinksBasedRole(role: UserIdentityType): Array<CmsPanelNavigationDataModel> {
         return this._navigationAllData.filter(el => el.availableFor.includes(role as string));
