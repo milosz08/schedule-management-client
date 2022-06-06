@@ -45,6 +45,8 @@ export class AppComponent implements OnInit {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public ngOnInit(): void {
         this._store.dispatch(NgrxAction_SES.__autoLogin());   // automatyczne logowanie
         this._sequencerService.refreshSession();              // odświeżenie sesji

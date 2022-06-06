@@ -39,7 +39,7 @@ import { InitialResetPasswordStateTypes } from '../../ngrx-store/reset-password-
 @Component({
     selector: 'app-insert-token-form',
     templateUrl: './insert-token-form.component.html',
-    styleUrls: [ './insert-token-form.component.scss' ]
+    styleUrls: [ './insert-token-form.component.scss' ],
 })
 export class InsertTokenFormComponent {
 
@@ -47,8 +47,7 @@ export class InsertTokenFormComponent {
     private _subscription?: Subscription;
     public _tokenValidMessage: string = '';
 
-    @Output()
-    public _discardEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() public _discardEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //------------------------------------------------------------------------------------------------------------------
 

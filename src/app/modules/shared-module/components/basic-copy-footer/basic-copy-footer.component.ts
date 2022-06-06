@@ -30,7 +30,7 @@ import { DatePipe } from '@angular/common';
 @Component({
     selector: 'app-basic-copy-footer',
     templateUrl: './basic-copy-footer.component.html',
-    styleUrls: [ './basic-copy-footer.component.scss' ]
+    styleUrls: [ './basic-copy-footer.component.scss' ],
 })
 export class BasicCopyFooterComponent {
 

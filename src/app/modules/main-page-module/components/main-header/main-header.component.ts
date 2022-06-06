@@ -59,6 +59,10 @@ export class MainHeaderComponent {
         }
     };
 
+    public handleCloseHambuerMenu(): void {
+        this._ifHamburgerOpen = false;
+    };
+
     get __hamburgerActiveClass(): string {
         return this._ifHamburgerOpen ? 'app__header__hamburger-bars hamburger--active' : 'app__header__hamburger-bars';
     };

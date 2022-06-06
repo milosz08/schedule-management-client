@@ -48,6 +48,7 @@ export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
     @Input() public _placeholder!: string;
     @Input() public _errorField: string = '';
     @Input() public _optionsList: Array<string> = new Array<string>();
+    @Input() public _ifErrorsDisabled: boolean = false;
 
     @Output() public _emitNewQuery: EventEmitter<string> = new EventEmitter<string>();
     @Output() public _addedValue: EventEmitter<void> = new EventEmitter<void>();
@@ -67,13 +68,17 @@ export class SelectDropBoxTemplateComponent implements OnDestroy, OnChanges {
     //------------------------------------------------------------------------------------------------------------------
 
     public ngOnChanges(changes: SimpleChanges): void {
-        this._formGroup?.get(this._formControlName)!.valueChanges.pipe(takeUntil(this._unsubscribe)).subscribe(data => {
-            if (!this._optionsList.includes(data as string)) {
-                this._formGroup?.get(this._formControlName)?.setErrors({ 'error': true });
-            } else {
+        if (!this._ifErrorsDisabled) {
+            this._formGroup?.get(this._formControlName)!.valueChanges.pipe(
+                takeUntil(this._unsubscribe)
+            ).subscribe(data => {
+                if (!this._optionsList.includes(data as string)) {
+                    this._formGroup?.get(this._formControlName)?.setErrors({ 'error': true });
+                } else {
                     this._formGroup?.get(this._formControlName)?.setErrors(null);
-            }
-        });
+                }
+            });
+        }
     };
 
     public ngOnDestroy(): void {

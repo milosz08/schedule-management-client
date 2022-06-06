@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: booking-page.component.ts
- * Last modified | Ostatnia modyfikacja: 09/04/2022, 16:59
+ * File name | Nazwa pliku: administrator-and-editor-redirect.guard.ts
+ * Last modified | Ostatnia modyfikacja: 06/06/2022, 05:52
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,28 +17,30 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+import { RedirectCmsRoleGuard } from './redirect-cms-role.guard';
+import { UserIdentityType } from '../../types/user-identity.type';
+import { SessionReducerType } from '../../modules/shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Widok odpowiadający za generowanie strony umożliwiającej rezerwację grupy/sali/nauczyciela.
+ * Redirektor przekierowujący na stronę główną panelu zarządzania treścią w przypadku próby odwołania się do
+ * chronionego zasobu do którego dostęp ma tylko role nauczyciel oraz student.
  */
 
-@Component({
-    selector: 'app-booking-page',
-    templateUrl: './booking-page.component.html',
-    styleUrls: [ './booking-page.component.scss' ]
+@Injectable({
+    providedIn: 'root',
 })
-export class BookingPageComponent extends MetaWebContentHelper {
+export class AdministratorAndEditorRedirectGuard extends RedirectCmsRoleGuard {
 
-    constructor(
-        titleService: Title,
-        metaService: Meta,
+    public constructor(
+        router: Router,
+        store: Store<SessionReducerType>
     ) {
-        super(titleService, metaService, AllMainWebpages.BOOKING);
+        super(router, store, [ UserIdentityType.TEACHER, UserIdentityType.STUDENT ]);
     };
 }

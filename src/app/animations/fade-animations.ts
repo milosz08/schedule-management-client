@@ -19,6 +19,8 @@
 
 import { animate, style, transition, trigger } from '@angular/animations';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Plik zawierający deklaracje prostych animacji (fadeIn, fadeOut itp.).
  */

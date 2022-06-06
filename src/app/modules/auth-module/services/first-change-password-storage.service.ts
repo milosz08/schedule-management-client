@@ -29,7 +29,7 @@ import { FirstChangePasswordDataModel } from '../../../models/first-change-passw
  */
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FirstChangePasswordStorageService {
 

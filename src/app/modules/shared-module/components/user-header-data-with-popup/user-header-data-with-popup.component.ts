@@ -53,14 +53,9 @@ export class UserHeaderDataWithPopupComponent implements OnInit, OnDestroy {
     public _userData: AuthResponseDataModel | null = null;
     private _ifModalOpen: boolean = false;
 
-    @Input()
-    public _blockedOpenPopup?: boolean = true;
-
-    @Input()
-    public _ifDarkBackgroundTheme?: boolean = false;
-
-    @Input()
-    public _ifIsCmsPanel?: boolean = false;
+    @Input() public _blockedOpenPopup?: boolean = true;
+    @Input() public _ifDarkBackgroundTheme?: boolean = false;
+    @Input() public _ifIsCmsPanel?: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 

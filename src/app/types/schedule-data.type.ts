@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { NameWithId } from '../modules/cms-panel-module/models/cms-drop-lists-data.model';
+import { NameWithId } from '../models/drop-lists-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 

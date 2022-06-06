@@ -30,7 +30,7 @@ import * as NgrxAction_PDA from '../../ngrx-store/post-data-ngrx-store/post-data
 import * as NgrxSelector_PDA from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 import { PostDataReducerType } from '../../ngrx-store/post-data-ngrx-store/post-data.selectors';
 
-import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-single-for-post-connector.service';
+import { CmsGetSingleBaseIdConnectorService } from '../../services/cms-get-single-base-id-connector.service';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ import { CmsGetSingleForPostConnectorService } from '../../services/cms-get-sing
     selector: 'app-add-update-department-form',
     templateUrl: './add-update-department-form.component.html',
     styleUrls: [],
-    providers: [ CmsGetSingleForPostConnectorService ],
+    providers: [ CmsGetSingleBaseIdConnectorService ],
 })
 export class AddUpdateDepartmentFormComponent implements OnInit, OnDestroy {
 
@@ -61,7 +61,7 @@ export class AddUpdateDepartmentFormComponent implements OnInit, OnDestroy {
 
     public constructor(
         private _store: Store<PostDataReducerType>,
-        private _serviceSingleGET: CmsGetSingleForPostConnectorService,
+        private _serviceSingleGET: CmsGetSingleBaseIdConnectorService,
     ) {
         this._newDepartmentForm = new FormGroup({
             name: new FormControl('', [ Validators.required ]),

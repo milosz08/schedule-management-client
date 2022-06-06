@@ -23,6 +23,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminRedirectGuard } from './guards/login-redirectors/admin-redirect.guard';
 import { NotFoundPageComponent } from './modules/shared-module/pages/not-found-page/not-found.component';
 
+//------------------------------------------------------------------------------------------------------------------
 
 const routes: Routes = [
     {
@@ -41,6 +42,7 @@ const routes: Routes = [
     { path: '**', component: NotFoundPageComponent },
 ];
 
+//------------------------------------------------------------------------------------------------------------------
 
 @NgModule({
     imports: [

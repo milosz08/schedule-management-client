@@ -2,7 +2,7 @@
   ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
   ~ Silesian University of Technology | Politechnika Śląska
   ~
-  ~ File name | Nazwa pliku: booking-page.component.html
+  ~ File name | Nazwa pliku: contact-page.component.html
   ~ Last modified | Ostatnia modyfikacja: 09/04/2022, 16:59
   ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
   ~
@@ -18,14 +18,21 @@
   -->
 
 <section class = 'app__safety-area-container'>
-	<h2 class = 'app-cms__header-h2 header--margin-from-bottom'>Nowa rezerwacja</h2>
+	<h2 class = 'app-cms__header-h2 header--margin-from-bottom'>Formularz kontaktowy</h2>
 	<aside class = 'app-cms__separator-line'></aside>
 	<div class = 'app-cms__description-block__container description-block-container__disabled-max-width'>
-		W tej zakładce masz możliwość wprowadzenia nowej rezerwacji grupy/pracownika/sali zajęciowej. Rezerwacja stworzona
-		bez zalogowania do systemu będzie rezerwacją anonimową i nie będzie możliwości śledzenia jej statusu. Każda
-		rezerwacja musi zostać zaakceptowana przez administratora/edytora danej jednostki. Po wykonaniu rezerwacji,
-		otrzymasz potwierdzenie na Twoją skrzynkę email. Status stworzonej rezerwacji będzie na bieżąca aktualizowany
-		poprzez wiadomości dostarczane na Twoją skrzynkę pocztową. Aktualny status wszystkich twoich rezerwacji możesz
-		sprawdzić w panelu konta.
+		W tej zakładce masz możliwość wysłania wiadomości do administratora systemu/edytorów wybranego wydziału
+		dotyczącej nieprawidłowości w planie oraz innych uwag. Zgłoszenie możesz stworzyć anonimowe (w przypadku
+		nieaktywnego zalogowania do systemu), wówczas nie zapisze się ono w twojej historii zgłoszeń oraz będzie miało
+		niższy priorytet.
 	</div>
+	<ng-container *ngIf = '!(_ifNotLogged$ | async)'>
+		<app-contact-as-logged class = 'contact-form__container'></app-contact-as-logged>
+		<div class = 'contact-content-separator__container'>
+			<aside class = 'separator-line__vertical'></aside>
+			<div class = 'separator-line__text-content'>lub utwórz zgłoszenie anonimowe</div>
+			<aside class = 'separator-line__vertical'></aside>
+		</div>
+	</ng-container>
+	<app-contact-as-anonymous class = 'contact-form__container'></app-contact-as-anonymous>
 </section>

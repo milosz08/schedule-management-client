@@ -19,5 +19,5 @@
 
 export const environment = {
     production: true,
-    backendApi: 'http://localhost:7575',
+    backendApi: 'http://aspnetschedulemanagementapicontainer.westeurope.azurecontainer.io',
 };

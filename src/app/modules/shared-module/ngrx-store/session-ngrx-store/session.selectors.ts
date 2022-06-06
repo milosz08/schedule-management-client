@@ -105,3 +105,7 @@ export const sel_updateUserImageServerMess = selectorWithInjectedStore(
 export const sel_ifUpdateUserImageServerError = selectorWithInjectedStore(
     state => state.ifUpdateImageServerError,
 );
+
+export const sel_userHash = selectorWithInjectedStore(
+    state => Boolean(state.userData) ? state.userData.dictionaryHash : '',
+);

@@ -47,8 +47,7 @@ export class UserDetailsPopupComponent {
     public _userAuthLevel$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userAuthLevel);
     public _userLogin$: Observable<string> = this._store.select(NgrxSelector_SES.sel_userLogin);
 
-    @Input()
-    public _ifIsCmsPanel?: boolean = false;
+    @Input() public _ifIsCmsPanel?: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 

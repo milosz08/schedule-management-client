@@ -25,7 +25,8 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import {
     CmsPaginationDataModel, CmsSingleCathDataModel, CmsSingleDeptDataModel, CmsSingleRoomTypeDataModel,
-    CmsSingleStudyGroupDataModel, CmsSingleStudySpecDataModel, CmsSingleStudySubjectDataModel, CmsSingleUserDataModel
+    CmsSingleStudyGroupDataModel, CmsSingleStudySpecDataModel, CmsSingleStudySubjectDataModel,
+    CmsSingleUserDataModel, CmsSingleUserMessageDataModel
 } from '../models/cms-pagination-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -131,6 +132,19 @@ export class CmsGetTablesConnectorService {
     public getAllStudyGroups(params: any): Observable<CmsPaginationDataModel<CmsSingleStudyGroupDataModel>> {
         return this._http.get<CmsPaginationDataModel<CmsSingleStudyGroupDataModel>>(
             this._endpoints.CMS_FILTERED_ALL_STUDY_GROUPS,
+            { params },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie wiadomości użytkowników z bazy danych (parametryzacja zapytania,
+     * paginacja i dynamiczne filtrowanie oraz filtrowanie na podstawie JWT).
+     */
+    public getAllUserMessagesBaseClaims(params: any): Observable<CmsPaginationDataModel<CmsSingleUserMessageDataModel>> {
+        return this._http.get<CmsPaginationDataModel<CmsSingleUserMessageDataModel>>(
+            this._endpoints.CMS_FILTERED_ALL_USER_MESSAGES_BASE_CLAIMS,
             { params },
         );
     };

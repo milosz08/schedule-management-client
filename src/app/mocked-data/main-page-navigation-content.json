@@ -10,9 +10,9 @@
         "ariaLabel": "Przejdź do planu zajęć"
     },
     {
-        "name": "Rezerwacje",
-        "location": "booking",
-        "ariaLabel": "Przejdź do stworzenia nowej rezerwacji"
+        "name": "Kontakt",
+        "location": "contact",
+        "ariaLabel": "Przejdź do formularzu kontaktowego"
     },
     {
         "name": "Wyszukaj",

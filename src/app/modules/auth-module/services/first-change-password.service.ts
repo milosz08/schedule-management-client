@@ -24,8 +24,8 @@ import { Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
-import { RequestFirstChangePasswordModel } from '../../../models/request-first-change-password.model';
 import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
+import { RequestFirstChangePasswordModel } from '../../../models/request-first-change-password.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ import { ResponseServerMessageModel } from '../../../models/response-server-mess
  */
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FirstChangePasswordService {
 

@@ -37,7 +37,7 @@ import * as NgrxSelector_REM from '../../ngrx-store/remember-user-ngrx-store/rem
 @Component({
     selector: 'app-last-logins',
     templateUrl: './last-logins.component.html',
-    styleUrls: [ './last-logins.component.scss' ]
+    styleUrls: [ './last-logins.component.scss' ],
 })
 export class LastLoginsComponent implements OnInit {
 

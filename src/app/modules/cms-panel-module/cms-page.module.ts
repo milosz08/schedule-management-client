@@ -26,7 +26,6 @@ import { StoreModule } from '@ngrx/store';
 
 import { CmsPageComponent } from './cms-page.component';
 import { UsersCmsPageComponent } from './pages/users-cms-page/users-cms-page.component';
-import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
 import { EditUserCmsPageComponent } from './pages/edit-user-cms-page/edit-user-cms-page.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
 import { CathedralsCmsPageComponent } from './pages/cathedrals-cms-page/cathedrals-cms-page.component';
@@ -35,6 +34,7 @@ import { DepartmentsCmsPageComponent } from './pages/departments-cms-page/depart
 import { AddNewUserCmsPageComponent } from './pages/add-new-user-cms-page/add-new-user-cms-page.component';
 import { StudyGroupsCmsPageComponent } from './pages/study-groups-cms-page/study-groups-cms-page.component';
 import { StudySubjectsCmsPageComponent } from './pages/study-subjects-cms-page/study-subjects-cms-page.component';
+import { UsersMessagesCmsPageComponent } from './pages/users-messages-cms-page/users-messages-cms-page.component';
 import { AddNewCathedralCmsPageComponent } from './pages/add-new-cathedral-cms-page/add-new-cathedral-cms-page.component';
 import { AddNewStudyRoomCmsPageComponent } from './pages/add-new-study-room-cms-page/add-new-study-room-cms-page.component';
 import { AddNewDepartmentCmsPageComponent } from './pages/add-new-department-cms-page/add-new-department-cms-page.component';
@@ -79,6 +79,7 @@ import { ChooseScheduleCmsPageComponent } from './pages/choose-schedule-cms-page
 import { CmsPanelHeaderComponent } from './components/cms-panel-header/cms-panel-header.component';
 import { CmsPanelFooterComponent } from './components/cms-panel-footer/cms-panel-footer.component';
 import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
+import { MyMessagesCmsPageComponent } from './pages/my-messages-cms-page/my-messages-cms-page.component';
 import { CmsSortingButtonComponent } from './components/cms-sorting-button/cms-sorting-button.component';
 import { CmsLeftNavigationComponent } from './components/cms-left-navigation/cms-left-navigation.component';
 import { CmsPaginationOptionsComponent } from './components/cms-pagination-options/cms-pagination-options.component';
@@ -112,6 +113,9 @@ import { scheduleManipulatorReducer } from './ngrx-store/schedule-manipulator-ng
 import { PostPutDataEffects } from './ngrx-store/post-data-ngrx-store/ngrx-effects/post-put-data-effects.service';
 import { ListNavigationsEffects } from './ngrx-store/list-navigations-ngrx-store/ngrx-effects/list-navigations.effects';
 import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ngrx-store/ngrx-effects/schedule-manipulator.effects';
+import { CmsMyMessagesTableComponent } from './components/cms-my-messages-table/cms-my-messages-table.component';
+import { CmsUsersMessagesTableComponent } from './components/cms-users-messages-table/cms-users-messages-table.component';
+import { SingleMessageCmsPageComponent } from './pages/single-message-cms-page/single-message-cms-page.component';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -121,14 +125,16 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsPageComponent,
         UsersCmsPageComponent,
         EditUserCmsPageComponent,
-        BookingsCmsPageComponent,
         ScheduleCmsPageComponent,
         DashboardCmsPageComponent,
         StudyRoomsCmsPageComponent,
+        MyMessagesCmsPageComponent,
         CathedralsCmsPageComponent,
         StudyGroupsCmsPageComponent,
         DepartmentsCmsPageComponent,
+        UsersMessagesCmsPageComponent,
         StudySubjectsCmsPageComponent,
+        SingleMessageCmsPageComponent,
         ChooseScheduleCmsPageComponent,
         StudySpecializationCmsPageComponent,
         // strony (dodawanie kontentu)
@@ -151,8 +157,10 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsUsersTableComponent,
         CmsStudyRoomsTableComponent,
         CmsCathedralsTableComponent,
+        CmsMyMessagesTableComponent,
         CmsStudyGroupsTableComponent,
         CmsDepartmentsTableComponent,
+        CmsUsersMessagesTableComponent,
         CmsStudySubjectsTableComponent,
         CmsStudySpecializationsTableComponent,
         // widoki dodanych treści
@@ -176,19 +184,19 @@ import { ScheduleManipulatorEffects } from './ngrx-store/schedule-manipulator-ng
         CmsSortingButtonComponent,
         CmsLeftNavigationComponent,
         CmsPaginationOptionsComponent,
+        DashboardUserConnectionsComponent,
+        DashboardUserDetailsPanelComponent,
+        DashboardDatabaseRolesPlotComponent,
         CmsDepartmentWithStudySpecComponent,
         CmsListDeleteSingleElementComponent,
         AddEditScheduleActivityFormComponent,
         CmsChooseScheduleFormEditorComponent,
         AddEditScheduleActivityModalComponent,
         DepartmentWithCathedralInputsComponent,
+        DashboardDatabaseElementsPlotComponent,
         CmsUserSubjectOrSpecsComboBoxComponent,
         CmsChooseScheduleFormAdministratorComponent,
         CmsListElementRemovableWithPaginationComponent,
-        DashboardUserDetailsPanelComponent,
-        DashboardUserConnectionsComponent,
-        DashboardDatabaseElementsPlotComponent,
-        DashboardDatabaseRolesPlotComponent,
     ],
     imports: [
         CommonModule,

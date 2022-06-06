@@ -35,14 +35,9 @@ import { UserIdentityType } from '../../../../types/user-identity.type';
 })
 export class UserRoleDotComponent {
 
-    @Input()
-    public _userRole: UserIdentityType = UserIdentityType.UNDEFINED;
-
-    @Input()
-    public _ifShowLetter?: boolean = true;
-
-    @Input()
-    public _ifThemeIsDark?: boolean = false;
+    @Input() public _userRole: UserIdentityType = UserIdentityType.UNDEFINED;
+    @Input() public _ifShowLetter?: boolean = true;
+    @Input() public _ifThemeIsDark?: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 

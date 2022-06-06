@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-get-single-for-post-connector.service.ts
+ * File name | Nazwa pliku: cms-get-single-base-id-connector.service.ts
  * Last modified | Ostatnia modyfikacja: 04/06/2022, 12:44
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -26,8 +26,8 @@ import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
 import {
     CathedralBaseIdModel, DepartmentBaseIdModel, StudyRoomBaseIdModel, StudySpecializationBaseIdModel,
-    StudySubjectBaseIdModel, UserDetailsBaseIdModel
-} from '../models/cms-single-for-put-data.model';
+    StudySubjectBaseIdModel, UserDetailsBaseIdModel, UserMessageBaseIdModel
+} from '../models/cms-single-base-id-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ import {
  */
 
 @Injectable()
-export class CmsGetSingleForPostConnectorService {
+export class CmsGetSingleBaseIdConnectorService {
 
     public constructor(
         private _http: HttpClient,
@@ -114,6 +114,19 @@ export class CmsGetSingleForPostConnectorService {
         return this._http.get<UserDetailsBaseIdModel>(
             this._endpoints.GET_USER_BASE_ID,
             { params: { userId } },
+        );
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wiadomość użytkownika z bazy danych na podstawie numeru ID przekazywanego w parametrach
+     * oraz identyfikacji claimów z JWT.
+     */
+    public getUserMessageDetailsBaseDbId(messId: number): Observable<UserMessageBaseIdModel> {
+        return this._http.get<UserMessageBaseIdModel>(
+            this._endpoints.GET_MESSAGE_BASE_ID_AND_CLAIMS,
+            { params: { messId } },
         );
     };
 }

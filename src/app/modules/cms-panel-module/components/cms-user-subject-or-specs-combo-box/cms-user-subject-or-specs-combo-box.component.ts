@@ -23,7 +23,7 @@ import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { NameWithId } from '../../models/cms-drop-lists-data.model';
+import { NameWithId } from '../../../../models/drop-lists-data.model';
 import { UserIdentityType } from '../../../../types/user-identity.type';
 
 import { CmsGetQueryConnectorService } from '../../services/cms-get-query-connector.service';

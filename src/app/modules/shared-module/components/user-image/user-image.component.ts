@@ -51,11 +51,8 @@ export class UserImageComponent implements OnInit, OnDestroy {
     private _storeSubscription: Subscription | undefined;
     private _imageURL: string = '';
 
-    @Input()
-    public _ifShowLetter?: boolean = true;
-
-    @Input()
-    public _ifDarkBackgroundTheme?: boolean = false;
+    @Input() public _ifShowLetter?: boolean = true;
+    @Input() public _ifDarkBackgroundTheme?: boolean = false;
 
     //------------------------------------------------------------------------------------------------------------------
 

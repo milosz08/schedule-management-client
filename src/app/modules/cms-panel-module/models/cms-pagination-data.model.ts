@@ -116,3 +116,13 @@ export interface CmsSingleStudyGroupDataModel {
     studySpecName: string;
     studySpecAlias: string;
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+export interface CmsSingleUserMessageDataModel {
+    id: number;
+    nameWithSurname: string;
+    issueType: string;
+    ifAnonymous: string;
+    createdDate: string;
+}

@@ -39,7 +39,7 @@ import { InitialSessionStateTypes } from '../../../shared-module/ngrx-store/sess
 @Component({
     selector: 'app-send-token-via-email-form-page',
     templateUrl: './send-token-via-email-page.component.html',
-    styleUrls: [ './send-token-via-email-page.component.scss' ]
+    styleUrls: [ './send-token-via-email-page.component.scss' ],
 })
 export class SendTokenViaEmailPageComponent extends MetaWebContentHelper implements OnInit {
 

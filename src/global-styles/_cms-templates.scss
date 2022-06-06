@@ -241,6 +241,18 @@
         font-size: 1.1rem;
         color: var(--darkRedColor);
     }
+    &.not-found-container--centered {
+        margin-top: 0;
+        flex-grow: 1;
+        justify-content: center;
+    }
+}
+
+.cms-table__user-message {
+    color: var(--darkGreenColor);
+    &.user-message--if-anonymous {
+        color: var(--darkRedColor);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------

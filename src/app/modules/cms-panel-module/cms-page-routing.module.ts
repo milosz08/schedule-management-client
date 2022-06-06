@@ -22,12 +22,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AdminRedirectGuard } from '../../guards/cms-roles-redirectors/administrator-redirect-guard.service';
 import { TeacherAndStudentRedirectGuard } from '../../guards/cms-roles-redirectors/teacher-and-student-redirect.guard';
+import { AdministratorAndEditorRedirectGuard } from '../../guards/cms-roles-redirectors/administrator-and-editor-redirect.guard';
 
 import { CmsPageComponent } from './cms-page.component';
 
-import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
 import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
+
+import { MyMessagesCmsPageComponent } from './pages/my-messages-cms-page/my-messages-cms-page.component';
+import { UsersMessagesCmsPageComponent } from './pages/users-messages-cms-page/users-messages-cms-page.component';
+import { SingleMessageCmsPageComponent } from './pages/single-message-cms-page/single-message-cms-page.component';
 
 import { ScheduleCmsPageComponent } from './pages/schedule-cms-page/schedule-cms-page.component';
 import { ChooseScheduleCmsPageComponent } from './pages/choose-schedule-cms-page/choose-schedule-cms-page.component';
@@ -71,8 +75,23 @@ const routes: Routes = [
             path: 'dashboard',
             component: DashboardCmsPageComponent,
         }, {
-            path: 'bookings',
-            component: BookingsCmsPageComponent,
+            path: 'users-messages',
+            component: UsersMessagesCmsPageComponent,
+            canActivate: [ TeacherAndStudentRedirectGuard ],
+        }, {
+            path: 'users-messages/message-detail/:messageId',
+            component: SingleMessageCmsPageComponent,
+            canActivate: [ TeacherAndStudentRedirectGuard ],
+            data: { returnRoutePath: '/secure/panel/users-messages' },
+        }, {
+            path: 'my-messages',
+            component: MyMessagesCmsPageComponent,
+            canActivate: [ AdministratorAndEditorRedirectGuard ],
+        }, {
+            path: 'my-messages/message-detail/:messageId',
+            component: SingleMessageCmsPageComponent,
+            canActivate: [ AdministratorAndEditorRedirectGuard ],
+            data: { returnRoutePath: '/secure/panel/my-messages' },
         }, {
             path: 'choose-schedule',
             component: ChooseScheduleCmsPageComponent,

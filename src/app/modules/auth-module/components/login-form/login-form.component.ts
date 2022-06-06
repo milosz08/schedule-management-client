@@ -42,7 +42,7 @@ import * as NgrxAction_SHA from '../../../shared-module/ngrx-store/shared-ngrx-s
 @Component({
     selector: 'app-login-form',
     templateUrl: './login-form.component.html',
-    styleUrls: [ './login-form.component.scss' ]
+    styleUrls: [ './login-form.component.scss' ],
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 

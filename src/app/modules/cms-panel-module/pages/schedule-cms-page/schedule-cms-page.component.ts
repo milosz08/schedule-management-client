@@ -27,21 +27,21 @@ import { takeUntil } from 'rxjs/operators';
 import { delay, Observable, Subject } from 'rxjs';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
+import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
-import { NameWithId } from '../../models/cms-drop-lists-data.model';
+import { NameWithId } from '../../../../models/drop-lists-data.model';
 import { CmsScheduleConvertFromIdsReqDataModel } from '../../models/cms-schedule-convert-data.model';
 
 import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';
 import { ScheduleDataRes, ScheduleFilteringData, ScheduleGroupQuery, ScheduleGroups } from '../../../../types/schedule-data.type';
 
+import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
 import * as NgrxAction_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.actions';
 import * as NgrxSelector_SMA from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 import { ScheduleManipulatorReducerType } from '../../ngrx-store/schedule-manipulator-ngrx-store/schedule-manipulator.selectors';
 
 import { ScheduleDataGetConnectorService } from '../../../../services/schedule-data-get-connector.service';
-import * as NgrxAction_MOD from '../../../shared-module/ngrx-store/modals-ngrx-store/modals.actions';
-import { ApiConfigurerHelper } from '../../../../utils/api-configurer.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 

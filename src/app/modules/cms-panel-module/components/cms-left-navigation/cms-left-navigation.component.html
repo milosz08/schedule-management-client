@@ -27,6 +27,7 @@
 			<a
 				[routerLink] = '"/secure/panel/" + link.location'
 				[routerLinkActive] = '[ "link--active" ]'
+				(click) = 'handleCloseHamburgerMenu()'
 				class = 'single-list-element__navigation-link'
 				title = '{{ link.ariaLabel }}'
 			>

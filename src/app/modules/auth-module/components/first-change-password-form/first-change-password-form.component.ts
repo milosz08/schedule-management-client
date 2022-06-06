@@ -42,7 +42,7 @@ import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ng
 @Component({
     selector: 'app-first-change-password-form',
     templateUrl: './first-change-password-form.component.html',
-    styleUrls: [ './first-change-password-form.component.scss' ]
+    styleUrls: [ './first-change-password-form.component.scss' ],
 })
 export class FirstChangePasswordFormComponent implements OnInit, OnDestroy {
 

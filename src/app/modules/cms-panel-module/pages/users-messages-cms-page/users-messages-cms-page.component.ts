@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-drop-lists-data.model.ts
- * Last modified | Ostatnia modyfikacja: 19/05/2022, 00:32
+ * File name | Nazwa pliku: users-messages-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 07/05/2022, 17:44
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -17,13 +17,29 @@
  * Obiektowe".
  */
 
-export interface AvailableDataModel<T> {
-    dataElements: Array<T>;
-}
+import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+
+import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export interface NameWithId {
-    id: number | string;
-    name: string;
+/**
+ * Komponent odpowiedzialny za renderowanie widoku związanego ze wszystkimi wiadomościami użytkowników.
+ */
+
+@Component({
+    selector: 'app-users-messages-cms-page',
+    templateUrl: './users-messages-cms-page.component.html',
+    styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
+})
+export class UsersMessagesCmsPageComponent extends MetaWebContentHelper {
+
+    public constructor(
+        titleService: Title,
+        metaService: Meta,
+    ) {
+        super(titleService, metaService, AllCmsWebpages.USERS_MESSAGES);
+    };
 }

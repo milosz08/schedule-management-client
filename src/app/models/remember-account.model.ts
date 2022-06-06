@@ -19,6 +19,8 @@
 
 import { UserIdentityType } from '../types/user-identity.type';
 
+//----------------------------------------------------------------------------------------------------------------------
+
 export interface RememberAccountModel {
     dictionaryHash: string;
     nameWithSurname: string;
