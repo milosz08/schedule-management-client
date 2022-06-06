@@ -2,8 +2,8 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: bookings-cms-page.component.ts
- * Last modified | Ostatnia modyfikacja: 07/05/2022, 17:44
+ * File name | Nazwa pliku: my-messages-cms-page.component.ts
+ * Last modified | Ostatnia modyfikacja: 06/06/2022, 05:40
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
  * Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
@@ -25,21 +25,21 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Komponent odpowiedzialny za renderowanie widoku związanego ze wszystkimi rezerwacjami oraz możliwością przejścia
- * do stworzenia nowej rezerwacji.
+ * Komponent odpowiedzialny za renderowanie widoku związanego ze wszystkimi wiadomościami konkretnego użytkownika.
  */
 
 @Component({
-    selector: 'app-bookings-cms-page',
-    templateUrl: './bookings-cms-page.component.html',
-    styleUrls: [ './bookings-cms-page.component.scss' ]
+    selector: 'app-my-messages-cms-page',
+    templateUrl: './my-messages-cms-page.component.html',
+    styleUrls: [],
+    host: { class: 'app__main-flex-columned' },
 })
-export class BookingsCmsPageComponent extends MetaWebContentHelper {
+export class MyMessagesCmsPageComponent extends MetaWebContentHelper {
 
     public constructor(
         titleService: Title,
         metaService: Meta,
     ) {
-        super(titleService, metaService, AllCmsWebpages.BOOKINGS);
+        super(titleService, metaService, AllCmsWebpages.MY_MESSAGES);
     };
 }

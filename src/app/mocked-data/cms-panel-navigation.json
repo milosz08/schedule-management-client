@@ -12,10 +12,16 @@
         "availableFor": "edytor administrator"
     },
     {
-        "name": "Wiadomości",
-        "location": "contact-messages",
-        "ariaLabel": "Kliknij aby przejść do przeglądu wiadomości",
-        "availableFor": "student nauczyciel edytor administrator"
+        "name": "Wiadomości użytkowników",
+        "location": "users-messages",
+        "ariaLabel": "Kliknij aby przejść do przeglądu wiadomości wszystkich użytkowników",
+        "availableFor": "edytor administrator"
+    },
+    {
+        "name": "Moje wiadomości",
+        "location": "my-messages",
+        "ariaLabel": "Kliknij aby przejść do przeglądu wysłanych wiadomości",
+        "availableFor": "student nauczyciel"
     },
     {
         "name": "wydziały",

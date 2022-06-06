@@ -29,5 +29,8 @@ export enum BasicDataSortBy {
     CAPACITY = 'Capacity',
     ROOM_TYPE_ALIAS = 'RoomTypeAlias',
     SPEC_TYPE_ALIAS = 'SpecTypeAlias',
-    DEGREE_TYPE_ALIAS = 'SpecDegree'
+    DEGREE_TYPE_ALIAS = 'SpecDegree',
+    CREATED_DATE = 'CreatedDate',
+    ISSUE_TYPE = 'IssueType',
+    IF_ANONYMOUS = 'IfAnonymous',
 }

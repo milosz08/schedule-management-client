@@ -61,9 +61,13 @@
             "title": "Edytuj konto użytkownika",
             "description": "W tej sekcji możesz edytować wybrane konto użytkownika systemu."
         },
-        "contactMessages": {
-            "title": "Wiadomości",
-            "description": "W tej sekcji możesz przeglądać stworzone wiadomości."
+        "usersMessages": {
+            "title": "Wiadomości użytkowników",
+            "description": "W tej sekcji możesz przeglądać wiadomości użytkowników."
+        },
+        "myMessages": {
+            "title": "Moje wiadomości",
+            "description": "W tej sekcji możesz przeglądać wysłane wiadomości."
         },
         "departments": {
             "title": "Wydziały",

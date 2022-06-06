@@ -135,4 +135,17 @@ export class CmsGetTablesConnectorService {
             { params },
         );
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metoda pobierająca wszystkie wiadomości użytkowników z bazy danych (parametryzacja zapytania,
+     * paginacja i dynamiczne filtrowanie oraz filtrowanie na podstawie JWT).
+     */
+    public getAllUserMessagesBaseClaims(params: any): Observable<CmsPaginationDataModel<CmsSingleUserMessageDataModel>> {
+        return this._http.get<CmsPaginationDataModel<CmsSingleUserMessageDataModel>>(
+            this._endpoints.CMS_FILTERED_ALL_USER_MESSAGES_BASE_CLAIMS,
+            { params },
+        );
+    };
 }
