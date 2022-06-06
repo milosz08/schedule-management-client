@@ -18,7 +18,6 @@
  */
 
 export class FirstChangePasswordDataModel {
-
     public _dictionaryHash: string;
     public _ifDisabled: boolean;
 

@@ -53,6 +53,8 @@ export class CmsListDeleteSingleElementComponent {
     ) {
     };
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public handleDeleteContent(): void {
         this._store.dispatch(NgrxAction_MOD.__openRemoveContentModal({
             removeContentPath: this._deleteEndpoint, removeContentIds: [ this._deleteContentId! ] }));

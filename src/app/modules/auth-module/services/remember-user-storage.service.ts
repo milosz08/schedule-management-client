@@ -37,7 +37,7 @@ import { ImageManipulationService } from '../../shared-module/services/image-man
  */
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class RememberUserStorageService {
 

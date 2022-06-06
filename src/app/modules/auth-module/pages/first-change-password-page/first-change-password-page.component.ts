@@ -34,11 +34,11 @@ import * as NgrxAction_FCP from '../../ngrx-store/first-change-password-ngrx-sto
 @Component({
     selector: 'app-first-change-password-page',
     templateUrl: './first-change-password-page.component.html',
-    styleUrls: [ './first-change-password-page.component.scss' ]
+    styleUrls: [ './first-change-password-page.component.scss' ],
 })
 export class FirstChangePasswordPageComponent extends MetaWebContentHelper {
 
-    constructor(
+    public constructor(
         titleService: Title,
         metaService: Meta,
         private _store: Store,

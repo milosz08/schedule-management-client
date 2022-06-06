@@ -22,8 +22,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { ScheduleNavListModel } from '../models/schedule-nav-list.model';
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
+
+import { ScheduleNavListModel } from '../models/schedule-nav-list.model';
 import { SearchQueryReqModel, SearchQueryResModel } from '../models/search-query.model';
 
 //----------------------------------------------------------------------------------------------------------------------

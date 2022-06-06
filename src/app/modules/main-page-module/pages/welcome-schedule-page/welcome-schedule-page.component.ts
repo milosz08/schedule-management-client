@@ -28,7 +28,6 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-welcome-schedule-page',
     templateUrl: './welcome-schedule-page.component.html',
-    styleUrls: [ './welcome-schedule-page.component.scss' ]
+    styleUrls: [ './welcome-schedule-page.component.scss' ],
 })
-export class WelcomeSchedulePageComponent {
-}
+export class WelcomeSchedulePageComponent {}

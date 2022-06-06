@@ -35,7 +35,7 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
 })
 export class LoginPageComponent extends MetaWebContentHelper {
 
-    constructor(
+    public constructor(
         titleService: Title,
         metaService: Meta,
     ) {

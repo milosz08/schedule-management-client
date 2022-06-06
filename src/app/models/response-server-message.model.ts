@@ -18,7 +18,6 @@
  */
 
 export class ResponseServerMessageModel {
-
     public message: string;
 
     public constructor(message: string) {

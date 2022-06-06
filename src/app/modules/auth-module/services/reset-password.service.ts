@@ -23,9 +23,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
 
-import { ResponseResetPasswordTokenModel } from '../../../models/response-reset-password-token.model';
-import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
 import { RequestResetPasswordModel } from '../../../models/request-reset-password.model';
+import { ResponseServerMessageModel } from '../../../models/response-server-message.model';
+import { ResponseResetPasswordTokenModel } from '../../../models/response-reset-password-token.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ import { RequestResetPasswordModel } from '../../../models/request-reset-passwor
  */
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ResetPasswordService {
 

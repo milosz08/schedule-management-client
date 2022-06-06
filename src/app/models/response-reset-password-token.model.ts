@@ -18,7 +18,6 @@
  */
 
 export class ResponseResetPasswordTokenModel {
-
     public email: string;
     public bearerToken: string;
 

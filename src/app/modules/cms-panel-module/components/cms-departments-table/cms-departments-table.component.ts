@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
@@ -47,7 +47,7 @@ import { CmsGetTablesConnectorService } from '../../services/cms-get-tables-conn
     styleUrls: [],
     providers: [ CmsGetTablesConnectorService ],
 })
-export class CmsDepartmentsTableComponent implements OnInit {
+export class CmsDepartmentsTableComponent implements OnInit, OnDestroy {
 
     public _deptsPagination?: CmsPaginationDataModel<CmsSingleDeptDataModel>;
     public _deptsSortBy: typeof BasicDataSortBy = BasicDataSortBy;

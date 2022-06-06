@@ -25,7 +25,6 @@ interface ResetPasswordFormModel {
 //----------------------------------------------------------------------------------------------------------------------
 
 export class RequestResetPasswordModel {
-
     public newPassword: string;
     public newPasswordConfirmed: string;
     public bearerToken: string;

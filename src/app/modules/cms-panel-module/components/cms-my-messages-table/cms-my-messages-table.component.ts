@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
@@ -46,7 +46,7 @@ import { CmsGetTablesConnectorService } from '../../services/cms-get-tables-conn
     styleUrls: [],
     providers: [ CmsGetTablesConnectorService ],
 })
-export class CmsMyMessagesTableComponent {
+export class CmsMyMessagesTableComponent implements OnInit, OnDestroy {
 
     public _myMessagesPagination?: CmsPaginationDataModel<CmsSingleUserMessageDataModel>;
     public _myMessagesSortBy: typeof BasicDataSortBy = BasicDataSortBy;

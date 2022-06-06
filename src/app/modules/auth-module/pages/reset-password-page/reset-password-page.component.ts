@@ -38,7 +38,7 @@ import { ResetPasswordReducerType } from '../../ngrx-store/reset-password-ngrx-s
 @Component({
     selector: 'app-reset-password-page',
     templateUrl: './reset-password-page.component.html',
-    styleUrls: [ './reset-password-page.component.scss' ]
+    styleUrls: [ './reset-password-page.component.scss' ],
 })
 export class ResetPasswordPageComponent extends MetaWebContentHelper {
 

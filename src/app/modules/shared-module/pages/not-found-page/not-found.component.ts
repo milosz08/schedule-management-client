@@ -33,7 +33,7 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
 @Component({
     selector: 'app-not-found-page',
     templateUrl: './not-found.component.html',
-    styleUrls: [ './not-found.component.scss' ]
+    styleUrls: [ './not-found.component.scss' ],
 })
 export class NotFoundPageComponent extends MetaWebContentHelper {
 

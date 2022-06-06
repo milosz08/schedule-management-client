@@ -18,7 +18,6 @@
  */
 
 export class RequestFirstChangePasswordModel {
-
     public oldPassword: string;
     public newPassword: string;
     public newPasswordConfirmed: string;

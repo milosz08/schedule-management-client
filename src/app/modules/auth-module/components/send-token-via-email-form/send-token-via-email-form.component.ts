@@ -38,7 +38,7 @@ import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ng
 @Component({
     selector: 'app-send-token-via-email-form',
     templateUrl: './send-token-via-email-form.component.html',
-    styleUrls: [ './send-token-via-email-form.component.scss' ]
+    styleUrls: [ './send-token-via-email-form.component.scss' ],
 })
 export class SendTokenViaEmailFormComponent implements OnInit, OnDestroy {
 
@@ -46,8 +46,7 @@ export class SendTokenViaEmailFormComponent implements OnInit, OnDestroy {
     private _subscription?: Subscription;
     public _emailMessage: string = '';
 
-    @Output()
-    public _discardEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() public _discardEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //------------------------------------------------------------------------------------------------------------------
 

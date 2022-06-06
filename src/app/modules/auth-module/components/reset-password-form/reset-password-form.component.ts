@@ -40,7 +40,7 @@ import { ResetPasswordReducerType } from '../../ngrx-store/reset-password-ngrx-s
 @Component({
     selector: 'app-reset-password-form',
     templateUrl: './reset-password-form.component.html',
-    styleUrls: [ './reset-password-form.component.scss' ]
+    styleUrls: [ './reset-password-form.component.scss' ],
 })
 export class ResetPasswordFormComponent implements OnInit, OnDestroy {
 
@@ -49,11 +49,8 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
     public _newPasswordServerMessage: string = '';
     private _storeSubscription?: Subscription;
 
-    @Input()
-    public _bearerToken: string = '';
-
-    @Output()
-    public _discardEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Input() public _bearerToken: string = '';
+    @Output() public _discardEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     //------------------------------------------------------------------------------------------------------------------
 

@@ -25,7 +25,7 @@ import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- *
+ * Komponent odpowiadający za renderowanie widoku umożliwiającego dodanie nowej grupy dziekańskiej.
  */
 
 @Component({
