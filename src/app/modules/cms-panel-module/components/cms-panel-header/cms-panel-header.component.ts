@@ -38,7 +38,7 @@ import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ng
 @Component({
     selector: 'app-cms-panel-header',
     templateUrl: './cms-panel-header.component.html',
-    styleUrls: [ './cms-panel-header.component.scss' ]
+    styleUrls: [ './cms-panel-header.component.scss' ],
 })
 export class CmsPanelHeaderComponent {
 
@@ -50,7 +50,7 @@ export class CmsPanelHeaderComponent {
     public constructor(
         private _store: Store<SessionReducerType>,
     ) {
-    }
+    };
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -59,6 +59,6 @@ export class CmsPanelHeaderComponent {
     };
 
     public handleHamburgerNavigationToggle(): void {
-        this._store.dispatch(NgrxAction_DOM.__toggleChangeLeftNavVisibility());
+        this._store.dispatch(NgrxAction_DOM.__toggleChangeLeftNavVisibility({}));
     };
 }

@@ -45,7 +45,5 @@
 			[_ifDarkBackgroundTheme] = 'true'
 		></app-user-header-data-with-popup>
 	</header>
-	<aside
-		[ngClass] = '[ "cms-header__role-indicator-bar", getUserRoleSingleClass((_userRole$ | async)!) ]'
-	></aside>
+	<aside [ngClass] = '[ "cms-header__role-indicator-bar", getUserRoleSingleClass((_userRole$ | async)!) ]'></aside>
 </div>
