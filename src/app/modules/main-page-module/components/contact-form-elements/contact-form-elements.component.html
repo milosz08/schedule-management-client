@@ -1,0 +1,128 @@
+<!--
+  ~ Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
+  ~ Silesian University of Technology | Politechnika Śląska
+  ~
+  ~ File name | Nazwa pliku: contact-form-elements.component.html
+  ~ Last modified | Ostatnia modyfikacja: 06/06/2022, 00:00
+  ~ Project name | Nazwa Projektu: angular-po-schedule-management-client
+  ~
+  ~ Klient | Client: <https://github.com/Milosz08/Angular_PO_Schedule_Management_Client>
+  ~ Serwer | Server: <https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server>
+  ~
+  ~ Client for the ASP.NET Core application to manage schedule for sample university. Written with the Angular Framework
+  ~ for generating dynamic web applications. Project for the teaching course "Objected Oriented Programming".
+  ~
+  ~ Klient dla aplikacji ASP.NET Core służącej do zarządzania planem zajęć uczelni. Napisany przy użyciu frameworka
+  ~ Angular do generowania dynamicznych aplikacji webowych. Projekt wykonany na zajęcia "Programowanie
+  ~ Obiektowe".
+  -->
+
+<ng-content></ng-content>
+<ng-container [formGroup] = '_formData'>
+	<label
+		[for] = '[ "add-contact__type" ]'
+		class = 'cms__simple-grid__label'
+	>
+		Typ zgłoszenia:
+	</label>
+	<div>
+		<app-select-drop-box-template
+			[_formGroup] = '_formData'
+			[_optionsList] = '_allMessageTypes'
+			(_emitNewQuery) = 'handleEmitQueryAfterSetType($event)'
+			(_addedValue) = 'handleChooseBookingType()'
+			_formControlName = 'issueType'
+			_selectId = 'add-contact__type'
+			_placeholder = 'np. nieprawidłowe dane w planie'
+			_errorField = 'prawidłowy typ zgłoszenia'
+		></app-select-drop-box-template>
+	</div>
+	<ng-container *ngIf = '_ifScheduleIssueVisible'>
+		<label
+			[for] = '[ "add-contact__department" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Wybierz wydział:
+		</label>
+		<div>
+			<app-select-drop-box-template
+				[_formGroup] = '_formData'
+				[_optionsList] = '_allDepartments'
+				[_ifErrorsDisabled] = 'true'
+				(_emitNewQuery) = 'handleEmitDepartmentQuery($event)'
+				(_addedValue) = 'handleChooseDepartment()'
+				_formControlName = 'departmentName'
+				_selectId = 'add-contact__department'
+				_placeholder = 'np. Elektryczny'
+				_errorField = 'prawidłową nazwę wydziału'
+			></app-select-drop-box-template>
+		</div>
+		<label
+			[for] = '[ "add-contact__group" ]'
+			class = 'cms__simple-grid__label'
+		>
+			Wybierz grupę/grupy:
+		</label>
+		<app-combo-box-template
+			[_formGroup] = '_formData'
+			[_allOptions] = '_allGroups'
+			id = 'add-contact__group'
+			_formControlName = 'groups'
+			_placeholder = 'grupy'
+		></app-combo-box-template>
+	</ng-container>
+	<label
+		for = 'add-contact__description'
+		class = 'cms__simple-grid__label'
+	>
+		Opis zgłoszenia:
+	</label>
+	<div>
+		<textarea
+			id = 'add-contact__description'
+			formControlName = 'description'
+			placeholder = 'np. Brak godziny dla zajęć laboratoryjnych "Programowanie Komputerów" we wtorek.'
+			rows = '5'
+			minlength = '10'
+			maxlength = '300'
+			class = 'app__input app__input--light app__input--exclude-margin resize--only-vertical'
+		></textarea>
+		<div
+			*ngIf = '_checkError("description")'
+			class = 'app__input-error app__input-error--light app__input-error--margin-top'
+		>
+			Minimalna ilość znaków dla pola opisu zgłoszenia wynosi 10.
+		</div>
+	</div>
+	<div></div>
+	<div class = 'cms__simple-grid__submit-button'>
+		<button
+			[disabled] = '!_formData.valid'
+			type = 'submit'
+			class = 'app__button app__button--full-width app__button--light'
+			title = 'Kliknij aby dodać nowa salę zajęciową'
+		>
+			<ng-container *ngIf = '_isSeding; else showArrow'>
+				Wysyłanie...
+				<img
+					src = 'assets/gifs/suspense-loading-light.gif' alt = ''
+					class = 'app__button--loading-content-spinner'
+				/>
+			</ng-container>
+			<ng-template #showArrow>
+				Wyślij wiadomość
+				<mat-icon class = 'app__button__arrow'>arrow_right_alt</mat-icon>
+			</ng-template>
+		</button>
+		<div
+			*ngIf = '_serverMessage !== ""'
+			[ngClass] = '[
+				"app__input-error app__input-error--light app__input-error--server",
+				_ifServerError ? "" : "app__input-non-error--light"
+			]'
+			class = ''
+		>
+			{{ _serverMessage }}
+		</div>
+	</div>
+</ng-container>

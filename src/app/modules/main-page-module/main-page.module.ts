@@ -21,12 +21,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared-module/shared.module';
 import { MainPageRoutingModule } from './main-page-routing.module';
+import { TemplatesModule } from '../templates-module/templates.module';
 
 import { MainPageComponent } from './main-page.component';
-import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
@@ -35,12 +37,13 @@ import { SelectedSchedulePageComponent } from './pages/selected-schedule-page/se
 
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
+import { ContactAsLoggedComponent } from './components/contact-as-logged/contact-as-logged.component';
+import { ContactAsAnonymousComponent } from './components/contact-as-anonymous/contact-as-anonymous.component';
+import { ContactFormElementsComponent } from './components/contact-form-elements/contact-form-elements.component';
 import { ScheduleDepartmentsListComponent } from './components/schedule-departments-list/schedule-departments-list.component';
 import { RememberOpenedScheduleBarComponent } from './components/remember-opened-schedule-bar/remember-opened-schedule-bar.component';
 import { ScheduleNextLevelTreeListComponent } from './components/schedule-next-level-tree-list/schedule-next-level-tree-list.component';
 import { ScheduleSecondLevelTreeListComponent } from './components/schedule-second-level-tree-list/schedule-second-level-tree-list.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TemplatesModule } from '../templates-module/templates.module';
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -48,7 +51,7 @@ import { TemplatesModule } from '../templates-module/templates.module';
     declarations: [
         // widoki stron
         MainPageComponent,
-        BookingPageComponent,
+        ContactPageComponent,
         SearchPageComponent,
         SchedulePageComponent,
         RootMainPageComponent,
@@ -57,6 +60,9 @@ import { TemplatesModule } from '../templates-module/templates.module';
         // komponenty
         MainHeaderComponent,
         MainFooterComponent,
+        ContactAsLoggedComponent,
+        ContactAsAnonymousComponent,
+        ContactFormElementsComponent,
         ScheduleDepartmentsListComponent,
         RememberOpenedScheduleBarComponent,
         ScheduleNextLevelTreeListComponent,

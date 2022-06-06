@@ -118,6 +118,7 @@ export class ApiConfigurerHelper {
     public readonly CMS_FILTERED_ALL_STUDY_GROUPS = ApiConfigurerHelper.API_PREFIX + 'studygroup/all-study-groups';
     public readonly GET_AVAILABLE_GROUPS_BASE_SPEC_AND_SEM = ApiConfigurerHelper.API_PREFIX + 'studygroup/available-groups-base-study-spec-and-sem';
     public readonly GET_AVAILABLE_GROUPS_BASE_SPEC = ApiConfigurerHelper.API_PREFIX + 'studygroup/available-groups-base-study-spec';
+    public readonly GET_ALL_GROUPS_BASE_DEPT = ApiConfigurerHelper.API_PREFIX + 'studygroup/study-groups-base-dept';
 
     public readonly ADD_SCHEDULE_ACTIVITY = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/add-new-schedule-activity';
     public readonly MASSIVE_DELETE_SCHEDULE_SUBJECTS = ApiConfigurerHelper.API_PREFIX + 'schedulesubjects/delete-massive';
@@ -128,6 +129,9 @@ export class ApiConfigurerHelper {
 
     public readonly GET_STUDY_YEARS = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-study-years';
     public readonly GET_WEEKSDATA_BASE_CURR_YEAR = ApiConfigurerHelper.API_PREFIX + 'timemanagement/all-weeks-data-base-curr-year';
+
+    public readonly ADD_NEW_CONTACT_MESSAGE = ApiConfigurerHelper.API_PREFIX + 'contactmessages/add-contact-message';
+    public readonly GET_ALL_CONTACT_MESSAGE_ISSUE_TYPES = ApiConfigurerHelper.API_PREFIX + 'contactmessages/all-contact-message-issue-types';
 
     public readonly GET_MASSIVE_QUERY_RESULT = ApiConfigurerHelper.API_PREFIX + 'searchcontent/massive-query-result';
 

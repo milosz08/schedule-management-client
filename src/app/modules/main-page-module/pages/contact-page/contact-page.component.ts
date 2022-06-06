@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: booking-page.component.ts
+ * File name | Nazwa pliku: contact-page.component.ts
  * Last modified | Ostatnia modyfikacja: 09/04/2022, 16:59
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *
@@ -19,25 +19,34 @@
 
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
+
+import * as NgrxSelector_SES from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
+import { SessionReducerType } from '../../../shared-module/ngrx-store/session-ngrx-store/session.selectors';
 
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * Widok odpowiadający za generowanie strony umożliwiającej rezerwację grupy/sali/nauczyciela.
+ * Widok odpowiadający za generowanie strony umożliwiającej wysłanie wiadomości do systemu.
  */
 
 @Component({
-    selector: 'app-booking-page',
-    templateUrl: './booking-page.component.html',
-    styleUrls: [ './booking-page.component.scss' ]
+    selector: 'app-contact-page',
+    templateUrl: './contact-page.component.html',
+    styleUrls: [ './contact-page.component.scss' ]
 })
-export class BookingPageComponent extends MetaWebContentHelper {
+export class ContactPageComponent extends MetaWebContentHelper {
+
+    public _ifNotLogged$: Observable<boolean> = this._store.select(NgrxSelector_SES.sel_ifUserNotLogged);
 
     constructor(
         titleService: Title,
         metaService: Meta,
+        private _store: Store<SessionReducerType>,
     ) {
         super(titleService, metaService, AllMainWebpages.BOOKING);
     };
