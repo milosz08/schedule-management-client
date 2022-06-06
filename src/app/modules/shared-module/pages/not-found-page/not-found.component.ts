@@ -18,6 +18,7 @@
  */
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
@@ -36,10 +37,14 @@ import { AllMainWebpages, MetaWebContentHelper } from '../../../../utils/meta-we
 })
 export class NotFoundPageComponent extends MetaWebContentHelper {
 
-    constructor(
-        titleService: Title,
+    public _ifIsOnCmsPage: boolean = false;
+
+    public constructor(
         metaService: Meta,
+        titleService: Title,
+        private _router: Router,
     ) {
         super(titleService, metaService, AllMainWebpages.NOT_FOUND);
+        this._ifIsOnCmsPage = this._router.url.includes('secure');
     };
 }

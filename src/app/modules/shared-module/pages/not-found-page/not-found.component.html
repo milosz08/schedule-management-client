@@ -17,4 +17,10 @@
   ~ Obiektowe".
   -->
 
-<p>404 nie znaleziono zawartości</p>
+<div [ngClass] = '[ "not-found-page__container", _ifIsOnCmsPage ? "not-fount-page--inside-cms-panel" : "" ]'>
+	<h2 class = 'not-fount-page__header'>404</h2>
+	<p class = 'not-fount-page__paragraph'>
+		Strona do której próbujesz się odwołać nie istnieje lub nie masz do niej dostępu (brak autoryzacji ze strony
+		serwera). Jeśli uważasz, że jest to błąd, skontaktuj się z administratorem systemu.
+	</p>
+</div>
