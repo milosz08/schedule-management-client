@@ -20,7 +20,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { NameWithId } from '../../../cms-panel-module/models/cms-drop-lists-data.model';
+import { NameWithId } from '../../../../models/drop-lists-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------
 

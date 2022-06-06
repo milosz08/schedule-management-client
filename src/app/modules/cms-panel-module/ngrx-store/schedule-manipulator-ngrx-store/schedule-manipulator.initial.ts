@@ -17,7 +17,7 @@
  * Obiektowe".
  */
 
-import { NameWithId } from '../../models/cms-drop-lists-data.model';
+import { NameWithId } from '../../../../models/drop-lists-data.model';
 import { CmsScheduleConvertResDataModel } from '../../models/cms-schedule-convert-data.model';
 
 import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';

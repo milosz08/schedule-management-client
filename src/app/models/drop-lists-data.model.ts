@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl> <https://github.com/Milosz08>
  * Silesian University of Technology | Politechnika Śląska
  *
- * File name | Nazwa pliku: cms-drop-lists-data.model.ts
+ * File name | Nazwa pliku: drop-lists-data.model.ts
  * Last modified | Ostatnia modyfikacja: 19/05/2022, 00:32
  * Project name | Nazwa Projektu: angular-po-schedule-management-client
  *

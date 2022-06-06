@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConfigurerHelper } from '../../../utils/api-configurer.helper';
-import { AvailableDataModel, NameWithId } from '../models/cms-drop-lists-data.model';
+import { AvailableDataModel, NameWithId } from '../../../models/drop-lists-data.model';
 import { DashboardDetailsDataModel } from '../models/dashboard-details-data.model';
 
 //----------------------------------------------------------------------------------------------------------------------

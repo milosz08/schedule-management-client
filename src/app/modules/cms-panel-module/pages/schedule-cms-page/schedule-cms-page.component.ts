@@ -29,7 +29,7 @@ import { delay, Observable, Subject } from 'rxjs';
 import { MiscHelper } from '../../../../utils/misc.helper';
 import { AllCmsWebpages, MetaWebContentHelper } from '../../../../utils/meta-web-content.helper';
 
-import { NameWithId } from '../../models/cms-drop-lists-data.model';
+import { NameWithId } from '../../../../models/drop-lists-data.model';
 import { CmsScheduleConvertFromIdsReqDataModel } from '../../models/cms-schedule-convert-data.model';
 
 import { AvailableScheduleModalTypes } from '../../types/available-schedule-modal.types';
