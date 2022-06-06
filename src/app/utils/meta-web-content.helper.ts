@@ -110,7 +110,7 @@ export enum AllCmsWebpages {
     USERS = 'users',
     CHOOSE_SCHEDULE = 'chooseSchedule',
     SCHEDULE = 'schedule',
-    BOOKINGS = 'bookings',
+    CONTACT_MESSAGES = 'contactMessages',
     ADD_USER = 'addUser',
     EDIT_USER = 'editUser',
     DEPARTMENTS = 'departments',

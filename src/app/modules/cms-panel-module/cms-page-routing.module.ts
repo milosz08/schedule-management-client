@@ -25,7 +25,7 @@ import { TeacherAndStudentRedirectGuard } from '../../guards/cms-roles-redirecto
 
 import { CmsPageComponent } from './cms-page.component';
 
-import { BookingsCmsPageComponent } from './pages/bookings-cms-page/bookings-cms-page.component';
+import { ContactMessagesCmsPageComponent } from './pages/contact-messages-cms-page/contact-messages-cms-page.component';
 import { NotFoundPageComponent } from '../shared-module/pages/not-found-page/not-found.component';
 import { DashboardCmsPageComponent } from './pages/dashboard-cms-page/dashboard-cms-page.component';
 
@@ -71,8 +71,8 @@ const routes: Routes = [
             path: 'dashboard',
             component: DashboardCmsPageComponent,
         }, {
-            path: 'bookings',
-            component: BookingsCmsPageComponent,
+            path: 'contact-messages',
+            component: ContactMessagesCmsPageComponent,
         }, {
             path: 'choose-schedule',
             component: ChooseScheduleCmsPageComponent,

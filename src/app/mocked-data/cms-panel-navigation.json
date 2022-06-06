@@ -12,9 +12,9 @@
         "availableFor": "edytor administrator"
     },
     {
-        "name": "rezerwacje",
-        "location": "bookings",
-        "ariaLabel": "Kliknij aby przejść do przeglądu rezerwacji",
+        "name": "Wiadomości",
+        "location": "contact-messages",
+        "ariaLabel": "Kliknij aby przejść do przeglądu wiadomości",
         "availableFor": "student nauczyciel edytor administrator"
     },
     {

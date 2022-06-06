@@ -23,7 +23,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page.component';
 
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 import { WelcomeSchedulePageComponent } from './pages/welcome-schedule-page/welcome-schedule-page.component';
@@ -46,8 +46,8 @@ const routes: Routes = [
                 component: SelectedSchedulePageComponent,
             } ],
         }, {
-            path: 'booking',
-            component: BookingPageComponent
+            path: 'contact',
+            component: ContactPageComponent
         }, {
             path: 'search',
             component: SearchPageComponent

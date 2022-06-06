@@ -24,8 +24,8 @@
             "description": "Na tej stronie masz możliwość stworzenia nowego hasła po weryfikacji tożsamości."
         },
         "booking": {
-            "title": "Rezerwacje",
-            "description": "Na tej stronie masz możliwość rezerwacji sali, grupy lub nauczyciela."
+            "title": "Kontakt",
+            "description": "Na tej stronie masz możliwość wysłania formularza kontaktowego."
         },
         "search": {
             "title": "Szukaj",
@@ -61,9 +61,9 @@
             "title": "Edytuj konto użytkownika",
             "description": "W tej sekcji możesz edytować wybrane konto użytkownika systemu."
         },
-        "bookings": {
-            "title": "Moje rezerwacje",
-            "description": "W tej sekcji możesz przeglądać wszystkie stworzone rezerwacje."
+        "contactMessages": {
+            "title": "Wiadomości",
+            "description": "W tej sekcji możesz przeglądać stworzone wiadomości."
         },
         "departments": {
             "title": "Wydziały",
