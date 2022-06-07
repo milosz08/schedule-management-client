@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { catchError, of, Subject } from 'rxjs';
+import { catchError, delay, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { MiscHelper } from '../../../../utils/misc.helper';
@@ -76,7 +76,10 @@ export class SelectedSchedulePageComponent implements OnDestroy {
             this._tableLoading = true;
             this._scheduleType = String(this._route.snapshot.paramMap.get('scheduleType'));
         });
-        this._route.queryParams.pipe(takeUntil(this._unsubscribe)).subscribe(() => {
+        this._route.queryParams.pipe(
+            takeUntil(this._unsubscribe),
+            delay(200),
+        ).subscribe(() => {
             if (![ 'groups', 'employeers', 'rooms' ].includes(this._scheduleType)) {
                 this._serverError = 'Skontaktuj się z administratorem systemu';
             } else {
@@ -100,6 +103,7 @@ export class SelectedSchedulePageComponent implements OnDestroy {
         this._tableLoading = true;
         this._scheduleGET.getSheduleBaseType(this._scheduleType, params, filter)
             .pipe(
+                delay(400),
                 takeUntil(this._unsubscribe),
                 catchError(({ error }) => {
                     this._tableLoading = false;
