@@ -86,6 +86,7 @@ export class ContactAsAnonymousComponent implements OnDestroy {
     public handleSubmitNewAnonymousContact(): void {
         const formData: ExtendedContactFormModel = this._anonymousContactForm.getRawValue();
         formData.ifAnonymous = true;
+        this._isSeding = true;
         this._service.sendContactFormData(formData).pipe(
             delay(500),
             take(1),
