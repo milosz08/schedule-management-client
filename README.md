@@ -1,7 +1,7 @@
 <h1 align="center">
     Schedule management system
     <br>
-    <img src="https://cdn.miloszgilga.pl/schedule-management-github-main-logo.png" width="200">
+    <img src="https://cdn.miloszgilga.pl/schedule-management-project-logo.png" width="140">
 </h1>
 
 > Demo available on: [schedule.miloszgilga.pl](https://schedule.miloszgilga.pl/) <br>
