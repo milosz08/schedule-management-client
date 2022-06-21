@@ -24,8 +24,7 @@ import { InitialDomManipulationStateTypes } from './dom-manipulation.initial';
 //----------------------------------------------------------------------------------------------------------------------
 
 export const DOM_MANIPULATION_REDUCER = 'domManipulationReducer' as const;
-const getDomManipulationState =
-    createFeatureSelector<InitialDomManipulationStateTypes>(DOM_MANIPULATION_REDUCER);
+const getDomManipulationState = createFeatureSelector<InitialDomManipulationStateTypes>(DOM_MANIPULATION_REDUCER);
 
 export type DomManipulatorReducerType = { [DOM_MANIPULATION_REDUCER]: InitialDomManipulationStateTypes };
 
