@@ -4,7 +4,7 @@
     <img src="https://cdn.miloszgilga.pl/schedule-management-project-logo.png" width="140">
 </h1>
 
-> Server: [ASP.NET PO Schedule Management Server](https://github.com/Milosz08/ASP.NET_PO_Schedule_Management_Server) <br>
+> Server: [SUoT Schedule Management Server](https://github.com/Milosz08/SUoT_Schedule_Management_Server) <br>
 
 The aim of this project is to simulate a schedule management system for an example technical university. The application is divided into several main modules: admin panel module, schedule editor module and public module. The project was created as part of the credit for the course "Object Oriented Programming" during the pursuit of an engineering degree in Computer Science. <br>
 
