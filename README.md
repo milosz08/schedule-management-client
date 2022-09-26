@@ -1,5 +1,5 @@
 # SUoT Schedule Management System (Frontend)
-[![Generic badge](https://img.shields.io/badge/Made%20with-Angular%20Framework%2014.1.0-1abc9c.svg)](https://angular.io/)&nbsp;&nbsp;
+[![Generic badge](https://img.shields.io/badge/Made%20with-Angular%20Framework%2013.3.0-1abc9c.svg)](https://angular.io/)&nbsp;&nbsp;
 [![Generic badge](https://img.shields.io/badge/Build%20with-Angular%20CLI-green.svg)](https://angular.io/cli)&nbsp;&nbsp;
 [![Generic badge](https://img.shields.io/badge/Packaging-Webpack%20with%20babel%20-brown.svg)](https://webpack.js.org/)&nbsp;&nbsp;
 <br><br>
