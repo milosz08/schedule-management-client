@@ -1,12 +1,12 @@
-<h1 align="center">
-    Schedule management system
-    <br>
-    <img src="https://cdn.miloszgilga.pl/schedule-management-project-logo.png" width="140">
-</h1>
-
-> Server: [SUoT Schedule Management Server](https://github.com/Milosz08/SUoT_Schedule_Management_Server) <br>
-
+# SUoT Schedule Management System (Frontend)
+[![Generic badge](https://img.shields.io/badge/Made%20with-Angular%20Framework%2014.1.0-1abc9c.svg)](https://angular.io/)&nbsp;&nbsp;
+[![Generic badge](https://img.shields.io/badge/Build%20with-Angular%20CLI-green.svg)](https://angular.io/cli)&nbsp;&nbsp;
+[![Generic badge](https://img.shields.io/badge/Packaging-Webpack%20with%20babel%20-brown.svg)](https://webpack.js.org/)&nbsp;&nbsp;
+<br><br>
 The aim of this project is to simulate a schedule management system for an example technical university. The application is divided into several main modules: admin panel module, schedule editor module and public module. The project was created as part of the credit for the course "Object Oriented Programming" during the pursuit of an engineering degree in Computer Science. <br>
+
+See live application at: [schedule.miloszgilga.pl](https://schedule.miloszgilga.pl)<br>
+See backend (server layer): [SUoT Schedule Management Server](https://github.com/Milosz08/SUoT_Schedule_Management_Server)
 
 ## Technology stack
 -  Front-end layer:
