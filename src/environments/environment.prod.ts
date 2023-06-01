@@ -19,5 +19,5 @@
 
 export const environment = {
     production: true,
-    backendApi: 'https://schedule-management-api.azurewebsites.net',
+    backendApi: 'https://schedule.api.miloszgilga.pl',
 };
