@@ -1,0 +1,14 @@
+.angular/
+.github/
+.vscode/
+.husky/
+out-tsc/
+node_modules/
+dist/
+.dockerignore
+.gitignore
+Dockerfile
+LICENSE
+nginx.conf
+README.md
+yarn.lock
