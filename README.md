@@ -1,5 +1,5 @@
 <p align="center">
-    <img src=".github/gh-banner.png" alt="">
+    <img src=".github/banner.png" alt="">
 </p>
 
 Schedule management client. Written using Angular (at beginning using version 13, recently updated to 17). Web UI
