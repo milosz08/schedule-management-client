@@ -1,8 +1,8 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.background": "#1f1135",
-    "titleBar.activeBackground": "#1f1135",
-    "titleBar.inactiveBackground": "#1f1135"
+    "activityBar.background": "#0f4141",
+    "titleBar.activeBackground": "#0f4141",
+    "titleBar.inactiveBackground": "#0f4141"
   },
   "editor.rulers": [120],
   "editor.detectIndentation": false,
