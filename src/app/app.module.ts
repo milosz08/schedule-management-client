@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '~/shared-mod/shared.module';
+import { titleStrategyProvider } from '~/shared-mod/strategies/template-page-title.strategy';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -21,7 +22,7 @@ import { AppComponent } from './app.component';
     RouterModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [titleStrategyProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
