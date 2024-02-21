@@ -1,0 +1,16 @@
+.angular/
+.github/
+.vscode/
+.husky/
+out-tsc/
+node_modules/
+dist/
+.dockerignore
+.eslintignore
+.eslintrc.json
+.gitignore
+.prettierignore
+.prettierrc.json
+Dockerfile
+LICENSE
+README.md
