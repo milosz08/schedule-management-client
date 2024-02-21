@@ -1,4 +1,9 @@
 {
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#1f1135",
+    "titleBar.activeBackground": "#1f1135",
+    "titleBar.inactiveBackground": "#1f1135"
+  },
   "editor.rulers": [120],
   "editor.detectIndentation": false,
   "editor.mouseWheelZoom": true,

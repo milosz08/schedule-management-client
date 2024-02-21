@@ -16,8 +16,13 @@
       }
     }
   ],
-  "importOrderParserPlugins": ["typescript", "decorators-legacy"],
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrderParserPlugins": [
+    "typescript",
+    "decorators-legacy"
+  ],
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports"
+  ],
   "importOrder": [
     "^(zone.*)$",
     "^(@.*)$",
