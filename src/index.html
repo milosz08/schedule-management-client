@@ -25,9 +25,48 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet" />
     <!-- GFont end -->
+    <style>
+      .nojs__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .nojs__container .nojs__header {
+        font-size: 6rem;
+        font-weight: 500;
+        color: var(--darkBlueColor);
+      }
+      .nojs__container .nojs__header::after {
+        content: '!';
+        font-size: 1.1em;
+        color: var(--headerDotColor);
+      }
+      .nojs__container .nojs__paragraph {
+        font-size: 1.1rem;
+        max-width: 1000px;
+        width: 100%;
+        text-align: center;
+        color: var(--darkBlueColor);
+      }
+    </style>
   </head>
   <body>
-    <noscript></noscript>
+    <!-- Start noscript section -->
+    <noscript>
+      <div class="nojs__container">
+        <h2 class="nojs__header">Uwaga</h2>
+        <p class="nojs__paragraph">
+          Twoja przeglądarka ma wyłączoną obsługę języka JavaScript. Aby móc
+          korzystać z aplikacji, musisz zezwolić na korzystanie z języka
+          JavaScript dla tej witryny.
+        </p>
+      </div>
+    </noscript>
+    <!-- End of noscript section -->
+    <!-- Start application renderer section -->
     <app-root></app-root>
+    <!-- End of application renderer section -->
   </body>
 </html>

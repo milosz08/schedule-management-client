@@ -1,0 +1,105 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: -.02rem;
+
+  &:focus {
+    outline: 2px dashed var(--accesibilityColor);
+  }
+}
+
+body {
+  font-size: 16px;
+  color: var(--mainBlackColor);
+  background: var(--mainWhiteColor);
+  min-height: 100vh;
+
+  &.app--disable-scroll {
+    overflow: hidden;
+  }
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  font-family: 'Poppins', sans-serif;
+}
+
+textarea {
+  &.resize--only-vertical {
+    resize: vertical;
+  }
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+}
+
+option {
+  text-transform: capitalize;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+button {
+  background-color: transparent;
+  font-size: 1rem;
+  border: none;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &.app-link--underline:hover {
+    text-decoration: underline;
+  }
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+address {
+  font-style: normal;
+}
+
+strong {
+  font-weight: 500;
+}
+
+p,
+li {
+  line-height: 1.4;
+}
+
+.non-style-list {
+  list-style-type: none;
+}
+
+.display-only-content {
+  display: contents;
+}
