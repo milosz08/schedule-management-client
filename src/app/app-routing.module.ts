@@ -4,6 +4,7 @@
  */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundPageComponent } from '~/shared-mod/pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./module/cms/cms.module').then(m => m.CmsModule),
   },
+  { path: '**', component: NotFoundPageComponent },
 ];
 
 @NgModule({
