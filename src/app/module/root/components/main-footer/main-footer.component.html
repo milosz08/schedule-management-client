@@ -1,0 +1,99 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<footer class="main-footer__container">
+  <div class="app__footer__wrapper">
+    <section class="app__footer__logo-with-description">
+      <a
+        routerLink="/"
+        title="Przejdź do strony głównej"
+        class="app__footer__logo">
+        <img src="assets/logo/main-logo-light.svg" alt="" />
+      </a>
+      <p class="app__footer__description">
+        Aplikacja bazodanowa symulująca system zarządzania planem zajęć
+        przykładowej uczelni wyższej technicznej. Napisana przy użyciu
+        technologii ASP.NET WebAPI (serwer) oraz Angular Framework (klient).
+      </p>
+    </section>
+    <section class="main-footer__all-links-container">
+      <article class="main-footer__links-container">
+        <h3 class="main-footer__links-navigation-header">Nawigacja</h3>
+        <ul class="main-footer__links-list">
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="/"
+              title="Przejdź do strony z informacjami"
+              class="main-footer__single-anchor-tag">
+              O Projekcie
+            </a>
+          </li>
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="schedule"
+              title="Przejdź do planu zajęć"
+              class="main-footer__single-anchor-tag">
+              Plan zajęć
+            </a>
+          </li>
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="contact"
+              title="Przejdź do formularzu kontaktowego"
+              class="main-footer__single-anchor-tag">
+              Kontakt
+            </a>
+          </li>
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="search"
+              title="Przejdź do wyszukiwarki"
+              class="main-footer__single-anchor-tag">
+              Wyszukaj
+            </a>
+          </li>
+        </ul>
+      </article>
+      <article class="main-footer__links-container">
+        <h3 class="main-footer__links-navigation-header">Autoryzacja</h3>
+        <ul class="main-footer__links-list">
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="auth/login"
+              title="Przejdź do strony logowania"
+              class="main-footer__single-anchor-tag">
+              Zaloguj
+            </a>
+          </li>
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="secure/panel"
+              title="Przejdź do strony panelu zarządzania systemem"
+              class="main-footer__single-anchor-tag">
+              Panel Zarządzania
+            </a>
+          </li>
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="auth/reset-password"
+              title="Przejdź do strony logowania"
+              class="main-footer__single-anchor-tag">
+              Resetuj hasło
+            </a>
+          </li>
+          <li class="main-footer__single-link-element">
+            <a
+              routerLink="auth/first-change-password"
+              title="Przejdź do strony logowania"
+              class="main-footer__single-anchor-tag">
+              Zmień domyślne hasło
+            </a>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </div>
+  <app-basic-copy-footer />
+</footer>
