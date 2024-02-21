@@ -1,6 +1,5 @@
 .angular/
 .github/
-.vscode/
 .husky/
 out-tsc/
 node_modules/
