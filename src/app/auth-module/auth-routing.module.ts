@@ -5,6 +5,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthPageComponent } from './auth-page.component';
+import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { SendTokenViaEmailPageComponent } from './pages/send-token-via-email-page/send-token-via-email-page.component';
@@ -27,11 +28,11 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ResetPasswordPageComponent,
-        title: 'Zmień hasło',
+        title: 'Ustaw hasło',
       },
       {
         path: 'first-change-password',
-        component: ResetPasswordPageComponent,
+        component: FirstChangePasswordPageComponent,
         title: 'Pierwsza zmiana hasła',
       },
     ],
