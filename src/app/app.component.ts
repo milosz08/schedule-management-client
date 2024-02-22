@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`,
+  template: `
+    <app-loading-suspense-card />
+    <router-outlet />
+  `,
 })
 export class AppComponent {}

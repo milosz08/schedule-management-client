@@ -4,7 +4,7 @@
  */
 import { Component, HostListener, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NameWithId } from '~/shared-module/models/drop-lists-data.model';
+import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
 
 @Component({
   selector: 'app-combo-box-template',
