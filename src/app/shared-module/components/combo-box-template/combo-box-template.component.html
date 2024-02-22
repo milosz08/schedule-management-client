@@ -1,0 +1,38 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div
+  *ngIf="formGroup"
+  [formGroup]="formGroup"
+  (mouseleave)="isLostFocus = true"
+  class="app__select__container select-drop-box__container">
+  <button
+    type="button"
+    (click)="handleOpenList()"
+    [class.button--active]="valuesArrayLenght() > 0"
+    class="app__input app__input--light app__input--exclude-margin combo-box__button">
+    <ng-container *ngIf="valuesArrayLenght() === 0; else valueWasSelected">
+      Wybierz {{ placeholder }}
+    </ng-container>
+    <ng-template #valueWasSelected>
+      Wybrano {{ valuesArrayLenght() }} z {{ allOptions.length }}
+    </ng-template>
+    <ng-icon name="matKeyboardArrowDown" class="comb-box__arrow" />
+  </button>
+  <div
+    *ngIf="isListVisible && allOptions.length > 0"
+    class="combo-box__list-container">
+    <ul class="combo-box__list-wrapper">
+      <li *ngFor="let option of allOptions" class="combo-box__list-element">
+        <app-checkbox-template
+          [checkboxLabel]="option.name"
+          [isWhiteBackground]="true"
+          [isCheckedInitial]="checkedInitial(option.id)"
+          [checkboxValue]="checkedInitial(option.id)"
+          (checkedEmitter)="handleToggleValuesInArray($event, option.id)" />
+      </li>
+    </ul>
+  </div>
+</div>

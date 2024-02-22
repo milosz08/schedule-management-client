@@ -1,0 +1,40 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div
+  *ngIf="formGroup"
+  [formGroup]="formGroup"
+  class="app__select__container select-drop-box__container"
+  (focusin)="handleOpenListVisibility()"
+  (focusout)="handleCloseListVisibility()">
+  <input
+    type="text"
+    autocomplete="off"
+    [id]="selectId"
+    [formControlName]="formControlName"
+    [placeholder]="placeholder"
+    (input)="handleInsertInput($event)"
+    class="app__input app__input--light app__input--exclude-margin select-drop-box__custom-select-input" />
+  <select class="select-drop-box__select"></select>
+  <ul
+    *ngIf="isListVisible && optionsList.length > 0"
+    class="app-select-list__list-container">
+    <li
+      *ngFor="let option of optionsList"
+      class="app-select-list__list-element">
+      <button type="button" (click)="handleSelectSingleListElement(option)">
+        {{ option }}
+      </button>
+    </li>
+  </ul>
+  <ng-icon
+    *ngIf="!this.formGroup!.get(formControlName)!.disabled"
+    name="matKeyboardArrowDown" />
+</div>
+<div
+  *ngIf="this.formGroup!.get(formControlName)!.touched && !this.formGroup!.get(formControlName)!.valid"
+  class="app__input-error app__input-error--light app__input-error--margin-top">
+  Proszę wybrać {{ errorField }}
+</div>

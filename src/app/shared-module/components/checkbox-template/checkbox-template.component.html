@@ -1,0 +1,25 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="app__checkbox-container">
+  <input
+    type="checkbox"
+    [checked]="isCheckedInitial"
+    [disabled]="isCheckboxDisabled"
+    (change)="handleCheckboxToggle()"
+    [id]="checkboxId"
+    [class.checkmark--white-background]="isWhiteBackground"
+    class="app__checkbox-input" />
+  <span
+    [class.checkmark--white-background]="isWhiteBackground"
+    class="app__checkbox-container__checkmark"></span>
+  <label
+    *ngIf="isShowLabel"
+    [for]="checkboxId"
+    [class.checkbox-label--white-background]="isWhiteBackground"
+    class="app__checkbox-label">
+    {{ checkboxLabel }}
+  </label>
+</div>

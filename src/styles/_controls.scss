@@ -1,0 +1,218 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.app {
+  &__toggle-visibility-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    &__icon {
+      color: var(--lightGrayColor);
+    }
+  }
+  &__input {
+    width: 100%;
+    padding: 8px 20px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    background-color: inherit;
+    border: 1px solid var(--lightGrayColor);
+    color: var(--mainWhiteColor);
+    border-radius: var(--borderRadius);
+    &::placeholder {
+      color: var(--lightGrayColor);
+      opacity: 1;
+    }
+    & &--light {
+      color: var(--darkBlueColor);
+    }
+    & &--exclude-margin {
+      margin-bottom: 0;
+    }
+    & &--max-height {
+      max-height: 50px !important;
+      overflow: auto;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+    &-error {
+      margin: 0 50px 0 20px;
+      color: var(--mainYellowColor);
+      line-height: 1.2;
+      &--light {
+        color: var(--darkRedColor);
+      }
+      &--light {
+        color: var(--darkGreenColor);
+      }
+      &--margin-top {
+        margin: 5px 0 0 20px;
+      }
+      &--server {
+        margin: 20px 0 0 20px;
+      }
+    }
+    &-message {
+      margin: 0 50px 0 20px;
+      line-height: 1.2;
+      &--light {
+        color: var(--darkGreenColor);
+      }
+    }
+  }
+  &__select {
+    &__container {
+      position: relative;
+      width: 100%;
+    }
+    &__arrow-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+  }
+  &__button {
+    background-color: var(--mainWhiteColor);
+    color: var(--darkBlueColor);
+    padding: 6px 15px;
+    font-size: 1rem;
+    border-radius: var(--borderRadius);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    &__arrow {
+      color: var(--mainWhiteColor);
+    }
+    &__text {
+      font-size: 1.5em;
+      line-height: 1;
+      color: inherit;
+      margin-right: 10px;
+      font-weight: 400;
+    }
+    &--loading-content-spinner {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+    }
+    & &--light {
+      background-color: var(--darkBlueColor);
+      color: var(--mainWhiteColor);
+      font-weight: 400;
+      .app__button__arrow {
+        color: var(--mainWhiteColor);
+      }
+    }
+    & &--full-width {
+      width: 100%;
+      justify-content: center;
+    }
+    & &--danger-light {
+      background-color: transparent;
+      border: 1px solid var(--darkRedColor);
+      color: var(--darkRedColor);
+      &.app__button--filled {
+        background-color: var(--darkRedColor);
+        color: var(--mainWhiteColor);
+      }
+    }
+    & &--hollow-light,
+    & &--hollow-dark {
+      background-color: transparent;
+      border: 1px solid var(--darkBlueColor);
+      color: var(--darkBlueColor);
+      font-weight: 400;
+      .app__button__arrow {
+        color: var(--darkBlueColor);
+      }
+    }
+    & &--hollow-dark {
+      border: 1px solid var(--mainWhiteColor);
+      color: var(--mainWhiteColor);
+      font-weight: 400;
+    }
+    .app__button__arrow {
+      margin: 4px 0 0 10px;
+      font-size: 1.5rem;
+      line-height: 0.8;
+      color: var(--darkBlueColor);
+      transition: var(--transitionDuration) transform ease-in-out;
+      & &--arrow-left {
+        margin: 5px 10px 3px 0;
+      }
+      &.arrow--red {
+        color: var(--darkRedColor);
+      }
+    }
+    &:hover:not(:disabled) .app__button__arrow {
+      transform: translateX(3px);
+      &.app__button__arrow--arrow-left {
+        transform: translateX(-3px);
+      }
+      &.app__button-animation-disabled {
+        transform: translateX(0);
+      }
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  &-select-list__list {
+    &-container {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      top: calc(100% + 8px);
+      width: 100%;
+      border: 1px solid var(--lightGrayColor);
+      background-color: var(--mainWhiteColor);
+      border-radius: var(--borderRadius);
+      padding: 5px;
+      list-style-type: none;
+      max-height: 200px;
+      overflow-y: scroll;
+    }
+    &-element {
+      color: var(--darkBlueColor);
+      border-radius: var(--borderRadius);
+      padding: 4px 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: var(--darkBlueColor);
+        button {
+          color: var(--mainWhiteColor);
+        }
+      }
+      button {
+        width: 100%;
+        text-align: left;
+        color: var(--darkBlueColor);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .app__button--full-size-window {
+    width: 100% !important;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .app__button--small-full-size-window {
+    width: 100% !important;
+    text-align: center;
+  }
+}

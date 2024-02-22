@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.app__checkbox {
+  &-label {
+    margin-left: 10px;
+    cursor: pointer;
+    color: var(--mainWhiteColor);
+    line-height: 1.1;
+    &.checkbox-label--white-background {
+      color: var(--darkBlueColor);
+    }
+  }
+  &-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &__checkmark {
+      display: inline-block;
+      position: relative;
+      border-radius: var(--borderRadius);
+      width: 17px;
+      height: 17px;
+      border: 1px solid var(--mainWhiteColor);
+      transition: var(--transitionDuration);
+      flex-shrink: 0;
+      &::after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 5px;
+        top: 0.08rem;
+        width: 4px;
+        height: 7px;
+        border: solid var(--darkBlueColor);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+      &.checkmark--white-background {
+        border-color: var(--darkBlueColor);
+        &::after {
+          border-color: var(--mainWhiteColor);
+        }
+      }
+    }
+  }
+  &-input {
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+    width: 17px;
+    height: 17px;
+    &:checked ~ .app__checkbox-container__checkmark {
+      background-color: var(--mainWhiteColor);
+      &.checkmark--white-background {
+        background-color: var(--darkBlueColor);
+      }
+      &::after {
+        display: block;
+      }
+    }
+    &:disabled,
+    &:disabled ~ .app__checkbox-label,
+    &:disabled + .app__checkbox-container__checkmark {
+      cursor: not-allowed;
+    }
+    &:disabled ~ .app__checkbox-label,
+    &:disabled + .app__checkbox-container__checkmark {
+      opacity: 0.5;
+    }
+  }
+}
