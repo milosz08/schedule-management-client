@@ -14,6 +14,7 @@ import {
 import { BasicCopyFooterComponent } from './components/basic-copy-footer/basic-copy-footer.component';
 import { CheckboxTemplateComponent } from './components/checkbox-template/checkbox-template.component';
 import { ComboBoxTemplateComponent } from './components/combo-box-template/combo-box-template.component';
+import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
 import { SelectDropBoxTemplateComponent } from './components/select-drop-box-template/select-drop-box-template.component';
 import { SelectListTemplateComponent } from './components/select-list-template/select-list-template.component';
 import { TextInputPasswordComponent } from './components/text-input-password/text-input-password.component';
@@ -24,6 +25,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     BasicCopyFooterComponent,
     CheckboxTemplateComponent,
     ComboBoxTemplateComponent,
+    LoadingSuspenseCardComponent,
     NotFoundPageComponent,
     SelectDropBoxTemplateComponent,
     SelectListTemplateComponent,
@@ -39,7 +41,14 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     }),
   ],
   providers: [],
-
-  exports: [BasicCopyFooterComponent],
+  exports: [
+    BasicCopyFooterComponent,
+    CheckboxTemplateComponent,
+    ComboBoxTemplateComponent,
+    LoadingSuspenseCardComponent,
+    SelectDropBoxTemplateComponent,
+    SelectListTemplateComponent,
+    TextInputPasswordComponent,
+  ],
 })
 export class SharedModule {}
