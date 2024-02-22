@@ -35,10 +35,38 @@
       margin-left: 1px;
     }
   }
+  &__auth-container {
+    padding-top: 80px;
+    margin: 0 auto;
+    max-width: var(--safetyAreaWidth);
+  }
 }
 
 @media only screen and (max-width: 1090px) {
   .app__root-container {
     padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 839px) {
+  .app {
+    &__cms-container {
+      padding-top: 0;
+    }
+    &__auth-container {
+      padding-top: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .app__auth-container,
+  .app__cms-container {
+    padding-top: 0;
+    .app__cms-main-container {
+      margin: 0;
+      padding: 20px 15px 15px;
+      border: none;
+    }
   }
 }
