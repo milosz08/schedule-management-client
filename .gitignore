@@ -4,3 +4,4 @@ node_modules/
 .angular/
 .sass-cache/
 coverage/
+.DS_Store
