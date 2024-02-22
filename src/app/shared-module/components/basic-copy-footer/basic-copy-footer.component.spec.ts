@@ -4,7 +4,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
-import { SharedModule } from '~/shared-mod/shared.module';
+import { SharedModule } from '~/shared-module/shared.module';
 import { BasicCopyFooterComponent } from './basic-copy-footer.component';
 
 describe('BasicCopyFooterComponent', () => {

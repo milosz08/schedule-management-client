@@ -4,19 +4,19 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
-import { RootModule } from '~/root-mod/root.module';
-import { MainHeaderComponent } from './main-header.component';
+import { RootModule } from '~/root-module/root.module';
+import { RootMainPageComponent } from './root-main-page.component';
 
-describe('MainHeaderComponent', () => {
-  let component: MainHeaderComponent;
-  let fixture: ComponentFixture<MainHeaderComponent>;
+describe('RootMainPageComponent', () => {
+  let component: RootMainPageComponent;
+  let fixture: ComponentFixture<RootMainPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, RootModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MainHeaderComponent);
+    fixture = TestBed.createComponent(RootMainPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

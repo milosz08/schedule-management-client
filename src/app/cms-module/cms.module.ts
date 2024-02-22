@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '~/shared-mod/shared.module';
+import { SharedModule } from '~/shared-module/shared.module';
 import { CmsPageComponent } from './cms-page.component';
 import { CmsRoutingModule } from './cms-routing.module';
 

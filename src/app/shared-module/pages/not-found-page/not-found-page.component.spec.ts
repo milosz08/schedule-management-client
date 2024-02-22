@@ -4,19 +4,19 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
-import { RootModule } from '~/root-mod/root.module';
-import { RootMainPageComponent } from './root-main-page.component';
+import { SharedModule } from '~/shared-module/shared.module';
+import { NotFoundPageComponent } from './not-found-page.component';
 
-describe('RootMainPageComponent', () => {
-  let component: RootMainPageComponent;
-  let fixture: ComponentFixture<RootMainPageComponent>;
+describe('NotFoundPageComponent', () => {
+  let component: NotFoundPageComponent;
+  let fixture: ComponentFixture<NotFoundPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppModule, RootModule],
+      imports: [AppModule, SharedModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RootMainPageComponent);
+    fixture = TestBed.createComponent(NotFoundPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

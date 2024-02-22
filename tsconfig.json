@@ -22,10 +22,6 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["src/app/*"],
-      "~/auth-mod/*": ["src/app/module/auth/*"],
-      "~/cms-mod/*": ["src/app/module/cms/*"],
-      "~/root-mod/*": ["src/app/module/root/*"],
-      "~/shared-mod/*": ["src/app/module/shared/*"]
     }
   },
   "angularCompilerOptions": {

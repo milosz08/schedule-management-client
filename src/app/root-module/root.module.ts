@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '~/shared-mod/shared.module';
+import { SharedModule } from '~/shared-module/shared.module';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
