@@ -11,19 +11,16 @@
     align-items: center;
     height: 100vh;
   }
-
   &__header {
     font-size: 6rem;
     font-weight: 500;
     color: var(--darkBlueColor);
-
     &::after {
       content: '!';
       font-size: 1.1em;
       color: var(--headerDotColor);
     }
   }
-
   &__paragraph {
     font-size: 1.1rem;
     max-width: 1000px;
@@ -31,7 +28,6 @@
     text-align: center;
     color: var(--darkBlueColor);
   }
-
   &--inside-cms-panel {
     height: 100%;
   }

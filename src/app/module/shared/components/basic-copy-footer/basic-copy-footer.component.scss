@@ -8,7 +8,6 @@
     background-color: var(--darkWhiteColor);
     color: var(--mainBlackColor);
     text-align: center;
-
     &__wrapper {
       width: calc(100% - 60px);
       padding: 20px 0;
@@ -19,13 +18,11 @@
 
   &-description {
     font-size: 1rem;
-
     strong {
       font-weight: normal;
       color: var(--darkRedColor);
     }
   }
-
   &-separator {
     display: block;
     margin: 30px auto 10px;
@@ -40,7 +37,6 @@
     &-section__wrapper {
       text-align: left;
     }
-
     &-separator {
       width: 100%;
     }

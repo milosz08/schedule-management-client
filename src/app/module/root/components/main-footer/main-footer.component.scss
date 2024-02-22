@@ -12,7 +12,6 @@
   display: flex;
   flex-grow: 1;
   justify-content: space-around;
-
   article {
     margin: 0 50px;
   }
@@ -22,11 +21,9 @@
   &-container {
     width: fit-content;
   }
-
   &-navigation-header {
     font-size: 1.2rem;
     color: var(--mainWhiteColor);
-
     &::after {
       font-size: 1.7em;
       content: '.';
@@ -38,12 +35,10 @@
 .main-footer__links-list {
   list-style-type: none;
   margin-top: 10px;
-
   .main-footer__single {
     &-link-element {
       margin: 10px 0;
     }
-
     &-anchor-tag:hover {
       text-decoration: underline;
     }
@@ -58,10 +53,8 @@
       margin: var(--mobileMargin);
       padding: 30px 0;
     }
-
     &__all-links-container {
       margin-top: 30px;
-
       article {
         margin: 0;
       }
