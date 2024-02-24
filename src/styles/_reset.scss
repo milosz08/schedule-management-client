@@ -18,9 +18,6 @@ body {
   color: var(--mainBlackColor);
   background: var(--mainWhiteColor);
   min-height: 100vh;
-  &.app--disable-scroll {
-    overflow: hidden;
-  }
 }
 
 body,

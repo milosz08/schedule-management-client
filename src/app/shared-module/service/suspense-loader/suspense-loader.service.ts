@@ -2,24 +2,33 @@
  * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
  * Silesian University of Technology
  */
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import {
   RouteConfigLoadEnd,
   RouteConfigLoadStart,
   Router,
 } from '@angular/router';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SuspenseLoaderService {
   private _isLoading$ = new BehaviorSubject<boolean>(true);
 
-  constructor(private readonly _router: Router) {
+  constructor(
+    private readonly _router: Router,
+    @Inject(DOCUMENT) private readonly _document: Document
+  ) {
     this._router.events.subscribe(event => {
       if (event instanceof RouteConfigLoadStart) {
+        disableBodyScroll(this._document.documentElement);
         this._isLoading$.next(true);
       } else if (event instanceof RouteConfigLoadEnd) {
-        setTimeout(() => this._isLoading$.next(false), 1000);
+        setTimeout(() => {
+          this._isLoading$.next(false);
+          enableBodyScroll(this._document.documentElement);
+        }, 1000);
       }
     });
   }
