@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./cms-module/cms.module').then(m => m.CmsModule),
   },
-  { path: '**', component: NotFoundPageComponent },
+  { path: '**', component: NotFoundPageComponent, title: '404' },
 ];
 
 @NgModule({

@@ -13,7 +13,7 @@
     type="text"
     autocomplete="off"
     [id]="selectId"
-    [formControlName]="formControlName"
+    [formControlName]="formControlId"
     [placeholder]="placeholder"
     (input)="handleInsertInput($event)"
     class="app__input app__input--light app__input--exclude-margin select-drop-box__custom-select-input" />
@@ -30,11 +30,11 @@
     </li>
   </ul>
   <ng-icon
-    *ngIf="!this.formGroup!.get(formControlName)!.disabled"
+    *ngIf="!this.formGroup!.get(formControlId)!.disabled"
     name="matKeyboardArrowDown" />
 </div>
 <div
-  *ngIf="this.formGroup!.get(formControlName)!.touched && !this.formGroup!.get(formControlName)!.valid"
+  *ngIf="this.formGroup!.get(formControlId)!.touched && !this.formGroup!.get(formControlId)!.valid"
   class="app__input-error app__input-error--light app__input-error--margin-top">
   Proszę wybrać {{ errorField }}
 </div>

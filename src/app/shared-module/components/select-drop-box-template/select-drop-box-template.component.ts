@@ -25,7 +25,7 @@ export class SelectDropBoxTemplateComponent
   implements OnInit, OnChanges, OnDestroy
 {
   @Input() formGroup?: FormGroup;
-  @Input() formControlName = '';
+  @Input() formControlId = '';
   @Input() selectId = '';
   @Input() placeholder = '';
   @Input() errorField = '';
@@ -45,7 +45,7 @@ export class SelectDropBoxTemplateComponent
   }
 
   ngOnChanges(): void {
-    const formControl = this.formGroup?.get(this.formControlName);
+    const formControl = this.formGroup?.get(this.formControlId);
     if (this.isErrorsDisabled || !formControl) {
       return;
     }
@@ -73,8 +73,8 @@ export class SelectDropBoxTemplateComponent
   }
 
   handleSelectSingleListElement(value: string): void {
-    this.formGroup?.patchValue({ [this.formControlName]: value });
-    if (this.addedValue && this.formGroup?.get(this.formControlName)!.valid) {
+    this.formGroup?.patchValue({ [this.formControlId]: value });
+    if (this.addedValue && this.formGroup?.get(this.formControlId)!.valid) {
       this.addedValue.emit();
     }
     this.isListVisible = false;

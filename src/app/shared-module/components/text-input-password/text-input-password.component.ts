@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './text-input-password.component.html',
 })
 export class TextInputPasswordComponent {
-  @Input() formControlName = '';
+  @Input() formControlId = '';
   @Input() inputPlaceholder = '';
   @Input() formGroup?: FormGroup;
   @Input() isLightTheme = true;
@@ -18,7 +18,7 @@ export class TextInputPasswordComponent {
   isPasswordVisible = false;
 
   handleChangePasswordVisibility(): void {
-    if (this.formGroup!.get(this.formControlName)?.value !== '') {
+    if (this.formGroup!.get(this.formControlId)?.value !== '') {
       this.isPasswordVisible = !this.isPasswordVisible;
     }
   }

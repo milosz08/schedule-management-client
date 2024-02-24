@@ -11,11 +11,13 @@
     align-items: center;
     top: 50%;
     transform: translateY(-50%);
-    right: 10px;
+    right: 5px;
     width: 40px;
     height: 40px;
     &__icon {
+      line-height: 0;
       color: var(--lightGrayColor);
+      font-size: 1.2rem;
     }
   }
   &__input {
@@ -31,13 +33,13 @@
       color: var(--lightGrayColor);
       opacity: 1;
     }
-    & &--light {
+    &--light {
       color: var(--darkBlueColor);
     }
-    & &--exclude-margin {
+    &--exclude-margin {
       margin-bottom: 0;
     }
-    & &--max-height {
+    &--max-height {
       max-height: 50px !important;
       overflow: auto;
     }
@@ -90,8 +92,18 @@
     font-weight: 400;
     display: flex;
     align-items: center;
-    &__arrow {
-      color: var(--mainWhiteColor);
+    & &__arrow {
+      margin-left: 10px;
+      font-size: 1.5rem;
+      line-height: 0.8;
+      color: var(--darkBlueColor);
+      transition: var(--transitionDuration) transform ease-in-out;
+      &--arrow-left {
+        margin: 5px 10px 3px 0;
+      }
+      &.arrow--red {
+        color: var(--darkRedColor);
+      }
     }
     &__text {
       font-size: 1.5em;
@@ -105,7 +117,7 @@
       height: 20px;
       margin-left: 10px;
     }
-    & &--light {
+    &--light {
       background-color: var(--darkBlueColor);
       color: var(--mainWhiteColor);
       font-weight: 400;
@@ -113,11 +125,11 @@
         color: var(--mainWhiteColor);
       }
     }
-    & &--full-width {
+    &--full-width {
       width: 100%;
       justify-content: center;
     }
-    & &--danger-light {
+    &--danger-light {
       background-color: transparent;
       border: 1px solid var(--darkRedColor);
       color: var(--darkRedColor);
@@ -126,8 +138,8 @@
         color: var(--mainWhiteColor);
       }
     }
-    & &--hollow-light,
-    & &--hollow-dark {
+    &--hollow-light,
+    &--hollow-dark {
       background-color: transparent;
       border: 1px solid var(--darkBlueColor);
       color: var(--darkBlueColor);
@@ -136,23 +148,10 @@
         color: var(--darkBlueColor);
       }
     }
-    & &--hollow-dark {
+    &--hollow-dark {
       border: 1px solid var(--mainWhiteColor);
       color: var(--mainWhiteColor);
       font-weight: 400;
-    }
-    .app__button__arrow {
-      margin: 4px 0 0 10px;
-      font-size: 1.5rem;
-      line-height: 0.8;
-      color: var(--darkBlueColor);
-      transition: var(--transitionDuration) transform ease-in-out;
-      & &--arrow-left {
-        margin: 5px 10px 3px 0;
-      }
-      &.arrow--red {
-        color: var(--darkRedColor);
-      }
     }
     &:hover:not(:disabled) .app__button__arrow {
       transform: translateX(3px);

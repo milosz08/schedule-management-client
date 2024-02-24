@@ -12,7 +12,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class SelectListTemplateComponent {
   @Input() formGroup?: FormGroup;
-  @Input() formControlName = '';
+  @Input() formControlId = '';
   @Input() placeholder = '';
   @Input() errorField = '';
   @Input() inputId = '';
@@ -29,7 +29,7 @@ export class SelectListTemplateComponent {
   }
 
   handleInsertToInputValue(value: string): void {
-    this.formGroup?.patchValue({ [this.formControlName]: value });
+    this.formGroup?.patchValue({ [this.formControlId]: value });
     this.listVisible = false;
   }
 }

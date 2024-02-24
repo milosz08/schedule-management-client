@@ -21,8 +21,8 @@
       display: inline-block;
       position: relative;
       border-radius: var(--borderRadius);
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       border: 1px solid var(--mainWhiteColor);
       transition: var(--transitionDuration);
       flex-shrink: 0;
@@ -30,8 +30,8 @@
         content: '';
         position: absolute;
         display: none;
-        left: 5px;
-        top: 0.08rem;
+        left: 0.29rem;
+        top: 0.12rem;
         width: 4px;
         height: 7px;
         border: solid var(--darkBlueColor);

@@ -13,7 +13,7 @@ import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
 })
 export class ComboBoxTemplateComponent {
   @Input() formGroup?: FormGroup;
-  @Input() formControlName = '';
+  @Input() formControlId = '';
   @Input() placeholder = '';
   @Input() allOptions: NameWithId[] = [];
 
@@ -35,12 +35,12 @@ export class ComboBoxTemplateComponent {
   }
 
   valuesArrayLenght(): number {
-    return this.formGroup?.get(this.formControlName)!.value.length;
+    return this.formGroup?.get(this.formControlId)!.value.length;
   }
 
   handleToggleValuesInArray(status: boolean, value: number | string): void {
-    const allElements = this.formGroup!.get(this.formControlName)!.value;
-    this.formGroup!.get(this.formControlName)!.patchValue(
+    const allElements = this.formGroup!.get(this.formControlId)!.value;
+    this.formGroup!.get(this.formControlId)!.patchValue(
       status
         ? [...allElements, value]
         : allElements.filter((el: number) => el !== value)
@@ -48,6 +48,6 @@ export class ComboBoxTemplateComponent {
   }
 
   checkedInitial(dbIdx: number | string): boolean {
-    return this.formGroup!.get(this.formControlName)!.value.includes(dbIdx);
+    return this.formGroup!.get(this.formControlId)!.value.includes(dbIdx);
   }
 }
