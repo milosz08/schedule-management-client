@@ -1,0 +1,103 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.main-header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    height: 80px;
+    color: var(--darkBlueColor);
+    font-weight: 500;
+    font-size: 1rem;
+    background-color: var(--navigationBackground);
+  }
+  &__logo {
+    width: 50px;
+    height: 50px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__navigation {
+    position: absolute;
+    width: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 50%;
+    &-link {
+      position: relative;
+      margin: 0 20px;
+      padding: 0 5px;
+      &::after {
+        position: absolute;
+        content: '';
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        bottom: -7px;
+        width: 70%;
+        height: 2px;
+        background-color: var(--darkBlueColor);
+        transition: var(--transitionDuration) all;
+      }
+      &:hover::after,
+      &.link--active::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+  }
+  &__mobile-navigation {
+    display: none;
+    background-color: var(--darkBlueColor);
+    padding: 30px;
+    &-container {
+      position: fixed;
+      z-index: 6;
+      width: 100%;
+    }
+    &-link {
+      display: block;
+      padding-top: 15px;
+      color: var(--lightBlueColor);
+    }
+    &-separator {
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin-top: 10px;
+      background-color: var(--lightBlueColor);
+    }
+  }
+  &__right-content {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .main-header {
+    &__navigation {
+      display: none;
+    }
+    &__mobile-navigation {
+      display: block;
+      &-container {
+        position: static;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .main-header__container {
+    padding: 0 20px;
+  }
+}

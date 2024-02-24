@@ -3,4 +3,85 @@
  ~ Silesian University of Technology
  -->
 
-<p>main-header works!</p>
+<div class="main-header__mobile-navigation-container">
+  <nav *ngIf="isHamburgerOpen" class="main-header__mobile-navigation">
+    <a
+      routerLink="/"
+      title="Przejdź do strony z informacjami"
+      class="main-header__mobile-navigation-link">
+      O Projekcie
+      <span class="main-header__mobile-navigation-separator"></span>
+    </a>
+    <a
+      routerLink="/schedule"
+      title="Przejdź do planu zajęć"
+      class="main-header__mobile-navigation-link">
+      Plan zajęć
+      <span class="main-header__mobile-navigation-separator"></span>
+    </a>
+    <a
+      routerLink="/contact"
+      title="Przejdź do formularzu kontaktowego"
+      class="main-header__mobile-navigation-link">
+      Kontakt
+      <span class="main-header__mobile-navigation-separator"></span>
+    </a>
+    <a
+      routerLink="/search"
+      title="Przejdź do wyszukiwarki"
+      class="main-header__mobile-navigation-link">
+      Wyszukaj
+      <span class="main-header__mobile-navigation-separator"></span>
+    </a>
+  </nav>
+  <header class="main-header__container">
+    <a
+      routerLink="/"
+      title="Przejdź do strony głównej"
+      class="main-header__logo">
+      <img src="assets/logo/main-logo-dark.svg" alt="" />
+    </a>
+    <nav class="main-header__navigation">
+      <a
+        routerLink="/"
+        routerLinkActive="link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        title="Przejdź do strony z informacjami"
+        class="main-header__navigation-link">
+        O Projekcie
+      </a>
+      <span class="app__dot-separator"></span>
+      <a
+        routerLink="/schedule"
+        routerLinkActive="link--active"
+        title="Przejdź do planu zajęć"
+        class="main-header__navigation-link">
+        Plan zajęć
+      </a>
+      <span class="app__dot-separator"></span>
+      <a
+        routerLink="/contact"
+        routerLinkActive="link--active"
+        title="Przejdź do formularzu kontaktowego"
+        class="main-header__navigation-link">
+        Kontakt
+      </a>
+      <span class="app__dot-separator"></span>
+      <a
+        routerLink="/search"
+        routerLinkActive="link--active"
+        title="Przejdź do wyszukiwarki"
+        class="main-header__navigation-link">
+        Wyszukaj
+      </a>
+    </nav>
+    <div class="main-header__right-content">
+      <app-user-header-data-with-popup [blockedOpenPopup]="!isHamburgerOpen" />
+      <button (click)="handleHamburgerToggle()" class="app__header__hamburger">
+        <div
+          class="app__header__hamburger-bars"
+          [class.app__header__hamburger-bars--active]="isHamburgerOpen"></div>
+      </button>
+    </div>
+  </header>
+</div>
