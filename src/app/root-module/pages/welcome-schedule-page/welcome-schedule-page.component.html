@@ -1,0 +1,27 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="welcome-schedule-page__container">
+  <img
+    src="assets/icon/info-icon.svg"
+    alt=""
+    class="welcome-schedule-page__image-wrapper" />
+  <p class="welcome-schedule-page__text-wrapper">
+    Aby rozpocząć przeglądanie planu zajęć rozwiń menu z lewej strony. Możesz
+    przeglądać plany grup, plany pracowników oraz plany sal zajęciowych. Każdy
+    otwarty plan (jeśli w przeglądarce uruchomiony jest mechanizm local storage)
+    zapisze się w nowej karcie na górnej belce. Po ponownym wejściu na stronę,
+    zamiast wyszukiwać konkretnego planu grupy/pracownika/sali wystraczy że
+    klikniesz w zapisany link na górnej belce. Możesz również wyszukać konkretny
+    plan. W tym celu kliknij w przycisk poniżej.
+  </p>
+  <a
+    routerLink="/search"
+    class="app__button app__button--light"
+    title="Kliknij aby przejść do wyszukiwarki planów">
+    Przejdź do wyszukiwarki
+    <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+  </a>
+</div>
