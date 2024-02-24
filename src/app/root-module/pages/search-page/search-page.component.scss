@@ -1,0 +1,159 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.search-param {
+  &__form-container {
+    margin: 100px auto;
+    padding: 30px;
+    max-width: 1000px;
+    border: 1px solid var(--extraLightGrayColor);
+    border-radius: var(--borderRadius);
+  }
+  &__query {
+    &-input {
+      &-label-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto 50px;
+      }
+      &-element {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 10px 130px 8px 20px;
+        border-radius: var(--borderRadius);
+        border: 1px solid var(--extraLightGrayColor);
+        background-color: var(--mainWhiteColor);
+        color: var(--darkBlueColor);
+        &::placeholder {
+          opacity: 1;
+          color: var(--lightGrayColor);
+        }
+      }
+    }
+  }
+  &__pseudo-button {
+    position: absolute;
+    right: 3px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0 15px 0 20px;
+    border-radius: var(--borderRadius);
+    height: calc(100% - 6px);
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--darkBlueColor);
+    color: var(--mainWhiteColor);
+    &-seach-icon {
+      margin-left: 10px;
+    }
+  }
+  &-query-form__checkboxes-container {
+    display: flex;
+    justify-content: center;
+  }
+  &__center-checkbox-element {
+    margin: 0 50px;
+  }
+}
+
+.search-page {
+  &__loading-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  &__loaded-elements__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+  }
+  &__single-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--darkWhiteColor);
+    border-radius: var(--borderRadius);
+    padding: 15px;
+    height: 100%;
+    p {
+      margin: 3px 0;
+      strong {
+        margin-left: 5px;
+      }
+    }
+    &__move-to-arrow {
+      &__container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 40px;
+        margin-right: 25px;
+      }
+      &__arrow {
+        font-size: 2rem;
+        transition: var(--transitionDuration);
+      }
+    }
+    &:hover &__move-to-arrow__arrow {
+      transform: translateX(10px);
+    }
+  }
+}
+
+@media only screen and (max-width: 821px) {
+  .search {
+    &-query-form__checkboxes-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    &-param__center-checkbox-element {
+      margin: 15px 0;
+    }
+    &-page__loaded-elements-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .search {
+    &-page__loaded-elements-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &-param__form-container {
+      margin: 50px auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .search {
+    &-param {
+      &__query-input-element {
+        padding: 8px 60px 7px 20px;
+      }
+      &__pseudo-button {
+        padding: 0 15px;
+      }
+    }
+    &-text-content {
+      display: none;
+    }
+    &-icon {
+      margin-left: 0;
+    }
+  }
+}
