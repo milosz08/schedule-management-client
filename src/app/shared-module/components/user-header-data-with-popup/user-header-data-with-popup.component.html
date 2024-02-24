@@ -1,0 +1,36 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="header-auth__container">
+  <button
+    (click)="handleOpenUserDetailsPopup()"
+    [disabled]="!blockedOpenPopup"
+    [class.header-auth__button--dark]="isDarkBackgroundTheme"
+    class="header-auth__button"
+    title="{{ loggedUser ? 'Otwórz panel użytkownika' : 'Przejdź do logowania' }}">
+    <div class="header-auth__text-area">
+      <div>{{ loggedUser?.nameWithSurname || 'Zaloguj' }}</div>
+      <div *ngIf="loggedUser" class="header-auth__session-info">
+        Pozostały czas sesji:
+        <span
+          [class.header-auth__session-info--yellow-color]="isDarkBackgroundTheme && (sesionSoonEnded$ | async)"
+          [class.header-auth__session-info--red-color]="!isDarkBackgroundTheme && (sesionSoonEnded$ | async)"
+          [class.header-auth__session-info--dark]="isDarkBackgroundTheme"
+          class="header-auth__session-info">
+          {{ sessionCurrentTime$ | async | date: 'mm:ss' }}
+        </span>
+      </div>
+    </div>
+    <div class="header-auth__image-container">
+      <app-user-image
+        [isLetterShowing]="false"
+        [isDarkBackgroundTheme]="isDarkBackgroundTheme" />
+    </div>
+  </button>
+</div>
+<app-user-details-popup
+  *ngIf="isModalOpen && loggedUser && blockedOpenPopup"
+  [isCmsPanel]="isCmsPanel"
+  @fadeInOutAnimation />

@@ -1,0 +1,55 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="user-details-popup__container">
+  <div class="user-details-popup__image">
+    <app-user-image />
+  </div>
+  <div class="user-details-popup__user-basic-data">
+    <span class="user-details-popup__user-name-and-surname">
+      {{ loggedUser?.nameWithSurname }}
+    </span>
+    <span class="user-details-popup__user-login">
+      {{ loggedUser?.login }}
+    </span>
+    <span class="user-details-popup__user-role">
+      Rola w systemie: <strong>{{ loggedUser?.role }}</strong>
+    </span>
+    <span class="user-details-popup__user-session">
+      Pozostały czas sesji:
+      <span
+        [class.user-details-popup__user-session--red-color]="sesionSoonEnded$ | async"
+        class="user-details-popup__user-session-time-container">
+        {{ sessionCurrentTime$ | async | date: 'mm:ss' }}
+      </span>
+    </span>
+  </div>
+  <div class="user-details-popup__buttons-container">
+    <a
+      *ngIf="isCmsPanel; else gotoSecurePanel"
+      routerLink="/"
+      class="app__button app__button--light app__button--hollow-light user-details-popup__button"
+      title="Kliknij aby przejść do strony głównej">
+      Start
+      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+    </a>
+    <ng-template #gotoSecurePanel>
+      <a
+        routerLink="/secure/panel"
+        class="app__button app__button--light app__button--hollow-light user-details-popup__button"
+        title="Kliknij aby przejść do panelu konta">
+        Konto
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </a>
+    </ng-template>
+    <button
+      (click)="handleUserLogout()"
+      class="app__button app__button--light user-details-popup__button"
+      title="Kliknij aby się wylogować">
+      Wyloguj
+      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+    </button>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div *ngIf="!loggedUser; else loggedUserContent" class="header-auth__icon">
+  <img src="assets/icon/not-logged.svg" alt="not-logged" />
+</div>
+<ng-template #loggedUserContent>
+  <div
+    *ngIf="loggedUser?.profileImageUrl; else loggedUserWithoutPhoto"
+    class="header-auth__icon header-auth__icon--logged">
+    <img [src]="loggedUser?.profileImageUrl" [alt]="loggedUser?.initials" />
+    <app-user-role-dot
+      [userRole]="loggedUser!.role"
+      [isLetterShowing]="isLetterShowing"
+      [isDarkTheme]="isDarkBackgroundTheme"
+      class="header-auth__role-indicator" />
+  </div>
+  <ng-template #loggedUserWithoutPhoto>
+    <div
+      [class.header-auth__icon--without-image--dark-theme]="isDarkBackgroundTheme"
+      class="header-auth__icon header-auth__icon--without-image">
+      {{ loggedUser?.initials }}
+      <app-user-role-dot
+        [userRole]="loggedUser!.role"
+        [isLetterShowing]="isLetterShowing"
+        [isDarkTheme]="isDarkBackgroundTheme"
+        class="header-auth__role-indicator" />
+    </div>
+  </ng-template>
+</ng-template>
