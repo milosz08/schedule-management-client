@@ -49,7 +49,15 @@
       class="app__button app__button--light user-details-popup__button"
       title="Kliknij aby się wylogować">
       Wyloguj
-      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      <ng-container *ngIf="isLoggingOut$ | async; else showArrow">
+        <img
+          src="assets/gif/suspense-loading-light.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+      </ng-container>
+      <ng-template #showArrow>
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </ng-template>
     </button>
   </div>
 </div>

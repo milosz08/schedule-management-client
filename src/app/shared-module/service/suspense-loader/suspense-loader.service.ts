@@ -22,15 +22,23 @@ export class SuspenseLoaderService {
   ) {
     this._router.events.subscribe(event => {
       if (event instanceof RouteConfigLoadStart) {
-        disableBodyScroll(this._document.documentElement);
-        this._isLoading$.next(true);
+        this.startGlobalLoader();
       } else if (event instanceof RouteConfigLoadEnd) {
         setTimeout(() => {
-          this._isLoading$.next(false);
-          enableBodyScroll(this._document.documentElement);
+          this.stopGlobalLoader();
         }, 1000);
       }
     });
+  }
+
+  startGlobalLoader(): void {
+    disableBodyScroll(this._document.documentElement);
+    this._isLoading$.next(true);
+  }
+
+  stopGlobalLoader(): void {
+    this._isLoading$.next(false);
+    enableBodyScroll(this._document.documentElement);
   }
 
   async reloadAngularPageWithRouter(): Promise<void> {

@@ -118,8 +118,7 @@
       Obecna jest również strona umożliwiająca zresetowanie hasła przez
       użytkownika. Odbywa się to poprzez podanie adresu email oraz wysłanie na
       niego przez serwer tokenu (tzw. tokenu krótkiego życia) którego ważność
-      jest równa 10 minut i można go użyć tylko raz. Po walidacji tokenu, serwer
-      zwraca JWT dzięki którym użytkownik ma możliwość podania nowego hasła.
+      jest równa 10 minut i można go użyć tylko raz.
     </p>
     <p class="root-main-page__paragraph">
       Na stronie logowania znajdują się konta z których ostatni raz logowano się
@@ -131,8 +130,8 @@
       Dodatkowo po udanym zalogowaniu obecny jest sekwencer odliczający czas
       aktywnej sesji użytkownika (na podstawie danych otrzymanych z serwera).
       Każda zmiana dokonana na stronie resetuje timer. Jeśli przez N czasu nie
-      będzie żadnej aktywności na stronie, aplikacja uruchomi 30 sekundowy
-      sekwencer dający możliwość odnowienia czasu sesji lub wylogowania. W
+      będzie żadnej aktywności na stronie, aplikacja uruchomi 30 sekundowe
+      odliczanie dające możliwość odnowienia czasu sesji lub wylogowania. W
       przypadku braku reakcji, po czasie 30 sekund następuje automatyczne
       wylogowanie z systemu.
     </p>

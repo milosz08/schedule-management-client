@@ -23,6 +23,7 @@ export class UserDetailsPopupComponent
 
   sessionCurrentTime$ = this._sessionService.sessionCurrentTime$;
   sesionSoonEnded$ = this._sessionService.sessionSoonEnded$;
+  isLoggingOut$ = this._identityService.isLoggingOut$;
 
   constructor(
     private readonly _identityService: IdentityService,
@@ -41,5 +42,7 @@ export class UserDetailsPopupComponent
     this.unmountAllSubscriptions();
   }
 
-  handleUserLogout(): void {}
+  handleUserLogout(): void {
+    this.wrapAsObservable$(this._identityService.logout$()).subscribe();
+  }
 }
