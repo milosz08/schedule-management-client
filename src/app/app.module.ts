@@ -12,6 +12,7 @@ import { titleStrategyProvider } from '~/shared-module/strategies/template-page-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalExceptionHandlerInterceptorInitializer } from './shared-module/interceptors/global-exceptions-handler/global-exceptions-handler.interceptor';
+import { refreshSessionInterceptorInitializer } from './shared-module/interceptors/refresh-session/refresh-session.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { globalExceptionHandlerInterceptorInitializer } from './shared-module/in
   providers: [
     titleStrategyProvider,
     globalExceptionHandlerInterceptorInitializer,
+    refreshSessionInterceptorInitializer,
   ],
   bootstrap: [AppComponent],
 })

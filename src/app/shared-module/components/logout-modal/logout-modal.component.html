@@ -1,0 +1,39 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div
+  *ngIf="(isModalVisible$ | async)"
+  @fadeInOutAnimation
+  class="app__modal-container">
+  <div class="app__modal-wrapper">
+    <img
+      src="assets/icon/info-icon.svg"
+      class="app__modal-wrapper__image-element"
+      alt="info" />
+    <h2 class="app__modal-wrapper__h2-header">
+      Nastąpiło poprawne wylogowanie z systemu.
+    </h2>
+    <p class="app__modal-wrapper__description">
+      Jeśli chcesz ponownie zalogować się do systemu (przy pomocy innego konta)
+      kliknij w przycisk <strong> Zaloguj ponownie</strong>. Przeniesie Cię on
+      bezpośrednio do strony logowania.
+    </p>
+    <div class="app__modal-buttons-container">
+      <button
+        (click)="handleCloseModalAndRedirect()"
+        class="app__button app__button--light user-details-popup__button app__button--hollow-light app__button--full-size-window"
+        title="Kliknij aby się zalogować ponownie do systemu">
+        Zaloguj ponownie
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </button>
+      <button
+        (click)="handleCloseModal()"
+        class="app__button app__button--light user-details-popup__button app__modal-buttons-container__button--left app__button--full-size-window"
+        title="Kliknij aby zamknąć okno">
+        Zamknij okno
+      </button>
+    </div>
+  </div>
+</div>

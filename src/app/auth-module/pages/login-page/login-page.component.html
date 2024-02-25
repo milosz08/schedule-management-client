@@ -3,4 +3,29 @@
  ~ Silesian University of Technology
  -->
 
-<p>login-page works!</p>
+<div class="login__wrapper">
+  <section class="login__last-logins__container">
+    <h3 class="app__header">Ostatnie logowania</h3>
+    <app-last-logins class="login__last-logins__component-container" />
+  </section>
+  <section class="app__flex-center login__login-form__container">
+    <img src="assets/logo/main-logo-light.svg" alt="" />
+    <h3 class="app__header app__header--light">Logowanie do systemu</h3>
+    <app-login-form class="login__login-form__main-container" />
+    <div class="login__login-form__bottom-links-container">
+      <a
+        routerLink="/auth/reset-password"
+        class="login__login-form__bottom-links-container__link"
+        title="Przejdź do resetowania hasła">
+        Resetuj hasło
+      </a>
+      <span class="app__dot-separator app__dot-separator--gray"></span>
+      <a
+        routerLink="/"
+        class="login__login-form__bottom-links-container__link"
+        title="Przejdź do strony głównej">
+        Strona główna
+      </a>
+    </div>
+  </section>
+</div>

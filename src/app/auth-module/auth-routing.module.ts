@@ -5,6 +5,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthPageComponent } from './auth-page.component';
+import { activateFirstChangePasswordGuard } from './guards/first-change-password/first-change-password.guard';
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
@@ -26,7 +27,7 @@ const routes: Routes = [
         title: 'Resetuj hasło',
       },
       {
-        path: 'reset-password',
+        path: 'reset-password/:token',
         component: ResetPasswordPageComponent,
         title: 'Ustaw hasło',
       },
@@ -34,6 +35,7 @@ const routes: Routes = [
         path: 'first-change-password',
         component: FirstChangePasswordPageComponent,
         title: 'Pierwsza zmiana hasła',
+        canActivate: [activateFirstChangePasswordGuard],
       },
     ],
   },

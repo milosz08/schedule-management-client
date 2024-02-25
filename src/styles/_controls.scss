@@ -151,6 +151,9 @@
       border: 1px solid var(--mainWhiteColor);
       color: var(--mainWhiteColor);
       font-weight: 400;
+      .app__button__arrow {
+        color: var(--mainWhiteColor);
+      }
     }
     &:hover:not(:disabled) .app__button__arrow {
       transform: translateX(3px);

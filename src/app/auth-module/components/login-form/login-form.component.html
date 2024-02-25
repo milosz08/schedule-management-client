@@ -1,0 +1,54 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form [formGroup]="loginForm" (ngSubmit)="handleSubmitLoginForm()">
+  <div class="login-form__element-container">
+    <label>
+      <input
+        type="text"
+        formControlName="login"
+        placeholder="Login/adres email"
+        class="app__input" />
+    </label>
+    <div *ngIf='checkIsFieldHasErrors("login")' class="app__input-error">
+      Proszę wpisać login/adres email
+    </div>
+  </div>
+  <div class="login-form__element-container">
+    <div class="app__label--relative">
+      <app-text-input-password
+        [formGroup]="loginForm"
+        [isLightTheme]="false"
+        inputPlaceholder="Hasło"
+        formControlId="password" />
+    </div>
+    <div *ngIf='checkIsFieldHasErrors("password")' class="app__input-error">
+      Proszę wpisać hasło
+    </div>
+  </div>
+  <app-checkbox-template
+    [isCheckedInitial]="saveAccount"
+    [checkboxLabel]="(saveUserLabel$ | async) || ''"
+    [isCheckboxDisabled]="!!(isAddNewUsersDisabled$ | async)"
+    (checkedEmitter)="handleToggleSaveAccount($event)" />
+  <div class="login-form__submit-container">
+    <button
+      [disabled]="!loginForm.valid"
+      type="submit"
+      class="app__button app__button--full-size-window"
+      title="Kliknij aby się zalogować">
+      Zaloguj
+      <ng-container *ngIf="isLoading$ | async; else showArrow">
+        <img
+          src="assets/gif/suspense-loading-dark.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+      </ng-container>
+      <ng-template #showArrow>
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </ng-template>
+    </button>
+  </div>
+</form>
