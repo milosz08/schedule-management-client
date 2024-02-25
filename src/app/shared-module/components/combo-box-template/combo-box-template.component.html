@@ -9,6 +9,7 @@
   (mouseleave)="isLostFocus = true"
   class="app__select__container select-drop-box__container">
   <button
+    [id]="labelId"
     type="button"
     (click)="handleOpenList()"
     [class.button--active]="valuesArrayLenght() > 0"
@@ -19,7 +20,9 @@
     <ng-template #valueWasSelected>
       Wybrano {{ valuesArrayLenght() }} z {{ allOptions.length }}
     </ng-template>
-    <ng-icon name="matKeyboardArrowDown" class="comb-box__arrow" />
+    <ng-icon
+      name="matKeyboardArrowDown"
+      class="app__select__arrow-icon combo-box__arrow" />
   </button>
   <div
     *ngIf="isListVisible && allOptions.length > 0"

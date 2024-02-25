@@ -4,6 +4,7 @@
  */
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
+import { RootModule } from '~/root-module/root.module';
 import { ScheduleHttpClientService } from './schedule-http-client.service';
 
 describe('ScheduleHttpClientService', () => {
@@ -11,7 +12,7 @@ describe('ScheduleHttpClientService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, RootModule],
       providers: [ScheduleHttpClientService],
     });
     service = TestBed.inject(ScheduleHttpClientService);

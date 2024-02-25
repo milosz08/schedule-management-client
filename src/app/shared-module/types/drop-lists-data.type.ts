@@ -4,7 +4,7 @@
  */
 
 export type AvailableDataModel<T> = {
-  dataElements: Array<T>;
+  dataElements: T[];
 };
 
 export type NameWithId = {

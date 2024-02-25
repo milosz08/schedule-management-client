@@ -21,7 +21,7 @@ export class SearchPageComponent
   searchParamsForm: FormGroup;
   foundElements: SearchQueryRes[] = [];
 
-  isFetching$ = this._searchService.isFetching$;
+  isFetching$ = this._searchService.isLoading$;
 
   constructor(private readonly _searchService: SearchService) {
     super();

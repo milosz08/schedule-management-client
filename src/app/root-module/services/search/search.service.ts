@@ -16,11 +16,11 @@ import {
   throwError,
 } from 'rxjs';
 import { SearchQueryRes } from '~/root-module/models/search-query.model';
-import { AbstractFetchProvider } from '~/shared-module/service/abstract-fetch-provider';
+import { AbstractLoadingProvider } from '~/shared-module/service/abstract-loading-provider';
 import { ScheduleHttpClientService } from '../schedule-http-client/schedule-http-client.service';
 
 @Injectable()
-export class SearchService extends AbstractFetchProvider {
+export class SearchService extends AbstractLoadingProvider {
   constructor(
     private readonly _scheduleHttpClientService: ScheduleHttpClientService
   ) {
@@ -33,13 +33,13 @@ export class SearchService extends AbstractFetchProvider {
       debounceTime(400),
       distinctUntilChanged(),
       switchMap(query => {
-        this.setFetching(true);
+        this.setLoading(true);
         return this._scheduleHttpClientService.getScheduleSearchData$(query);
       }),
       delay(500),
-      tap(() => this.setFetching(false)),
+      tap(() => this.setLoading(false)),
       catchError(err => {
-        this.setFetching(false);
+        this.setLoading(false);
         return throwError(() => err);
       })
     );

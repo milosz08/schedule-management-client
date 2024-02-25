@@ -12,6 +12,7 @@ import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
   styleUrl: './combo-box-template.component.scss',
 })
 export class ComboBoxTemplateComponent {
+  @Input() labelId = '';
   @Input() formGroup?: FormGroup;
   @Input() formControlId = '';
   @Input() placeholder = '';
