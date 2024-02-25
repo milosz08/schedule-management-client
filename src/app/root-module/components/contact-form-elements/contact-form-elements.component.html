@@ -70,7 +70,7 @@
       type="submit"
       class="app__button app__button--full-width app__button--light"
       title="Kliknij aby dodać nowa salę zajęciową">
-      <ng-container *ngIf="isLoading$ | async; else showArrow">
+      <ng-container *ngIf="(loadingFor$ | async) === loader; else showArrow">
         Wysyłanie...
         <img
           src="assets/gif/suspense-loading-light.gif"

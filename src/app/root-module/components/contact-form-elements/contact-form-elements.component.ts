@@ -5,6 +5,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ContactService } from '~/root-module/services/contact/contact.service';
+import { ContactFormLoader } from '~/root-module/types/contact-form-loader.type';
 import { AbstractReactiveProvider } from '~/shared-module/components/abstract-reactive-provider';
 import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
 
@@ -17,13 +18,14 @@ export class ContactFormElementsComponent
   implements OnInit, OnDestroy
 {
   @Input() formData!: FormGroup;
+  @Input() loader: ContactFormLoader = 'none';
 
   departments: string[] = [];
   messageTypes: string[] = [];
   groups: NameWithId[] = [];
   isScheduleIssueVisible = false;
 
-  isLoading$ = this._contactService.isLoading$;
+  loadingFor$ = this._contactService.loadingFor$;
 
   constructor(private readonly _contactService: ContactService) {
     super();

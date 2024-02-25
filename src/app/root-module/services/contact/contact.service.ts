@@ -7,6 +7,7 @@ import {
   BehaviorSubject,
   Observable,
   catchError,
+  delay,
   filter,
   map,
   switchMap,
@@ -17,6 +18,7 @@ import {
   ContactFormReq,
   ExtendedContactFormReq,
 } from '~/root-module/models/contact-form.model';
+import { ContactFormLoader } from '~/root-module/types/contact-form-loader.type';
 import { BaseMessage } from '~/shared-module/models/base-mesage.model';
 import { AbstractLoadingProvider } from '~/shared-module/service/abstract-loading-provider';
 import { SnackbarService } from '~/shared-module/service/snackbar/snackbar.service';
@@ -28,6 +30,7 @@ export class ContactService extends AbstractLoadingProvider {
   private _typeQuery$ = new BehaviorSubject<string>('');
   private _departmentQuery$ = new BehaviorSubject<string>('');
   private _departmentName$ = new BehaviorSubject<string>('');
+  private _loadingFor$ = new BehaviorSubject<ContactFormLoader>('none');
 
   constructor(
     private readonly _contactHttpClientService: ContactHttpClientService,
@@ -105,16 +108,21 @@ export class ContactService extends AbstractLoadingProvider {
     isAnonymous: boolean
   ): Observable<BaseMessage> {
     req.isAnonymous = isAnonymous;
-    this.setLoading(true);
+    this._loadingFor$.next(isAnonymous ? 'anonymous' : 'logged');
     return this._contactHttpClientService.sendContactFormData$(req).pipe(
+      delay(1000),
       tap(({ message }) => {
-        this.setLoading(false);
+        this._loadingFor$.next('none');
         this._snackbarService.addSnackbar({ message, severity: 'info' });
       }),
       catchError(err => {
-        this.setLoading(false);
+        this._loadingFor$.next('none');
         return throwError(() => err);
       })
     );
+  }
+
+  get loadingFor$(): Observable<ContactFormLoader> {
+    return this._loadingFor$.asObservable();
   }
 }
