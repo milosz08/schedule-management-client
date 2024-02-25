@@ -1,0 +1,64 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form
+  [formGroup]="anonymousContactForm"
+  (ngSubmit)="handleSubmitAnonymousContactForm()"
+  class="cms__simple-grid__angular-form angular-form--extended-width contact-form">
+  <app-contact-form-elements
+    [formData]="anonymousContactForm"
+    class="display-only-content">
+    <label for="add-contact__name" class="cms__simple-grid__label">
+      Imię:
+    </label>
+    <div>
+      <input
+        type="text"
+        id="add-contact__name"
+        formControlName="name"
+        maxlength="50"
+        placeholder="np. Jan"
+        class="app__input app__input--light app__input--exclude-margin" />
+      <div
+        *ngIf='checkIsFieldHasErrors("name")'
+        class="app__input-error app__input-error--light app__input-error--margin-top">
+        Proszę wpisać swoje imię
+      </div>
+    </div>
+    <label for="add-contact__surname" class="cms__simple-grid__label">
+      Nazwisko:
+    </label>
+    <div>
+      <input
+        type="text"
+        id="add-contact__surname"
+        formControlName="surname"
+        maxlength="50"
+        placeholder="np. Kowalski"
+        class="app__input app__input--light app__input--exclude-margin" />
+      <div
+        *ngIf='checkIsFieldHasErrors("surname")'
+        class="app__input-error app__input-error--light app__input-error--margin-top">
+        Proszę wpisać swoje nazwisko
+      </div>
+    </div>
+    <label for="add-contact__email" class="cms__simple-grid__label">
+      Adres email:
+    </label>
+    <div>
+      <input
+        type="text"
+        id="add-contact__email"
+        formControlName="email"
+        placeholder="np. jan.kowalski@gmail.com"
+        class="app__input app__input--light app__input--exclude-margin" />
+      <div
+        *ngIf='checkIsFieldHasErrors("email")'
+        class="app__input-error app__input-error--light app__input-error--margin-top">
+        Proszę wpisać poprawny adres email
+      </div>
+    </div>
+  </app-contact-form-elements>
+</form>

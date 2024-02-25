@@ -1,0 +1,86 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<ng-content />
+<ng-container [formGroup]="formData">
+  <label for="add-contact__type" class="cms__simple-grid__label">
+    Typ zgłoszenia:
+  </label>
+  <div>
+    <app-select-drop-box-template
+      [formGroup]="formData"
+      [optionsList]="messageTypes"
+      (emitNewQuery)="handleEmitQueryAfterSetType($event)"
+      (addedValue)="handleChooseBookingType()"
+      formControlId="issueType"
+      selectId="add-contact__type"
+      placeholder="np. nieprawidłowe dane w planie"
+      errorField="prawidłowy typ zgłoszenia" />
+  </div>
+  <ng-container *ngIf="isScheduleIssueVisible">
+    <label for="add-contact__department" class="cms__simple-grid__label">
+      Wybierz wydział:
+    </label>
+    <div>
+      <app-select-drop-box-template
+        [formGroup]="formData"
+        [optionsList]="departments"
+        [isErrorsDisabled]="true"
+        (emitNewQuery)="handleEmitDepartmentQuery($event)"
+        (addedValue)="handleChooseDepartment()"
+        formControlId="departmentName"
+        selectId="add-contact__department"
+        placeholder="np. Elektryczny"
+        errorField="prawidłową nazwę wydziału" />
+    </div>
+    <label for="add-contact__group" class="cms__simple-grid__label">
+      Wybierz grupę/grupy:
+    </label>
+    <app-combo-box-template
+      [formGroup]="formData"
+      [allOptions]="groups"
+      id="add-contact__group"
+      formControlId="groups"
+      placeholder="grupy" />
+  </ng-container>
+  <label for="add-contact__description" class="cms__simple-grid__label">
+    Opis zgłoszenia:
+  </label>
+  <div>
+    <textarea
+      id="add-contact__description"
+      formControlName="description"
+      placeholder='np. Brak godziny dla zajęć laboratoryjnych "Programowanie Komputerów" we wtorek.'
+      rows="5"
+      minlength="10"
+      maxlength="300"
+      class="app__input app__input--light app__input--exclude-margin resize--only-vertical"></textarea>
+    <div
+      *ngIf='checkIsFieldHasErrors("description")'
+      class="app__input-error app__input-error--light app__input-error--margin-top">
+      Minimalna ilość znaków dla pola opisu zgłoszenia wynosi 10.
+    </div>
+  </div>
+  <div></div>
+  <div class="cms__simple-grid__submit-button">
+    <button
+      [disabled]="!formData.valid"
+      type="submit"
+      class="app__button app__button--full-width app__button--light"
+      title="Kliknij aby dodać nowa salę zajęciową">
+      <ng-container *ngIf="isLoading$ | async; else showArrow">
+        Wysyłanie...
+        <img
+          src="assets/gif/suspense-loading-light.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+      </ng-container>
+      <ng-template #showArrow>
+        Wyślij wiadomość
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </ng-template>
+    </button>
+  </div>
+</ng-container>

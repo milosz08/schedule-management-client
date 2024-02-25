@@ -1,0 +1,13 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form
+  [formGroup]="loggedContactForm"
+  (ngSubmit)="handleSubmitNewLoggedContact()"
+  class="cms__simple-grid__angular-form angular-form--extended-width contact-form">
+  <app-contact-form-elements
+    [formData]="loggedContactForm"
+    class="display-only-content" />
+</form>

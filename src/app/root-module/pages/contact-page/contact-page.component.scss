@@ -1,0 +1,36 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.contact {
+  &-content {
+    &-separator {
+      &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &-line {
+        &__vertical {
+          display: block;
+          max-width: 300px;
+          flex-grow: 1;
+          height: 1px;
+          background-color: var(--darkBlueColor);
+        }
+        &__text-content {
+          font-size: 0.8rem;
+          color: var(--darkBlueColor);
+          margin: 0 20px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  &-form__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

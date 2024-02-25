@@ -1,0 +1,30 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<section class="app__safety-area-container">
+  <h2 class="app-cms__header-h2 header--margin-from-bottom">
+    <ng-container>Formularz kontaktowy</ng-container>
+  </h2>
+  <aside class="app-cms__separator-line"></aside>
+  <div
+    class="app-cms__description-block__container description-block-container__disabled-max-width">
+    W tej zakładce masz możliwość wysłania wiadomości do administratora
+    systemu/edytorów wybranego wydziału dotyczącej nieprawidłowości w planie
+    oraz innych uwag. Zgłoszenie możesz stworzyć anonimowe (w przypadku
+    nieaktywnego zalogowania do systemu), wówczas nie zapisze się ono w twojej
+    historii zgłoszeń oraz będzie miało niższy priorytet.
+  </div>
+  <ng-container *ngIf="!!(loggedUser$ | async)">
+    <app-contact-as-logged class="contact-form__container" />
+    <div class="contact-content-separator__container">
+      <aside class="contact-content-separator-line__vertical"></aside>
+      <div class="contact-content-separator-line__text-content">
+        lub utwórz zgłoszenie anonimowe
+      </div>
+      <aside class="contact-content-separator-line__vertical"></aside>
+    </div>
+  </ng-container>
+  <app-contact-as-anonymous class="contact-form__container" />
+</section>
