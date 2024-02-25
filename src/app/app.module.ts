@@ -11,6 +11,7 @@ import { SharedModule } from '~/shared-module/shared.module';
 import { titleStrategyProvider } from '~/shared-module/strategies/template-page-title.strategy';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { globalExceptionHandlerInterceptorInitializer } from './shared-module/interceptors/global-exceptions-handler/global-exceptions-handler.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,10 @@ import { AppComponent } from './app.component';
     RouterModule,
     SharedModule,
   ],
-  providers: [titleStrategyProvider],
+  providers: [
+    titleStrategyProvider,
+    globalExceptionHandlerInterceptorInitializer,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

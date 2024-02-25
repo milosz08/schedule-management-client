@@ -1,0 +1,22 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="snackbar__container">
+  <div
+    *ngFor="let snackbar of snackbars$ | async"
+    [@snackbarFadeAndMove]
+    [class.snackbar__element--error]="snackbar.severity === 'error'"
+    [class.snackbar__element--info]="snackbar.severity === 'info'"
+    class="snackbar__element">
+    <div class="snackbar__element-text">{{ snackbar.message }}</div>
+    <div class="snackbar__element-info-icon">
+      <img
+        [src]="getIconUrl(snackbar.severity)"
+        width="30px"
+        height="30px"
+        alt="" />
+    </div>
+  </div>
+</div>
