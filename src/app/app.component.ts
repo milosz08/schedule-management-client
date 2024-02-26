@@ -22,7 +22,6 @@ export class AppComponent
   extends AbstractReactiveProvider
   implements OnInit, OnDestroy
 {
-  redirectUrl = '/';
   isUserLogged = false;
 
   constructor(
@@ -31,16 +30,13 @@ export class AppComponent
     private readonly _router: Router
   ) {
     super();
-    this.redirectUrl = this._router.url;
   }
 
   ngOnInit(): void {
     this.wrapAsObservable$(this._identityService.currentLoggedUser$).subscribe(
       loggedUser => (this.isUserLogged = !!loggedUser)
     );
-    this.wrapAsObservable$(
-      this._identityService.autoLogin$(this.redirectUrl)
-    ).subscribe({
+    this.wrapAsObservable$(this._identityService.autoLogin$()).subscribe({
       next: async redirectUrl => {
         if (redirectUrl) {
           await this._router.navigateByUrl(redirectUrl);

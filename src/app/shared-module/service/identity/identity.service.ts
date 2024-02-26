@@ -85,11 +85,11 @@ export class IdentityService {
     return redirectUrl;
   }
 
-  autoLogin$(redirectUrl: string): Observable<string> {
+  autoLogin$(): Observable<string> {
     const loggedUser = this._localStorageService.get<LoggedUser>('logged_user');
     if (!loggedUser) {
       this._suspenseLoaderService.startGlobalLoader();
-      return of(redirectUrl);
+      return of('');
     }
     return this._identityHttpClientService.tokenLogin$(loggedUser).pipe(
       map(res => {
@@ -112,6 +112,7 @@ export class IdentityService {
           this._isLogout$.next(true);
           this._localStorageService.remove('logged_user');
           this._snackbarService.addSnackbar({ message, severity: 'info' });
+          this._sessionService.stopSession();
         }),
         catchError(err => {
           this._isLoggingOut$.next(false);
