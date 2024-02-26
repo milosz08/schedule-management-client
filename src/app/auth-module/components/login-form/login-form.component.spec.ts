@@ -5,6 +5,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { AuthModule } from '~/auth-module/auth.module';
+import { LoginService } from '~/auth-module/services/login/login.service';
 import { LoginFormComponent } from './login-form.component';
 
 describe('AppLoginFormComponent', () => {
@@ -14,6 +15,7 @@ describe('AppLoginFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
+      providers: [LoginService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginFormComponent);

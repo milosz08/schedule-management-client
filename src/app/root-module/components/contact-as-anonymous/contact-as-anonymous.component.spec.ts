@@ -5,6 +5,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { RootModule } from '~/root-module/root.module';
+import { ContactService } from '~/root-module/services/contact/contact.service';
 import { ContactAsAnonymousComponent } from './contact-as-anonymous.component';
 
 describe('ContactAsAnonymousComponent', () => {
@@ -14,6 +15,7 @@ describe('ContactAsAnonymousComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, RootModule],
+      providers: [ContactService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ContactAsAnonymousComponent);
