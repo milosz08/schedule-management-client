@@ -24,7 +24,6 @@ export class LoginFormComponent
 
   saveUserLabel$ = this._savedAccountsService.saveUserLabel$;
   isAddNewUsersDisabled$ = this._savedAccountsService.isAddNewUsersDisabled$;
-  selectedAccountEmail$ = this._savedAccountsService.selectedAccountEmail$;
   isLoading$ = this._loginService.isLoading$;
 
   constructor(

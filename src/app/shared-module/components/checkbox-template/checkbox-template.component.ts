@@ -31,7 +31,7 @@ export class CheckboxTemplateComponent implements OnInit {
   }
 
   handleCheckboxToggle(): void {
-    this.checkboxValue = !this.checkboxValue;
     this.checkedEmitter.emit(this.checkboxValue);
+    this.checkboxValue = !this.checkboxValue;
   }
 }
