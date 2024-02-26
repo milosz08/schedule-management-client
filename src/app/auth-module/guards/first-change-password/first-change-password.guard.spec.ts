@@ -1,11 +1,15 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
-import { firstChangePasswordGuard } from './first-change-password.guard';
+import { activateFirstChangePasswordGuard } from './first-change-password.guard';
 
 describe('firstChangePasswordGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() =>
-      firstChangePasswordGuard(...guardParameters)
+      activateFirstChangePasswordGuard(...guardParameters)
     );
 
   beforeEach(() => {
