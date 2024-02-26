@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "types:check": "tsc --noEmit",
     "husky:add-pre-commit": "npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
-    "husky:add-pre-push": "npx husky add .husky/pre-push \"yarn run types:check\"",
+    "husky:add-pre-push": "npx husky add .husky/pre-push \"yarn run types:check && yarn run test:single\"",
     "configure:husky": "npx husky install && yarn run husky:add-pre-commit && yarn run husky:add-pre-push"
   },
   "private": true,
