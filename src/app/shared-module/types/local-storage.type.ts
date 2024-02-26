@@ -3,4 +3,7 @@
  * Silesian University of Technology
  */
 
-export type StorageKey = 'omit_change_first_password' | 'logged_user';
+export type StorageKey =
+  | 'omit_change_first_password'
+  | 'logged_user'
+  | 'saved_accounts';

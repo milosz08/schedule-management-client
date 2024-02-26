@@ -27,6 +27,7 @@ import { UserHeaderDataWithPopupComponent } from './components/user-header-data-
 import { UserImageComponent } from './components/user-image/user-image.component';
 import { UserRoleDotComponent } from './components/user-role-dot/user-role-dot.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
 
 @NgModule({
   declarations: [
@@ -41,10 +42,11 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     SelectListTemplateComponent,
     SnackbarsContainerComponent,
     TextInputPasswordComponent,
-    UserRoleDotComponent,
     UserDetailsPopupComponent,
     UserHeaderDataWithPopupComponent,
+    UserIdentityPipe,
     UserImageComponent,
+    UserRoleDotComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     SnackbarsContainerComponent,
     TextInputPasswordComponent,
     UserHeaderDataWithPopupComponent,
+    UserIdentityPipe,
+    UserRoleDotComponent,
   ],
 })
 export class SharedModule {}
