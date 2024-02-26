@@ -1,0 +1,96 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.schedule {
+  &-container__main {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+  }
+  &-choose-with-navigation__container {
+    display: flex;
+    margin: 20px 0 20px 20px;
+    position: relative;
+    z-index: 2;
+  }
+  &-navigation {
+    &__container {
+      border-top-left-radius: 0;
+      flex-basis: 300px;
+      width: 300px;
+      margin-left: 40px;
+    }
+    &__left-bar {
+      display: flex;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      z-index: 0;
+      right: 100%;
+      white-space: nowrap;
+      height: 40px;
+      transform: rotate(270deg);
+      transform-origin: right top;
+      .left-bar__single-link-button {
+        width: 140px;
+        margin-left: 10px;
+        height: 40px;
+        background-color: var(--darkWhiteColor);
+        color: var(--darkBlueColor);
+        border-radius: var(--borderRadius);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        text-transform: capitalize;
+        &.single-link-button--active {
+          background-color: var(--darkBlueColor);
+          color: var(--mainWhiteColor);
+        }
+      }
+    }
+    &-with-content {
+      width: calc(100% - 40px);
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    &__link-element {
+      text-decoration: underline;
+    }
+  }
+  &-navigation__container,
+  &-content__container {
+    border: 1px solid var(--extraLightGrayColor);
+    border-radius: var(--borderRadius);
+    border-top-left-radius: 0;
+    padding: 15px 20px;
+  }
+  &-content__container {
+    flex-grow: 1;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .schedule {
+    &-container__main {
+      flex-direction: column;
+    }
+    &-navigation__container {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+    &-choose-with-navigation__container {
+      min-height: 500px;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .schedule-content__container {
+    margin: 0;
+    padding: 0 5px;
+    border: none;
+  }
+}

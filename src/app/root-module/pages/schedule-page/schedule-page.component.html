@@ -1,0 +1,25 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<main class="schedule-container__main">
+  <section class="schedule-choose-with-navigation__container">
+    <nav class="schedule-navigation__left-bar">
+      <button
+        *ngFor="let buttonName of buttons"
+        (click)="handleToggleActiveSection(buttonName)"
+        [class.single-link-button--active]="buttonName === activeNav"
+        class="left-bar__single-link-button">
+        {{ buttonName }}
+      </button>
+    </nav>
+    <div [ngSwitch]="activeNav" class="schedule-navigation__container"></div>
+  </section>
+  <div class="schedule-navigation-with-content">
+    <app-remember-opened-schedule-bar />
+    <section class="schedule-content__container">
+      <router-outlet />
+    </section>
+  </div>
+</main>

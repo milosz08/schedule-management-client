@@ -4,7 +4,11 @@
  */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
+import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { WelcomeSchedulePageComponent } from './pages/welcome-schedule-page/welcome-schedule-page.component';
 import { RootPageComponent } from './root-page.component';
 
 const routes: Routes = [
@@ -16,6 +20,27 @@ const routes: Routes = [
         path: '',
         component: RootMainPageComponent,
         title: 'Strona Główna',
+      },
+      {
+        path: 'schedule',
+        component: SchedulePageComponent,
+        title: 'Plan zajęć',
+        children: [
+          {
+            path: '',
+            component: WelcomeSchedulePageComponent,
+          },
+        ],
+      },
+      {
+        path: 'contact',
+        component: ContactPageComponent,
+        title: 'Kontakt',
+      },
+      {
+        path: 'search',
+        component: SearchPageComponent,
+        title: 'Szukaj',
       },
     ],
   },
