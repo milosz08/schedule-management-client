@@ -19,7 +19,6 @@ import { FirstChangePasswordGuard } from './guards/first-change-password/first-c
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
-import { SendTokenViaEmailPageComponent } from './pages/send-token-via-email-page/send-token-via-email-page.component';
 import { UserHoverInfoPipe } from './pipes/user-hover-info/user-hover-info.pipe';
 import { SavedAccountsService } from './services/saved-accounts/saved-accounts.service';
 
@@ -33,7 +32,6 @@ import { SavedAccountsService } from './services/saved-accounts/saved-accounts.s
     LoginFormComponent,
     LoginPageComponent,
     ResetPasswordPageComponent,
-    SendTokenViaEmailPageComponent,
     UserHoverInfoPipe,
   ],
   imports: [
