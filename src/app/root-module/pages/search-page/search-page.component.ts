@@ -4,9 +4,9 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SearchQueryRes } from '~/root-module/models/search-query.model';
 import { SearchService } from '~/root-module/services/search/search.service';
 import { AbstractReactiveProvider } from '~/shared-module/components/abstract-reactive-provider';
+import { SearchQueryRes } from '~/shared-module/models/search-query.model';
 
 @Component({
   selector: 'app-search-page',

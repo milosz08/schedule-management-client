@@ -15,9 +15,9 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { SearchQueryRes } from '~/root-module/models/search-query.model';
+import { SearchQueryRes } from '~/shared-module/models/search-query.model';
 import { AbstractLoadingProvider } from '~/shared-module/service/abstract-loading-provider';
-import { ScheduleHttpClientService } from '../schedule-http-client/schedule-http-client.service';
+import { ScheduleHttpClientService } from '~/shared-module/service/schedule-http-client/schedule-http-client.service';
 
 @Injectable()
 export class SearchService extends AbstractLoadingProvider {

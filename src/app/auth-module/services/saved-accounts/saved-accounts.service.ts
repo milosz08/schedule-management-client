@@ -16,7 +16,7 @@ import { LoginRes } from '~/shared-module/models/identity.model';
 import { SavedAccountRes } from '~/shared-module/models/memory-storage.model';
 import { AbstractLoadingProvider } from '~/shared-module/service/abstract-loading-provider';
 import { LocalStorageService } from '~/shared-module/service/local-storage/local-storage.service';
-import { MemoryStorageHttpClientService } from '~/shared-module/service/memory-data-http-client/memory-storage-http-client.service';
+import { MemoryStorageHttpClientService } from '~/shared-module/service/memory-storage-http-client/memory-storage-http-client.service';
 
 @Injectable()
 export class SavedAccountsService extends AbstractLoadingProvider {
