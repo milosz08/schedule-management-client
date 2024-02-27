@@ -22,6 +22,7 @@ import { LastLoginsComponent } from './components/last-logins/last-logins.compon
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SendTokenViaEmailFormComponent } from './components/send-token-via-email-form/send-token-via-email-form.component';
 import { UserProfileImageComponent } from './components/user-profile-image/user-profile-image.component';
+import { ActiveNonLoggedUserGuard } from './guards/active-logged-user/active-non-logged-user.guard';
 import { FirstChangePasswordGuard } from './guards/first-change-password/first-change-password.guard';
 import { ResetPasswordGuard } from './guards/reset-password/reset-password.guard';
 import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
@@ -57,6 +58,7 @@ import { SavedAccountsService } from './services/saved-accounts/saved-accounts.s
     SharedModule,
   ],
   providers: [
+    ActiveNonLoggedUserGuard,
     FirstChangePasswordGuard,
     ResetPasswordGuard,
     SavedAccountsService,
