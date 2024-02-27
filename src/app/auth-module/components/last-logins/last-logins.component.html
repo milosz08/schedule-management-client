@@ -27,17 +27,10 @@
         <button
           (click)="handleSelectAccount(savedAccount)"
           class="last-logins__button-element">
-          <img
-            *ngIf="savedAccount.profileImageUrl; else userIdentity"
-            [src]="getSaveImageURL(savedAccount.profileImageUrl)"
-            [alt]="savedAccount.nameWithSurname | userIdentity"
-            class="last-logins__user-image" />
-          <ng-template #userIdentity>
-            {{ savedAccount.nameWithSurname | userIdentity }}
-          </ng-template>
-          <app-user-role-dot
-            [userRole]="savedAccount.role"
-            class="last-logins__role-dot-container" />
+          <app-user-profile-image
+            [profileImageUrl]="savedAccount.profileImageUrl"
+            [nameWithSurname]="savedAccount.nameWithSurname"
+            [role]="savedAccount.role" />
         </button>
         <button
           (click)="handleDeleteSavedAccount(savedAccount)"

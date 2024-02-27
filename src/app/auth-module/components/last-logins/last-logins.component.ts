@@ -3,7 +3,6 @@
  * Silesian University of Technology
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { SavedAccountsService } from '~/auth-module/services/saved-accounts/saved-accounts.service';
 import { AbstractReactiveProvider } from '~/shared-module/components/abstract-reactive-provider';
 import { SavedAccountRes } from '~/shared-module/models/memory-storage.model';
@@ -20,10 +19,7 @@ export class LastLoginsComponent
   savedAccounts$ = this._savedAccountsService.savedAccounts$;
   isLoading$ = this._savedAccountsService.isLoading$;
 
-  constructor(
-    private readonly _savedAccountsService: SavedAccountsService,
-    private readonly _sanitizer: DomSanitizer
-  ) {
+  constructor(private readonly _savedAccountsService: SavedAccountsService) {
     super();
   }
 
@@ -47,9 +43,5 @@ export class LastLoginsComponent
 
   handleDeleteAllSavedAccounts(): void {
     this._savedAccountsService.deleteAllUserAccounts();
-  }
-
-  getSaveImageURL(imageUrl: string): SafeUrl {
-    return this._sanitizer.bypassSecurityTrustUrl(imageUrl);
   }
 }

@@ -1,0 +1,14 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<ng-container *ngIf="nameWithSurname && role">
+  <img
+    *ngIf="profileImageUrl; else userIdentity"
+    [src]="getSaveImageURL(profileImageUrl)"
+    [alt]="nameWithSurname! | userIdentity"
+    class="profile__user-image" />
+  <ng-template #userIdentity>{{ nameWithSurname! | userIdentity }}</ng-template>
+  <app-user-role-dot [userRole]="role!" class="profile__role-dot-container" />
+</ng-container>
