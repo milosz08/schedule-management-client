@@ -1,0 +1,49 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form
+  [formGroup]="loginOrEmailForm"
+  (ngSubmit)="handleSubmitSendToken()"
+  class="send-token-via-email-form__container">
+  <div class="send-token-via-email-form__element-container">
+    <label for="send-token-via-email-form___$email">
+      <input
+        id="send-token-via-email-form___$email"
+        type="text"
+        formControlName="loginOrEmail"
+        placeholder="Login lub adres email"
+        class="app__input" />
+    </label>
+    <div *ngIf="checkIsFieldHasErrors('loginOrEmail')" class="app__input-error">
+      Login/adres email jest wymagany.
+    </div>
+    <div class="send-token-via-email-form__has-token-container">
+      <button
+        (click)="handleSwitchViewToToken()"
+        class="send-token-via-email-form__has-token-button">
+        Posiadam już token
+      </button>
+    </div>
+  </div>
+  <div class="send-token-via-email-form__submit-container">
+    <button
+      [disabled]="!loginOrEmailForm.valid"
+      type="submit"
+      class="app__button app__button--full-size-window"
+      title="Kliknij aby wysłać token odzyskiwania hasła">
+      Wyślij token
+      <ng-container
+        *ngIf="(loadingFor$ | async) === 'send_token'; else showArrow">
+        <img
+          src="assets/gif/suspense-loading-dark.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+      </ng-container>
+      <ng-template #showArrow>
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </ng-template>
+    </button>
+  </div>
+</form>

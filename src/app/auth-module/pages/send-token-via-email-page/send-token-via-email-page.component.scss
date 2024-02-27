@@ -2,3 +2,53 @@
  * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
  * Silesian University of Technology
  */
+
+.send-token-via-email {
+  &__container {
+    border-radius: var(--borderRadius);
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid var(--darkBlueColor);
+    margin: auto;
+  }
+  &__send-token-wrapper,
+  &__paste-token-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__form-container {
+    max-width: 360px;
+    width: 100%;
+  }
+  &__send-token-wrapper {
+    background-color: var(--darkBlueColor);
+  }
+  &__logo-image {
+    margin: 20px auto;
+    width: 60px;
+    height: 60px;
+  }
+  &__description {
+    margin: 20px 50px 30px;
+    color: var(--mainWhiteColor);
+    text-align: center;
+  }
+  &__paste-token-wrapper {
+    padding: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .send-token-via-email {
+    &__container {
+      border: none;
+      border-radius: 0;
+    }
+    &__form-container {
+      width: calc(100% - 60px);
+      max-width: var(--mobileExactMargins);
+      margin: var(--mobileMargin);
+    }
+  }
+}

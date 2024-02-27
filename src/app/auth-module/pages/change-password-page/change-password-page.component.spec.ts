@@ -5,20 +5,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { AuthModule } from '~/auth-module/auth.module';
-import { ResetPasswordService } from '~/auth-module/services/reset-password/reset-password.service';
-import { SendTokenViaEmailPageComponent } from './send-token-via-email-page.component';
+import { ChangePasswordPageComponent } from './change-password-page.component';
 
-describe('SendTokenViaEmailPageComponent', () => {
-  let component: SendTokenViaEmailPageComponent;
-  let fixture: ComponentFixture<SendTokenViaEmailPageComponent>;
+describe('ChangePasswordPageComponent', () => {
+  let component: ChangePasswordPageComponent;
+  let fixture: ComponentFixture<ChangePasswordPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, AuthModule],
-      providers: [ResetPasswordService],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SendTokenViaEmailPageComponent);
+    fixture = TestBed.createComponent(ChangePasswordPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

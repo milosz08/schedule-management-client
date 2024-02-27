@@ -1,0 +1,52 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form
+  [formGroup]="tokenForm"
+  (ngSubmit)="handleSubmitSendToken()"
+  class="check-token-form__container">
+  <div class="check-token-form__element-container">
+    <label for="send-token-via-email-form___$token">
+      <input
+        id="send-token-via-email-form___$token"
+        type="text"
+        formControlName="token"
+        placeholder="np. g4k7D38v"
+        maxlength="8"
+        class="app__input app__input--light" />
+    </label>
+    <div
+      *ngIf="checkIsTokenFieldHasErrors()"
+      class="app__input-error app__input-error--light">
+      Nieprawidłowy format tokenu.
+    </div>
+    <div class="check-token-form__token-expired-container">
+      <button
+        (click)="handleSwitchViewToEmail()"
+        class="check-token-form__token-expired-button">
+        Wyślij token ponownie
+      </button>
+    </div>
+  </div>
+  <div class="check-token-form__submit-container">
+    <button
+      [disabled]="!tokenForm.valid"
+      type="submit"
+      class="app__button app__button--hollow-light app__button--full-size-window"
+      title="Kliknij wysłać token odzyskiwania hasła">
+      Odzyskaj hasło
+      <ng-container
+        *ngIf="(loadingFor$ | async) === 'validate_token'; else showArrow">
+        <img
+          src="assets/gif/suspense-loading-dark.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+      </ng-container>
+      <ng-template #showArrow>
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </ng-template>
+    </button>
+  </div>
+</form>

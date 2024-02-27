@@ -6,11 +6,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { AuthModule } from '~/auth-module/auth.module';
 import { ResetPasswordService } from '~/auth-module/services/reset-password/reset-password.service';
-import { SendTokenViaEmailPageComponent } from './send-token-via-email-page.component';
+import { InsertTokenFormComponent } from './insert-token-form.component';
 
-describe('SendTokenViaEmailPageComponent', () => {
-  let component: SendTokenViaEmailPageComponent;
-  let fixture: ComponentFixture<SendTokenViaEmailPageComponent>;
+describe('InsertTokenFormComponent', () => {
+  let component: InsertTokenFormComponent;
+  let fixture: ComponentFixture<InsertTokenFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,7 +18,7 @@ describe('SendTokenViaEmailPageComponent', () => {
       providers: [ResetPasswordService],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SendTokenViaEmailPageComponent);
+    fixture = TestBed.createComponent(InsertTokenFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

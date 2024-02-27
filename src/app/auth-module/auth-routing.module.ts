@@ -6,9 +6,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthPageComponent } from './auth-page.component';
 import { activateFirstChangePasswordGuard } from './guards/first-change-password/first-change-password.guard';
+import { activateResetPasswordGuard } from './guards/reset-password/reset-password.guard';
+import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
 import { FirstChangePasswordPageComponent } from './pages/first-change-password-page/first-change-password-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { SendTokenViaEmailPageComponent } from './pages/send-token-via-email-page/send-token-via-email-page.component';
 
 const routes: Routes = [
@@ -22,14 +23,15 @@ const routes: Routes = [
         title: 'Logowanie',
       },
       {
-        path: 'require-reset-password',
+        path: 'reset-password',
         component: SendTokenViaEmailPageComponent,
         title: 'Resetuj hasło',
       },
       {
-        path: 'reset-password/:token',
-        component: ResetPasswordPageComponent,
+        path: 'change-password',
+        component: ChangePasswordPageComponent,
         title: 'Ustaw hasło',
+        canActivate: [activateResetPasswordGuard],
       },
       {
         path: 'first-change-password',

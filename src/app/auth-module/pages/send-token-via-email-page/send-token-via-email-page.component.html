@@ -3,4 +3,33 @@
  ~ Silesian University of Technology
  -->
 
-<p>send-token-via-email-page works!</p>
+<div class="send-token-via-email__container">
+  <section class="send-token-via-email__send-token-wrapper">
+    <img
+      src="assets/logo/main-logo-light.svg"
+      alt=""
+      class="send-token-via-email__logo-image" />
+    <h3 class="app__header app__header--light app__header--exclude-margins">
+      <ng-container>Odzyskiwanie hasła</ng-container>
+    </h3>
+    <p class="send-token-via-email__description">
+      <ng-container
+        *ngIf="(currentStage$ | async) === 'send_token'; else successSendToken">
+        Na podane konto zgodne z loginem/adresem email zostanie wysłany token
+        odzyskiwania hasło do systemu.
+      </ng-container>
+      <ng-template #successSendToken>
+        Aby dokończyć procedurę resetu hasła, wprowadź token z wiadomości email.
+      </ng-template>
+    </p>
+    <app-send-token-via-email-form
+      *ngIf="(currentStage$ | async) === 'send_token'"
+      class="send-token-via-email__form-container" />
+  </section>
+  <section
+    *ngIf="(currentStage$ | async) === 'validate_token'"
+    class="send-token-via-email__paste-token-wrapper">
+    <h3 class="app__header app__header--exclude-margins">Wprowadź token</h3>
+    <app-insert-token-form class="send-token-via-email__form-container" />
+  </section>
+</div>
