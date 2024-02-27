@@ -27,7 +27,7 @@ export class FirstChangePasswordGuard {
         ) {
           return true;
         }
-        router.navigate(['/']).then(r => r);
+        router.navigateByUrl('/').then(r => r);
         return false;
       })
     );
