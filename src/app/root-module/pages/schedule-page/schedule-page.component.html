@@ -14,7 +14,121 @@
         {{ buttonName }}
       </button>
     </nav>
-    <div [ngSwitch]="activeNav" class="schedule-navigation__container"></div>
+    <div [ngSwitch]="activeNav" class="schedule-navigation__container">
+      <app-first-level-nav-tree *ngSwitchCase="'grupy'">
+        <ng-template let-deptData="drillingData">
+          <app-nav-tree-element
+            [levelNr]="1"
+            [inheritLvlData]="deptData"
+            [params]="{ deptId: deptData.id }"
+            [dataFetchCallback$]="handleFetchStudyDegrees$.bind(this)">
+            <ng-template let-degreeData="drillingData">
+              <app-nav-tree-element
+                [levelNr]="2"
+                [inheritLvlData]="degreeData"
+                [params]="{ deptId: deptData.id, degreeId: degreeData.id }"
+                [dataFetchCallback$]="handleFetchStudySpecs$.bind(this)">
+                <ng-template let-specData="drillingData">
+                  <app-nav-tree-element
+                    [levelNr]="3"
+                    [inheritLvlData]="specData"
+                    [params]="{ deptId: deptData.id, specId: specData.id }"
+                    [dataFetchCallback$]="handleFetchStudySemesters$.bind(this)">
+                    <ng-template let-semData="drillingData">
+                      <app-nav-tree-element
+                        [levelNr]="4"
+                        [inheritLvlData]="semData"
+                        [params]="{ specId: specData.id, semId: semData.id }"
+                        [dataFetchCallback$]="handleFetchStudySemesters$.bind(this)">
+                        <ng-template let-groupData="drillingData">
+                          <a
+                            routerLink="/schedule/selected-schedule/groups"
+                            [queryParams]="{
+                              deptId: deptData.id,
+                              specId: specData.id,
+                              groupId: groupData.id
+                            }"
+                            title="Kliknij aby przejść do podglądu planu wybranej grupy"
+                            class="app__schedule-nav-list__link-element">
+                            {{ groupData.name }}
+                          </a>
+                        </ng-template>
+                      </app-nav-tree-element>
+                    </ng-template>
+                  </app-nav-tree-element>
+                </ng-template>
+              </app-nav-tree-element>
+            </ng-template>
+          </app-nav-tree-element>
+        </ng-template>
+      </app-first-level-nav-tree>
+      <app-first-level-nav-tree
+        *ngSwitchCase="'sale'"
+        loadingFor="employers_1st">
+        <ng-template let-deptData="drillingData">
+          <app-nav-tree-element
+            [levelNr]="1"
+            [inheritLvlData]="deptData"
+            [params]="{ deptId: deptData.id }"
+            [dataFetchCallback$]="handleFetchCathedrals$.bind(this)">
+            <ng-template let-cathData="drillingData">
+              <app-nav-tree-element
+                [levelNr]="2"
+                [inheritLvlData]="cathData"
+                [params]="{ deptId: deptData.id, cathId: cathData.id }"
+                [dataFetchCallback$]="handleFetchStudyRooms$.bind(this)">
+                <ng-template let-roomData="drillingData">
+                  <a
+                    routerLink="/schedule/selected-schedule/rooms"
+                    [queryParams]="{
+                      deptId: deptData.id,
+                      cathId: cathData.id,
+                      roomId: roomData.id
+                    }"
+                    title="Kliknij aby przejść do podglądu planu wybranej sali zajęciowej"
+                    class="app__schedule-nav-list__link-element">
+                    {{ roomData.name }}
+                  </a>
+                </ng-template>
+              </app-nav-tree-element>
+            </ng-template>
+          </app-nav-tree-element>
+        </ng-template>
+      </app-first-level-nav-tree>
+      <app-first-level-nav-tree
+        *ngSwitchCase="'pracownicy'"
+        loadingFor="rooms_1st">
+        <ng-template let-deptData="drillingData">
+          <app-nav-tree-element
+            [levelNr]="1"
+            [inheritLvlData]="deptData"
+            [params]="{ deptId: deptData.id }"
+            [dataFetchCallback$]="handleFetchCathedrals$.bind(this)">
+            <ng-template let-cathData="drillingData">
+              <app-nav-tree-element
+                [levelNr]="2"
+                [inheritLvlData]="cathData"
+                [params]="{ deptId: deptData.id, cathId: cathData.id }"
+                [dataFetchCallback$]="handleFetchEmployers$.bind(this)">
+                <ng-template let-employerData="drillingData">
+                  <a
+                    routerLink="/schedule/selected-schedule/employeers"
+                    [queryParams]="{
+                      deptId: deptData.id,
+                      cathId: cathData.id,
+                      employeerId: employerData.id
+                    }"
+                    title="Kliknij aby przejść do podglądu planu wybranego nauczyciela"
+                    class="app__schedule-nav-list__link-element">
+                    {{ employerData.name }}
+                  </a>
+                </ng-template>
+              </app-nav-tree-element>
+            </ng-template>
+          </app-nav-tree-element>
+        </ng-template>
+      </app-first-level-nav-tree>
+    </div>
   </section>
   <div class="schedule-navigation-with-content">
     <app-remember-opened-schedule-bar />

@@ -5,17 +5,17 @@
 import { TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { RootModule } from '~/root-module/root.module';
-import { ScheduleHttpClientService } from './schedule-http-client.service';
+import { ScheduleNavigationService } from './schedule-navigation.service';
 
-describe('ScheduleHttpClientService', () => {
-  let service: ScheduleHttpClientService;
+describe('ScheduleNavigationService', () => {
+  let service: ScheduleNavigationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, RootModule],
-      providers: [ScheduleHttpClientService],
+      providers: [ScheduleNavigationService],
     });
-    service = TestBed.inject(ScheduleHttpClientService);
+    service = TestBed.inject(ScheduleNavigationService);
   });
 
   it('should be created', () => {
