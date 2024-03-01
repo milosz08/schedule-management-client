@@ -187,7 +187,6 @@
     &-element {
       color: var(--darkBlueColor);
       border-radius: var(--borderRadius);
-      padding: 4px 10px;
       &:hover {
         cursor: pointer;
         background-color: var(--darkBlueColor);
@@ -199,6 +198,7 @@
         width: 100%;
         text-align: left;
         color: var(--darkBlueColor);
+        padding: 4px 10px;
       }
     }
   }

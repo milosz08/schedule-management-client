@@ -31,7 +31,7 @@ export class GlobalExceptionHandlerInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         this._snackbarService.addSnackbar({
           message:
-            err.error.Message ||
+            err?.error?.Message ||
             'Wystąpił nieoczekiwany błąd. Spróbuj ponownie później.',
           severity: 'error',
         });

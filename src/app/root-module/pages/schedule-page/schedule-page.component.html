@@ -42,8 +42,9 @@
                         [dataFetchCallback$]="handleFetchStudySemesters$.bind(this)">
                         <ng-template let-groupData="drillingData">
                           <a
-                            routerLink="/schedule/selected-schedule/groups"
+                            routerLink="/schedule/selected-schedule"
                             [queryParams]="{
+                              for: 'group',
                               deptId: deptData.id,
                               specId: specData.id,
                               groupId: groupData.id
@@ -79,8 +80,9 @@
                 [dataFetchCallback$]="handleFetchStudyRooms$.bind(this)">
                 <ng-template let-roomData="drillingData">
                   <a
-                    routerLink="/schedule/selected-schedule/rooms"
+                    routerLink="/schedule/selected-schedule"
                     [queryParams]="{
+                      for: 'room',
                       deptId: deptData.id,
                       cathId: cathData.id,
                       roomId: roomData.id
@@ -112,11 +114,12 @@
                 [dataFetchCallback$]="handleFetchEmployers$.bind(this)">
                 <ng-template let-employerData="drillingData">
                   <a
-                    routerLink="/schedule/selected-schedule/employeers"
+                    routerLink="/schedule/selected-schedule"
                     [queryParams]="{
+                      for: 'employer',
                       deptId: deptData.id,
                       cathId: cathData.id,
-                      employeerId: employerData.id
+                      employerId: employerData.id
                     }"
                     title="Kliknij aby przejść do podglądu planu wybranego nauczyciela"
                     class="app__schedule-nav-list__link-element">
