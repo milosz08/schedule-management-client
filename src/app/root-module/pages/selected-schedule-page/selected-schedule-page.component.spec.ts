@@ -5,6 +5,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { RootModule } from '~/root-module/root.module';
+import { RememberScheduleBarService } from '~/root-module/services/remember-schedule-bar/remember-schedule-bar.service';
 import { SelectedSchedulePageComponent } from './selected-schedule-page.component';
 
 describe('SelectedSchedulePageComponent', () => {
@@ -14,6 +15,7 @@ describe('SelectedSchedulePageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, RootModule],
+      providers: [RememberScheduleBarService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectedSchedulePageComponent);
