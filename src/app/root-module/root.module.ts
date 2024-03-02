@@ -24,6 +24,7 @@ import { MainFooterComponent } from './components/main-footer/main-footer.compon
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { NavTreeElementComponent } from './components/nav-tree-element/nav-tree-element.component';
 import { RememberOpenedScheduleBarComponent } from './components/remember-opened-schedule-bar/remember-opened-schedule-bar.component';
+import { ScheduleParametersGuard } from './guards/schedule-parameters/schedule-parameters.guard';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
@@ -66,7 +67,7 @@ import { RootRoutingModule } from './root-routing.module';
     RouterModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [ScheduleParametersGuard],
   exports: [],
 })
 export class RootModule {}
