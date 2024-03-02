@@ -3,6 +3,7 @@
  * Silesian University of Technology
  */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CurrentLoggedUser } from '~/shared-module/models/identity.model';
 import { IdentityService } from '~/shared-module/service/identity/identity.service';
 import { SessionService } from '~/shared-module/service/session/session.service';
@@ -27,7 +28,8 @@ export class UserDetailsPopupComponent
 
   constructor(
     private readonly _identityService: IdentityService,
-    private readonly _sessionService: SessionService
+    private readonly _sessionService: SessionService,
+    private readonly _router: Router
   ) {
     super();
   }
@@ -43,6 +45,12 @@ export class UserDetailsPopupComponent
   }
 
   handleUserLogout(): void {
-    this.wrapAsObservable$(this._identityService.logout$()).subscribe();
+    this.wrapAsObservable$(this._identityService.logout$()).subscribe({
+      next: async () => {
+        if (this.isCmsPanel) {
+          await this._router.navigateByUrl('/');
+        }
+      },
+    });
   }
 }

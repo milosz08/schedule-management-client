@@ -12,7 +12,7 @@
     title="{{ loggedUser ? 'Otwórz panel użytkownika' : 'Przejdź do logowania' }}">
     <div class="header-auth__text-area">
       <div>{{ loggedUser?.nameWithSurname || 'Zaloguj' }}</div>
-      <div *ngIf="loggedUser" class="header-auth__session-info">
+      <div *ngIf="loggedUser" class="header-auth__session-info-container">
         Pozostały czas sesji:
         <span
           [class.header-auth__session-info--yellow-color]="isDarkBackgroundTheme && (sesionSoonEnded$ | async)"

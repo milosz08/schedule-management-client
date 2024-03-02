@@ -24,17 +24,17 @@
     margin-right: 15px;
   }
   &__session-info {
-    display: flex;
-    font-size: 0.8em;
-    color: var(--lightGrayColor);
-    span {
-      font-weight: 500;
-      color: var(--darkBlueColor);
-      display: block;
-      min-width: 40px;
-      text-align: right;
-      font-size: 1em;
+    &-container {
+      display: flex;
+      font-size: 0.8em;
+      color: var(--lightGrayColor);
     }
+    font-weight: 500;
+    color: var(--darkBlueColor);
+    display: block;
+    min-width: 40px;
+    text-align: right;
+    font-size: 1em;
     &--dark {
       color: var(--mainWhiteColor);
     }

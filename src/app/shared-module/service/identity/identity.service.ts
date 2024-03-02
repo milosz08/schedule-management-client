@@ -24,6 +24,7 @@ import {
 } from '~/shared-module/models/identity.model';
 import { LoggedUser } from '~/shared-module/types/logged-user.type';
 import { OmitChangeFirstPassword } from '~/shared-module/types/omit-change-first-password.type';
+import { UserIdentityType } from '~/shared-module/types/user-identity.type';
 import { IdentityHttpClientService } from '../identity-http-client/identity-http-client.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { SessionService } from '../session/session.service';
@@ -60,7 +61,7 @@ export class IdentityService {
     );
   }
 
-  setCurrentLoggedUser(loggedUser: LoginRes): string {
+  setCurrentLoggedUser(loggedUser: LoginRes, fromAutoLogin?: boolean): string {
     this._currentLoggedUser$.next({
       ...loggedUser,
       initials: this.createUserInitials(loggedUser),
@@ -82,6 +83,9 @@ export class IdentityService {
       }
     }
     this._sessionService.startSession();
+    if (fromAutoLogin) {
+      return '';
+    }
     return redirectUrl;
   }
 
@@ -94,7 +98,7 @@ export class IdentityService {
     return this._identityHttpClientService.tokenLogin$(loggedUser).pipe(
       map(res => {
         this._suspenseLoaderService.stopGlobalLoader();
-        return this.setCurrentLoggedUser(res);
+        return this.setCurrentLoggedUser(res, true);
       })
     );
   }
@@ -141,5 +145,8 @@ export class IdentityService {
   }
   get isLoggingOut$(): Observable<boolean> {
     return this._isLoggingOut$.asObservable();
+  }
+  get loggedUserRole$(): Observable<UserIdentityType | undefined> {
+    return this._currentLoggedUser$.pipe(map(loggedUser => loggedUser?.role));
   }
 }

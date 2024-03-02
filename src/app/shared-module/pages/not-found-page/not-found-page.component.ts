@@ -16,6 +16,6 @@ export class NotFoundPageComponent implements OnInit {
   constructor(private readonly _router: Router) {}
 
   ngOnInit(): void {
-    this._router.url.includes('secure');
+    this.isOnCmsPage = this._router.url.includes('secure/');
   }
 }
