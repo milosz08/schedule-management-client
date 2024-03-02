@@ -3,19 +3,30 @@
  * Silesian University of Technology
  */
 import { Injectable, inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { CanActivateFn, Router } from '@angular/router';
+import { Observable, map, tap } from 'rxjs';
 import { IdentityService } from '~/shared-module/service/identity/identity.service';
 
 @Injectable()
 export class ActiveNonLoggedUserGuard {
-  canActivate(identityService: IdentityService): Observable<boolean> {
+  canActivate(
+    identityService: IdentityService,
+    router: Router
+  ): Observable<boolean> {
     return identityService.currentLoggedUser$.pipe(
-      map(loggedUser => !loggedUser)
+      map(loggedUser => !loggedUser),
+      tap(isValid => {
+        if (!isValid) {
+          router.navigateByUrl('/');
+        }
+      })
     );
   }
 }
 
 export const activateActiveNonLoggedUserGuard: CanActivateFn = () => {
-  return inject(ActiveNonLoggedUserGuard).canActivate(inject(IdentityService));
+  return inject(ActiveNonLoggedUserGuard).canActivate(
+    inject(IdentityService),
+    inject(Router)
+  );
 };
