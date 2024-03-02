@@ -8,6 +8,7 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 import { RootMainPageComponent } from './pages/root-main-page/root-main-page.component';
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { SelectedSchedulePageComponent } from './pages/selected-schedule-page/selected-schedule-page.component';
 import { WelcomeSchedulePageComponent } from './pages/welcome-schedule-page/welcome-schedule-page.component';
 import { RootPageComponent } from './root-page.component';
 
@@ -29,6 +30,10 @@ const routes: Routes = [
           {
             path: '',
             component: WelcomeSchedulePageComponent,
+          },
+          {
+            path: 'selected-schedule',
+            component: SelectedSchedulePageComponent,
           },
         ],
       },

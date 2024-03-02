@@ -1,0 +1,221 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.app__schedule {
+  &-nav-list {
+    &__loading-all-list-elements__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    &__button-element {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      line-height: 1.1;
+      margin: 5px 0;
+    }
+    &__arrow {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    &__spinner-container {
+      width: 24px;
+      flex-shrink: 0;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 60%;
+        height: 60%;
+      }
+    }
+    &__link-element {
+      padding-left: 10px;
+      display: block;
+    }
+  }
+  &-main-canvas {
+    &__container {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 1596px;
+    }
+    &--schedule-editor {
+      height: 1656px;
+    }
+    &--refetch {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--navigationBackground);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    &__days-separator,
+    &__days-container {
+      margin: 0 5px;
+      height: 100%;
+    }
+    &__hours-container {
+      margin-right: 5px;
+    }
+    &__single-hour {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      height: 96px;
+      padding: 5px 5px 0 0;
+      border-top: 1px solid var(--darkWhiteColor);
+      &--hour-indicator,
+      &--schedule-editor {
+        border: none;
+      }
+      &--hour-indicator {
+        height: 60px;
+      }
+      &--schedule-editor {
+        height: 120px;
+      }
+    }
+    &__days-separator {
+      width: 1px;
+      background-color: var(--darkWhiteColor);
+    }
+    &__days-container {
+      position: relative;
+      flex-grow: 1;
+    }
+    &__single-day {
+      width: 100%;
+      height: 96px;
+      border-top: 1px solid var(--darkWhiteColor);
+      &--day-indicator,
+      &--schedule-editor {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        font-size: 1.1em;
+        text-transform: uppercase;
+        color: var(--darkBlueColor);
+      }
+      &__date-value {
+        color: var(--lightGrayColor);
+        font-size: 0.9rem;
+      }
+      &--day-indicator {
+        height: 60px;
+      }
+      &--schedule-editor {
+        height: 80px;
+      }
+    }
+  }
+  &-info__container {
+    margin-bottom: 30px;
+    &-schedule-group-data {
+      font-size: 1.1em;
+      color: var(--darkBlueColor);
+      border: 1px solid var(--darkBlueColor);
+      width: fit-content;
+      padding: 4px 15px 3px;
+      border-radius: var(--borderRadius);
+    }
+    &-schedule__delete-all-data {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+  &-trace-info {
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+    &__value {
+      text-transform: capitalize;
+      color: var(--lightGrayColor);
+    }
+    &__arrow {
+      margin: 0 5px;
+      font-size: 1.2rem;
+      color: var(--lightGrayColor);
+    }
+  }
+}
+
+.loading-schedule {
+  &__container,
+  &-problem__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  &__image,
+  &-problem__image {
+    width: 150px;
+    height: 150px;
+  }
+  &-problem {
+    &__header {
+      font-size: 1.3rem;
+      color: var(--darkRedColor);
+    }
+    &__button {
+      margin-top: 20px;
+    }
+    &__description {
+      margin-top: 5px;
+      color: var(--darkBlueColor);
+    }
+  }
+}
+
+.add-activity-form__min-checkbox-height {
+  height: 43px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1000px) {
+  .app__schedule-main-canvas {
+    &__days-separator {
+      display: none;
+    }
+    &--no-content {
+      flex-grow: initial;
+      width: fit-content;
+    }
+  }
+}
+
+@media only screen and (max-width: 775px) {
+  .app__schedule-main-canvas {
+    &__container {
+      font-size: 0.8rem;
+    }
+    &-info__container {
+      margin: 0 15px 30px;
+    }
+  }
+}

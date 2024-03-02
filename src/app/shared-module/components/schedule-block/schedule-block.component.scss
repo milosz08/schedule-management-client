@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.schedule-block {
+  &-component {
+    &__container {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px;
+      border-radius: var(--borderRadius);
+      overflow: hidden;
+      color: var(--mainBlackColor);
+      p {
+        text-align: center;
+      }
+      &:hover {
+        overflow-y: scroll;
+        z-index: 5 !important;
+      }
+      &::-webkit-scrollbar {
+        position: absolute;
+        width: 2px;
+      }
+      &::-webkit-scrollbar-thumb {
+        width: 2px;
+        height: 10px;
+        border-radius: var(--borderRadius);
+        background-color: var(--lightGrayColor);
+      }
+    }
+    &__layered-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--mainWhiteColor);
+    }
+  }
+  &__anchor-element {
+    text-decoration: underline;
+    &.anchor--disable-events {
+      pointer-events: none;
+      text-decoration: initial;
+    }
+    &.group-alias__anchor-element {
+      display: block;
+    }
+  }
+  &__occur-container {
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .hide-elements-on-small-devices {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 775px) {
+  .schedule-block-component__layered-button {
+    display: none;
+  }
+}

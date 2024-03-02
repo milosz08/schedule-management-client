@@ -5,10 +5,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NgIconsModule } from '@ng-icons/core';
 import {
   matArrowRightAlt,
   matKeyboardArrowDown,
+  matKeyboardArrowLeft,
+  matKeyboardArrowRight,
   matVisibility,
   matVisibilityOff,
 } from '@ng-icons/material-icons/baseline';
@@ -18,6 +21,8 @@ import { ComboBoxTemplateComponent } from './components/combo-box-template/combo
 import { EndSessionModalComponent } from './components/end-session-modal/end-session-modal.component';
 import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
 import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
+import { ScheduleBlockComponent } from './components/schedule-block/schedule-block.component';
+import { ScheduleNavFilterPanelComponent } from './components/schedule-nav-filter-panel/schedule-nav-filter-panel.component';
 import { SelectDropBoxTemplateComponent } from './components/select-drop-box-template/select-drop-box-template.component';
 import { SelectListTemplateComponent } from './components/select-list-template/select-list-template.component';
 import { SnackbarsContainerComponent } from './components/snackbars-container/snackbars-container.component';
@@ -40,6 +45,8 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
     NotFoundPageComponent,
     SelectDropBoxTemplateComponent,
     SelectListTemplateComponent,
+    ScheduleBlockComponent,
+    ScheduleNavFilterPanelComponent,
     SnackbarsContainerComponent,
     TextInputPasswordComponent,
     UserDetailsPopupComponent,
@@ -51,9 +58,12 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     NgIconsModule.withIcons({
       matArrowRightAlt,
       matKeyboardArrowDown,
+      matKeyboardArrowLeft,
+      matKeyboardArrowRight,
       matVisibility,
       matVisibilityOff,
     }),
@@ -68,6 +78,8 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
     LogoutModalComponent,
     SelectDropBoxTemplateComponent,
     SelectListTemplateComponent,
+    ScheduleBlockComponent,
+    ScheduleNavFilterPanelComponent,
     SnackbarsContainerComponent,
     TextInputPasswordComponent,
     UserHeaderDataWithPopupComponent,

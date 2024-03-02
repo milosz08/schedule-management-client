@@ -1,0 +1,110 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<aside
+  *ngIf="(fetchingState$ | async) === 'failure'; else loadingWithoutErrors"
+  class="loading-schedule-problem__container">
+  <img
+    src="assets/icon/info-important-icon.svg"
+    alt=""
+    class="loading-schedule-problem__image" />
+  <h3 class="loading-schedule-problem__header">
+    Ładowanie planu zakończone niepowodzeniem.
+  </h3>
+  <p class="loading-schedule-problem__description">
+    {{ onErrorMessage$ | async }}
+  </p>
+  <button
+    *ngIf="retryFetchEnabled$ | async"
+    (click)="handleLoadAgain()"
+    class="app__button app__button--light app__button--full-size-window loading-schedule-problem__button">
+    Załaduj ponownie
+    <ng-container *ngIf="isLoading$ | async; else showArrow">
+      <img
+        src="assets/gif/suspense-loading-light.gif"
+        alt=""
+        class="app__button--loading-content-spinner" />
+    </ng-container>
+    <ng-template #showArrow>
+      <ng-icon name="matRefresh" class="app__button__arrow" />
+    </ng-template>
+  </button>
+</aside>
+<ng-template #loadingWithoutErrors>
+  <aside
+    *ngIf="(fetchingState$ | async) === 'fetching'; else showContent"
+    class="loading-schedule__container">
+    <img
+      src="assets/gif/suspense-loading-dark.gif"
+      alt=""
+      class="loading-schedule__image" />
+  </aside>
+  <ng-template #showContent>
+    <ng-container *ngIf="scheduleData">
+      <section class="app__schedule-info__container">
+        <div class="app__schedule-trace-info__container">
+          <ng-container
+            *ngFor="let trace of scheduleData!.traceDetails; index as idx">
+            <div class="app__schedule-trace-info__value">{{ trace }}</div>
+            <ng-icon
+              *ngIf="idx !== scheduleData!.traceDetails!.length - 1"
+              name="matKeyboardArrowRight"
+              class="app__schedule-trace-info__arrow" />
+          </ng-container>
+        </div>
+        <div class="app__schedule-info__container-schedule-group-data">
+          {{ scheduleData!.scheduleHeaderData }}
+        </div>
+      </section>
+      <app-schedule-nav-filter-panel [filterForm]="filterForm" />
+      <section class="app__schedule-main-canvas__container">
+        <div class="app__schedule-main-canvas__hours-container">
+          <div
+            class="app__schedule-main-canvas__single-hour app__schedule-main-canvas__single-hour--hour-indicator"></div>
+          <div
+            *ngFor="let hour of hoursData"
+            class="app__schedule-main-canvas__single-hour">
+            {{ hour }}
+          </div>
+        </div>
+        <aside class="app__schedule-main-canvas__days-separator"></aside>
+        <ng-container
+          *ngFor="let dayData of scheduleData.scheduleCanvasData; index as idx">
+          <div
+            [class.app__schedule-main-canvas--no-content]="areSomeDataExist(dayData.weekdayData.length === 0)"
+            class="app__schedule-main-canvas__days-container">
+            <div
+              class="app__schedule-main-canvas__single-day app__schedule-main-canvas__single-day--day-indicator">
+              <p>{{ dayData.weekdayNameWithId.name }}</p>
+              <p
+                *ngIf="!dayData.isNotShowingOccuredDates"
+                class="app__schedule-main-canvas__single-day__date-value">
+                {{ dayData.weekdayDateTime }}
+              </p>
+            </div>
+            <div
+              *ngFor="let hour of hoursData"
+              class="app__schedule-main-canvas__single-day single-grid-picker"></div>
+            <app-schedule-block
+              *ngFor="let weekdayData of dayData!.weekdayData"
+              [weekdayData]="weekdayData"
+              [addedPxFromTop]="60" />
+          </div>
+          <aside
+            *ngIf="idx !== scheduleData!.scheduleCanvasData.length - 1"
+            class="app__schedule-main-canvas__days-separator"></aside>
+        </ng-container>
+        <div
+          *ngIf="isRefetching$ | async"
+          class="app__schedule-main-canvas--refetch">
+          <img
+            src="assets/gif/suspense-loading-dark.gif"
+            alt=""
+            class="app__schedule-main-canvas--refetch-image" />
+        </div>
+      </section>
+    </ng-container>
+  </ng-template>
+</ng-template>

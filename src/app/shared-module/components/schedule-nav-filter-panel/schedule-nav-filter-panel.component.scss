@@ -1,0 +1,87 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.schedule {
+  &-navigation {
+    &-filtering {
+      &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+      &__inputs {
+        display: flex;
+      }
+    }
+    &-mobile-buttons__container {
+      display: none;
+    }
+  }
+  &-year-input__container {
+    max-width: 150px;
+    margin-right: 20px;
+  }
+  &-week-input__container {
+    max-width: 250px;
+  }
+  &-button__max-height {
+    max-height: 40px;
+  }
+}
+
+@media only screen and (max-width: 1182px) {
+  .schedule {
+    &-year-input__container,
+    &-week-input__container {
+      max-width: 100%;
+      flex-basis: 50%;
+    }
+    &-navigation {
+      &--disable-mobile {
+        display: none;
+      }
+      &-filtering__container {
+        flex-direction: column;
+      }
+      &-mobile-buttons__container {
+        display: flex;
+        width: 100%;
+      }
+      &--disable-full-width {
+        flex-basis: 50%;
+        justify-content: center;
+        &:nth-of-type(1) {
+          margin-right: 10px;
+        }
+        &:nth-of-type(2) {
+          margin-left: 10px;
+        }
+      }
+      &-filtering__inputs {
+        margin-top: 20px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 775px) {
+  .schedule-navigation-filtering__container {
+    margin: 0 15px 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .schedule {
+    &-navigation-filtering__inputs {
+      flex-direction: column;
+    }
+    &-year-input__container {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+}

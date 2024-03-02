@@ -1,0 +1,61 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form [formGroup]="filterForm" class="schedule-navigation-filtering__container">
+  <button
+    [disabled]="(isBlockPrev$ | async) || (buttonsBlocked$ | async)"
+    (click)="handleGotoPrevWeek()"
+    class="app__button app__button--light schedule-button__max-height schedule-navigation--disable-mobile"
+    title="Kliknij aby przejść do poprzedniego tygodnia">
+    <ng-icon
+      name="matKeyboardArrowLeft"
+      class="app__button__arrow app__button__arrow--arrow-left" />
+    Poprzedni tydzień
+  </button>
+  <div class="schedule-navigation-mobile-buttons__container">
+    <button
+      [disabled]="(isBlockPrev$ | async) || (buttonsBlocked$ | async)"
+      (click)="handleGotoPrevWeek()"
+      class="app__button app__button--light schedule-button__max-height schedule-navigation--disable-full-width"
+      title="Kliknij aby przejść do poprzedniego tygodnia">
+      <ng-icon
+        name="matKeyboardArrowLeft"
+        class="app__button__arrow app__button__arrow--arrow-left" />
+    </button>
+    <button
+      [disabled]="(isBlockNext$ | async) || (buttonsBlocked$ | async)"
+      (click)="handleGotoNextWeek()"
+      class="app__button app__button--light schedule-button__max-height schedule-navigation--disable-full-width"
+      title="Kliknij aby przejść do następnego tygodnia">
+      <ng-icon name="matKeyboardArrowRight" class="app__button__arrow" />
+    </button>
+  </div>
+  <nav class="schedule-navigation-filtering__inputs">
+    <app-select-drop-box-template
+      [formGroup]="filterForm"
+      [optionsList]="(yearsData$ | async) || []"
+      (addedValue)="handleSubmitYear()"
+      formControlId="selectedStudyYear"
+      placeholder="Wybierz rok"
+      errorField="prawidłowy rok z rozwijanej listy"
+      class="schedule-year-input__container" />
+    <app-select-drop-box-template
+      [formGroup]="filterForm"
+      [optionsList]="(weeksData$ | async) || []"
+      (addedValue)="handleSubmitWeek()"
+      formControlId="selectedWeekData"
+      placeholder="Wybierz tydzień"
+      errorField="prawidłowy tydzień z rozwijanej listy"
+      class="schedule-week-input__container" />
+  </nav>
+  <button
+    [disabled]="(isBlockNext$ | async) || (buttonsBlocked$ | async)"
+    (click)="handleGotoNextWeek()"
+    class="app__button app__button--light schedule-button__max-height schedule-navigation--disable-mobile"
+    title="Kliknij aby przejść do następnego tygodnia">
+    Następny tydzień
+    <ng-icon name="matKeyboardArrowRight" class="app__button__arrow" />
+  </button>
+</form>
