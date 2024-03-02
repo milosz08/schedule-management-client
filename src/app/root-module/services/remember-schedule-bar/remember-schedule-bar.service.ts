@@ -31,9 +31,10 @@ export class RememberScheduleBarService {
 
   addRememberContent(scheduleData: ScheduleDataRes): void {
     const headerData = scheduleData.scheduleHeaderData;
+    const hasComma = headerData.indexOf(',') !== -1;
     const headerFormat = scheduleData.scheduleHeaderData.substring(
       headerData.indexOf('-') + 2,
-      headerData.indexOf(',')
+      hasComma ? headerData.indexOf(',') : headerData.length
     );
     const queryParamMap = this._route.snapshot.queryParamMap;
     const scheduleSavingData: RememberScheduleBar = {
