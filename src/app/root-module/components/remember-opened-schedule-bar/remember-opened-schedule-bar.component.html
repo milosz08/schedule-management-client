@@ -1,0 +1,31 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="remember-schedule-bar__container">
+  <a
+    routerLink="/schedule"
+    routerLinkActive="remember-schedule-bar__button--active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="remember-schedule-bar__button remember-schedule-bar__button--not-include-delete-icon">
+    Start
+  </a>
+  <a
+    *ngFor="let scheduleData of (loadedData$ | async)"
+    routerLink="/schedule/selected-schedule"
+    routerLinkActive="remember-schedule-bar__button--active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    [queryParams]="scheduleData.params"
+    class="remember-schedule-bar__button">
+    <span class="remember-schedule-bar__text">
+      {{ scheduleData.scheduleName }}
+    </span>
+    <button
+      (click)="handleRemoveRememberElement($event, scheduleData.scheduleName)"
+      title="Kliknij aby usunąć zapisane okno"
+      class="remember-schedule__remove-button">
+      <ng-icon name="matClear" class="remove-button__time-icon" />
+    </button>
+  </a>
+</div>

@@ -6,4 +6,5 @@
 export type StorageKey =
   | 'omit_change_first_password'
   | 'logged_user'
-  | 'saved_accounts';
+  | 'saved_accounts'
+  | 'remember_schedule_bar';
