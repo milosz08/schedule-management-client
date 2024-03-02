@@ -8,22 +8,31 @@ import {
   ScheduleNavList,
   ScheduleNavParams,
 } from '~/root-module/models/schedule-nav-list.model';
+import { RememberScheduleBarService } from '~/root-module/services/remember-schedule-bar/remember-schedule-bar.service';
 import { ScheduleNavigationHttpClientService } from '~/root-module/services/schedule-navigation-http-client/schedule-navigation-http-client.service';
 import { ScheduleNavigationService } from '~/root-module/services/schedule-navigation/schedule-navigation.service';
+import { ScheduleSubjectModalService } from '~/shared-module/service/schedule-subject-modal/schedule-subject-modal.service';
 
 @Component({
   selector: 'app-schedule-page',
   templateUrl: './schedule-page.component.html',
   styleUrl: './schedule-page.component.scss',
-  providers: [ScheduleNavigationService],
+  providers: [
+    ScheduleNavigationService,
+    ScheduleSubjectModalService,
+    RememberScheduleBarService,
+  ],
 })
 export class SchedulePageComponent {
   activeNav = 'grupy';
 
   readonly buttons = ['sale', 'pracownicy', 'grupy'];
 
+  isModalOpen$ = this._scheduleSubjectModalService.isOpen$;
+
   constructor(
-    private readonly _scheduleNavigationHttpClientService: ScheduleNavigationHttpClientService
+    private readonly _scheduleNavigationHttpClientService: ScheduleNavigationHttpClientService,
+    private readonly _scheduleSubjectModalService: ScheduleSubjectModalService
   ) {}
 
   handleToggleActiveSection(section: string): void {
