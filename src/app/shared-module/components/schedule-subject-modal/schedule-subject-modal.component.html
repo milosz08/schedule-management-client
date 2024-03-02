@@ -1,0 +1,53 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div
+  @fadeInOutAnimation
+  class="app__modal-container schedule-subject-details-modal__container">
+  <div
+    *ngIf="subjectDetails"
+    class="app__modal-wrapper schedule-subject-details-modal__wrapper">
+    <div
+      [ngStyle]="{ backgroundColor: subjectDetails.subjectTypeColor}"
+      class="schedule-subject-details-modal__data">
+      <div class="schedule-subject-details-modal__single-block">
+        <p>{{ subjectDetails.subjectName }}</p>
+        <p>{{ subjectDetails.subjectHours }}</p>
+      </div>
+      <div class="schedule-subject-details-modal__single-block">
+        <p>{{ subjectDetails.teachers }}</p>
+      </div>
+      <div class="schedule-subject-details-modal__single-block">
+        <p>{{ subjectDetails.typeAndRoomsName }}</p>
+        <p>{{ subjectDetails.departmentName }}</p>
+      </div>
+      <div
+        *ngIf="subjectDetails.subjectOccur !== ''"
+        class="schedule-subject-details-modal__single-block">
+        <p>Występowanie:</p>
+        <p>{{ subjectDetails.subjectOccur }}</p>
+      </div>
+    </div>
+    <div class="schedule-subject-details__buttons-container">
+      <button
+        (click)="handleCloseModal()"
+        [class.schedule-subject-details__close-button--full-size]="!isEditable"
+        class="app__button app__button--light schedule-subject-details__close-button"
+        title="Kliknij aby zamknąć okno">
+        Zamknij okno
+      </button>
+      <button
+        *ngIf="isEditable"
+        (click)="handleDeleteScheduleSubject()"
+        class="app__button app__button--danger-light app__button--light schedule-subject-details__close-button"
+        title="Kliknij aby usunąć zawartość">
+        Usuń zawartość
+        <ng-icon
+          name="matArrowRightAlt"
+          class="app__button__arrow app__button__arrow--red" />
+      </button>
+    </div>
+  </div>
+</div>
