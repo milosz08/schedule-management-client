@@ -1,0 +1,87 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.cms-header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    padding: 0 50px 0 20px;
+    background-color: var(--darkBlueColor);
+    font-weight: 500;
+  }
+  &__role-bar-container {
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+  }
+  &__title-with-hamburger {
+    display: flex;
+    align-items: center;
+  }
+  &__left-content-container {
+    display: flex;
+    align-items: center;
+  }
+  &__logo {
+    width: 50px;
+    height: 50px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__title {
+    color: var(--mainWhiteColor);
+    margin-left: 30px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    &::after {
+      content: '.';
+      font-size: 1.5em;
+      line-height: 0;
+      color: var(--headerDotColor);
+    }
+  }
+  &__role-indicator-bar {
+    width: 100%;
+    height: 4px;
+    &--administrator {
+      background-color: var(--administratorColor);
+    }
+    &--editor {
+      background-color: var(--editorColor);
+    }
+    &--teacher {
+      background-color: var(--teacherColor);
+    }
+    &--student {
+      background-color: var(--studentColor);
+    }
+  }
+}
+
+@media only screen and (max-width: 839px) {
+  .cms-header {
+    &__role-bar-container {
+      position: static;
+    }
+    &__container {
+      padding: 0 20px;
+    }
+    &__title {
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .cms-header__title {
+    display: none;
+  }
+}

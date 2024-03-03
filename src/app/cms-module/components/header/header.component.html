@@ -1,0 +1,36 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="cms-header__role-bar-container">
+  <header class="cms-header__container">
+    <div class="cms-header__title-with-hamburger">
+      <button
+        (click)="handleToggleMenuVisibilitty()"
+        title="Kliknij aby otworzyć/zamkąć nawigację"
+        class="app__header__hamburger app__header__hamburger--remove-left-margin app__header__hamburger--always-show">
+        <div
+          class="app__header__hamburger-bars app__header__hamburger-bars--dark-mode"></div>
+      </button>
+      <a routerLink="/secure/dashboard" title="Przejdź do strony głównej">
+        <div class="cms-header__left-content-container">
+          <img
+            class="cms-header__logo"
+            src="assets/logo/main-logo-light.svg"
+            alt="" />
+          <h1 class="cms-header__title">System zarządzania planem</h1>
+        </div>
+      </a>
+    </div>
+    <app-user-header-data-with-popup
+      [isCmsPanel]="true"
+      [isDarkBackgroundTheme]="true" />
+  </header>
+  <aside
+    [class.cms-header__role-indicator-bar--administrator]="(loggedUserRole$ | async) === 'administrator'"
+    [class.cms-header__role-indicator-bar--editor]="(loggedUserRole$ | async) === 'edytor'"
+    [class.cms-header__role-indicator-bar--teacher]="(loggedUserRole$ | async) === 'nauczyciel'"
+    [class.cms-header__role-indicator-bar--student]="(loggedUserRole$ | async) === 'student'"
+    class="cms-header__role-indicator-bar"></aside>
+</div>

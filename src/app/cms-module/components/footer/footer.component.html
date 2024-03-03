@@ -1,0 +1,55 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<footer class="cms-footer__container">
+  <div class="app__footer__wrapper">
+    <section class="app__footer__logo-with-description">
+      <a
+        routerLink="/"
+        title="Przejdź do strony głównej"
+        class="app__footer__logo">
+        <img src="assets/logo/main-logo-dark.svg" alt="" />
+      </a>
+      <p class="app__footer__description cms-footer__description--dark">
+        Aplikacja bazodanowa symulująca system zarządzania planem zajęć
+        przykładowej uczelni wyższej technicznej. Napisana przy użyciu
+        technologii ASP.NET WebAPI (serwer) oraz Angular Framework (klient).
+      </p>
+    </section>
+    <section class="cms-footer__login-status-info">
+      <div class="cms-footer__user-data">
+        <p>Jesteś zalogowany(a) jako:</p>
+        <p class="cms-footer__user-data__data">
+          <span>{{ currentLoggedUser?.nameWithSurname }}</span>
+          <span>({{ currentLoggedUser?.login }})</span>
+        </p>
+      </div>
+      <div class="cms-footer__user-data">
+        <p>Rola w systemie:</p>
+        <p
+          class="cms-footer__user-data__data cms-footer__user-data__data--capitalised">
+          {{ currentLoggedUser?.role }}
+        </p>
+      </div>
+      <div class="cms-footer__logout-button">
+        <button
+          (click)="handleLogout()"
+          class="app__button app__button--light app__button--hollow-light user-details-popup__button">
+          Wyloguj/przełącz konto
+          <ng-container *ngIf="isLoggingOut$ | async; else showArrow">
+            <img
+              src="assets/gif/suspense-loading-dark.gif"
+              alt=""
+              class="app__button--loading-content-spinner" />
+          </ng-container>
+          <ng-template #showArrow>
+            <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          </ng-template>
+        </button>
+      </div>
+    </section>
+  </div>
+  <app-basic-copy-footer />
+</footer>
