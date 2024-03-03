@@ -17,7 +17,7 @@ const routes: Routes = [
     title: 'Wiadomości użytkowników',
   },
   {
-    path: 'users-message/:messId',
+    path: 'users-messages/:messId',
     component: UserMessagePageComponent,
     title: 'Szczegóły wiadomości',
   },

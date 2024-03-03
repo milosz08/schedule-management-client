@@ -35,7 +35,7 @@ const routes: Routes = [
         canActivate: [activateStudentAndTeacherRouteProtectorGuard],
       },
       {
-        path: 'my-message/:messId',
+        path: 'my-messages/details/:messId',
         component: MyMessagePageComponent,
         title: 'Szczegóły wiadomości',
         canActivate: [activateStudentAndTeacherRouteProtectorGuard],

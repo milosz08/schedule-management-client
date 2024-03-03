@@ -45,12 +45,12 @@ const routes: Routes = [
     title: 'Wydziały',
   },
   {
-    path: 'department/add',
+    path: 'departments/add',
     component: DepartmentAddPageComponent,
     title: 'Dodaj wydział',
   },
   {
-    path: 'department/edit/:deptId',
+    path: 'departments/edit/:deptId',
     component: DepartmentEditPageComponent,
     title: 'Edytuj wydział',
   },
@@ -60,7 +60,7 @@ const routes: Routes = [
     title: 'Grupy',
   },
   {
-    path: 'study-group/add',
+    path: 'study-groups/add',
     component: StudyGroupAddPageComponent,
     title: 'Dodaj grupę',
   },
@@ -70,12 +70,12 @@ const routes: Routes = [
     title: 'Sale',
   },
   {
-    path: 'study-room/add',
+    path: 'study-rooms/add',
     component: StudyRoomAddPageComponent,
     title: 'Dodaj salę',
   },
   {
-    path: 'study-room/edit/:roomId',
+    path: 'study-rooms/edit/:roomId',
     component: StudyRoomEditPageComponent,
     title: 'Edytuj salę',
   },
@@ -85,12 +85,12 @@ const routes: Routes = [
     title: 'Kierunki studiów',
   },
   {
-    path: 'study-specialization/add',
+    path: 'study-specializations/add',
     component: StudySpecializationAddPageComponent,
     title: 'Dodaj kierunek studiów',
   },
   {
-    path: 'study-specialization/edit/:specId',
+    path: 'study-specializations/edit/:specId',
     component: StudySpecializationEditPageComponent,
     title: 'Edytuj kierunek studiów',
   },
@@ -100,12 +100,12 @@ const routes: Routes = [
     title: 'Przedmioty',
   },
   {
-    path: 'study-subject/add',
+    path: 'study-subjects/add',
     component: StudySpecializationAddPageComponent,
     title: 'Dodaj przedmiot',
   },
   {
-    path: 'study-subject/edit/:subjId',
+    path: 'study-subjects/edit/:subjId',
     component: StudySpecializationEditPageComponent,
     title: 'Edytuj przedmiot',
   },
@@ -115,12 +115,12 @@ const routes: Routes = [
     title: 'Użytkownicy',
   },
   {
-    path: 'user/add',
+    path: 'users/add',
     component: UserAddPageComponent,
     title: 'Dodaj użytkownika',
   },
   {
-    path: 'user/edit/:userId',
+    path: 'users/edit/:userId',
     component: UserEditPageComponent,
     title: 'Edytuj użytkownika',
   },
