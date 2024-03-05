@@ -19,6 +19,9 @@ import { StudyRoomsPageComponent } from './pages/study-rooms-page/study-rooms-pa
 import { StudySpecializationAddPageComponent } from './pages/study-specialization-add-page/study-specialization-add-page.component';
 import { StudySpecializationEditPageComponent } from './pages/study-specialization-edit-page/study-specialization-edit-page.component';
 import { StudySpecializationsPageComponent } from './pages/study-specializations-page/study-specializations-page.component';
+import { StudySubjectAddPageComponent } from './pages/study-subject-add-page/study-subject-add-page.component';
+import { StudySubjectEditPageComponent } from './pages/study-subject-edit-page/study-subject-edit-page.component';
+import { StudySubjectsPageComponent } from './pages/study-subjects-page/study-subjects-page.component';
 import { UserAddPageComponent } from './pages/user-add-page/user-add-page.component';
 import { UserEditPageComponent } from './pages/user-edit-page/user-edit-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
@@ -96,17 +99,17 @@ const routes: Routes = [
   },
   {
     path: 'study-subjects',
-    component: StudySpecializationsPageComponent,
+    component: StudySubjectsPageComponent,
     title: 'Przedmioty',
   },
   {
     path: 'study-subjects/add',
-    component: StudySpecializationAddPageComponent,
+    component: StudySubjectAddPageComponent,
     title: 'Dodaj przedmiot',
   },
   {
     path: 'study-subjects/edit/:subjId',
-    component: StudySpecializationEditPageComponent,
+    component: StudySubjectEditPageComponent,
     title: 'Edytuj przedmiot',
   },
   {
