@@ -2,3 +2,27 @@
  * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
  * Silesian University of Technology
  */
+
+.schedule-select {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+  }
+  &__loading-container {
+    margin-top: 40px;
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .choose-schedule__container {
+    margin-top: 20px;
+  }
+}

@@ -3,4 +3,21 @@
  ~ Silesian University of Technology
  -->
 
-<p>study-specialization-edit-page works!</p>
+<app-add-edit-section-header
+  header="Edycja wybranego kierunku studiów"
+  returnUrl="/secure/admin/study-specializations"
+  returnText="Powróć do listy kierunków studiów">
+  <ng-container description>
+    W tej sekcji możesz edytować część informacji o wybranym kierunku studiów.
+  </ng-container>
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć kierunek studiów i stworzyć nowy.
+    Zalecamy korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do
+    utraty głębiej położonych zasobów w systemie.
+  </ng-template>
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  formHeader="Edytuj kierunek"
+  resultHeader="Informacje o kierunku">
+</app-add-edit-column-wrapper>

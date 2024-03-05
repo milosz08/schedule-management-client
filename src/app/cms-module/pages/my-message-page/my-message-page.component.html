@@ -3,4 +3,13 @@
  ~ Silesian University of Technology
  -->
 
-<p>my-message-page works!</p>
+<app-add-edit-section-header
+  header="Szczegóły wysłanej wiadomości"
+  returnUrl="/secure/my-messages"
+  returnText="Powróć do listy wysłanych wiadomości">
+  <ng-container description>
+    W tej sekcji możesz podejrzeć zawartość wybranej wiadomości wysłanej przez
+    Ciebie do administratorów systemu.
+  </ng-container>
+</app-add-edit-section-header>
+<div class="app-cms__table-loading-container"></div>

@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-user-messages-page',
   templateUrl: './user-messages-page.component.html',
+  host: { class: 'app__main-flex-columned' },
 })
 export class UserMessagesPageComponent {}

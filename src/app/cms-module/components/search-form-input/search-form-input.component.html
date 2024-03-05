@@ -1,0 +1,17 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="search-form__container">
+  <label [for]="inputId" class="search-form__label">
+    <input
+      type="text"
+      [id]="inputId"
+      [placeholder]="inputPlaceholder"
+      class="app__input app__input--light search-form__input" />
+  </label>
+  <span class="search-form__magnifier">
+    <ng-icon name="matSearch" class="search-form__magnifier-icon" />
+  </span>
+</div>

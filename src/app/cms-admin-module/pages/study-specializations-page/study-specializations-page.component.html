@@ -3,4 +3,17 @@
  ~ Silesian University of Technology
  -->
 
-<p>study-specializations-page works!</p>
+<app-table-data-header
+  header="Kierunki studiów"
+  inputPlaceholder="Wyszukaj po nazwie kierunku"
+  addContentUrl="/secure/admin/study-specializations/add"
+  addContentText="Dodaj kierunek studiów">
+  W tej sekcji możesz przeglądać i edytować kierunki studiów na poszczególnych
+  wydziałach. Pamiętaj, że w przypadku usunięcia kierunku studiów, usuwa się
+  również przydział uczniów do grup wydziałowych oraz innych, powiązanych
+  zależności Radzimy z tej sekcji korzystać rozważnie i w ostateczności. Każdy
+  kierunek studiów posiada nazwę, alias (skrót używany do identyfikacji w planie
+  zajęć), przydział do wydziału oraz typ kierunku (stacjonarny/niestacjonarny)
+  oznaczone odpowiednio jako ST oraz NS/Z.
+</app-table-data-header>
+<div class="app-cms__table-loading-container"></div>

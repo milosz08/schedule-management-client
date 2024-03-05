@@ -3,4 +3,14 @@
  ~ Silesian University of Technology
  -->
 
-<p>study-rooms-page works!</p>
+<app-table-data-header
+  header="Sale zajęciowe"
+  inputPlaceholder="Wyszukaj po aliasie (np. B102)"
+  addContentUrl="/secure/admin/study-rooms/add"
+  addContentText="Dodaj nową salę">
+  W tej sekcji możesz przeglądać i edytować sale zajęciowe. Każda sala ma
+  przydzielony swój typ (sala wykładowa/ ćwiczeniowa/laboratoryjna) i oznaczone
+  są odpowiednim kolorem. Jeśli przeznaczenie sali nie jest sprecyzowane,
+  oznaczona jest ona jaki "inna".
+</app-table-data-header>
+<div class="app-cms__table-loading-container"></div>

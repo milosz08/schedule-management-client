@@ -2,3 +2,33 @@
  * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
  * Silesian University of Technology
  */
+
+.schedule-editor {
+  &__data-info {
+    &-container {
+      margin-bottom: 50px;
+      font-size: 1.1rem;
+    }
+    &-description {
+      color: var(--lightGrayColor);
+    }
+  }
+  &__add-content-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    height: 40px;
+    max-height: 40px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .schedule-editor__info-group-data,
+  .schedule-editor__delete-activity {
+    width: 100%;
+  }
+  .schedule-editor__delete-activity {
+    margin-top: 10px;
+  }
+}

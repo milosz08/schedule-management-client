@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-department-add-page',
   templateUrl: './department-add-page.component.html',
+  host: { class: 'app__main-flex-columned' },
 })
 export class DepartmentAddPageComponent {}

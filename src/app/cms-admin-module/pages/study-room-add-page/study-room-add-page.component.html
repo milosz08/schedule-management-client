@@ -3,4 +3,21 @@
  ~ Silesian University of Technology
  -->
 
-<p>study-room-add-page works!</p>
+<app-add-edit-section-header
+  header="Dodawanie nowej sali"
+  returnUrl="/secure/admin/study-rooms"
+  returnText="Powróć do listy sal">
+  <ng-container description>
+    W tej sekcji możesz dodać nową salę zajęciową. Każda sala jest przypisana do
+    konkretnej katedry (a katedra do wydziału). Każda sala musi posiadać również
+    jej typ przeznaczenia (wykładowa/laboratoryjna itp.). Jeśli sala nie posiada
+    sprecyzowanego typu, należy wybrać opcję "inna". Należy również podać
+    pojemność sali (jako wartość całkowita) indentyfikująca maksymalną ilość
+    osób jaka może przebywać w sali w tym samym czasie. Można dodać którki opis
+    sali, ale nie jest on wymagany (należy zostawić puste pole).
+  </ng-container>
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  formHeader="Dodaj salę"
+  resultHeader="Informacje o sali">
+</app-add-edit-column-wrapper>

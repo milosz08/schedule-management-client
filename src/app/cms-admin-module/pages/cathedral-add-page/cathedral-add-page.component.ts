@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-cathedral-add-page',
   templateUrl: './cathedral-add-page.component.html',
+  host: { class: 'app__main-flex-columned' },
 })
 export class CathedralAddPageComponent {}

@@ -3,4 +3,15 @@
  ~ Silesian University of Technology
  -->
 
-<p>departments-page works!</p>
+<app-table-data-header
+  header="Wydziały uczelni"
+  inputPlaceholder="Wyszukaj po nazwie wydziału"
+  addContentUrl="/secure/admin/departments/add"
+  addContentText="Dodaj nowy wydział">
+  W tej sekcji możesz przeglądać i edytować wydziały uczelni. Pamiętaj, że w
+  przypadku usunięcia wydziału, wszystkie powiązanie z nim przedmioty, grupy i
+  inne zależności również zostaną usunięte. Radzimy z tej sekcji korzystać
+  rozważnie i w ostateczności. Każdy wydział posiada pełną nazwę i alias używany
+  w celu identyfikacji.
+</app-table-data-header>
+<div class="app-cms__table-loading-container"></div>

@@ -3,4 +3,16 @@
  ~ Silesian University of Technology
  -->
 
-<p>users-page works!</p>
+<app-table-data-header
+  header="Lista użytkowników systemu"
+  inputPlaceholder="Wyszukaj po nazwisku"
+  addContentUrl="/secure/admin/users/add"
+  addContentText="Dodaj użytkownika">
+  W tej sekcji możesz przeglądać wszystkich aktywnych użytkowników systemu.
+  Każdemu użytkownikowi przypisana jest rola. Dostępne role to: administrator,
+  edytor, nauczyciel oraz student z odpowiednimi kolorami oznaczającymi rolę
+  danego użytkownika. Kliknięcie w przycisk "usuń" spowoduje usunięcie
+  użytkownika z systemu. Kliknięcie w strzałkę przy użytkowniku przeniesie do
+  strony ze szczegółowymi danymi użytkownika.
+</app-table-data-header>
+<div class="app-cms__table-loading-container"></div>

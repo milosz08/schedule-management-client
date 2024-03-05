@@ -3,4 +3,14 @@
  ~ Silesian University of Technology
  -->
 
-<p>cathedrals-page works!</p>
+<app-table-data-header
+  header="Katedry poszczególnych wydziałów"
+  inputPlaceholder="Wyszukaj po nazwie katedry"
+  addContentUrl="/secure/admin/cathedrals/add"
+  addContentText="Dodaj nową katedrę">
+  W tej sekcji możesz przeglądać i edytować poszczególne katedry wydziałów.
+  Pamiętaj, że aby dodać katedrę musi istnieć w systemie co najmniej jeden
+  wydział. Jeśli usuniesz katedrę, kaskadowo usuną się również nauczyciele
+  przypisani do tej katedry. Zalecamy korzystanie z tej funkcji rozważnie.
+</app-table-data-header>
+<div class="app-cms__table-loading-container"></div>

@@ -3,4 +3,21 @@
  ~ Silesian University of Technology
  -->
 
-<p>department-edit-page works!</p>
+<app-add-edit-section-header
+  header="Edycja wybranego wydziału"
+  returnUrl="/secure/admin/departments"
+  returnText="Powróć do listy wydziałów">
+  <ng-container description>
+    W tej sekcji możesz edytować część informacji o wybranym wydziale.
+  </ng-container>
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć wydział i stworzyć nowy. Zalecamy
+    korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do utraty
+    głębiej położonych zasobów w systemie.
+  </ng-template>
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  formHeader="Edytuj wydział"
+  resultHeader="Informacje o wydziale">
+</app-add-edit-column-wrapper>

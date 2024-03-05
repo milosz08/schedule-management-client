@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   selector: 'app-schedule-select-page',
   templateUrl: './schedule-select-page.component.html',
   styleUrl: './schedule-select-page.component.scss',
+  host: { class: 'app__main-flex-columned' },
 })
 export class ScheduleSelectPageComponent {}

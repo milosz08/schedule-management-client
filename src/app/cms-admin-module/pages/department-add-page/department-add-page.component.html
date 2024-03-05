@@ -3,4 +3,18 @@
  ~ Silesian University of Technology
  -->
 
-<p>department-add-page works!</p>
+<app-add-edit-section-header
+  header="Dodawanie nowego wydziału"
+  returnUrl="/secure/admin/departments"
+  returnText="Powróć do listy wydziałów">
+  <ng-container description>
+    W tej sekcji możesz dodać nowy wydział. Wydział składa się z nazwy wydziału
+    oraz aliasu (kliku-literowego skrótu) używanego głównie na planach zajęć
+    poszczególnych jednostek (grup) funkcyjnych. Uwaga! Nazwę wydziału należy
+    wprowadzać bez słowa "wydział" np. (Wydział) Elektryczny.
+  </ng-container>
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  formHeader="Dodaj wydział"
+  resultHeader="Informacje o wydziale">
+</app-add-edit-column-wrapper>

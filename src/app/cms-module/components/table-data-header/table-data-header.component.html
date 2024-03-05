@@ -1,0 +1,24 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="app-cms__top-description-container">
+  <h2 class="app-cms__header-h2">{{ header }}</h2>
+  <div class="app-cms__description-block-container">
+    <ng-content />
+  </div>
+  <aside class="app-cms__separator-line"></aside>
+</div>
+<header *ngIf="inputPlaceholder" class="app-cms__top-header">
+  <app-search-form-input
+    [inputPlaceholder]="inputPlaceholder"
+    class="cms-search-input--max-size" />
+  <a
+    *ngIf="addContentUrl && addContentText"
+    [routerLink]="addContentUrl"
+    class="app__button cms-def-button--max-size app__button--light app__button--full-size-window">
+    <ng-icon name="matPlus" class="app__button__text" />
+    {{ addContentText }}
+  </a>
+</header>

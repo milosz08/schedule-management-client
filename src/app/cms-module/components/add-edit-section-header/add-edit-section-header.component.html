@@ -1,0 +1,30 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="app-cms__top-description-container">
+  <h2 class="app-cms__header-h2">{{ header }}</h2>
+  <nav class="app-cms__return-link-anchor">
+    <a [routerLink]="returnUrl">
+      <ng-icon name="matKeyboardBackspace" class="app-cms__return-link-arrow" />
+      {{ returnText }}
+    </a>
+  </nav>
+  <div class="app-cms__description-block-container">
+    <ng-content select="[description]" />
+  </div>
+  <ng-container *ngIf="warningContent">
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      <ng-container *ngTemplateOutlet="warningContent" />
+    </div>
+  </ng-container>
+  <ng-container *ngIf="infoContent">
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--important-info">
+      <ng-container *ngTemplateOutlet="infoContent" />
+    </div>
+  </ng-container>
+  <aside class="app-cms__separator-line"></aside>
+</div>

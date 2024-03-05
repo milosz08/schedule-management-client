@@ -1,0 +1,18 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="app-cms__add-new-content-container">
+  <section
+    class="app-cms__add-new-content-form-wrapper app-cms__add-new-content-form-wrapper--extended-form-section">
+    <h3 class="app__header app__header--exclude-margins">{{ formHeader }}</h3>
+    <ng-content select="[form]" />
+  </section>
+  <aside
+    class="app-cms__separator-line app-cms__separator-line--vertical"></aside>
+  <section class="app-cms__add-new-content__response-wrapper">
+    <h3 class="app__header app__header--exclude-margins">{{ resultHeader }}</h3>
+    <ng-content select="[result]" />
+  </section>
+</div>

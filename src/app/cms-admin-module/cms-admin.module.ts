@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { CmsModule } from '~/cms-module/cms.module';
 import { SharedModule } from '~/shared-module/shared.module';
 import { CmsAdminRoutingModule } from './cms-admin-routing.module';
+import { AddEditColumnWrapperComponent } from './components/add-edit-column-wrapper/add-edit-column-wrapper.component';
 import { CathedralAddPageComponent } from './pages/cathedral-add-page/cathedral-add-page.component';
 import { CathedralEditPageComponent } from './pages/cathedral-edit-page/cathedral-edit-page.component';
 import { CathedralsPageComponent } from './pages/cathedrals-page/cathedrals-page.component';
@@ -32,6 +33,7 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
 
 @NgModule({
   declarations: [
+    AddEditColumnWrapperComponent,
     CathedralAddPageComponent,
     CathedralEditPageComponent,
     CathedralsPageComponent,

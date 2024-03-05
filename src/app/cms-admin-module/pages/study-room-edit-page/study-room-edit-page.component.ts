@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-study-room-edit-page',
   templateUrl: './study-room-edit-page.component.html',
+  host: { class: 'app__main-flex-columned' },
 })
 export class StudyRoomEditPageComponent {}

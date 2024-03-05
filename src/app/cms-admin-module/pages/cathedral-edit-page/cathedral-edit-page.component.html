@@ -3,4 +3,21 @@
  ~ Silesian University of Technology
  -->
 
-<p>cathedral-edit-page works!</p>
+<app-add-edit-section-header
+  header="Edycja wybranej katedry"
+  returnUrl="/secure/admin/cathedrals"
+  returnText="Powróć do listy katedr">
+  <ng-container description>
+    W tej sekcji możesz edytować część informacji o wybranej katedrze.
+  </ng-container>
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć katedrę i stworzyć nową. Zalecamy
+    korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do utraty
+    głębiej położonych zasobów w systemie.
+  </ng-template>
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  formHeader="Edytuj katedrę"
+  resultHeader="Informacje o katedrze">
+</app-add-edit-column-wrapper>
