@@ -3,7 +3,7 @@
  * Silesian University of Technology
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserMessageData } from '~/cms-editor-module/models/user-message.model';
+import { UserMessageData } from '~/cms-module/models/user-message.model';
 import { DeleteContentService } from '~/cms-module/services/delete-content/delete-content.service';
 import { PaginationService } from '~/cms-module/services/pagination/pagination.service';
 import { UserMessageHttpClientService } from '~/cms-module/services/user-message-http-client/user-message-http-client.service';
