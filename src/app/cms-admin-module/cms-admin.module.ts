@@ -30,6 +30,14 @@ import { StudySubjectsPageComponent } from './pages/study-subjects-page/study-su
 import { UserAddPageComponent } from './pages/user-add-page/user-add-page.component';
 import { UserEditPageComponent } from './pages/user-edit-page/user-edit-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { RoleToViewPipe } from './pipes/role-to-view/role-to-view.pipe';
+import { CathedralHttpClientService } from './services/cathedral-http-client/cathedral-http-client.service';
+import { DepartmentHttpClientService } from './services/department-http-client/department-http-client.service';
+import { StudyGroupHttpClientService } from './services/study-group-http-client/study-group-http-client.service';
+import { StudyRoomHttpClientService } from './services/study-room-http-client/study-room-http-client.service';
+import { StudySpecializationHttpClientService } from './services/study-specialization-http-client/study-specialization-http-client.service';
+import { StudySubjectHttpClientService } from './services/study-subject-http-client/study-subject-http-client.service';
+import { UserHttpClientService } from './services/user-http-client/user-http-client.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +48,7 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     DepartmentAddPageComponent,
     DepartmentEditPageComponent,
     DepartmentsPageComponent,
+    RoleToViewPipe,
     StudyGroupAddPageComponent,
     StudyGroupsPageComponent,
     StudyRoomAddPageComponent,
@@ -63,7 +72,15 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     RouterModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    CathedralHttpClientService,
+    DepartmentHttpClientService,
+    StudyGroupHttpClientService,
+    StudyRoomHttpClientService,
+    StudySpecializationHttpClientService,
+    StudySubjectHttpClientService,
+    UserHttpClientService,
+  ],
   exports: [],
 })
 export class CmsAdminModule {}

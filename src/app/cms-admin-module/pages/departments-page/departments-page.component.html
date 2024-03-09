@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Wydziały uczelni"
   inputPlaceholder="Wyszukaj po nazwie wydziału"
@@ -14,4 +15,37 @@
   rozważnie i w ostateczności. Każdy wydział posiada pełną nazwę i alias używany
   w celu identyfikacji.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="departments" class="app-cms__table-container">
+    <tr *ngIf="departments.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
+        <app-sorting-button sortBy="Id" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Nazwa" sortBy="Name" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button sortPlaceholder="Alias" sortBy="Alias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let deptartment of departments"
+      [editRoutePath]="'/secure/admin/departments/edit/' + deptartment.id"
+      [deleteContentId]="deptartment.id"
+      [isRemovable]="deptartment.isRemovable">
+      <td class="app-cms__table-td app-cms__table--hide-smal">
+        {{ deptartment.id }}
+      </td>
+      <td class="app-cms__table-td">{{ deptartment.name }}</td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ deptartment.alias }}
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

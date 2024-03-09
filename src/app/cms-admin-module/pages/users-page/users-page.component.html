@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Lista użytkowników systemu"
   inputPlaceholder="Wyszukaj po nazwisku"
@@ -15,4 +16,49 @@
   użytkownika z systemu. Kliknięcie w strzałkę przy użytkowniku przeniesie do
   strony ze szczegółowymi danymi użytkownika.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="users" class="app-cms__table-container">
+    <tr *ngIf="users.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms-table--hide-column__small">
+        <app-sorting-button sortPlaceholder="Id" sortBy="Id" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button
+          sortPlaceholder="Nazwisko i imię"
+          sortBy="Surname" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button sortPlaceholder="Login" sortBy="Login" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-medium">
+        <app-sorting-button sortPlaceholder="Rola w systemie" sortBy="Role" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let user of users"
+      [deleteContentId]="user.id"
+      [isRemovable]="(loggedUserLogin$ | async) !== user.login || user.isRemovable"
+      [editRoutePath]='"/secure/admin/users/edit/" + user.id'>
+      <td class="app-cms__table-td app-cms__table--hide-small">
+        {{ user.id }}
+      </td>
+      <td>{{ user.nameWithSurname }}</td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ user.login }}
+      </td>
+      <td class="app-cms__table-td app-cms__table--hide-medium">
+        <span
+          class="cms-table__user-role"
+          [ngClass]="(user.role | roleToView).class">
+          {{ (user.role | roleToView).label }}
+        </span>
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

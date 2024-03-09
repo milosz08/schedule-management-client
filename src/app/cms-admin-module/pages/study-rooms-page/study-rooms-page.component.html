@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Sale zajęciowe"
   inputPlaceholder="Wyszukaj po aliasie (np. B102)"
@@ -13,4 +14,61 @@
   są odpowiednim kolorem. Jeśli przeznaczenie sali nie jest sprecyzowane,
   oznaczona jest ona jaki "inna".
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="studyRooms" class="app-cms__table-container">
+    <tr *ngIf="studyRooms.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
+        <app-sorting-button sortPlaceholder="Id"></app-sorting-button>
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Nazwa" sortBy="Name" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Wydział i katedra"
+          sortBy="DepartmentAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button sortPlaceholder="Pojemność" sortBy="Capacity" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias Typu"
+          sortBy="RoomTypeAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let studyRoom of studyRooms"
+      [deleteContentId]="studyRoom.id"
+      [isRemovable]="true"
+      [editRoutePath]="'/secure/admin/study-rooms/edit/' + studyRoom.id">
+      <td class="app-cms__table-td app-cms__table--hide-small">
+        {{ studyRoom.id }}
+      </td>
+      <td
+        [title]="studyRoom.description + ', ' + studyRoom.departmentName + ', ' + studyRoom.cathedralName"
+        class="app-cms__table-td app-cms__on-hover-show-info">
+        {{ studyRoom.name }}
+      </td>
+      <td
+        [title]="studyRoom.departmentName + ', ' + studyRoom.cathedralName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studyRoom.deptWithCathAlias }}
+      </td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ studyRoom.capacity }}
+      </td>
+      <td
+        [title]="studyRoom.roomTypeName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studyRoom.roomTypeAlias }}
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

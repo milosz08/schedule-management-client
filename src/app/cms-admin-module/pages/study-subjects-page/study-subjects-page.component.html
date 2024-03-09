@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Przedmioty"
   inputPlaceholder="Wyszukaj po nazwie przedmiotu"
@@ -12,4 +13,53 @@
   studiów. Każdy przedmiot przypisany jest do konkrentego kierunku studiów na
   konkretnym wydziale.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="studySubjects" class="app-cms__table-container">
+    <tr *ngIf="studySubjects.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
+        <app-sorting-button sortPlaceholder="Id" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Nazwa" sortBy="Name" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button sortPlaceholder="Kierunek" sortBy="SpecTypeAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias wydziału"
+          sortBy="DepartmentAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let studySubject of studySubjects"
+      [deleteContentId]="studySubject.id"
+      [isRemovable]="true"
+      [editRoutePath]="'/secure/admin/study-subjects/edit/' + studySubject.id">
+      <td class="app-cms__table-td app-cms__table--hide-small">
+        {{ studySubject.id }}
+      </td>
+      <td
+        [title]="studySubject.departmentName"
+        class="app-cms__table-td app-cms__on-hover-show-info">
+        {{ studySubject.name }}
+      </td>
+      <td
+        [title]="studySubject.specName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studySubject.specAlias }}
+      </td>
+      <td
+        [title]="studySubject.departmentName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studySubject.departmentAlias }}
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

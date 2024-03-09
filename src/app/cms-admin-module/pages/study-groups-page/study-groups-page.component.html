@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Grupy dziekańskie"
   inputPlaceholder="Wyszukaj (np. SI RE Inf sII)"
@@ -11,4 +12,55 @@
   W tej sekcji możesz przeglądać i edytować grupy dziekańskie. Każda grupa
   dziekańska przypisana jest do konkretnego kierunku na wybranym wydziale.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="studyGroups" class="app-cms__table-container">
+    <tr *ngIf="studyGroups.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
+        <app-sorting-button sortPlaceholder="Id" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Nazwa" sortBy="Name" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias wydziału"
+          sortBy="DepartmentAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias kierunku"
+          sortBy="SpecTypeAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let studyGroup of studyGroups"
+      [deleteContentId]="studyGroup.id"
+      [isRemovable]="true"
+      [editRoutePath]="'/secure/admin/study-groups/edit/' + studyGroup.id"
+      [disableEditDetailsButton]="true">
+      <td class="app-cms__table-td app-cms__table--hide-smal">
+        {{ studyGroup.id }}
+      </td>
+      <td
+        [title]="studyGroup.departmentName + ', ' + studyGroup.studySpecName"
+        class="app-cms__table-td app-cms__on-hover-show-info">
+        {{ studyGroup.name }}
+      </td>
+      <td
+        [title]="studyGroup.departmentName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studyGroup.departmentAlias }}
+      </td>
+      <td
+        [title]="studyGroup.studySpecName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studyGroup.studySpecAlias }}
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

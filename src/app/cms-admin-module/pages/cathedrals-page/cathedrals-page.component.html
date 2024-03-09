@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Katedry poszczególnych wydziałów"
   inputPlaceholder="Wyszukaj po nazwie katedry"
@@ -13,4 +14,57 @@
   wydział. Jeśli usuniesz katedrę, kaskadowo usuną się również nauczyciele
   przypisani do tej katedry. Zalecamy korzystanie z tej funkcji rozważnie.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="cathedrals" class="app-cms__table-container">
+    <tr *ngIf="cathedrals.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
+        <app-sorting-button sortPlaceholder="Id" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Nazwa" sortBy="Name" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button sortPlaceholder="Alias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Nazwa wydziału"
+          sortBy="DepartmentName" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias wydziału"
+          sortBy="DepartmentAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let cathedral of cathedrals"
+      [deleteContentId]="cathedral.id"
+      [isRemovable]="cathedral.isRemovable"
+      [editRoutePath]="'/secure/admin/cathedrals/edit/' + cathedral.id">
+      <td class="app-cms__table-td app-cms__table--hide-smal">
+        {{ cathedral.id }}
+      </td>
+      <td
+        [title]="cathedral.departmentName"
+        class="app-cms__table-td app-cms__on-hover-show-info">
+        {{ cathedral.name }}
+      </td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ cathedral.alias }}
+      </td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ cathedral.departmentName }}
+      </td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ cathedral.departmentAlias }}
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

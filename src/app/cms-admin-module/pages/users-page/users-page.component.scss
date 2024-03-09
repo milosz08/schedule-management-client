@@ -1,0 +1,21 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.app-cms__table-user-role {
+  text-transform: capitalize;
+  font-weight: 500;
+  &--administrator {
+    color: var(--administratorColor);
+  }
+  &--editor {
+    color: var(--editorColor);
+  }
+  &--teacher {
+    color: var(--teacherColor);
+  }
+  &--student {
+    color: var(--studentColor);
+  }
+}

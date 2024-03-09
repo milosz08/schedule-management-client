@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Kierunki studiów"
   inputPlaceholder="Wyszukaj po nazwie kierunku"
@@ -16,4 +17,65 @@
   zajęć), przydział do wydziału oraz typ kierunku (stacjonarny/niestacjonarny)
   oznaczone odpowiednio jako ST oraz NS/Z.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="studySpecializations" class="app-cms__table-container">
+    <tr *ngIf="studySpecializations.length > 0" class="app-cms__table-tr">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
+        <app-sorting-button sortPlaceholder="Id" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Nazwa" sortBy="Name" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias wydziału"
+          sortBy="DepartmentAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias typu kierunku"
+          sortBy="SpecTypeAlias" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Alias stopnia"
+          sortBy="SpecDegree" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let studySpec of studySpecializations"
+      [deleteContentId]="studySpec.id"
+      [isRemovable]="true"
+      [editRoutePath]="'/secure/admin/study-specializations/edit/' + studySpec.id">
+      <td class="app-cms__table-td app-cms__table--hide-small">
+        {{ studySpec.id }}
+      </td>
+      <td
+        [title]="studySpec.departmentName + ', ' + studySpec.specTypeName + ', ' + studySpec.studyDegree"
+        class="app-cms__table-td app-cms__on-hover-show-info">
+        {{ studySpec.name }}
+      </td>
+      <td
+        [title]="studySpec.departmentName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studySpec.departmentAlias }}
+      </td>
+      <td
+        [title]="studySpec.specTypeName"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studySpec.specTypeAlias }}
+      </td>
+      <td
+        [title]="studySpec.studyDegree"
+        class="app-cms__table-td app-cms__table--hide-large app-cms__on-hover-show-info">
+        {{ studySpec.studyDegreeAlias }}
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>
