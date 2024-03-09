@@ -3,6 +3,7 @@
  ~ Silesian University of Technology
  -->
 
+<app-delete-content-modal />
 <app-table-data-header
   header="Wiadomości użytkowników"
   inputPlaceholder="Wyszukaj po nazwisku">
@@ -13,4 +14,51 @@
   reprezentującym wiadomość zostaniesz przeniesiony do strony z dodatkowymi
   informacjami.
 </app-table-data-header>
-<div class="app-cms__table-loading-container"></div>
+<app-delete-pageable-elements>
+  <table *ngIf="userMessages" class="app-cms__table-container">
+    <tr *ngIf="userMessages.length > 0">
+      <th
+        class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-small">
+        <app-sorting-button sortPlaceholder="Id" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-large">
+        <app-sorting-button
+          sortPlaceholder="Nazwisko i imię"
+          sortBy="Surname" />
+      </th>
+      <th class="app-cms__table-th">
+        <app-sorting-button sortPlaceholder="Typ" sortBy="IssueType" />
+      </th>
+      <th class="app-cms__table-th app-cms__table--hide-medium">
+        <app-sorting-button
+          sortPlaceholder="Czy anonimowe"
+          sortBy="IsAnonymous" />
+      </th>
+      <th class="app-cms__table-th app-cms__table-th-details"></th>
+      <th class="app-cms__table-th app-cms__table-th-remove"></th>
+      <th
+        class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
+    </tr>
+    <tr
+      app-delete-element
+      *ngFor="let userMessage of userMessages"
+      [deleteContentId]="userMessage.id"
+      [isRemovable]="true"
+      [editRoutePath]="'/secure/users-messages/details/' + userMessage.id">
+      <td class="app-cms__table-td app-cms__table--hide-small">
+        {{ userMessage.id }}
+      </td>
+      <td class="app-cms__table-td app-cms__table--hide-large">
+        {{ userMessage.nameWithSurname }}
+      </td>
+      <td class="app-cms__table-td">{{ userMessage.issueType }}</td>
+      <td class="app-cms__table-td app-cms__table--hide-medium">
+        <span
+          [class.user-message--anonymous]="userMessage.isAnonymous"
+          class="app-cms__table-user-message">
+          {{ userMessage.isAnonymous ? "anonimowa" : "spersonalizowana" }}
+        </span>
+      </td>
+    </tr>
+  </table>
+</app-delete-pageable-elements>

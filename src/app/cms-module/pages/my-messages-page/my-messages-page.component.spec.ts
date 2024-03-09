@@ -5,6 +5,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { CmsModule } from '~/cms-module/cms.module';
+import { DeleteContentService } from '~/cms-module/services/delete-content/delete-content.service';
+import { PaginationService } from '~/cms-module/services/pagination/pagination.service';
 import { MyMessagesPageComponent } from './my-messages-page.component';
 
 describe('MyMessagesPageComponent', () => {
@@ -14,6 +16,7 @@ describe('MyMessagesPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, CmsModule],
+      providers: [PaginationService, DeleteContentService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MyMessagesPageComponent);
