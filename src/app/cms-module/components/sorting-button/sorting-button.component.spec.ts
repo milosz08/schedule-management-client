@@ -6,11 +6,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { CmsModule } from '~/cms-module/cms.module';
 import { PaginationService } from '~/cms-module/services/pagination/pagination.service';
-import { SearchFormInputComponent } from './search-form-input.component';
+import { SortingButtonComponent } from './sorting-button.component';
 
-describe('SearchFormInputComponent', () => {
-  let component: SearchFormInputComponent;
-  let fixture: ComponentFixture<SearchFormInputComponent>;
+describe('SortingButtonComponent', () => {
+  let component: SortingButtonComponent;
+  let fixture: ComponentFixture<SortingButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,7 +18,7 @@ describe('SearchFormInputComponent', () => {
       providers: [PaginationService],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchFormInputComponent);
+    fixture = TestBed.createComponent(SortingButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

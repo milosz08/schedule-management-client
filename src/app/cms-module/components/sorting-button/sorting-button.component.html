@@ -1,0 +1,15 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<button
+  (click)="handleToggleSortingDirMode()"
+  title="Kliknij aby posortować wyniki rosnąco/malejąco"
+  class="app-cms__table-sort-button">
+  {{ sortPlaceholder || sortBy }}
+  <ng-icon
+    [name]="(sortBy$ | async) === sortBy ? (sortDir$ | async) === 'ASC'
+    ? 'matKeyboardArrowDown' :'matKeyboardArrowUp' : 'matKeyboardArrowDown'"
+    class="app-cms__table-arrow-icon" />
+</button>

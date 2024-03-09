@@ -149,4 +149,9 @@ export class IdentityService {
   get loggedUserRole$(): Observable<UserIdentityType | undefined> {
     return this._currentLoggedUser$.pipe(map(loggedUser => loggedUser?.role));
   }
+  get loggedUserLogin$(): Observable<string> {
+    return this._currentLoggedUser$.pipe(
+      map(loggedUser => loggedUser?.login || '')
+    );
+  }
 }

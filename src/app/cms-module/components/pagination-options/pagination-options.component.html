@@ -1,0 +1,65 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<section class="cms-pagination__container">
+  <div class="cms-pagination__all-pages">
+    <button
+      (click)="handlePrevPage()"
+      [disabled]="(currentPage$ | async) === 1"
+      class="app__button cms-pagination__button cms-pagination__button--page-prev-next">
+      <ng-icon
+        name="matKeyboardArrowLeft"
+        class="cms-pagination__button-icon" />
+    </button>
+    <ng-container *ngIf="activePages?.minEnabled">
+      <button
+        (click)="handleSelectPage(1)"
+        [class.cms-pagination__button--active]="(currentPage$ | async) === 1"
+        [disabled]="(currentPage$ | async) === 1"
+        class="cms-pagination__button">
+        1
+      </button>
+      <span *ngIf="(currentPage$ | async)! > 3" class="cms-pagination__dots">
+        ...
+      </span>
+    </ng-container>
+    <button
+      *ngFor="let page of activePages?.activePages"
+      (click)="handleSelectPage(page)"
+      [class.cms-pagination__button--active]="(currentPage$ | async) === page"
+      [disabled]="(currentPage$ | async) === page"
+      class="cms-pagination__button">
+      {{ page }}
+    </button>
+    <ng-container *ngIf="activePages?.maxEnabled">
+      <span class="cms-pagination__dots">...</span>
+      <button
+        (click)="handleSelectPage(totalPages)"
+        [class.cms-pagination__button--active]="(currentPage$ | async) === totalPages"
+        [disabled]="(currentPage$ | async) === totalPages"
+        class="cms-pagination__button">
+        {{ totalPages }}
+      </button>
+    </ng-container>
+    <button
+      (click)="handleNextPage()"
+      [disabled]="(currentPage$ | async) === totalPages"
+      class="app__button cms-pagination__button cms-pagination__button--page-prev-next">
+      <ng-icon
+        name="matKeyboardArrowRight"
+        class="cms-pagination__button-icon" />
+    </button>
+  </div>
+  <div class="cms-pagination__size-of-page">
+    Wyników na stronę:
+    <button
+      *ngFor="let size of (allPageSizes$ | async)"
+      (click)="handleChangePaginationSize(size)"
+      [class.cms-pagination__button--active]="(currentSize$ | async) === size"
+      class="cms-pagination__button">
+      {{ size }}
+    </button>
+  </div>
+</section>

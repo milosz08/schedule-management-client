@@ -8,6 +8,7 @@
     <input
       type="text"
       [id]="inputId"
+      (input)="handleOnChangeContent($event)"
       [placeholder]="inputPlaceholder"
       class="app__input app__input--light search-form__input" />
   </label>

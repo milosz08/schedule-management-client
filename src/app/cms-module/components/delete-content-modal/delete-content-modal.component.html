@@ -1,0 +1,63 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div *ngIf="isOpen$ | async" @fadeInOutAnimation class="app-modal__container">
+  <form
+    [formGroup]="passwordForm"
+    (ngSubmit)="handleDeleteElements()"
+    class="app-modal__wrapper">
+    <img
+      src="assets/icon/info-important-icon.svg"
+      class="app-modal__wrapper-image-element"
+      alt="" />
+    <h2 class="app-modal__wrapper-h2-header">Usuwanie zawartości</h2>
+    <p class="app-modal__wrapper-description">
+      Aby potwierdzić usunięcie zawartości (oraz w celu dodatkowej autoryzacji),
+      wprowadź swoje hasło. Następnie (jeśli chcesz usunać wybraną zawartość z
+      bazy danych) potwierdź kliknięciem w <strong>Usuń element/y</strong>.
+      Operacji tej nie można cofnąć. Jeśli nie chcesz usuwać wybranych
+      elementów, kliknij w przycisk <strong>Zamknij okno</strong>.
+    </p>
+    <div class="app__label--relative delete-content-modal__password-label">
+      <app-text-input-password
+        [formGroup]="passwordForm"
+        [isLightTheme]="true"
+        inputPlaceholder="Hasło"
+        formControlId="password" />
+      <div
+        *ngIf="checkIsFieldHasErrors('password')"
+        class="app__input-error app__input-error--light">
+        Hasło jest wymagane
+      </div>
+    </div>
+    <div class="app-modal__buttons-container">
+      <button
+        [disabled]="!passwordForm.valid"
+        type="submit"
+        class="app__button app__button--light app__button--hollow-light app__button--full-size-window"
+        title="Kliknij aby usunąć element/y">
+        <ng-container *ngIf="isLoading$ | async; else showArrow">
+          Usuwanie
+          <img
+            src="assets/gif/suspense-loading-dark.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+        </ng-container>
+        <ng-template #showArrow>
+          Usuń element/y
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+        </ng-template>
+      </button>
+      <button
+        (click)="handleCloseModal()"
+        [disabled]="isLoading$ | async"
+        type="button"
+        class="app__button app__button--light app-modal__button--left-modal app__button--full-size-window app-modal__button--left"
+        title="Kliknij aby zamknąć okno">
+        Zamknij okno
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="app-cms__table-loading-container">
+  <aside
+    *ngIf="(fetchingStatus$ | async) === 'fetching'"
+    class="app-cms__table-loading-content">
+    <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+  </aside>
+  <aside
+    *ngIf="(fetchingStatus$ | async) === 'failure'"
+    class="app-cms__table-error-content">
+    <img src="assets/icon/info-important-icon.svg" alt="" />
+    <p class="app-cms__table-error-content-message">
+      Nieudane załadowanie danych.
+    </p>
+    <button
+      (click)="handleRefetchData()"
+      class="app__button app__button--light app__button--full-size-window">
+      Spróbj ponownie
+      <ng-icon name="matRefresh" class="app__button__arrow" />
+    </button>
+  </aside>
+  <ng-container *ngIf="(fetchingStatus$ | async) === 'success'">
+    <p class="app-cms__query-parameters">
+      Pobrano {{ paginationData?.elementsFrom }}-{{ paginationData?.elementsTo
+      }} wyników z {{ paginationData?.totalElementsCount }} wszystkich możliwych
+      wyników.
+    </p>
+    <ng-content />
+    <ng-container
+      *ngIf="paginationData && (paginationData.totalElementsCount > 0)">
+      <section class="app-cms__danger-zone-deleting-container">
+        <button
+          class="app__button app__button--danger-light app__button--small-full-size-window"
+          title="Kliknij aby usunąć tylko zaznaczone elementy"
+          (click)="handleOpenDeleteModal()"
+          [disabled]="isDeleteContentEmpty$ | async">
+          Usuń zaznaczone
+        </button>
+        <button
+          class="app__button app__button--danger-light app__button--filled app__button--small-full-size-window"
+          title="Kliknij aby usunąć wszystkie elementy"
+          (click)="handleOpenDeleteModal()">
+          Usuń wszystko
+        </button>
+      </section>
+      <app-pagination-options />
+    </ng-container>
+  </ng-container>
+</div>

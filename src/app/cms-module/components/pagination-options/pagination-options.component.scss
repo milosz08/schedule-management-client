@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.cms-pagination {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__all-pages,
+  &__size-of-page {
+    margin-top: 15px;
+  }
+  &__all-pages {
+    display: flex;
+    align-items: center;
+  }
+  &__button {
+    background-color: var(--darkWhiteColor);
+    color: var(--lightGrayColor);
+    border-radius: var(--borderRadius);
+    margin: 0 4px;
+    padding: 2px 0;
+    width: 30px;
+    height: 30px;
+    &--active {
+      background-color: var(--darkBlueColor);
+      color: var(--mainWhiteColor);
+    }
+    &--page-prev-next {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 0;
+    }
+    &-icon {
+      font-size: 1.5rem;
+    }
+  }
+  &__dots {
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    margin: 0 5px;
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  .cms-pagination__container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

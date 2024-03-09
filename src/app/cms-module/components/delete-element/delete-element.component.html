@@ -1,0 +1,33 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<ng-content />
+<td *ngIf="!disableEditDetailsButton" class="app-cms__table-td">
+  <a
+    [routerLink]="'/secure/' + editRoutePath"
+    class="app__button app__button--light app__button--hollow-light app-cms__table-edit-button"
+    title="Kliknij aby edytować/podejrzeć zawartość">
+    <ng-icon
+      name="matArrowRightAlt"
+      class="app__button__arrow app-cms__table-button--remove-arrow-margin" />
+  </a>
+</td>
+<td class="app-cms__table-td">
+  <button
+    (click)="handleDeleteContent()"
+    class="app__button app__button--danger-light"
+    title="Kliknij aby usunąć zawartość z systemu"
+    [disabled]="!isRemovable">
+    Usuń
+  </button>
+</td>
+<td
+  class="app-cms__table-td app-cms__table-td-select app-cms__table--hide-smal">
+  <app-checkbox-template
+    [isCheckboxDisabled]="!isRemovable"
+    [isWhiteBackground]="true"
+    [isShowLabel]="false"
+    (checkedEmitter)="handleToggleSelectedDeleteContent($event)" />
+</td>
