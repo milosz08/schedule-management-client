@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { ScheduleNavList } from '~/root-module/models/schedule-nav-list.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();

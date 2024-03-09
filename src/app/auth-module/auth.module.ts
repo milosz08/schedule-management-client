@@ -30,6 +30,7 @@ import { FirstChangePasswordPageComponent } from './pages/first-change-password-
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SendTokenViaEmailPageComponent } from './pages/send-token-via-email-page/send-token-via-email-page.component';
 import { UserHoverInfoPipe } from './pipes/user-hover-info/user-hover-info.pipe';
+import { AuthHttpClientService } from './services/auth-http-client/auth-http-client.service';
 import { SavedAccountsService } from './services/saved-accounts/saved-accounts.service';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { SavedAccountsService } from './services/saved-accounts/saved-accounts.s
     SharedModule,
   ],
   providers: [
+    AuthHttpClientService,
     ActiveNonLoggedUserGuard,
     FirstChangePasswordGuard,
     ResetPasswordGuard,

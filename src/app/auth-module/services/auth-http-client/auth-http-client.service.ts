@@ -15,7 +15,7 @@ import { BaseMessage } from '~/shared-module/models/base-mesage.model';
 import { LoginRes } from '~/shared-module/models/identity.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();

@@ -2,6 +2,11 @@
  * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
  * Silesian University of Technology
  */
+
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +38,8 @@ import { SelectedSchedulePageComponent } from './pages/selected-schedule-page/se
 import { WelcomeSchedulePageComponent } from './pages/welcome-schedule-page/welcome-schedule-page.component';
 import { RootPageComponent } from './root-page.component';
 import { RootRoutingModule } from './root-routing.module';
+import { ContactHttpClientService } from './services/contact-http-client/contact-http-client.service';
+import { ScheduleNavigationHttpClientService } from './services/schedule-navigation-http-client/schedule-navigation-http-client.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +74,11 @@ import { RootRoutingModule } from './root-routing.module';
     RouterModule,
     SharedModule,
   ],
-  providers: [ScheduleParametersGuard],
+  providers: [
+    ContactHttpClientService,
+    ScheduleNavigationHttpClientService,
+    ScheduleParametersGuard,
+  ],
   exports: [],
 })
 export class RootModule {}

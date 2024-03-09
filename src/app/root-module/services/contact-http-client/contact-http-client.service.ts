@@ -13,7 +13,7 @@ import {
   NameWithId,
 } from '~/shared-module/types/drop-lists-data.type';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ContactHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
