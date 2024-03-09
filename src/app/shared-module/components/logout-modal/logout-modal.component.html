@@ -6,21 +6,21 @@
 <div
   *ngIf="(isModalVisible$ | async)"
   @fadeInOutAnimation
-  class="app__modal-container">
-  <div class="app__modal-wrapper">
+  class="app-modal__container">
+  <div class="app-modal__wrapper">
     <img
       src="assets/icon/info-icon.svg"
-      class="app__modal-wrapper__image-element"
+      class="app-modal__wrapper-image-element"
       alt="info" />
-    <h2 class="app__modal-wrapper__h2-header">
+    <h2 class="app-modal__wrapper-h2-header">
       Nastąpiło poprawne wylogowanie z systemu.
     </h2>
-    <p class="app__modal-wrapper__description">
+    <p class="app-modal__wrapper-description">
       Jeśli chcesz ponownie zalogować się do systemu (przy pomocy innego konta)
       kliknij w przycisk <strong> Zaloguj ponownie</strong>. Przeniesie Cię on
       bezpośrednio do strony logowania.
     </p>
-    <div class="app__modal-buttons-container">
+    <div class="app-modal__buttons-container">
       <button
         (click)="handleCloseModalAndRedirect()"
         class="app__button app__button--light user-details-popup__button app__button--hollow-light app__button--full-size-window"
@@ -30,7 +30,7 @@
       </button>
       <button
         (click)="handleCloseModal()"
-        class="app__button app__button--light user-details-popup__button app__modal-buttons-container__button--left app__button--full-size-window"
+        class="app__button app__button--light user-details-popup__button app-modal__button--left app__button--full-size-window"
         title="Kliknij aby zamknąć okno">
         Zamknij okno
       </button>

@@ -108,6 +108,7 @@
   .app {
     &__cms-container {
       padding-top: 0;
+      min-height: fit-content;
     }
     &__auth-container {
       padding-top: 30px;

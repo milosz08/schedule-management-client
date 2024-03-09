@@ -6,24 +6,24 @@
 <div
   *ngIf="isModalOpen$ | async"
   @fadeInOutAnimation
-  class="app__modal-container">
-  <div class="app__modal-wrapper">
+  class="app-modal__container">
+  <div class="app-modal__wrapper">
     <img
       src="assets/icon/info-important-icon.svg"
-      class="app__modal-wrapper__image-element"
+      class="app-modal__wrapper-image-element"
       alt="" />
-    <h2 class="app__modal-wrapper__h2-header">
+    <h2 class="app-modal__wrapper-h2-header">
       Automatyczne wylogowanie nastąpi za {{ currentWaitingTime$ | async }}
       sekund.
     </h2>
-    <p class="app__modal-wrapper__description">
+    <p class="app-modal__wrapper-description">
       W wyniku braku aktywności zostaniesz automatycznie wylogowany/na w
       przeciągu {{ waitingTime }} sekund. Jeśli chcesz odnowić czas sesji,
       kliknij w przycisk <strong>zamknij okno i odśwież sesję</strong>. Jeśli
       natomiast chcesz wylogować się w trybie natychmiastowym, kliknij w
       przycisk <strong>Wyloguj z systemu</strong>.
     </p>
-    <div class="app__modal-buttons-container">
+    <div class="app-modal__buttons-container">
       <button
         (click)="handleCloseModalAndLogoutUser()"
         class="app__button app__button--light user-details-popup__button app__button--hollow-light app__button--full-size-window"
@@ -41,7 +41,7 @@
       </button>
       <button
         (click)="handleCloseModalAndRenewSession()"
-        class="app__button app__button--light user-details-popup__button app__modal-buttons-container__button--left app__button--full-size-window"
+        class="app__button app__button--light user-details-popup__button app-modal__button--left app__button--full-size-window"
         title="Kliknij aby zamknąć okno">
         Zamknij okno i odśwież sesję
       </button>

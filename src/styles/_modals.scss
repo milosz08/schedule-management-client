@@ -3,10 +3,11 @@
  * Silesian University of Technology
  */
 
-.app__modal {
-  &-container {
+.app-modal {
+  &__container {
     position: fixed;
     top: 0;
+    left: 0;
     z-index: 20;
     display: flex;
     justify-content: center;
@@ -15,7 +16,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     overflow-y: auto;
   }
-  &-wrapper {
+  &__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,17 +27,17 @@
     height: fit-content;
     max-width: 1000px;
     width: calc(100% - 60px);
-    &__image-element {
+    &-image-element {
       width: 120px;
       height: 120px;
     }
-    &__h2-header {
+    &-h2-header {
       font-size: 1.5rem;
       font-weight: 500;
       text-align: center;
       color: var(--darkBlueColor);
     }
-    &__description {
+    &-description {
       font-size: 1rem;
       color: var(--lightGrayColor);
       margin: 20px 40px 30px;
@@ -46,45 +47,45 @@
       }
     }
   }
-  &-buttons-container {
+  &__buttons-container {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    &__button--left {
-      margin-left: 20px;
-    }
+  }
+  &__button--left {
+    margin-left: 20px;
   }
 }
 
 @media only screen and (max-width: 775px) {
-  .app__modal {
-    &-wrapper {
+  .app-modal {
+    &__wrapper {
       margin: 15px;
       width: calc(100% - 30px);
-      &__description {
+      &-description {
         margin: 20px 0 30px;
       }
     }
-    &-buttons-container {
+    &__buttons-container {
       justify-content: space-around;
       flex-wrap: wrap;
-      &__button--left {
-        margin-left: 0;
-      }
+    }
+    &__button--left {
+      margin-left: 0;
     }
   }
 }
 
 @media only screen and (max-width: 500px) {
-  .app__modal {
-    &-buttons-container button:nth-last-child(1) {
+  .app-modal {
+    &__buttons-container button:nth-last-child(1) {
       margin-top: 10px;
     }
-    &-wrapper {
-      &__h2-header {
+    &__wrapper {
+      &-h2-header {
         font-size: 1.3rem;
       }
-      &__description {
+      &-description {
         font-size: 0.9rem;
       }
     }

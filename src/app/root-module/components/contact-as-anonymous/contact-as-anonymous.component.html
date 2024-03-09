@@ -6,14 +6,12 @@
 <form
   [formGroup]="anonymousContactForm"
   (ngSubmit)="handleSubmitAnonymousContactForm()"
-  class="cms__simple-grid__angular-form angular-form--extended-width contact-form">
+  class="app-cms__grid-form app-cms__grid-form--extended-width contact-form">
   <app-contact-form-elements
     [formData]="anonymousContactForm"
     class="display-only-content"
     loader="anonymous">
-    <label for="add-contact__name" class="cms__simple-grid__label">
-      Imię:
-    </label>
+    <label for="add-contact__name" class="app-cms__grid-label"> Imię: </label>
     <div>
       <input
         type="text"
@@ -28,7 +26,7 @@
         Proszę wpisać swoje imię
       </div>
     </div>
-    <label for="add-contact__surname" class="cms__simple-grid__label">
+    <label for="add-contact__surname" class="app-cms__grid-label">
       Nazwisko:
     </label>
     <div>
@@ -45,7 +43,7 @@
         Proszę wpisać swoje nazwisko
       </div>
     </div>
-    <label for="add-contact__email" class="cms__simple-grid__label">
+    <label for="add-contact__email" class="app-cms__grid-label">
       Adres email:
     </label>
     <div>

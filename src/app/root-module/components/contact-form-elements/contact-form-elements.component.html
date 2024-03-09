@@ -5,7 +5,7 @@
 
 <ng-content />
 <ng-container [formGroup]="formData">
-  <label for="add-contact__type" class="cms__simple-grid__label">
+  <label for="add-contact__type" class="app-cms__grid-label">
     Typ zgłoszenia:
   </label>
   <div>
@@ -20,7 +20,7 @@
       errorField="prawidłowy typ zgłoszenia" />
   </div>
   <ng-container *ngIf="isScheduleIssueVisible">
-    <label for="add-contact__department" class="cms__simple-grid__label">
+    <label for="add-contact__department" class="app-cms__grid-label">
       Wybierz wydział:
     </label>
     <div>
@@ -35,7 +35,7 @@
         placeholder="np. Elektryczny"
         errorField="prawidłową nazwę wydziału" />
     </div>
-    <label for="add-contact__group" class="cms__simple-grid__label">
+    <label for="add-contact__group" class="app-cms__grid-label">
       Wybierz grupę/grupy:
     </label>
     <app-combo-box-template
@@ -45,7 +45,7 @@
       formControlId="groups"
       placeholder="grupy" />
   </ng-container>
-  <label for="add-contact__description" class="cms__simple-grid__label">
+  <label for="add-contact__description" class="app-cms__grid-label">
     Opis zgłoszenia:
   </label>
   <div>
@@ -64,7 +64,7 @@
     </div>
   </div>
   <div></div>
-  <div class="cms__simple-grid__submit-button">
+  <div class="app-cms__grid-submit-button">
     <button
       [disabled]="!formData.valid"
       type="submit"
