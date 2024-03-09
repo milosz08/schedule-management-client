@@ -1,0 +1,98 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.app-cms__round-plot {
+  &-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+  }
+  &-data-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+  }
+  &-round-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-round-data-number {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.1rem;
+    font-weight: 500;
+  }
+  &-data-value {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    color: var(--lightGrayColor);
+    &--strong {
+      margin-left: 7px;
+      color: var(--darkBlueColor);
+    }
+    &-dot {
+      display: block;
+      margin-right: 10px;
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      &--teacher {
+        background-color: var(--teacherColor);
+      }
+      &--editor {
+        background-color: var(--editorColor);
+      }
+      &--administrator {
+        background-color: var(--administratorColor);
+      }
+      &--student {
+        background-color: var(--studentColor);
+      }
+      &--department {
+        background-color: var(--departmentColor);
+      }
+      &--cathedral {
+        background-color: var(--cathedralColor);
+      }
+      &--study-room {
+        background-color: var(--studyRoomColor);
+      }
+      &--study-spec {
+        background-color: var(--studySpecColor);
+      }
+      &--study-subject {
+        background-color: var(--studySubjectColor);
+      }
+      &--study-group {
+        background-color: var(--studyGroupColor);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .app-cms__round-plot-round-container {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .app-cms__round {
+    &-data-container {
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    &-dashboard {
+      margin-top: 20px;
+    }
+  }
+}
