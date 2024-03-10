@@ -37,16 +37,14 @@
         <button
           (click)="handleLogout()"
           class="app__button app__button--light app__button--hollow-light user-details-popup__button">
-          Wyloguj/przełącz konto
-          <ng-container *ngIf="isLoggingOut$ | async; else showArrow">
-            <img
-              src="assets/gif/suspense-loading-dark.gif"
-              alt=""
-              class="app__button--loading-content-spinner" />
-          </ng-container>
-          <ng-template #showArrow>
-            <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-          </ng-template>
+          Wyloguj/przełącz konto @if (isLoggingOut$ | async) {
+          <img
+            src="assets/gif/suspense-loading-dark.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
         </button>
       </div>
     </section>

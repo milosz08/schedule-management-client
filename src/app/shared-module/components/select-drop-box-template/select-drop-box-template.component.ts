@@ -79,4 +79,11 @@ export class SelectDropBoxTemplateComponent
     }
     this.isListVisible = false;
   }
+
+  validateFormField(): boolean {
+    if (!this.formGroup) {
+      return false;
+    }
+    return this.checkFormFieldErrors(this.formGroup, this.formControlId);
+  }
 }

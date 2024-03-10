@@ -52,29 +52,30 @@
         checkboxLabel="Szukaj sal zajęciowych" />
     </div>
   </form>
-  <aside
-    *ngIf="(isFetching$ | async); else showLoadedElements"
-    class="search-page__loading-data-container">
+  @if (isFetching$ | async) {
+  <aside class="search-page__loading-data-container">
     <img src="assets/gif/suspense-loading-dark.gif" alt="" />
   </aside>
-  <ng-template #showLoadedElements>
-    <ul class="non-style-list search-page__loaded-elements__container">
-      <li *ngFor="let foundElement of foundElements">
-        <a
-          [routerLink]='[ "/schedule/selected-schedule/" + foundElement.pathParam ]'
-          [queryParams]="foundElement.pathQueryParams"
-          title="Przejdź do wybranego elemenu w planie zajęć"
-          class="search-page__single-element">
-          <p>Typ: <strong>{{ foundElement.typeName }}</strong></p>
-          <p>Pełna nazwa: <strong>{{ foundElement.fullName }}</strong></p>
-          <p>Wydział: <strong>{{ foundElement.departmentName }}</strong></p>
-          <div class="search-page__single-element__move-to-arrow__container">
-            <ng-icon
-              name="matArrowRightAlt"
-              class="search-page__single-element__move-to-arrow__arrow" />
-          </div>
-        </a>
-      </li>
-    </ul>
-  </ng-template>
+  } @else {
+  <ul class="non-style-list search-page__loaded-elements__container">
+    @for (foundElement of foundElements; track foundElement.fullName) {
+    <li>
+      <a
+        [routerLink]='[ "/schedule/selected-schedule/" + foundElement.pathParam ]'
+        [queryParams]="foundElement.pathQueryParams"
+        title="Przejdź do wybranego elemenu w planie zajęć"
+        class="search-page__single-element">
+        <p>Typ: <strong>{{ foundElement.typeName }}</strong></p>
+        <p>Pełna nazwa: <strong>{{ foundElement.fullName }}</strong></p>
+        <p>Wydział: <strong>{{ foundElement.departmentName }}</strong></p>
+        <div class="search-page__single-element__move-to-arrow__container">
+          <ng-icon
+            name="matArrowRightAlt"
+            class="search-page__single-element__move-to-arrow__arrow" />
+        </div>
+      </a>
+    </li>
+    }
+  </ul>
+  }
 </section>

@@ -3,12 +3,11 @@
  ~ Silesian University of Technology
  -->
 
-<ng-container *ngIf="nameWithSurname && role">
-  <img
-    *ngIf="profileImageUrl; else userIdentity"
-    [src]="getSaveImageURL(profileImageUrl)"
-    [alt]="nameWithSurname! | userIdentity"
-    class="profile__user-image" />
-  <ng-template #userIdentity>{{ nameWithSurname! | userIdentity }}</ng-template>
-  <app-user-role-dot [userRole]="role!" class="profile__role-dot-container" />
-</ng-container>
+@if (nameWithSurname && role) { @if (profileImageUrl) {
+<img
+  [src]="getSaveImageURL(profileImageUrl)"
+  [alt]="nameWithSurname! | userIdentity"
+  class="profile__user-image" />
+} @else { {{ nameWithSurname! | userIdentity }} }
+<app-user-role-dot [userRole]="role!" class="profile__role-dot-container" />
+}

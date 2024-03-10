@@ -13,36 +13,34 @@
         name="matKeyboardArrowLeft"
         class="cms-pagination__button-icon" />
     </button>
-    <ng-container *ngIf="activePages?.minEnabled">
-      <button
-        (click)="handleSelectPage(1)"
-        [class.cms-pagination__button--active]="(currentPage$ | async) === 1"
-        [disabled]="(currentPage$ | async) === 1"
-        class="cms-pagination__button">
-        1
-      </button>
-      <span *ngIf="(currentPage$ | async)! > 3" class="cms-pagination__dots">
-        ...
-      </span>
-    </ng-container>
+    @if (activePages?.minEnabled) {
     <button
-      *ngFor="let page of activePages?.activePages"
+      (click)="handleSelectPage(1)"
+      [class.cms-pagination__button--active]="(currentPage$ | async) === 1"
+      [disabled]="(currentPage$ | async) === 1"
+      class="cms-pagination__button">
+      1
+    </button>
+    @if ((currentPage$ | async)! > 3) {
+    <span class="cms-pagination__dots"> ... </span>
+    } } @for (page of activePages?.activePages; track page) {
+    <button
       (click)="handleSelectPage(page)"
       [class.cms-pagination__button--active]="(currentPage$ | async) === page"
       [disabled]="(currentPage$ | async) === page"
       class="cms-pagination__button">
       {{ page }}
     </button>
-    <ng-container *ngIf="activePages?.maxEnabled">
-      <span class="cms-pagination__dots">...</span>
-      <button
-        (click)="handleSelectPage(totalPages)"
-        [class.cms-pagination__button--active]="(currentPage$ | async) === totalPages"
-        [disabled]="(currentPage$ | async) === totalPages"
-        class="cms-pagination__button">
-        {{ totalPages }}
-      </button>
-    </ng-container>
+    } @if (activePages?.maxEnabled) {
+    <span class="cms-pagination__dots">...</span>
+    <button
+      (click)="handleSelectPage(totalPages)"
+      [class.cms-pagination__button--active]="(currentPage$ | async) === totalPages"
+      [disabled]="(currentPage$ | async) === totalPages"
+      class="cms-pagination__button">
+      {{ totalPages }}
+    </button>
+    }
     <button
       (click)="handleNextPage()"
       [disabled]="(currentPage$ | async) === totalPages"
@@ -53,13 +51,13 @@
     </button>
   </div>
   <div class="cms-pagination__size-of-page">
-    Wyników na stronę:
+    Wyników na stronę: @for (size of (allPageSizes$ | async);track size) {
     <button
-      *ngFor="let size of (allPageSizes$ | async)"
       (click)="handleChangePaginationSize(size)"
       [class.cms-pagination__button--active]="(currentSize$ | async) === size"
       class="cms-pagination__button">
       {{ size }}
     </button>
+    }
   </div>
 </section>

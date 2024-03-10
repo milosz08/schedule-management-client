@@ -15,8 +15,10 @@
   informacjami.
 </app-table-data-header>
 <app-delete-pageable-elements>
-  <table *ngIf="userMessages" class="app-cms__table-container">
-    <tr *ngIf="userMessages.length > 0">
+  @if (userMessages) {
+  <table class="app-cms__table-container">
+    @if (userMessages.length > 0) {
+    <tr class="app-cms__table-tr">
       <th
         class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-small">
         <app-sorting-button sortPlaceholder="Id" />
@@ -39,9 +41,9 @@
       <th
         class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
     </tr>
+    } @for (userMessage of userMessages; track userMessage.id) {
     <tr
       app-delete-element
-      *ngFor="let userMessage of userMessages"
       [deleteContentId]="userMessage.id"
       [isRemovable]="true"
       [editRoutePath]="'/secure/users-messages/details/' + userMessage.id">
@@ -60,5 +62,7 @@
         </span>
       </td>
     </tr>
+    }
   </table>
+  }
 </app-delete-pageable-elements>

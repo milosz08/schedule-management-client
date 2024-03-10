@@ -15,11 +15,12 @@
   <span
     [class.checkmark--white-background]="isWhiteBackground"
     class="app__checkbox-container__checkmark"></span>
+  @if (isShowLabel) {
   <label
-    *ngIf="isShowLabel"
     [for]="checkboxId"
     [class.checkbox-label--white-background]="isWhiteBackground"
     class="app__checkbox-label">
     {{ checkboxLabel }}
   </label>
+  }
 </div>

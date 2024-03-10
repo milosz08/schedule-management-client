@@ -13,8 +13,10 @@
   dziekańska przypisana jest do konkretnego kierunku na wybranym wydziale.
 </app-table-data-header>
 <app-delete-pageable-elements>
-  <table *ngIf="studyGroups" class="app-cms__table-container">
-    <tr *ngIf="studyGroups.length > 0" class="app-cms__table-tr">
+  @if (studyGroups) {
+  <table class="app-cms__table-container">
+    @if (studyGroups.length > 0) {
+    <tr class="app-cms__table-tr">
       <th
         class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
         <app-sorting-button sortPlaceholder="Id" />
@@ -36,9 +38,9 @@
       <th
         class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
     </tr>
+    } @for (studyGroup of studyGroups; track studyGroup.id) {
     <tr
       app-delete-element
-      *ngFor="let studyGroup of studyGroups"
       [deleteContentId]="studyGroup.id"
       [isRemovable]="true"
       [editRoutePath]="'/secure/admin/study-groups/edit/' + studyGroup.id"
@@ -62,5 +64,7 @@
         {{ studyGroup.studySpecAlias }}
       </td>
     </tr>
+    }
   </table>
+  }
 </app-delete-pageable-elements>

@@ -3,10 +3,8 @@
  ~ Silesian University of Technology
  -->
 
-<nav
-  *ngIf="menuVisibility$ | async"
-  @fadeInOutAnimation
-  class="cms-navigation__container">
+@if (menuVisibility$ | async) {
+<nav @fadeInOutAnimation class="cms-navigation__container">
   <ul class="cms-navigation__list-of-links">
     <li>
       <a
@@ -18,7 +16,8 @@
         panel główny
       </a>
     </li>
-    <li *ngIf="hasRole('ADMINISTRATOR', 'EDITOR') | async">
+    @if (hasRole('ADMINISTRATOR', 'EDITOR') | async) {
+    <li>
       <a
         routerLink="/secure/editor/schedule-select"
         routerLinkActive="link--active"
@@ -28,7 +27,8 @@
         edycja planów
       </a>
     </li>
-    <li *ngIf="hasRole('ADMINISTRATOR', 'EDITOR') | async">
+    } @if (hasRole('ADMINISTRATOR', 'EDITOR') | async) {
+    <li>
       <a
         routerLink="/secure/editor/users-messages"
         routerLinkActive="link--active"
@@ -38,7 +38,8 @@
         wiadomości użytkowników
       </a>
     </li>
-    <li *ngIf="hasRole('STUDENT', 'TEACHER') | async">
+    } @if (hasRole('STUDENT', 'TEACHER') | async) {
+    <li>
       <a
         routerLink="/secure/my-messages"
         routerLinkActive="link--active"
@@ -48,77 +49,78 @@
         moje wiadomości
       </a>
     </li>
-    <ng-container *ngIf="hasRole('ADMINISTRATOR') | async">
-      <li>
-        <a
-          routerLink="/secure/admin/departments"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania wydziałami">
-          wydziały
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/secure/admin/cathedrals"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania katedrami">
-          katedry
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/secure/admin/study-rooms"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania salami na wydziałach">
-          sale zajęciowe
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/secure/admin/study-specializations"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania kierunkami studiów">
-          kierunki studiów
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/secure/admin/study-subjects"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania przedmiotami na studiach">
-          przedmioty
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/secure/admin/study-groups"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania grupami dziekańskimi">
-          grupy dziekańskie
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/secure/admin/users"
-          routerLinkActive="link--active"
-          (click)="handleCloseMenu()"
-          class="cms-navigation__navigation-link"
-          title="Kliknij aby przejść do panelu zarządzania użytkownikami">
-          użytkownicy
-        </a>
-      </li>
-    </ng-container>
+    } @if (hasRole('ADMINISTRATOR') | async) {
+    <li>
+      <a
+        routerLink="/secure/admin/departments"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania wydziałami">
+        wydziały
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/secure/admin/cathedrals"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania katedrami">
+        katedry
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/secure/admin/study-rooms"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania salami na wydziałach">
+        sale zajęciowe
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/secure/admin/study-specializations"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania kierunkami studiów">
+        kierunki studiów
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/secure/admin/study-subjects"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania przedmiotami na studiach">
+        przedmioty
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/secure/admin/study-groups"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania grupami dziekańskimi">
+        grupy dziekańskie
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/secure/admin/users"
+        routerLinkActive="link--active"
+        (click)="handleCloseMenu()"
+        class="cms-navigation__navigation-link"
+        title="Kliknij aby przejść do panelu zarządzania użytkownikami">
+        użytkownicy
+      </a>
+    </li>
+    }
   </ul>
 </nav>
+}

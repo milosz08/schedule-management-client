@@ -12,7 +12,8 @@
     title="{{ loggedUser ? 'Otwórz panel użytkownika' : 'Przejdź do logowania' }}">
     <div class="header-auth__text-area">
       <div>{{ loggedUser?.nameWithSurname || 'Zaloguj' }}</div>
-      <div *ngIf="loggedUser" class="header-auth__session-info-container">
+      @if (loggedUser) {
+      <div class="header-auth__session-info-container">
         Pozostały czas sesji:
         <span
           [class.header-auth__session-info--yellow-color]="isDarkBackgroundTheme && (sesionSoonEnded$ | async)"
@@ -22,6 +23,7 @@
           {{ sessionCurrentTime$ | async | date: 'mm:ss' }}
         </span>
       </div>
+      }
     </div>
     <div class="header-auth__image-container">
       <app-user-image
@@ -30,7 +32,6 @@
     </div>
   </button>
 </div>
-<app-user-details-popup
-  *ngIf="isModalOpen && loggedUser && blockedOpenPopup"
-  [isCmsPanel]="isCmsPanel"
-  @fadeInOutAnimation />
+@if (isModalOpen && loggedUser && blockedOpenPopup) {
+<app-user-details-popup [isCmsPanel]="isCmsPanel" @fadeInOutAnimation />
+}

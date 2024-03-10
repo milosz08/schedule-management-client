@@ -4,9 +4,9 @@
  -->
 
 <div class="snackbar__container">
+  @for (snackbar of snackbars$ | async; track $index) {
   <div
-    *ngFor="let snackbar of snackbars$ | async"
-    [@snackbarFadeAndMove]
+    @snackbarFadeAndMove
     [class.snackbar__element--error]="snackbar.severity === 'error'"
     [class.snackbar__element--info]="snackbar.severity === 'info'"
     class="snackbar__element">
@@ -19,4 +19,5 @@
         alt="" />
     </div>
   </div>
+  }
 </div>

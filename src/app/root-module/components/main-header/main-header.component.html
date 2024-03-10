@@ -4,7 +4,8 @@
  -->
 
 <div class="main-header__mobile-navigation-container">
-  <nav *ngIf="isHamburgerOpen" class="main-header__mobile-navigation">
+  @if (isHamburgerOpen) {
+  <nav class="main-header__mobile-navigation">
     <a
       routerLink="/"
       title="Przejdź do strony z informacjami"
@@ -34,6 +35,7 @@
       <span class="main-header__mobile-navigation-separator"></span>
     </a>
   </nav>
+  }
   <header class="main-header__container">
     <a
       routerLink="/"

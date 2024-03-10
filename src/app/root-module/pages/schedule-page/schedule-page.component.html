@@ -3,20 +3,24 @@
  ~ Silesian University of Technology
  -->
 
-<app-schedule-subject-modal *ngIf="isModalOpen$ | async" />
+@if (isModalOpen$ | async) {
+<app-schedule-subject-modal />
+}
 <main class="schedule-container__main">
   <section class="schedule-choose-with-navigation__container">
     <nav class="schedule-navigation__left-bar">
+      @for (buttonName of buttons; track buttonName) {
       <button
-        *ngFor="let buttonName of buttons"
         (click)="handleToggleActiveSection(buttonName)"
         [class.single-link-button--active]="buttonName === activeNav"
         class="left-bar__single-link-button">
         {{ buttonName }}
       </button>
+      }
     </nav>
-    <div [ngSwitch]="activeNav" class="schedule-navigation__container">
-      <app-first-level-nav-tree *ngSwitchCase="'grupy'">
+    <div class="schedule-navigation__container">
+      @switch (activeNav) { @case ('grupy') {
+      <app-first-level-nav-tree>
         <ng-template let-deptData="drillingData">
           <app-nav-tree-element
             [levelNr]="1"
@@ -64,9 +68,8 @@
           </app-nav-tree-element>
         </ng-template>
       </app-first-level-nav-tree>
-      <app-first-level-nav-tree
-        *ngSwitchCase="'sale'"
-        loadingFor="employers_1st">
+      } @case ('sale') {
+      <app-first-level-nav-tree loadingFor="employers_1st">
         <ng-template let-deptData="drillingData">
           <app-nav-tree-element
             [levelNr]="1"
@@ -98,9 +101,8 @@
           </app-nav-tree-element>
         </ng-template>
       </app-first-level-nav-tree>
-      <app-first-level-nav-tree
-        *ngSwitchCase="'pracownicy'"
-        loadingFor="rooms_1st">
+      } @case ('pracownicy') {
+      <app-first-level-nav-tree loadingFor="rooms_1st">
         <ng-template let-deptData="drillingData">
           <app-nav-tree-element
             [levelNr]="1"
@@ -132,6 +134,7 @@
           </app-nav-tree-element>
         </ng-template>
       </app-first-level-nav-tree>
+      } }
     </div>
   </section>
   <div class="schedule-navigation-with-content">

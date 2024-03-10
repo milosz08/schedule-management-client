@@ -14,17 +14,16 @@
   <div class="app-cms__description-block-container">
     <ng-content select="[description]" />
   </div>
-  <ng-container *ngIf="warningContent">
-    <div
-      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
-      <ng-container *ngTemplateOutlet="warningContent" />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="infoContent">
-    <div
-      class="app-cms__description-block-container app-cms__description-block-container--important-info">
-      <ng-container *ngTemplateOutlet="infoContent" />
-    </div>
-  </ng-container>
+  @if (warningContent) {
+  <div
+    class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+    <ng-container *ngTemplateOutlet="warningContent" />
+  </div>
+  } @else if (infoContent) {
+  <div
+    class="app-cms__description-block-container app-cms__description-block-container--important-info">
+    <ng-container *ngTemplateOutlet="infoContent" />
+  </div>
+  }
   <aside class="app-cms__separator-line"></aside>
 </div>

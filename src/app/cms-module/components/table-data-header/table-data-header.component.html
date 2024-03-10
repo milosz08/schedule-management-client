@@ -10,15 +10,18 @@
   </div>
   <aside class="app-cms__separator-line"></aside>
 </div>
-<header *ngIf="inputPlaceholder" class="app-cms__top-header">
+@if (inputPlaceholder) {
+<header class="app-cms__top-header">
   <app-search-form-input
     [inputPlaceholder]="inputPlaceholder"
     class="cms-search-input--max-size" />
+  @if (addContentUrl && addContentText) {
   <a
-    *ngIf="addContentUrl && addContentText"
     [routerLink]="addContentUrl"
     class="app__button app-cms__button--max-size app__button--light app__button--full-size-window">
     <ng-icon name="matPlus" class="app__button__text" />
     {{ addContentText }}
   </a>
+  }
 </header>
+}

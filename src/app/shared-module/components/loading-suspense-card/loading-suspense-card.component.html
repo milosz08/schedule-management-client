@@ -3,12 +3,11 @@
  ~ Silesian University of Technology
  -->
 
-<div
-  *ngIf="isLoading$ | async"
-  [@fadeOutAnimation]=""
-  class="loading-suspense__container">
+@if (isLoading$ | async) {
+<div @fadeOutAnimation class="loading-suspense__container">
   <img
     src="assets/gif/suspense-loading-light.gif"
     class="loading-suspense__gif-image"
     alt="" />
 </div>
+}

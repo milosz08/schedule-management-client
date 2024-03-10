@@ -16,8 +16,10 @@
   w celu identyfikacji.
 </app-table-data-header>
 <app-delete-pageable-elements>
-  <table *ngIf="departments" class="app-cms__table-container">
-    <tr *ngIf="departments.length > 0" class="app-cms__table-tr">
+  @if (departments) {
+  <table class="app-cms__table-container">
+    @if (departments.length > 0) {
+    <tr class="app-cms__table-tr">
       <th
         class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
         <app-sorting-button sortBy="Id" />
@@ -33,19 +35,21 @@
       <th
         class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
     </tr>
+    } @for (department of departments; track department.id) {
     <tr
       app-delete-element
-      *ngFor="let deptartment of departments"
-      [editRoutePath]="'/secure/admin/departments/edit/' + deptartment.id"
-      [deleteContentId]="deptartment.id"
-      [isRemovable]="deptartment.isRemovable">
+      [editRoutePath]="'/secure/admin/departments/edit/' + department.id"
+      [deleteContentId]="department.id"
+      [isRemovable]="department.isRemovable">
       <td class="app-cms__table-td app-cms__table--hide-smal">
-        {{ deptartment.id }}
+        {{ department.id }}
       </td>
-      <td class="app-cms__table-td">{{ deptartment.name }}</td>
+      <td class="app-cms__table-td">{{ department.name }}</td>
       <td class="app-cms__table-td app-cms__table--hide-large">
-        {{ deptartment.alias }}
+        {{ department.alias }}
       </td>
     </tr>
+    }
   </table>
+  }
 </app-delete-pageable-elements>

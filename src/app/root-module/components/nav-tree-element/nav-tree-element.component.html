@@ -6,23 +6,23 @@
 <button
   class="app__schedule-nav-list__button-element"
   (click)="handleGetNextLevelContent()">
-  <div
-    *ngIf="isFetching$ | async; else showDefArrow"
-    class="app__schedule-nav-list__spinner-container">
+  @if (isFetching$ | async) {
+  <div class="app__schedule-nav-list__spinner-container">
     <img src="assets/gif/suspense-loading-dark.gif" alt="Loading..." />
   </div>
-  <ng-template #showDefArrow>
-    <ng-icon
-      [name]="isOpen ? 'matKeyboardArrowDown' : 'matKeyboardArrowRight'"
-      class="app__schedule-nav-list__arrow" />
-  </ng-template>
-  {{ inheritLvlData?.name }}
+  } @else {
+  <ng-icon
+    [name]="isOpen ? 'matKeyboardArrowDown' : 'matKeyboardArrowRight'"
+    class="app__schedule-nav-list__arrow" />
+  } {{ inheritLvlData?.name }}
 </button>
 <ul
   class="non-style-list"
   [style]="{ marginLeft: ((levelNr * 10) + 5) + 'px' }">
-  <li *ngFor="let element of fetchElements">
+  @for (element of fetchElements; track element.id) {
+  <li>
     <ng-template
       *ngTemplateOutlet="contentChildRef; context: { drillingData: element }" />
   </li>
+  }
 </ul>

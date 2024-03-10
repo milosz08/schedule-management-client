@@ -14,8 +14,10 @@
   konkretnym wydziale.
 </app-table-data-header>
 <app-delete-pageable-elements>
-  <table *ngIf="studySubjects" class="app-cms__table-container">
-    <tr *ngIf="studySubjects.length > 0" class="app-cms__table-tr">
+  @if (studySubjects) {
+  <table class="app-cms__table-container">
+    @if (studySubjects.length > 0) {
+    <tr class="app-cms__table-tr">
       <th
         class="app-cms__table-th app-cms__table-th-id app-cms__table--hide-smal">
         <app-sorting-button sortPlaceholder="Id" />
@@ -36,9 +38,9 @@
       <th
         class="app-cms__table-th app-cms__table-th-select app-cms__table--hide-smal"></th>
     </tr>
+    } @for (studySubject of studySubjects; track studySubject.id) {
     <tr
       app-delete-element
-      *ngFor="let studySubject of studySubjects"
       [deleteContentId]="studySubject.id"
       [isRemovable]="true"
       [editRoutePath]="'/secure/admin/study-subjects/edit/' + studySubject.id">
@@ -61,5 +63,7 @@
         {{ studySubject.departmentAlias }}
       </td>
     </tr>
+    }
   </table>
+  }
 </app-delete-pageable-elements>

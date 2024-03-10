@@ -11,8 +11,9 @@
     class="remember-schedule-bar__button remember-schedule-bar__button--not-include-delete-icon">
     Start
   </a>
+  @for (scheduleData of (loadedData$ | async); track scheduleData.scheduleName)
+  {
   <a
-    *ngFor="let scheduleData of (loadedData$ | async)"
     routerLink="/schedule/selected-schedule"
     routerLinkActive="remember-schedule-bar__button--active"
     [routerLinkActiveOptions]="{ exact: true }"
@@ -28,4 +29,5 @@
       <ng-icon name="matClear" class="remove-button__time-icon" />
     </button>
   </a>
+  }
 </div>

@@ -3,16 +3,17 @@
  ~ Silesian University of Technology
  -->
 
-<aside
-  *ngIf="isLoading$ | async; else loadedContent"
-  class="app__schedule-nav-list__loading-all-list-elements__container">
+@if (isLoading$ | async) {
+<aside class="app__schedule-nav-list__loading-all-list-elements__container">
   <img src="assets/gif/suspense-loading-dark.gif" alt="Loading..." />
 </aside>
-<ng-template #loadedContent>
-  <ul class="non-style-list">
-    <li *ngFor="let department of departments">
-      <ng-template
-        *ngTemplateOutlet="contentChildRef; context: { drillingData: department}" />
-    </li>
-  </ul>
-</ng-template>
+} @else {
+<ul class="non-style-list">
+  @for (department of departments; track department.id) {
+  <li>
+    <ng-template
+      *ngTemplateOutlet="contentChildRef; context: { drillingData: department}" />
+  </li>
+  }
+</ul>
+}

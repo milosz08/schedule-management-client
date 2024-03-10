@@ -3,8 +3,8 @@
  ~ Silesian University of Technology
  -->
 
+@if (formGroup) {
 <div
-  *ngIf="formGroup"
   [formGroup]="formGroup"
   (focusin)="handleOpenListVisibility()"
   (focusout)="handleCloseListVisibility()"
@@ -17,21 +17,22 @@
     type="text"
     autocomplete="off"
     class="app__input app__input--light app__input--exclude-margin select-drop-box__custom-select-input" />
-  <ul
-    *ngIf="listElements.length > 0 && listVisible"
-    class="app-select-list__list-container">
-    <li
-      *ngFor="let result of listElements"
-      class="app-select-list__list-element">
+  @if (listElements.length > 0 && listVisible) {
+  <ul class="app-select-list__list-container">
+    @for (result of listElements; track result) {
+    <li class="app-select-list__list-element">
       <button type="button" (click)="handleInsertToInputValue(result)">
         {{ result }}
       </button>
     </li>
+    }
   </ul>
+  }
   <ng-icon class="app__select__arrow-icon" name="matKeyboardArrowDown" />
 </div>
+@if (validateFormField()) {
 <div
-  *ngIf="this.formGroup!.get(formControlId)!.touched && !this.formGroup!.get(formControlId)!.valid"
   class="app__input-error app__input-error--light app__input-error--margin-top">
   Proszę wybrać {{ errorField }}
 </div>
+} }

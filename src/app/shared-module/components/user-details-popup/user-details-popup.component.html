@@ -27,37 +27,36 @@
     </span>
   </div>
   <div class="user-details-popup__buttons-container">
+    @if (isCmsPanel) {
     <a
-      *ngIf="isCmsPanel; else gotoSecurePanel"
       routerLink="/"
       class="app__button app__button--light app__button--hollow-light user-details-popup__button"
       title="Kliknij aby przejść do strony głównej">
       Start
       <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
     </a>
-    <ng-template #gotoSecurePanel>
-      <a
-        routerLink="/secure/dashboard"
-        class="app__button app__button--light app__button--hollow-light user-details-popup__button"
-        title="Kliknij aby przejść do panelu konta">
-        Konto
-        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-      </a>
-    </ng-template>
+    } @else {
+    <a
+      routerLink="/secure/dashboard"
+      class="app__button app__button--light app__button--hollow-light user-details-popup__button"
+      title="Kliknij aby przejść do panelu konta">
+      Konto
+      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+    </a>
+    }
     <button
       (click)="handleUserLogout()"
       class="app__button app__button--light user-details-popup__button"
       title="Kliknij aby się wylogować">
-      Wyloguj
-      <ng-container *ngIf="isLoggingOut$ | async; else showArrow">
-        <img
-          src="assets/gif/suspense-loading-light.gif"
-          alt=""
-          class="app__button--loading-content-spinner" />
-      </ng-container>
-      <ng-template #showArrow>
-        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-      </ng-template>
+      Wyloguj @if (isLoggingOut$ | async) {
+      <img
+        src="assets/gif/suspense-loading-light.gif"
+        alt=""
+        class="app__button--loading-content-spinner" />
+      } @else {
+      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+
+      }
     </button>
   </div>
 </div>

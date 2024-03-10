@@ -12,9 +12,9 @@
         placeholder="Login/adres email"
         class="app__input" />
     </label>
-    <div *ngIf='checkIsFieldHasErrors("login")' class="app__input-error">
-      Proszę wpisać login/adres email
-    </div>
+    @if (checkIsFieldHasErrors('login')) {
+    <div class="app__input-error">Proszę wpisać login/adres email</div>
+    }
   </div>
   <div class="login-form__element-container">
     <div class="app__label--relative">
@@ -24,9 +24,9 @@
         inputPlaceholder="Hasło"
         formControlId="password" />
     </div>
-    <div *ngIf='checkIsFieldHasErrors("password")' class="app__input-error">
-      Proszę wpisać hasło
-    </div>
+    @if (checkIsFieldHasErrors('password')) {
+    <div class="app__input-error">Proszę wpisać hasło</div>
+    }
   </div>
   <app-checkbox-template
     [isCheckedInitial]="saveAccount"
@@ -39,16 +39,14 @@
       type="submit"
       class="app__button app__button--full-size-window"
       title="Kliknij aby się zalogować">
-      Zaloguj
-      <ng-container *ngIf="isLoading$ | async; else showArrow">
-        <img
-          src="assets/gif/suspense-loading-dark.gif"
-          alt=""
-          class="app__button--loading-content-spinner" />
-      </ng-container>
-      <ng-template #showArrow>
-        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-      </ng-template>
+      Zaloguj @if (isLoading$ | async) {
+      <img
+        src="assets/gif/suspense-loading-dark.gif"
+        alt=""
+        class="app__button--loading-content-spinner" />
+      } @else {
+      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      }
     </button>
   </div>
 </form>

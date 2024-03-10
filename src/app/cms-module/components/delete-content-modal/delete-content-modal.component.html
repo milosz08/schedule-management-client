@@ -3,7 +3,8 @@
  ~ Silesian University of Technology
  -->
 
-<div *ngIf="isOpen$ | async" @fadeInOutAnimation class="app-modal__container">
+@if (isOpen$ | async) {
+<div @fadeInOutAnimation class="app-modal__container">
   <form
     [formGroup]="passwordForm"
     (ngSubmit)="handleDeleteElements()"
@@ -26,11 +27,11 @@
         [isLightTheme]="true"
         inputPlaceholder="Hasło"
         formControlId="password" />
-      <div
-        *ngIf="checkIsFieldHasErrors('password')"
-        class="app__input-error app__input-error--light">
+      @if (checkIsFieldHasErrors('password')) {
+      <div class="app__input-error app__input-error--light">
         Hasło jest wymagane
       </div>
+      }
     </div>
     <div class="app-modal__buttons-container">
       <button
@@ -38,17 +39,14 @@
         type="submit"
         class="app__button app__button--light app__button--hollow-light app__button--full-size-window"
         title="Kliknij aby usunąć element/y">
-        <ng-container *ngIf="isLoading$ | async; else showArrow">
-          Usuwanie
-          <img
-            src="assets/gif/suspense-loading-dark.gif"
-            alt=""
-            class="app__button--loading-content-spinner" />
-        </ng-container>
-        <ng-template #showArrow>
-          Usuń element/y
-          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-        </ng-template>
+        @if (isLoading$ | async) { Usuwanie
+        <img
+          src="assets/gif/suspense-loading-dark.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+        } @else { Usuń element/y
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+        }
       </button>
       <button
         (click)="handleCloseModal()"
@@ -61,3 +59,4 @@
     </div>
   </form>
 </div>
+}

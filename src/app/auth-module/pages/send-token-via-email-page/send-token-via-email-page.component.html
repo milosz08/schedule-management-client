@@ -13,23 +13,20 @@
       <ng-container>Odzyskiwanie hasła</ng-container>
     </h3>
     <p class="send-token-via-email__description">
-      <ng-container
-        *ngIf="(currentStage$ | async) === 'send_token'; else successSendToken">
-        Na podane konto zgodne z loginem/adresem email zostanie wysłany token
-        odzyskiwania hasło do systemu.
-      </ng-container>
-      <ng-template #successSendToken>
-        Aby dokończyć procedurę resetu hasła, wprowadź token z wiadomości email.
-      </ng-template>
+      @if ((currentStage$ | async) === 'send_token') { Na podane konto zgodne z
+      loginem/adresem email zostanie wysłany token odzyskiwania hasło do
+      systemu. } @else { Aby dokończyć procedurę resetu hasła, wprowadź token z
+      wiadomości email. }
     </p>
+    @if ((currentStage$ | async) === 'send_token') {
     <app-send-token-via-email-form
-      *ngIf="(currentStage$ | async) === 'send_token'"
       class="send-token-via-email__form-container" />
+    }
   </section>
-  <section
-    *ngIf="(currentStage$ | async) === 'validate_token'"
-    class="send-token-via-email__paste-token-wrapper">
+  @if ((currentStage$ | async) === 'validate_token') {
+  <section class="send-token-via-email__paste-token-wrapper">
     <h3 class="app__header app__header--exclude-margins">Wprowadź token</h3>
     <app-insert-token-form class="send-token-via-email__form-container" />
   </section>
+  }
 </div>

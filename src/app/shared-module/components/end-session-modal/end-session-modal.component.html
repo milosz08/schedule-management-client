@@ -3,10 +3,8 @@
  ~ Silesian University of Technology
  -->
 
-<div
-  *ngIf="isModalOpen$ | async"
-  @fadeInOutAnimation
-  class="app-modal__container">
+@if (isModalOpen$ | async) {
+<div @fadeInOutAnimation class="app-modal__container">
   <div class="app-modal__wrapper">
     <img
       src="assets/icon/info-important-icon.svg"
@@ -28,16 +26,14 @@
         (click)="handleCloseModalAndLogoutUser()"
         class="app__button app__button--light user-details-popup__button app__button--hollow-light app__button--full-size-window"
         title="Kliknij aby natychmiastowo wylogować się z systemu">
-        Wyloguj z systemu
-        <ng-container *ngIf="isLoggingOut$ | async; else showArrow">
-          <img
-            src="assets/gif/suspense-loading-dark.gif"
-            alt=""
-            class="app__button--loading-content-spinner" />
-        </ng-container>
-        <ng-template #showArrow>
-          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-        </ng-template>
+        Wyloguj z systemu @if (isLoggingOut$ | async) {
+        <img
+          src="assets/gif/suspense-loading-dark.gif"
+          alt=""
+          class="app__button--loading-content-spinner" />
+        } @else {
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+        }
       </button>
       <button
         (click)="handleCloseModalAndRenewSession()"
@@ -48,3 +44,4 @@
     </div>
   </div>
 </div>
+}

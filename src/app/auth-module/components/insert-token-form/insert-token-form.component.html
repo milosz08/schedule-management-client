@@ -17,11 +17,11 @@
         maxlength="8"
         class="app__input app__input--light" />
     </label>
-    <div
-      *ngIf="checkIsTokenFieldHasErrors()"
-      class="app__input-error app__input-error--light">
+    @if (checkIsTokenFieldHasErrors()) {
+    <div class="app__input-error app__input-error--light">
       Nieprawidłowy format tokenu.
     </div>
+    }
     <div class="check-token-form__token-expired-container">
       <button
         (click)="handleSwitchViewToEmail()"
@@ -36,17 +36,15 @@
       type="submit"
       class="app__button app__button--hollow-light app__button--full-size-window"
       title="Kliknij wysłać token odzyskiwania hasła">
-      Odzyskaj hasło
-      <ng-container
-        *ngIf="(loadingFor$ | async) === 'validate_token'; else showArrow">
-        <img
-          src="assets/gif/suspense-loading-dark.gif"
-          alt=""
-          class="app__button--loading-content-spinner" />
-      </ng-container>
-      <ng-template #showArrow>
-        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-      </ng-template>
+      Odzyskaj hasło @if ((loadingFor$ | async) === 'validate_token') {
+      <img
+        src="assets/gif/suspense-loading-dark.gif"
+        alt=""
+        class="app__button--loading-content-spinner" />
+      } @else {
+      <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+
+      }
     </button>
   </div>
 </form>

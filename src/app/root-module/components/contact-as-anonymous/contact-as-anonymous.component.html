@@ -20,11 +20,12 @@
         maxlength="50"
         placeholder="np. Jan"
         class="app__input app__input--light app__input--exclude-margin" />
+      @if (checkIsFieldHasErrors('name')) {
       <div
-        *ngIf='checkIsFieldHasErrors("name")'
         class="app__input-error app__input-error--light app__input-error--margin-top">
         Proszę wpisać swoje imię
       </div>
+      }
     </div>
     <label for="add-contact__surname" class="app-cms__grid-label">
       Nazwisko:
@@ -37,11 +38,12 @@
         maxlength="50"
         placeholder="np. Kowalski"
         class="app__input app__input--light app__input--exclude-margin" />
+      @if (checkIsFieldHasErrors('surname')) {
       <div
-        *ngIf='checkIsFieldHasErrors("surname")'
         class="app__input-error app__input-error--light app__input-error--margin-top">
         Proszę wpisać swoje nazwisko
       </div>
+      }
     </div>
     <label for="add-contact__email" class="app-cms__grid-label">
       Adres email:
@@ -53,11 +55,12 @@
         formControlName="email"
         placeholder="np. jan.kowalski@gmail.com"
         class="app__input app__input--light app__input--exclude-margin" />
+      @if (checkIsFieldHasErrors('email')) {
       <div
-        *ngIf='checkIsFieldHasErrors("email")'
         class="app__input-error app__input-error--light app__input-error--margin-top">
         Proszę wpisać poprawny adres email
       </div>
+      }
     </div>
   </app-contact-form-elements>
 </form>

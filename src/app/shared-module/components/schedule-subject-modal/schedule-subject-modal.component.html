@@ -6,9 +6,8 @@
 <div
   @fadeInOutAnimation
   class="app-modal__container schedule-subject-details-modal__container">
-  <div
-    *ngIf="subjectDetails"
-    class="app-modal__wrapper schedule-subject-details-modal__wrapper">
+  @if (subjectDetails) {
+  <div class="app-modal__wrapper schedule-subject-details-modal__wrapper">
     <div
       [ngStyle]="{ backgroundColor: subjectDetails.subjectTypeColor}"
       class="schedule-subject-details-modal__data">
@@ -23,12 +22,12 @@
         <p>{{ subjectDetails.typeAndRoomsName }}</p>
         <p>{{ subjectDetails.departmentName }}</p>
       </div>
-      <div
-        *ngIf="subjectDetails.subjectOccur !== ''"
-        class="schedule-subject-details-modal__single-block">
+      @if (subjectDetails.subjectOccur !== '') {
+      <div class="schedule-subject-details-modal__single-block">
         <p>Występowanie:</p>
         <p>{{ subjectDetails.subjectOccur }}</p>
       </div>
+      }
     </div>
     <div class="schedule-subject-details__buttons-container">
       <button
@@ -38,8 +37,8 @@
         title="Kliknij aby zamknąć okno">
         Zamknij okno
       </button>
+      @if (isEditable) {
       <button
-        *ngIf="isEditable"
         (click)="handleDeleteScheduleSubject()"
         class="app__button app__button--danger-light app__button--light schedule-subject-details__close-button"
         title="Kliknij aby usunąć zawartość">
@@ -48,6 +47,8 @@
           name="matArrowRightAlt"
           class="app__button__arrow app__button__arrow--red" />
       </button>
+      }
     </div>
   </div>
+  }
 </div>

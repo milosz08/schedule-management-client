@@ -3,51 +3,46 @@
  ~ Silesian University of Technology
  -->
 
-<div
-  *ngIf="isLoading$ | async; else isLoadedContent"
-  class="last-logins__no-content-container">
+@if (isLoading$ | async) {
+<div class="last-logins__no-content-container">
   <img
     src="assets/gif/suspense-loading-dark.gif"
     alt=""
     width="80px"
     height="80px" />
 </div>
-<ng-template #isLoadedContent>
-  <div
-    *ngIf="(savedAccounts$ | async)?.length === 0; else accountsContent"
-    class="last-logins__no-content-container">
-    <p class="last-logins__no-content-text">Brak zapisanych kont.</p>
-  </div>
-  <ng-template #accountsContent>
-    <ul class="last-logins__list-container">
-      <li
-        *ngFor="let savedAccount of (savedAccounts$ | async)"
-        [title]="savedAccount | userHoverInfo"
-        class="last-logins__list-element">
-        <button
-          (click)="handleSelectAccount(savedAccount)"
-          class="last-logins__button-element">
-          <app-user-profile-image
-            [profileImageUrl]="savedAccount.profileImageUrl"
-            [nameWithSurname]="savedAccount.nameWithSurname"
-            [role]="savedAccount.role" />
-        </button>
-        <button
-          (click)="handleDeleteSavedAccount(savedAccount)"
-          class="last-logins__remove-button"
-          title="Kliknij aby usunąć konto z zapisanej listy">
-          Usuń konto
-        </button>
-      </li>
-    </ul>
-    <div class="last-logins__delete-container">
-      <button
-        (click)="handleDeleteAllSavedAccounts()"
-        class="app__button app__button--light app__button--hollow-light app__button--full-size-window"
-        title="Kliknij aby usunąc wszystkie zapisane konta">
-        Usuń wszystkie zapisane konta
-        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
-      </button>
-    </div>
-  </ng-template>
-</ng-template>
+} @else { @if ((savedAccounts$ | async)?.length === 0) {
+<div class="last-logins__no-content-container">
+  <p class="last-logins__no-content-text">Brak zapisanych kont.</p>
+</div>
+} @else {
+<ul class="last-logins__list-container">
+  @for (savedAccount of (savedAccounts$ | async); track savedAccount.id) {
+  <li [title]="savedAccount | userHoverInfo" class="last-logins__list-element">
+    <button
+      (click)="handleSelectAccount(savedAccount)"
+      class="last-logins__button-element">
+      <app-user-profile-image
+        [profileImageUrl]="savedAccount.profileImageUrl"
+        [nameWithSurname]="savedAccount.nameWithSurname"
+        [role]="savedAccount.role" />
+    </button>
+    <button
+      (click)="handleDeleteSavedAccount(savedAccount)"
+      class="last-logins__remove-button"
+      title="Kliknij aby usunąć konto z zapisanej listy">
+      Usuń konto
+    </button>
+  </li>
+  }
+</ul>
+<div class="last-logins__delete-container">
+  <button
+    (click)="handleDeleteAllSavedAccounts()"
+    class="app__button app__button--light app__button--hollow-light app__button--full-size-window"
+    title="Kliknij aby usunąc wszystkie zapisane konta">
+    Usuń wszystkie zapisane konta
+    <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+  </button>
+</div>
+} }

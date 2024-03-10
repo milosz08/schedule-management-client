@@ -16,15 +16,15 @@
     nieaktywnego zalogowania do systemu), wówczas nie zapisze się ono w twojej
     historii zgłoszeń oraz będzie miało niższy priorytet.
   </div>
-  <ng-container *ngIf="!!(loggedUser$ | async)">
-    <app-contact-as-logged class="contact-form__container" />
-    <div class="contact-content-separator__container">
-      <aside class="contact-content-separator-line__vertical"></aside>
-      <div class="contact-content-separator-line__text-content">
-        lub utwórz zgłoszenie anonimowe
-      </div>
-      <aside class="contact-content-separator-line__vertical"></aside>
+  @if (!!(loggedUser$ | async)) {
+  <app-contact-as-logged class="contact-form__container" />
+  <div class="contact-content-separator__container">
+    <aside class="contact-content-separator-line__vertical"></aside>
+    <div class="contact-content-separator-line__text-content">
+      lub utwórz zgłoszenie anonimowe
     </div>
-  </ng-container>
+    <aside class="contact-content-separator-line__vertical"></aside>
+  </div>
+  }
   <app-contact-as-anonymous class="contact-form__container" />
 </section>

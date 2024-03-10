@@ -3,10 +3,8 @@
  ~ Silesian University of Technology
  -->
 
-<div
-  *ngIf="(isModalVisible$ | async)"
-  @fadeInOutAnimation
-  class="app-modal__container">
+@if (isModalVisible$ | async) {
+<div @fadeInOutAnimation class="app-modal__container">
   <div class="app-modal__wrapper">
     <img
       src="assets/icon/info-icon.svg"
@@ -37,3 +35,4 @@
     </div>
   </div>
 </div>
+}
