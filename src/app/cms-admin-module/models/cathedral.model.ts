@@ -11,3 +11,15 @@ export type CathedralData = {
   departmentName: string;
   departmentAlias: string;
 };
+
+export type AddUpdateCathedralRequest = {
+  name: string;
+  alias: string;
+  departmentName: number;
+};
+
+export type AddUpdateCathedralResponse = {
+  name: string;
+  alias: string;
+  departmentFullName: string;
+};

@@ -11,3 +11,26 @@ export type UserData = {
   login: string;
   role: UserIdentityType;
 };
+
+export type AddUpdateUserRequest = {
+  name: string;
+  surname: string;
+  nationality: string;
+  city: string;
+  role: string;
+  departmentName: string;
+  cathedralName: string;
+  studySpecsOrSubjects: string;
+};
+
+export type AddUpdateUserResponse = {
+  name: string;
+  surname: string;
+  nationality: string;
+  city: string;
+  role: UserIdentityType;
+  email: string;
+  emailPassword: string;
+  departmentData: string;
+  cathedralData: string;
+};

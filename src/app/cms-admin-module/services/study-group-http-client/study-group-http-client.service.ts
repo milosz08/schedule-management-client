@@ -6,7 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { StudyGroupData } from '~/cms-admin-module/models/study-group.model';
+import {
+  AddUpdateStudyGroupRequest,
+  AddUpdateStudyGroupResponse,
+  StudyGroupData,
+} from '~/cms-admin-module/models/study-group.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
@@ -20,6 +24,15 @@ export class StudyGroupHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<StudyGroupData>>(
       `${this._apiUrl}/api/v1/studygroup/all/pageable`,
       { params }
+    );
+  }
+
+  createNewStudyGroup$(
+    req: AddUpdateStudyGroupRequest
+  ): Observable<AddUpdateStudyGroupResponse> {
+    return this._httpClient.post<AddUpdateStudyGroupResponse>(
+      `${this._apiUrl}/api/v1/studygroup`,
+      req
     );
   }
 }

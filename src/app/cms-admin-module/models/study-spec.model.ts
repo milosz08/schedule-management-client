@@ -13,3 +13,19 @@ export type StudySpecializationData = {
   studyDegree: string;
   studyDegreeAlias: string;
 };
+
+export type AddUpdateStudySpecializationRequest = {
+  name: string;
+  alias: string;
+  departmentName: string;
+  studyType: number[];
+  studyDegree: number[];
+};
+
+export type AddUpdateStudySpecializationResponse = {
+  name: string;
+  alias: string;
+  departmentFullName: string;
+  studyTypeFullName: string;
+  studyDegreeFullName: string;
+};

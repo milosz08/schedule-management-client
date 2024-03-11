@@ -16,3 +16,21 @@ export type StudyRoomData = {
   roomTypeAlias: string;
   deptWithCathAlias: string;
 };
+
+export type AddUpdateStudyRoomRequest = {
+  name: string;
+  description: string;
+  departmentName: string;
+  cathedralName: string;
+  capacity: number;
+  roomTypeName: string;
+};
+
+export type AddUpdateStudyRoomResponse = {
+  name: string;
+  description: string;
+  capacity: number;
+  departmentFullName: string;
+  cathedralFullName: string;
+  roomTypeFullName: string;
+};

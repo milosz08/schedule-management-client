@@ -6,7 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { StudyRoomData } from '~/cms-admin-module/models/study-room.model';
+import {
+  AddUpdateStudyRoomRequest,
+  AddUpdateStudyRoomResponse,
+  StudyRoomData,
+} from '~/cms-admin-module/models/study-room.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
@@ -20,6 +24,25 @@ export class StudyRoomHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<StudyRoomData>>(
       `${this._apiUrl}/api/v1/studyroom/all/pageable`,
       { params }
+    );
+  }
+
+  createNewStudyRoom$(
+    req: AddUpdateStudyRoomRequest
+  ): Observable<AddUpdateStudyRoomResponse> {
+    return this._httpClient.post<AddUpdateStudyRoomResponse>(
+      `${this._apiUrl}/api/v1/studyroom`,
+      req
+    );
+  }
+
+  updateStudyRoom$(
+    id: number,
+    req: AddUpdateStudyRoomRequest
+  ): Observable<AddUpdateStudyRoomResponse> {
+    return this._httpClient.put<AddUpdateStudyRoomResponse>(
+      `${this._apiUrl}/api/v1/studyroom/${id}`,
+      req
     );
   }
 }

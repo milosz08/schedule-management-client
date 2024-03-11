@@ -6,7 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CathedralData } from '~/cms-admin-module/models/cathedral.model';
+import {
+  AddUpdateCathedralRequest,
+  AddUpdateCathedralResponse,
+  CathedralData,
+} from '~/cms-admin-module/models/cathedral.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
@@ -20,6 +24,25 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<CathedralData>>(
       `${this._apiUrl}/api/v1/cathedral/all/pageable`,
       { params }
+    );
+  }
+
+  createNewCathedral$(
+    req: AddUpdateCathedralRequest
+  ): Observable<AddUpdateCathedralResponse> {
+    return this._httpClient.post<AddUpdateCathedralResponse>(
+      `${this._apiUrl}/api/v1/cathedral`,
+      req
+    );
+  }
+
+  updateCathedral$(
+    id: number,
+    req: AddUpdateCathedralRequest
+  ): Observable<AddUpdateCathedralResponse> {
+    return this._httpClient.put<AddUpdateCathedralResponse>(
+      `${this._apiUrl}/api/v1/cathedral/${id}`,
+      req
     );
   }
 }

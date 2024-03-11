@@ -6,7 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserData } from '~/cms-admin-module/models/user.model';
+import {
+  AddUpdateUserRequest,
+  AddUpdateUserResponse,
+  UserData,
+} from '~/cms-admin-module/models/user.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
@@ -20,6 +24,25 @@ export class UserHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<UserData>>(
       `${this._apiUrl}/api/v1/user/all/pageable`,
       { params }
+    );
+  }
+
+  createNewUser$(req: AddUpdateUserRequest): Observable<AddUpdateUserResponse> {
+    return this._httpClient.post<AddUpdateUserResponse>(
+      `${this._apiUrl}/api/v1/auth/register`,
+      req
+    );
+  }
+
+  updateUser$(
+    id: number,
+    isUpdateEmailPass: boolean,
+    req: AddUpdateUserRequest
+  ): Observable<AddUpdateUserResponse> {
+    return this._httpClient.put<AddUpdateUserResponse>(
+      `${this._apiUrl}/api/v1/user/${id}`,
+      req,
+      { params: { isUpdateEmailPass } }
     );
   }
 }
