@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { StudySubjectData } from '~/cms-admin-module/models/entities.model';
+import { StudySubjectData } from '~/cms-admin-module/models/study-subject.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
