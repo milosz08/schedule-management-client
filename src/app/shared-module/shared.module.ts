@@ -87,6 +87,7 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
     TextInputPasswordComponent,
     UserHeaderDataWithPopupComponent,
     UserIdentityPipe,
+    UserImageComponent,
     UserRoleDotComponent,
   ],
 })

@@ -132,7 +132,7 @@
       background-color: transparent;
       border: 1px solid var(--darkRedColor);
       color: var(--darkRedColor);
-      &.app__button--filled {
+      &--filled {
         background-color: var(--darkRedColor);
         color: var(--mainWhiteColor);
       }
