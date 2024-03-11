@@ -5,20 +5,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
 import { CmsModule } from '~/cms-module/cms.module';
-import { DashboardService } from '~/cms-module/services/dashboard/dashboard.service';
-import { DashboardPageComponent } from './dashboard-page.component';
+import { PlotDescriptionComponent } from './plot-description.component';
 
-describe('DashboardPageComponent', () => {
-  let component: DashboardPageComponent;
-  let fixture: ComponentFixture<DashboardPageComponent>;
+describe('PlotDescriptionComponent', () => {
+  let component: PlotDescriptionComponent;
+  let fixture: ComponentFixture<PlotDescriptionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, CmsModule],
-      providers: [DashboardService],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DashboardPageComponent);
+    fixture = TestBed.createComponent(PlotDescriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

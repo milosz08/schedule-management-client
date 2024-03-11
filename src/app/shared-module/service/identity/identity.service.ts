@@ -89,6 +89,14 @@ export class IdentityService {
     return redirectUrl;
   }
 
+  updateProfileImage(imageUrl: string): void {
+    const currentData = this._currentLoggedUser$.value;
+    if (currentData) {
+      currentData.profileImageUrl = imageUrl;
+      this._currentLoggedUser$.next(currentData);
+    }
+  }
+
   autoLogin$(): Observable<string> {
     const loggedUser = this._localStorageService.get<LoggedUser>('logged_user');
     if (!loggedUser) {

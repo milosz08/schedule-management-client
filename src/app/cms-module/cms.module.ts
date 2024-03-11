@@ -29,6 +29,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
 import { PaginationOptionsComponent } from './components/pagination-options/pagination-options.component';
+import { PlotDescriptionComponent } from './components/plot-description/plot-description.component';
+import { RoundPlotComponent } from './components/round-plot/round-plot.component';
 import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
 import { SortingButtonComponent } from './components/sorting-button/sorting-button.component';
 import { TableDataHeaderComponent } from './components/table-data-header/table-data-header.component';
@@ -36,6 +38,8 @@ import { RouteProtectorGuard } from './guards/route-protector/route-protector.gu
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { MyMessagePageComponent } from './pages/my-message-page/my-message-page.component';
 import { MyMessagesPageComponent } from './pages/my-messages-page/my-messages-page.component';
+import { FromDashToCamelPipe } from './pipes/from-dash-to-camel/from-dash-to-camel.pipe';
+import { DashboardHttpClientService } from './services/dashboard-http-client/dashboard-http-client.service';
 import { DeleteContentHttpClientService } from './services/delete-content-http-client/delete-content-http-client.service';
 import { DomService } from './services/dom/dom.service';
 import { PaginationHttpClientService } from './services/pagination-http-client/pagination-http-client.service';
@@ -50,10 +54,13 @@ import { UserMessageHttpClientService } from './services/user-message-http-clien
     DeleteElementComponent,
     DeletePageableElementsComponent,
     FooterComponent,
+    FromDashToCamelPipe,
     HeaderComponent,
     LeftNavigationComponent,
     MyMessagePageComponent,
     MyMessagesPageComponent,
+    PlotDescriptionComponent,
+    RoundPlotComponent,
     SearchFormInputComponent,
     SortingButtonComponent,
     TableDataHeaderComponent,
@@ -78,6 +85,7 @@ import { UserMessageHttpClientService } from './services/user-message-http-clien
     SharedModule,
   ],
   providers: [
+    DashboardHttpClientService,
     DeleteContentHttpClientService,
     DomService,
     PaginationHttpClientService,

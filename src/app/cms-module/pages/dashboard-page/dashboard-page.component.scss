@@ -16,11 +16,12 @@
       width: 130px;
       height: 130px;
     }
-  }
-  &-loading-data-issue-description {
-    color: var(--darkRedColor);
-    text-align: center;
-    font-size: 1.1rem;
+    &-description {
+      color: var(--darkRedColor);
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
   }
   &__grid-container {
     display: grid;
@@ -35,17 +36,191 @@
     padding: 30px;
     background-color: var(--mainWhiteColor);
   }
+  &__user {
+    &-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    &-image-with-data {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    &-image {
+      width: 100px;
+      height: 100px;
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+    &-description {
+      margin-left: 40px;
+      &-header {
+        font-size: 2.1rem;
+        font-weight: 500;
+      }
+      &-text {
+        font-size: 1rem;
+        color: var(--lightGrayColor);
+        &-strong {
+          color: var(--darkBlueColor);
+          &--red-color {
+            color: var(--darkRedColor);
+          }
+          &--capitalised {
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+    &-change-image {
+      &-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 30px;
+      }
+      &-label {
+        margin-bottom: 15px;
+        max-width: 200px;
+      }
+      &-input {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+      }
+      &-text,
+      &-remove-button {
+        margin-left: 10px;
+      }
+      &-remove-button {
+        justify-content: center;
+      }
+      &-text {
+        cursor: pointer;
+        justify-content: center;
+      }
+    }
+    &-additional-info {
+      &-container {
+        word-break: break-all;
+      }
+      &-elements {
+        margin-top: 10px;
+      }
+      &-paragraph {
+        color: var(--lightGrayColor);
+        margin: 5px 0;
+        &-strong {
+          color: var(--darkBlueColor);
+        }
+      }
+    }
+  }
+  &__connections {
+    &-container {
+      margin-top: 15px;
+    }
+    &-element {
+      margin: 10px 0;
+      &-description {
+        color: var(--lightGrayColor);
+      }
+      &-value {
+        margin-top: 3px;
+        color: var(--darkBlueColor);
+        font-weight: 500;
+      }
+    }
+  }
+  &__plot {
+    &-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-left: 30px;
+    }
+    &-data-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-grow: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 1634px) {
+  .cms-dashboard__user-change-image {
+    &-container {
+      flex-direction: row;
+      width: 100%;
+      margin: 30px 0 20px;
+      max-height: 37px;
+      &:nth-of-type(1) {
+        margin-right: 0;
+      }
+    }
+    &-label {
+      max-width: fit-content;
+    }
+  }
 }
 
 @media only screen and (max-width: 1250px) {
-  .cms-dashboard__grid-container {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: initial;
+  .cms-dashboard {
+    &__grid-container {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: initial;
+    }
+    &__plot-circles-container {
+      margin-left: 0;
+    }
   }
 }
 
 @media only screen and (max-width: 700px) {
   .cms-dashboard__grid-element {
     padding: 15px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cms-dashboard__plot {
+    &-data-container {
+      flex-direction: column;
+      margin-top: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .cms-dashboard__user {
+    &-image-with-data {
+      flex-direction: column;
+      width: 100%;
+    }
+    &-image {
+      margin-bottom: 20px;
+    }
+    &-description {
+      margin-left: 0;
+    }
+    &-change-image {
+      &-container {
+        height: fit-content;
+        max-height: fit-content;
+        flex-direction: column;
+        margin: 20px 0;
+      }
+      &-label {
+        max-width: 100%;
+      }
+      &-remove-button,
+      &-text {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
   }
 }

@@ -3,4 +3,235 @@
  ~ Silesian University of Technology
  -->
 
-<p>dashboard-page works!</p>
+@if ((fetchingState$ | async) === 'fetching') {
+<aside class="cms-dashboard__loading-content">
+  <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+</aside>
+} @else if ((fetchingState$ | async) === 'failure') {
+<aside class="cms-dashboard__loading-data-issue">
+  <img src="assets/icon/info-important-icon.svg" alt="" />
+  <p class="cms-dashboard__loading-data-issue-description">
+    Wystąpił problem podczas ładowania danych.
+  </p>
+  <button
+    (click)="handleRefetchData()"
+    class="app__button app__button--light app__button--full-size-window">
+    Spróbj ponownie
+    <ng-icon name="matRefresh" class="app__button__arrow" />
+  </button>
+</aside>
+} @else {
+<div class="cms-dashboard__grid-container">
+  <section class="cms-dashboard__grid-element">
+    <div class="cms-dashboard__user-container">
+      <div class="cms-dashboard__user-image-with-data">
+        <div class="cms-dashboard__user-image">
+          <app-user-image />
+        </div>
+        <div class="cms-dashboard__user-description">
+          <h2 class="cms-dashboard__user-description-header">
+            {{ currentLoggedUser?.nameWithSurname }}
+          </h2>
+          <p class="cms-dashboard__user-description-text">
+            Login:
+            <strong class="cms-dashboard__user-description-text-strong">
+              {{ currentLoggedUser?.login }}
+            </strong>
+          </p>
+          <p class="cms-dashboard__user-description-text">
+            Rola w systemie:
+            <strong
+              class="cms-dashboard__user-description-text-strong--capitalised">
+              {{ currentLoggedUser?.role }}
+            </strong>
+          </p>
+          <p class="cms-dashboard__user-description-text">
+            Czas aktywnej sesji:
+            <strong
+              [class.cms-dashboard__user-description-text-strong--red-color]="sessionSoonEnded$ | async"
+              class="cms-dashboard__user-description-text-strong--capitalised">
+              {{ sessionCurrentTime$ | async | date: 'mm:ss' }}
+            </strong>
+          </p>
+        </div>
+      </div>
+      <div class="cms-dashboard__user-change-image-container">
+        <label
+          for="change-image-form___input"
+          class="cms-dashboard__user-change-image-label">
+          <input
+            type="file"
+            accept="image/jpeg,image/jpg,image/png"
+            id="change-image-form___input"
+            title="Kliknij aby dodać/zmienić zdjęcie"
+            class="cms-dashboard__user-change-image-input"
+            (change)="handleAddChangeUserImage($event)" />
+          <div
+            class="app__button app__button--light cms-dashboard__user-change-image-text">
+            @if ((loadingFor$ | async) === 'updating') { Aktualizacja
+            <img
+              src="assets/gif/suspense-loading-light.gif"
+              alt=""
+              class="app__button--loading-content-spinner" />
+            } @else { Dodaj/zmień zdjęcie }
+          </div>
+        </label>
+        <button
+          (click)="handleDeleteUserImage()"
+          [disabled]="!currentLoggedUser?.profileImageUrl"
+          class="app__button app__button--danger-light--filled cms-dashboard__user-change-image-remove-button"
+          title="Kliknij aby usunąć zdjęcie">
+          @if ((loadingFor$ | async) === 'deleting') { Usuwanie
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else { Usuń zdjęcie }
+        </button>
+      </div>
+    </div>
+    <div class="cms-dashboard__user-additional-info-container">
+      <h2 class="app-cms__header-h2">Dodatkowe informacje</h2>
+      <div class="cms-dashboard__user-additional-info-elements">
+        <p class="cms-dashboard__user-additional-info-paragraph">
+          Adres email:
+          <strong class="cms-dashboard__user-additional-info-paragraph-strong">
+            {{ dashboardDetails?.data?.email }}
+          </strong>
+        </p>
+        <p class="cms-dashboard__user-additional-info-paragraph">
+          Skrót systemowy:
+          <strong class="cms-dashboard__user-additional-info-paragraph-strong">
+            {{ dashboardDetails?.data?.shortcut }}
+          </strong>
+        </p>
+        <p class="cms-dashboard__user-additional-info-paragraph">
+          Miejscowość zamieszkania:
+          <strong class="cms-dashboard__user-additional-info-paragraph-strong">
+            {{ dashboardDetails?.data?.city }}
+          </strong>
+        </p>
+        <p class="cms-dashboard__user-additional-info-paragraph">
+          Narodowość:
+          <strong class="cms-dashboard__user-additional-info-paragraph-strong">
+            {{ dashboardDetails?.data?.nationality }}
+          </strong>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="cms-dashboard__grid-element">
+    @if (currentLoggedUser?.role === 'administrator') {
+    <div class="cms-dashboard__plot-container">
+      <h2 class="app-cms__header-h2">Użytkownicy w systemie</h2>
+      <div class="cms-dashboard__plot-data-container">
+        <div>
+          <app-plot-description
+            label="Ilość studentów"
+            [data]="dashboardDetails?.data?.dashboardUserTypesCount?.studentsCount"
+            color="student" />
+          <app-plot-description
+            label="Ilość edytorów"
+            [data]="dashboardDetails?.data?.dashboardUserTypesCount?.editorsCount"
+            color="editor" />
+          <app-plot-description
+            label="Ilość nauczycieli"
+            [data]="dashboardDetails?.data?.dashboardUserTypesCount?.teachersCount"
+            color="teacher" />
+          <app-plot-description
+            label="Ilość administratorów"
+            [data]="dashboardDetails?.data?.dashboardUserTypesCount?.administratorsCount"
+            color="administrator" />
+        </div>
+        <app-round-plot
+          [colors]="rolesPlot"
+          [data]="dashboardDetails?.rolesPlot || []"
+          [allElements]="dashboardDetails?.data?.dashboardUserTypesCount?.allElements || 0" />
+      </div>
+    </div>
+    }
+  </section>
+  <section class="cms-dashboard__grid-element">
+    <h2 class="app-cms__header-h2">Połączenia</h2>
+    <div class="cms-dashboard__connections-container">
+      <div class="cms-dashboard__connections-element">
+        <p class="cms-dashboard__connections-element-description">
+          Przypisanie do wydziału:
+        </p>
+        <p class="cms-dashboard__connections-element-value">
+          {{ dashboardDetails?.data?.departmentFullName }}
+        </p>
+      </div>
+      @if (currentLoggedUser?.role !== 'student') {
+      <div class="cms-dashboard__connections-element">
+        <p class="cms-dashboard__connections-element-description">
+          Przypisanie do katedry:
+        </p>
+        <p class="cms-dashboard__connections-element-value">
+          {{ dashboardDetails?.data?.cathedralFullName }}
+        </p>
+      </div>
+      } @if (currentLoggedUser?.role === 'student') {
+      <div class="cms-dashboard__connections-element">
+        <p class="cms-dashboard__connections-element-description">
+          Przypisanie do kierunków:
+        </p>
+        @for (studySpec of dashboardDetails?.data?.studySpecializations; track
+        studySpec) {
+        <p class="cms-dashboard__connections-element-value">{{ studySpec }}</p>
+        }
+      </div>
+      } @if (currentLoggedUser?.role === 'edytor' || currentLoggedUser?.role ===
+      'nauczyciel') {
+      <div class="cms-dashboard__connections-element">
+        <p class="cms-dashboard__connections-element-description">
+          Przypisanie do przedmiotów:
+        </p>
+        @for (subject of dashboardDetails?.data?.studySubjects; track subject) {
+        <p class="cms-dashboard__connections-element-value">{{ subject }}</p>
+        }
+      </div>
+      }
+    </div>
+  </section>
+  <section class="cms-dashboard__grid-element">
+    @if (currentLoggedUser?.role === 'administrator') {
+    <div class="cms-dashboard__plot-container">
+      <h2 class="app-cms__header-h2">Elementy bazy danych</h2>
+      <div class="cms-dashboard__plot-data-container">
+        <div>
+          <app-plot-description
+            label="Ilość wydziałów"
+            [data]="dashboardDetails?.data?.dashboardElementsCount?.departmentsCount"
+            color="department" />
+          <app-plot-description
+            label="Ilość katedr"
+            [data]="dashboardDetails?.data?.dashboardElementsCount?.cathedralsCount"
+            color="cathedral" />
+          <app-plot-description
+            label="Ilość sal zajęciowych"
+            [data]="dashboardDetails?.data?.dashboardElementsCount?.studyRoomsCount"
+            color="study-room" />
+          <app-plot-description
+            label="Ilość kierunków studiów"
+            [data]="dashboardDetails?.data?.dashboardElementsCount?.studySpecializationsCount"
+            color="study-spec" />
+          <app-plot-description
+            label="Ilość przedmiotów"
+            [data]="dashboardDetails?.data?.dashboardElementsCount?.studySubjectsCount"
+            color="study-subject" />
+          <app-plot-description
+            label="Ilość grup dziekańskich"
+            [data]="dashboardDetails?.data?.dashboardElementsCount?.studyGroupsCount"
+            color="study-group" />
+        </div>
+        <app-round-plot
+          [colors]="elementsPlot"
+          [data]="dashboardDetails?.elementsPlot || []"
+          [allElements]="dashboardDetails?.data?.dashboardElementsCount?.allElements || 0" />
+      </div>
+    </div>
+    }
+  </section>
+</div>
+}
