@@ -3,7 +3,7 @@
  * Silesian University of Technology
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { StudySubjectData } from '~/cms-admin-module/models/entities.model';
+import { StudySubjectData } from '~/cms-admin-module/models/study-subject.model';
 import { StudySubjectHttpClientService } from '~/cms-admin-module/services/study-subject-http-client/study-subject-http-client.service';
 import { DeleteContentService } from '~/cms-module/services/delete-content/delete-content.service';
 import { PaginationService } from '~/cms-module/services/pagination/pagination.service';

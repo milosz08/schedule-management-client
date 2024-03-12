@@ -3,7 +3,7 @@
  * Silesian University of Technology
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserData } from '~/cms-admin-module/models/entities.model';
+import { UserData } from '~/cms-admin-module/models/user.model';
 import { UserHttpClientService } from '~/cms-admin-module/services/user-http-client/user-http-client.service';
 import { DeleteContentService } from '~/cms-module/services/delete-content/delete-content.service';
 import { PaginationService } from '~/cms-module/services/pagination/pagination.service';

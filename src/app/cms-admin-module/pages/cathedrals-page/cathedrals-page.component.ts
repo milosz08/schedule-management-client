@@ -3,7 +3,7 @@
  * Silesian University of Technology
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CathedralData } from '~/cms-admin-module/models/entities.model';
+import { CathedralData } from '~/cms-admin-module/models/cathedral.model';
 import { CathedralHttpClientService } from '~/cms-admin-module/services/cathedral-http-client/cathedral-http-client.service';
 import { DeleteContentService } from '~/cms-module/services/delete-content/delete-content.service';
 import { PaginationService } from '~/cms-module/services/pagination/pagination.service';
