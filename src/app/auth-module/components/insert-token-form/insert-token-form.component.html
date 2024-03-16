@@ -32,7 +32,7 @@
   </div>
   <div class="check-token-form__submit-container">
     <button
-      [disabled]="!tokenForm.valid"
+      [disabled]="!tokenForm.valid || (loadingFor$ | async) === 'validate_token'"
       type="submit"
       class="app__button app__button--hollow-light app__button--full-size-window"
       title="Kliknij wysłać token odzyskiwania hasła">

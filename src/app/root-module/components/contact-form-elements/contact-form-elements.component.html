@@ -67,7 +67,7 @@
   <div></div>
   <div class="app-cms__grid-submit-button">
     <button
-      [disabled]="!formData.valid"
+      [disabled]="!formData.valid || (loadingFor$ | async) === loader"
       type="submit"
       class="app__button app__button--full-width app__button--light"
       title="Kliknij aby dodać nowa salę zajęciową">

@@ -35,7 +35,7 @@
     </div>
     <div class="app-modal__buttons-container">
       <button
-        [disabled]="!passwordForm.valid"
+        [disabled]="!passwordForm.valid || (isLoading$ | async)"
         type="submit"
         class="app__button app__button--light app__button--hollow-light app__button--full-size-window"
         title="Kliknij aby usunąć element/y">

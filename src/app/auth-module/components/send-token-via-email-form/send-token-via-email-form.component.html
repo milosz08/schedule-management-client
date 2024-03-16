@@ -29,7 +29,7 @@
   </div>
   <div class="send-token-via-email-form__submit-container">
     <button
-      [disabled]="!loginOrEmailForm.valid"
+      [disabled]="!loginOrEmailForm.valid || (loadingFor$ | async) === 'send_token'"
       type="submit"
       class="app__button app__button--full-size-window"
       title="Kliknij aby wysłać token odzyskiwania hasła">

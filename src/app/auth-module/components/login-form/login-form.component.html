@@ -35,7 +35,7 @@
     (checkedEmitter)="handleToggleSaveAccount($event)" />
   <div class="login-form__submit-container">
     <button
-      [disabled]="!loginForm.valid"
+      [disabled]="!loginForm.valid || (isLoading$ | async)"
       type="submit"
       class="app__button app__button--full-size-window"
       title="Kliknij aby się zalogować">
