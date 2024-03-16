@@ -32,6 +32,106 @@
 <app-add-edit-column-wrapper
   [formHeader]="(currentMode | isCreationMode) ? 'Dodaj kierunek' : 'Edytuj kierunek'"
   resultHeader="Informacje o kierunku">
+  <ng-container form>
+    <form
+      [formGroup]="addEditStudySpecForm"
+      (ngSubmit)="handleSubmitStudySpec()"
+      class="app-cms__grid-form app-cms__add-new-content-form-container">
+      <label
+        for="add-study-specialization-form___name"
+        class="app-cms__grid-label">
+        Nazwa kierunku:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-study-specialization-form___name"
+          formControlName="name"
+          placeholder="np. Informatyka"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("name")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać nazwę kierunku
+        </div>
+        }
+      </div>
+      <label
+        for="add-study-specialization-form___alias"
+        class="app-cms__grid-label">
+        Alias nazwy kierunku:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-study-specialization-form___alias"
+          formControlName="alias"
+          placeholder="np. INF"
+          maxlength="8"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("alias")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać alias nazwy kierunku
+        </div>
+        }
+      </div>
+      <label
+        for="add-study-specialization-form___department"
+        class="app-cms__grid-label">
+        Przypisany do wydziału:
+      </label>
+      <app-select-drop-box-template
+        [formGroup]="addEditStudySpecForm"
+        [optionsList]="departments"
+        (emitNewQuery)="handleEmitDepartmentName($event)"
+        formControlId="departmentName"
+        selectId="add-study-specialization-form___department"
+        placeholder="np. Elektryczny"
+        errorField="prawidłowy wydział" />
+      @if (currentMode | isCreationMode) {
+      <label
+        for="add-study-specialization-form___type"
+        class="app-cms__grid-label">
+        Typ studiów:
+      </label>
+      <app-combo-box-template
+        [allOptions]="studyTypes"
+        [formGroup]="addEditStudySpecForm"
+        id="add-study-specialization-form___type"
+        formControlId="studyType"
+        placeholder="typ studiów" />
+      <label
+        for="add-study-specialization-form___degree"
+        class="app-cms__grid-label">
+        Stopień studiów:
+      </label>
+      <app-combo-box-template
+        [formGroup]="addEditStudySpecForm"
+        [allOptions]="studyDegress"
+        id="add-study-specialization-form___degree"
+        formControlId="studyDegree"
+        placeholder="stopień studiów" />
+      }
+      <div></div>
+      <div class="app-cms__grid-submit-button">
+        <button
+          [disabled]="!addEditStudySpecForm.valid || (isLoading$ | async)"
+          type="submit"
+          class="app__button app__button--full-width app__button--light">
+          {{ (currentMode | isEditMode) ? 'Edytuj wybraną' : 'Dodaj nową' }}
+          specjalizację @if (isLoading$ | async) {
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </ng-container>
   <ng-container result>
     @if (addEditStudySpecsRes.length > 0) {
     <div

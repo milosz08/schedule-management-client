@@ -32,6 +32,95 @@
 <app-add-edit-column-wrapper
   [formHeader]="(currentMode | isCreationMode) ? 'Dodaj salę' : 'Edytuj salę'"
   resultHeader="Informacje o sali">
+  <ng-container form>
+    <form
+      [formGroup]="addEditStudyRoomForm"
+      (ngSubmit)="handleSubmitAddEditStudyRoom()"
+      class="app-cms__grid-form app-cms__add-new-content-form-container">
+      <label for="add-study-room-form___name" class="app-cms__grid-label">
+        Nazwa (alias) sali:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-study-room-form___name"
+          formControlName="name"
+          maxlength="50"
+          placeholder="np. B102"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("name")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać nazwę (alias) sali
+        </div>
+        }
+      </div>
+      <label
+        for="add-study-room-form___description"
+        class="app-cms__grid-label">
+        Krótki opis (opcjonalny):
+      </label>
+      <textarea
+        id="add-study-room-form___description"
+        formControlName="description"
+        placeholder="np. Laboratorium Programowania Komputerów"
+        rows="4"
+        maxlength="150"
+        class="app__input app__input--light app__input--exclude-margin resize--only-vertical"></textarea>
+      <app-dept-with-cath
+        [currentMode]="currentMode"
+        [formGroup]="addEditStudyRoomForm"
+        class="app__show-only-content" />
+      <label for="add-study-room-form___capacity" class="app-cms__grid-label">
+        Pojemność sali:
+      </label>
+      <div>
+        <input
+          type="text"
+          pattern="^(0|[1-9][0-9]*)$"
+          min="0"
+          id="add-study-room-form___capacity"
+          formControlName="capacity"
+          placeholder="np. 40"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("capacity")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać poprawną pojemność sali
+        </div>
+        }
+      </div>
+      <label for="add-study-room-form___type" class="app-cms__grid-label">
+        Typ sali zajęciowej:
+      </label>
+      <div>
+        <app-select-list-template
+          [formGroup]="addEditStudyRoomForm"
+          [listElements]="roomTypes"
+          formControlId="roomTypeName"
+          inputId="add-study-room-form___type"
+          placeholder="np. Wykładowa"
+          errorField="prawidłowy typ sali zajęciowej" />
+      </div>
+      <div></div>
+      <div class="app-cms__grid-submit-button">
+        <button
+          [disabled]="!addEditStudyRoomForm.valid || (isLoading$ | async)"
+          type="submit"
+          class="app__button app__button--full-width app__button--light">
+          {{ (currentMode | isEditMode) ? 'Edytuj wybraną' : 'Dodaj nową' }}
+          salę @if (isLoading$ | async) {
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </ng-container>
   <ng-container result>
     @if (addEditStudyRoomRes) {
     <div

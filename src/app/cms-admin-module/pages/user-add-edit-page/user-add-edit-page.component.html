@@ -34,6 +34,155 @@
 <app-add-edit-column-wrapper
   [formHeader]="(currentMode | isCreationMode) ? 'Dodaj użytkownika' : 'Edytuj użytkownika'"
   resultHeader="Informacje o użytkowniku">
+  <ng-container form>
+    <form
+      [formGroup]="addEditUserForm"
+      (ngSubmit)="handleSubmitAddEditUser()"
+      class="app-cms__grid-form app-cms__add-new-content-form-container">
+      <label for="add-user-form___name" class="app-cms__grid-label">
+        Imię:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-user-form___name"
+          formControlName="name"
+          placeholder="np. Jan"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("name")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać imię
+        </div>
+        }
+      </div>
+      <label for="add-user-form___surname" class="app-cms__grid-label">
+        Nazwisko:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-user-form___surname"
+          formControlName="surname"
+          placeholder="np. Kowalski"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("surname")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać imię
+        </div>
+        }
+      </div>
+      <label for="add-user-form___city" class="app-cms__grid-label">
+        Miejscowość:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-user-form___city"
+          formControlName="city"
+          placeholder="np. Gliwice"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("city")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać miasto zamieszkania
+        </div>
+        }
+      </div>
+      <label for="add-user-form___nationality" class="app-cms__grid-label">
+        Narodowość:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-user-form___nationality"
+          formControlName="nationality"
+          placeholder="np. Polska"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("nationality")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać narodowość
+        </div>
+        }
+      </div>
+      <label for="add-user-form___role" class="app-cms__grid-label">
+        Rola w systemie:
+      </label>
+      <div>
+        <app-select-list-template
+          [formGroup]="addEditUserForm"
+          [listElements]="roles"
+          formControlId="role"
+          inputId="add-user-form___role"
+          placeholder="np. Nauczyciel"
+          errorField="prawidłowy typ roli" />
+      </div>
+      @if (getFormValue("role")) { @if (currentRole !== 'student') {
+      <app-dept-with-cath
+        [currentMode]="currentMode"
+        [formGroup]="addEditUserForm"
+        (emitNextSelection)="handleEmitStudySubjects()"
+        class="app__show-only-content" />
+      } @else if (currentRole === 'student') {
+      <label for="add-user___department" class="app-cms__grid-label">
+        Wydział:
+      </label>
+      <app-select-drop-box-template
+        [formGroup]="addEditUserForm"
+        [optionsList]="departments"
+        (emitNewQuery)="handleEmitDepartmentName($event)"
+        (addedValue)="handleEmitStudySpecializations()"
+        formControlId="departmentName"
+        selectId="add-user___department"
+        placeholder="np. Elektryczny"
+        errorField="prawidłowy wydział" />
+      @if (studySpecsVisibility) {
+      <label for="add-user-form___study-specs" class="app-cms__grid-label">
+        Kierunki studiów:
+      </label>
+      <app-combo-box-template
+        [formGroup]="addEditUserForm"
+        [allOptions]="studySpecs"
+        formControlId="studySpecsOrSubjects"
+        placeholder="kierunki studiów" />
+      } } @else if ((currentRole === 'edytor' || currentRole === 'nauczyciel')
+      && studySubjectsVisibility) {
+      <label for="add-user-form___subjects" class="app-cms__grid-label">
+        Przedmioty:
+      </label>
+      <app-combo-box-template
+        [formGroup]="addEditUserForm"
+        [allOptions]="subjects"
+        formControlId="studySpecsOrSubjects"
+        placeholder="przedmioty" />
+      } } @if (currentMode | isEditMode) {
+      <div></div>
+      <app-checkbox-template
+        checkboxLabel="Generuj nowe hasło do skrzynki pocztowej"
+        [isWhiteBackground]="true"
+        (checkedEmitter)="regeneratePassword = !regeneratePassword" />
+      }
+      <div></div>
+      <div class="app-cms__grid-submit-button">
+        <button
+          [disabled]="!addEditUserForm.valid || (isLoading$ | async)"
+          type="submit"
+          class="app__button app__button--full-width app__button--light">
+          {{ (currentMode | isEditMode) ? 'Edytuj wybranego' : 'Dodaj nowego' }}
+          użytkownika @if (isLoading$ | async) {
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </ng-container>
   <ng-container result>
     @if (addEditUserRes) {
     <div

@@ -29,6 +29,80 @@
 <app-add-edit-column-wrapper
   [formHeader]="(currentMode | isCreationMode) ? 'Dodaj katedrę' : 'Edytuj katedrę'"
   resultHeader="Informacje o katedrze">
+  <ng-container form>
+    <form
+      [formGroup]="addEditCathedralForm"
+      (ngSubmit)="handleSubmitAddEditCathedral()"
+      class="app-cms__grid-form app-cms__add-new-content-form-container">
+      <label for="add-department-form___name" class="app-cms__grid-label">
+        Nazwa katedry:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-cathedral-form___name"
+          formControlName="name"
+          placeholder="np. Elektroniki, Metrologii i Automatyki"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("name")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać nazwę katedry
+        </div>
+        }
+      </div>
+      <label for="add-cathedral-form___alias" class="app-cms__grid-label">
+        Alias katedry:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-cathedral-form___alias"
+          formControlName="alias"
+          placeholder="np. KMEiA"
+          maxlength="10"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("alias")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać alias katedry
+        </div>
+        }
+      </div>
+      <label
+        for="add-cathedral-form___departmentName"
+        class="app-cms__grid-label">
+        Przypisanie do wydziału:
+      </label>
+      <div>
+        <app-select-drop-box-template
+          [formGroup]="addEditCathedralForm"
+          [optionsList]="departments"
+          (emitNewQuery)="handleEmitDepartmentName($event)"
+          formControlId="departmentName"
+          selectId="add-cathedral-form___departmentName"
+          placeholder="np. Elektryczny"
+          errorField="prawidłowy wydział" />
+      </div>
+      <div></div>
+      <div class="app-cms__grid-submit-button">
+        <button
+          [disabled]="!addEditCathedralForm.valid || (isLoading$ | async)"
+          type="submit"
+          class="app__button app__button--full-width app__button--light">
+          {{ (currentMode | isEditMode) ? 'Edytuj wybraną' : 'Dodaj nową' }}
+          katedrę @if (isLoading$ | async) {
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </ng-container>
   <ng-container result>
     @if (addEditCathedralRes) {
     <div

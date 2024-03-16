@@ -56,6 +56,23 @@ export class StudySubjectAddEditPageComponent
     this.unmountAllSubscriptions();
   }
 
+  handleSubmitAddEditStudySubject(): void {
+    this.wrapAsObservable$(
+      this._addEditContentService.addUpdateContent$(
+        this.currentMode,
+        this.addEditStudySubjectForm.getRawValue(),
+        this._studySubjectHttpClientService,
+        this._studySubjectHttpClientService.createNewStudySubject$,
+        this._studySubjectHttpClientService.updateStudySubject$
+      )
+    ).subscribe(addEditStudySubjectRes => {
+      if (this.currentMode === 'add') {
+        this.addEditStudySubjectForm.reset();
+      }
+      this.addEditStudySubjectRes = addEditStudySubjectRes;
+    });
+  }
+
   checkIsFieldHasErrors(controlName: string): boolean {
     return this.checkFormFieldErrors(this.addEditStudySubjectForm, controlName);
   }

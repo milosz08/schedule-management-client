@@ -23,6 +23,63 @@
 <app-add-edit-column-wrapper
   formHeader="Dodaj grupę"
   resultHeader="Informacje o grupie">
+  <ng-container form>
+    <form
+      [formGroup]="addStudyGroupForm"
+      (ngSubmit)="handleSubmitAddStudyGroup()"
+      class="app-cms__grid-form app-cms__add-new-content-form-container">
+      <app-dept-with-study-spec
+        [formGroup]="addStudyGroupForm"
+        labelId="study-group"
+        class="display-only-content" />
+      <label for="add-study-group-form___semester" class="app-cms__grid-label">
+        Semestry:
+      </label>
+      <app-combo-box-template
+        id="add-study-group-form___semester"
+        [formGroup]="addStudyGroupForm"
+        [allOptions]="semesters"
+        formControlId="semesters"
+        placeholder="semestry" />
+      <label
+        for="add-study-group-form___count-of-groups"
+        class="app-cms__grid-label">
+        Ilość grup:
+      </label>
+      <div>
+        <input
+          type="text"
+          pattern="^(0|[1-9][0-9]*)$"
+          min="0"
+          id="add-study-group-form___count-of-groups"
+          formControlName="countOfGroups"
+          placeholder="np. 2"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors("countOfGroups")) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać poprawną ilość grup
+        </div>
+        }
+      </div>
+      <div></div>
+      <div class="app-cms__grid-submit-button">
+        <button
+          [disabled]="!addStudyGroupForm.valid || (isLoading$ | async)"
+          type="submit"
+          class="app__button app__button--full-width app__button--light">
+          Dodaj nową grupę @if (isLoading$ | async) {
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </ng-container>
   <ng-container result>
     @if (addStudyGroupsRes.length > 0) {
     <div

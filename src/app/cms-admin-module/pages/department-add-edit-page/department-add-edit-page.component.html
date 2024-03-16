@@ -70,12 +70,11 @@
         }
       </div>
       <div></div>
-      <div class="cms__simple-grid__submit-button">
+      <div class="app-cms__grid-submit-button">
         <button
           [disabled]="!addEditDepartmentForm.valid || (isLoading$ | async)"
           type="submit"
-          class="app__button app__button--full-width app__button--light"
-          title="Kliknij aby dodać nowy wydział">
+          class="app__button app__button--full-width app__button--light">
           {{ (currentMode | isEditMode) ? 'Edytuj wybrany' : 'Dodaj nowy' }}
           wydział @if (isLoading$ | async) {
           <img

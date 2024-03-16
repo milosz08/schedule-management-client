@@ -55,7 +55,20 @@ export class DepartmentAddEditPageComponent
   }
 
   handleSubmitAddEditDepartment(): void {
-    console.log('submit');
+    this.wrapAsObservable$(
+      this._addEditContentService.addUpdateContent$(
+        this.currentMode,
+        this.addEditDepartmentForm.getRawValue(),
+        this._departmentHttpClientService,
+        this._departmentHttpClientService.createNewDepartment$,
+        this._departmentHttpClientService.updateDepartment$
+      )
+    ).subscribe(addEditDepartmentRes => {
+      if (this.currentMode === 'add') {
+        this.addEditDepartmentForm.reset();
+      }
+      this.addEditDepartmentRes = addEditDepartmentRes;
+    });
   }
 
   checkIsFieldHasErrors(controlName: string): boolean {

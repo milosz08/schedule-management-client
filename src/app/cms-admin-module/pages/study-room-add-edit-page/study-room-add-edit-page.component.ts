@@ -4,7 +4,6 @@
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AddUpdateStudyRoomResponse } from '~/cms-admin-module/models/study-room.model';
 import { AddEditContentService } from '~/cms-admin-module/services/add-edit-content/add-edit-content.service';
 import { StudyRoomHttpClientService } from '~/cms-admin-module/services/study-room-http-client/study-room-http-client.service';
@@ -23,13 +22,14 @@ export class StudyRoomAddEditPageComponent
   addEditStudyRoomForm: FormGroup;
   addEditStudyRoomRes?: AddUpdateStudyRoomResponse;
 
+  roomTypes: string[] = [];
+
   loadingEditableContent$ = this._addEditContentService.loadingEditableContent$;
   isLoading$ = this._addEditContentService.isLoading$;
 
   constructor(
     private readonly _addEditContentService: AddEditContentService,
-    private readonly _studyRoomHttpClientServie: StudyRoomHttpClientService,
-    private readonly _router: Router
+    private readonly _studyRoomHttpClientServie: StudyRoomHttpClientService
   ) {
     super(_addEditContentService);
     this.addEditStudyRoomForm = new FormGroup({
@@ -43,6 +43,9 @@ export class StudyRoomAddEditPageComponent
   }
 
   ngOnInit(): void {
+    this.wrapAsObservable$(
+      this._studyRoomHttpClientServie.getRoomTypes$()
+    ).subscribe(({ dataElements }) => (this.roomTypes = dataElements));
     this.wrapAsObservable$(
       this._addEditContentService.setEditElementFormContent$(
         this.addEditStudyRoomForm,
@@ -59,6 +62,23 @@ export class StudyRoomAddEditPageComponent
 
   ngOnDestroy(): void {
     this.unmountAllSubscriptions();
+  }
+
+  handleSubmitAddEditStudyRoom(): void {
+    this.wrapAsObservable$(
+      this._addEditContentService.addUpdateContent$(
+        this.currentMode,
+        this.addEditStudyRoomForm.getRawValue(),
+        this._studyRoomHttpClientServie,
+        this._studyRoomHttpClientServie.createNewStudyRoom$,
+        this._studyRoomHttpClientServie.updateStudyRoom$
+      )
+    ).subscribe(addEditStudyRoomRes => {
+      if (this.currentMode === 'add') {
+        this.addEditStudyRoomForm.reset();
+      }
+      this.addEditStudyRoomRes = addEditStudyRoomRes;
+    });
   }
 
   checkIsFieldHasErrors(controlName: string): boolean {
