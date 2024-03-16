@@ -20,6 +20,7 @@ export class CheckboxTemplateComponent implements OnInit {
   @Input() isWhiteBackground = false;
 
   @Output() checkedEmitter = new EventEmitter<boolean>();
+  @Output() checkboxEmitter = new EventEmitter<boolean>();
 
   checkboxId = '';
 
@@ -33,5 +34,6 @@ export class CheckboxTemplateComponent implements OnInit {
   handleCheckboxToggle(): void {
     this.checkedEmitter.emit(this.checkboxValue);
     this.checkboxValue = !this.checkboxValue;
+    this.checkboxEmitter.emit(this.checkboxValue);
   }
 }

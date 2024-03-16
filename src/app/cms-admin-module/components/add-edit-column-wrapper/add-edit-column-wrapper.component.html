@@ -7,7 +7,13 @@
   <section
     class="app-cms__add-new-content-form-wrapper app-cms__add-new-content-form-wrapper--extended-form-section">
     <h3 class="app__header app__header--exclude-margins">{{ formHeader }}</h3>
+    @if (loadingEditableContent$ | async) {
+    <aside class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </aside>
+    } @else {
     <ng-content select="[form]" />
+    }
   </section>
   <aside
     class="app-cms__separator-line app-cms__separator-line--vertical"></aside>
