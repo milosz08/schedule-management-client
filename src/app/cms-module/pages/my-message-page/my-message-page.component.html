@@ -7,9 +7,9 @@
   header="Szczegóły wysłanej wiadomości"
   returnUrl="/secure/my-messages"
   returnText="Powróć do listy wysłanych wiadomości">
-  <ng-container description>
+  <ng-container addDescription>
     W tej sekcji możesz podejrzeć zawartość wybranej wiadomości wysłanej przez
     Ciebie do administratorów systemu.
   </ng-container>
 </app-add-edit-section-header>
-<div class="app-cms__table-loading-container"></div>
+<app-user-message-details returnUrl="/secure/my-messages" />

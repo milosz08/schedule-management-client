@@ -1,0 +1,57 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+@if (isLoading$ | async) {
+<aside class="app-cms__table-loading-content">
+  <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+</aside>
+} @else {
+<div class="app-cms__grid-form app-cms__add-new-content-info-container">
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Identyfikator zgłoszenia:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.messageIdentifier }}</div>
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Nazwisko i imię zgłaszającego:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.nameWithSurname }}</div>
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Adres email zgłaszającego:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.email }}</div>
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Czy anonimowe:
+  </div>
+  <div class="app-cms__grid-text">
+    {{ messageData?.isAnonymous ? "tak" : "nie" }}
+  </div>
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Typ wiadomości:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.issueType }}</div>
+  @if (messageData?.departmentName) {
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Wydział:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.departmentName }}</div>
+  } @if (messageData?.groups && messageData!.groups!.length > 0) {
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Grupy dziekańskie:
+  </div>
+  <div class="app-cms__grid-text">
+    @for (group of messageData?.groups; track group) { {{ group }}<br />
+    }
+  </div>
+  }
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Data wysłania:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.createdDate }}</div>
+  <div class="app-cms__grid-label app-cms__grid-label--single-line">
+    Treść wiadomości:
+  </div>
+  <div class="app-cms__grid-text">{{ messageData?.description }}</div>
+</div>
+}

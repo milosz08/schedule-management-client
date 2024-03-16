@@ -34,6 +34,7 @@ import { RoundPlotComponent } from './components/round-plot/round-plot.component
 import { SearchFormInputComponent } from './components/search-form-input/search-form-input.component';
 import { SortingButtonComponent } from './components/sorting-button/sorting-button.component';
 import { TableDataHeaderComponent } from './components/table-data-header/table-data-header.component';
+import { UserMessageDetailsComponent } from './components/user-message-details/user-message-details.component';
 import { RouteProtectorGuard } from './guards/route-protector/route-protector.guard';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { MyMessagePageComponent } from './pages/my-message-page/my-message-page.component';
@@ -59,12 +60,13 @@ import { UserMessageHttpClientService } from './services/user-message-http-clien
     LeftNavigationComponent,
     MyMessagePageComponent,
     MyMessagesPageComponent,
+    PaginationOptionsComponent,
     PlotDescriptionComponent,
     RoundPlotComponent,
     SearchFormInputComponent,
     SortingButtonComponent,
     TableDataHeaderComponent,
-    PaginationOptionsComponent,
+    UserMessageDetailsComponent,
   ],
   imports: [
     CmsRoutingModule,
@@ -100,6 +102,7 @@ import { UserMessageHttpClientService } from './services/user-message-http-clien
     SearchFormInputComponent,
     SortingButtonComponent,
     TableDataHeaderComponent,
+    UserMessageDetailsComponent,
   ],
 })
 export class CmsModule {}

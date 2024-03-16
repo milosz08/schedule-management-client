@@ -5,10 +5,11 @@
 
 <app-add-edit-section-header
   header="Szczegóły wiadomości użytkownika"
-  returnUrl="/secure/editor/user-messages"
+  returnUrl="/secure/editor/users-messages"
   returnText="Powróć do listy wiadomości użytkowników">
-  <ng-container description>
+  <ng-container addDescription>
     W tej sekcji możesz podejrzeć zawartość wybranej wiadomości wysłanej do
     systemu przez wybranego użytkownika systemu.
   </ng-container>
 </app-add-edit-section-header>
+<app-user-message-details returnUrl="/secure/editor/users-messages" />
