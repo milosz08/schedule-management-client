@@ -13,11 +13,21 @@ import {
 } from '~/cms-admin-module/models/study-group.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import {
+  AvailableDataModel,
+  NameWithId,
+} from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class StudyGroupHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
+  }
+
+  getSemesters$(): Observable<AvailableDataModel<NameWithId>> {
+    return this._httpClient.get<AvailableDataModel<NameWithId>>(
+      `${this._apiUrl}/api/v1/helper/semester/all`
+    );
   }
 
   getStudyGroups$(params: Params): Observable<Pagination<StudyGroupData>> {

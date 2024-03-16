@@ -18,6 +18,7 @@ import {
 } from '~/cms-admin-module/models/department.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import { AvailableDataModel } from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class DepartmentHttpClientService extends AbstractHttpClientProvider {
@@ -29,6 +30,13 @@ export class DepartmentHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<DepartmentData>>(
       `${this._apiUrl}/api/v1/department/all/pageable`,
       { params }
+    );
+  }
+
+  getDepartmentsByName$(name: string): Observable<AvailableDataModel<string>> {
+    return this._httpClient.get<AvailableDataModel<string>>(
+      `${this._apiUrl}/api/v1/department/all`,
+      { params: { name } }
     );
   }
 

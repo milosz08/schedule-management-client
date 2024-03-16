@@ -14,11 +14,18 @@ import {
 } from '~/cms-admin-module/models/study-room.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import { AvailableDataModel } from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class StudyRoomHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
+  }
+
+  getRoomTypes$(): Observable<AvailableDataModel<string>> {
+    return this._httpClient.get<AvailableDataModel<string>>(
+      `${this._apiUrl}/api/v1/helper/room/type/all`
+    );
   }
 
   getStudyRooms$(params: Params): Observable<Pagination<StudyRoomData>> {

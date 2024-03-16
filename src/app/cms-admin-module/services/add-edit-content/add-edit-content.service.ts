@@ -10,18 +10,22 @@ import {
   Observable,
   Observer,
   catchError,
+  delay,
   filter,
   map,
+  of,
   switchMap,
   tap,
   throwError,
 } from 'rxjs';
 import { ContentMode } from '~/cms-admin-module/types/content-mode.type';
+import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 import { AbstractLoadingProvider } from '~/shared-module/service/abstract-loading-provider';
 
 @Injectable()
 export class AddEditContentService extends AbstractLoadingProvider {
   private _loadingEditableContent$ = new BehaviorSubject<boolean>(false);
+  private _editElementId$ = new BehaviorSubject<number | undefined>(undefined);
 
   constructor(
     private readonly _activatedRoute: ActivatedRoute,
@@ -44,7 +48,11 @@ export class AddEditContentService extends AbstractLoadingProvider {
       filter(() => mode === 'edit'),
       map(param => param.get('id')),
       filter(id => !!id),
-      tap(() => this._loadingEditableContent$.next(true)),
+      tap(id => {
+        this._loadingEditableContent$.next(true);
+        this._editElementId$.next(Number(id));
+      }),
+      delay(500),
       switchMap(id => httpClientCallback(Number(id))),
       tap(data => {
         for (const key of Object.keys(data as object)) {
@@ -59,6 +67,30 @@ export class AddEditContentService extends AbstractLoadingProvider {
       }),
       catchError(err => {
         this._loadingEditableContent$.next(false);
+        return throwError(() => err);
+      })
+    );
+  }
+
+  addUpdateContent$<RQ, RS>(
+    mode: ContentMode,
+    req: RQ,
+    httpClient: AbstractHttpClientProvider,
+    addCallback: (req: RQ) => Observable<RS>,
+    editCallback?: (id: number, req: RQ) => Observable<RS>
+  ): Observable<RS> {
+    return of(null).pipe(
+      tap(() => this.setLoading(true)),
+      delay(500),
+      switchMap(() => this._editElementId$),
+      switchMap(id =>
+        mode === 'edit' && id && editCallback
+          ? editCallback.bind(httpClient)(id, req)
+          : addCallback.bind(httpClient)(req)
+      ),
+      tap(() => this.setLoading(false)),
+      catchError(err => {
+        this.setLoading(false);
         return throwError(() => err);
       })
     );

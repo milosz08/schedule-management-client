@@ -14,11 +14,18 @@ import {
 } from '~/cms-admin-module/models/user.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import { AvailableDataModel } from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class UserHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
+  }
+
+  getUserRoles$(): Observable<AvailableDataModel<string>> {
+    return this._httpClient.get<AvailableDataModel<string>>(
+      `${this._apiUrl}/api/v1/helper/role/all`
+    );
   }
 
   getUsers$(params: Params): Observable<Pagination<UserData>> {

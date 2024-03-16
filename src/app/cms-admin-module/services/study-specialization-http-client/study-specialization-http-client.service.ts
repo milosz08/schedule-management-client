@@ -14,11 +14,36 @@ import {
 } from '~/cms-admin-module/models/study-spec.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import {
+  AvailableDataModel,
+  NameWithId,
+} from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class StudySpecializationHttpClientService extends AbstractHttpClientProvider {
   constructor(private readonly _httpClient: HttpClient) {
     super();
+  }
+
+  getStudyTypes$(): Observable<AvailableDataModel<NameWithId>> {
+    return this._httpClient.get<AvailableDataModel<NameWithId>>(
+      `${this._apiUrl}/api/v1/helper/study/types/all`
+    );
+  }
+
+  getStudyDegrees$(): Observable<AvailableDataModel<NameWithId>> {
+    return this._httpClient.get<AvailableDataModel<NameWithId>>(
+      `${this._apiUrl}/api/v1/helper/study/degrees/all`
+    );
+  }
+
+  getAllStudySpecializationsBaseDepartment$(
+    deptName: string
+  ): Observable<AvailableDataModel<NameWithId>> {
+    return this._httpClient.get<AvailableDataModel<NameWithId>>(
+      `${this._apiUrl}/api/v1/studyspec/dept`,
+      { params: { deptName } }
+    );
   }
 
   getStudySpecializations$(
@@ -27,6 +52,16 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     return this._httpClient.get<Pagination<StudySpecializationData>>(
       `${this._apiUrl}/api/v1/studyspec/all/pageable`,
       { params }
+    );
+  }
+
+  getStudySpecializationsBaseDepartment$(
+    specName: string,
+    deptName: string
+  ): Observable<AvailableDataModel<string>> {
+    return this._httpClient.get<AvailableDataModel<string>>(
+      `${this._apiUrl}/api/v1/studyspec/dept/all`,
+      { params: { specName, deptName } }
     );
   }
 

@@ -14,6 +14,7 @@ import {
 } from '~/cms-admin-module/models/cathedral.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import { AvailableDataModel } from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class CathedralHttpClientService extends AbstractHttpClientProvider {
@@ -25,6 +26,16 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<CathedralData>>(
       `${this._apiUrl}/api/v1/cathedral/all/pageable`,
       { params }
+    );
+  }
+
+  getCathedralsBaseDepartment$(
+    cathName: string,
+    deptName: string
+  ): Observable<AvailableDataModel<string>> {
+    return this._httpClient.get<AvailableDataModel<string>>(
+      `${this._apiUrl}/api/v1/cathedral/dept/all`,
+      { params: { cathName, deptName } }
     );
   }
 

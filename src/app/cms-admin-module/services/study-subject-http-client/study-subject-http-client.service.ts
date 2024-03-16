@@ -14,6 +14,10 @@ import {
 } from '~/cms-admin-module/models/study-subject.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
+import {
+  AvailableDataModel,
+  NameWithId,
+} from '~/shared-module/types/drop-lists-data.type';
 
 @Injectable()
 export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
@@ -25,6 +29,15 @@ export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<StudySubjectData>>(
       `${this._apiUrl}/api/v1/studysubject/all/pageable`,
       { params }
+    );
+  }
+
+  getAllStudySubjectsBaseDepartments$(
+    deptName: string
+  ): Observable<AvailableDataModel<NameWithId>> {
+    return this._httpClient.get<AvailableDataModel<NameWithId>>(
+      `${this._apiUrl}/api/v1/studysubject/dept/all`,
+      { params: { deptName } }
     );
   }
 
