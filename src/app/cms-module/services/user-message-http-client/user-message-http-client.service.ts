@@ -28,7 +28,7 @@ export class UserMessageHttpClientService extends AbstractHttpClientProvider {
     );
   }
 
-  getUserMessage$(id: number): Observable<UserMessageDetailsData> {
+  getUserMessageDetails$(id: number): Observable<UserMessageDetailsData> {
     return this._httpClient.get<UserMessageDetailsData>(
       `${this._apiUrl}/api/v1/contactmessage/${id}/details`
     );
