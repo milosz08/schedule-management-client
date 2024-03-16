@@ -10,6 +10,7 @@ import {
   AddUpdateStudySubjectRequest,
   AddUpdateStudySubjectResponse,
   StudySubjectData,
+  StudySubjectDetailsData,
 } from '~/cms-admin-module/models/study-subject.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
@@ -24,6 +25,12 @@ export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<StudySubjectData>>(
       `${this._apiUrl}/api/v1/studysubject/all/pageable`,
       { params }
+    );
+  }
+
+  getStudySubjectDetails$(id: number): Observable<StudySubjectDetailsData> {
+    return this._httpClient.get<StudySubjectDetailsData>(
+      `${this._apiUrl}/api/v1/studysubject/${id}/details`
     );
   }
 

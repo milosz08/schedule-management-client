@@ -10,6 +10,7 @@ import {
   AddUpdateStudyRoomRequest,
   AddUpdateStudyRoomResponse,
   StudyRoomData,
+  StudyRoomDetailsData,
 } from '~/cms-admin-module/models/study-room.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
@@ -24,6 +25,12 @@ export class StudyRoomHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<StudyRoomData>>(
       `${this._apiUrl}/api/v1/studyroom/all/pageable`,
       { params }
+    );
+  }
+
+  getStudyRoomDetails$(id: number): Observable<StudyRoomDetailsData> {
+    return this._httpClient.get<StudyRoomDetailsData>(
+      `${this._apiUrl}/api/v1/studyroom/${id}/details`
     );
   }
 

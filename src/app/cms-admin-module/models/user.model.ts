@@ -12,6 +12,17 @@ export type UserData = {
   role: UserIdentityType;
 };
 
+export type UserDetailsData = {
+  name: string;
+  surname: string;
+  city: string;
+  nationality: string;
+  role: string;
+  departmentName: string;
+  cathedralName: string;
+  studySpecsOrSubjects: number[];
+};
+
 export type AddUpdateUserRequest = {
   name: string;
   surname: string;

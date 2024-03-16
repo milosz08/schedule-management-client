@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import {
   AddUpdateDepartment,
   DepartmentData,
+  DepartmentDetailsData,
 } from '~/cms-admin-module/models/department.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
@@ -28,6 +29,12 @@ export class DepartmentHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<DepartmentData>>(
       `${this._apiUrl}/api/v1/department/all/pageable`,
       { params }
+    );
+  }
+
+  getDepartmentDetails$(id: number): Observable<DepartmentDetailsData> {
+    return this._httpClient.get<DepartmentDetailsData>(
+      `${this._apiUrl}/api/v1/department/${id}/details`
     );
   }
 

@@ -12,6 +12,12 @@ export type StudySubjectData = {
   departmentAlias: string;
 };
 
+export type StudySubjectDetailsData = {
+  name: string;
+  departmentName: string;
+  studySpecName: string;
+};
+
 export type AddUpdateStudySubjectRequest = {
   name: string;
   departmentName: string;

@@ -10,6 +10,7 @@ import {
   AddUpdateStudySpecializationRequest,
   AddUpdateStudySpecializationResponse,
   StudySpecializationData,
+  StudySpecializationDetailsData,
 } from '~/cms-admin-module/models/study-spec.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
@@ -26,6 +27,14 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     return this._httpClient.get<Pagination<StudySpecializationData>>(
       `${this._apiUrl}/api/v1/studyspec/all/pageable`,
       { params }
+    );
+  }
+
+  getStudySpecializationDetails$(
+    id: number
+  ): Observable<StudySpecializationDetailsData> {
+    return this._httpClient.get<StudySpecializationDetailsData>(
+      `${this._apiUrl}/api/v1/studyspec/${id}/details`
     );
   }
 

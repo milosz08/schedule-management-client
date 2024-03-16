@@ -7,7 +7,10 @@ import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Pagination } from '~/cms-module/models/pagination.model';
-import { UserMessageData } from '~/cms-module/models/user-message.model';
+import {
+  UserMessageData,
+  UserMessageDetailsData,
+} from '~/cms-module/models/user-message.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
 
 @Injectable()
@@ -22,6 +25,12 @@ export class UserMessageHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<UserMessageData>>(
       `${this._apiUrl}/api/v1/contactmessage/user/all/pageable`,
       { params }
+    );
+  }
+
+  getUserMessage$(id: number): Observable<UserMessageDetailsData> {
+    return this._httpClient.get<UserMessageDetailsData>(
+      `${this._apiUrl}/api/v1/contactmessage/${id}/details`
     );
   }
 }

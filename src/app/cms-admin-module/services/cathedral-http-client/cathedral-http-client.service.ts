@@ -10,6 +10,7 @@ import {
   AddUpdateCathedralRequest,
   AddUpdateCathedralResponse,
   CathedralData,
+  CathedralDetailsData,
 } from '~/cms-admin-module/models/cathedral.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
@@ -24,6 +25,12 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<CathedralData>>(
       `${this._apiUrl}/api/v1/cathedral/all/pageable`,
       { params }
+    );
+  }
+
+  getCathedralDetails$(id: number): Observable<CathedralDetailsData> {
+    return this._httpClient.get<CathedralDetailsData>(
+      `${this._apiUrl}/api/v1/cathedral/${id}/details`
     );
   }
 

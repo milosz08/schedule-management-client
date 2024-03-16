@@ -12,6 +12,12 @@ export type CathedralData = {
   departmentAlias: string;
 };
 
+export type CathedralDetailsData = {
+  name: string;
+  alias: string;
+  departmentName: string;
+};
+
 export type AddUpdateCathedralRequest = {
   name: string;
   alias: string;

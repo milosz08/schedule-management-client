@@ -10,6 +10,7 @@ import {
   AddUpdateUserRequest,
   AddUpdateUserResponse,
   UserData,
+  UserDetailsData,
 } from '~/cms-admin-module/models/user.model';
 import { Pagination } from '~/cms-module/models/pagination.model';
 import { AbstractHttpClientProvider } from '~/shared-module/service/abstract-http-client-provider';
@@ -24,6 +25,12 @@ export class UserHttpClientService extends AbstractHttpClientProvider {
     return this._httpClient.get<Pagination<UserData>>(
       `${this._apiUrl}/api/v1/user/all/pageable`,
       { params }
+    );
+  }
+
+  getUserDetails$(id: number): Observable<UserDetailsData> {
+    return this._httpClient.get<UserDetailsData>(
+      `${this._apiUrl}/api/v1/user/${id}/details`
     );
   }
 
