@@ -46,7 +46,7 @@
       app-delete-element
       [deleteContentId]="user.id"
       [isRemovable]="(loggedUserLogin$ | async) !== user.login || user.isRemovable"
-      [editRoutePath]='"/secure/admin/users/edit/" + user.id'>
+      [editRoutePath]='"/admin/users/edit/" + user.id'>
       <td class="app-cms__table-td app-cms__table--hide-small">
         {{ user.id }}
       </td>

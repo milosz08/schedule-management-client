@@ -39,6 +39,11 @@
       height: 80px;
     }
   }
+  &-save-to-file-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
 }
 
 @media only screen and (max-width: 1280px) {

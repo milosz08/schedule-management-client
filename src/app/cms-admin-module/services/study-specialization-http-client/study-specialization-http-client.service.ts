@@ -40,8 +40,8 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
 
   createNewStudySpecialization$(
     req: AddUpdateStudySpecializationRequest
-  ): Observable<AddUpdateStudySpecializationResponse> {
-    return this._httpClient.post<AddUpdateStudySpecializationResponse>(
+  ): Observable<AddUpdateStudySpecializationResponse[]> {
+    return this._httpClient.post<AddUpdateStudySpecializationResponse[]>(
       `${this._apiUrl}/api/v1/studyspec`,
       req
     );
@@ -50,8 +50,8 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
   updateStudySpecialization$(
     id: number,
     req: AddUpdateStudySpecializationRequest
-  ): Observable<AddUpdateStudySpecializationResponse> {
-    return this._httpClient.put<AddUpdateStudySpecializationResponse>(
+  ): Observable<AddUpdateStudySpecializationResponse[]> {
+    return this._httpClient.put<AddUpdateStudySpecializationResponse[]>(
       `${this._apiUrl}/api/v1/studyspec/${id}`,
       req
     );

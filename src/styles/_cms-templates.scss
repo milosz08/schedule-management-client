@@ -186,6 +186,9 @@
       align-items: center;
       color: var(--mainBlackColor);
       font-size: 1.1rem;
+      &--capitalized {
+        text-transform: capitalize;
+      }
     }
     &-form {
       display: grid;

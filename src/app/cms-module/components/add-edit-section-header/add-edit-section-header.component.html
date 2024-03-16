@@ -12,7 +12,11 @@
     </a>
   </nav>
   <div class="app-cms__description-block-container">
-    <ng-content select="[description]" />
+    @if (currentMode === 'add') {
+    <ng-content select="[addDescription]" />
+    } @else {
+    <ng-content select="[editDescription]" />
+    }
   </div>
   @if (warningContent) {
   <div

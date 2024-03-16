@@ -29,8 +29,8 @@ export class StudyGroupHttpClientService extends AbstractHttpClientProvider {
 
   createNewStudyGroup$(
     req: AddUpdateStudyGroupRequest
-  ): Observable<AddUpdateStudyGroupResponse> {
-    return this._httpClient.post<AddUpdateStudyGroupResponse>(
+  ): Observable<AddUpdateStudyGroupResponse[]> {
+    return this._httpClient.post<AddUpdateStudyGroupResponse[]>(
       `${this._apiUrl}/api/v1/studygroup`,
       req
     );

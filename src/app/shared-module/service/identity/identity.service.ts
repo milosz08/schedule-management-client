@@ -162,4 +162,9 @@ export class IdentityService {
       map(loggedUser => loggedUser?.login || '')
     );
   }
+  get loggedUserDepartment$(): Observable<string> {
+    return this._currentLoggedUser$.pipe(
+      map(loggedUser => loggedUser?.connectedWithDepartment || '')
+    );
+  }
 }

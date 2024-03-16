@@ -38,7 +38,7 @@
     } @for (department of departments; track department.id) {
     <tr
       app-delete-element
-      [editRoutePath]="'/secure/admin/departments/edit/' + department.id"
+      [editRoutePath]="'/admin/departments/edit/' + department.id"
       [deleteContentId]="department.id"
       [isRemovable]="department.isRemovable">
       <td class="app-cms__table-td app-cms__table--hide-smal">
