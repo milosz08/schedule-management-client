@@ -54,6 +54,10 @@ export class DepartmentAddEditPageComponent
     this.unmountAllSubscriptions();
   }
 
+  handleSubmitAddEditDepartment(): void {
+    console.log('submit');
+  }
+
   checkIsFieldHasErrors(controlName: string): boolean {
     return this.checkFormFieldErrors(this.addEditDepartmentForm, controlName);
   }

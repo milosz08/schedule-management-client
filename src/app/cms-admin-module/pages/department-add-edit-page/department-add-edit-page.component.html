@@ -29,6 +29,66 @@
 <app-add-edit-column-wrapper
   [formHeader]="(currentMode | isCreationMode) ? 'Dodaj wydział' : 'Edytuj wydział'"
   resultHeader="Informacje o wydziale">
+  <ng-container form>
+    <form
+      [formGroup]="addEditDepartmentForm"
+      (ngSubmit)="handleSubmitAddEditDepartment()"
+      class="app-cms__grid-form app-cms__add-new-content-form-container">
+      <label for="add-department-form___name" class="app-cms__grid-label">
+        Nazwa wydziału:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-department-form___name"
+          formControlName="name"
+          placeholder="np. Elektryczny"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors('name')) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać nazwę wydziału
+        </div>
+        }
+      </div>
+      <label for="add-department-form___alias" class="app-cms__grid-label">
+        Alias wydziału:
+      </label>
+      <div>
+        <input
+          type="text"
+          id="add-department-form___alias"
+          formControlName="alias"
+          placeholder="np. RE"
+          maxlength="4"
+          class="app__input app__input--light app__input--exclude-margin" />
+        @if (checkIsFieldHasErrors('alias')) {
+        <div
+          class="app__input-error app__input-error--light app__input-error--margin-top">
+          Proszę wpisać alias wydziału
+        </div>
+        }
+      </div>
+      <div></div>
+      <div class="cms__simple-grid__submit-button">
+        <button
+          [disabled]="!addEditDepartmentForm.valid || (isLoading$ | async)"
+          type="submit"
+          class="app__button app__button--full-width app__button--light"
+          title="Kliknij aby dodać nowy wydział">
+          {{ (currentMode | isEditMode) ? 'Edytuj wybrany' : 'Dodaj nowy' }}
+          wydział @if (isLoading$ | async) {
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else {
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </ng-container>
   <ng-container result>
     @if (addEditDepartmentRes) {
     <div
