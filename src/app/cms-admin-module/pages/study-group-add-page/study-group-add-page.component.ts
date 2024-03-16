@@ -37,7 +37,7 @@ export class StudyGroupAddPageComponent
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    console.log();
   }
 
   ngOnDestroy(): void {
