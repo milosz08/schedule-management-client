@@ -5,25 +5,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from '~/shared-module/pages/not-found-page/not-found-page.component';
-import { CathedralAddPageComponent } from './pages/cathedral-add-page/cathedral-add-page.component';
-import { CathedralEditPageComponent } from './pages/cathedral-edit-page/cathedral-edit-page.component';
+import { CathedralAddEditPageComponent } from './pages/cathedral-add-edit-page/cathedral-add-edit-page.component';
 import { CathedralsPageComponent } from './pages/cathedrals-page/cathedrals-page.component';
-import { DepartmentAddPageComponent } from './pages/department-add-page/department-add-page.component';
-import { DepartmentEditPageComponent } from './pages/department-edit-page/department-edit-page.component';
+import { DepartmentAddEditPageComponent } from './pages/department-add-edit-page/department-add-edit-page.component';
 import { DepartmentsPageComponent } from './pages/departments-page/departments-page.component';
 import { StudyGroupAddPageComponent } from './pages/study-group-add-page/study-group-add-page.component';
 import { StudyGroupsPageComponent } from './pages/study-groups-page/study-groups-page.component';
-import { StudyRoomAddPageComponent } from './pages/study-room-add-page/study-room-add-page.component';
-import { StudyRoomEditPageComponent } from './pages/study-room-edit-page/study-room-edit-page.component';
+import { StudyRoomAddEditPageComponent } from './pages/study-room-add-edit-page/study-room-add-edit-page.component';
 import { StudyRoomsPageComponent } from './pages/study-rooms-page/study-rooms-page.component';
-import { StudySpecializationAddPageComponent } from './pages/study-specialization-add-page/study-specialization-add-page.component';
-import { StudySpecializationEditPageComponent } from './pages/study-specialization-edit-page/study-specialization-edit-page.component';
+import { StudySpecializationAddEditPageComponent } from './pages/study-specialization-add-edit-page/study-specialization-add-edit-page.component';
 import { StudySpecializationsPageComponent } from './pages/study-specializations-page/study-specializations-page.component';
-import { StudySubjectAddPageComponent } from './pages/study-subject-add-page/study-subject-add-page.component';
-import { StudySubjectEditPageComponent } from './pages/study-subject-edit-page/study-subject-edit-page.component';
+import { StudySubjectAddEditPageComponent } from './pages/study-subject-add-edit-page/study-subject-add-edit-page.component';
 import { StudySubjectsPageComponent } from './pages/study-subjects-page/study-subjects-page.component';
-import { UserAddPageComponent } from './pages/user-add-page/user-add-page.component';
-import { UserEditPageComponent } from './pages/user-edit-page/user-edit-page.component';
+import { UserAddEditPageComponent } from './pages/user-add-edit-page/user-add-edit-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 
 const routes: Routes = [
@@ -34,12 +28,14 @@ const routes: Routes = [
   },
   {
     path: 'cathedrals/add',
-    component: CathedralAddPageComponent,
+    component: CathedralAddEditPageComponent,
+    data: { mode: 'add' },
     title: 'Dodaj katedrę',
   },
   {
-    path: 'cathedrals/edit/:cathId',
-    component: CathedralEditPageComponent,
+    path: 'cathedrals/edit/:id',
+    component: CathedralAddEditPageComponent,
+    data: { mode: 'edit' },
     title: 'Edytuj katedrę',
   },
   {
@@ -49,12 +45,14 @@ const routes: Routes = [
   },
   {
     path: 'departments/add',
-    component: DepartmentAddPageComponent,
+    component: DepartmentAddEditPageComponent,
+    data: { mode: 'add' },
     title: 'Dodaj wydział',
   },
   {
-    path: 'departments/edit/:deptId',
-    component: DepartmentEditPageComponent,
+    path: 'departments/edit/:id',
+    component: DepartmentAddEditPageComponent,
+    data: { mode: 'edit' },
     title: 'Edytuj wydział',
   },
   {
@@ -74,12 +72,14 @@ const routes: Routes = [
   },
   {
     path: 'study-rooms/add',
-    component: StudyRoomAddPageComponent,
+    component: StudyRoomAddEditPageComponent,
+    data: { mode: 'add' },
     title: 'Dodaj salę',
   },
   {
-    path: 'study-rooms/edit/:roomId',
-    component: StudyRoomEditPageComponent,
+    path: 'study-rooms/edit/:id',
+    component: StudyRoomAddEditPageComponent,
+    data: { mode: 'edit' },
     title: 'Edytuj salę',
   },
   {
@@ -89,12 +89,14 @@ const routes: Routes = [
   },
   {
     path: 'study-specializations/add',
-    component: StudySpecializationAddPageComponent,
+    component: StudySpecializationAddEditPageComponent,
+    data: { mode: 'add' },
     title: 'Dodaj kierunek studiów',
   },
   {
-    path: 'study-specializations/edit/:specId',
-    component: StudySpecializationEditPageComponent,
+    path: 'study-specializations/edit/:id',
+    component: StudySpecializationAddEditPageComponent,
+    data: { mode: 'edit' },
     title: 'Edytuj kierunek studiów',
   },
   {
@@ -104,12 +106,14 @@ const routes: Routes = [
   },
   {
     path: 'study-subjects/add',
-    component: StudySubjectAddPageComponent,
+    component: StudySubjectAddEditPageComponent,
+    data: { mode: 'add' },
     title: 'Dodaj przedmiot',
   },
   {
-    path: 'study-subjects/edit/:subjId',
-    component: StudySubjectEditPageComponent,
+    path: 'study-subjects/edit/:id',
+    component: StudySubjectAddEditPageComponent,
+    data: { mode: 'edit' },
     title: 'Edytuj przedmiot',
   },
   {
@@ -119,12 +123,14 @@ const routes: Routes = [
   },
   {
     path: 'users/add',
-    component: UserAddPageComponent,
+    component: UserAddEditPageComponent,
+    data: { mode: 'add' },
     title: 'Dodaj użytkownika',
   },
   {
-    path: 'users/edit/:userId',
-    component: UserEditPageComponent,
+    path: 'users/edit/:id',
+    component: UserAddEditPageComponent,
+    data: { mode: 'edit' },
     title: 'Edytuj użytkownika',
   },
   {

@@ -1,0 +1,80 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<app-add-edit-section-header
+  [header]="(currentMode | isCreationMode) ? 'Dodawanie nowej sali' : 'Edycja wybranej sali'"
+  [currentMode]="currentMode"
+  returnUrl="/secure/admin/study-rooms"
+  returnText="Powrót do listy sal">
+  <ng-container addDescription>
+    W tej sekcji możesz dodać nową salę zajęciową. Każda sala jest przypisana do
+    konkretnej katedry (a katedra do wydziału). Każda sala musi posiadać również
+    jej typ przeznaczenia (wykładowa/laboratoryjna itp.). Jeśli sala nie posiada
+    sprecyzowanego typu, należy wybrać opcję "inna". Należy również podać
+    pojemność sali (jako wartość całkowita) indentyfikująca maksymalną ilość
+    osób jaka może przebywać w sali w tym samym czasie. Można dodać którki opis
+    sali, ale nie jest on wymagany (należy zostawić puste pole).
+  </ng-container>
+  <ng-container editDescription>
+    W tej sekcji możesz edytować część informacji o wybranej sali zajęciowej.
+  </ng-container>
+  @if (currentMode | isEditMode) {
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć salę zajęciową i stworzyć nową.
+    Zalecamy korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do
+    utraty głębiej położonych zasobów w systemie.
+  </ng-template>
+  }
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  [formHeader]="(currentMode | isCreationMode) ? 'Dodaj salę' : 'Edytuj salę'"
+  resultHeader="Informacje o sali">
+  <ng-container result>
+    @if (addEditStudyRoomRes) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu.
+    </div>
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Nazwa (alias) sali:</div>
+      <div class="app-cms__grid-text">{{ addEditStudyRoomRes.name }}</div>
+      @if (addEditStudyRoomRes.description) {
+      <div class="app-cms__grid-label">Dodatkowy opis sali:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudyRoomRes.description }}
+      </div>
+      }
+      <div class="app-cms__grid-label">Wydział:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudyRoomRes.departmentFullName }}
+      </div>
+      <div class="app-cms__grid-label">Katedra:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudyRoomRes.cathedralFullName }}
+      </div>
+      <div class="app-cms__grid-label">Pojemność sali:</div>
+      <div class="app-cms__grid-text">{{ addEditStudyRoomRes.capacity }}</div>
+      <div class="app-cms__grid-label">Typ sali:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudyRoomRes.roomTypeFullName }}
+      </div>
+    </div>
+    } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po {{ (currentMode | isEditMode) ? 'edycji' : 'dodaniu nowej' }} sali
+      zajęciowej w tym oknie zostaną wyświetlone informacje o {{ (currentMode |
+      isEditMode) ? 'edytowanej' : 'dodanej' }} sali (nazwa oraz alias) oraz
+      inne powiązanie z nią informacje (wydział, katedra itp.) Informacje te
+      zostaną utracone po przeładowaniu strony.
+    </div>
+    } }
+  </ng-container>
+</app-add-edit-column-wrapper>

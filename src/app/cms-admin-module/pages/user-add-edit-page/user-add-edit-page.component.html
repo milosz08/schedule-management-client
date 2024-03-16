@@ -1,0 +1,98 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<app-add-edit-section-header
+  [header]="(currentMode | isCreationMode) ? 'Dodawanie nowego użytkownika' : 'Edycja użytkownika'"
+  [currentMode]="currentMode"
+  returnUrl="/secure/admin/users"
+  returnText="Powrót do listy użytkowników">
+  <ng-container addDescription>
+    W tej sekcji możesz dodać nowego użytkownika do systemu. Początkowe dane
+    jakie należy wprowadzić to imię, nazwisko, miejsce zamieszkania oraz kraj
+    pochodzenia. W rezultacie serwer wygeneruje login, początkowe hasło oraz
+    dostęp do poczty. Potwierdzenie zostanie wysłane na Twój adres email. Dane
+    uwierzytelniające do systemu zostaną wysłane użytkownikowi na stworzoną
+    skrzynkę pocztową. Twoim zadaniem po stworzeniu użytkownika jest przekazać
+    mu dane logowania do poczty (dane te są również dostępne w sekcji
+    dodatkowych informacji).
+  </ng-container>
+  <ng-container editDescription>
+    W tej sekcji możesz edytować część informacji o wybranym użytkowniku
+    systemu.
+  </ng-container>
+  @if (currentMode | isEditMode) {
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć użytkownika i stworzyć nowego.
+    Zalecamy korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do
+    utraty głębiej położonych zasobów w systemie.
+  </ng-template>
+  }
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  [formHeader]="(currentMode | isCreationMode) ? 'Dodaj użytkownika' : 'Edytuj użytkownika'"
+  resultHeader="Informacje o użytkowniku">
+  <ng-container result>
+    @if (addEditUserRes) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu. Zaleca się zapisanie ich do pliku tekstowego.
+    </div>
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Imię i nazwisko:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditUserRes.name }} {{ addEditUserRes.surname }}
+      </div>
+      <div class="app-cms__grid-label">Miejscowość zamieszkania:</div>
+      <div class="app-cms__grid-text">{{ addEditUserRes.city }}</div>
+      <div class="app-cms__grid-label">Narodowość:</div>
+      <div class="app-cms__grid-text">{{ addEditUserRes.nationality }}</div>
+      <div class="app-cms__grid-label">Rola użytkownika:</div>
+      <div class="app-cms__grid-text app-cms__grid-text--capitalized">
+        {{ addEditUserRes.role }}
+      </div>
+      <div class="app-cms__grid-label">Adres email:</div>
+      <div class="app-cms__grid-text">{{ addEditUserRes.email }}</div>
+      <div class="app-cms__grid-label">Hasło do adresu email:</div>
+      <div class="app-cms__grid-text">{{ addEditUserRes.emailPassword }}</div>
+      @if (addEditUserRes.departmentData && addEditUserRes.cathedralData) {
+      <div class="app-cms__grid-label">Przypisany do wydziału:</div>
+      <div class="app-cms__grid-text">{{ addEditUserRes.departmentData }}</div>
+      <div class="app-cms__grid-label">Przypisany do katedry:</div>
+      <div class="app-cms__grid-text">{{ addEditUserRes.cathedralData }}</div>
+      }
+    </div>
+    <div class="app-cms__add-new-content-save-to-file-container">
+      <button
+        (click)="handleSaveUserToFile()"
+        class="app__button app__button--hollow-light app__button--full-size-window"
+        title="Kliknij aby zapisać dane do pliku .txt">
+        Zapisz do pliku .txt
+        <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+      </button>
+    </div>
+    } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po {{ (currentMode | isEditMode) ? 'edycji' : 'dodaniu nowego' }}
+      użytkownika w tym oknie zostanie wyświetlona wygenerowana zawartość przez
+      serwer składająca się na imię, nazwisko oraz podstawowe informacje poczty.
+      @if (currentMode | isCreationMode) { Kopia zostanie również wysłana na
+      adres email. }
+    </div>
+    @if (currentMode | isCreationMode) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Część informacji (takich jak na przykład wygenerowane hasło dla
+      użytkownika) zostanie wysłane w wiadomości email tylko i wyłącznie do
+      stworzonego użytkownika (z uwagi na ochronę danych).
+    </div>
+    } } }
+  </ng-container>
+</app-add-edit-column-wrapper>

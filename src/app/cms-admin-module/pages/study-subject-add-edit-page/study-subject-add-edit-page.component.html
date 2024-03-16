@@ -1,0 +1,67 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<app-add-edit-section-header
+  [header]="(currentMode | isCreationMode) ? 'Dodawanie nowego przedmiotu' : 'Edycja przedmiotu'"
+  [currentMode]="currentMode"
+  returnUrl="/secure/admin/study-subjects"
+  returnText="Powrót do listy przedmiotów">
+  <ng-container addDescription>
+    W tej sekcji możesz dodać nowy przedmiot. Każdy przedmiot należy przypisać
+    do konkretnego kierunku na wybranym wydziale. Należy wówczas pamiętać, że w
+    ogranizatorze planu (przy wybranym kierunku) tylko przypisane do niego
+    przedmioty będą możliwe do dodania.
+  </ng-container>
+  <ng-container editDescription>
+    W tej sekcji możesz edytować część informacji o wybranym przedmiocie.
+  </ng-container>
+  @if (currentMode | isEditMode) {
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć przedmiot i stworzyć nowy.
+    Zalecamy korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do
+    utraty głębiej położonych zasobów w systemie.
+  </ng-template>
+  }
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  [formHeader]="(currentMode | isCreationMode) ? 'Dodaj przedmiot' : 'Edytuj przedmiot'"
+  resultHeader="Informacje o przedmiocie">
+  <ng-container result>
+    @if (addEditStudySubjectRes) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu.
+    </div>
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Nazwa przedmiotu:</div>
+      <div class="app-cms__grid-text">{{ addEditStudySubjectRes.name }}</div>
+      <div class="app-cms__grid-label">Alias przedmiotu:</div>
+      <div class="app-cms__grid-text">{{ addEditStudySubjectRes.alias }}</div>
+      <div class="app-cms__grid-label">Wydział:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudySubjectRes.departmentFullName }}
+      </div>
+      <div class="app-cms__grid-label">Kierunek:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudySubjectRes.studySpecFullName }}
+      </div>
+    </div>
+    } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po {{ (currentMode | isEditMode) ? 'edycji' : 'dodaniu nowego' }}
+      przedmiotu w tym oknie zostaną wyświetlone informacje o {{ (currentMode |
+      isEditMode) ? 'edytowanym' : 'dodanym' }} przedmiocie (nazwa oraz alias)
+      oraz inne powiązanie z nim informacje (wydział, kierunek itp.) Informacje
+      te zostaną utracone po przeładowaniu strony.
+    </div>
+    } }
+  </ng-container>
+</app-add-edit-column-wrapper>

@@ -1,0 +1,63 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<app-add-edit-section-header
+  [header]="(currentMode | isCreationMode) ? 'Dodawanie nowej katedry' : 'Edycja wybranej katedry'"
+  [currentMode]="currentMode"
+  returnUrl="/secure/admin/cathedrals"
+  returnText="Powrót do listy katedr">
+  <ng-container addDescription>
+    W tej sekcji możesz dodać nową katedrę do wydziału. Pamiętaj, że aby było
+    możliwe stworzenie nowej katedry, musi istnieć co najmniej jeden wydział w
+    systemie. Jeśli tak nie jest, przejdź do zakładki "wydziały" aby dodać nowy
+    wydział. Nazwę katedry należy podać bez słowa "katedra" w nazwie.
+  </ng-container>
+  <ng-container editDescription>
+    W tej sekcji możesz edytować część informacji o wybranej katedrze.
+  </ng-container>
+  @if (currentMode | isEditMode) {
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć katedrę i stworzyć nową. Zalecamy
+    korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do utraty
+    głębiej położonych zasobów w systemie.
+  </ng-template>
+  }
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  [formHeader]="(currentMode | isCreationMode) ? 'Dodaj katedrę' : 'Edytuj katedrę'"
+  resultHeader="Informacje o katedrze">
+  <ng-container result>
+    @if (addEditCathedralRes) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu.
+    </div>
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Nazwa katedry:</div>
+      <div class="app-cms__grid-text">{{ addEditCathedralRes.name }}</div>
+      <div class="app-cms__grid-label">Alias nazwy katedry:</div>
+      <div class="app-cms__grid-text">{{ addEditCathedralRes.alias }}</div>
+      <div class="app-cms__grid-label">Nazwa wydziału katedry:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditCathedralRes.departmentFullName }}
+      </div>
+    </div>
+    } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po {{ (currentMode | isEditMode) ? 'edycji' : 'dodaniu nowego' }} katedry
+      w tym oknie zostaną wyświetlone informacje o {{ (currentMode | isEditMode)
+      ? 'edytowanej' : 'dodanej' }} katedrze (nazwa oraz alias) oraz dodatkowe
+      powiązane z nią informacje. Informacje te zostaną utracone po
+      przeładowaniu strony.
+    </div>
+    } }
+  </ng-container>
+</app-add-edit-column-wrapper>

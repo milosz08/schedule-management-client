@@ -1,0 +1,76 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<app-add-edit-section-header
+  [header]="(currentMode | isCreationMode) ? 'Dodawanie nowego kierunku studiów' : 'Edycja kierunku studiów'"
+  [currentMode]="currentMode"
+  returnUrl="/secure/admin/study-specializations"
+  returnText="Powrót do listy kierunków studiów">
+  <ng-container addDescription>
+    W tej sekcji możesz dodać nowy kierunek studiów. Formularz składa się z pola
+    nazwy kierunku, aliasu nazwy kierunku (skrótu używanego w planie zajęć),
+    przypisanego wydziału, typu kierunku oraz stopnia studiów (w przypadku dwóch
+    ostatnich do wyboru możliwe odpowiednio: stacjonarny lub niestacjonarny oraz
+    I stopień i II stopień). Można również wybrać opcję "oba" - wówczas utworzą
+    się dwa takie same kierunki, odpowiednio: stacjonarny i niestacjonarny oraz
+    I stopnia i II stopnia.
+  </ng-container>
+  <ng-container editDescription>
+    W tej sekcji możesz edytować część informacji o wybranym kierunku studiów.
+  </ng-container>
+  @if (currentMode | isEditMode) {
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć kierunek studiów i stworzyć nowy.
+    Zalecamy korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do
+    utraty głębiej położonych zasobów w systemie.
+  </ng-template>
+  }
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  [formHeader]="(currentMode | isCreationMode) ? 'Dodaj kierunek' : 'Edytuj kierunek'"
+  resultHeader="Informacje o kierunku">
+  <ng-container result>
+    @if (addEditStudySpecsRes.length > 0) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu.
+    </div>
+    @for (addEditStudySpecRes of addEditStudySpecsRes; track
+    addEditStudySpecRes.name) {
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Nazwa kierunku:</div>
+      <div class="app-cms__grid-text">{{ addEditStudySpecRes.name }}</div>
+      <div class="app-cms__grid-label">Alias nazwy kierunku:</div>
+      <div class="app-cms__grid-text">{{ addEditStudySpecRes.alias }}</div>
+      <div class="app-cms__grid-label">Przypisany do wydziału:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudySpecRes.departmentFullName }}
+      </div>
+      <div class="app-cms__grid-label">Typ kierunku:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudySpecRes.studyTypeFullName }}
+      </div>
+      <div class="app-cms__grid-label">Stopień studiów:</div>
+      <div class="app-cms__grid-text">
+        {{ addEditStudySpecRes.studyDegreeFullName }}
+      </div>
+    </div>
+    } } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po {{ (currentMode | isEditMode) ? 'edycji' : 'dodaniu nowego' }} kierunku
+      w tym oknie zostaną wyświetlone informacje o {{ (currentMode | isEditMode)
+      ? 'edytowanym' : 'dodanym' }} kierunku oraz powiązanego z nim wydziału
+      (nazwa oraz alias). Informacje te zostaną utracone po przeładowaniu
+      strony.
+    </div>
+    } }
+  </ng-container>
+</app-add-edit-column-wrapper>

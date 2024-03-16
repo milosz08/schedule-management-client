@@ -1,0 +1,58 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<app-add-edit-section-header
+  [header]="(currentMode | isCreationMode) ? 'Dodawanie nowego wydziału' : 'Edycja wybranego wydziału'"
+  [currentMode]="currentMode"
+  returnUrl="/secure/admin/departments"
+  returnText="Powrót do listy wydziałów">
+  <ng-container addDescription>
+    W tej sekcji możesz dodać nowy wydział. Wydział składa się z nazwy wydziału
+    oraz aliasu (kliku-literowego skrótu) używanego głównie na planach zajęć
+    poszczególnych jednostek (grup) funkcyjnych. Uwaga! Nazwę wydziału należy
+    wprowadzać bez słowa "wydział" np. (Wydział) Elektryczny.
+  </ng-container>
+  <ng-container editDescription>
+    W tej sekcji możesz edytować część informacji o wybranym wydziale.
+  </ng-container>
+  @if (currentMode | isEditMode) {
+  <ng-template #warning>
+    Część informacji nie podlega edycji. W przypadku chęci zmiany parametrów
+    które nie podlegają edycji, należy usunąć wydział i stworzyć nowy. Zalecamy
+    korzystanie z tej funkcjonalności rozważnie, ponieważ może dojść do utraty
+    głębiej położonych zasobów w systemie.
+  </ng-template>
+  }
+</app-add-edit-section-header>
+<app-add-edit-column-wrapper
+  [formHeader]="(currentMode | isCreationMode) ? 'Dodaj wydział' : 'Edytuj wydział'"
+  resultHeader="Informacje o wydziale">
+  <ng-container result>
+    @if (addEditDepartmentRes) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu.
+    </div>
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Nazwa wydziału:</div>
+      <div class="app-cms__grid-text">{{ addEditDepartmentRes.name }}</div>
+      <div class="app-cms__grid-label">Alias nazwy wydziału:</div>
+      <div class="app-cms__grid-text">{{ addEditDepartmentRes.alias }}</div>
+    </div>
+    } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po {{ (currentMode | isEditMode) ? 'edycji' : 'dodaniu nowego' }} wydziału
+      w tym oknie zostaną wyświetlone informacje o {{ (currentMode | isEditMode)
+      ? 'edytowanym' : 'dodanym' }} wydziale (nazwa oraz alias). Informacje te
+      zostaną utracone po przeładowaniu strony.
+    </div>
+    } }
+  </ng-container>
+</app-add-edit-column-wrapper>

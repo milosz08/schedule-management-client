@@ -7,7 +7,7 @@
   header="Dodawanie nowej grupy"
   returnUrl="/secure/admin/study-groups"
   returnText="Powróć do listy grup">
-  <ng-container description>
+  <ng-container addDescription>
     W tej sekcji możesz dodać nową grupę dziekańską. Na grupę składa się
     przypisanie do wydziału oraz wybranego kierunku na wybranym semestrze.
     Możesz również stworzyć więcej grup dziekańskich (jednak fizycznie nie będą
@@ -23,4 +23,39 @@
 <app-add-edit-column-wrapper
   formHeader="Dodaj grupę"
   resultHeader="Informacje o grupie">
+  <ng-container result>
+    @if (addStudyGroupsRes.length > 0) {
+    <div
+      class="app-cms__description-block-container app-cms__description-block-container--warning-info">
+      Uwaga! Informacje po odświeżeniu strony, bądź przejścia pod inny adres
+      zostaną usunięte z podglądu.
+    </div>
+    @for (studyGroupRes of addStudyGroupsRes; track studyGroupRes.name) {
+    <div class="app-cms__grid-form app-cms__add-new-content-info-container">
+      <div class="app-cms__grid-label">Nazwa grupy:</div>
+      <div class="app-cms__grid-text">{{ studyGroupRes.name }}</div>
+      <div class="app-cms__grid-label">Nazwa wydziału:</div>
+      <div class="app-cms__grid-text">
+        {{ studyGroupRes.departmentFullName }}
+      </div>
+      <div class="app-cms__grid-label">Nazwa kierunku:</div>
+      <div class="app-cms__grid-text">
+        {{ studyGroupRes.studySpecFullName }}
+      </div>
+      <div class="app-cms__grid-label">Semestr:</div>
+      <div class="app-cms__grid-text">{{ studyGroupRes.semesterName }}</div>
+    </div>
+    } } @else { @if (isLoading$ | async) {
+    <div class="app-cms__add-new-content-suspense-loading-container">
+      <img src="assets/gif/suspense-loading-dark.gif" alt="" />
+    </div>
+    } @else {
+    <div class="app-cms__description-block-container">
+      Po dodaniu nowej grupy dziekańskiej w tym oknie zostaną wyświetlone
+      informacje o dodanej grupie (nazwa oraz alias) oraz inne powiązanie z nią
+      informacje (wydział, kierunek itp.) Informacje te zostaną utracone po
+      przeładowaniu strony.
+    </div>
+    } }
+  </ng-container>
 </app-add-edit-column-wrapper>
