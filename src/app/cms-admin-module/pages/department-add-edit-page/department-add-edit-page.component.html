@@ -97,9 +97,13 @@
       zostaną usunięte z podglądu.
     </div>
     <div class="app-cms__grid-form app-cms__add-new-content-info-container">
-      <div class="app-cms__grid-label">Nazwa wydziału:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Nazwa wydziału:
+      </div>
       <div class="app-cms__grid-text">{{ addEditDepartmentRes.name }}</div>
-      <div class="app-cms__grid-label">Alias nazwy wydziału:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Alias nazwy wydziału:
+      </div>
       <div class="app-cms__grid-text">{{ addEditDepartmentRes.alias }}</div>
     </div>
     } @else { @if (isLoading$ | async) {

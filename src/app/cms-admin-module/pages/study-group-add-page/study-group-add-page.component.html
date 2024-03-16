@@ -32,17 +32,25 @@
     </div>
     @for (studyGroupRes of addStudyGroupsRes; track studyGroupRes.name) {
     <div class="app-cms__grid-form app-cms__add-new-content-info-container">
-      <div class="app-cms__grid-label">Nazwa grupy:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Nazwa grupy:
+      </div>
       <div class="app-cms__grid-text">{{ studyGroupRes.name }}</div>
-      <div class="app-cms__grid-label">Nazwa wydziału:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Nazwa wydziału:
+      </div>
       <div class="app-cms__grid-text">
         {{ studyGroupRes.departmentFullName }}
       </div>
-      <div class="app-cms__grid-label">Nazwa kierunku:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Nazwa kierunku:
+      </div>
       <div class="app-cms__grid-text">
         {{ studyGroupRes.studySpecFullName }}
       </div>
-      <div class="app-cms__grid-label">Semestr:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Semestr:
+      </div>
       <div class="app-cms__grid-text">{{ studyGroupRes.semesterName }}</div>
     </div>
     } } @else { @if (isLoading$ | async) {

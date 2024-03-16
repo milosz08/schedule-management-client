@@ -42,26 +42,42 @@
       zostaną usunięte z podglądu. Zaleca się zapisanie ich do pliku tekstowego.
     </div>
     <div class="app-cms__grid-form app-cms__add-new-content-info-container">
-      <div class="app-cms__grid-label">Imię i nazwisko:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Imię i nazwisko:
+      </div>
       <div class="app-cms__grid-text">
         {{ addEditUserRes.name }} {{ addEditUserRes.surname }}
       </div>
-      <div class="app-cms__grid-label">Miejscowość zamieszkania:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Miejscowość zamieszkania:
+      </div>
       <div class="app-cms__grid-text">{{ addEditUserRes.city }}</div>
-      <div class="app-cms__grid-label">Narodowość:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Narodowość:
+      </div>
       <div class="app-cms__grid-text">{{ addEditUserRes.nationality }}</div>
-      <div class="app-cms__grid-label">Rola użytkownika:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Rola użytkownika:
+      </div>
       <div class="app-cms__grid-text app-cms__grid-text--capitalized">
         {{ addEditUserRes.role }}
       </div>
-      <div class="app-cms__grid-label">Adres email:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Adres email:
+      </div>
       <div class="app-cms__grid-text">{{ addEditUserRes.email }}</div>
-      <div class="app-cms__grid-label">Hasło do adresu email:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Hasło do adresu email:
+      </div>
       <div class="app-cms__grid-text">{{ addEditUserRes.emailPassword }}</div>
       @if (addEditUserRes.departmentData && addEditUserRes.cathedralData) {
-      <div class="app-cms__grid-label">Przypisany do wydziału:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Przypisany do wydziału:
+      </div>
       <div class="app-cms__grid-text">{{ addEditUserRes.departmentData }}</div>
-      <div class="app-cms__grid-label">Przypisany do katedry:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Przypisany do katedry:
+      </div>
       <div class="app-cms__grid-text">{{ addEditUserRes.cathedralData }}</div>
       }
     </div>

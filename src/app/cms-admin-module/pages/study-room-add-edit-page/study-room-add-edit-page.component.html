@@ -40,25 +40,37 @@
       zostaną usunięte z podglądu.
     </div>
     <div class="app-cms__grid-form app-cms__add-new-content-info-container">
-      <div class="app-cms__grid-label">Nazwa (alias) sali:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Nazwa (alias) sali:
+      </div>
       <div class="app-cms__grid-text">{{ addEditStudyRoomRes.name }}</div>
       @if (addEditStudyRoomRes.description) {
-      <div class="app-cms__grid-label">Dodatkowy opis sali:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Dodatkowy opis sali:
+      </div>
       <div class="app-cms__grid-text">
         {{ addEditStudyRoomRes.description }}
       </div>
       }
-      <div class="app-cms__grid-label">Wydział:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Wydział:
+      </div>
       <div class="app-cms__grid-text">
         {{ addEditStudyRoomRes.departmentFullName }}
       </div>
-      <div class="app-cms__grid-label">Katedra:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Katedra:
+      </div>
       <div class="app-cms__grid-text">
         {{ addEditStudyRoomRes.cathedralFullName }}
       </div>
-      <div class="app-cms__grid-label">Pojemność sali:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Pojemność sali:
+      </div>
       <div class="app-cms__grid-text">{{ addEditStudyRoomRes.capacity }}</div>
-      <div class="app-cms__grid-label">Typ sali:</div>
+      <div class="app-cms__grid-label app-cms__grid-label--single-line">
+        Typ sali:
+      </div>
       <div class="app-cms__grid-text">
         {{ addEditStudyRoomRes.roomTypeFullName }}
       </div>
