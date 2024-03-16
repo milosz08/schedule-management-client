@@ -12,6 +12,8 @@ import { CmsModule } from '~/cms-module/cms.module';
 import { SharedModule } from '~/shared-module/shared.module';
 import { CmsAdminRoutingModule } from './cms-admin-routing.module';
 import { AddEditColumnWrapperComponent } from './components/add-edit-column-wrapper/add-edit-column-wrapper.component';
+import { DeptWithCathComponent } from './components/dept-with-cath/dept-with-cath.component';
+import { DeptWithStudySpecComponent } from './components/dept-with-study-spec/dept-with-study-spec.component';
 import { CathedralAddEditPageComponent } from './pages/cathedral-add-edit-page/cathedral-add-edit-page.component';
 import { CathedralsPageComponent } from './pages/cathedrals-page/cathedrals-page.component';
 import { DepartmentAddEditPageComponent } from './pages/department-add-edit-page/department-add-edit-page.component';
@@ -44,6 +46,8 @@ import { UserHttpClientService } from './services/user-http-client/user-http-cli
     CathedralsPageComponent,
     DepartmentAddEditPageComponent,
     DepartmentsPageComponent,
+    DeptWithCathComponent,
+    DeptWithStudySpecComponent,
     IsCreationModePipe,
     IsEditModePipe,
     RoleToViewPipe,

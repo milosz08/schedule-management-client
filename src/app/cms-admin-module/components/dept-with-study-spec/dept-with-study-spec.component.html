@@ -1,0 +1,32 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+@if (formGroup) {
+<label [for]="labelId + '-form___department'" class="app-cms__grid-label">
+  Wydział:
+</label>
+<app-select-drop-box-template
+  [formGroup]="formGroup"
+  [optionsList]="departments"
+  (emitNewQuery)="handleEmitDepartmentName($event)"
+  (addedValue)="studySpecVisibily = true"
+  formControlId="departmentName"
+  [selectId]='labelId + "-form___department"'
+  placeholder="np. Elektryczny"
+  errorField="prawidłowy wydział" />
+@if (studySpecVisibily) {
+<label [for]="labelId + '-form___study-spec'" class="app-cms__grid-label">
+  Kierunek studiów:
+</label>
+<app-select-drop-box-template
+  [formGroup]="formGroup"
+  [optionsList]="studySpecs"
+  (emitNewQuery)="handleEmitStudySpecName($event)"
+  (addedValue)="emitNextSelection.emit()"
+  formControlId="studySpecName"
+  [selectId]='labelId + "-form___study-spec"'
+  placeholder="np. Informatyka"
+  errorField="prawidłowy kierunek studiów" />
+} }
