@@ -17,7 +17,7 @@
     type="text"
     autocomplete="off"
     class="app__input app__input--light app__input--exclude-margin select-drop-box__custom-select-input" />
-  @if (listElements.length > 0 && listVisible) {
+  @if (listVisible) { @if (listElements.length > 0) {
   <ul class="app-select-list__list-container">
     @for (result of listElements; track result) {
     <li class="app-select-list__list-element">
@@ -27,7 +27,9 @@
     </li>
     }
   </ul>
-  }
+  } @else {
+  <li class="app-select-list__list-no-content-container">Brak danych</li>
+  } }
   <ng-icon class="app__select__arrow-icon" name="matKeyboardArrowDown" />
 </div>
 @if (validateFormField()) {

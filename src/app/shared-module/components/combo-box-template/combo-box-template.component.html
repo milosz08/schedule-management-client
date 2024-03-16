@@ -20,18 +20,21 @@
       name="matKeyboardArrowDown"
       class="app__select__arrow-icon combo-box__arrow" />
   </button>
-  @if (isListVisible && allOptions.length > 0) {
+  @if (isListVisible) {
   <div class="combo-box__list-container">
     <ul class="combo-box__list-wrapper">
-      @for (option of allOptions; track option.id) {
+      @if (allOptions.length > 0) { @for (option of allOptions; track option.id)
+      {
       <li class="combo-box__list-element">
         <app-checkbox-template
           [checkboxLabel]="option.name"
           [isWhiteBackground]="true"
           [isCheckedInitial]="checkedInitial(option.id)"
           [checkboxValue]="checkedInitial(option.id)"
-          (checkedEmitter)="handleToggleValuesInArray($event, option.id)" />
+          (checkboxEmitter)="handleToggleValuesInArray($event, option.id)" />
       </li>
+      } } @else {
+      <li class="app-select-list__list-no-content-container">Brak danych</li>
       }
     </ul>
   </div>

@@ -18,14 +18,16 @@
     (input)="handleInsertInput($event)"
     class="app__input app__input--light app__input--exclude-margin select-drop-box__custom-select-input" />
   <select class="select-drop-box__select"></select>
-  @if (isListVisible && optionsList.length > 0) {
+  @if (isListVisible) {
   <ul class="app-select-list__list-container">
-    @for (option of optionsList; track option) {
+    @if (optionsList.length > 0) { @for (option of optionsList; track option) {
     <li class="app-select-list__list-element">
       <button type="button" (click)="handleSelectSingleListElement(option)">
         {{ option }}
       </button>
     </li>
+    } } @else {
+    <li class="app-select-list__list-no-content-container">Brak danych</li>
     }
   </ul>
   } @if (!this.formGroup!.get(formControlId)!.disable) {
