@@ -8,3 +8,18 @@
   z wybranego wydziału. Dla rangi "edytor" występuje możliwość wyboru jedynie
   kierunku - wydział jest odgórnie przypisany przez system.
 </app-table-data-header>
+<div class="schedule-select__container">
+  @if ((userRole$ | async) === 'administrator') {
+  <app-admin-schedule-chooser />
+  } @else {
+  <div class="schedule-select__editor-container">
+    <p class="schedule-select__editor-description">
+      Jesteś przypisany/przypisana do jednostki:
+    </p>
+    <p class="schedule-select__editor-department-name">
+      {{ loggedUserDepartment$ | async }}
+    </p>
+  </div>
+  <app-editor-schedule-chooser />
+  }
+</div>

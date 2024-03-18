@@ -1,0 +1,57 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form
+  [formGroup]="adminSelectScheduleForm"
+  (ngSubmit)="handleSubmitSelectScheduleGroup()"
+  class="app-cms__grid-form app-cms__grid-form--vertical">
+  <label
+    for="choose-schedule-form___department'"
+    class="app-cms__grid-label app-cms__grid-label--vertical">
+    Wydział:
+  </label>
+  <app-select-drop-box-template
+    [formGroup]="adminSelectScheduleForm"
+    [optionsList]="departments"
+    (emitNewQuery)="handleEmitDepartmentName($event)"
+    (addedValue)="handleShowStudySpecs()"
+    formControlId="departmentName"
+    selectId="choose-schedule-form___department"
+    placeholder="np. Elektryczny"
+    errorField="prawidłowy wydział" />
+  @if (studySpecVisibility$ | async) {
+  <label
+    for="choose-schedule-form___study-spec"
+    class="app-cms__grid-label app-cms__grid-label--vertical">
+    Kierunek studiów:
+  </label>
+  <app-select-drop-box-template
+    [formGroup]="adminSelectScheduleForm"
+    [optionsList]="studySpecs"
+    (emitNewQuery)="handleEmitStudySpecName($event)"
+    (addedValue)="handleShowScheduleGroups()"
+    formControlId="studySpecName"
+    selectId="choose-schedule-form___study-spec"
+    placeholder="np. Informatyka"
+    errorField="prawidłowy kierunek studiów" />
+  } @if (groupFieldVisibility$ | async) {
+  <label
+    for="choose-schedule-form___group--admin"
+    class="app-cms__grid-label app-cms__grid-label--vertical">
+    Grupa dziekańska:
+  </label>
+  <app-select-drop-box-template
+    [formGroup]="adminSelectScheduleForm"
+    [optionsList]="scheduleGroups"
+    (emitNewQuery)="handleEmitScheduleGroupName($event)"
+    formControlId="studyGroupName"
+    selectId="choose-schedule-form___group--admin"
+    placeholder="np. ST I INF NS/Z I/1"
+    errorField="prawidłową grupę dziekańską" />
+  }
+  <div></div>
+  <app-schedule-chooser-submit
+    [isFormInvalid]="adminSelectScheduleForm.invalid" />
+</form>

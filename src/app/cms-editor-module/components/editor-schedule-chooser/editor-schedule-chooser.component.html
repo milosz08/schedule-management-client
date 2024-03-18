@@ -1,0 +1,41 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<form
+  [formGroup]="editorSelectScheduleForm"
+  (ngSubmit)="handleSubmitSelectScheduleGroup()"
+  class="app-cms__grid-form app-cms__grid-form--vertical">
+  <label
+    for="choose-schedule-form___study-spec--editor"
+    class="app-cms__grid-label app-cms__grid-label--vertical">
+    Kierunek:
+  </label>
+  <app-select-drop-box-template
+    [formGroup]="editorSelectScheduleForm"
+    [optionsList]="studySpecs"
+    (emitNewQuery)="handleEmitStudyTypeName($event)"
+    formControlId="studySpecName"
+    selectId="choose-schedule-form___study-spec--editor"
+    placeholder="np. Informatyka (ST I NS/Z)"
+    errorField="prawidłowy kierunek" />
+  @if (groupFieldVisibility$ | async) {
+  <label
+    for="choose-schedule-form___group--editor"
+    class="app-cms__grid-label app-cms__grid-label--vertical">
+    Grupa dziekańska:
+  </label>
+  <app-select-drop-box-template
+    [formGroup]="editorSelectScheduleForm"
+    [optionsList]="scheduleGroups"
+    (emitNewQuery)="handleEmitScheduleGroupName($event)"
+    formControlId="studyGroupName"
+    selectId="choose-schedule-form___group--editor"
+    placeholder="np. ST I INF NS/Z I/1"
+    errorField="prawidłową grupę dziekańską" />
+  }
+  <div></div>
+  <app-schedule-chooser-submit
+    [isFormInvalid]="editorSelectScheduleForm.invalid" />
+</form>

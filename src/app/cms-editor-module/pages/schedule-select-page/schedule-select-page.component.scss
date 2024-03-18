@@ -19,6 +19,20 @@
       height: 70px;
     }
   }
+  &__editor {
+    &-container {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+    &-description {
+      color: var(--lightGrayColor);
+    }
+    &-department-name {
+      font-size: 1.2rem;
+      margin-top: 3px;
+      color: var(--darkBlueColor);
+    }
+  }
 }
 
 @media only screen and (max-width: 500px) {

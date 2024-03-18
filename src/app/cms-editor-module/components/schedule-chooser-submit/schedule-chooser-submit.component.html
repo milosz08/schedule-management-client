@@ -1,0 +1,19 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<button
+  [disabled]="isFormInvalid || (isSelecting$ | async)"
+  type="submit"
+  class="app__button app__button--full-width app__button--light"
+  title="Kliknij aby przejść do planu">
+  @if (isSelecting$ | async) { Ładowanie...
+  <img
+    src="assets/gif/suspense-loading-light.gif"
+    alt=""
+    class="app__button--loading-content-spinner" />
+  } @else { Przejdź do planu
+  <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+  }
+</button>
