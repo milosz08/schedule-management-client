@@ -13,7 +13,7 @@
   (emitNewQuery)="handleEmitDepartmentName($event)"
   (addedValue)="studySpecVisibily = true"
   formControlId="departmentName"
-  [selectId]='labelId + "-form___department"'
+  [selectId]="labelId + '-form___department'"
   placeholder="np. Elektryczny"
   errorField="prawidłowy wydział" />
 @if (studySpecVisibily) {
@@ -26,7 +26,7 @@
   (emitNewQuery)="handleEmitStudySpecName($event)"
   (addedValue)="emitNextSelection.emit()"
   formControlId="studySpecName"
-  [selectId]='labelId + "-form___study-spec"'
+  [selectId]="labelId + '-form___study-spec'"
   placeholder="np. Informatyka"
   errorField="prawidłowy kierunek studiów" />
 } }
