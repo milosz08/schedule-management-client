@@ -4,6 +4,7 @@
  */
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -39,7 +40,8 @@ export class ScheduleBlockComponent implements AfterViewInit {
   overflowBlockSize = false;
 
   constructor(
-    private readonly _scheduleSubjectModalService: ScheduleSubjectModalService
+    private readonly _scheduleSubjectModalService: ScheduleSubjectModalService,
+    private readonly _changeDetectionRef: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
@@ -47,6 +49,7 @@ export class ScheduleBlockComponent implements AfterViewInit {
     if (containerElement) {
       const { scrollHeight, clientHeight } = containerElement;
       this.overflowBlockSize = scrollHeight > clientHeight;
+      this._changeDetectionRef.detectChanges();
     }
   }
 
