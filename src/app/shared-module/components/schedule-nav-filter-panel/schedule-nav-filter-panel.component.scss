@@ -14,6 +14,18 @@
       }
       &__inputs {
         display: flex;
+        gap: 10px;
+      }
+      &__restore {
+        &-button {
+          max-height: 43px;
+        }
+        &-icon {
+          position: relative;
+          color: var(--mainWhiteColor);
+          top: -3px;
+          font-size: 1.4rem;
+        }
       }
     }
     &-mobile-buttons__container {
@@ -22,10 +34,11 @@
   }
   &-year-input__container {
     max-width: 150px;
-    margin-right: 20px;
   }
   &-week-input__container {
-    max-width: 250px;
+    display: flex;
+    gap: 10px;
+    max-width: 300px;
   }
   &-button__max-height {
     max-height: 40px;

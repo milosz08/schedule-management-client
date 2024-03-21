@@ -54,9 +54,17 @@ export class ScheduleNavFilterPanelComponent
     this._scheduleFilterService.toNextWeek(this.filterForm);
   }
 
-  handleSubmitYear(): void {
+  handleRestoreCurrentWeek(): void {
+    this._scheduleFilterService.restoreCurrentWeek(this.filterForm);
+  }
+
+  handleSubmitYear(yearData: string): void {
+    this._scheduleCanvasService.setYear(yearData);
+    this._scheduleCanvasService.setWeek('Pokaż wszystko');
     this.filterForm.get('selectedWeekData')?.patchValue('Pokaż wszystko');
   }
 
-  handleSubmitWeek(): void {}
+  handleSubmitWeek(weekData: string): void {
+    this._scheduleCanvasService.setWeek(weekData);
+  }
 }

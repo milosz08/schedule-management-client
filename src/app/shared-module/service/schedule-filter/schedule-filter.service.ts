@@ -15,6 +15,10 @@ import {
 } from 'rxjs';
 import { FilterBlockState } from '~/shared-module/types/filter-block-state.type';
 import { ScheduleFilterData } from '~/shared-module/types/schedule-entity.type';
+import {
+  getCurrentStudyYear,
+  getCurrentWeek,
+} from '~/shared-module/utils/date.utils';
 import { ScheduleCanvasService } from '../schedule-canvas/schedule-canvas.service';
 import { ScheduleHttpClientService } from '../schedule-http-client/schedule-http-client.service';
 
@@ -123,6 +127,14 @@ export class ScheduleFilterService {
       }
     }
     this.patchFormData(formData);
+  }
+
+  restoreCurrentWeek(formData: FormGroup): void {
+    const weekDataControl = formData.get('selectedWeekData');
+    this.determinateButtonsBlock(this._weeksData$.value, getCurrentWeek());
+    formData.get('selectedStudyYear')?.patchValue(getCurrentStudyYear());
+    weekDataControl?.patchValue(getCurrentWeek());
+    weekDataControl?.setErrors(null);
   }
 
   private determinateButtonsBlock(weeks: string[], weeksRange: string): void {

@@ -36,19 +36,28 @@
     <app-select-drop-box-template
       [formGroup]="filterForm"
       [optionsList]="(yearsData$ | async) || []"
-      (addedValue)="handleSubmitYear()"
+      (addedValueWithResult)="handleSubmitYear($event)"
       formControlId="selectedStudyYear"
       placeholder="Wybierz rok"
       errorField="prawidłowy rok z rozwijanej listy"
       class="schedule-year-input__container" />
-    <app-select-drop-box-template
-      [formGroup]="filterForm"
-      [optionsList]="(weeksData$ | async) || []"
-      (addedValue)="handleSubmitWeek()"
-      formControlId="selectedWeekData"
-      placeholder="Wybierz tydzień"
-      errorField="prawidłowy tydzień z rozwijanej listy"
-      class="schedule-week-input__container" />
+    <div class="schedule-week-input__container">
+      <app-select-drop-box-template
+        [formGroup]="filterForm"
+        [optionsList]="(weeksData$ | async) || []"
+        (addedValueWithResult)="handleSubmitWeek($event)"
+        formControlId="selectedWeekData"
+        placeholder="Wybierz tydzień"
+        errorField="prawidłowy tydzień z rozwijanej listy" />
+      <button
+        title="Kliknij aby przywrócić aktualny tydzień"
+        class="app__button app__button--light schedule-navigation-filtering__restore-button"
+        (click)="handleRestoreCurrentWeek()">
+        <ng-icon
+          name="matEventRepeat"
+          class="schedule-navigation-filtering__restore-icon" />
+      </button>
+    </div>
   </nav>
   <button
     [disabled]="(isBlockNext$ | async) || (buttonsBlocked$ | async)"
