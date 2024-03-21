@@ -34,6 +34,7 @@ export class SelectDropBoxTemplateComponent
 
   @Output() emitNewQuery = new EventEmitter<string>();
   @Output() addedValue = new EventEmitter<void>();
+  @Output() addedValueWithResult = new EventEmitter<string>();
 
   searchQuery$ = new Subject<string>();
   isListVisible = false;
@@ -76,6 +77,7 @@ export class SelectDropBoxTemplateComponent
     this.formGroup?.patchValue({ [this.formControlId]: value });
     if (this.addedValue && this.formGroup?.get(this.formControlId)!.valid) {
       this.addedValue.emit();
+      this.addedValueWithResult.emit(value);
     }
     this.isListVisible = false;
   }
