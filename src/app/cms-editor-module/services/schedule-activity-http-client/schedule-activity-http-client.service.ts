@@ -63,4 +63,15 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
       { params: { subjectTypeName } }
     );
   }
+
+  getSubjectsBaseDepartmentAndSpecialization$(
+    subjectName: string,
+    deptId: number,
+    specId: number
+  ): Observable<AvailableDataModel<string>> {
+    return this._httpClient.get<AvailableDataModel<string>>(
+      `${this._apiUrl}/api/v1/studysubject/dept/${deptId}/spec/${specId}/all`,
+      { params: { subjectName } }
+    );
+  }
 }

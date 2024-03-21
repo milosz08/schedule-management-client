@@ -1,0 +1,170 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+@if (isOpen$ | async) {
+<div @fadeInOutAnimation class="app-modal__container">
+  <div class="app-modal__wrapper add-edit-schedule__wrapper-container">
+    <form
+      [formGroup]="newActivityForm"
+      (ngSubmit)="handleSubmitNewScheduleActivity()"
+      class="add-edit-schedule__form-container">
+      <h2 class="app__header add-edit-schedule__header">
+        Dodaj nową aktywność w dniu:
+        <span class="add-edit-schedule__selected-day-content">
+          {{ selectedDay$ | async }}
+        </span>
+      </h2>
+      <div
+        class="app-cms__description-block-container app-cms__description-block-container--layered-top">
+        W tym oknie możesz dodać nową aktywność/przedmiot do planu zajęć.
+        Niezbędne pola to przedmiot/aktywność, typ przedmiotu oraz godziny
+        rozpoczęcia/zakończenia. Jeśli nie podasz konkretnych tygodni odbywania
+        zajęć, wówczas zajęcia będą oznaczone jako "odbywane każdego tygodnia".
+        Aby dodać zajęcia wspólne dla wszystkich grup dziekańskich wybranego
+        kierunku należy zaznaczyć opcję "Dodaj do wyszstkich grup dziekańskich".
+      </div>
+      <aside class="app-cms__separator-line"></aside>
+      <div class="add-edit-schedule__form-wrapper">
+        <section class="app-cms__grid-form app-cms__grid-form--max-half-width">
+          <label
+            for="add-activity-form___schedule-name"
+            class="app-cms__grid-label">
+            Przedmiot/aktywność:
+          </label>
+          <app-select-drop-box-template
+            [formGroup]="newActivityForm"
+            [optionsList]="scheduleSubjects"
+            (emitNewQuery)="handleEmitSubjectBaseName($event)"
+            (addedValue)="handleFetchTeachersBaseDepartmentAndSubject()"
+            formControlId="subjectOrActivityName"
+            selectId="add-activity-form___schedule-name"
+            placeholder="np. Programowanie Komputerów"
+            errorField="prawidłowy przedmiot lub dodać własną aktywność" />
+          <label for="add-user-form___role" class="app-cms__grid-label">
+            Sale zajęciowe:
+          </label>
+          <app-combo-box-template
+            [formGroup]="newActivityForm"
+            [allOptions]="studyRooms"
+            formControlId="subjectRooms"
+            placeholder="sale" />
+          <label
+            for="add-activity-form___schedule-start-hour"
+            class="app-cms__grid-label">
+            Godzina rozpoczęcia:
+          </label>
+          <div>
+            <input
+              type="time"
+              id="add-activity-form___schedule-start-hour"
+              formControlName="hourStart"
+              class="app__input app__input--light app__input--exclude-margin" />
+            @if (checkIsFieldHasErrors('hourStart')) {
+            <div
+              class="app__input-error app__input-error--light app__input-error--margin-top">
+              Proszę wpisać prawidłową godzinę rozpoczęcia
+            </div>
+            }
+          </div>
+          <label
+            for="add-activity-form___schedule-study-year"
+            class="app-cms__grid-label">
+            Rok akademicki:
+          </label>
+          <app-select-drop-box-template
+            [formGroup]="newActivityForm"
+            [optionsList]="studyYears"
+            (addedValue)="handleFetchStudyWeeksBaseYear()"
+            formControlId="studyYear"
+            selectId="add-activity-form___schedule-study-year"
+            placeholder="np. 2021/2022"
+            errorField="prawidłowy typ roku studiów" />
+          <div class="add-edit-schedule__min-checkbox-height"></div>
+          <app-checkbox-template
+            checkboxLabel="Dodaj do wszystkich grup dziekańskich na wybranym kierunku"
+            [isWhiteBackground]="true"
+            (checkboxEmitter)="addedForAllGroups = !addedForAllGroups"
+            class="add-edit-schedule__min-checkbox-height" />
+        </section>
+        <section class="app-cms__grid-form app-cms__grid-form--max-half-width">
+          <label
+            for="add-activity-form___schedule-type-name"
+            class="app-cms__grid-label">
+            Typ przedmiotu/aktywności:
+          </label>
+          <app-select-drop-box-template
+            [formGroup]="newActivityForm"
+            [optionsList]="scheduleSubjectTypes"
+            (emitNewQuery)="handleEmitSubjectTypeBaseName($event)"
+            formControlId="subjectTypeName"
+            selectId="add-activity-form___schedule-type-name"
+            placeholder="np. Laboratoria"
+            errorField="prawidłowy typ przedmiotu/aktywności" />
+          <label
+            for="add-activity-form___schedule-teachers"
+            class="app-cms__grid-label">
+            Nauczyciele:
+          </label>
+          <app-combo-box-template
+            [formGroup]="newActivityForm"
+            [allOptions]="studyTeachers"
+            formControlId="subjectTeachers"
+            placeholder="nauczycieli" />
+          <label
+            for="add-activity-form___schedule-end-hour"
+            class="app-cms__grid-label">
+            Godzina zakończenia:
+          </label>
+          <div>
+            <input
+              type="time"
+              id="add-activity-form___schedule-end-hour"
+              formControlName="hourEnd"
+              class="app__input app__input--light app__input--exclude-margin" />
+            @if (checkIsFieldHasErrors('hourEnd')) {
+            <div
+              class="app__input-error app__input-error--light app__input-error--margin-top">
+              Proszę wpisać prawidłową godzinę zakończenia
+            </div>
+            }
+          </div>
+          <label
+            for="add-activity-form___schedule-occuring"
+            class="app-cms__grid-label">
+            Występowanie:
+          </label>
+          <app-combo-box-template
+            [formGroup]="newActivityForm"
+            [allOptions]="studyWeeks"
+            formControlId="weeksData"
+            placeholder="tygodnie" />
+        </section>
+      </div>
+      <div class="add-edit-schedule__submit-container">
+        <button
+          type="button"
+          class="app__button app__button--hollow-light"
+          (click)="handleCloseModal()">
+          Zamknij okno
+        </button>
+        <button
+          [disabled]="!newActivityForm.valid"
+          type="submit"
+          class="app__button app__button--light"
+          title="Kliknij aby dodać nową aktywność">
+          @if (isLoading$ | async) { Dodawanie...
+          <img
+            src="assets/gif/suspense-loading-light.gif"
+            alt=""
+            class="app__button--loading-content-spinner" />
+          } @else { Dodaj nową aktywność
+          <ng-icon name="matArrowRightAlt" class="app__button__arrow" />
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}

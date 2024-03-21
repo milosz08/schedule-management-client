@@ -11,6 +11,7 @@ import { matArrowRightAlt } from '@ng-icons/material-icons/baseline';
 import { CmsModule } from '~/cms-module/cms.module';
 import { SharedModule } from '~/shared-module/shared.module';
 import { CmsEditorRoutingModule } from './cms-editor-routing.module';
+import { AddScheduleActivityModalComponent } from './components/add-schedule-activity-modal/add-schedule-activity-modal.component';
 import { AdminScheduleChooserComponent } from './components/admin-schedule-chooser/admin-schedule-chooser.component';
 import { EditorScheduleChooserComponent } from './components/editor-schedule-chooser/editor-schedule-chooser.component';
 import { ScheduleChooserSubmitComponent } from './components/schedule-chooser-submit/schedule-chooser-submit.component';
@@ -23,6 +24,7 @@ import { ScheduleSelectorHttpClientService } from './services/schedule-selector-
 
 @NgModule({
   declarations: [
+    AddScheduleActivityModalComponent,
     AdminScheduleChooserComponent,
     EditorScheduleChooserComponent,
     ScheduleEditorPageComponent,

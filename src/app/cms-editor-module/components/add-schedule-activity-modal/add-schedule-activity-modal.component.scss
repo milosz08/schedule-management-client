@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.add-edit-schedule {
+  &__wrapper-container {
+    align-items: flex-start;
+    max-width: 1400px;
+    display: flex;
+    padding: 20px 30px;
+  }
+  &__header {
+    margin-bottom: 10px;
+  }
+  &__form-container {
+    width: 100%;
+  }
+  &__form-wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+  }
+  &__submit-container {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin: 30px 0 10px;
+  }
+  &__selected-day-content {
+    text-transform: uppercase;
+  }
+  &__min-checkbox-height {
+    height: 43px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 972px) {
+  .add-edit-schedule__form-wrapper {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 542px) {
+  .add-edit-schedule {
+    &__submit-container {
+      flex-direction: column-reverse;
+    }
+    &__submit-button {
+      justify-content: center;
+      &--margin-left {
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
