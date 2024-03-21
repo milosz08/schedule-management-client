@@ -36,10 +36,7 @@
     justify-content: center;
   }
   &__close-button {
-    margin-left: 10px;
-    &--full-size {
-      flex-basis: 100%;
-    }
+    flex-basis: 100%;
   }
   &__remove-content-button {
     margin-right: 10px;

@@ -52,10 +52,4 @@ export class ScheduleSubjectModalComponent
   handleCloseModal(): void {
     this._scheduleSubjectModalService.setIsOpen(false);
   }
-
-  handleDeleteScheduleSubject(): void {
-    if (this.isEditable && this.subjectDetails) {
-      this.deleteScheduleSubject.emit(this.subjectDetails.id);
-    }
-  }
 }

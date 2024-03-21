@@ -32,22 +32,10 @@
     <div class="schedule-subject-details__buttons-container">
       <button
         (click)="handleCloseModal()"
-        [class.schedule-subject-details__close-button--full-size]="!isEditable"
         class="app__button app__button--light schedule-subject-details__close-button"
         title="Kliknij aby zamknąć okno">
         Zamknij okno
       </button>
-      @if (isEditable) {
-      <button
-        (click)="handleDeleteScheduleSubject()"
-        class="app__button app__button--danger-light app__button--light schedule-subject-details__close-button"
-        title="Kliknij aby usunąć zawartość">
-        Usuń zawartość
-        <ng-icon
-          name="matArrowRightAlt"
-          class="app__button__arrow app__button__arrow--red" />
-      </button>
-      }
     </div>
   </div>
   }
