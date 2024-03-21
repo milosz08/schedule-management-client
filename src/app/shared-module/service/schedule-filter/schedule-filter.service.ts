@@ -131,10 +131,11 @@ export class ScheduleFilterService {
 
   restoreCurrentWeek(formData: FormGroup): void {
     const weekDataControl = formData.get('selectedWeekData');
-    this.determinateButtonsBlock(this._weeksData$.value, getCurrentWeek());
     formData.get('selectedStudyYear')?.patchValue(getCurrentStudyYear());
     weekDataControl?.patchValue(getCurrentWeek());
     weekDataControl?.setErrors(null);
+    this._scheduleCanvasService.setWeek(getCurrentWeek());
+    this._scheduleCanvasService.setYear(getCurrentStudyYear());
   }
 
   private determinateButtonsBlock(weeks: string[], weeksRange: string): void {
