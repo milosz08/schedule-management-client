@@ -41,8 +41,21 @@ export class DeleteContentService extends AbstractModalProvider {
 
   openDeleteContentModal(deleteContentId: number | undefined): void {
     if (deleteContentId) {
-      this._deleteContentIds$.next([deleteContentId]);
+      this.openDeleteContentModalForMultipleValues([deleteContentId]);
+    }
+  }
+
+  openDeleteContentModalForMultipleValues(deleteContentIds: number[]): void {
+    if (deleteContentIds.length > 0) {
+      this._deleteContentIds$.next(deleteContentIds);
       this.setIsOpen(true);
+    }
+  }
+
+  override setIsOpen(isOpen: boolean): void {
+    super.setIsOpen(isOpen);
+    if (!isOpen) {
+      this._deleteContentIds$.next([]);
     }
   }
 
@@ -108,5 +121,8 @@ export class DeleteContentService extends AbstractModalProvider {
   }
   get isDeleteContentEmpty$(): Observable<boolean> {
     return this._deleteContentIds$.pipe(map(ids => ids.length === 0));
+  }
+  get deleteContentLength$(): Observable<number> {
+    return this._deleteContentIds$.pipe(map(ids => ids.length));
   }
 }

@@ -20,15 +20,35 @@
     font-weight: 600;
     height: 40px;
     max-height: 40px;
+    &-icon {
+      margin-top: -5px;
+    }
+  }
+  &__delete-content-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
   }
 }
 
 @media only screen and (max-width: 1000px) {
-  .schedule-editor__info-group-data,
-  .schedule-editor__delete-activity {
-    width: 100%;
+  .schedule-editor {
+    &__info-group-data,
+    &__delete-activity {
+      width: 100%;
+    }
+    &__delete-activity {
+      margin-top: 10px;
+    }
   }
-  .schedule-editor__delete-activity {
-    margin-top: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+  .schedule-editor {
+    &__delete-content-container {
+      flex-direction: column;
+    }
   }
 }

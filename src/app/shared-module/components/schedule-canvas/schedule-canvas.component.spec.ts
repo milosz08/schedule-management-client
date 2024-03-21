@@ -4,21 +4,22 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '~/app.module';
-import { ScheduleSubjectModalService } from '~/shared-module/service/schedule-subject-modal/schedule-subject-modal.service';
+import { ScheduleCanvasService } from '~/shared-module/service/schedule-canvas/schedule-canvas.service';
+import { ScheduleFilterService } from '~/shared-module/service/schedule-filter/schedule-filter.service';
 import { SharedModule } from '~/shared-module/shared.module';
-import { ScheduleBlockComponent } from './schedule-block.component';
+import { ScheduleCanvasComponent } from './schedule-canvas.component';
 
-describe('ScheduleBlockComponent', () => {
-  let component: ScheduleBlockComponent;
-  let fixture: ComponentFixture<ScheduleBlockComponent>;
+describe('ScheduleCanvasComponent', () => {
+  let component: ScheduleCanvasComponent;
+  let fixture: ComponentFixture<ScheduleCanvasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule, SharedModule],
-      providers: [ScheduleSubjectModalService],
+      providers: [ScheduleCanvasService, ScheduleFilterService],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ScheduleBlockComponent);
+    fixture = TestBed.createComponent(ScheduleCanvasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

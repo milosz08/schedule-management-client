@@ -11,14 +11,12 @@ import {
   Observable,
   catchError,
   combineLatest,
-  delay,
   filter,
   map,
   of,
   switchMap,
   tap,
 } from 'rxjs';
-import { RememberScheduleBarService } from '~/root-module/services/remember-schedule-bar/remember-schedule-bar.service';
 import { ScheduleDataRes } from '~/shared-module/models/schedule-data.model';
 import { FetchingState } from '~/shared-module/types/fetching-state.type';
 import {
@@ -52,15 +50,15 @@ export class ScheduleCanvasService extends AbstractLoadingProvider {
   private _week$ = new BehaviorSubject<string>(getCurrentWeek());
 
   constructor(
-    private readonly _scheduleHttpClientService: ScheduleHttpClientService,
-    private readonly _rememberScheduleBarService: RememberScheduleBarService
+    private readonly _scheduleHttpClientService: ScheduleHttpClientService
   ) {
     super();
   }
 
   saveScheduleFetchType$(
     form: FormGroup,
-    route$: ActivatedRoute
+    route$: ActivatedRoute,
+    typeFor?: keyof typeof ScheduleCanvasService.ROUTE_MANAGER_QUERY_MAP
   ): Observable<ScheduleDataRes> {
     return combineLatest([
       route$.queryParamMap,
@@ -69,7 +67,7 @@ export class ScheduleCanvasService extends AbstractLoadingProvider {
     ]).pipe(
       tap(() => this.setRefetching(true)),
       map(([queryParamMap, week]) => ({
-        scheduleType: queryParamMap.get('for'),
+        scheduleType: queryParamMap.get('for') || typeFor,
         queryParams: queryParamMap.keys
           .filter(key => key !== 'for')
           .reduce(
@@ -121,13 +119,11 @@ export class ScheduleCanvasService extends AbstractLoadingProvider {
         weekInputOptions: selectedWeek,
       })
       .pipe(
-        delay(500),
-        tap(res => {
+        tap(() => {
           this.setLoading(false);
           this.setRefetching(false);
           this._errorReason$.next('none');
           this._fetchingState$.next('success');
-          this._rememberScheduleBarService.addRememberContent(res);
         }),
         catchError(() => {
           this.setLoading(false);

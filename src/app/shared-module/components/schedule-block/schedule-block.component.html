@@ -5,63 +5,85 @@
 
 @if (weekdayData) {
 <div
+  #container
   class="schedule-block-component__container"
-  (click)="handleOpenDetailsModal()"
+  [class.schedule-block-component__container--full-content]="showFullContent"
+  (mouseenter)="showFullContent = true"
+  (mouseleave)="showFullContent = false"
   [ngStyle]='{
       height: weekdayData.elementHeight + "px",
       top: (weekdayData.positionFromTop + addedPxFromTop) + "px",
       backgroundColor: weekdayData.subjectTypeHexColor
     }'>
-  <div class="schedule-block-component__layered-button"></div>
-  <p>{{ weekdayData.subjectWithTypeAlias }}</p>
-  <p class="hide-elements-on-small-devices">{{ weekdayData.subjectTime }}</p>
-  @if (hasKey('teachers')) {
-  <p class="hide-elements-on-small-devices">
-    @for (teacher of weekdayData.aliases.teachers; track teacher.alias) {
-    <a
-      routerLink="/schedule/selected-schedule"
-      [queryParams]="fabricateRouteParams(teacher.pathValues, 'employer')"
-      (click)="disableEventPropagation($event)"
-      [class.anchor--disable-events]="hrefEventsDisabled"
-      class="schedule-block__anchor-element">
-      {{ teacher.alias }} @if ($index !== weekdayData.aliases.teachers!.length -
-      1) {,}
-    </a>
-    }
-  </p>
-  } @if (hasKey('rooms')) {
-  <p>
-    @for (room of weekdayData.aliases.rooms; track room.alias) {
-    <a
-      routerLink="/schedule/selected-schedule"
-      [queryParams]="fabricateRouteParams(room.pathValues, 'room')"
-      (click)="disableEventPropagation($event)"
-      [class.anchor--disable-events]="hrefEventsDisabled"
-      class="schedule-block__anchor-element">
-      {{ room.alias }} @if ($index !== weekdayData.aliases.rooms!.length - 1) {
-      , }
-    </a>
-    }
-  </p>
-  } @if (hasKey('groups')) {
-  <p class="hide-elements-on-small-devices">
-    @for (group of weekdayData.aliases.groups; track group.alias) {
-    <a
-      routerLink="/schedule/selected-schedule"
-      [queryParams]="fabricateRouteParams(group.pathValues, 'group')"
-      (click)="disableEventPropagation($event)"
-      [class.anchor--disable-events]="hrefEventsDisabled"
-      class="schedule-block__anchor-element group-alias__anchor-element">
-      {{ group.alias }}
-    </a>
-    }
-  </p>
-  } @if (weekdayData.subjectOccuredData !== '' &&
-  !weekdayData.ifNotShowingOccuredDates) {
-  <div class="schedule-block__occur-container hide-elements-on-small-devices">
-    <p>występowanie:</p>
-    <p>{{ weekdayData.subjectOccuredData }}</p>
+  @if (overflowBlockSize) {
+  <div
+    class="schedule-block-component__overflow-icon-container"
+    title="Najedź, aby zobaczyć całą zawartość">
+    <ng-icon
+      name="matOpenInFull"
+      class="schedule-block-component__overflow-icon" />
+  </div>
+  } @if (isEditMode) {
+  <div class="schedule-block-component__edit-mode-container">
+    <app-checkbox-template
+      checkboxLabel="Zaznacz"
+      (checkboxEmitter)="handleMarkScheduleSubject($event)" />
   </div>
   }
+  <div
+    (click)="handleOpenDetailsModal($event)"
+    [class.schedule-block-component__wrapper--edit-mode]="isEditMode"
+    class="schedule-block-component__wrapper">
+    <p>{{ weekdayData.subjectWithTypeAlias }}</p>
+    <p class="hide-elements-on-small-devices">{{ weekdayData.subjectTime }}</p>
+    @if (hasKey('teachers')) {
+    <p class="hide-elements-on-small-devices">
+      @for (teacher of weekdayData.aliases.teachers; track teacher.alias) {
+      <a
+        routerLink="/schedule/selected-schedule"
+        [queryParams]="fabricateRouteParams(teacher.pathValues, 'employer')"
+        (click)="disableEventPropagation($event)"
+        [class.anchor--disable-events]="hrefEventsDisabled"
+        class="schedule-block__anchor-element">
+        {{ teacher.alias }} @if ($index !== weekdayData.aliases.teachers!.length
+        - 1) {,}
+      </a>
+      }
+    </p>
+    } @if (hasKey('rooms')) {
+    <p>
+      @for (room of weekdayData.aliases.rooms; track room.alias) {
+      <a
+        routerLink="/schedule/selected-schedule"
+        [queryParams]="fabricateRouteParams(room.pathValues, 'room')"
+        (click)="disableEventPropagation($event)"
+        [class.anchor--disable-events]="hrefEventsDisabled"
+        class="schedule-block__anchor-element">
+        {{ room.alias }} @if ($index !== weekdayData.aliases.rooms!.length - 1)
+        { , }
+      </a>
+      }
+    </p>
+    } @if (hasKey('groups')) {
+    <p class="hide-elements-on-small-devices">
+      @for (group of weekdayData.aliases.groups; track group.alias) {
+      <a
+        routerLink="/schedule/selected-schedule"
+        [queryParams]="fabricateRouteParams(group.pathValues, 'group')"
+        (click)="disableEventPropagation($event)"
+        [class.anchor--disable-events]="hrefEventsDisabled"
+        class="schedule-block__anchor-element group-alias__anchor-element">
+        {{ group.alias }}
+      </a>
+      }
+    </p>
+    } @if (weekdayData.subjectOccuredData !== '' &&
+    !weekdayData.isNotShowingOccuredDates) {
+    <div class="schedule-block__occur-container hide-elements-on-small-devices">
+      <p>występowanie:</p>
+      <p>{{ weekdayData.subjectOccuredData }}</p>
+    </div>
+    }
+  </div>
 </div>
 }

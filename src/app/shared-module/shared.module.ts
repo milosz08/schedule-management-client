@@ -9,9 +9,11 @@ import { RouterModule } from '@angular/router';
 import { NgIconsModule } from '@ng-icons/core';
 import {
   matArrowRightAlt,
+  matEventRepeat,
   matKeyboardArrowDown,
   matKeyboardArrowLeft,
   matKeyboardArrowRight,
+  matOpenInFull,
   matVisibility,
   matVisibilityOff,
 } from '@ng-icons/material-icons/baseline';
@@ -22,6 +24,7 @@ import { EndSessionModalComponent } from './components/end-session-modal/end-ses
 import { LoadingSuspenseCardComponent } from './components/loading-suspense-card/loading-suspense-card.component';
 import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
 import { ScheduleBlockComponent } from './components/schedule-block/schedule-block.component';
+import { ScheduleCanvasComponent } from './components/schedule-canvas/schedule-canvas.component';
 import { ScheduleNavFilterPanelComponent } from './components/schedule-nav-filter-panel/schedule-nav-filter-panel.component';
 import { ScheduleSubjectModalComponent } from './components/schedule-subject-modal/schedule-subject-modal.component';
 import { SelectDropBoxTemplateComponent } from './components/select-drop-box-template/select-drop-box-template.component';
@@ -47,6 +50,7 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
     SelectDropBoxTemplateComponent,
     SelectListTemplateComponent,
     ScheduleBlockComponent,
+    ScheduleCanvasComponent,
     ScheduleNavFilterPanelComponent,
     ScheduleSubjectModalComponent,
     SnackbarsContainerComponent,
@@ -63,9 +67,11 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
     RouterModule,
     NgIconsModule.withIcons({
       matArrowRightAlt,
+      matEventRepeat,
       matKeyboardArrowDown,
       matKeyboardArrowLeft,
       matKeyboardArrowRight,
+      matOpenInFull,
       matVisibility,
       matVisibilityOff,
     }),
@@ -81,6 +87,7 @@ import { UserIdentityPipe } from './pipes/user-identity/user-identity.pipe';
     SelectDropBoxTemplateComponent,
     SelectListTemplateComponent,
     ScheduleBlockComponent,
+    ScheduleCanvasComponent,
     ScheduleNavFilterPanelComponent,
     ScheduleSubjectModalComponent,
     SnackbarsContainerComponent,

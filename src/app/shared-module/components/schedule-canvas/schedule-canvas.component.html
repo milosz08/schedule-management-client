@@ -1,0 +1,108 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+@if ((fetchingState$ | async) === 'failure') {
+<aside class="loading-schedule-problem__container">
+  <img
+    src="assets/icon/info-important-icon.svg"
+    alt=""
+    class="loading-schedule-problem__image" />
+  <h3 class="loading-schedule-problem__header">
+    Ładowanie planu zakończone niepowodzeniem.
+  </h3>
+  <p class="loading-schedule-problem__description">
+    {{ onErrorMessage$ | async }}
+  </p>
+  @if (retryFetchEnabled$ | async) {
+  <button
+    (click)="handleLoadAgain()"
+    class="app__button app__button--light app__button--full-size-window loading-schedule-problem__button">
+    Załaduj ponownie @if (isLoading$ | async) {
+    <img
+      src="assets/gif/suspense-loading-light.gif"
+      alt=""
+      class="app__button--loading-content-spinner" />
+    } @else {
+    <ng-icon name="matRefresh" class="app__button__arrow" />
+    }
+  </button>
+  }
+</aside>
+} @if ((fetchingState$ | async) === 'fetching') {
+<aside class="loading-schedule__container">
+  <img
+    src="assets/gif/suspense-loading-dark.gif"
+    alt=""
+    class="loading-schedule__image" />
+</aside>
+} @else if ((fetchingState$ | async) === 'success' && scheduleData) {
+<section class="app__schedule-info__container">
+  <div class="app__schedule-trace-info__container">
+    @for (trace of scheduleData!.traceDetails; track trace) {
+    <div class="app__schedule-trace-info__value">{{ trace }}</div>
+    @if ($index !== scheduleData!.traceDetails!.length - 1) {
+    <ng-icon
+      name="matKeyboardArrowRight"
+      class="app__schedule-trace-info__arrow" />
+    } }
+  </div>
+  <div class="app__schedule-info__container-schedule-group-data">
+    {{ scheduleData!.scheduleHeaderData }}
+  </div>
+  <ng-content select="[deleteSection]" />
+</section>
+<app-schedule-nav-filter-panel [filterForm]="filterForm" />
+<section
+  [class.app__schedule-main-canvas__container--schedule-editor]="isEditMode"
+  class="app__schedule-main-canvas__container">
+  <div class="app__schedule-main-canvas__hours-container">
+    <div
+      [class.app__schedule-main-canvas__single-hour--schedule-editor]="isEditMode"
+      class="app__schedule-main-canvas__single-hour app__schedule-main-canvas__single-hour--hour-indicator"></div>
+    @for (hour of hoursData; track hour) {
+    <div class="app__schedule-main-canvas__single-hour">{{ hour }}</div>
+    }
+  </div>
+  <aside class="app__schedule-main-canvas__days-separator"></aside>
+  @for (dayData of scheduleData.scheduleCanvasData; track $index) {
+  <div
+    [class.app__schedule-main-canvas--no-content]="areSomeDataExist(dayData.weekdayData.length === 0)"
+    class="app__schedule-main-canvas__days-container">
+    <ng-template
+      [ngTemplateOutlet]="addButtonSectionRef"
+      [ngTemplateOutletContext]="{ dayName: dayData.weekdayNameWithId }" />
+    <div
+      class="app__schedule-main-canvas__single-day app__schedule-main-canvas__single-day--day-indicator"
+      [class.app__schedule-main-canvas__single-day--schedule-editor]="isEditMode">
+      <p>{{ dayData.weekdayNameWithId.name }}</p>
+      @if (!dayData.isNotShowingOccuredDates) {
+      <p class="app__schedule-main-canvas__single-day__date-value">
+        {{ dayData.weekdayDateTime }}
+      </p>
+      }
+    </div>
+    @for (hour of hoursData; track hour) {
+    <div class="app__schedule-main-canvas__single-day single-grid-picker"></div>
+    @for (weekdayData of dayData!.weekdayData; track weekdayData.aliases) {
+    <app-schedule-block
+      [isEditMode]="isEditMode"
+      [weekdayData]="weekdayData"
+      [addedPxFromTop]="addedFromTop"
+      [hrefEventsDisabled]="isEditMode"
+      (scheduleMarkEmitter)="handleScheduleMarkEmitter($event)" />
+    } }
+  </div>
+  @if ($index !== scheduleData!.scheduleCanvasData.length - 1) {
+  <aside class="app__schedule-main-canvas__days-separator"></aside>
+  } } @if (isRefetching$ | async) {
+  <div class="app__schedule-main-canvas--refetch">
+    <img
+      src="assets/gif/suspense-loading-dark.gif"
+      alt=""
+      class="app__schedule-main-canvas--refetch-image" />
+  </div>
+  }
+</section>
+}

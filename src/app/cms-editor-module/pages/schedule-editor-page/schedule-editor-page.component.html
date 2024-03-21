@@ -3,4 +3,43 @@
  ~ Silesian University of Technology
  -->
 
-<p>schedule-editor-page works!</p>
+@if (isDetailsModalOpen$ | async) {
+<app-schedule-subject-modal />
+} @if (isAddModalOpen$ | async) {
+<app-add-schedule-activity-modal />
+}
+<app-delete-content-modal />
+<app-schedule-canvas
+  scheduleTypeFor="group"
+  [addedFromTop]="120"
+  [isEditMode]="true"
+  (fetchScheduleDataEmitter)="onFetchScheduleData($event)"
+  (scheduleMarkEmitter)="handleMarkScheduleSubject($event)">
+  <ng-container deleteSection>
+    <div class="schedule-editor__delete-content-container">
+      <button
+        [disabled]="scheduleSubjectIds.length === 0"
+        (click)="handleDeleteAllScheduleSubjects()"
+        class="app__button app__button--danger-light app__button--full-size-window"
+        title="Kliknij aby wyczyścić cały plan wybranej grupy (UWAGA! Wyczyści to również zajęcia wspólne)">
+        Wyczyść cały plan
+      </button>
+      <button
+        [disabled]="(isDeleteContentEmpty$ | async) || (isDeleteModalOpen$ | async)"
+        (click)="handleDeleteScheduleSubjects()"
+        class="app__button app__button--danger-light--filled app__button--full-size-window">
+        Usuń zaznaczone ({{ deleteContentLength$ | async }})
+      </button>
+    </div>
+  </ng-container>
+  <ng-template let-dayName="dayName">
+    <button
+      (click)="handleOpenAddActivityModal(dayName)"
+      class="app__button app__button--light schedule-editor__add-content-button"
+      title="Kliknij aby dodać nowy element do wybranego dla tygodnia">
+      <ng-icon
+        name="matPlus"
+        class="schedule-editor__add-content-button-icon" />
+    </button>
+  </ng-template>
+</app-schedule-canvas>

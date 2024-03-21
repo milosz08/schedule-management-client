@@ -10,14 +10,13 @@ export type ConvertFromNamesToTupleRequest = {
   studyGroupName: string;
 };
 
-export type ConvertFromIdsToTupleRequest = {
-  departmentId: number;
-  studySpecId: number;
-  studyGroupId: number;
-};
-
-export interface ConvertToTupleResponse {
+export type ConvertToTupleResponse = {
   deptData: NameWithId;
   studySpecData: NameWithId;
   studyGroupData: NameWithId;
-}
+};
+
+export type ScheduleAccData = {
+  deptId: number;
+  specId: number;
+};

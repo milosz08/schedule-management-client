@@ -3,7 +3,7 @@
  * Silesian University of Technology
  */
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   BehaviorSubject,
   Observable,
@@ -22,10 +22,12 @@ import {
 import {
   ConvertFromNamesToTupleRequest,
   ConvertToTupleResponse,
+  ScheduleAccData,
 } from '~/cms-editor-module/models/schedule-convert.model';
 import { BaseMessage } from '~/shared-module/models/base-mesage.model';
 import { AbstractModalProvider } from '~/shared-module/service/abstract-modal-provider';
 import { SnackbarService } from '~/shared-module/service/snackbar/snackbar.service';
+import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
 import { ScheduleActivityHttpClientService } from '../schedule-activity-http-client/schedule-activity-http-client.service';
 
 @Injectable()
@@ -34,25 +36,31 @@ export class ScheduleActivityService extends AbstractModalProvider {
   private _selectedSchedule$ = new BehaviorSubject<
     ConvertToTupleResponse | undefined
   >(undefined);
+  private _selectedDay$ = new BehaviorSubject<NameWithId | undefined>(
+    undefined
+  );
 
   constructor(
     private readonly _scheduleActivityHttpClientService: ScheduleActivityHttpClientService,
     private readonly _snackbarService: SnackbarService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _activatedRoute: ActivatedRoute
   ) {
     super();
   }
 
   publishScheduleActivity$(
-    formData: ScheduleActivityForm,
-    weekDayId: number
+    formData: ScheduleActivityForm
   ): Observable<BaseMessage> {
     return of(null).pipe(
       map(() => this._selectedSchedule$.value),
-      filter(selectedSchedule => !!selectedSchedule),
+      filter(
+        selectedSchedule => !!selectedSchedule && !!this._selectedDay$.value?.id
+      ),
+      tap(() => this.setLoading(true)),
       switchMap(selectedSchedule =>
         this._scheduleActivityHttpClientService.publishScheduleActivity$(
-          this.mapToRequestDto(formData, selectedSchedule!, weekDayId)
+          this.mapToRequestDto(formData, selectedSchedule!)
         )
       ),
       tap(({ message }) => {
@@ -63,6 +71,29 @@ export class ScheduleActivityService extends AbstractModalProvider {
       catchError(err => {
         this.setLoading(false);
         return throwError(() => err);
+      })
+    );
+  }
+
+  listenRouteParameters$(): Observable<null> {
+    return this._activatedRoute.queryParamMap.pipe(
+      map(paramMap => ({
+        deptId: paramMap.get('deptId'),
+        specId: paramMap.get('specId'),
+        groupId: paramMap.get('groupId'),
+      })),
+      filter(
+        params =>
+          Object.values(params).every(param => !!param) &&
+          !this._selectedSchedule$.value
+      ),
+      map(({ deptId, specId, groupId }) => {
+        this._selectedSchedule$.next({
+          deptData: { id: deptId!, name: deptId! },
+          studySpecData: { id: specId!, name: specId! },
+          studyGroupData: { id: groupId!, name: groupId! },
+        });
+        return null;
       })
     );
   }
@@ -100,19 +131,34 @@ export class ScheduleActivityService extends AbstractModalProvider {
 
   private mapToRequestDto(
     formData: ScheduleActivityForm,
-    scheduleData: ConvertToTupleResponse,
-    weekDayId: number
+    scheduleData: ConvertToTupleResponse
   ): ScheduleActivity {
     return {
       ...formData,
       deptId: scheduleData.deptData.id as number,
       studySpecId: scheduleData.studySpecData.id as number,
       studyGroupId: scheduleData.studyGroupData.id as number,
-      weekDayId,
+      weekDayId: this._selectedDay$.value!.id as number,
     };
+  }
+
+  override setIsOpen(isOpen: boolean, selectedDay?: NameWithId): void {
+    super.setIsOpen(isOpen);
+    this._selectedDay$.next(selectedDay);
   }
 
   get isSelecting$(): Observable<boolean> {
     return this._isSelecting$.asObservable();
+  }
+  get selectedDay$(): Observable<string> {
+    return this._selectedDay$.pipe(map(nameWithId => nameWithId?.name || ''));
+  }
+  get selectedSchedule$(): Observable<ScheduleAccData> {
+    return this._selectedSchedule$.pipe(
+      map(schedule => ({
+        deptId: schedule?.deptData.id as number,
+        specId: schedule?.studySpecData.id as number,
+      }))
+    );
   }
 }
