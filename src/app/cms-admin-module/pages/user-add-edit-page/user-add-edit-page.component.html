@@ -147,8 +147,8 @@
         [allOptions]="studySpecs"
         formControlId="studySpecsOrSubjects"
         placeholder="kierunki studiów" />
-      } } @else if ((currentRole === 'edytor' || currentRole === 'nauczyciel')
-      && studySubjectsVisibility) {
+      } } @if ((currentRole === 'edytor' || currentRole === 'nauczyciel') &&
+      studySubjectsVisibility) {
       <label for="add-user-form___subjects" class="app-cms__grid-label">
         Przedmioty:
       </label>

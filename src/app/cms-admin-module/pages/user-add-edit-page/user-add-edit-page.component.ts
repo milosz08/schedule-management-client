@@ -111,12 +111,14 @@ export class UserAddEditPageComponent
   }
 
   handleEmitStudySpecializations(): void {
-    this.studySpecsVisibility = true;
     this.wrapAsObservable$(
       this._studySpecializationHttpClientService.getAllStudySpecializationsBaseDepartment$(
         this.getFormValue('departmentName')
       )
-    ).subscribe(({ dataElements }) => (this.studySpecs = dataElements));
+    ).subscribe(({ dataElements }) => {
+      this.studySpecsVisibility = true;
+      this.studySpecs = dataElements;
+    });
   }
 
   handleEmitStudySubjects(): void {

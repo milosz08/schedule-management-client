@@ -41,19 +41,19 @@ export class EditorScheduleChooserComponent
   }
 
   ngOnInit(): void {
-    this.handleEmitScheduleGroupName();
-    this.handleEmitStudyTypeName();
     this._scheduleSelectorService.setStudyGroupsQueryCallback(
       this,
       this.handleEmitScheduleGroupName
     );
     this.wrapAsObservable$(
       this._identityService.loggedUserDepartment$
-    ).subscribe(
-      loggedUserDepartment => (this.loggedUserDepartment = loggedUserDepartment)
-    );
+    ).subscribe(loggedUserDepartment => {
+      this.loggedUserDepartment = loggedUserDepartment;
+      this.handleEmitScheduleGroupName();
+      this.handleEmitStudyTypeName();
+    });
     this.wrapAsObservable$(
-      this._scheduleSelectorService.listenStudyGroupFormChanges$(
+      this._scheduleSelectorService.listenStudySpecFormChanges$(
         this.editorSelectScheduleForm
       )
     ).subscribe();
@@ -69,9 +69,10 @@ export class EditorScheduleChooserComponent
 
   handleSubmitSelectScheduleGroup(): void {
     this.wrapAsObservable$(
-      this._scheduleActivityService.setSelectedSchedule$(
-        this.editorSelectScheduleForm.getRawValue()
-      )
+      this._scheduleActivityService.setSelectedSchedule$({
+        ...this.editorSelectScheduleForm.getRawValue(),
+        departmentName: this.loggedUserDepartment,
+      })
     ).subscribe(this._scheduleActivityService.navigateToScheduleActivity());
   }
 

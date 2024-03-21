@@ -77,7 +77,7 @@ export class ScheduleCanvasService extends AbstractLoadingProvider {
             {}
           ) as ParamMap,
         week,
-        year: form.get('selectedWeekData')!.value,
+        year: form.get('selectedStudyYear')!.value,
       })),
       filter(({ scheduleType, queryParams }) => {
         if (!scheduleType || !queryParams) {

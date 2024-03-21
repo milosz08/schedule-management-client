@@ -30,7 +30,7 @@
     <li class="app-select-list__list-no-content-container">Brak danych</li>
     }
   </ul>
-  } @if (!this.formGroup!.get(formControlId)!.disable) {
+  } @if (!(this.formGroup!.get(formControlId)!.disabled)) {
   <ng-icon class="app__select__arrow-icon" name="matKeyboardArrowDown" />
   }
 </div>

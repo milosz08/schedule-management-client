@@ -16,9 +16,7 @@
     class="app__schedule-nav-list__arrow" />
   } {{ inheritLvlData?.name }}
 </button>
-<ul
-  class="non-style-list"
-  [style]="{ marginLeft: ((levelNr * 10) + 5) + 'px' }">
+<ul class="app__schedule-nav-list__list non-style-list">
   @for (element of fetchElements; track element.id) {
   <li>
     <ng-template

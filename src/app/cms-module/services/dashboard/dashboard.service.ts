@@ -148,10 +148,12 @@ export class DashboardService {
     return '';
   }
 
-  private mapObjectToArray(mappingObject: object): number[] {
-    return Object.keys(mappingObject)
-      .filter(key => key !== 'allElements')
-      .map(key => mappingObject[key as keyof typeof mappingObject]);
+  private mapObjectToArray(mappingObject: object | null): number[] {
+    return mappingObject
+      ? Object.keys(mappingObject)
+          .filter(key => key !== 'allElements')
+          .map(key => mappingObject[key as keyof typeof mappingObject])
+      : [];
   }
 
   get fetchingState$(): Observable<FetchingState> {

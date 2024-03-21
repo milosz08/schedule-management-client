@@ -23,7 +23,7 @@ export class FirstChangePasswordGuard {
         );
         if (
           loggedUser?.firstAccess &&
-          (!isOmitData || isOmitData[loggedUser?.login])
+          (!isOmitData || !isOmitData[loggedUser?.login])
         ) {
           return true;
         }

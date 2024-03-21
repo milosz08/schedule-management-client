@@ -3,14 +3,7 @@
  * Silesian University of Technology
  */
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  delay,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import {
   ScheduleNavList,
   ScheduleNavParams,
@@ -29,7 +22,6 @@ export class ScheduleNavigationService extends AbstractLoadingProvider {
   fetchDepartments$(): Observable<ScheduleNavList[]> {
     this.setLoading(true);
     return this._scheduleNavigationHttpClientService.getDepartments$().pipe(
-      delay(500),
       tap(() => this.setLoading(false)),
       catchError(() => {
         this.setLoading(false);
@@ -47,7 +39,6 @@ export class ScheduleNavigationService extends AbstractLoadingProvider {
   ) {
     isLoading$.next(true);
     return dataFetchCallback$(params).pipe(
-      delay(500),
       tap(() => isLoading$.next(false)),
       catchError(() => {
         isLoading$.next(false);

@@ -5,7 +5,10 @@
 
 @if (!loggedUser) {
 <div class="header-auth__icon">
-  <img src="assets/icon/not-logged.svg" alt="not-logged" />
+  <img
+    src="assets/icon/not-logged.svg"
+    alt=""
+    class="header-auth__icon-not-logged" />
 </div>
 } @else { @if (loggedUser.profileImageUrl) {
 <div class="header-auth__icon header-auth__icon--logged">

@@ -94,7 +94,6 @@ export class AdminScheduleChooserComponent
   }
 
   handleEmitStudySpecName(studySpecName?: string): void {
-    console.log(this.adminSelectScheduleForm?.get('departmentName')?.value);
     this.wrapAsObservable$(
       this._scheduleSelectorHttpClientService.getStudySpecializationsBaseDepartment$(
         studySpecName || '',

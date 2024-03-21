@@ -5,14 +5,14 @@
 
 @if (isLoading$ | async) {
 <aside class="app__schedule-nav-list__loading-all-list-elements__container">
-  <img src="assets/gif/suspense-loading-dark.gif" alt="Loading..." />
+  <img src="assets/gif/suspense-loading-dark.gif" alt="" />
 </aside>
 } @else {
 <ul class="non-style-list">
   @for (department of departments; track department.id) {
   <li>
     <ng-template
-      *ngTemplateOutlet="contentChildRef; context: { drillingData: department}" />
+      *ngTemplateOutlet="contentChildRef; context: { drillingData: department }" />
   </li>
   }
 </ul>

@@ -7,7 +7,6 @@ import { FormGroup } from '@angular/forms';
 import {
   BehaviorSubject,
   Observable,
-  delay,
   map,
   of,
   switchMap,
@@ -49,7 +48,6 @@ export class ScheduleFilterService {
     return this._scheduleCanvasService.year$.pipe(
       tap(() => this._filterBlockState$.next('all')),
       tap(() => this._scheduleCanvasService.setRefetching(true)),
-      delay(500),
       switchMap(() => this._scheduleHttpClientService.getScheduleYears$()),
       switchMap(years => {
         this._yearsData$.next(years);

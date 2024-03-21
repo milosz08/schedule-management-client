@@ -20,14 +20,14 @@ export type DashboardDetailsData = {
     studySpecializationsCount: number;
     studySubjectsCount: number;
     studyGroupsCount: number;
-  };
+  } | null;
   dashboardUserTypesCount: {
     allElements: number;
     studentsCount: number;
     teachersCount: number;
     editorsCount: number;
     administratorsCount: number;
-  };
+  } | null;
 };
 
 export type DashboardWithPlotData = {

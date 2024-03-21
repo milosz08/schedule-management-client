@@ -16,6 +16,7 @@
     [formGroup]="editorSelectScheduleForm"
     [optionsList]="studySpecs"
     (emitNewQuery)="handleEmitStudyTypeName($event)"
+    (addedValue)="handleShowScheduleGroups()"
     formControlId="studySpecName"
     selectId="choose-schedule-form___study-spec--editor"
     placeholder="np. Informatyka (ST I NS/Z)"

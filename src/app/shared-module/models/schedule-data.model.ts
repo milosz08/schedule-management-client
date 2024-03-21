@@ -27,7 +27,7 @@ export type WeekdayData = {
   positionFromTop: number;
   elementHeight: number;
   subjectOccuredData: string;
-  ifNotShowingOccuredDates: boolean;
+  isNotShowingOccuredDates: boolean;
   aliases: {
     [aliasKey in AliasKey]?: {
       alias: string;

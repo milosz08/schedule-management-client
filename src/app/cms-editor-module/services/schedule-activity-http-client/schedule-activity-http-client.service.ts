@@ -7,7 +7,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ScheduleActivity } from '~/cms-editor-module/models/schedule-activity.model';
 import {
-  ConvertFromIdsToTupleRequest,
   ConvertFromNamesToTupleRequest,
   ConvertToTupleResponse,
 } from '~/cms-editor-module/models/schedule-convert.model';
@@ -40,15 +39,6 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
     );
   }
 
-  convertFromIdsToTuple$(
-    req: ConvertFromIdsToTupleRequest
-  ): Observable<ConvertToTupleResponse> {
-    return this._httpClient.post<ConvertToTupleResponse>(
-      `${this._apiUrl}/api/v1/helper/schedule/id/to/tuple`,
-      req
-    );
-  }
-
   getStudyRoomsBaseDepartment$(deptId: number): Observable<NameWithId[]> {
     return this._httpClient.get<NameWithId[]>(
       `${this._apiUrl}/api/v1/studyroom/dept/${deptId}`
@@ -60,7 +50,7 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
     subjectName: string
   ): Observable<NameWithId[]> {
     return this._httpClient.get<NameWithId[]>(
-      `${this._apiUrl}/api/v1/user/teacher/dept/${deptId}/all"`,
+      `${this._apiUrl}/api/v1/user/teacher/dept/${deptId}/all`,
       { params: { subjectName } }
     );
   }

@@ -44,7 +44,7 @@
                         [levelNr]="4"
                         [inheritLvlData]="semData"
                         [params]="{ specId: specData.id, semId: semData.id }"
-                        [dataFetchCallback$]="handleFetchStudySemesters$.bind(this)">
+                        [dataFetchCallback$]="handleFetchStudyGroups$.bind(this)">
                         <ng-template let-groupData="drillingData">
                           <a
                             routerLink="/schedule/selected-schedule"
