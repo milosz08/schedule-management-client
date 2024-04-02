@@ -3,6 +3,10 @@
  * Silesian University of Technology
  */
 
+:host {
+  flex-grow: 1;
+}
+
 .select-drop-box {
   &__container {
     position: relative;
