@@ -28,6 +28,7 @@ import { BaseMessage } from '~/shared-module/models/base-mesage.model';
 import { AbstractModalProvider } from '~/shared-module/service/abstract-modal-provider';
 import { SnackbarService } from '~/shared-module/service/snackbar/snackbar.service';
 import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
+import { LastOpenedSchedulesHttpClientService } from '../last-opened-schedules-http-client/last-opened-schedules-http-client.service';
 import { ScheduleActivityHttpClientService } from '../schedule-activity-http-client/schedule-activity-http-client.service';
 
 @Injectable()
@@ -44,7 +45,8 @@ export class ScheduleActivityService extends AbstractModalProvider {
     private readonly _scheduleActivityHttpClientService: ScheduleActivityHttpClientService,
     private readonly _snackbarService: SnackbarService,
     private readonly _router: Router,
-    private readonly _activatedRoute: ActivatedRoute
+    private readonly _activatedRoute: ActivatedRoute,
+    private readonly _lastOpenedSchedulesServiceHttpClient: LastOpenedSchedulesHttpClientService
   ) {
     super();
   }
@@ -87,6 +89,14 @@ export class ScheduleActivityService extends AbstractModalProvider {
           Object.values(params).every(param => !!param) &&
           !this._selectedSchedule$.value
       ),
+      switchMap(({ deptId, specId, groupId }) => {
+        if (deptId && specId && groupId) {
+          return this._lastOpenedSchedulesServiceHttpClient
+            .appendLastOpenedSchedule$({ deptId, specId, groupId })
+            .pipe(catchError(() => of({ deptId, specId, groupId })));
+        }
+        return of({ deptId, specId, groupId });
+      }),
       map(({ deptId, specId, groupId }) => {
         this._selectedSchedule$.next({
           deptData: { id: deptId!, name: deptId! },

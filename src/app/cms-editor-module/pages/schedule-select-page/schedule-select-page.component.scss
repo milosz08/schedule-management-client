@@ -5,12 +5,14 @@
 
 .schedule-select {
   &__container {
+    flex-grow: 1;
+  }
+  &__wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin: 100px 0 50px;
     align-items: center;
     width: 100%;
-    flex-grow: 1;
   }
   &__loading-container {
     margin-top: 40px;

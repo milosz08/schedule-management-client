@@ -1,0 +1,79 @@
+<!--
+ ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ ~ Silesian University of Technology
+ -->
+
+<div class="app-cms__top-description-container">
+  <aside class="app-cms__separator-line"></aside>
+  <h2 class="app-cms__header-h2">Ostatnie plany zajęć</h2>
+</div>
+<div class="last-opened-schedules__delete-content-container">
+  <button
+    [disabled]="lastOpenedSchedules.length === 0"
+    (click)="handleDeleteAllLastOpenedSchedules()"
+    class="app__button app__button--danger-light app__button--small-full-size-window">
+    Usuń wszystkie zapamiętane plany
+  </button>
+  <button
+    [disabled]="elementsToRemove.length === 0"
+    (click)="handleDeleteLastOpenedSchedules()"
+    class="app__button app__button--danger-light--filled app__button--small-full-size-window">
+    Usuń zaznaczone ({{ elementsToRemove.length }})
+  </button>
+</div>
+@if ((fetchingState$ | async) === 'failure') {
+<aside class="last-opened-schedules-loading-problem__container">
+  <img
+    src="assets/icon/info-important-icon.svg"
+    alt=""
+    class="last-opened-schedules-loading-problem__image" />
+  <h3 class="last-opened-schedules-loading-problem__header">
+    Ładowanie zapisanych planów zakończone niepowodzeniem.
+  </h3>
+  <button
+    (click)="handleLoadAgain()"
+    class="app__button app__button--light app__button--full-size-window last-opened-schedules-loading-problem__button">
+    Załaduj ponownie
+  </button>
+</aside>
+} @if ((fetchingState$ | async) === 'fetching') {
+<aside class="last-opened-schedules-loading__container">
+  <img
+    src="assets/gif/suspense-loading-dark.gif"
+    alt=""
+    class="last-opened-schedules-loading__image" />
+</aside>
+} @if ((fetchingState$ | async) === 'success') { @if (lastOpenedSchedules.length
+=== 0) {
+<aside class="last-opened-schedules-loading-problem__container">
+  <img
+    src="assets/icon/info-icon.svg"
+    alt=""
+    class="last-opened-schedules-loading-problem__image" />
+  <h3 class="last-opened-schedules-loading__header">Brak zapisanych planów.</h3>
+</aside>
+} @else {
+<div class="last-opened-schedules__container">
+  @for (lastOpenedSchedule of lastOpenedSchedules; track lastOpenedSchedule.id)
+  {
+  <div class="last-opened-schedules__element">
+    <button
+      (click)="handleNavigateToSelectedSchedule(lastOpenedSchedule)"
+      title="Kliknij, aby przejść do wybranego planu"
+      class="last-opened-schedules__element-top-content">
+      <div class="last-opened-schedules__element-top-content-name">
+        {{ lastOpenedSchedule.name }}
+      </div>
+      <ng-icon
+        name="matArrowRightAlt"
+        class="last-opened-schedules__element-top-content-arrow" />
+    </button>
+    <div class="last-opened-schedules__element-bottom-content">
+      <app-checkbox-template
+        checkboxLabel="Zaznacz"
+        (checkboxEmitter)="handleCheckSelectedSchedule($event, lastOpenedSchedule.id)" />
+    </div>
+  </div>
+  }
+</div>
+} }

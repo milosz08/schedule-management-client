@@ -1,0 +1,92 @@
+/*
+ * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
+ * Silesian University of Technology
+ */
+
+.last-opened-schedules {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  &__element {
+    &-top-content,
+    &-bottom-content {
+      border: 1px solid var(--darkBlueColor);
+      padding: 8px;
+    }
+    &-top-content {
+      display: flex;
+      border-top-left-radius: var(--borderRadius);
+      border-top-right-radius: var(--borderRadius);
+      background-color: var(--mainWhiteColor);
+      width: 100%;
+      height: 80px;
+      &-name,
+      &-arrow {
+        display: flex;
+        align-items: center;
+      }
+      &-name {
+        flex-grow: 1;
+      }
+      &-arrow {
+        font-size: 1.5rem;
+        transform: translateX(-5px);
+        transition: var(--transitionDuration) transform;
+      }
+    }
+    &-bottom-content {
+      display: flex;
+      padding: 10px 15px;
+      border-bottom-left-radius: var(--borderRadius);
+      border-bottom-right-radius: var(--borderRadius);
+      background-color: var(--darkBlueColor);
+    }
+    &:hover &-top-content-arrow {
+      transform: translateX(0);
+    }
+  }
+  &__delete-content-container {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  &-loading {
+    &__container,
+    &-problem__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 80px;
+    }
+    &__image,
+    &-problem__image {
+      width: 80px;
+      height: 80px;
+    }
+    &__header {
+      font-size: 1.1rem;
+    }
+    &-problem {
+      &__header {
+        font-size: 1.1rem;
+        color: var(--darkRedColor);
+      }
+      &__button {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .last-opened-schedules {
+    &__delete-content-container {
+      flex-direction: column;
+    }
+  }
+}
