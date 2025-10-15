@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Injectable } from '@angular/core';
 import { Observable, catchError, delay, map, throwError } from 'rxjs';
 import { FirstChangePasswordReq } from '~/auth-module/models/first-change-password.model';

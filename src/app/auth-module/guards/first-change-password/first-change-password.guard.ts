@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Injectable, inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';

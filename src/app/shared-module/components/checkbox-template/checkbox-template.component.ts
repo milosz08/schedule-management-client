@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 

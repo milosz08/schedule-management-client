@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SavedAccountsService } from '~/auth-module/services/saved-accounts/saved-accounts.service';
 import { AbstractReactiveProvider } from '~/shared-module/components/abstract-reactive-provider';

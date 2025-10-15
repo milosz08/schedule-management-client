@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CurrentLoggedUser } from '~/shared-module/models/identity.model';
 import { IdentityService } from '~/shared-module/service/identity/identity.service';

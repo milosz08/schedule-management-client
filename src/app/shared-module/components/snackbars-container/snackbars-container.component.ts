@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component } from '@angular/core';
 import { snackbarFadeAndMove } from '~/shared-module/animations/snackbar-fade-and-move.animation';
 import { SnackbarService } from '~/shared-module/service/snackbar/snackbar.service';

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { animate, style, transition, trigger } from '@angular/animations';
 
 export const fadeInOutAnimation = trigger('fadeInOutAnimation', [

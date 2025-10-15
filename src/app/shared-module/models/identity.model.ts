@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { SafeUrl } from '@angular/platform-browser';
 import { UserIdentityType } from '../types/user-identity.type';
 

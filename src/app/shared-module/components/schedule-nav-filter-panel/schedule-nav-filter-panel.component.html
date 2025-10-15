@@ -1,8 +1,3 @@
-<!--
- ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- ~ Silesian University of Technology
- -->
-
 <form [formGroup]="filterForm" class="schedule-navigation-filtering__container">
   <button
     [disabled]="(isBlockPrev$ | async) || (buttonsBlocked$ | async)"

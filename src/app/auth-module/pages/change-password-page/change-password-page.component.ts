@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangePasswordService } from '~/auth-module/services/change-password/change-password.service';

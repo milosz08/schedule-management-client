@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, Input, OnInit } from '@angular/core';
 import { UserIdentityType } from '~/shared-module/types/user-identity.type';
 import { UserRoleSingleLetterType } from '~/shared-module/types/user-role-single-letter.type';

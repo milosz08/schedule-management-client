@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FirstChangePasswordService } from '~/auth-module/services/first-change-password/first-change-password.service';
 import { AbstractReactiveProvider } from '~/shared-module/components/abstract-reactive-provider';

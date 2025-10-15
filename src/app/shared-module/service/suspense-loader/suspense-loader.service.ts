@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import {

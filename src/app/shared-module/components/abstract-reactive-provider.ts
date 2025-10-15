@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject, takeUntil } from 'rxjs';
 

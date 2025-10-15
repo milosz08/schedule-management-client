@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractReactiveProvider } from '../components/abstract-reactive-provider';
 

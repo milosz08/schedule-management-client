@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy } from '@angular/core';
 import { fadeInOutAnimation } from '~/shared-module/animations/fade-in-out.animation';
 import { IdentityService } from '~/shared-module/service/identity/identity.service';

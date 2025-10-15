@@ -1,8 +1,3 @@
-<!--
- ~ Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- ~ Silesian University of Technology
- -->
-
 @if (weekdayData) {
 <div
   #container
@@ -77,11 +72,11 @@
       </a>
       }
     </p>
-    } @if (weekdayData.subjectOccuredData !== '' &&
-    !weekdayData.isNotShowingOccuredDates) {
+    } @if (weekdayData.subjectOccurredData !== '' &&
+    !weekdayData.isNotShowingOccurredDates) {
     <div class="schedule-block__occur-container hide-elements-on-small-devices">
       <p>występowanie:</p>
-      <p>{{ weekdayData.subjectOccuredData }}</p>
+      <p>{{ weekdayData.subjectOccurredData }}</p>
     </div>
     }
   </div>

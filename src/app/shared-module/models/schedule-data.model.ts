@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Params } from '@angular/router';
 import { NameWithId } from '../types/drop-lists-data.type';
 

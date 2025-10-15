@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
@@ -84,7 +80,7 @@ export class SessionService {
       `Pozostało ${this._waitingScreenCounter} sekund do wylogowania!`
     );
     if (this._waitingScreenCounter % 5 === 0) {
-      this._warningAudio.play();
+      this._warningAudio.play().then(r => r);
     }
     if (this._waitingScreenCounter-- === 0) {
       this._titleService.setTitle(this._savedWindowTitle);
