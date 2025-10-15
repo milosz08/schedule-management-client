@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { SortingBy } from '../types/sorting-by.type';
 import { SortingDir } from '../types/sorting-dir.type';
 

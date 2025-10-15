@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScheduleActivityService } from '~/cms-editor-module/services/schedule-activity/schedule-activity.service';
 import { DeleteContentService } from '~/cms-module/services/delete-content/delete-content.service';

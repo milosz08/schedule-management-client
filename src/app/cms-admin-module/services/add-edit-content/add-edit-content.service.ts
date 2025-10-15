@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -94,10 +90,6 @@ export class AddEditContentService extends AbstractLoadingProvider {
         return throwError(() => err);
       })
     );
-  }
-
-  setLoadingEditableContent(isLoading: boolean): void {
-    this._loadingEditableContent$.next(isLoading);
   }
 
   navigateOnErrorCallback<T>(redirectTo: string): Partial<Observer<T>> {

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashboardWithPlotData } from '~/cms-module/models/dashboard-details.model';
 import { DashboardService } from '~/cms-module/services/dashboard/dashboard.service';

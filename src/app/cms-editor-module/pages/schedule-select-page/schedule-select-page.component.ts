@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component } from '@angular/core';
 import { LastOpenedSchedulesService } from '~/cms-editor-module/services/last-opened-schedules/last-opened-schedules.service';
 import { ScheduleActivityService } from '~/cms-editor-module/services/schedule-activity/schedule-activity.service';

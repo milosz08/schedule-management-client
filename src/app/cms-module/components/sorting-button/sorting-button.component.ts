@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, Input } from '@angular/core';
 import { PaginationService } from '~/cms-module/services/pagination/pagination.service';
 import { SortingBy } from '~/cms-module/types/sorting-by.type';

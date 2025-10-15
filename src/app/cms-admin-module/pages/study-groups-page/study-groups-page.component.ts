@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StudyGroupData } from '~/cms-admin-module/models/study-group.model';
 import { StudyGroupHttpClientService } from '~/cms-admin-module/services/study-group-http-client/study-group-http-client.service';

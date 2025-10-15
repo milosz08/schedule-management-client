@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DepartmentData } from '~/cms-admin-module/models/department.model';
 import { DepartmentHttpClientService } from '~/cms-admin-module/services/department-http-client/department-http-client.service';

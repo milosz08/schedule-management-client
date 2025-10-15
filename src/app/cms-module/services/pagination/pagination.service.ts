@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Injectable, OnDestroy } from '@angular/core';
 import { Params } from '@angular/router';
 import _ from 'lodash';

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ScheduleActivityService } from '~/cms-editor-module/services/schedule-activity/schedule-activity.service';
@@ -23,7 +19,6 @@ export class AdminScheduleChooserComponent
   departments: string[] = [];
   studySpecs: string[] = [];
 
-  isSelecting$ = this._scheduleActivityService.isSelecting$;
   groupFieldVisibility$ = this._scheduleSelectorService.groupFieldVisibility$;
   studySpecVisibility$ = this._scheduleSelectorService.studySpecVisibility$;
 

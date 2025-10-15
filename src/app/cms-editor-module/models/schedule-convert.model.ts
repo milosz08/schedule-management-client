@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { NameWithId } from '~/shared-module/types/drop-lists-data.type';
 
 export type ConvertFromNamesToTupleRequest = {

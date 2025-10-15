@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, Input } from '@angular/core';
 import { AddEditContentService } from '~/cms-admin-module/services/add-edit-content/add-edit-content.service';
 

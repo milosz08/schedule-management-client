@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2024 by Miłosz Gilga <https://miloszgilga.pl>
- * Silesian University of Technology
- */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserData } from '~/cms-admin-module/models/user.model';
 import { UserHttpClientService } from '~/cms-admin-module/services/user-http-client/user-http-client.service';
