@@ -1,0 +1,78 @@
+name: Build and deploy to DockerHub
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/docker-image.yml"
+      - "src/**"
+      - "angular.json"
+      - "Dockerfile.pipeline"
+      - "package.json"
+      - "tsconfig.json"
+      - "tsconfig.*.json"
+      - "yarn.lock"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn run build
+
+      - name: Upload generated artifact files
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-dist
+          path: dist/
+          retention-days: 1
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download generated artifact files
+        uses: actions/download-artifact@v4
+        with:
+          name: output-app
+          path: ${{ github.workspace }}/docker/dist
+
+      - name: Set up builder
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build the Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.pipeline
+          push: true
+          tags: milosz08/schedule-management-client:latest
+
+      - name: Logout from Docker Hub
+        run: docker logout

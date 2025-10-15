@@ -1,0 +1,13 @@
+:8080 {
+  root * /app
+  encode gzip zstd
+
+  handle /api/* {
+    reverse_proxy {$SCHEDULE_API_URL}
+  }
+
+  handle {
+    file_server
+    try_files {path} /index.html
+  }
+}

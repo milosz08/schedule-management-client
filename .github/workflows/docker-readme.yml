@@ -1,0 +1,26 @@
+name: Update DockerHub README file
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/docker-readme.yml"
+      - "docker/README.md"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: milosz08/schedule-management-client
+          readme-filepath: ./docker/README.md
+          short-description: "Client for the ASP.NET Core schedules management API. Written with the Angular framework."

@@ -1,0 +1,8 @@
+FROM caddy:2.10
+
+COPY /docker/dist/browser/ /app
+COPY /docker/Caddyfile /etc/caddy/Caddyfile
+
+LABEL maintainer="Miłosz Gilga <miloszgilga@gmail.com>"
+
+EXPOSE 8080
