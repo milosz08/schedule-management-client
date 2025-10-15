@@ -20,7 +20,7 @@ export class ScheduleHttpClientService extends AbstractHttpClientProvider {
 
   getScheduleSearchData$(req: SearchQueryReq): Observable<SearchQueryRes[]> {
     return this._httpClient.get<SearchQueryRes[]>(
-      `${this._apiUrl}/api/v1/searchcontent`,
+      `${this._apiUrl}/v1/searchcontent`,
       { params: req }
     );
   }
@@ -29,7 +29,7 @@ export class ScheduleHttpClientService extends AbstractHttpClientProvider {
     schedSubjId: number
   ): Observable<ScheduleSubjectDetails> {
     return this._httpClient.get<ScheduleSubjectDetails>(
-      `${this._apiUrl}/api/v1/schedulesubject/${schedSubjId}/details`
+      `${this._apiUrl}/v1/schedulesubject/${schedSubjId}/details`
     );
   }
 
@@ -39,7 +39,7 @@ export class ScheduleHttpClientService extends AbstractHttpClientProvider {
     filter: ScheduleFilter
   ): Observable<ScheduleDataRes> {
     return this._httpClient.post<ScheduleDataRes>(
-      `${this._apiUrl}/api/v1/schedulesubject/all/filter/${parameter}`,
+      `${this._apiUrl}/v1/schedulesubject/all/filter/${parameter}`,
       filter,
       { params }
     );
@@ -47,13 +47,13 @@ export class ScheduleHttpClientService extends AbstractHttpClientProvider {
 
   getScheduleYears$(): Observable<string[]> {
     return this._httpClient.get<string[]>(
-      `${this._apiUrl}/api/v1/timemanagement/study/years`
+      `${this._apiUrl}/v1/timemanagement/study/years`
     );
   }
 
   getWeeksBaseYear$(fromYear: number, toYear: number): Observable<string[]> {
     return this._httpClient.get<string[]>(
-      `${this._apiUrl}/api/v1/timemanagement/weekdata/from/year/${fromYear}/to/year/${toYear}`
+      `${this._apiUrl}/v1/timemanagement/weekdata/from/year/${fromYear}/to/year/${toYear}`
     );
   }
 }

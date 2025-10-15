@@ -15,7 +15,7 @@ export class MemoryStorageHttpClientService extends AbstractHttpClientProvider {
 
   checkAccounts$(req: SavedAccountsReq): Observable<SavedAccountRes[]> {
     return this._httpClient.patch<SavedAccountRes[]>(
-      `${this._apiUrl}/api/v1/memorystorage/accounts/check`,
+      `${this._apiUrl}/v1/memorystorage/accounts/check`,
       req
     );
   }

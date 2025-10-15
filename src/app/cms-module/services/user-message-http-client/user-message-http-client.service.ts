@@ -19,14 +19,14 @@ export class UserMessageHttpClientService extends AbstractHttpClientProvider {
     params: Params
   ): Observable<Pagination<UserMessageData>> {
     return this._httpClient.get<Pagination<UserMessageData>>(
-      `${this._apiUrl}/api/v1/contactmessage/user/all/pageable`,
+      `${this._apiUrl}/v1/contactmessage/user/all/pageable`,
       { params }
     );
   }
 
   getUserMessageDetails$(id: number): Observable<UserMessageDetailsData> {
     return this._httpClient.get<UserMessageDetailsData>(
-      `${this._apiUrl}/api/v1/contactmessage/${id}/details`
+      `${this._apiUrl}/v1/contactmessage/${id}/details`
     );
   }
 }

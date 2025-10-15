@@ -17,7 +17,7 @@ export class LastOpenedSchedulesHttpClientService extends AbstractHttpClientProv
 
   getAllLastOpenedSchedules$(): Observable<LastOpenedSchedule[]> {
     return this._httpClient.get<LastOpenedSchedule[]>(
-      `${this._apiUrl}/api/v1/lastopenedschedules/all`
+      `${this._apiUrl}/v1/lastopenedschedules/all`
     );
   }
 
@@ -25,21 +25,21 @@ export class LastOpenedSchedulesHttpClientService extends AbstractHttpClientProv
     reqDto: LastOpenedScheduleReqDto
   ): Observable<LastOpenedScheduleResDto> {
     return this._httpClient.post<LastOpenedScheduleResDto>(
-      `${this._apiUrl}/api/v1/lastopenedschedules`,
+      `${this._apiUrl}/v1/lastopenedschedules`,
       reqDto
     );
   }
 
   deleteSelectedLastOpenedSchedules$(ids: number[]): Observable<BaseMessage> {
     return this._httpClient.delete<BaseMessage>(
-      `${this._apiUrl}/api/v1/lastopenedschedules/selected`,
+      `${this._apiUrl}/v1/lastopenedschedules/selected`,
       { body: { ids } }
     );
   }
 
   deleteAllLastOpenedSchedules$(): Observable<BaseMessage> {
     return this._httpClient.delete<BaseMessage>(
-      `${this._apiUrl}/api/v1/lastopenedschedules/all`
+      `${this._apiUrl}/v1/lastopenedschedules/all`
     );
   }
 }

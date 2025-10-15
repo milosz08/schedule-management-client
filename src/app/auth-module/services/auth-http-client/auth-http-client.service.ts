@@ -19,21 +19,21 @@ export class AuthHttpClientService extends AbstractHttpClientProvider {
 
   login$(req: LoginReq): Observable<LoginRes> {
     return this._httpClient.post<LoginRes>(
-      `${this._apiUrl}/api/v1/auth/login`,
+      `${this._apiUrl}/v1/auth/login`,
       req
     );
   }
 
   changeFirstPassword$(req: FirstChangePasswordReq): Observable<BaseMessage> {
     return this._httpClient.patch<BaseMessage>(
-      `${this._apiUrl}/api/v1/resetpassword/account/change`,
+      `${this._apiUrl}/v1/resetpassword/account/change`,
       req
     );
   }
 
   sendTokenForResetPassword$(loginOrEmail: string): Observable<BaseMessage> {
     return this._httpClient.post<BaseMessage>(
-      `${this._apiUrl}/api/v1/resetpassword/email`,
+      `${this._apiUrl}/v1/resetpassword/email`,
       null,
       { params: { loginOrEmail } }
     );
@@ -41,7 +41,7 @@ export class AuthHttpClientService extends AbstractHttpClientProvider {
 
   checkResetPasswordToken$(token: string): Observable<CheckResetPasswordRes> {
     return this._httpClient.patch<CheckResetPasswordRes>(
-      `${this._apiUrl}/api/v1/resetpassword/email/check/token/${token}`,
+      `${this._apiUrl}/v1/resetpassword/email/check/token/${token}`,
       null
     );
   }
@@ -51,7 +51,7 @@ export class AuthHttpClientService extends AbstractHttpClientProvider {
     req: ResetPasswordReq
   ): Observable<BaseMessage> {
     return this._httpClient.patch<BaseMessage>(
-      `${this._apiUrl}/api/v1/resetpassword/email/change/token/${token}`,
+      `${this._apiUrl}/v1/resetpassword/email/change/token/${token}`,
       req
     );
   }

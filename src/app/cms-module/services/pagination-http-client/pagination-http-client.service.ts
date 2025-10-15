@@ -11,7 +11,7 @@ export class PaginationHttpClientService extends AbstractHttpClientProvider {
 
   getPaginationSizes$(): Observable<number[]> {
     return this._httpClient.get<number[]>(
-      `${this._apiUrl}/api/v1/helper/pagination/all`
+      `${this._apiUrl}/v1/helper/pagination/all`
     );
   }
 }

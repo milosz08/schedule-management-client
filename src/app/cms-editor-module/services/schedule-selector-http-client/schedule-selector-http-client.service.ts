@@ -16,7 +16,7 @@ export class ScheduleSelectorHttpClientService extends AbstractHttpClientProvide
     studySpecName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/studygroup/spec`,
+      `${this._apiUrl}/v1/studygroup/spec`,
       { params: { groupName, deptName, studySpecName } }
     );
   }
@@ -26,14 +26,14 @@ export class ScheduleSelectorHttpClientService extends AbstractHttpClientProvide
     deptName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/studyspec/dept/all`,
+      `${this._apiUrl}/v1/studyspec/dept/all`,
       { params: { specName, deptName } }
     );
   }
 
   getDepartmentsByName$(name: string): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/department/all`,
+      `${this._apiUrl}/v1/department/all`,
       { params: { name } }
     );
   }
@@ -43,7 +43,7 @@ export class ScheduleSelectorHttpClientService extends AbstractHttpClientProvide
     deptName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/studyspec/dept/all`,
+      `${this._apiUrl}/v1/studyspec/dept/all`,
       { params: { specName, deptName } }
     );
   }

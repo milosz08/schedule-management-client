@@ -23,13 +23,13 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
 
   getStudyTypes$(): Observable<AvailableDataModel<NameWithId>> {
     return this._httpClient.get<AvailableDataModel<NameWithId>>(
-      `${this._apiUrl}/api/v1/helper/study/types/all`
+      `${this._apiUrl}/v1/helper/study/types/all`
     );
   }
 
   getStudyDegrees$(): Observable<AvailableDataModel<NameWithId>> {
     return this._httpClient.get<AvailableDataModel<NameWithId>>(
-      `${this._apiUrl}/api/v1/helper/study/degrees/all`
+      `${this._apiUrl}/v1/helper/study/degrees/all`
     );
   }
 
@@ -37,7 +37,7 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     deptName: string
   ): Observable<AvailableDataModel<NameWithId>> {
     return this._httpClient.get<AvailableDataModel<NameWithId>>(
-      `${this._apiUrl}/api/v1/studyspec/dept`,
+      `${this._apiUrl}/v1/studyspec/dept`,
       { params: { deptName } }
     );
   }
@@ -46,7 +46,7 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     params: Params
   ): Observable<Pagination<StudySpecializationData>> {
     return this._httpClient.get<Pagination<StudySpecializationData>>(
-      `${this._apiUrl}/api/v1/studyspec/all/pageable`,
+      `${this._apiUrl}/v1/studyspec/all/pageable`,
       { params }
     );
   }
@@ -56,7 +56,7 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     deptName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/studyspec/dept/all`,
+      `${this._apiUrl}/v1/studyspec/dept/all`,
       { params: { specName, deptName } }
     );
   }
@@ -65,7 +65,7 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     id: number
   ): Observable<StudySpecializationDetailsData> {
     return this._httpClient.get<StudySpecializationDetailsData>(
-      `${this._apiUrl}/api/v1/studyspec/${id}/details`
+      `${this._apiUrl}/v1/studyspec/${id}/details`
     );
   }
 
@@ -73,7 +73,7 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     req: AddUpdateStudySpecializationRequest
   ): Observable<AddUpdateStudySpecializationResponse[]> {
     return this._httpClient.post<AddUpdateStudySpecializationResponse[]>(
-      `${this._apiUrl}/api/v1/studyspec`,
+      `${this._apiUrl}/v1/studyspec`,
       req
     );
   }
@@ -83,7 +83,7 @@ export class StudySpecializationHttpClientService extends AbstractHttpClientProv
     req: AddUpdateStudySpecializationRequest
   ): Observable<AddUpdateStudySpecializationResponse[]> {
     return this._httpClient.put<AddUpdateStudySpecializationResponse[]>(
-      `${this._apiUrl}/api/v1/studyspec/${id}`,
+      `${this._apiUrl}/v1/studyspec/${id}`,
       req
     );
   }

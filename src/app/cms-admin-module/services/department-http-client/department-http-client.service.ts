@@ -19,21 +19,21 @@ export class DepartmentHttpClientService extends AbstractHttpClientProvider {
 
   getDepartments$(params: Params): Observable<Pagination<DepartmentData>> {
     return this._httpClient.get<Pagination<DepartmentData>>(
-      `${this._apiUrl}/api/v1/department/all/pageable`,
+      `${this._apiUrl}/v1/department/all/pageable`,
       { params }
     );
   }
 
   getDepartmentsByName$(name: string): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/department/all`,
+      `${this._apiUrl}/v1/department/all`,
       { params: { name } }
     );
   }
 
   getDepartmentDetails$(id: number): Observable<DepartmentDetailsData> {
     return this._httpClient.get<DepartmentDetailsData>(
-      `${this._apiUrl}/api/v1/department/${id}/details`
+      `${this._apiUrl}/v1/department/${id}/details`
     );
   }
 
@@ -41,7 +41,7 @@ export class DepartmentHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateDepartment
   ): Observable<AddUpdateDepartment> {
     return this._httpClient.post<AddUpdateDepartment>(
-      `${this._apiUrl}/api/v1/department`,
+      `${this._apiUrl}/v1/department`,
       req
     );
   }
@@ -51,7 +51,7 @@ export class DepartmentHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateDepartment
   ): Observable<AddUpdateDepartment> {
     return this._httpClient.put<AddUpdateDepartment>(
-      `${this._apiUrl}/api/v1/department/${id}`,
+      `${this._apiUrl}/v1/department/${id}`,
       req
     );
   }

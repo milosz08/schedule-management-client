@@ -23,7 +23,7 @@ export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
 
   getStudySubjects$(params: Params): Observable<Pagination<StudySubjectData>> {
     return this._httpClient.get<Pagination<StudySubjectData>>(
-      `${this._apiUrl}/api/v1/studysubject/all/pageable`,
+      `${this._apiUrl}/v1/studysubject/all/pageable`,
       { params }
     );
   }
@@ -32,14 +32,14 @@ export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
     deptName: string
   ): Observable<AvailableDataModel<NameWithId>> {
     return this._httpClient.get<AvailableDataModel<NameWithId>>(
-      `${this._apiUrl}/api/v1/studysubject/dept/all`,
+      `${this._apiUrl}/v1/studysubject/dept/all`,
       { params: { deptName } }
     );
   }
 
   getStudySubjectDetails$(id: number): Observable<StudySubjectDetailsData> {
     return this._httpClient.get<StudySubjectDetailsData>(
-      `${this._apiUrl}/api/v1/studysubject/${id}/details`
+      `${this._apiUrl}/v1/studysubject/${id}/details`
     );
   }
 
@@ -47,7 +47,7 @@ export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateStudySubjectRequest
   ): Observable<AddUpdateStudySubjectResponse> {
     return this._httpClient.post<AddUpdateStudySubjectResponse>(
-      `${this._apiUrl}/api/v1/studysubject`,
+      `${this._apiUrl}/v1/studysubject`,
       req
     );
   }
@@ -57,7 +57,7 @@ export class StudySubjectHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateStudySubjectRequest
   ): Observable<AddUpdateStudySubjectResponse> {
     return this._httpClient.put<AddUpdateStudySubjectResponse>(
-      `${this._apiUrl}/api/v1/studysubject/${id}`,
+      `${this._apiUrl}/v1/studysubject/${id}`,
       req
     );
   }

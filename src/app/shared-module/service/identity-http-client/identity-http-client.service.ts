@@ -18,14 +18,14 @@ export class IdentityHttpClientService extends AbstractHttpClientProvider {
 
   tokenLogin$(req: TokenLoginReq): Observable<LoginRes> {
     return this._httpClient.post<LoginRes>(
-      `${this._apiUrl}/api/v1/auth/login/token`,
+      `${this._apiUrl}/v1/auth/login/token`,
       req
     );
   }
 
   refreshToken$(req: RefreshTokenReq): Observable<RefreshTokenRes> {
     return this._httpClient.patch<RefreshTokenRes>(
-      `${this._apiUrl}/api/v1/auth/token/refresh`,
+      `${this._apiUrl}/v1/auth/token/refresh`,
       req
     );
   }
@@ -35,7 +35,7 @@ export class IdentityHttpClientService extends AbstractHttpClientProvider {
       'X-RefreshToken': refreshToken,
     });
     return this._httpClient.delete<BaseMessage>(
-      `${this._apiUrl}/api/v1/auth/logout`,
+      `${this._apiUrl}/v1/auth/logout`,
       { headers }
     );
   }

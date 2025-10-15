@@ -20,20 +20,20 @@ export class StudyRoomHttpClientService extends AbstractHttpClientProvider {
 
   getRoomTypes$(): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/helper/room/type/all`
+      `${this._apiUrl}/v1/helper/room/type/all`
     );
   }
 
   getStudyRooms$(params: Params): Observable<Pagination<StudyRoomData>> {
     return this._httpClient.get<Pagination<StudyRoomData>>(
-      `${this._apiUrl}/api/v1/studyroom/all/pageable`,
+      `${this._apiUrl}/v1/studyroom/all/pageable`,
       { params }
     );
   }
 
   getStudyRoomDetails$(id: number): Observable<StudyRoomDetailsData> {
     return this._httpClient.get<StudyRoomDetailsData>(
-      `${this._apiUrl}/api/v1/studyroom/${id}/details`
+      `${this._apiUrl}/v1/studyroom/${id}/details`
     );
   }
 
@@ -41,7 +41,7 @@ export class StudyRoomHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateStudyRoomRequest
   ): Observable<AddUpdateStudyRoomResponse> {
     return this._httpClient.post<AddUpdateStudyRoomResponse>(
-      `${this._apiUrl}/api/v1/studyroom`,
+      `${this._apiUrl}/v1/studyroom`,
       req
     );
   }
@@ -51,7 +51,7 @@ export class StudyRoomHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateStudyRoomRequest
   ): Observable<AddUpdateStudyRoomResponse> {
     return this._httpClient.put<AddUpdateStudyRoomResponse>(
-      `${this._apiUrl}/api/v1/studyroom/${id}`,
+      `${this._apiUrl}/v1/studyroom/${id}`,
       req
     );
   }

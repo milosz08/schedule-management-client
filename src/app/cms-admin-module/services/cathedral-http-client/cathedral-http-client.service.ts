@@ -20,7 +20,7 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
 
   getCathedrals$(params: Params): Observable<Pagination<CathedralData>> {
     return this._httpClient.get<Pagination<CathedralData>>(
-      `${this._apiUrl}/api/v1/cathedral/all/pageable`,
+      `${this._apiUrl}/v1/cathedral/all/pageable`,
       { params }
     );
   }
@@ -30,14 +30,14 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
     deptName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/cathedral/dept/all`,
+      `${this._apiUrl}/v1/cathedral/dept/all`,
       { params: { cathName, deptName } }
     );
   }
 
   getCathedralDetails$(id: number): Observable<CathedralDetailsData> {
     return this._httpClient.get<CathedralDetailsData>(
-      `${this._apiUrl}/api/v1/cathedral/${id}/details`
+      `${this._apiUrl}/v1/cathedral/${id}/details`
     );
   }
 
@@ -45,7 +45,7 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateCathedralRequest
   ): Observable<AddUpdateCathedralResponse> {
     return this._httpClient.post<AddUpdateCathedralResponse>(
-      `${this._apiUrl}/api/v1/cathedral`,
+      `${this._apiUrl}/v1/cathedral`,
       req
     );
   }
@@ -55,7 +55,7 @@ export class CathedralHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateCathedralRequest
   ): Observable<AddUpdateCathedralResponse> {
     return this._httpClient.put<AddUpdateCathedralResponse>(
-      `${this._apiUrl}/api/v1/cathedral/${id}`,
+      `${this._apiUrl}/v1/cathedral/${id}`,
       req
     );
   }

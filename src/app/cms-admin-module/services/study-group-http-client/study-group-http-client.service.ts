@@ -22,13 +22,13 @@ export class StudyGroupHttpClientService extends AbstractHttpClientProvider {
 
   getSemesters$(): Observable<AvailableDataModel<NameWithId>> {
     return this._httpClient.get<AvailableDataModel<NameWithId>>(
-      `${this._apiUrl}/api/v1/helper/semester/all`
+      `${this._apiUrl}/v1/helper/semester/all`
     );
   }
 
   getStudyGroups$(params: Params): Observable<Pagination<StudyGroupData>> {
     return this._httpClient.get<Pagination<StudyGroupData>>(
-      `${this._apiUrl}/api/v1/studygroup/all/pageable`,
+      `${this._apiUrl}/v1/studygroup/all/pageable`,
       { params }
     );
   }
@@ -37,7 +37,7 @@ export class StudyGroupHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateStudyGroupRequest
   ): Observable<AddUpdateStudyGroupResponse[]> {
     return this._httpClient.post<AddUpdateStudyGroupResponse[]>(
-      `${this._apiUrl}/api/v1/studygroup`,
+      `${this._apiUrl}/v1/studygroup`,
       req
     );
   }

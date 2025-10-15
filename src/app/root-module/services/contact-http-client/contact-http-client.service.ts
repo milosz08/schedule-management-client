@@ -19,14 +19,14 @@ export class ContactHttpClientService extends AbstractHttpClientProvider {
     name: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/department/all`,
+      `${this._apiUrl}/v1/department/all`,
       { params: { name } }
     );
   }
 
   getAllQueryGroupsBaseDept$(dept: string): Observable<NameWithId[]> {
     return this._httpClient.get<NameWithId[]>(
-      `${this._apiUrl}/api/v1/studygroup/dept`,
+      `${this._apiUrl}/v1/studygroup/dept`,
       { params: { dept } }
     );
   }
@@ -35,14 +35,14 @@ export class ContactHttpClientService extends AbstractHttpClientProvider {
     issueTypeName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/contactmessage/issue/type/all`,
+      `${this._apiUrl}/v1/contactmessage/issue/type/all`,
       { params: { issueTypeName } }
     );
   }
 
   sendContactFormData$(req: ExtendedContactFormReq): Observable<BaseMessage> {
     return this._httpClient.post<BaseMessage>(
-      `${this._apiUrl}/api/v1/contactmessage/new`,
+      `${this._apiUrl}/v1/contactmessage/new`,
       req
     );
   }

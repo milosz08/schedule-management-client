@@ -17,7 +17,7 @@ export class DeleteContentHttpClientService extends AbstractHttpClientProvider {
     userCredentials: UserCredentials
   ): Observable<BaseMessage> {
     return this._httpClient.delete<BaseMessage>(
-      `${this._apiUrl}/api/v1/${endpoint}/selected`,
+      `${this._apiUrl}/v1/${endpoint}/selected`,
       { body: { ids }, headers: this.prepareHeaders(userCredentials) }
     );
   }
@@ -27,7 +27,7 @@ export class DeleteContentHttpClientService extends AbstractHttpClientProvider {
     userCredentials: UserCredentials
   ): Observable<BaseMessage> {
     return this._httpClient.delete<BaseMessage>(
-      `${this._apiUrl}/api/v1/${endpoint}/all`,
+      `${this._apiUrl}/v1/${endpoint}/all`,
       { headers: this.prepareHeaders(userCredentials) }
     );
   }

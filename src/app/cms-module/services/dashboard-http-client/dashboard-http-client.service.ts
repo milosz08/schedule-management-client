@@ -16,7 +16,7 @@ export class DashboardHttpClientService extends AbstractHttpClientProvider {
 
   getDashboardDetails$(): Observable<DashboardDetailsData> {
     return this._httpClient.get<DashboardDetailsData>(
-      `${this._apiUrl}/api/v1/user/dashboard/details`
+      `${this._apiUrl}/v1/user/dashboard/details`
     );
   }
 
@@ -24,14 +24,14 @@ export class DashboardHttpClientService extends AbstractHttpClientProvider {
     const formData = new FormData();
     formData.append('image', image);
     return this._httpClient.post<UpdateUserImageResponse>(
-      `${this._apiUrl}/api/v1/file/profile`,
+      `${this._apiUrl}/v1/file/profile`,
       formData
     );
   }
 
   deleteProfileImage$(): Observable<BaseMessage> {
     return this._httpClient.delete<BaseMessage>(
-      `${this._apiUrl}/api/v1/file/profile`
+      `${this._apiUrl}/v1/file/profile`
     );
   }
 }

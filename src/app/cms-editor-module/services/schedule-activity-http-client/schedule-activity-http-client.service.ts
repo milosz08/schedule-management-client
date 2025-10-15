@@ -21,7 +21,7 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
 
   publishScheduleActivity$(req: ScheduleActivity): Observable<BaseMessage> {
     return this._httpClient.post<BaseMessage>(
-      `${this._apiUrl}/api/v1/schedulesubject`,
+      `${this._apiUrl}/v1/schedulesubject`,
       req
     );
   }
@@ -30,14 +30,14 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
     req: ConvertFromNamesToTupleRequest
   ): Observable<ConvertToTupleResponse> {
     return this._httpClient.post<ConvertToTupleResponse>(
-      `${this._apiUrl}/api/v1/helper/schedule/name/to/tuple`,
+      `${this._apiUrl}/v1/helper/schedule/name/to/tuple`,
       req
     );
   }
 
   getStudyRoomsBaseDepartment$(deptId: number): Observable<NameWithId[]> {
     return this._httpClient.get<NameWithId[]>(
-      `${this._apiUrl}/api/v1/studyroom/dept/${deptId}`
+      `${this._apiUrl}/v1/studyroom/dept/${deptId}`
     );
   }
 
@@ -46,7 +46,7 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
     subjectName: string
   ): Observable<NameWithId[]> {
     return this._httpClient.get<NameWithId[]>(
-      `${this._apiUrl}/api/v1/user/teacher/dept/${deptId}/all`,
+      `${this._apiUrl}/v1/user/teacher/dept/${deptId}/all`,
       { params: { subjectName } }
     );
   }
@@ -55,7 +55,7 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
     subjectTypeName: string
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/helper/subject/type/all`,
+      `${this._apiUrl}/v1/helper/subject/type/all`,
       { params: { subjectTypeName } }
     );
   }
@@ -66,7 +66,7 @@ export class ScheduleActivityHttpClientService extends AbstractHttpClientProvide
     specId: number
   ): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/studysubject/dept/${deptId}/spec/${specId}/all`,
+      `${this._apiUrl}/v1/studysubject/dept/${deptId}/spec/${specId}/all`,
       { params: { subjectName } }
     );
   }

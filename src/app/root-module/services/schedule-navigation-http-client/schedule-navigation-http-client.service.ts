@@ -12,13 +12,13 @@ export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvi
 
   getDepartments$(): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/department/all/schedule`
+      `${this._apiUrl}/v1/department/all/schedule`
     );
   }
 
   getCathedralsFromDepartment$(deptId: number): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/cathedral/schedule/department/${deptId}`
+      `${this._apiUrl}/v1/cathedral/schedule/department/${deptId}`
     );
   }
 
@@ -27,7 +27,7 @@ export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvi
     cathId: number
   ): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/studyroom/dept/${deptId}/cath:/${cathId}`
+      `${this._apiUrl}/v1/studyroom/dept/${deptId}/cath:/${cathId}`
     );
   }
 
@@ -36,7 +36,7 @@ export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvi
     degreeId: number
   ): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/studyspec/schedule/dept/${deptId}/degree/${degreeId}/all`
+      `${this._apiUrl}/v1/studyspec/schedule/dept/${deptId}/degree/${degreeId}/all`
     );
   }
 
@@ -45,7 +45,7 @@ export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvi
     cathId: number
   ): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/user/employeer/dept/${deptId}/cath/${cathId}/all`
+      `${this._apiUrl}/v1/user/employeer/dept/${deptId}/cath/${cathId}/all`
     );
   }
 
@@ -54,7 +54,7 @@ export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvi
     specId: number
   ): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/helper/semester/dept/${deptId}/spec/${specId}/all`
+      `${this._apiUrl}/v1/helper/semester/dept/${deptId}/spec/${specId}/all`
     );
   }
 
@@ -63,13 +63,13 @@ export class ScheduleNavigationHttpClientService extends AbstractHttpClientProvi
     semId: number
   ): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/studygroup/spec/${specId}/sem/${semId}`
+      `${this._apiUrl}/v1/studygroup/spec/${specId}/sem/${semId}`
     );
   }
 
   getDegreesBaseDepartment$(deptId: number): Observable<ScheduleNavList[]> {
     return this._httpClient.get<ScheduleNavList[]>(
-      `${this._apiUrl}/api/v1/helper/degrees/dept/${deptId}/all`
+      `${this._apiUrl}/v1/helper/degrees/dept/${deptId}/all`
     );
   }
 }

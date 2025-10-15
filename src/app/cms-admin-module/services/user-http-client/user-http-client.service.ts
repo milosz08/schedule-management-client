@@ -20,26 +20,26 @@ export class UserHttpClientService extends AbstractHttpClientProvider {
 
   getUserRoles$(): Observable<AvailableDataModel<string>> {
     return this._httpClient.get<AvailableDataModel<string>>(
-      `${this._apiUrl}/api/v1/helper/role/all`
+      `${this._apiUrl}/v1/helper/role/all`
     );
   }
 
   getUsers$(params: Params): Observable<Pagination<UserData>> {
     return this._httpClient.get<Pagination<UserData>>(
-      `${this._apiUrl}/api/v1/user/all/pageable`,
+      `${this._apiUrl}/v1/user/all/pageable`,
       { params }
     );
   }
 
   getUserDetails$(id: number): Observable<UserDetailsData> {
     return this._httpClient.get<UserDetailsData>(
-      `${this._apiUrl}/api/v1/user/${id}/details`
+      `${this._apiUrl}/v1/user/${id}/details`
     );
   }
 
   createNewUser$(req: AddUpdateUserRequest): Observable<AddUpdateUserResponse> {
     return this._httpClient.post<AddUpdateUserResponse>(
-      `${this._apiUrl}/api/v1/auth/register`,
+      `${this._apiUrl}/v1/auth/register`,
       req
     );
   }
@@ -50,7 +50,7 @@ export class UserHttpClientService extends AbstractHttpClientProvider {
     req: AddUpdateUserRequest
   ): Observable<AddUpdateUserResponse> {
     return this._httpClient.put<AddUpdateUserResponse>(
-      `${this._apiUrl}/api/v1/user/${id}`,
+      `${this._apiUrl}/v1/user/${id}`,
       req,
       { params: { isUpdateEmailPass } }
     );
