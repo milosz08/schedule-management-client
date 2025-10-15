@@ -8,7 +8,6 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { environment } from 'src/environment/environment';
 import { SnackbarService } from '~/shared-module/service/snackbar/snackbar.service';
 
 @Injectable()
@@ -19,8 +18,7 @@ export class GlobalExceptionHandlerInterceptor implements HttpInterceptor {
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const requestUrl = new URL(req.url);
-    if (requestUrl.origin !== environment.apiUrl) {
+    if (!req.url.includes('/api')) {
       return next.handle(req);
     }
     return next.handle(req).pipe(

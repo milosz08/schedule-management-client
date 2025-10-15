@@ -17,7 +17,6 @@ import {
   take,
   throwError,
 } from 'rxjs';
-import { environment } from 'src/environment/environment';
 import { RefreshTokenReq } from '~/shared-module/models/refresh-access.model';
 import { IdentityHttpClientService } from '~/shared-module/service/identity-http-client/identity-http-client.service';
 import { IdentityService } from '~/shared-module/service/identity/identity.service';
@@ -43,8 +42,7 @@ export class RefreshSessionInterceptor implements HttpInterceptor {
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const apiGateway = environment.apiUrl;
-    if (!apiGateway || !req.url.includes(`${apiGateway}/api`)) {
+    if (!req.url.includes('/api')) {
       return next.handle(req);
     }
     let authReq = req;
