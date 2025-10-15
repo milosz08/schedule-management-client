@@ -34,7 +34,6 @@ export class UserAddEditPageComponent
   studySpecsVisibility = false;
   studySubjectsVisibility = false;
 
-  loadingEditableContent$ = this._addEditContentService.loadingEditableContent$;
   isLoading$ = this._addEditContentService.isLoading$;
 
   constructor(

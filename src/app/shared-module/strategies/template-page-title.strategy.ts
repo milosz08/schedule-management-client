@@ -19,10 +19,6 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
         : this.DEF_SUFFIX
     );
   }
-
-  updateCustomTitle(title: string): void {
-    this._title.setTitle(`${title} ${this.SEPARATOR} ${this.DEF_SUFFIX}`);
-  }
 }
 
 export const titleStrategyProvider = {

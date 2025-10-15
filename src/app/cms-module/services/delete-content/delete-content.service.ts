@@ -58,7 +58,7 @@ export class DeleteContentService extends AbstractModalProvider {
   setDeleteContentIds(id: number | undefined, insertMode: boolean): void {
     if (id) {
       const currentDeleteContent = this._deleteContentIds$.value;
-      let updatedIds = [];
+      let updatedIds;
       if (insertMode) {
         updatedIds = [...currentDeleteContent, id];
       } else {

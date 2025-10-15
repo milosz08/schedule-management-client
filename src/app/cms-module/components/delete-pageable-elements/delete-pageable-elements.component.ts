@@ -7,7 +7,6 @@ import { AbstractReactiveProvider } from '~/shared-module/components/abstract-re
 @Component({
   selector: 'app-delete-pageable-elements',
   templateUrl: './delete-pageable-elements.component.html',
-  host: { class: 'app__cms-full-size' },
 })
 export class DeletePageableElementsComponent
   extends AbstractReactiveProvider

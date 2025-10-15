@@ -26,7 +26,6 @@ export class DashboardPageComponent
   sessionSoonEnded$ = this._sessionService.sessionSoonEnded$;
   sessionCurrentTime$ = this._sessionService.sessionCurrentTime$;
 
-  rolesData: number[] = [];
   readonly rolesPlot: PlotDotColor[] = [
     'administrator',
     'editor',
@@ -34,7 +33,6 @@ export class DashboardPageComponent
     'student',
   ];
 
-  elementsData: number[] = [];
   readonly elementsPlot: PlotDotColor[] = [
     'study-group',
     'study-subject',

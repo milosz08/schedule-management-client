@@ -21,7 +21,6 @@ export class EditorScheduleChooserComponent
   studySpecs: string[] = [];
 
   groupFieldVisibility$ = this._scheduleSelectorService.groupFieldVisibility$;
-  isSelecting$ = this._scheduleActivityService.isSelecting$;
 
   constructor(
     private readonly _scheduleSelectorService: ScheduleSelectorService,
