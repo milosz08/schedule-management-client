@@ -8,6 +8,7 @@ dist/
 .dockerignore
 .gitignore
 Dockerfile
+Dockerfile.*
 LICENSE
 nginx.conf
 README.md

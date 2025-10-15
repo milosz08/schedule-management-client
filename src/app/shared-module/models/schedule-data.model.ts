@@ -11,7 +11,7 @@ export type ScheduleDataRes = {
 export type ScheduleCanvasData = {
   weekdayNameWithId: NameWithId;
   weekdayDateTime: string;
-  isNotShowingOccuredDates: boolean;
+  isNotShowingOccurredDates: boolean;
   weekdayData: WeekdayData[];
 };
 
@@ -22,8 +22,8 @@ export type WeekdayData = {
   subjectTime: string;
   positionFromTop: number;
   elementHeight: number;
-  subjectOccuredData: string;
-  isNotShowingOccuredDates: boolean;
+  subjectOccurredData: string;
+  isNotShowingOccurredDates: boolean;
   aliases: {
     [aliasKey in AliasKey]?: {
       alias: string;

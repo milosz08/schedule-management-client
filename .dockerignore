@@ -1,10 +1,9 @@
 .angular/
 .github/
-.vscode/
 .husky/
-out-tsc/
-node_modules/
 dist/
+node_modules/
+
 .dockerignore
 .eslintignore
 .eslintrc.json
@@ -12,5 +11,6 @@ dist/
 .prettierignore
 .prettierrc.json
 Dockerfile
+Dockerfile.*
 LICENSE
 README.md
