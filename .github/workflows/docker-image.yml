@@ -54,7 +54,7 @@ jobs:
       - name: Download generated artifact files
         uses: actions/download-artifact@v4
         with:
-          name: output-app
+          name: output-dist
           path: ${{ github.workspace }}/docker/dist
 
       - name: Set up builder
