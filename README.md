@@ -57,13 +57,14 @@ Make sure, that other containers from [api](https://github.com/milosz08/schedule
 ## Prepare development environment
 
 1. Make sure you have Node v20 and npm with yarn. If you do not have yarn, install it via `$ npm i -g yarn`.
-2. Install all dependencies via:
+2. Create `.env` file and fill up environment variables based on `example.env` file.
+3. Install all dependencies via:
 
 ```bash
 $ yarn install --frozen-lockfile
 ```
 
-3. Run angular development server via:
+4. Run angular development server via:
 
 ```bash
 $ yarn run start
