@@ -45,11 +45,11 @@ networks:
 ```
 
 > [!NOTE]
-> The value for the `SCHEDULE_API_URL` environment variable depends on your Docker network configuration. If the
-> `schedule-management-client` runs in the same network as the API (`schedule-management-api`), you should provide the
-> service name as the URL: `http://schedule-management-api:8080`. However, if the client application is in a different
+> The value for the SCHEDULE_API_URL environment variable depends on your Docker network configuration. If the
+> schedule-management-client runs in the same network as the API (schedule-management-api), you should provide the
+> service name as the URL: http://schedule-management-api:8080. However, if the client application is in a different
 > Docker network but on the same host, you should connect via the host's exposed port by setting the variable to
-> `http://host.docker.internal:7695`.
+> http://host.docker.internal:7695.
 
 ## Author
 
