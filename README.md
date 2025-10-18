@@ -21,7 +21,7 @@ interface for [ASP.NET WebAPI](https://github.com/milosz08/schedule-management-s
 1. Clone repository on your local machine via:
 
 ```bash
-git clone https://github.com/milosz08/schedule-management-client
+$ git clone https://github.com/milosz08/schedule-management-client
 ```
 
 2. Prepare and run necessary docker containers with rest API application (more you find
